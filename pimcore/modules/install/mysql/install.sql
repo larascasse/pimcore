@@ -242,6 +242,16 @@ CREATE TABLE `edit_lock` (
   KEY `cidtype` (`cid`,`ctype`)
 ) DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `email_blacklist`;
+CREATE TABLE `email_blacklist` (
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `creationDate` int(11) unsigned DEFAULT NULL,
+  `modificationDate` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`address`)
+) DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `email_log`;
 CREATE TABLE `email_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -631,6 +641,8 @@ CREATE TABLE `users` (
   `welcomescreen` tinyint(1) DEFAULT NULL,
   `closeWarning` tinyint(1) DEFAULT NULL,
   `memorizeTabs` tinyint(1) DEFAULT NULL,
+  `docTypes` varchar(255) DEFAULT NULL,
+  `classes` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `type_name` (`type`,`name`),
   KEY `parentId` (`parentId`),

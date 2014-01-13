@@ -25,8 +25,7 @@ pimcore.layout.toolbar = Class.create({
         this.dashboardMenu = new Ext.menu.Item({
             text: t("dashboards"),
             iconCls: "pimcore_icon_welcome",
-            handler: function () {
-            },
+            hideOnClick: false,
             menu: {
                 cls: "pimcore_navigation_flyout",
                 items: [{
@@ -308,11 +307,27 @@ pimcore.layout.toolbar = Class.create({
             });
         }
 
-        if (user.isAllowed("bounce_mail_inbox")) {
+        if (user.isAllowed("emails")) {
             extrasItems.push({
-                text: t("bounce_mail_inbox"),
-                iconCls: "pimcore_icon_bouncemail",
-                handler: this.showBounceMailInbox
+                text: t("email"),
+                iconCls: "pimcore_icon_email",
+                hideOnClick: false,
+                menu: {
+                    cls: "pimcore_navigation_flyout",
+                    items: [{
+                        text: t("email_logs"),
+                        iconCls: "pimcore_icon_email",
+                        handler: this.sentEmailsLog
+                    },{
+                        text: t("email_blacklist"),
+                        iconCls: "pimcore_icon_email_blacklist",
+                        handler: this.emailBlacklist
+                    },{
+                        text: t("bounce_mail_inbox"),
+                        iconCls: "pimcore_icon_bouncemail",
+                        handler: this.showBounceMailInbox
+                    }]
+                }
             });
         }
 
@@ -1525,6 +1540,23 @@ pimcore.layout.toolbar = Class.create({
         catch (e) {
             pimcore.globalmanager.add("element_history", new pimcore.element.history());
         }
-    }
+    },
 
+    sentEmailsLog: function () {
+        try {
+            pimcore.globalmanager.get("sent_emails").activate();
+        }
+        catch (e) {
+            pimcore.globalmanager.add("sent_emails", new pimcore.settings.email.log());
+        }
+    },
+
+    emailBlacklist: function () {
+        try {
+            pimcore.globalmanager.get("email_blacklist").activate();
+        }
+        catch (e) {
+            pimcore.globalmanager.add("email_blacklist", new pimcore.settings.email.blacklist());
+        }
+    }
 });

@@ -20,7 +20,7 @@ CREATE TABLE `assets` (
   KEY `parentId` (`parentId`),
   KEY `filename` (`filename`),
   KEY `path` (`path`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 
 
@@ -155,7 +155,7 @@ CREATE TABLE `documents` (
   KEY `key` (`key`),
   KEY `path` (`path`),
   KEY `published` (`published`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 
 
@@ -275,8 +275,16 @@ CREATE TABLE `edit_lock` (
   KEY `cid` (`cid`),
   KEY `ctype` (`ctype`),
   KEY `cidtype` (`cid`,`ctype`)
-) ENGINE=InnoDB AUTO_INCREMENT=479 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=499 DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `email_blacklist`;
+CREATE TABLE `email_blacklist` (
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `creationDate` int(11) unsigned DEFAULT NULL,
+  `modificationDate` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `email_log`;
@@ -1081,12 +1089,14 @@ CREATE TABLE `users` (
   `welcomescreen` tinyint(1) DEFAULT NULL,
   `closeWarning` tinyint(1) DEFAULT NULL,
   `memorizeTabs` tinyint(1) DEFAULT NULL,
+  `docTypes` varchar(255) DEFAULT NULL,
+  `classes` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `type_name` (`type`,`name`),
   KEY `parentId` (`parentId`),
   KEY `name` (`name`),
   KEY `password` (`password`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 
 
@@ -1189,7 +1199,7 @@ CREATE TABLE `versions` (
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`),
   KEY `ctype` (`ctype`)
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8;
 
 
 
@@ -1227,7 +1237,7 @@ INSERT INTO `assets` VALUES (23,17,'image','img_0411.jpg','/examples/panama/','i
 INSERT INTO `assets` VALUES (24,17,'image','img_0410.jpg','/examples/panama/','image/jpeg',1368532838,1368632468,0,0,'a:3:{s:10:\"imageWidth\";i:2000;s:11:\"imageHeight\";i:1500;s:25:\"imageDimensionsCalculated\";b:1;}');
 INSERT INTO `assets` VALUES (25,17,'image','img_0160.jpg','/examples/panama/','image/jpeg',1368532839,1368632468,0,0,'a:3:{s:10:\"imageWidth\";i:2000;s:11:\"imageHeight\";i:1500;s:25:\"imageDimensionsCalculated\";b:1;}');
 INSERT INTO `assets` VALUES (26,1,'folder','videos','/','',1368542684,1368632471,0,0,'a:0:{}');
-INSERT INTO `assets` VALUES (27,26,'video','home-trailer-english.mp4','/videos/','video/mp4',1368542794,1388406345,0,0,'a:1:{s:10:\"thumbnails\";a:2:{s:12:\"featurerette\";a:2:{s:6:\"status\";s:8:\"finished\";s:7:\"formats\";a:2:{s:3:\"mp4\";s:81:\"/website/var/tmp/video-thumbnails/27/thumb__featurerette/home-trailer-english.mp4\";s:4:\"webm\";s:82:\"/website/var/tmp/video-thumbnails/27/thumb__featurerette/home-trailer-english.webm\";}}s:7:\"content\";a:2:{s:6:\"status\";s:8:\"finished\";s:7:\"formats\";a:2:{s:3:\"mp4\";s:76:\"/website/var/tmp/video-thumbnails/27/thumb__content/home-trailer-english.mp4\";s:4:\"webm\";s:77:\"/website/var/tmp/video-thumbnails/27/thumb__content/home-trailer-english.webm\";}}}}');
+INSERT INTO `assets` VALUES (27,26,'video','home-trailer-english.mp4','/videos/','video/mp4',1368542794,1388733679,0,0,'a:1:{s:10:\"thumbnails\";a:2:{s:12:\"featurerette\";a:2:{s:6:\"status\";s:8:\"finished\";s:7:\"formats\";a:2:{s:3:\"mp4\";s:81:\"/website/var/tmp/video-thumbnails/27/thumb__featurerette/home-trailer-english.mp4\";s:4:\"webm\";s:82:\"/website/var/tmp/video-thumbnails/27/thumb__featurerette/home-trailer-english.webm\";}}s:7:\"content\";a:2:{s:6:\"status\";s:8:\"finished\";s:7:\"formats\";a:2:{s:3:\"mp4\";s:76:\"/website/var/tmp/video-thumbnails/27/thumb__content/home-trailer-english.mp4\";s:4:\"webm\";s:77:\"/website/var/tmp/video-thumbnails/27/thumb__content/home-trailer-english.webm\";}}}}');
 INSERT INTO `assets` VALUES (29,1,'folder','documents','/','',1368548619,1368632467,0,0,'a:0:{}');
 INSERT INTO `assets` VALUES (34,1,'folder','screenshots','/','',1368560793,1368632470,0,0,'a:0:{}');
 INSERT INTO `assets` VALUES (35,34,'image','glossary.png','/screenshots/','image/png',1368560809,1368632470,0,0,'a:3:{s:10:\"imageWidth\";i:908;s:11:\"imageHeight\";i:267;s:25:\"imageDimensionsCalculated\";b:1;}');
@@ -1263,6 +1273,8 @@ INSERT INTO `assets` VALUES (65,34,'image','objects-forms.png','/screenshots/','
 INSERT INTO `assets` VALUES (66,29,'document','example-excel.xlsx','/documents/','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',1378992590,1378992590,0,0,'a:0:{}');
 INSERT INTO `assets` VALUES (67,29,'document','example.docx','/documents/','application/vnd.openxmlformats-officedocument.wordprocessingml.document',1378992591,1378992591,0,0,'a:0:{}');
 INSERT INTO `assets` VALUES (68,29,'document','example.pptx','/documents/','application/vnd.openxmlformats-officedocument.presentationml.presentation',1378992592,1378992592,0,0,'a:0:{}');
+INSERT INTO `assets` VALUES (69,34,'image','e-commerce1.png','/screenshots/','image/png',1388740480,1388740490,14,14,'a:3:{s:10:\"imageWidth\";i:1252;s:11:\"imageHeight\";i:1009;s:25:\"imageDimensionsCalculated\";b:1;}');
+INSERT INTO `assets` VALUES (70,34,'image','pim1-png','/screenshots/','image/png',1388740572,1388740580,14,14,'a:3:{s:10:\"imageWidth\";i:1275;s:11:\"imageHeight\";i:799;s:25:\"imageDimensionsCalculated\";b:1;}');
 
 
 
@@ -1290,6 +1302,7 @@ INSERT INTO `dependencies` VALUES ('document',1,'asset',27);
 INSERT INTO `dependencies` VALUES ('document',1,'document',40);
 INSERT INTO `dependencies` VALUES ('document',1,'asset',55);
 INSERT INTO `dependencies` VALUES ('document',1,'document',57);
+INSERT INTO `dependencies` VALUES ('document',1,'document',60);
 INSERT INTO `dependencies` VALUES ('document',3,'document',7);
 INSERT INTO `dependencies` VALUES ('document',3,'document',18);
 INSERT INTO `dependencies` VALUES ('document',3,'document',19);
@@ -1314,6 +1327,7 @@ INSERT INTO `dependencies` VALUES ('document',3,'asset',50);
 INSERT INTO `dependencies` VALUES ('document',3,'asset',55);
 INSERT INTO `dependencies` VALUES ('document',3,'asset',56);
 INSERT INTO `dependencies` VALUES ('document',3,'asset',57);
+INSERT INTO `dependencies` VALUES ('document',3,'document',60);
 INSERT INTO `dependencies` VALUES ('document',4,'document',5);
 INSERT INTO `dependencies` VALUES ('document',4,'document',15);
 INSERT INTO `dependencies` VALUES ('document',4,'document',16);
@@ -1323,6 +1337,8 @@ INSERT INTO `dependencies` VALUES ('document',4,'asset',24);
 INSERT INTO `dependencies` VALUES ('document',4,'document',40);
 INSERT INTO `dependencies` VALUES ('document',4,'document',59);
 INSERT INTO `dependencies` VALUES ('document',5,'document',40);
+INSERT INTO `dependencies` VALUES ('document',5,'document',60);
+INSERT INTO `dependencies` VALUES ('document',5,'document',69);
 INSERT INTO `dependencies` VALUES ('document',6,'document',1);
 INSERT INTO `dependencies` VALUES ('document',6,'document',40);
 INSERT INTO `dependencies` VALUES ('document',7,'asset',27);
@@ -1374,6 +1390,9 @@ INSERT INTO `dependencies` VALUES ('document',25,'asset',45);
 INSERT INTO `dependencies` VALUES ('document',25,'asset',47);
 INSERT INTO `dependencies` VALUES ('document',25,'asset',51);
 INSERT INTO `dependencies` VALUES ('document',25,'asset',54);
+INSERT INTO `dependencies` VALUES ('document',26,'document',3);
+INSERT INTO `dependencies` VALUES ('document',26,'document',40);
+INSERT INTO `dependencies` VALUES ('document',26,'document',57);
 INSERT INTO `dependencies` VALUES ('document',27,'document',3);
 INSERT INTO `dependencies` VALUES ('document',28,'document',3);
 INSERT INTO `dependencies` VALUES ('document',28,'asset',61);
@@ -1393,6 +1412,8 @@ INSERT INTO `dependencies` VALUES ('document',35,'document',5);
 INSERT INTO `dependencies` VALUES ('document',35,'asset',51);
 INSERT INTO `dependencies` VALUES ('document',35,'asset',53);
 INSERT INTO `dependencies` VALUES ('document',36,'document',5);
+INSERT INTO `dependencies` VALUES ('document',36,'document',40);
+INSERT INTO `dependencies` VALUES ('document',36,'document',57);
 INSERT INTO `dependencies` VALUES ('document',37,'document',5);
 INSERT INTO `dependencies` VALUES ('document',37,'document',38);
 INSERT INTO `dependencies` VALUES ('document',38,'document',5);
@@ -1450,7 +1471,6 @@ INSERT INTO `dependencies` VALUES ('document',58,'document',57);
 INSERT INTO `dependencies` VALUES ('document',59,'document',15);
 INSERT INTO `dependencies` VALUES ('document',59,'document',16);
 INSERT INTO `dependencies` VALUES ('document',59,'document',40);
-INSERT INTO `dependencies` VALUES ('document',59,'document',57);
 INSERT INTO `dependencies` VALUES ('document',60,'document',5);
 INSERT INTO `dependencies` VALUES ('document',60,'document',40);
 INSERT INTO `dependencies` VALUES ('document',60,'document',57);
@@ -1477,6 +1497,20 @@ INSERT INTO `dependencies` VALUES ('document',67,'document',57);
 INSERT INTO `dependencies` VALUES ('document',68,'document',5);
 INSERT INTO `dependencies` VALUES ('document',68,'document',40);
 INSERT INTO `dependencies` VALUES ('document',68,'document',57);
+INSERT INTO `dependencies` VALUES ('document',69,'document',5);
+INSERT INTO `dependencies` VALUES ('document',69,'document',40);
+INSERT INTO `dependencies` VALUES ('document',69,'document',57);
+INSERT INTO `dependencies` VALUES ('document',69,'document',60);
+INSERT INTO `dependencies` VALUES ('document',70,'document',5);
+INSERT INTO `dependencies` VALUES ('document',70,'document',40);
+INSERT INTO `dependencies` VALUES ('document',70,'document',60);
+INSERT INTO `dependencies` VALUES ('document',70,'document',69);
+INSERT INTO `dependencies` VALUES ('document',70,'asset',70);
+INSERT INTO `dependencies` VALUES ('document',71,'document',5);
+INSERT INTO `dependencies` VALUES ('document',71,'document',40);
+INSERT INTO `dependencies` VALUES ('document',71,'document',60);
+INSERT INTO `dependencies` VALUES ('document',71,'document',69);
+INSERT INTO `dependencies` VALUES ('document',71,'asset',69);
 INSERT INTO `dependencies` VALUES ('object',3,'document',19);
 INSERT INTO `dependencies` VALUES ('object',3,'document',24);
 INSERT INTO `dependencies` VALUES ('object',3,'asset',43);
@@ -1502,10 +1536,10 @@ INSERT INTO `dependencies` VALUES ('object',40,'object',36);
 
 
 
-INSERT INTO `documents` VALUES (1,0,'page','','/',999999,1,1368522989,1382962883,1,0);
-INSERT INTO `documents` VALUES (3,40,'page','basic-examples','/en/',1,1,1368523212,1382956582,0,0);
+INSERT INTO `documents` VALUES (1,0,'page','','/',999999,1,1368522989,1388738445,1,14);
+INSERT INTO `documents` VALUES (3,40,'page','basic-examples','/en/',1,1,1368523212,1388738504,0,14);
 INSERT INTO `documents` VALUES (4,40,'page','introduction','/en/',0,1,1368523285,1382962961,0,0);
-INSERT INTO `documents` VALUES (5,40,'page','advanced-examples','/en/',2,1,1368523389,1382956042,0,0);
+INSERT INTO `documents` VALUES (5,40,'page','advanced-examples','/en/',2,1,1368523389,1388738496,0,14);
 INSERT INTO `documents` VALUES (6,40,'page','experiments','/en/',3,1,1368523410,1382956044,0,0);
 INSERT INTO `documents` VALUES (7,3,'page','html5-video','/en/basic-examples/',1,1,1368525394,1382956040,0,0);
 INSERT INTO `documents` VALUES (9,5,'page','creating-objects-using-forms','/en/advanced-examples/',1,1,1368525933,1382956042,0,0);
@@ -1525,7 +1559,7 @@ INSERT INTO `documents` VALUES (22,3,'page','website-translations','/en/basic-ex
 INSERT INTO `documents` VALUES (23,51,'page','website-uebersetzungen','/de/einfache-beispiele/',0,1,1368608357,1382958135,0,0);
 INSERT INTO `documents` VALUES (24,3,'page','content-page','/en/basic-examples/',0,1,1368609059,1382956040,0,0);
 INSERT INTO `documents` VALUES (25,3,'page','editable-roundup','/en/basic-examples/',7,1,1368609569,1382956040,0,0);
-INSERT INTO `documents` VALUES (26,3,'page','form','/en/basic-examples/',8,1,1368610663,1382956040,0,0);
+INSERT INTO `documents` VALUES (26,3,'page','form','/en/basic-examples/',8,1,1368610663,1388733533,0,14);
 INSERT INTO `documents` VALUES (27,3,'page','news','/en/basic-examples/',9,1,1368613137,1382956040,0,0);
 INSERT INTO `documents` VALUES (28,3,'page','properties','/en/basic-examples/',10,1,1368615986,1382956040,0,0);
 INSERT INTO `documents` VALUES (29,3,'page','tag-and-snippet-management','/en/basic-examples/',11,1,1368617118,1382956040,0,0);
@@ -1535,7 +1569,7 @@ INSERT INTO `documents` VALUES (32,3,'link','pimcore.org','/en/basic-examples/',
 INSERT INTO `documents` VALUES (33,34,'hardlink','basic-examples','/en/advanced-examples/hard-link/',0,1,1368626461,1382956042,0,0);
 INSERT INTO `documents` VALUES (34,5,'page','hard-link','/en/advanced-examples/',3,1,1368626655,1382956042,0,0);
 INSERT INTO `documents` VALUES (35,5,'page','image-with-hotspots-and-markers','/en/advanced-examples/',4,1,1368626888,1382956042,0,0);
-INSERT INTO `documents` VALUES (36,5,'page','search','/en/advanced-examples/',5,1,1368629524,1382956042,0,0);
+INSERT INTO `documents` VALUES (36,5,'page','search','/en/advanced-examples/',5,1,1368629524,1388733927,0,14);
 INSERT INTO `documents` VALUES (37,5,'page','contact-form','/en/advanced-examples/',6,1,1368630444,1382956042,0,0);
 INSERT INTO `documents` VALUES (38,37,'email','email','/en/advanced-examples/contact-form/',1,1,1368631410,1382956042,0,0);
 INSERT INTO `documents` VALUES (39,1,'page','error','/',3,1,1369854325,1369854422,0,0);
@@ -1556,18 +1590,21 @@ INSERT INTO `documents` VALUES (53,51,'page','neuigkeiten','/de/einfache-beispie
 INSERT INTO `documents` VALUES (54,1,'folder','shared','/',4,1,1382959757,1382959757,0,0);
 INSERT INTO `documents` VALUES (55,54,'folder','includes','/shared/',1,1,1382959767,1382959768,0,0);
 INSERT INTO `documents` VALUES (56,55,'snippet','languages','/shared/includes/',1,1,1382959774,1382959822,0,0);
-INSERT INTO `documents` VALUES (57,40,'snippet','sidebar','/en/',4,1,1382962826,1382962845,0,0);
+INSERT INTO `documents` VALUES (57,40,'snippet','sidebar','/en/',4,1,1382962826,1388735598,0,14);
 INSERT INTO `documents` VALUES (58,41,'snippet','sidebar','/de/',3,1,1382962891,1382962906,0,0);
-INSERT INTO `documents` VALUES (59,4,'snippet','sidebar','/en/introduction/',1,1,1382962940,1382962952,0,0);
+INSERT INTO `documents` VALUES (59,4,'snippet','sidebar','/en/introduction/',1,1,1382962940,1388738272,0,14);
 INSERT INTO `documents` VALUES (60,5,'page','blog','/en/advanced-examples/',0,1,1388391128,1388396165,7,7);
-INSERT INTO `documents` VALUES (61,5,'page','sitemap','/en/advanced-examples/',7,1,1388406334,1388406406,'','');
-INSERT INTO `documents` VALUES (62,1,'folder','newsletters','/',5,1,1388409377,1388409377,12,12);
-INSERT INTO `documents` VALUES (63,5,'page','newsletter','/en/advanced-examples/',8,1,1388409438,1388409571,12,12);
-INSERT INTO `documents` VALUES (64,63,'page','confirm','/en/advanced-examples/newsletter/',1,1,1388409594,1388409641,12,12);
-INSERT INTO `documents` VALUES (65,63,'page','unsubscribe','/en/advanced-examples/newsletter/',2,1,1388409614,1388412346,12,12);
-INSERT INTO `documents` VALUES (66,63,'email','confirmation-email','/en/advanced-examples/newsletter/',3,1,1388409670,1388412587,12,12);
-INSERT INTO `documents` VALUES (67,62,'email','example-mailing','/newsletters/',1,1,1388412605,1388412917,12,12);
-INSERT INTO `documents` VALUES (68,5,'page','asset-thumbnail-list','/en/advanced-examples/',9,1,1388414727,1388414883,12,12);
+INSERT INTO `documents` VALUES (61,5,'page','sitemap','/en/advanced-examples/',7,1,1388406334,1388406406,0,0);
+INSERT INTO `documents` VALUES (62,1,'folder','newsletters','/',5,1,1388409377,1388409377,'','');
+INSERT INTO `documents` VALUES (63,5,'page','newsletter','/en/advanced-examples/',8,1,1388409438,1388409571,'','');
+INSERT INTO `documents` VALUES (64,63,'page','confirm','/en/advanced-examples/newsletter/',1,1,1388409594,1388409641,'','');
+INSERT INTO `documents` VALUES (65,63,'page','unsubscribe','/en/advanced-examples/newsletter/',2,1,1388409614,1388412346,'','');
+INSERT INTO `documents` VALUES (66,63,'email','confirmation-email','/en/advanced-examples/newsletter/',3,1,1388409670,1388412587,'','');
+INSERT INTO `documents` VALUES (67,62,'email','example-mailing','/newsletters/',1,1,1388412605,1388412917,'','');
+INSERT INTO `documents` VALUES (68,5,'page','asset-thumbnail-list','/en/advanced-examples/',9,1,1388414727,1388414883,'','');
+INSERT INTO `documents` VALUES (69,5,'snippet','sidebar','/en/advanced-examples/',12,1,1388734403,1388738477,14,14);
+INSERT INTO `documents` VALUES (70,5,'page','product-information-management','/en/advanced-examples/',11,1,1388740191,1388740585,14,14);
+INSERT INTO `documents` VALUES (71,5,'page','e-commerce','/en/advanced-examples/',10,1,1388740265,1388740613,14,14);
 
 
 
@@ -1978,6 +2015,10 @@ INSERT INTO `documents_elements` VALUES (25,'myTextarea','textarea','Some Text')
 INSERT INTO `documents_elements` VALUES (25,'myVideo','video','a:5:{s:2:\"id\";i:27;s:4:\"type\";s:5:\"asset\";s:5:\"title\";s:0:\"\";s:11:\"description\";s:0:\"\";s:6:\"poster\";N;}');
 INSERT INTO `documents_elements` VALUES (25,'myWysiwyg','wysiwyg','<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.</p>\n\n<p>&nbsp;</p>\n\n<p>Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>\n\n<p>&nbsp;</p>\n\n<p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>\n');
 INSERT INTO `documents_elements` VALUES (25,'tableName','table','a:2:{i:0;a:3:{i:0;s:7:\"Value 1\";i:1;s:7:\"Value 2\";i:2;s:7:\"Value 3\";}i:1;a:3:{i:0;s:4:\"this\";i:1;s:2:\"is\";i:2;s:4:\"test\";}}');
+INSERT INTO `documents_elements` VALUES (26,'content','areablock','a:0:{}');
+INSERT INTO `documents_elements` VALUES (26,'headDescription','input','');
+INSERT INTO `documents_elements` VALUES (26,'headline','input','Just a simple form');
+INSERT INTO `documents_elements` VALUES (26,'headTitle','input','');
 INSERT INTO `documents_elements` VALUES (26,'multiselect','multiselect','a:0:{}');
 INSERT INTO `documents_elements` VALUES (26,'myCheckbox','checkbox','');
 INSERT INTO `documents_elements` VALUES (26,'myDate','date','');
@@ -2065,7 +2106,7 @@ INSERT INTO `documents_elements` VALUES (35,'headTitle','input','');
 INSERT INTO `documents_elements` VALUES (35,'imagecontent1','image','a:9:{s:2:\"id\";i:53;s:3:\"alt\";s:0:\"\";s:11:\"cropPercent\";N;s:9:\"cropWidth\";N;s:10:\"cropHeight\";N;s:7:\"cropTop\";N;s:8:\"cropLeft\";N;s:8:\"hotspots\";a:0:{}s:6:\"marker\";a:4:{i:0;a:3:{s:3:\"top\";d:35.220125786163521;s:4:\"left\";d:82.098765432098759;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:27:\"Table Mountain Peak Station\";s:4:\"type\";s:9:\"textfield\";}}}i:1;a:3:{s:3:\"top\";d:67.924528301886795;s:4:\"left\";d:9.0534979423868318;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:16:\"Victoria Harbour\";s:4:\"type\";s:9:\"textfield\";}}}i:2;a:3:{s:3:\"top\";d:57.232704402515722;s:4:\"left\";d:45.267489711934154;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:12:\"District Six\";s:4:\"type\";s:9:\"textfield\";}}}i:3;a:3:{s:3:\"top\";d:45.911949685534594;s:4:\"left\";d:98.971193415637856;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:11:\"Lion\'s Head\";s:4:\"type\";s:9:\"textfield\";}}}}}');
 INSERT INTO `documents_elements` VALUES (35,'imagecontent2','image','a:9:{s:2:\"id\";i:51;s:3:\"alt\";s:0:\"\";s:11:\"cropPercent\";N;s:9:\"cropWidth\";N;s:10:\"cropHeight\";N;s:7:\"cropTop\";N;s:8:\"cropLeft\";N;s:8:\"hotspots\";a:3:{i:0;a:5:{s:3:\"top\";d:0.54794520547945003;s:4:\"left\";d:20.370370370370001;s:5:\"width\";d:22.016460905350002;s:6:\"height\";d:21.917808219177999;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:3:\"Ear\";s:4:\"type\";s:9:\"textfield\";}}}i:1;a:5:{s:3:\"top\";d:59.178082191781002;s:4:\"left\";d:8.8477366255144005;s:5:\"width\";d:33.127572016461002;s:6:\"height\";d:40.273972602740002;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:5:\"Claws\";s:4:\"type\";s:9:\"textfield\";}}}i:2;a:5:{s:3:\"top\";d:25.205479452054998;s:4:\"left\";d:11.934156378600999;s:5:\"width\";d:16.460905349794;s:6:\"height\";d:18.356164383562;s:4:\"data\";a:1:{i:0;a:3:{s:4:\"name\";s:5:\"title\";s:5:\"value\";s:3:\"Eye\";s:4:\"type\";s:9:\"textfield\";}}}}s:6:\"marker\";a:0:{}}');
 INSERT INTO `documents_elements` VALUES (36,'content','areablock','a:1:{i:0;a:2:{s:3:\"key\";s:1:\"1\";s:4:\"type\";s:7:\"wysiwyg\";}}');
-INSERT INTO `documents_elements` VALUES (36,'contentcontent1','wysiwyg','<p>&nbsp;</p>\n\n<p>The search is using the contents from&nbsp;pimcore.org.&nbsp;<strong>TIP</strong>: Search for \"web\".&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p>&nbsp;</p>\n');
+INSERT INTO `documents_elements` VALUES (36,'contentcontent1','wysiwyg','<p>The search is using the contents from&nbsp;pimcore.org.&nbsp;<strong>TIP</strong>: Search for \"web\".</p>\n');
 INSERT INTO `documents_elements` VALUES (36,'headDescription','input','');
 INSERT INTO `documents_elements` VALUES (36,'headline','input','Search');
 INSERT INTO `documents_elements` VALUES (36,'headlinecontent1','input','');
@@ -2275,11 +2316,13 @@ INSERT INTO `documents_elements` VALUES (53,'myWysiwyg','wysiwyg','');
 INSERT INTO `documents_elements` VALUES (56,'languages','block','a:2:{i:0;s:1:\"1\";i:1;s:1:\"2\";}');
 INSERT INTO `documents_elements` VALUES (56,'linklanguages1','link','a:14:{s:4:\"text\";s:7:\"English\";s:4:\"path\";s:3:\"/en\";s:6:\"target\";s:0:\"\";s:10:\"parameters\";s:0:\"\";s:6:\"anchor\";s:0:\"\";s:5:\"title\";s:0:\"\";s:9:\"accesskey\";s:0:\"\";s:3:\"rel\";s:0:\"\";s:8:\"tabindex\";s:0:\"\";s:5:\"class\";s:2:\"en\";s:10:\"attributes\";s:0:\"\";s:8:\"internal\";b:1;s:10:\"internalId\";i:40;s:12:\"internalType\";s:8:\"document\";}');
 INSERT INTO `documents_elements` VALUES (56,'linklanguages2','link','a:14:{s:4:\"text\";s:6:\"German\";s:4:\"path\";s:3:\"/de\";s:6:\"target\";s:0:\"\";s:10:\"parameters\";s:0:\"\";s:6:\"anchor\";s:0:\"\";s:5:\"title\";s:0:\"\";s:9:\"accesskey\";s:0:\"\";s:3:\"rel\";s:0:\"\";s:8:\"tabindex\";s:0:\"\";s:5:\"class\";s:2:\"de\";s:10:\"attributes\";s:0:\"\";s:8:\"internal\";b:1;s:10:\"internalId\";i:41;s:12:\"internalType\";s:8:\"document\";}');
+INSERT INTO `documents_elements` VALUES (57,'blogArticles','select','3');
 INSERT INTO `documents_elements` VALUES (57,'teasers','block','a:1:{i:0;s:1:\"1\";}');
 INSERT INTO `documents_elements` VALUES (57,'teaserteasers1','snippet','15');
 INSERT INTO `documents_elements` VALUES (58,'teasers','block','a:2:{i:0;s:1:\"1\";i:1;s:1:\"2\";}');
 INSERT INTO `documents_elements` VALUES (58,'teaserteasers1','snippet','47');
 INSERT INTO `documents_elements` VALUES (58,'teaserteasers2','snippet','49');
+INSERT INTO `documents_elements` VALUES (59,'blogArticles','select','2');
 INSERT INTO `documents_elements` VALUES (59,'teasers','block','a:2:{i:0;s:1:\"1\";i:1;s:1:\"2\";}');
 INSERT INTO `documents_elements` VALUES (59,'teaserteasers1','snippet','15');
 INSERT INTO `documents_elements` VALUES (59,'teaserteasers2','snippet','16');
@@ -2345,6 +2388,29 @@ INSERT INTO `documents_elements` VALUES (68,'headDescription','input','');
 INSERT INTO `documents_elements` VALUES (68,'headline','input','Asset Thumbnail List');
 INSERT INTO `documents_elements` VALUES (68,'headTitle','input','');
 INSERT INTO `documents_elements` VALUES (68,'parentFolder','href','a:3:{s:2:\"id\";N;s:4:\"type\";N;s:7:\"subtype\";N;}');
+INSERT INTO `documents_elements` VALUES (69,'teasers','block','a:2:{i:0;s:1:\"1\";i:1;s:1:\"2\";}');
+INSERT INTO `documents_elements` VALUES (69,'teaserteasers1','snippet','16');
+INSERT INTO `documents_elements` VALUES (69,'teaserteasers2','snippet','17');
+INSERT INTO `documents_elements` VALUES (70,'content','areablock','a:2:{i:0;a:2:{s:3:\"key\";s:1:\"1\";s:4:\"type\";s:7:\"wysiwyg\";}i:1;a:2:{s:3:\"key\";s:1:\"2\";s:4:\"type\";s:5:\"image\";}}');
+INSERT INTO `documents_elements` VALUES (70,'contentcontent1','wysiwyg','<p>Please visit our&nbsp;<a href=\"http://pimcore.org/demo\">PIM, E-Commerce &amp; Asset Management demo</a> to see it in action.&nbsp;</p>\n');
+INSERT INTO `documents_elements` VALUES (70,'headDescription','input','');
+INSERT INTO `documents_elements` VALUES (70,'headline','input','Product Information Management');
+INSERT INTO `documents_elements` VALUES (70,'headlinecontent1','input','');
+INSERT INTO `documents_elements` VALUES (70,'headlinecontent2','input','');
+INSERT INTO `documents_elements` VALUES (70,'headTitle','input','');
+INSERT INTO `documents_elements` VALUES (70,'imagecontent2','image','a:9:{s:2:\"id\";i:70;s:3:\"alt\";s:0:\"\";s:11:\"cropPercent\";N;s:9:\"cropWidth\";N;s:10:\"cropHeight\";N;s:7:\"cropTop\";N;s:8:\"cropLeft\";N;s:8:\"hotspots\";a:0:{}s:6:\"marker\";a:0:{}}');
+INSERT INTO `documents_elements` VALUES (70,'leadcontent1','wysiwyg','');
+INSERT INTO `documents_elements` VALUES (70,'leadcontent2','wysiwyg','');
+INSERT INTO `documents_elements` VALUES (71,'content','areablock','a:2:{i:0;a:2:{s:3:\"key\";s:1:\"1\";s:4:\"type\";s:7:\"wysiwyg\";}i:1;a:2:{s:3:\"key\";s:1:\"2\";s:4:\"type\";s:5:\"image\";}}');
+INSERT INTO `documents_elements` VALUES (71,'contentcontent1','wysiwyg','<p>Please visit our&nbsp;<a href=\"http://pimcore.org/demo\">PIM, E-Commerce &amp; Asset Management demo</a> to see it in action.&nbsp;</p>\n');
+INSERT INTO `documents_elements` VALUES (71,'headDescription','input','');
+INSERT INTO `documents_elements` VALUES (71,'headline','input','E-Commerce');
+INSERT INTO `documents_elements` VALUES (71,'headlinecontent1','input','');
+INSERT INTO `documents_elements` VALUES (71,'headlinecontent2','input','');
+INSERT INTO `documents_elements` VALUES (71,'headTitle','input','');
+INSERT INTO `documents_elements` VALUES (71,'imagecontent2','image','a:9:{s:2:\"id\";i:69;s:3:\"alt\";s:0:\"\";s:11:\"cropPercent\";N;s:9:\"cropWidth\";N;s:10:\"cropHeight\";N;s:7:\"cropTop\";N;s:8:\"cropLeft\";N;s:8:\"hotspots\";a:0:{}s:6:\"marker\";a:0:{}}');
+INSERT INTO `documents_elements` VALUES (71,'leadcontent1','wysiwyg','');
+INSERT INTO `documents_elements` VALUES (71,'leadcontent2','wysiwyg','');
 
 
 
@@ -2400,10 +2466,12 @@ INSERT INTO `documents_page` VALUES (52,'','content','default','','Beispiele fü
 INSERT INTO `documents_page` VALUES (53,'','news','index','','','','','a:0:{}','',0,'','');
 INSERT INTO `documents_page` VALUES (60,'','blog','index','','Blog','','','a:0:{}','',0,'','');
 INSERT INTO `documents_page` VALUES (61,'','advanced','sitemap','','Sitemap','','','a:0:{}','',0,'','');
-INSERT INTO `documents_page` VALUES (63,'','newsletter','subscribe','','Newsletter','','','a:0:{}','','','','');
-INSERT INTO `documents_page` VALUES (64,'','newsletter','confirm','','','','','a:0:{}','','','','');
-INSERT INTO `documents_page` VALUES (65,'','newsletter','unsubscribe','','Unsubscribe','','','a:0:{}','','','','');
-INSERT INTO `documents_page` VALUES (68,'','advanced','asset-thumbnail-list','','Asset Thumbnail List','','','a:0:{}','','','','');
+INSERT INTO `documents_page` VALUES (63,'','newsletter','subscribe','','Newsletter','','','a:0:{}','',0,'','');
+INSERT INTO `documents_page` VALUES (64,'','newsletter','confirm','','','','','a:0:{}','',0,'','');
+INSERT INTO `documents_page` VALUES (65,'','newsletter','unsubscribe','','Unsubscribe','','','a:0:{}','',0,'','');
+INSERT INTO `documents_page` VALUES (68,'','advanced','asset-thumbnail-list','','Asset Thumbnail List','','','a:0:{}','',0,'','');
+INSERT INTO `documents_page` VALUES (70,'','content','default','','Product Information Management','','','a:0:{}','','','','');
+INSERT INTO `documents_page` VALUES (71,'','content','default','','E-Commerce','','','a:0:{}','','','','');
 
 
 
@@ -2420,6 +2488,7 @@ INSERT INTO `documents_snippet` VALUES (56,'','default','default','/includes/lan
 INSERT INTO `documents_snippet` VALUES (57,'','default','default','/includes/sidebar.php',0);
 INSERT INTO `documents_snippet` VALUES (58,'','default','default','/includes/sidebar.php',0);
 INSERT INTO `documents_snippet` VALUES (59,'','default','default','/includes/sidebar.php',0);
+INSERT INTO `documents_snippet` VALUES (69,'','default','default','/includes/sidebar.php','');
 
 
 
@@ -2656,9 +2725,9 @@ INSERT INTO `objects` VALUES (8,2,'object','in-enim-justo_4','/news/',0,1,136861
 INSERT INTO `objects` VALUES (9,2,'object','in-enim-justo_5','/news/',0,1,1368615197,1382958706,0,0,2,'news');
 INSERT INTO `objects` VALUES (10,1,'folder','crm','/',0,1,1368620607,1368620607,0,0,0,'');
 INSERT INTO `objects` VALUES (11,1,'folder','inquiries','/',0,1,1368620624,1368620624,0,0,0,'');
-INSERT INTO `objects` VALUES (28,42,'object','john-doe.com','/crm/inquiries/',0,1,1368630902,1388409139,0,12,4,'person');
+INSERT INTO `objects` VALUES (28,42,'object','john-doe.com','/crm/inquiries/',0,1,1368630902,1388409139,0,'',4,'person');
 INSERT INTO `objects` VALUES (29,11,'object','may-15-2013-5-15-02-pm~john-doe.com','/inquiries/',0,1,1368630902,1368630902,0,0,3,'inquiry');
-INSERT INTO `objects` VALUES (30,42,'object','jane-doe.com','/crm/inquiries/',0,1,1368630916,1388409137,0,12,4,'person');
+INSERT INTO `objects` VALUES (30,42,'object','jane-doe.com','/crm/inquiries/',0,1,1368630916,1388409137,0,'',4,'person');
 INSERT INTO `objects` VALUES (31,11,'object','may-15-2013-5-15-16-pm~jane-doe.com','/inquiries/',0,1,1368630916,1368630916,0,0,3,'inquiry');
 INSERT INTO `objects` VALUES (32,1,'folder','blog','/',0,1,1388389170,1388389170,7,7,0,'');
 INSERT INTO `objects` VALUES (33,32,'folder','categories','/blog/',0,1,1388389428,1388389428,7,7,0,'');
@@ -2669,13 +2738,14 @@ INSERT INTO `objects` VALUES (37,33,'object','nam-eget-dui','/blog/categories/',
 INSERT INTO `objects` VALUES (38,33,'object','etiam-rhoncus','/blog/categories/',0,1,1388389892,1388389900,7,7,6,'blogCategory');
 INSERT INTO `objects` VALUES (39,34,'object','lorem-ipsum-dolor-sit-amet','/blog/articles/',0,1,1388390090,1388393711,7,7,5,'blogArticle');
 INSERT INTO `objects` VALUES (40,34,'object','cum-sociis-natoque-penatibus-et-magnis','/blog/articles/',0,1,1388390120,1388393706,7,7,5,'blogArticle');
-INSERT INTO `objects` VALUES (41,10,'folder','newsletter','/crm/','',1,1388408967,1388408967,12,12,'','');
-INSERT INTO `objects` VALUES (42,10,'folder','inquiries','/crm/','',1,1388409135,1388409135,12,12,'','');
+INSERT INTO `objects` VALUES (41,10,'folder','newsletter','/crm/',0,1,1388408967,1388408967,'','',0,'');
+INSERT INTO `objects` VALUES (42,10,'folder','inquiries','/crm/',0,1,1388409135,1388409135,'','',0,'');
 INSERT INTO `objects` VALUES (47,41,'object','pimcore-byom.de~7a3','/crm/newsletter/',0,1,1388412533,1388412544,0,0,4,'person');
 
 
 
 
+INSERT INTO `properties` VALUES (1,'document','/','blog','document','60',1);
 INSERT INTO `properties` VALUES (1,'document','/','language','text','en',1);
 INSERT INTO `properties` VALUES (1,'document','/','leftNavStartNode','document','40',1);
 INSERT INTO `properties` VALUES (1,'document','/','mainNavStartNode','document','40',1);
@@ -2687,6 +2757,7 @@ INSERT INTO `properties` VALUES (4,'document','/en/introduction','navigation_nam
 INSERT INTO `properties` VALUES (4,'document','/en/introduction','sidebar','document','59',1);
 INSERT INTO `properties` VALUES (5,'document','/en/advanced-examples','leftNavStartNode','document','5',1);
 INSERT INTO `properties` VALUES (5,'document','/en/advanced-examples','navigation_name','text','Advanced Examples',0);
+INSERT INTO `properties` VALUES (5,'document','/en/advanced-examples','sidebar','document','69',1);
 INSERT INTO `properties` VALUES (6,'document','/en/experiments','navigation_name','text','Experiments',0);
 INSERT INTO `properties` VALUES (7,'document','/en/basic-examples/html5-video','navigation_name','text','HTML5 Video',0);
 INSERT INTO `properties` VALUES (9,'document','/en/advanced-examples/creating-objects-using-forms','navigation_name','text','Creating Objects with a Form',0);
@@ -2733,6 +2804,8 @@ INSERT INTO `properties` VALUES (63,'document','/en/advanced-examples/newsletter
 INSERT INTO `properties` VALUES (64,'document','/en/advanced-examples/newsletter/confirm','navigation_name','text','',1);
 INSERT INTO `properties` VALUES (65,'document','/en/advanced-examples/newsletter/unsubscribe','navigation_name','text','Unsubscribe',1);
 INSERT INTO `properties` VALUES (68,'document','/en/advanced-examples/asset-thumbnail-list','navigation_name','text','Asset Thumbnail List',1);
+INSERT INTO `properties` VALUES (70,'document','/en/advanced-examples/product-information-management','navigation_name','text','Product Information Management',0);
+INSERT INTO `properties` VALUES (71,'document','/en/advanced-examples/e-commerce','navigation_name','text','E-Commerce',1);
 
 
 
@@ -2765,11 +2838,11 @@ INSERT INTO `recyclebin` VALUES (24,'object','object','/crm/newsletter/pimcore-b
 
 
 
-INSERT INTO `search_backend_data` VALUES (5,'/en/advanced-examples','document','page','page',1,1368523389,1382956042,2,2,'ID: 5  \nPath: /en/advanced-examples  \n The following list is generated automatically. See controller/action to see how it\'s done.&nbsp; Advanced Examples ','leftNavStartNode:/en/advanced-examples navigation_name:Advanced Examples ');
-INSERT INTO `search_backend_data` VALUES (3,'/en/basic-examples','document','page','page',1,1368523212,1382956582,2,2,'ID: 3  \nPath: /en/basic-examples  \n 1 1 1 1 1 1 Basic Examples HTML5 Video Glossary Simple Content News PDF Viewer Thumbnails Round-Up Properties Galleries Website Translations Simple Form Tag Manager See in Action See in Action See in Action See in Action See in Action See in Action See in Action See in Action See in Action See in Action See in Action Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. direct direct direct direct direct direct direct direct direct direct direct direct ','leftNavStartNode:/en/basic-examples navigation_name:Basic Examples ');
+INSERT INTO `search_backend_data` VALUES (5,'/en/advanced-examples','document','page','page',1,1368523389,1388738496,0,14,'ID: 5  \nPath: /en/advanced-examples  \n The following list is generated automatically. See controller/action to see how it\'s done.&nbsp; Advanced Examples ','sidebar:/en/advanced-examples/sidebar leftNavStartNode:/en/advanced-examples navigation_name:Advanced Examples ');
+INSERT INTO `search_backend_data` VALUES (3,'/en/basic-examples','document','page','page',1,1368523212,1388738504,0,14,'ID: 3  \nPath: /en/basic-examples  \n 1 1 1 1 1 1 Basic Examples HTML5 Video Glossary Simple Content News PDF Viewer Thumbnails Round-Up Properties Galleries Website Translations Simple Form Tag Manager See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action See it in Action Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. direct direct direct direct direct direct direct direct direct direct direct direct ','leftNavStartNode:/en/basic-examples navigation_name:Basic Examples ');
 INSERT INTO `search_backend_data` VALUES (4,'/en/introduction','document','page','page',1,1368523285,1382962961,2,2,'ID: 4  \nPath: /en/introduction  \n Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. &nbsp; Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. &nbsp; Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. &nbsp; It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es. Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. &nbsp; Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Overview of the project and how to get started with a simple template. Introduction Nullam quis ante Maecenas tempus, tellus eget condimentum rhoncu Ullamcorper Scelerisque Getting started Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Etiam rhoncu Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. snippet snippet ','sidebar:/en/introduction/sidebar navigation_name:Introduction ');
 INSERT INTO `search_backend_data` VALUES (6,'/en/experiments','document','page','page',1,1368523410,1382956044,2,2,'ID: 6  \nPath: /en/experiments  \n Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. &nbsp; Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. &nbsp; Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, Experiments This space is reserved for your individual experiments &amp; tests. ','navigation_name:Experiments ');
-INSERT INTO `search_backend_data` VALUES (1,'/','document','page','page',1,1368522989,1382962883,1,2,'ID: 1  \nPath: /  \nAlbert Einstein 3 Ready to get impressed? It\'ll blow your mind. Oh yeah, it\'s that good See in Action See in Action Checkmate In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Check out our examples and dive into the next generation of digital data management. See for yourself. See for yourself Lorem ipsum. Oh yeah, it\'s that good. And lastly, this one. left left We can\'t solve problems by using the same kind of thinking we used when we created them. Cum sociis. See for yourself. Checkmate. video a.pimcore_video_flowplayer { display:block; text-align:center; } #video_526e56c37ffa7 .play { margin-top:108.5px; border:0px; display:inline-block; width:83px; height:83px; background:url(/pimcore/static/js/lib/flowplayer/play_large.png); } var player_config_video_526e56c37ffa7 = array_merge_recursive({\"dummy\":true},{\"clip\":{\"url\":\"\\/videos\\/home-trailer-english.mp4\"}}); flowplayer(\"video_526e56c37ffa7\", { src: \"/pimcore/static/js/lib/flowplayer/flowplayer.swf\", width: \"100%\", height: \"300\" },player_config_video_526e56c37ffa7); ','navigation_name:Home mainNavStartNode:/en leftNavStartNode:/en language:en sidebar:/en/sidebar ');
+INSERT INTO `search_backend_data` VALUES (1,'/','document','page','page',1,1368522989,1388738445,1,14,'ID: 1  \nPath: /  \nAlbert Einstein 3 Ready to be impressed? It\'ll blow your mind. Oh yeah, it\'s that good See it in Action See it in Action Checkmate In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Check out our examples and dive into the next generation of digital data management. See for yourself. See for yourself Lorem ipsum. Oh yeah, it\'s that good. And lastly, this one. left left We can\'t solve problems by using the same kind of thinking we used when we created them. Cum sociis. See for yourself. Checkmate. video a.pimcore_video_flowplayer { display:block; text-align:center; } #video_52c6778e49a87 .play { margin-top:108.5px; border:0px; display:inline-block; width:83px; height:83px; background:url(/pimcore/static/js/lib/flowplayer/play_large.png); } var player_config_video_52c6778e49a87 = array_merge_recursive({\"dummy\":true},{\"clip\":{\"url\":\"\\/videos\\/home-trailer-english.mp4\"}}); flowplayer(\"video_52c6778e49a87\", { src: \"/pimcore/static/js/lib/flowplayer/flowplayer.swf\", width: \"100%\", height: \"300\" },player_config_video_52c6778e49a87); ','sidebar:/en/sidebar navigation_name:Home mainNavStartNode:/en leftNavStartNode:/en language:en blog:/en/advanced-examples/blog ');
 INSERT INTO `search_backend_data` VALUES (7,'/basic-examples/html5-video','document','page','page',1,1368525394,1368545013,2,2,'ID: 7  \nPath: /basic-examples/html5-video  \n HTML5 Video is just as simple as that .... Just drop an video from your assets, the video will be automatically converted to the different HTML5 formats and to the correct size.&nbsp; a.pimcore_video_flowplayer { display:block; text-align:center; } #video_519256f5bec42 .play { margin-top:108.5px; border:0px; display:inline-block; width:83px; height:83px; background:url(/pimcore/static/js/lib/flowplayer/play_large.png); } var player_config_video_519256f5bec42 = array_merge_recursive({\"dummy\":true},{\"clip\":{\"url\":\"\\/demo-website\\/videos\\/home-trailer-english.mp4\"}}); flowplayer(\"video_519256f5bec42\", { src: \"/pimcore/static/js/lib/flowplayer/flowplayer.swf\", width: \"100%\", height: \"300\" },player_config_video_519256f5bec42); HTML5 Video ','HTML5 Video ');
 INSERT INTO `search_backend_data` VALUES (9,'/advanced-examples/creating-objects-using-forms','document','page','page',1,1368525933,1369854600,2,2,'ID: 9  \nPath: /advanced-examples/creating-objects-using-forms  \n &nbsp; In this example we dynamically create objects out of the data submitted via the form. The you can use the same approach to create objects using a commandline script, or wherever you need it. After submitting the form you\'ll find the data in \"Objects\" /crm and /inquiries.&nbsp; &nbsp; &nbsp; And here\'s the form:&nbsp; Please fill all fields and accept the terms of use. Creating Objects &amp; Assets with a Form ','language:en leftNavStartNode:/advanced-examples navigation_name:Creating Objects with a Form ');
 INSERT INTO `search_backend_data` VALUES (10,'/en/shared','document','folder','folder',1,1368527956,1382956831,2,2,'ID: 10  \nPath: /en/shared  \nshared','mainNavStartNode:/en leftNavStartNode:/en language:en ');
@@ -2795,7 +2868,7 @@ INSERT INTO `search_backend_data` VALUES (25,'/demo-website/examples/panama/img_
 INSERT INTO `search_backend_data` VALUES (16,'/shared/teasers/standard/advanced-examples','document','snippet','snippet',1,1368534298,1370432637,2,2,'ID: 16  \nPath: /shared/teasers/standard/advanced-examples  \n Drag &amp; Drop Interface Etiam rhoncu Content is created by simply dragging &amp; dropping blocks, that can&nbsp;be editited in-place and wysiwyg.&nbsp; ','leftNavStartNode:/ language:en ');
 INSERT INTO `search_backend_data` VALUES (17,'/shared/teasers/standard/experiments','document','snippet','snippet',1,1368534344,1370432641,2,2,'ID: 17  \nPath: /shared/teasers/standard/experiments  \n HTML5 omnipresent Quisque rutrum Drag &amp; drop upload directly&nbsp;into the asset tree, automatic html5 video transcoding, and much more ... ','leftNavStartNode:/ language:en ');
 INSERT INTO `search_backend_data` VALUES (26,'/videos','asset','folder','folder',1,1368542684,1368632471,2,2,'ID: 26  \nPath: /videos  \nvideos','');
-INSERT INTO `search_backend_data` VALUES (27,'/videos/home-trailer-english.mp4','asset','video','video',1,1368542794,1388406345,0,0,'ID: 27  \nPath: /videos/home-trailer-english.mp4  \nhome-trailer-english.mp4','');
+INSERT INTO `search_backend_data` VALUES (27,'/videos/home-trailer-english.mp4','asset','video','video',1,1368542794,1388733679,0,0,'ID: 27  \nPath: /videos/home-trailer-english.mp4  \nhome-trailer-english.mp4','');
 INSERT INTO `search_backend_data` VALUES (20,'/basic-examples/glossary','document','page','page',1,1368559903,1368561466,2,2,'ID: 20  \nPath: /basic-examples/glossary  \n Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. &nbsp; Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es. &nbsp; Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. The Glossary ... ... makes it very simple to automatically link keywords, abbreviation and acronyms. This is not only perfect for SEO but also makes it super easy to navigate in the content.&nbsp; &nbsp; ... this is how it looks in the admin interface. Glossary ','Glossary ');
 INSERT INTO `search_backend_data` VALUES (18,'/basic-examples/pdf-viewer','document','page','page',1,1368548449,1378992677,2,2,'ID: 18  \nPath: /basic-examples/pdf-viewer  \n Isn\'t that amazing? Just drop a PDF, doc(x), xls(x) or many other formats, et voilá ...&nbsp; + &#x21e9; x var pimcore_pdf_pdfcontent1 = new pimcore.pdf({ id: \"pimcore-pdf-5231c2258795e\", data: {\"pages\":[{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-1.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-1.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-2.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-2.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-3.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-3.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-4.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-4.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-5.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-5.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-6.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-6.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-7.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-7.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-8.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-8.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-9.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-9.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-10.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-10.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-11.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-11.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-12.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-12.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-13.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-13.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-14.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-14.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-15.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-15.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-16.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-16.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-17.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-17.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-18.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-18.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-19.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-19.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-20.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-20.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-21.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-21.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-22.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-22.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-23.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-23.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-24.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-24.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-25.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-25.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-26.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-26.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-27.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-27.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-28.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-28.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-29.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-29.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-30.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-30.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-31.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-31.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-32.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-32.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-33.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-33.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-34.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-34.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-35.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-35.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-36.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-36.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-37.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-37.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-38.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-38.pjpeg\"},{\"thumbnail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_ca35914f842e48731761eda9e1b55fa1-39.pjpeg\",\"detail\":\"\\/website\\/var\\/tmp\\/thumb_36__document_auto_55c4d1de803e2f89c46b9a22287c3b50-39.pjpeg\"}],\"pdf\":\"\\/documents\\/documentation.pdf\",\"fullscreen\":true} }); ','navigation_name:Document Viewer ');
 INSERT INTO `search_backend_data` VALUES (29,'/documents','asset','folder','folder',1,1368548619,1368632467,2,2,'ID: 29  \nPath: /documents  \ndocuments','');
@@ -2828,7 +2901,7 @@ INSERT INTO `search_backend_data` VALUES (23,'/de/einfache-beispiele/website-ueb
 INSERT INTO `search_backend_data` VALUES (60,'/demo-website/screenshots/website-translations.png','asset','image','image',1,1368608949,1368608949,2,2,'ID: 60  \nPath: /demo-website/screenshots/website-translations.png  \nwebsite-translations.png','');
 INSERT INTO `search_backend_data` VALUES (24,'/basic-examples/content-page','document','page','page',1,1368609059,1368611682,2,2,'ID: 24  \nPath: /basic-examples/content-page  \nAlbert Einstein Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. &nbsp; Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. &nbsp; Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. This is just a simple Content-Page ... Where some Content-Blocks are mixed together. Nulla consequat massa quis enim Lorem ipsum. Etiam ultricies. African Animals Donec pede justo, fringilla vel, aliquet nec left We can\'t solve problems by using the same kind of thinking we used when we created them. Dolor sit amet. Nam eget dui. video a.pimcore_video_flowplayer { display:block; text-align:center; } #video_51935b6301d62 .play { margin-top:108.5px; border:0px; display:inline-block; width:83px; height:83px; background:url(/pimcore/static/js/lib/flowplayer/play_large.png); } var player_config_video_51935b6301d62 = array_merge_recursive({\"dummy\":true},{\"clip\":{\"url\":\"\\/demo-website\\/videos\\/home-trailer-english.mp4\"}}); flowplayer(\"video_51935b6301d62\", { src: \"/pimcore/static/js/lib/flowplayer/flowplayer.swf\", width: \"100%\", height: \"300\" },player_config_video_51935b6301d62); Content Page ','Content Page ');
 INSERT INTO `search_backend_data` VALUES (25,'/basic-examples/editable-roundup','document','page','page',1,1368609569,1368610457,2,2,'ID: 25  \nPath: /basic-examples/editable-roundup  \n This is an overview of all available &quot;editables&quot; (except area/areablock/block) Please view this page in the editmode (admin interface)! ... nothing to see here ;-)&nbsp; 1 May 16, 2013 2:00:00 AM /basic-examples/thumbnails Some Text My Link document: /basic-examples/glossarydocument: /basic-examples/thumbnailsdocument: /basic-examples/editable-roundupasset: /demo-website/examples/south-africa/img_1842.jpgasset: /demo-website/examples/south-africa/img_2133.jpgasset: /demo-website/examples/south-africa/img_2240.jpg value2,value4 123 option2 Some Text a.pimcore_video_flowplayer { display:block; text-align:center; } #video_5193569a0dcec .play { margin-top:108.5px; border:0px; display:inline-block; width:83px; height:83px; background:url(/pimcore/static/js/lib/flowplayer/play_large.png); } var player_config_video_5193569a0dcec = array_merge_recursive({\"dummy\":true},{\"clip\":{\"url\":\"\\/demo-website\\/videos\\/home-trailer-english.mp4\"}}); flowplayer(\"video_5193569a0dcec\", { src: \"/pimcore/static/js/lib/flowplayer/flowplayer.swf\", width: \"100%\", height: \"300\" },player_config_video_5193569a0dcec); Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. &nbsp; Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. &nbsp; Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, Value 1Value 2Value 3thisistest Editable Round-Up ','Editable Round-Up ');
-INSERT INTO `search_backend_data` VALUES (26,'/basic-examples/form','document','page','page',1,1368610663,1368610681,2,2,'ID: 26  \nPath: /basic-examples/form  \n Simple Form ','Simple Form ');
+INSERT INTO `search_backend_data` VALUES (26,'/en/basic-examples/form','document','page','page',1,1368610663,1388733533,0,14,'ID: 26  \nPath: /en/basic-examples/form  \n Just a simple form ','navigation_name:Simple Form ');
 INSERT INTO `search_backend_data` VALUES (27,'/basic-examples/news','document','page','page',1,1368613137,1368614363,2,2,'ID: 27  \nPath: /basic-examples/news  \n News Any kind of structured data is stored in \"Objects\".&nbsp; News ','News ');
 INSERT INTO `search_backend_data` VALUES (2,'/news','object','folder','folder',1,1368613451,1368613451,2,2,'ID: 2  \nPath: /news  \nnews','');
 INSERT INTO `search_backend_data` VALUES (3,'/news/lorem-ipsum','object','object','news',1,1368613483,1382958769,2,2,'ID: 3  \nPath: /news/lorem-ipsum  \nEr hörte leise Schritte hinter sich Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Oder geh&ouml;rten die Schritte hinter ihm zu einem der unz&auml;hligen Gesetzesh&uuml;ter dieser Stadt, und die st&auml;hlerne Acht um seine Handgelenke w&uuml;rde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon h&ouml;ren. Gehetzt sah er sich um. Pl&ouml;tzlich erblickte er den schmalen Durchgang. Blitzartig drehte er sich nach rechts und verschwand zwischen den beiden Geb&auml;uden. Beinahe w&auml;re er dabei &uuml;ber den umgest&uuml;rzten M&uuml;lleimer gefallen, der mitten im Weg lag. Er versuchte, sich in der Dunkelheit seinen Weg zu ertasten und erstarrte: Anscheinend gab es keinen anderen Ausweg aus diesem kleinen Hof als den Durchgang, durch den er gekommen war. Die Schritte wurden lauter und lauter, er sah eine dunkle Gestalt um die Ecke biegen. Fieberhaft irrten seine Augen durch die n&auml;chtliche Dunkelheit und suchten einen Ausweg. War jetzt wirklich alles vorbei. Lorem ipsum dolor sit amet Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam&nbsp;ultricies&nbsp;nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget&nbsp;condimentum&nbsp;rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Jul 18, 2013 1:45:00 PM /examples/south-africa/img_2155.jpg /examples/south-africa/img_1414.jpg /examples/south-africa/img_1920.jpg ','');
@@ -2846,7 +2919,7 @@ INSERT INTO `search_backend_data` VALUES (29,'/basic-examples/tag-and-snippet-ma
 INSERT INTO `search_backend_data` VALUES (64,'/demo-website/screenshots/tag-snippet-management.png','asset','image','image',1,1368617634,1368617634,2,2,'ID: 64  \nPath: /demo-website/screenshots/tag-snippet-management.png  \ntag-snippet-management.png','');
 INSERT INTO `search_backend_data` VALUES (10,'/crm','object','folder','folder',1,1368620607,1368620607,2,2,'ID: 10  \nPath: /crm  \ncrm','');
 INSERT INTO `search_backend_data` VALUES (11,'/inquiries','object','folder','folder',1,1368620624,1368620624,2,2,'ID: 11  \nPath: /inquiries  \ninquiries','');
-INSERT INTO `search_backend_data` VALUES (36,'/advanced-examples/search','document','page','page',1,1368629524,1368630250,2,2,'ID: 36  \nPath: /advanced-examples/search  \n Search &nbsp; The search is using the contents from&nbsp;pimcore.org.&nbsp;TIP: Search for \"web\".&nbsp; &nbsp; &nbsp; Search ','Search ');
+INSERT INTO `search_backend_data` VALUES (36,'/en/advanced-examples/search','document','page','page',1,1368629524,1388733927,0,14,'ID: 36  \nPath: /en/advanced-examples/search  \n The search is using the contents from&nbsp;pimcore.org.&nbsp;TIP: Search for \"web\". Search ','navigation_name:Search ');
 INSERT INTO `search_backend_data` VALUES (37,'/advanced-examples/contact-form','document','page','page',1,1368630444,1368631569,2,2,'ID: 37  \nPath: /advanced-examples/contact-form  \n Contact Form Contact Form ','Contact Form ');
 INSERT INTO `search_backend_data` VALUES (65,'/demo-website/screenshots/objects-forms.png','asset','image','image',1,1368623266,1368623266,2,2,'ID: 65  \nPath: /demo-website/screenshots/objects-forms.png  \nobjects-forms.png','');
 INSERT INTO `search_backend_data` VALUES (30,'/crm/inquiries/jane-doe.com','object','object','person',1,1368630916,1388409137,0,12,'ID: 30  \nPath: /crm/inquiries/jane-doe.com  \nfemale Jane Doe jane@doe.com May 15, 2013 5:15:16 PM ','');
@@ -2884,9 +2957,9 @@ INSERT INTO `search_backend_data` VALUES (53,'/de/einfache-beispiele/neuigkeiten
 INSERT INTO `search_backend_data` VALUES (54,'/shared','document','folder','folder',1,1382959757,1382959757,2,2,'ID: 54  \nPath: /shared  \nshared','mainNavStartNode:/en leftNavStartNode:/en language:en ');
 INSERT INTO `search_backend_data` VALUES (55,'/shared/includes','document','folder','folder',1,1382959767,1382959768,2,2,'ID: 55  \nPath: /shared/includes  \nincludes','mainNavStartNode:/en leftNavStartNode:/en language:en ');
 INSERT INTO `search_backend_data` VALUES (56,'/shared/includes/languages','document','snippet','snippet',1,1382959774,1382959822,2,2,'ID: 56  \nPath: /shared/includes/languages  \n English German ','');
-INSERT INTO `search_backend_data` VALUES (57,'/en/sidebar','document','snippet','snippet',1,1382962826,1382962845,2,2,'ID: 57  \nPath: /en/sidebar  \n ','');
+INSERT INTO `search_backend_data` VALUES (57,'/en/sidebar','document','snippet','snippet',1,1382962826,1388735598,0,14,'ID: 57  \nPath: /en/sidebar  \n 3 ','');
 INSERT INTO `search_backend_data` VALUES (58,'/de/sidebar','document','snippet','snippet',1,1382962891,1382962906,2,2,'ID: 58  \nPath: /de/sidebar  \n ','');
-INSERT INTO `search_backend_data` VALUES (59,'/en/introduction/sidebar','document','snippet','snippet',1,1382962940,1382962952,2,2,'ID: 59  \nPath: /en/introduction/sidebar  \n ','');
+INSERT INTO `search_backend_data` VALUES (59,'/en/introduction/sidebar','document','snippet','snippet',1,1382962940,1388738272,0,14,'ID: 59  \nPath: /en/introduction/sidebar  \n 2 ','');
 INSERT INTO `search_backend_data` VALUES (32,'/blog','object','folder','folder',1,1388389170,1388389170,7,7,'ID: 32  \nPath: /blog  \nblog','');
 INSERT INTO `search_backend_data` VALUES (33,'/blog/categories','object','folder','folder',1,1388389428,1388389428,7,7,'ID: 33  \nPath: /blog/categories  \ncategories','');
 INSERT INTO `search_backend_data` VALUES (34,'/blog/articles','object','folder','folder',1,1388389435,1388389435,7,7,'ID: 34  \nPath: /blog/articles  \narticles','');
@@ -2908,6 +2981,11 @@ INSERT INTO `search_backend_data` VALUES (66,'/en/advanced-examples/newsletter/c
 INSERT INTO `search_backend_data` VALUES (47,'/crm/newsletter/pimcore-byom.de~7a3','object','object','person',1,1388412533,1388412544,0,0,'ID: 47  \nPath: /crm/newsletter/pimcore-byom.de~7a3  \nmale Demo User pimcore@byom.de 1 1 Dec 30, 2013 3:08:54 PM ','token:YTozOntzOjQ6InNhbHQiO3M6MzI6IjNlMGRkYTk3MWU1YTY5MWViYmM0OGVkNGQ5NzA4MDFmIjtzOjU6ImVtYWlsIjtzOjE1OiJwaW1jb3JlQGJ5b20uZGUiO3M6MjoiaWQiO2k6NDc7fQ== ');
 INSERT INTO `search_backend_data` VALUES (67,'/newsletters/example-mailing','document','email','email',1,1388412605,1388412917,12,12,'ID: 67  \nPath: /newsletters/example-mailing  \nContact Info Example Inc. Evergreen Terrace 123 XX 89234 Springfield +8998 487563 34234 info@example.inc Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. &nbsp; &nbsp; &nbsp; Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante.&nbsp; &nbsp; &nbsp; &nbsp; Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. &nbsp; Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Terms Privacy Unsubscribe ','');
 INSERT INTO `search_backend_data` VALUES (68,'/en/advanced-examples/asset-thumbnail-list','document','page','page',1,1388414727,1388414883,12,12,'ID: 68  \nPath: /en/advanced-examples/asset-thumbnail-list  \n Asset Thumbnail List Asset Thumbnail List ','navigation_name:Asset Thumbnail List ');
+INSERT INTO `search_backend_data` VALUES (69,'/en/advanced-examples/sidebar','document','snippet','snippet',1,1388734403,1388738477,14,14,'ID: 69  \nPath: /en/advanced-examples/sidebar  \n ','');
+INSERT INTO `search_backend_data` VALUES (70,'/en/advanced-examples/product-information-management','document','page','page',1,1388740191,1388740585,14,14,'ID: 70  \nPath: /en/advanced-examples/product-information-management  \n Please visit our&nbsp;PIM, E-Commerce &amp; Asset Management demo to see it in action.&nbsp; Product Information Management Product Information Management ','navigation_name:Product Information Management ');
+INSERT INTO `search_backend_data` VALUES (71,'/en/advanced-examples/e-commerce','document','page','page',1,1388740265,1388740613,14,14,'ID: 71  \nPath: /en/advanced-examples/e-commerce  \n E-Commerce Please visit our&nbsp;PIM, E-Commerce &amp; Asset Management demo to see it in action.&nbsp; E-Commerce ','navigation_name:E-Commerce ');
+INSERT INTO `search_backend_data` VALUES (69,'/screenshots/e-commerce1.png','asset','image','image',1,1388740480,1388740490,14,14,'ID: 69  \nPath: /screenshots/e-commerce1.png  \ne-commerce1.png','');
+INSERT INTO `search_backend_data` VALUES (70,'/screenshots/pim1-png','asset','image','image',1,1388740572,1388740580,14,14,'ID: 70  \nPath: /screenshots/pim1-png  \npim1-png','');
 
 
 
@@ -3021,6 +3099,8 @@ INSERT INTO `translations_website` VALUES ('check me out','en','',1368610820,136
 INSERT INTO `translations_website` VALUES ('combined 1','en','',1368606496,1368606496);
 INSERT INTO `translations_website` VALUES ('combined 2','en','',1368606637,1368606637);
 INSERT INTO `translations_website` VALUES ('combined 3','en','',1368606637,1368606637);
+INSERT INTO `translations_website` VALUES ('contact form','de','','','');
+INSERT INTO `translations_website` VALUES ('contact form','en','','','');
 INSERT INTO `translations_website` VALUES ('contain','en','',1368603255,1368603255);
 INSERT INTO `translations_website` VALUES ('contain &amp; overlay','en','',1368605819,1368605819);
 INSERT INTO `translations_website` VALUES ('content page','de','',0,0);
@@ -3037,6 +3117,8 @@ INSERT INTO `translations_website` VALUES ('download now (%s)','de','',136861972
 INSERT INTO `translations_website` VALUES ('download now (%s)','en','',1368619727,1368619727);
 INSERT INTO `translations_website` VALUES ('download source','de','Herunterladen (Quellen)',1368608508,1368608508);
 INSERT INTO `translations_website` VALUES ('download source','en','',1368608508,1368608508);
+INSERT INTO `translations_website` VALUES ('e-commerce','de','','','');
+INSERT INTO `translations_website` VALUES ('e-commerce','en','','','');
 INSERT INTO `translations_website` VALUES ('e-mail','de','',1368610820,1368610820);
 INSERT INTO `translations_website` VALUES ('e-mail','en','',1368610820,1368610820);
 INSERT INTO `translations_website` VALUES ('einfache beispiele','de','',0,0);
@@ -3058,6 +3140,8 @@ INSERT INTO `translations_website` VALUES ('gender','de','',1368622092,136862209
 INSERT INTO `translations_website` VALUES ('gender','en','',1368622092,1368622092);
 INSERT INTO `translations_website` VALUES ('get the original files for all css and javascript, along with a local copy of the docs by downloading the latest version directly from github.','de','Lade die originalen  CSS und Javascript Dateien zusammen mit einer lokalen Kopie der Dokumentation von github.com',1368608698,1368608698);
 INSERT INTO `translations_website` VALUES ('get the original files for all css and javascript, along with a local copy of the docs by downloading the latest version directly from github.','en','',1368608698,1368608698);
+INSERT INTO `translations_website` VALUES ('glossary','de','','','');
+INSERT INTO `translations_website` VALUES ('glossary','en','','','');
 INSERT INTO `translations_website` VALUES ('grayscale','en','',1368606077,1368606077);
 INSERT INTO `translations_website` VALUES ('home','de','Startseite',0,1382961053);
 INSERT INTO `translations_website` VALUES ('home','en','Home',0,1382961053);
@@ -3084,8 +3168,14 @@ INSERT INTO `translations_website` VALUES ('newsletter','de','',1368620340,13686
 INSERT INTO `translations_website` VALUES ('newsletter','en','',1368620340,1368620340);
 INSERT INTO `translations_website` VALUES ('original dimensions of the image','en','',1368604779,1368604779);
 INSERT INTO `translations_website` VALUES ('overlay','en','',1368605562,1368605562);
+INSERT INTO `translations_website` VALUES ('product information management','de','','','');
+INSERT INTO `translations_website` VALUES ('product information management','en','','','');
+INSERT INTO `translations_website` VALUES ('product information managment','de','','','');
+INSERT INTO `translations_website` VALUES ('product information managment','en','','','');
 INSERT INTO `translations_website` VALUES ('properties','de','',0,0);
 INSERT INTO `translations_website` VALUES ('properties','en','',0,0);
+INSERT INTO `translations_website` VALUES ('recently in the blog','de','','','');
+INSERT INTO `translations_website` VALUES ('recently in the blog','en','','','');
 INSERT INTO `translations_website` VALUES ('resize','en','',1368603801,1368603801);
 INSERT INTO `translations_website` VALUES ('rotate','en','',1368603255,1368603255);
 INSERT INTO `translations_website` VALUES ('rounded corners','en','',1368605936,1368605936);
@@ -3094,6 +3184,8 @@ INSERT INTO `translations_website` VALUES ('scale by width','en','',1368603959,1
 INSERT INTO `translations_website` VALUES ('search','de','',1368629830,1368629830);
 INSERT INTO `translations_website` VALUES ('search','en','',1368629830,1368629830);
 INSERT INTO `translations_website` VALUES ('sepia','en','',1368606075,1368606075);
+INSERT INTO `translations_website` VALUES ('simple form','de','','','');
+INSERT INTO `translations_website` VALUES ('simple form','en','','','');
 INSERT INTO `translations_website` VALUES ('sitemap','de','',0,0);
 INSERT INTO `translations_website` VALUES ('sitemap','en','',0,0);
 INSERT INTO `translations_website` VALUES ('sorry, something went wrong, please check the data in the form and try again!','de','',0,0);
@@ -3127,8 +3219,8 @@ INSERT INTO `tree_locks` VALUES (56,'document','self');
 
 
 
-INSERT INTO `users` VALUES (0,0,'user','system','','','','','',1,1,'','',0,0,0);
-INSERT INTO `users` VALUES (12,0,'user','admin','7f4ca4d63c375ea4bfa1bda6f39101b0','','','','en',1,1,'','',1,1,1);
+INSERT INTO `users` VALUES (0,0,'user','system','','','','','',1,1,'','',0,0,0,'','');
+INSERT INTO `users` VALUES (14,0,'user','admin','7f4ca4d63c375ea4bfa1bda6f39101b0','','','','en',1,1,'','',1,1,1,'','');
 
 
 

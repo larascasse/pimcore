@@ -28,12 +28,12 @@ class Asset_Image extends Asset {
     public function update() {
 
         // only do this if the file exists and conains data
-        if($this->getDataChanged()) {
+        if($this->getDataChanged() || !$this->getCustomSetting("imageDimensionsCalculated")) {
             try {
                 // save the current data into a tmp file to calculate the dimensions, otherwise updates wouldn't be updated
                 // because the file is written in parent::update();
                 $tmpFile = $this->getTemporaryFile(true);
-                $dimensions = $this->getDimensions($tmpFile);
+                $dimensions = $this->getDimensions($tmpFile, true);
                 unlink($tmpFile);
 
                 if($dimensions && $dimensions["width"]) {
@@ -157,7 +157,19 @@ class Asset_Image extends Asset {
     /**
      * @return array
      */
-    public function getDimensions($path = null) {
+    public function getDimensions($path = null, $force = false) {
+
+        if(!$force) {
+            $width = $this->getCustomSetting("imageWidth");
+            $height = $this->getCustomSetting("imageHeight");
+
+            if($width && $height) {
+                return [
+                    "width" => $width,
+                    "height" => $height
+                ];
+            }
+        }
 
         if(!$path) {
             $path = $this->getFileSystemPath();

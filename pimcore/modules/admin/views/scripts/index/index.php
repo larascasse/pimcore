@@ -85,7 +85,7 @@ $styles = array(
     // see also: http://blogs.telerik.com/blogs/posts/10-05-03/internet-explorer-css-limits.aspx
     // @import bypasses this problem in an elegant way
     foreach ($styles as $style) { ?>
-        @import url(<?php echo $style ?>?_dc=<?php echo Pimcore_Version::$revision ?>);
+    @import url(<?php echo $style ?>?_dc=<?php echo Pimcore_Version::$revision ?>);
     <?php } ?>
 </style>
 
@@ -196,6 +196,7 @@ $scripts = array(
     "pimcore/settings/user/workspace/asset.js",
     "pimcore/settings/user/workspace/document.js",
     "pimcore/settings/user/workspace/object.js",
+    "pimcore/settings/user/workspace/language.js",
     "pimcore/settings/user/role/settings.js",
     "pimcore/settings/profile/panel.js",
     "pimcore/settings/thumbnail/item.js",
@@ -546,14 +547,14 @@ if($this->config->services->google->browserapikey) {
     <script type="text/javascript" src="/pimcore/static/js/<?php echo $scriptUrl ?>?_dc=<?php echo Pimcore_Version::$revision ?>"></script>
 <?php } ?>
 <?php } else { ?>
-    <?php
-    $scriptContents = "";
-    foreach ($scripts as $scriptUrl) {
-        if(is_file(PIMCORE_PATH."/static/js/".$scriptUrl)) {
-            $scriptContents .= file_get_contents(PIMCORE_PATH."/static/js/".$scriptUrl) . "\n\n\n";
-        }
+<?php
+$scriptContents = "";
+foreach ($scripts as $scriptUrl) {
+    if(is_file(PIMCORE_PATH."/static/js/".$scriptUrl)) {
+        $scriptContents .= file_get_contents(PIMCORE_PATH."/static/js/".$scriptUrl) . "\n\n\n";
     }
-    ?>
+}
+?>
     <script type="text/javascript" src="<?php echo Pimcore_Tool_Admin::getMinimizedScriptPath($scriptContents) ?>?_dc=<?php echo Pimcore_Version::$revision ?>"></script>
 <?php } ?>
 

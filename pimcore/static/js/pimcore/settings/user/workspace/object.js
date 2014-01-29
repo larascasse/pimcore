@@ -30,6 +30,7 @@ pimcore.settings.user.workspace.object = Class.create({
 
         var availableRights = ["list","view","save","publish","unpublish","delete","rename","create","settings",
                                                                 "versions","properties"];
+
         var gridPlugins = [];
         var storeFields = ["path"];
 
@@ -55,6 +56,43 @@ pimcore.settings.user.workspace.object = Class.create({
             // store fields
             storeFields.push({name:availableRights[i], type: 'bool'});
         }
+
+        storeFields.push({name: "lEdit", type: 'text'});
+        storeFields.push({name: "lView", type: 'text'});
+
+        typesColumns.push({
+            xtype: 'actioncolumn',
+            header: t('localized_view'),
+            width: 30,
+            items: [{
+                tooltip: t('localized_view_tooltip'),
+                icon: "/pimcore/static/img/icon/cog_edit.png",
+                handler: function (grid, rowIndex) {
+                    var data = grid.getStore().getAt(rowIndex);
+                    var callback = this.applyLocalized.bind(this, data, "lView");
+                    var dialog = new pimcore.settings.user.workspace.language(callback, data.data.lView, data.data.path);
+                    dialog.show();
+                }.bind(this)
+            }]
+        });
+
+        typesColumns.push({
+            xtype: 'actioncolumn',
+            header: t('localized_edit'),
+            width: 30,
+            items: [{
+                tooltip: t('localized_edit_tooltip'),
+                icon: "/pimcore/static/img/icon/cog_edit.png",
+                handler: function (grid, rowIndex) {
+                    var data = grid.getStore().getAt(rowIndex);
+                    var callback = this.applyLocalized.bind(this, data, "lEdit");
+                    var dialog = new pimcore.settings.user.workspace.language(callback, data.data.lEdit, data.data.path);
+                    dialog.show();
+                }.bind(this)
+            }]
+        });
+
+
 
         typesColumns.push({
             xtype: 'actioncolumn',
@@ -174,5 +212,11 @@ pimcore.settings.user.workspace.object = Class.create({
         }
 
         return values;
+    },
+
+    applyLocalized: function(rec, column, value) {
+        rec.set(column, value);
     }
+
+
 });

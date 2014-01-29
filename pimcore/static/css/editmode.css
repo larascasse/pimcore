@@ -372,6 +372,10 @@
 .pimcore_tag_video {
     position: relative;
 }
+.pimcore_tag_video.x-masked {
+    position: static;
+    min-height: 50px;
+}
 
 .pimcore_video_edit_button {
     position: absolute;

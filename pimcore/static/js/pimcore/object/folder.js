@@ -167,7 +167,7 @@ pimcore.object.folder = Class.create(pimcore.object.abstract, {
                 buttons.push(this.toolbarButtons.publish);
             }
 
-            if(this.isAllowed("delete") && !this.data.general.o_locked) {
+            if(this.isAllowed("delete") && !this.data.general.o_locked && this.data.general.o_id != 1) {
                 buttons.push(this.toolbarButtons.remove);
             }
 
@@ -331,7 +331,12 @@ pimcore.object.folder = Class.create(pimcore.object.abstract, {
 
     showMetaInfo: function() {
 
-        new pimcore.element.metainfo([{
+        new pimcore.element.metainfo([
+        {
+            name: "id",
+            value: this.data.general.o_id
+        },
+        {
             name: "path",
             value: this.data.general.fullpath
         }, {
@@ -347,10 +352,15 @@ pimcore.object.folder = Class.create(pimcore.object.abstract, {
             type: "user",
             value: this.data.general.o_userModification
         }, {
-            name: " userowner",
+            name: "userowner",
             type: "user",
             value: this.data.general.o_userOwner
-        }], "folder");
+        },
+        {
+            name: "deeplink",
+            value: window.location.protocol + "//" + window.location.hostname + "/admin/login/deeplink?object_" + this.data.general.o_id + "_folder"
+        }
+        ], "folder");
     }
 
 });

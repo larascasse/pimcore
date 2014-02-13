@@ -118,6 +118,10 @@ class Asset extends Element_Abstract {
      */
     public $versions = null;
 
+    /**
+     * @var array
+     */
+    public $metadata = array();
 
     /**
      * enum('self','propagate') nullable
@@ -451,6 +455,7 @@ class Asset extends Element_Abstract {
                 $updatedChildren = array();
                 if($oldPath && $oldPath != $this->getFullPath()) {
                     @rename(PIMCORE_ASSET_DIRECTORY . $oldPath, $this->getFileSystemPath());
+                    $this->getResource()->updateWorkspaces();
                     $updatedChildren = $this->getResource()->updateChildsPaths($oldPath);
                 }
 
@@ -1241,6 +1246,46 @@ class Asset extends Element_Abstract {
     }
 
     /**
+     * @param array $metadata
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMetadata($name = null, $language = null)
+    {
+        if($name) {
+            if($language === null) {
+                if(Zend_Registry::isRegistered("Zend_Locale")) {
+                    $language = (string) Zend_Registry::get("Zend_Locale");
+                }
+            }
+
+            $data = null;
+            foreach ($this->metadata as $md) {
+                if($md["name"] == $name) {
+                    if($language == $md["language"]) {
+                        return $md["data"];
+                    }
+                    if(empty($md["language"])) {
+                        $data = $md;
+                    }
+                }
+            }
+
+            if($data) {
+                return $data["data"];
+            }
+            return null;
+        }
+        return $this->metadata;
+    }
+
+    /**
      * @return array
      */
     public function getScheduledTasks() {
@@ -1396,12 +1441,14 @@ class Asset extends Element_Abstract {
                 $this->setFilename($originalElement->getFilename());
                 $this->setPath($originalElement->getPath());
             }
-
-            unset($this->_fulldump);
         }
 
         if(isset($this->_fulldump) && $this->properties !== null) {
             $this->renewInheritedProperties();
+        }
+
+        if(isset($this->_fulldump)) {
+            unset($this->_fulldump);
         }
     }
     

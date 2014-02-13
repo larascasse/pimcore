@@ -284,7 +284,9 @@ $scripts = array(
     "pimcore/asset/video.js",
     "pimcore/asset/text.js",
     "pimcore/asset/folder.js",
+    "pimcore/asset/listfolder.js",
     "pimcore/asset/versions.js",
+    "pimcore/asset/metadata.js",
     "pimcore/asset/tree.js",
 
     // object
@@ -480,10 +482,7 @@ $modifiedPlugins = array(
 );
 
 // google maps API key
-$googleMapsApiKey = $this->config->services->google->simpleapikey;
-if($this->config->services->google->browserapikey) {
-    $googleMapsApiKey = $this->config->services->google->browserapikey;
-}
+$googleMapsApiKey = $this->config->services->google->browserapikey;
 
 ?>
 

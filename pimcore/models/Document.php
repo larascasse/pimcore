@@ -194,7 +194,7 @@ class Document extends Element_Abstract {
             return self::getById($document->getId());
         }
         catch (Exception $e) {
-            Logger::warning($e->getMessage());
+            Logger::debug($e->getMessage());
         }
 
         return null;
@@ -390,6 +390,7 @@ class Document extends Element_Abstract {
                 // if the old path is different from the new path, update all children
                 $updatedChildren = array();
                 if($oldPath && $oldPath != $this->getFullPath()) {
+                    $this->getResource()->updateWorkspaces();
                     $updatedChildren = $this->getResource()->updateChildsPaths($oldPath);
                 }
 
@@ -1063,12 +1064,14 @@ class Document extends Element_Abstract {
                 $this->setKey($originalElement->getKey());
                 $this->setPath($originalElement->getPath());
             }
-
-            unset($this->_fulldump);
         }
 
         if(isset($this->_fulldump) && $this->properties !== null) {
             $this->renewInheritedProperties();
+        }
+
+        if(isset($this->_fulldump)) {
+            unset($this->_fulldump);
         }
     }
 

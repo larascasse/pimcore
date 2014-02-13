@@ -29,6 +29,8 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
 
         $list = new User_List();
         $list->setCondition("parentId = ?", intval($this->getParam("node")));
+        $list->setOrder("ASC");
+        $list->setOrderKey("name");
         $list->load();
 
         $users = array();
@@ -479,5 +481,21 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
         }
 
         exit;
+    }
+
+    public function getTokenLoginLinkAction() {
+        if($this->getUser()->isAdmin()) {
+
+            $user = User::getById($this->getParam("id"));
+            if($user) {
+                $token = Pimcore_Tool_Authentication::generateToken($user->getName(), $user->getPassword());
+                $r = $this->getRequest();
+                $link = $r->getScheme() . "://" . $r->getHttpHost() . "/admin/login/login/?username=" . $user->getName() . "&token=" . $token;
+
+                $this->_helper->json(array(
+                    "link" => $link
+                ));
+            }
+        }
     }
 }

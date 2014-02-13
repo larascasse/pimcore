@@ -508,6 +508,7 @@ class Object_Abstract extends Element_Abstract {
                 // if the old path is different from the new path, update all children
                 $updatedChildren = array();
                 if($oldPath && $oldPath != $this->getFullPath()) {
+                    $this->getResource()->updateWorkspaces();
                     $updatedChildren = $this->getResource()->updateChildsPaths($oldPath);
                 }
 
@@ -975,12 +976,14 @@ class Object_Abstract extends Element_Abstract {
                 $this->setKey($originalElement->getKey());
                 $this->setPath($originalElement->getPath());
             }
-
-            unset($this->_fulldump);
         }
 
         if(isset($this->_fulldump) && $this->o_properties !== null) {
             $this->renewInheritedProperties();
+        }
+
+        if(isset($this->_fulldump)) {
+            unset($this->_fulldump);
         }
     }
 

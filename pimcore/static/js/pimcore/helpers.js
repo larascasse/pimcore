@@ -74,7 +74,27 @@ pimcore.helpers.registerKeyBindings = function (bindEl, ExtJS) {
         shift:true,
         stopEvent:true
     });
+
+    var openWelcomePage = new ExtJS.KeyMap(bindEl, {
+        key:"w",
+        fn: top.pimcore.helpers.openWelcomePage.bind(this),
+        ctrl:true,
+        alt:false,
+        shift:true,
+        stopEvent:true
+    });
+
+
 };
+
+pimcore.helpers.openWelcomePage = function() {
+    try {
+        pimcore.globalmanager.get("layout_portal_welcome").activate();
+    }
+    catch (e) {
+        pimcore.globalmanager.add("layout_portal_welcome", new pimcore.layout.portal());
+    }
+}
 
 pimcore.helpers.openAsset = function (id, type, ignoreForHistory) {
 
@@ -634,10 +654,11 @@ pimcore.helpers.deleteAssetCheckDependencyComplete = function (id, callback, res
 
     try {
         var res = Ext.decode(response.responseText);
-        var message = t('delete_message');
+        var message = res.batchDelete ? t('delete_message_batch') : t('delete_message');
         if (res.hasDependencies) {
-            message = t('delete_message_dependencies');
+            var message = t('delete_message_dependencies');
         }
+
         Ext.MessageBox.show({
             title:t('delete'),
             msg: message,
@@ -885,7 +906,7 @@ pimcore.helpers.deleteObjectCheckDependencyComplete = function (id, callback, re
 
     try {
         var res = Ext.decode(response.responseText);
-        var message = t('delete_message');
+        var message = res.batchDelete ? t('delete_message_batch') : t('delete_message');
         if (res.hasDependencies) {
             var message = t('delete_message_dependencies');
         }
@@ -1396,6 +1417,9 @@ pimcore.helpers.generatePagePreview = function (id, path, callback) {
      }*/
 };
 
+pimcore.helpers.treeNodeThumbnailTimeout = null;
+pimcore.helpers.treeNodeThumbnailLastClose = 0;
+
 pimcore.helpers.treeNodeThumbnailPreview = function (tree, parent, node, index) {
     if(typeof node.attributes["thumbnail"] != "undefined" ||
         typeof node.attributes["thumbnails"] != "undefined") {
@@ -1440,6 +1464,7 @@ pimcore.helpers.treeNodeThumbnailPreview = function (tree, parent, node, index) 
                     if(!container) {
                         container  = Ext.getBody().insertHtml("beforeEnd", '<div id="pimcore_tree_preview"></div>');
                         container = Ext.get(container);
+                        container.addClass("hidden");
                     }
 
                     // check for an existing iframe
@@ -1484,8 +1509,18 @@ pimcore.helpers.treeNodeThumbnailPreview = function (tree, parent, node, index) 
                     container.update(""); // remove all
                     container.clean(true);
                     container.dom.appendChild(iframe);
-                    container.removeClass("hidden");
                     container.applyStyles(styles);
+
+                    var date = new Date();
+                    if(pimcore.helpers.treeNodeThumbnailLastClose === 0 || (date.getTime() - pimcore.helpers.treeNodeThumbnailLastClose) > 300) {
+                        // open deferred
+                        pimcore.helpers.treeNodeThumbnailTimeout = window.setTimeout(function() {
+                            container.removeClass("hidden");
+                        }, 500);
+                    } else {
+                        // open immediately
+                        container.removeClass("hidden");
+                    }
                 }
             }.bind(this, node));
             el.on("mouseleave", function () {
@@ -1495,6 +1530,22 @@ pimcore.helpers.treeNodeThumbnailPreview = function (tree, parent, node, index) 
     }
 };
 
+pimcore.helpers.treeNodeThumbnailPreviewHide = function () {
+
+    if(pimcore.helpers.treeNodeThumbnailTimeout) {
+        clearTimeout(pimcore.helpers.treeNodeThumbnailTimeout);
+        pimcore.helpers.treeNodeThumbnailTimeout = null;
+    }
+
+    var container = Ext.get("pimcore_tree_preview");
+    if(container) {
+        if(!container.hasClass("hidden")) {
+            var date = new Date();
+            pimcore.helpers.treeNodeThumbnailLastClose = date.getTime();
+        }
+        container.addClass("hidden");
+    }
+};
 
 pimcore.helpers.showUser = function(specificUser) {
     var user = pimcore.globalmanager.get("user");
@@ -1513,14 +1564,7 @@ pimcore.helpers.showUser = function(specificUser) {
             panel.openUser(specificUser);
         }
     }
-}
-
-pimcore.helpers.treeNodeThumbnailPreviewHide = function () {
-    var container = Ext.get("pimcore_tree_preview");
-    if(container) {
-        container.addClass("hidden");
-    }
-}
+};
 
 pimcore.helpers.insertTextAtCursorPosition = function (text) {
 
@@ -1600,4 +1644,75 @@ pimcore.helpers.handleTabRightClick = function (tabPanel, el, index) {
     }
 };
 
+pimcore.helpers.uploadAssetFromFileObject = function (file, url, callback) {
+    var reader = new FileReader();
 
+    if(typeof callback != "function") {
+        callback = function () {};
+    }
+
+    // binary upload
+    if(typeof reader["readAsBinaryString"] == "function") {
+        reader.onload = function(e) {
+
+            var boundary = '------multipartformboundary' + (new Date()).getTime();
+            var dashdash = '--';
+            var crlf     = '\r\n';
+
+            var builder = '';
+
+            builder += dashdash;
+            builder += boundary;
+            builder += crlf;
+
+            var xhr = new XMLHttpRequest();
+
+            builder += 'Content-Disposition: form-data; name="Filedata"';
+            if (file.name) {
+                builder += '; filename="' + file.name + '"';
+            }
+            builder += crlf;
+
+            builder += 'Content-Type: ' + file.type;
+            builder += crlf;
+            builder += crlf;
+
+            builder += e.target.result;
+            builder += crlf;
+
+            builder += dashdash;
+            builder += boundary;
+            builder += crlf;
+
+            builder += dashdash;
+            builder += boundary;
+            builder += dashdash;
+            builder += crlf;
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('content-type', 'multipart/form-data; boundary='
+                + boundary);
+            xhr.sendAsBinary(builder);
+            xhr.onload = callback;
+        };
+
+        reader.readAsBinaryString(file);
+    } else if(typeof reader["readAsDataURL"] == "function") {
+        // "text" base64 upload
+        reader.onload = function(e) {
+
+            Ext.Ajax.request({
+                url: url,
+                method: "post",
+                params: {
+                    type: "base64",
+                    filename: file.name,
+                    data: e.target.result
+                },
+                success: callback
+            });
+        };
+
+        reader.readAsDataURL(file);
+    }
+};

@@ -291,7 +291,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
             $data[$parent->getId()] = $info;
 
-           $object = $parent;
+            $object = $parent;
         }
 
         $this->_helper->json($data);
@@ -648,7 +648,8 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
                 $object->setUserModification($this->getUser()->getId());
                 $object->setPublished(false);
 
-                if ($this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_OBJECT || $this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_VARIANT) {
+                if ($this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_OBJECT
+                                || $this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_VARIANT) {
                     $object->setType($this->getParam("objecttype"));
                 }
 
@@ -662,7 +663,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
             } else {
                 $message = "prevented creating object because object with same path+key already exists";
-                Logger::debug("prevented creating object because object with same path+key [ $intendedPath ] already exists");
+                Logger::debug($message);
             }
         } else {
             $message = "prevented adding object because of missing permissions";
@@ -750,72 +751,86 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
         $this->_helper->json(array("success" => false, "message" => "missing_permission"));
     }
 
-    public function deleteInfoAction()
-    {
-
+    public function deleteInfoAction() {
         $hasDependency = false;
-
-        try {
-            $object = Object_Abstract::getById($this->getParam("id"));
-            $hasDependency = $object->getDependencies()->isRequired();
-        } catch (Exception $e) {
-            Logger::err("failed to access object with id: " . $this->getParam("id"));
-        }
-
         $deleteJobs = array();
+        $recycleJobs = array();
 
-        // check for children
-        if ($object instanceof Object_Abstract) {
+        $totalChilds = 0;
 
-            $deleteJobs[] = array(array(
-                "url" => "/admin/recyclebin/add",
-                "params" => array(
-                    "type" => "object",
-                    "id" => $object->getId()
-                )
-            ));
+        $ids = $this->getParam("id");
+        $ids = explode(',', $ids);
 
-            $hasChilds = $object->hasChilds();
-            if (!$hasDependency) {
-                $hasDependency = $hasChilds;
+        foreach ($ids as $id) {
+
+            try {
+                $object = Object_Abstract::getById($id);
+                if (!$object) {
+                    continue;
+                }
+                $hasDependency |= $object->getDependencies()->isRequired();
+            } catch (Exception $e) {
+                Logger::err("failed to access object with id: " . $id);
+                continue;
             }
 
-            $childs = 0;
-            if ($hasChilds) {
-                // get amount of childs
-                $list = new Object_List();
-                $list->setCondition("o_path LIKE '" . $object->getFullPath() . "/%'");
-                $childs = $list->getTotalCount();
 
-                if ($childs > 0) {
-                    $deleteObjectsPerRequest = 5;
-                    for ($i = 0; $i < ceil($childs / $deleteObjectsPerRequest); $i++) {
-                        $deleteJobs[] = array(array(
-                            "url" => "/admin/object/delete",
-                            "params" => array(
-                                "step" => $i,
-                                "amount" => $deleteObjectsPerRequest,
-                                "type" => "childs",
-                                "id" => $object->getId()
-                            )
-                        ));
+            // check for children
+            if ($object instanceof Object_Abstract) {
+
+                $recycleJobs[] = array(array(
+                    "url" => "/admin/recyclebin/add",
+                    "params" => array(
+                        "type" => "object",
+                        "id" => $object->getId()
+                    )
+                ));
+
+                $hasChilds = $object->hasChilds();
+                if (!$hasDependency) {
+                    $hasDependency = $hasChilds;
+                }
+
+                $childs = 0;
+                if ($hasChilds) {
+                    // get amount of childs
+                    $list = new Object_List();
+                    $list->setCondition("o_path LIKE '" . $object->getFullPath() . "/%'");
+                    $childs = $list->getTotalCount();
+
+                    $totalChilds += $childs;
+                    if ($childs > 0) {
+                        $deleteObjectsPerRequest = 5;
+                        for ($i = 0; $i < ceil($childs / $deleteObjectsPerRequest); $i++) {
+                            $deleteJobs[] = array(array(
+                                "url" => "/admin/object/delete",
+                                "params" => array(
+                                    "step" => $i,
+                                    "amount" => $deleteObjectsPerRequest,
+                                    "type" => "childs",
+                                    "id" => $object->getId()
+                                )
+                            ));
+                        }
                     }
                 }
-            }
 
-            // the object itself is the last one
-            $deleteJobs[] = array(array(
-                "url" => "/admin/object/delete",
-                "params" => array(
-                    "id" => $object->getId()
-                )
-            ));
+                // the object itself is the last one
+                $deleteJobs[] = array(array(
+                    "url" => "/admin/object/delete",
+                    "params" => array(
+                        "id" => $object->getId()
+                    )
+                ));
+            }
         }
 
+        $deleteJobs = array_merge($recycleJobs, $deleteJobs);
         $this->_helper->json(array(
             "hasDependencies" => $hasDependency,
-            "childs" => $childs,
-            "deletejobs" => $deleteJobs
+            "childs" => $totalChilds,
+            "deletejobs" => $deleteJobs,
+            "batchDelete" => count($ids) > 1
         ));
     }
 

@@ -189,7 +189,6 @@ class Document_Tag_Image extends Document_Tag {
      */
     public function frontend() {
         if ($this->image instanceof Asset) {
-
             $thumbnailInUse = false;
             if ($this->options["thumbnail"] || $this->cropPercent) {
                 // create a thumbnail first
@@ -229,7 +228,7 @@ class Document_Tag_Image extends Document_Tag {
             }
 
             if (!$thumbnailInUse) {
-                $imagePath = $this->image->getPath() . $this->image->getFilename();
+                $imagePath = $this->image->getFullPath();
 
                 // width & height
                 $options = $this->getOptions();
@@ -239,6 +238,33 @@ class Document_Tag_Image extends Document_Tag {
                 if ($options["height"]) {
                     $height = $options["height"];
                 }
+            }
+
+            $altText = $this->alt;
+            $titleText = $this->alt;
+            if(empty($titleText)) {
+                if($this->getImage()->getMetadata("title")) {
+                    $titleText = $this->getImage()->getMetadata("title");
+                }
+            }
+            if(empty($altText)) {
+                if($this->getImage()->getMetadata("alt")) {
+                    $altText = $this->getImage()->getMetadata("alt");
+                } else {
+                    $altText = $titleText;
+                }
+            }
+
+            // get copyright from asset
+            if($this->getImage()->getMetadata("copyright")) {
+                if(!empty($altText)) {
+                    $altText .= " | ";
+                }
+                if(!empty($titleText)) {
+                    $titleText .= " | ";
+                }
+                $altText .= ("© " . $this->getImage()->getMetadata("copyright"));
+                $titleText .= ("© " . $this->getImage()->getMetadata("copyright"));
             }
 
             // add attributes to image
@@ -251,11 +277,14 @@ class Document_Tag_Image extends Document_Tag {
                 "vspace", "width", "class", "dir", "id", "lang",  "title");
 
             $defaultAttributes = array(
-                "alt" => $this->alt,
-                "title" => $this->alt,
+                "alt" => $altText,
                 "height" => $height,
                 "width" => $width
             );
+
+            if(!empty($titleText)) {
+                $defaultAttributes["title"] = $titleText;
+            }
 
             if (!is_array($this->options)) {
                 $this->options = array();

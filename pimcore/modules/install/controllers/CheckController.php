@@ -184,13 +184,6 @@ class Install_CheckController extends Pimcore_Controller_Action {
             "state" => function_exists("pcntl_exec") ? "ok" : "warning"
         );
 
-        // soap
-        $checksPHP[] = array(
-            "name" => "Soap",
-            "link" => "http://www.php.net/soap",
-            "state" => class_exists("SoapClient") ? "ok" : "warning"
-        );
-
         // curl for google api sdk
         $checksPHP[] = array(
             "name" => "curl",
@@ -584,6 +577,18 @@ class Install_CheckController extends Pimcore_Controller_Action {
         $checksApps[] = array(
             "name" => "JPEG Optimizer (imgmin, jpegoptim)",
             "state" => $jpgOptimizer ? "ok" : "warning"
+        );
+
+        // timeout binary
+        try {
+            $timeoutBin = (bool) Pimcore_Tool_Console::getTimeoutBinary();
+        } catch (Exception $e) {
+            $timeoutBin = false;
+        }
+
+        $checksApps[] = array(
+            "name" => "timeout - (GNU coreutils)",
+            "state" => $timeoutBin ? "ok" : "warning"
         );
 
 

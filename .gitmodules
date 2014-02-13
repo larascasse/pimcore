@@ -1,0 +1,3 @@
+[submodule "plugins/LpnPlugin/odata"]
+	path = plugins/LpnPlugin/odata
+	url = https://larascasse@bitbucket.org/larascasse/lpn-odata-azure.git

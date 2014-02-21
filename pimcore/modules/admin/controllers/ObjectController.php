@@ -97,8 +97,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
             $childsList->setCondition($condition);
             $childsList->setLimit($limit);
             $childsList->setOffset($offset);
-            $childsList->setOrderKey("o_key");
-            $childsList->setOrder("asc");
+            $childsList->setOrderKey("FIELD(o_type, 'folder') DESC, o_key ASC", false);
             $childsList->setObjectTypes($objectTypes);
 
             $childs = $childsList->load();
@@ -881,11 +880,15 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
                     if ($objectWithSamePath != null) {
                         $allowUpdate = false;
+                        $this->_helper->json(array("success" => false, "message" => "prevented creating object because object with same path+key already exists"));
                     }
-                }
 
-                //$object->setO_path($newPath);
-                $object->setParentId($values["parentId"]);
+                    if($object->isLocked()) {
+                        $this->_helper->json(array("success" => false, "message" => "prevented moving object, because it is locked: ID: " . $object->getId()));
+                    }
+
+                    $object->setParentId($values["parentId"]);
+                }
             }
 
             if (array_key_exists("locked", $values)) {

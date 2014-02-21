@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+		<import>
+            <importFileArticles>export_article_terrasse_pimcore.csv</importFileArticles>
+            <importFileEan>export_ean_terrasses_pimcore.csv</importFileEan>
+            <folderId>2019</folderId>
+			<classId>5</classId>
+			<userId>6</userId>
+		</import>
+		<export>
+            <exportFileEan>export_ean_for_magento.csv</exportFileEan>
+            <exportFileConfigurables>export_configurables_for_magento.csv</exportFileConfigurables>
+			<folderId>2019</folderId>
+			<classId>5</classId>
+			<userId>6</userId>
+		</export>
+</zend-config>
+
+<!--
+
+IMPORT ARTICLES
+
+  [code] => 1
+    [name] => 2
+    [famille] => 3
+    [essence] => 4
+    [qualite] => 5
+    [choix] => 6
+    [epaisseur] => 7
+    [largeur] => 8
+    [longueur] => 9
+    [unite] => 10
+    [published] => 11
+    [nbrpp] => 12
+)
+
+-->
+
+
+<!--
+
+IMPORT EAN
+
+    [code] => 0
+    [ean] => 1
+    [name] => 2
+    [epaisseur] => 3
+    [largeur] => 4
+    [longueur] => 5
+    [choix] => 7
+    [famille] => 8
+
+
+-->

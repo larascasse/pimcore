@@ -1,0 +1,5 @@
+Webservvices
+
+http://pimcore.florent.local/webservice/rest/object/id/34?apikey=037db32506b8582cfc438da250da68d3
+
+http://pimcore.florent.local/webservice/rest/class/id/5?apikey=037db32506b8582cfc438da250da68d3

@@ -1,0 +1,236 @@
+body { padding-top: 50px; }
+
+.clearfix:after { 
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden; 
+}
+.clearfix { 
+  display: inline-block;  
+}
+* html .clearfix {  
+  height: 1%;  
+} /* Hides from IE-mac \*/
+.clearfix {  
+  display: block;  
+}
+
+
+.jumbotron__ {
+    background: #BEBEBE; /* Old browsers */
+    background: -moz-linear-gradient(45deg, #BEBEBE 0%, #CECECE 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #BEBEBE), color-stop(100%, #CECECE)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg, #BEBEBE 0%, #CECECE 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg, #BEBEBE 0%, #CECECE 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg, #BEBEBE 0%, #CECECE 100%); /* IE10+ */
+    background: linear-gradient(45deg, #BEBEBE 0%, #CECECE 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#BEBEBE', endColorstr='#CECECE', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+    margin-top: -91px;
+    padding-bottom: 20px;
+    color: #fff;
+    padding-top: 90px;
+}
+
+
+.product-desc {
+  margin-bottom:36px;
+}
+
+.description__ {
+	float : left;
+	width : 60%;
+	display: block;
+	padding-right: 12px;
+
+}
+
+.caracteristiques__ {
+
+	float : right;
+	width : 40%;
+	display: block;
+	padding-left: 12px;
+
+}
+.row {
+	margin-top:30px;
+}
+
+
+.typeahead {
+
+}
+.typeahead,
+.tt-query,
+.tt-hint {
+  margin-top:10px;
+  width: 300px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 18px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 422px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.highlight_word {
+  color:#FF0000;
+}
+
+.tt-suggestion p.title {
+  font-weight: bold;
+}
+
+.tt-suggestion p.short {
+  font-size : 12px;
+}
+
+.product-detail .page-header {
+  margin-top:0px;
+
+}
+
+.product-detail .carousel {
+  position: relative !important;
+  /*top:100px;*/
+  margin-top:20px;
+  left: 0;
+}
+
+#myCarousel2.carousel .item, #myCarousel2 .carousel-inner > .item > img, #myCarousel2.carousel {
+  height:600px !important;;
+}
+
+.product-detail h1 {
+  font-size:24px;
+}
+
+.product-detail h2 {
+  font-size:20px;
+}
+
+.product-detail h3 {
+  font-size:18px;
+}
+
+h2 {
+  font-family: 'DINPro-Bold';
+}
+
+.section p {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+  line-height: 24px;
+}
+/* LPN H2 */
+.section .row h2 {
+  margin-top: 0px;
+  text-transform: uppercase;
+  font-family: 'DINPro-Bold';
+  color: #333;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  width: auto;
+  margin-bottom: 30px;
+}
+
+.section .row h3 {
+margin-top: 0px;
+text-transform: none;
+font-family: 'DINPro-Bold';
+color: #333;
+font-weight: normal;
+font-size: 16px;
+line-height: 20px;
+letter-spacing: 1px;
+width: auto;
+margin-bottom: 20px
+}
+/* LPN UL */
+.section ul, .section ul
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.section ul li:first-child {}
+
+.section
+ul {
+    border-top: 1px solid #CCC
+}
+
+.section ul
+li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+    border-bottom: 1px solid #CCC
+}
+
+.section.rebound ul li,
+.section .selector ul
+li {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px solid #CCC
+}

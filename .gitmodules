@@ -1,3 +1,6 @@
 [submodule "plugins/LpnPlugin/odata"]
 	path = plugins/LpnPlugin/odata
 	url = https://larascasse@bitbucket.org/larascasse/lpn-odata-azure.git
+[submodule "submodules/google_api"]
+	path = submodules/google_api
+	url = https://github.com/google/google-api-php-client.git

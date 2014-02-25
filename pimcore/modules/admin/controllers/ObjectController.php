@@ -441,14 +441,23 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
             $fieldData = $object->$getter();
             $isInheritedValue = false;
             $value = $fielddefinition->getDataForEditmode($fieldData, $object, $objectFromVersion);
+
+            // following some exceptions for special data types (localizedfields, objectbricks)
             if ($value && ($fieldData instanceof Object_Localizedfield)) {
                 // make sure that the localized field participates in the inheritance detection process
                 $isInheritedValue = $value["inherited"];
             }
-            if (((!$fielddefinition instanceof Object_Class_Data_Numeric && empty($value)) ||
-                    ($fielddefinition instanceof Object_Class_Data_Numeric && $value === null))
-                && !empty($parent)
-            ) {
+            if ($fielddefinition instanceof Object_Class_Data_Objectbricks && is_array($value)) {
+                // make sure that the objectbricks participate in the inheritance detection process
+                foreach($value as $singleBrickData) {
+                    if($singleBrickData["inherited"]) {
+                        $isInheritedValue = true;
+                    }
+                }
+            }
+
+
+            if ( $fielddefinition->isEmpty($value) && !empty($parent) ) {
                 $this->getDataForField($parent, $key, $fielddefinition, $objectFromVersion, $level + 1);
             } else {
                 $isInheritedValue = $isInheritedValue || ($level != 0);
@@ -457,19 +466,11 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
                 $this->objectData[$key] = $value;
                 $this->metaData[$key]['inherited'] = $isInheritedValue;
 
-                if ($isInheritedValue && !empty($value) && !$this->isInheritableField($fielddefinition)) {
+                if ($isInheritedValue && !$fielddefinition->isEmpty($value) && !$this->isInheritableField($fielddefinition)) {
                     $this->objectData[$key] = null;
                     $this->metaData[$key]['inherited'] = false;
                     $this->metaData[$key]['hasParentValue'] = true;
-                } else {
-                    // CF: I don't think this code is necessary at all - fact is, that it is buggy
-//                    $parentValue = $this->getParentValue($object, $key);
-//                    $this->metaData[$key]['hasParentValue'] = !empty($parentValue->value);
-//                    if(!empty($parentValue->value)) {
-//                        $this->metaData[$key]['objectid'] = $parentValue->id;
-//                    }
                 }
-
             }
         }
     }

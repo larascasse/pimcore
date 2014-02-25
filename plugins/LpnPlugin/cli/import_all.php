@@ -40,6 +40,9 @@ try {
     p_r($e);
 }
 
+
+
+
 $filenameEan= dirname(__FILE__) . "/../config/".$importerConfig->import->importFileEan;
 try {
     //do the import job

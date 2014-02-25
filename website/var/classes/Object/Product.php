@@ -5,12 +5,14 @@ class Object_Product extends Object_Concrete {
 public $o_classId = 5;
 public $o_className = "product";
 public $code;
-public $subtype;
+public $ean;
 public $name_scienergie;
+public $subtype;
+public $name_scienergie_court;
+public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
 public $short_name;
-public $ean;
 public $price;
 public $short_description;
 public $short_description_title;
@@ -18,6 +20,10 @@ public $description;
 public $lesplus;
 public $remarque;
 public $echantillon;
+public $price_1;
+public $price_2;
+public $price_3;
+public $price_4;
 public $epaisseur;
 public $longueur;
 public $largeur;
@@ -29,6 +35,7 @@ public $finition;
 public $characteristics_others;
 public $nbrpp;
 public $unite;
+public $mode_calcul;
 public $rendement;
 public $famille;
 public $qualite;
@@ -108,20 +115,20 @@ public function setCode ($code) {
 /**
 * @return string
 */
-public function getSubtype () {
-	$preValue = $this->preGetValue("subtype"); 
+public function getEan () {
+	$preValue = $this->preGetValue("ean"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->subtype;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("subtype");}
+	$data = $this->ean;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("ean");}
 	 return $data;
 }
 
 /**
-* @param string $subtype
+* @param string $ean
 * @return void
 */
-public function setSubtype ($subtype) {
-	$this->subtype = $subtype;
+public function setEan ($ean) {
+	$this->ean = $ean;
 	return $this;
 }
 
@@ -142,6 +149,66 @@ public function getName_scienergie () {
 */
 public function setName_scienergie ($name_scienergie) {
 	$this->name_scienergie = $name_scienergie;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getSubtype () {
+	$preValue = $this->preGetValue("subtype"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->subtype;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("subtype");}
+	 return $data;
+}
+
+/**
+* @param string $subtype
+* @return void
+*/
+public function setSubtype ($subtype) {
+	$this->subtype = $subtype;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getName_scienergie_court () {
+	$preValue = $this->preGetValue("name_scienergie_court"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->name_scienergie_court;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie_court");}
+	 return $data;
+}
+
+/**
+* @param string $name_scienergie_court
+* @return void
+*/
+public function setName_scienergie_court ($name_scienergie_court) {
+	$this->name_scienergie_court = $name_scienergie_court;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getName_scienergie_converti () {
+	$preValue = $this->preGetValue("name_scienergie_converti"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->name_scienergie_converti;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie_converti");}
+	 return $data;
+}
+
+/**
+* @param string $name_scienergie_converti
+* @return void
+*/
+public function setName_scienergie_converti ($name_scienergie_converti) {
+	$this->name_scienergie_converti = $name_scienergie_converti;
 	return $this;
 }
 
@@ -202,26 +269,6 @@ public function getShort_name () {
 */
 public function setShort_name ($short_name) {
 	$this->short_name = $short_name;
-	return $this;
-}
-
-/**
-* @return string
-*/
-public function getEan () {
-	$preValue = $this->preGetValue("ean"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->ean;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("ean");}
-	 return $data;
-}
-
-/**
-* @param string $ean
-* @return void
-*/
-public function setEan ($ean) {
-	$this->ean = $ean;
 	return $this;
 }
 
@@ -362,6 +409,86 @@ public function getEchantillon () {
 */
 public function setEchantillon ($echantillon) {
 	$this->echantillon = $echantillon;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getPrice_1 () {
+	$preValue = $this->preGetValue("price_1"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->price_1;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_1");}
+	 return $data;
+}
+
+/**
+* @param string $price_1
+* @return void
+*/
+public function setPrice_1 ($price_1) {
+	$this->price_1 = $price_1;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getPrice_2 () {
+	$preValue = $this->preGetValue("price_2"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->price_2;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_2");}
+	 return $data;
+}
+
+/**
+* @param string $price_2
+* @return void
+*/
+public function setPrice_2 ($price_2) {
+	$this->price_2 = $price_2;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getPrice_3 () {
+	$preValue = $this->preGetValue("price_3"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->price_3;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_3");}
+	 return $data;
+}
+
+/**
+* @param string $price_3
+* @return void
+*/
+public function setPrice_3 ($price_3) {
+	$this->price_3 = $price_3;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getPrice_4 () {
+	$preValue = $this->preGetValue("price_4"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->price_4;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_4");}
+	 return $data;
+}
+
+/**
+* @param string $price_4
+* @return void
+*/
+public function setPrice_4 ($price_4) {
+	$this->price_4 = $price_4;
 	return $this;
 }
 
@@ -582,6 +709,26 @@ public function getUnite () {
 */
 public function setUnite ($unite) {
 	$this->unite = $unite;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getMode_calcul () {
+	$preValue = $this->preGetValue("mode_calcul"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mode_calcul;
+	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mode_calcul");}
+	 return $data;
+}
+
+/**
+* @param string $mode_calcul
+* @return void
+*/
+public function setMode_calcul ($mode_calcul) {
+	$this->mode_calcul = $mode_calcul;
 	return $this;
 }
 

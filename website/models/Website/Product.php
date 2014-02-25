@@ -9,20 +9,22 @@ class Website_Product extends Object_Product {
      */
     public function preGetValue ($key) {
 
-   
+   		
+    	if(!Pimcore::inAdmin()) {
+		     $getter = "get" . ucfirst($key);
+		  	if(!method_exists($this,$getter)) {
+		  		return;
+		  	}
 
-     $getter = "get" . ucfirst($key);
-  	if(!method_exists($this,$getter)) {
-  		return;
-  	}
+		    	$data = $this->$key;
 
-    	$data = $this->$key;
+		    	
+				if(!$data) { return $this->getValueFromParent($key);}
+			 	return $data;
 
-    	
-		if(!$data) { return $this->getValueFromParent($key);}
-	 	return $data;
-
-        //return;
+	   }
+	   return;
+	   
     }
 
 
@@ -61,11 +63,11 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getChoixString () {
-		$preValue = $this->getChoix; 
+		$preValue = $this->getChoix(); 
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
-		    return $data->getLabel();
+		    return ucwords(strtolower($data->getLabel()));
 		}
 
 	}
@@ -101,11 +103,11 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getEssenceString () {
-		$preValue = $this->getEssence; 
+		$preValue = $this->getEssence(); 
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
-		    return $data->getLabel();
+		    return ucwords(strtolower($data->getLabel()));
 		}
 
 	}
@@ -140,11 +142,11 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getQualiteString () {
-		$preValue = $this->getQualite; 
+		$preValue = $this->getQualite(); 
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
-		    return $data->getLabel();
+		    return ucwords(strtolower($data->getLabel()));
 		}
 
 	}
@@ -236,7 +238,7 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
@@ -245,6 +247,11 @@ class Website_Product extends Object_Product {
 		}
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
+
+		if(count($this->getDimensionsString())>0)
+		$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
+
+		
 
 		$fields = array("epaisseur","longueur");
 		foreach($attributes as $key=> $value) {
@@ -259,11 +266,18 @@ class Website_Product extends Object_Product {
 			$this->getClass()->getFieldDefinition($value->getName());
 			//print_r( $value->fieldtype);
 			$getter = "get" . ucfirst($attribute);
+			$getterString = $getter."String";
 			
 			
 			if(!empty($this)) {
-				if(method_exists($this, $getter)) {
-					$attributeValue = $this->$getter();
+				if(method_exists($this, $getter) || method_exists($this, $getterString)) {
+					unset($attributeValue);
+					if(method_exists($this, $getterString)) {
+						$attributeValue = $this->$getterString();
+					}
+
+					if(empty($attributeValue))
+						$attributeValue = $this->$getter();
 
 					if(!$showEmptyAttribute && empty($attributeValue))
 							continue;
@@ -369,9 +383,12 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$includeFields = array("epaisseur","longeur","largeur","finition","fixation","choix","qualite");
+		$includeFields = array("finition","fixation","choix","qualite");
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
+
+		if(count($this->getDimensionsString())>0)
+			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
 
 		foreach($attributes as $key=> $value) {
 
@@ -385,11 +402,17 @@ class Website_Product extends Object_Product {
 			$this->getClass()->getFieldDefinition($value->getName());
 			//print_r( $value->fieldtype);
 			$getter = "get" . ucfirst($attribute);
-			
+			$getterString = $getter."String";
 			
 			if(!empty($this)) {
-				if(method_exists($this, $getter)) {
-					$attributeValue = $this->$getter();
+				if(method_exists($this, $getter) || method_exists($this, $getterString)) {
+					unset($attributeValue);
+					if(method_exists($this, $getterString)) {
+						$attributeValue = $this->$getterString();
+					}
+
+					if(empty($attributeValue))
+						$attributeValue = $this->$getter();
 
 					if(!$showEmptyAttribute && empty($attributeValue))
 							continue;
@@ -459,17 +482,17 @@ class Website_Product extends Object_Product {
 	public function getDimensionsString() {
 		$varationString =array();
 		if(round($this->getEpaisseur())>0)
-			$varationString[]="Ep: ".round($this->getEpaisseur());
+			$varationString[]="Ep: ".round($this->getEpaisseur())."mm";
 		
 		if(round($this->getLargeur())>0)
-			$varationString[]="l: ".round($this->getLargeur());
+			$varationString[]="l: ".round($this->getLargeur())."mm";
 
 
 		if(round($this->getLongueur())>0) 
-			$varationString[]= "L: ".round($this->getLongueur());
+			$varationString[]= "L: ".round($this->getLongueur())."mm";
 
 		if($this->getVolume())
-			$varationString[]=$this->getVolume();
+			$varationString[]=$this->getVolume()."L";
 
 		if($this->getHauteur())
 			$varationString[]=$this->getHauteur();
@@ -477,7 +500,7 @@ class Website_Product extends Object_Product {
 		if($this->getConditionnement())
 			$varationString[]=$this->getConditionnement();
 		
-		return implode($varationString," / ");
+		return count($varationString)>0?implode($varationString," / "):"";
 	}
 
 	public function getLesPlusArray() {

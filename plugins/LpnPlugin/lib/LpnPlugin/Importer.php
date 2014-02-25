@@ -8,43 +8,75 @@
 
  	private $parentId = 1514;
 
- 	function LpnPlugin_Importer($importerConfig,$overwrite) {
+ 	function LpnPlugin_Importer($importerConfig=null,$overwrite=false) {
  		echo "ok\n";
  		$this->config = $importerConfig;
  		$this->overwrite = $overwrite;
- 		$this->parentId = $this->config->import->folderId;
+        if($importerConfig)
+ 		 $this->parentId = $this->config->import->folderId;
  	}
 
  	function init() {
 		echo "\nImporter Init\n";
  	}
 
-    function test() {
-        $className = Pimcore_Tool::getModelClassMapping("Object_Product");
-        $parentId = $this->config->import->folderId;
 
-        $parent = Object_Product::getByEan("3239918102910");
-        //print_r($parent);
-        if($parent->count()==1)
-             echo "exist".$parent->current()->getFullPath();
-        else
-            echo "n'existe pas";
+    function convertScienergieName($name) {
 
-        //$mappingRaw = [[0,"",""],[1,"code","code"],[2,"name","name"],[3,"Famille art","famille"],[4,"Essence","essence"],[5,"Qualité","qualite"],[6,"Choix","choix"],[7,"epaisseur","epaisseur"],[8,"largeur","largeur"],[9,"longueur","longueur"],[10,"Unité","unite"],[11,"published (system)",""],[12,"nbrpp","nbrpp"]];
-                $mappingRaw = [[0,"Article","code"],[1,"Code_EAN_Article","ean"],[2,"Article Designation","name"],[3,"Epaisseur","epaisseur"],[4,"Largeur","largeur"],[5,"Longueur","longueur"],[6,"Base3",""],[7,"Choix","choix"],[8,"Article Famille","famille"]];
+        $name = strtolower($name);
 
-        foreach ($mappingRaw as $map) {
+        $name=str_ireplace("CHENE ", "Chêne ", $name);
+        $name=str_ireplace("FRENE ", "Frêne ", $name);
 
-            if ($map[0] !== "" && $map[1] && !empty($map[2])) {
-                $mapping[$map[2]] = $map[0];
-            } else if ($map[1] == "published (system)") {
-                $mapping["published"] = $map[0];
+
+        $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
+        $name=str_ireplace("STRUCTURE ", "Structuré ", $name);
+                $name=str_ireplace("BOMBE ", "Bombé ", $name);
+
+        $name=str_ireplace("ANTIDERAPANT", "Antidérapant", $name);
+        $name=str_ireplace("IPE ", "Ipé ", $name);
+        $name=str_ireplace("IPE/", "Ipé/", $name);
+
+        $name=str_ireplace(" A ", " à  ", $name);
+        $name=str_ireplace("MELEZE ", "Mélèze ", $name);
+        $name=str_ireplace("PEIGNE", "Peigné", $name);
+        $name=str_ireplace("THERMOCHAUFFE ", "Thermochauffé ", $name);
+        $name=str_ireplace("STRIEE ", "Striée ", $name);
+        $name=str_ireplace("RESINEUX ", "Résineux ", $name);
+        $name=str_ireplace("( ", "(", $name);
+        $name=str_ireplace(") ", ")", $name);
+
+
+
+        $name=str_ireplace("  ", " ", $name);
+        $name=str_ireplace(".", "", $name);
+        //$name = strtolower($name);
+        $name = ucwords($name);
+
+
+        return trim($name);
+
+    }
+
+    function splitNameType($name) {
+        $types = array(
+            "TERRASSE MONOLAME"=>"Lame de terrasse",
+            "TERRASSE FINITION" => "Produit de finition",
+            "STRUCTURE" => "Produit de structure",
+            "TERRASSE ACCESSOIRE" => "Accessoire pour terrasse",
+            "TERRASSE DALLE" => "Dalle de terasse",
+            );
+        foreach ($types as $key => $value) {
+            $splitted = explode($key." ", $name);
+            if(count($splitted)>1) {
+                return array($splitted[1],$value);
             }
         }
-        // print_r($mapping);
-        //$articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . $data[$mapping["code"]]);
-        //print_r($mapping);
+        return array($name,"");
     }
+
+
+  
 
  	function doImport() {
 		echo "\nImporter doImport\n";
@@ -204,8 +236,9 @@
         ));*/
     }
 
-    public function importProcessAction($job=1)
-    {
+
+    // ARTICLE
+    public function importProcessAction($job=1) {
 
         $success = true;
 
@@ -224,7 +257,7 @@
 		$userId = $this->config->import->userId;
 
 
-        $mappingRaw = [[0,"",""],[1,"code","code"],[2,"name","name"],[3,"Famille art","famille"],[4,"Essence","essence"],[5,"Qualité","qualite"],[6,"Choix","choix"],[7,"epaisseur","epaisseur"],[8,"largeur","largeur"],[9,"longueur","longueur"],[10,"Unité","unite"],[11,"published (system)",""],[12,"nbrpp","nbrpp"]];
+        $mappingRaw = [[0,"",""],[1,"code","code"],[2,"name","name"],[3,"Famille art","famille"],[4,"Essence","essence"],[5,"Qualité","qualite"],[6,"Choix","choix"],[7,"epaisseur","epaisseur"],[8,"largeur","largeur"],[9,"longueur","longueur"],[10,"Unité","unite"],[11,"nbrpp","nbrpp"],[12,"mode_calcul","mode_calcul"]];
         // $mappingRaw = [[0,"",""],[1,"","code"],[2,"name","name"],[3,"Essence","essence"],[4,"Famille art","famille"],[5,"Qualité","qualite"],[6,"Choix","choix"],[7,"epaisseur","epaisseur"],[8,"largeur","largeur"],[9,"longueur","longueur"],[10,"Unité","unite"],[11,"published (system)",""]];
         
         $class = Object_Class::getById($classId );
@@ -239,11 +272,11 @@
 
         $count = 0;
         if (($handle = fopen($file, "r")) !== false) {
-            $data = fgetcsv($handle, 100000, ";",'"');
+            $data = fgetcsv($handle, 100000, ",");
         }
         if ($skipFirstRow && $job == 1) {
             //read the next row, we need to skip the head row
-            $data = fgetcsv($handle, 100000, ";",'"');
+            $data = fgetcsv($handle, 100000, ",");
         }
 
         $tmpFile = $file . "_tmp";
@@ -259,6 +292,7 @@
         unlink($file);
         rename($tmpFile, $file);
 
+        print_r($data);
 
 
         // prepare mapping
@@ -277,6 +311,7 @@
         $className = Pimcore_Tool::getModelClassMapping($className);
 
         $parent = Object_Abstract::getById($parentId);
+
         $objectKey = "object_" . $job;
         if ($keyCol == "id") {
             $objectKey = null;
@@ -286,22 +321,71 @@
         }
    
         $overwrite = false;
-        //if ($this->getParam("overwrite") == "true") {
-            $overwrite = true;
-       // }
-         // $canInsert = $parent->isAllowed("create");
-          $canInsert = true;
-          $isUpdating = false;
+        $overwrite = true;
+        $canInsert = true;
+        $isUpdating = false;
         if ($canInsert && $objectKey && $parent) {
 
             
-            $intendedPath = $parent->getFullPath() . "/" . $objectKey;
+            $intendedPath = $parent->getFullPath() . "/" . strtolower($data[$mapping["famille"]]).  "/" . $objectKey;
+
+            $folderParent = Object_Product::getByPath($parent->getFullPath() . "/" .  strtolower($data[$mapping["famille"]]));
+
+            if(!$folderParent) {
+                echo ("Crete product ".$data[$mapping["famille"]]);
+                $folderParent = Object_Product::create(array(
+                    "o_parentId" => $parentId,
+                    "o_creationDate" => time(),
+                    "o_userOwner" => $userId,
+                    "o_userModification" => $userId,
+                    "o_key" => strtolower($data[$mapping["famille"]]),
+                    "name" => $data[$mapping["famille"]],
+                    "o_published" => false
+                ));
+
+                $folderParent->setCreationDate(time());
+                $folderParent->setUserOwner($userId);
+                $folderParent->setUserModification($userId);
+
+                try {
+                    $folder->save();
+                    $success = true;
+                } catch (Exception $e) {
+                    echo "Error creating folder".$e->getMessage();
+                }
+            }
+            $realParentId  = $folderParent->getId();
+
+            $existingArticle=null;
+
+            $existingProductList = Object_Product::getByCode($data[$keyCol]);
+            if($existingProductList->count()>=1) {
+                $currentArticle = $existingProductList->current();
+                
+                 if(empty($currentArticle->Ean)) {
+                    $existingArticle = $currentArticle;
+                     echo "ARTICLE existe ".$existingArticle->getFullPath()."\n";
+                    
+                    $intendedPath = $existingArticle->getFullPath();
+                    $realParentId = $existingArticle->getParent()->getId();
+                 }
+                 
+            }
+
+            if(!$existingArticle) {
+                echo "n'existe pas".$data[$keyCol]."\n";
+
+            }
+
+            
+
             if ($overwrite) {
             	//echo "intendedPath : ".$intendedPath;
                 $object = Object_Abstract::getByPath($intendedPath);
 				
                 if (!$object instanceof Object_Concrete) {
                     //create new object
+                    echo "create new object";
                     $object = new $className();
                 } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
                     //delete the old object it is of a different class
@@ -315,9 +399,10 @@
                     //use the existing objectecho "llll".$object;
                     $isUpdating = true;
                     echo "\nUpdate\n";
-
                 }
-            } else {
+
+            } 
+            else {
                 $counter = 1;
                 while (Object_Abstract::getByPath($intendedPath) != null) {
                     $objectKey .= "_" . $counter;
@@ -326,9 +411,11 @@
                 }
                 $object = new $className();
             }
+
+            $object->setDescription(null);
             $object->setClassId($classId);
             $object->setClassName($o_className);
-            $object->setParentId($parentId);
+            $object->setParentId($realParentId);
             $object->setKey($objectKey);
             $object->setCreationDate(time());
            	$object->setUserOwner($userId);
@@ -337,25 +424,45 @@
             if ($data[$mapping["published"]] === "1") {
                 $object->setPublished(true);
             } else {
-                $object->setPublished(false);
+                //$object->setPublished(false);
             }
+
+
 
             foreach ($class->getFieldDefinitions() as $key => $field) {
 
-
                 $value = $data[$mapping[$key]];
                 if (array_key_exists($key, $mapping) and  $value != null) {
+                    if($key=="name") {
+                        $splitedName = $this->splitNameType($value);
+                        $object->setValue("subtype", $splitedName[1]);
+                        $object->setValue("name_scienergie",$value);
 
-                    if($isUpdating && $key=="name")
-                        continue;
-                    // data mapping
-                    $value = $field->getFromCsvImport($value);
+                        $object->setValue("name_scienergie_converti",$this->convertScienergieName($value));
+
+                        if($isUpdating) {
+                           // continue;
+                        }
+                        //a l'insert
+                        $value = $this->convertScienergieName($splitedName[0]);
+
+
+                    }
+                    else {
+                         // data mapping
+                         $value = $field->getFromCsvImport($value);
+                    }
+                    
+                   
 
                     if ($value !== null) {
                         $object->setValue($key, $value);
-                        echo $key." ";
+                        //echo $key." ";
                     }
                 }
+                //else
+                //    $object->setValue($key, null);
+                
             }
 
             try {
@@ -368,16 +475,14 @@
 
             } catch (Exception $e) {
             	echo $e->getMessage();
-                //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
         }
 
-
+        Pimcore::collectGarbage();
         //$this->_helper->json(array("success" => $success));
     }
     //
-    public function importEanProcessAction($job=1)
-    {
+    public function importEanProcessAction($job=1) {
 
         $success = true;
 
@@ -395,7 +500,7 @@
 
 		$userId = $this->config->import->userId;
 
-        $mappingRaw = [[0,"Article","code"],[1,"Code_EAN_Article","ean"],[2,"Article Designation","name"],[3,"Epaisseur","epaisseur"],[4,"Largeur","largeur"],[5,"Longueur","longueur"],[6,"Base3",""],[7,"Choix","choix"],[8,"Article Famille","famille"]];
+        $mappingRaw = [[0,"Article","code"],[1,"Code_EAN_Article","ean"],[2,"Article Designation","name"],[3,"Epaisseur","epaisseur"],[4,"Largeur","largeur"],[5,"Longueur","longueur"],[6,"nbrpp","nbrpp"],[7,"Choix","choix"],[8,"Essence","essence"],[9,"Qualite","qualite"],[10,"Article Famille","famille"],[11,"name_scienergie_court","name_scienergie_court"]];
         
         $class = Object_Class::getById($classId );
         $skipFirstRow = true;
@@ -409,11 +514,11 @@
 
         $count = 0;
         if (($handle = fopen($file, "r")) !== false) {
-            $data = fgetcsv($handle, 100000, ";",'"');
+            $data = fgetcsv($handle, 100000, ",",'"');
         }
         if ($skipFirstRow && $job == 1) {
             //read the next row, we need to skip the head row
-            $data = fgetcsv($handle, 100000, ";",'"');
+            $data = fgetcsv($handle, 100000, ",",'"');
         }
 
         $tmpFile = $file . "_tmp";
@@ -436,7 +541,8 @@
 
             if ($map[0] !== "" && $map[1] && !empty($map[2])) {
                 $mapping[$map[2]] = $map[0];
-            } else if ($map[1] == "published (system)") {
+            } 
+            else if ($map[1] == "published (system)") {
                 $mapping["published"] = $map[0];
             }
         }
@@ -456,8 +562,10 @@
 
         $parent = Object_Abstract::getById($parentId);
 
-        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . $data[$mapping["code"]]);
-        //print_r($mapping);
+
+
+        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($data[$mapping["famille"]])."/".$data[$mapping["code"]]);
+        //print_r ($articleParent);
        
 
         $objectKey = "object_" . $job;
@@ -502,6 +610,9 @@
             	$intendedPath = $articleParent->getFullPath() . "/" . $objectKey;
             	$objectParentId = $articleParent->getId();
             }
+
+
+            echo ("intendedPath :".$intendedPath);
             if ($overwrite) {
                 $object = Object_Abstract::getByPath($intendedPath);
 				
@@ -554,14 +665,28 @@
 
                 $value = $data[$mapping[$key]];
                 if (array_key_exists($key, $mapping) and  $value != null) {
-                    if($isUpdating && $key=="name")
+                    if($isUpdating && $key=="name") {
                         continue;
-                    if($isUpdating && $key=="code")
+                    }
+
+                    /*else if($key=="code") {
+                        $object->setCode(null);
+                        $object->save();
                         continue;
-                    if($isUpdating && $key=="famille")
+                    }
+                    else if($isUpdating && $key=="famille") {
+                        $object->setFamille(null);
+                        $object->save();
                         continue;
-                    // data mapping
-                    $value = $field->getFromCsvImport($value);
+                    }*/
+                    elseif($key=="name_scienergie_court") {
+                        $splitedName = $this->splitNameType($value);
+                        $value = $this->convertScienergieName($value);
+                    }
+                    else {
+                       $value = $field->getFromCsvImport($value); 
+                    }
+                    
 
                     if ($value !== null) {
                         $object->setValue($key, $value);
@@ -582,10 +707,9 @@
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
         }
+    }
 
-
-        public function importProduct($product)
-    {
+    public function importProduct($product) {
 
       
         $o_className = "product";
@@ -622,7 +746,7 @@
 
 
         $existingEan=null;
-        $existingProductList = Object_Product::getByEan($data[$product["ean"]);
+        $existingProductList = Object_Product::getByEan($data[$product["ean"]]);
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
@@ -720,6 +844,61 @@
                 else 
                     echo "\nrow ".$job." inserted ".$objectKey." / ".$object->getFullPath()."\n";
                 $this->importEanProcessAction(++$job);
+
+            } catch (Exception $e) {
+                echo $e->getMessage();
+                //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
+            }
+        }
+
+
+        //$this->_helper->json(array("success" => $success));
+    }
+
+    public function importProductPrice($product) {
+
+      
+        $o_className = "product";
+        $className=$o_className;
+        $parentId = 2019;
+        $classId = 5;
+        $keyCol = 1;
+
+        $userId = 6;
+
+        
+        $class = Object_Class::getById($classId );
+        $fields = $class->getFieldDefinitions();
+       
+
+        // create new object
+        $className = "Object_" . ucfirst($className);
+
+        $className = Pimcore_Tool::getModelClassMapping($className);
+
+        $existingProductList = Object_Product::getByEan($product["ean"]);
+        //print_r($parent);
+        if($existingProductList->count()==1) {
+            $existingEan = $existingProductList->current();
+             echo "EAN existe ".$existingEan->getFullPath()."\n";
+             
+        }
+        else {
+            echo "n'existe pas ".$product["ean"]."\n";
+            
+        }
+
+        if ($existingEan) {
+           $existingEan->setModificationDate(time());
+
+           $existingEan->setPrice_1($product["price_1"]);
+           $existingEan->setPrice_2($product["price_2"]);
+           $existingEan->setPrice_3($product["price_3"]);
+           $existingEan->setPrice_4($product["price_4"]);
+
+            try {
+                $existingEan->save();
+                echo "\Price  updated ".$product["ean"]." / ".$existingEan->getFullPath()."\n";
 
             } catch (Exception $e) {
                 echo $e->getMessage();

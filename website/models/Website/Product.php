@@ -306,7 +306,7 @@ class Website_Product extends Object_Product {
 					}
 
 					else if(is_array($attributeValue)) {
-						$attributeValue = implode($attributeValue);
+						$attributeValue = implode(",",$attributeValue);
 						$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 
 					}

@@ -15,6 +15,7 @@ public $name;
 public $short_name;
 public $price;
 public $short_description;
+public $mage_sub_description;
 public $short_description_title;
 public $description;
 public $lesplus;
@@ -68,7 +69,6 @@ public $meta_title;
 public $meta_description;
 public $meta_keywords;
 public $mage_short_name;
-public $mage_sub_description;
 public $mage_lesplus;
 public $mage_description;
 public $characteristics;
@@ -99,7 +99,7 @@ public function getCode () {
 	$preValue = $this->preGetValue("code"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->code;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("code");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("code")->isEmpty($data)) { return $this->getValueFromParent("code");}
 	 return $data;
 }
 
@@ -119,7 +119,7 @@ public function getEan () {
 	$preValue = $this->preGetValue("ean"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->ean;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("ean");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("ean")->isEmpty($data)) { return $this->getValueFromParent("ean");}
 	 return $data;
 }
 
@@ -139,7 +139,7 @@ public function getName_scienergie () {
 	$preValue = $this->preGetValue("name_scienergie"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name_scienergie;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie")->isEmpty($data)) { return $this->getValueFromParent("name_scienergie");}
 	 return $data;
 }
 
@@ -159,7 +159,7 @@ public function getSubtype () {
 	$preValue = $this->preGetValue("subtype"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->subtype;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("subtype");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("subtype")->isEmpty($data)) { return $this->getValueFromParent("subtype");}
 	 return $data;
 }
 
@@ -179,7 +179,7 @@ public function getName_scienergie_court () {
 	$preValue = $this->preGetValue("name_scienergie_court"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name_scienergie_court;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie_court");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_court")->isEmpty($data)) { return $this->getValueFromParent("name_scienergie_court");}
 	 return $data;
 }
 
@@ -199,7 +199,7 @@ public function getName_scienergie_converti () {
 	$preValue = $this->preGetValue("name_scienergie_converti"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name_scienergie_converti;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie_converti");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_converti")->isEmpty($data)) { return $this->getValueFromParent("name_scienergie_converti");}
 	 return $data;
 }
 
@@ -219,7 +219,7 @@ public function getName_scienergie2 () {
 	$preValue = $this->preGetValue("name_scienergie2"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name_scienergie2;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name_scienergie2");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie2")->isEmpty($data)) { return $this->getValueFromParent("name_scienergie2");}
 	 return $data;
 }
 
@@ -239,7 +239,7 @@ public function getName () {
 	$preValue = $this->preGetValue("name"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name")->isEmpty($data)) { return $this->getValueFromParent("name");}
 	 return $data;
 }
 
@@ -259,7 +259,7 @@ public function getShort_name () {
 	$preValue = $this->preGetValue("short_name"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->short_name;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("short_name");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) { return $this->getValueFromParent("short_name");}
 	 return $data;
 }
 
@@ -279,7 +279,7 @@ public function getPrice () {
 	$preValue = $this->preGetValue("price"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->price;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price")->isEmpty($data)) { return $this->getValueFromParent("price");}
 	 return $data;
 }
 
@@ -299,7 +299,7 @@ public function getShort_description () {
 	$preValue = $this->preGetValue("short_description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->short_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("short_description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_description")->isEmpty($data)) { return $this->getValueFromParent("short_description");}
 	 return $data;
 }
 
@@ -315,11 +315,31 @@ public function setShort_description ($short_description) {
 /**
 * @return string
 */
+public function getMage_sub_description () {
+	$preValue = $this->preGetValue("mage_sub_description"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mage_sub_description;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_sub_description")->isEmpty($data)) { return $this->getValueFromParent("mage_sub_description");}
+	 return $data;
+}
+
+/**
+* @param string $mage_sub_description
+* @return void
+*/
+public function setMage_sub_description ($mage_sub_description) {
+	$this->mage_sub_description = $mage_sub_description;
+	return $this;
+}
+
+/**
+* @return string
+*/
 public function getShort_description_title () {
 	$preValue = $this->preGetValue("short_description_title"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->short_description_title;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("short_description_title");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_description_title")->isEmpty($data)) { return $this->getValueFromParent("short_description_title");}
 	 return $data;
 }
 
@@ -339,7 +359,7 @@ public function getDescription () {
 	$preValue = $this->preGetValue("description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("description")->isEmpty($data)) { return $this->getValueFromParent("description");}
 	 return $data;
 }
 
@@ -359,7 +379,7 @@ public function getLesplus () {
 	$preValue = $this->preGetValue("lesplus"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->lesplus;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("lesplus");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("lesplus")->isEmpty($data)) { return $this->getValueFromParent("lesplus");}
 	 return $data;
 }
 
@@ -379,7 +399,7 @@ public function getRemarque () {
 	$preValue = $this->preGetValue("remarque"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->remarque;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("remarque");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("remarque")->isEmpty($data)) { return $this->getValueFromParent("remarque");}
 	 return $data;
 }
 
@@ -399,7 +419,7 @@ public function getEchantillon () {
 	$preValue = $this->preGetValue("echantillon"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->echantillon;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("echantillon");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("echantillon")->isEmpty($data)) { return $this->getValueFromParent("echantillon");}
 	 return $data;
 }
 
@@ -419,7 +439,7 @@ public function getPrice_1 () {
 	$preValue = $this->preGetValue("price_1"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->price_1;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_1");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_1")->isEmpty($data)) { return $this->getValueFromParent("price_1");}
 	 return $data;
 }
 
@@ -439,7 +459,7 @@ public function getPrice_2 () {
 	$preValue = $this->preGetValue("price_2"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->price_2;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_2");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_2")->isEmpty($data)) { return $this->getValueFromParent("price_2");}
 	 return $data;
 }
 
@@ -459,7 +479,7 @@ public function getPrice_3 () {
 	$preValue = $this->preGetValue("price_3"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->price_3;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_3");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_3")->isEmpty($data)) { return $this->getValueFromParent("price_3");}
 	 return $data;
 }
 
@@ -479,7 +499,7 @@ public function getPrice_4 () {
 	$preValue = $this->preGetValue("price_4"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->price_4;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("price_4");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_4")->isEmpty($data)) { return $this->getValueFromParent("price_4");}
 	 return $data;
 }
 
@@ -499,7 +519,7 @@ public function getEpaisseur () {
 	$preValue = $this->preGetValue("epaisseur"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->epaisseur;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("epaisseur");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseur")->isEmpty($data)) { return $this->getValueFromParent("epaisseur");}
 	 return $data;
 }
 
@@ -519,7 +539,7 @@ public function getLongueur () {
 	$preValue = $this->preGetValue("longueur"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->longueur;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("longueur");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("longueur")->isEmpty($data)) { return $this->getValueFromParent("longueur");}
 	 return $data;
 }
 
@@ -539,7 +559,7 @@ public function getLargeur () {
 	$preValue = $this->preGetValue("largeur"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->largeur;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("largeur");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("largeur")->isEmpty($data)) { return $this->getValueFromParent("largeur");}
 	 return $data;
 }
 
@@ -559,7 +579,7 @@ public function getColor () {
 	$preValue = $this->preGetValue("color"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->color;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("color");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("color")->isEmpty($data)) { return $this->getValueFromParent("color");}
 	 return $data;
 }
 
@@ -579,7 +599,7 @@ public function getVolume () {
 	$preValue = $this->preGetValue("volume"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->volume;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("volume");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("volume")->isEmpty($data)) { return $this->getValueFromParent("volume");}
 	 return $data;
 }
 
@@ -599,7 +619,7 @@ public function getHauteur () {
 	$preValue = $this->preGetValue("hauteur"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->hauteur;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("hauteur");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur")->isEmpty($data)) { return $this->getValueFromParent("hauteur");}
 	 return $data;
 }
 
@@ -619,7 +639,7 @@ public function getConditionnement () {
 	$preValue = $this->preGetValue("conditionnement"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->conditionnement;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("conditionnement");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("conditionnement")->isEmpty($data)) { return $this->getValueFromParent("conditionnement");}
 	 return $data;
 }
 
@@ -639,7 +659,7 @@ public function getFinition () {
 	$preValue = $this->preGetValue("finition"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->finition;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("finition");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition")->isEmpty($data)) { return $this->getValueFromParent("finition");}
 	 return $data;
 }
 
@@ -659,7 +679,7 @@ public function getCharacteristics_others () {
 	$preValue = $this->preGetValue("characteristics_others"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->characteristics_others;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("characteristics_others");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("characteristics_others")->isEmpty($data)) { return $this->getValueFromParent("characteristics_others");}
 	 return $data;
 }
 
@@ -679,7 +699,7 @@ public function getNbrpp () {
 	$preValue = $this->preGetValue("nbrpp"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->nbrpp;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("nbrpp");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nbrpp")->isEmpty($data)) { return $this->getValueFromParent("nbrpp");}
 	 return $data;
 }
 
@@ -699,7 +719,7 @@ public function getUnite () {
 	$preValue = $this->preGetValue("unite"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->unite;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("unite");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("unite")->isEmpty($data)) { return $this->getValueFromParent("unite");}
 	 return $data;
 }
 
@@ -719,7 +739,7 @@ public function getMode_calcul () {
 	$preValue = $this->preGetValue("mode_calcul"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mode_calcul;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mode_calcul");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mode_calcul")->isEmpty($data)) { return $this->getValueFromParent("mode_calcul");}
 	 return $data;
 }
 
@@ -739,7 +759,7 @@ public function getRendement () {
 	$preValue = $this->preGetValue("rendement"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->rendement;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("rendement");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("rendement")->isEmpty($data)) { return $this->getValueFromParent("rendement");}
 	 return $data;
 }
 
@@ -759,7 +779,7 @@ public function getFamille () {
 	$preValue = $this->preGetValue("famille"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->famille;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("famille");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("famille")->isEmpty($data)) { return $this->getValueFromParent("famille");}
 	 return $data;
 }
 
@@ -779,7 +799,7 @@ public function getQualite () {
 	$preValue = $this->preGetValue("qualite"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->qualite;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("qualite");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("qualite")->isEmpty($data)) { return $this->getValueFromParent("qualite");}
 	 return $data;
 }
 
@@ -799,7 +819,7 @@ public function getEssence () {
 	$preValue = $this->preGetValue("essence"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->essence;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("essence");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("essence")->isEmpty($data)) { return $this->getValueFromParent("essence");}
 	 return $data;
 }
 
@@ -819,7 +839,7 @@ public function getChoix () {
 	$preValue = $this->preGetValue("choix"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->choix;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("choix");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) { return $this->getValueFromParent("choix");}
 	 return $data;
 }
 
@@ -839,7 +859,7 @@ public function getFixation () {
 	$preValue = $this->preGetValue("fixation"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->fixation;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("fixation");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation")->isEmpty($data)) { return $this->getValueFromParent("fixation");}
 	 return $data;
 }
 
@@ -859,7 +879,7 @@ public function getProfil () {
 	$preValue = $this->preGetValue("profil"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->profil;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("profil");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("profil")->isEmpty($data)) { return $this->getValueFromParent("profil");}
 	 return $data;
 }
 
@@ -879,7 +899,7 @@ public function getClasse () {
 	$preValue = $this->preGetValue("classe"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->classe;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("classe");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("classe")->isEmpty($data)) { return $this->getValueFromParent("classe");}
 	 return $data;
 }
 
@@ -899,7 +919,7 @@ public function getEpaisseurUsure () {
 	$preValue = $this->preGetValue("epaisseurUsure"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->epaisseurUsure;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("epaisseurUsure");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseurUsure")->isEmpty($data)) { return $this->getValueFromParent("epaisseurUsure");}
 	 return $data;
 }
 
@@ -919,7 +939,7 @@ public function getExtras () {
 	$preValue = $this->preGetValue("extras"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("extras")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("extras");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("extras")->isEmpty($data)) { return $this->getValueFromParent("extras");}
 	 return $data;
 }
 
@@ -939,7 +959,7 @@ public function getChanfreins () {
 	$preValue = $this->preGetValue("chanfreins"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->chanfreins;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("chanfreins");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chanfreins")->isEmpty($data)) { return $this->getValueFromParent("chanfreins");}
 	 return $data;
 }
 
@@ -959,7 +979,7 @@ public function getPieceHumide () {
 	$preValue = $this->preGetValue("pieceHumide"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->pieceHumide;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("pieceHumide");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pieceHumide")->isEmpty($data)) { return $this->getValueFromParent("pieceHumide");}
 	 return $data;
 }
 
@@ -979,7 +999,7 @@ public function getSousCoucheIntegree () {
 	$preValue = $this->preGetValue("sousCoucheIntegree"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->sousCoucheIntegree;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("sousCoucheIntegree");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("sousCoucheIntegree")->isEmpty($data)) { return $this->getValueFromParent("sousCoucheIntegree");}
 	 return $data;
 }
 
@@ -999,7 +1019,7 @@ public function getChauffantBasseTemperature () {
 	$preValue = $this->preGetValue("chauffantBasseTemperature"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->chauffantBasseTemperature;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("chauffantBasseTemperature");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantBasseTemperature")->isEmpty($data)) { return $this->getValueFromParent("chauffantBasseTemperature");}
 	 return $data;
 }
 
@@ -1019,7 +1039,7 @@ public function getChauffantAccumulationBasseTemperature () {
 	$preValue = $this->preGetValue("chauffantAccumulationBasseTemperature"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->chauffantAccumulationBasseTemperature;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("chauffantAccumulationBasseTemperature");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantAccumulationBasseTemperature")->isEmpty($data)) { return $this->getValueFromParent("chauffantAccumulationBasseTemperature");}
 	 return $data;
 }
 
@@ -1039,7 +1059,7 @@ public function getSolRaffraichissant () {
 	$preValue = $this->preGetValue("solRaffraichissant"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->solRaffraichissant;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("solRaffraichissant");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("solRaffraichissant")->isEmpty($data)) { return $this->getValueFromParent("solRaffraichissant");}
 	 return $data;
 }
 
@@ -1059,7 +1079,7 @@ public function getCountry () {
 	$preValue = $this->preGetValue("country"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->country;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("country");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("country")->isEmpty($data)) { return $this->getValueFromParent("country");}
 	 return $data;
 }
 
@@ -1079,7 +1099,7 @@ public function getColisage () {
 	$preValue = $this->preGetValue("colisage"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->colisage;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("colisage");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("colisage")->isEmpty($data)) { return $this->getValueFromParent("colisage");}
 	 return $data;
 }
 
@@ -1099,7 +1119,7 @@ public function getTypeLame () {
 	$preValue = $this->preGetValue("typeLame"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->typeLame;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("typeLame");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("typeLame")->isEmpty($data)) { return $this->getValueFromParent("typeLame");}
 	 return $data;
 }
 
@@ -1119,7 +1139,7 @@ public function getImage_1 () {
 	$preValue = $this->preGetValue("image_1"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_1;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_1");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_1")->isEmpty($data)) { return $this->getValueFromParent("image_1");}
 	 return $data;
 }
 
@@ -1139,7 +1159,7 @@ public function getImage_2 () {
 	$preValue = $this->preGetValue("image_2"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_2;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_2");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_2")->isEmpty($data)) { return $this->getValueFromParent("image_2");}
 	 return $data;
 }
 
@@ -1159,7 +1179,7 @@ public function getImage_3 () {
 	$preValue = $this->preGetValue("image_3"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_3;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_3");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_3")->isEmpty($data)) { return $this->getValueFromParent("image_3");}
 	 return $data;
 }
 
@@ -1179,7 +1199,7 @@ public function getRealisations () {
 	$preValue = $this->preGetValue("realisations"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("realisations")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("realisations");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("realisations")->isEmpty($data)) { return $this->getValueFromParent("realisations");}
 	 return $data;
 }
 
@@ -1199,7 +1219,7 @@ public function getFiche_technique_lpn () {
 	$preValue = $this->preGetValue("fiche_technique_lpn"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("fiche_technique_lpn")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("fiche_technique_lpn");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fiche_technique_lpn")->isEmpty($data)) { return $this->getValueFromParent("fiche_technique_lpn");}
 	 return $data;
 }
 
@@ -1219,7 +1239,7 @@ public function getFiche_technique_orginale () {
 	$preValue = $this->preGetValue("fiche_technique_orginale"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("fiche_technique_orginale")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("fiche_technique_orginale");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fiche_technique_orginale")->isEmpty($data)) { return $this->getValueFromParent("fiche_technique_orginale");}
 	 return $data;
 }
 
@@ -1239,7 +1259,7 @@ public function getRelatedProducts () {
 	$preValue = $this->preGetValue("relatedProducts"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("relatedProducts")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("relatedProducts");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("relatedProducts")->isEmpty($data)) { return $this->getValueFromParent("relatedProducts");}
 	 return $data;
 }
 
@@ -1259,7 +1279,7 @@ public function getRelatedAccessories () {
 	$preValue = $this->preGetValue("relatedAccessories"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("relatedAccessories")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("relatedAccessories");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("relatedAccessories")->isEmpty($data)) { return $this->getValueFromParent("relatedAccessories");}
 	 return $data;
 }
 
@@ -1279,7 +1299,7 @@ public function getAssociatedArticles () {
 	$preValue = $this->preGetValue("associatedArticles"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("associatedArticles")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("associatedArticles");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("associatedArticles")->isEmpty($data)) { return $this->getValueFromParent("associatedArticles");}
 	 return $data;
 }
 
@@ -1299,7 +1319,7 @@ public function getMeta_title () {
 	$preValue = $this->preGetValue("meta_title"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->meta_title;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("meta_title");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title")->isEmpty($data)) { return $this->getValueFromParent("meta_title");}
 	 return $data;
 }
 
@@ -1319,7 +1339,7 @@ public function getMeta_description () {
 	$preValue = $this->preGetValue("meta_description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->meta_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("meta_description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_description")->isEmpty($data)) { return $this->getValueFromParent("meta_description");}
 	 return $data;
 }
 
@@ -1339,7 +1359,7 @@ public function getMeta_keywords () {
 	$preValue = $this->preGetValue("meta_keywords"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->meta_keywords;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("meta_keywords");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_keywords")->isEmpty($data)) { return $this->getValueFromParent("meta_keywords");}
 	 return $data;
 }
 
@@ -1359,7 +1379,7 @@ public function getMage_short_name () {
 	$preValue = $this->preGetValue("mage_short_name"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_short_name;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_short_name");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_short_name")->isEmpty($data)) { return $this->getValueFromParent("mage_short_name");}
 	 return $data;
 }
 
@@ -1375,31 +1395,11 @@ public function setMage_short_name ($mage_short_name) {
 /**
 * @return string
 */
-public function getMage_sub_description () {
-	$preValue = $this->preGetValue("mage_sub_description"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->mage_sub_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_sub_description");}
-	 return $data;
-}
-
-/**
-* @param string $mage_sub_description
-* @return void
-*/
-public function setMage_sub_description ($mage_sub_description) {
-	$this->mage_sub_description = $mage_sub_description;
-	return $this;
-}
-
-/**
-* @return string
-*/
 public function getMage_lesplus () {
 	$preValue = $this->preGetValue("mage_lesplus"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_lesplus;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_lesplus");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_lesplus")->isEmpty($data)) { return $this->getValueFromParent("mage_lesplus");}
 	 return $data;
 }
 
@@ -1419,7 +1419,7 @@ public function getMage_description () {
 	$preValue = $this->preGetValue("mage_description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_description")->isEmpty($data)) { return $this->getValueFromParent("mage_description");}
 	 return $data;
 }
 
@@ -1439,7 +1439,7 @@ public function getCharacteristics () {
 	$preValue = $this->preGetValue("characteristics"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->characteristics;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("characteristics");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("characteristics")->isEmpty($data)) { return $this->getValueFromParent("characteristics");}
 	 return $data;
 }
 
@@ -1459,7 +1459,7 @@ public function getMage_guideline () {
 	$preValue = $this->preGetValue("mage_guideline"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_guideline;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_guideline");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_guideline")->isEmpty($data)) { return $this->getValueFromParent("mage_guideline");}
 	 return $data;
 }
 
@@ -1479,7 +1479,7 @@ public function getImage_1_src () {
 	$preValue = $this->preGetValue("image_1_src"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_1_src;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_1_src");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_1_src")->isEmpty($data)) { return $this->getValueFromParent("image_1_src");}
 	 return $data;
 }
 
@@ -1499,7 +1499,7 @@ public function getImage_2_src () {
 	$preValue = $this->preGetValue("image_2_src"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_2_src;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_2_src");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_2_src")->isEmpty($data)) { return $this->getValueFromParent("image_2_src");}
 	 return $data;
 }
 
@@ -1519,7 +1519,7 @@ public function getImage_3_src () {
 	$preValue = $this->preGetValue("image_3_src"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->image_3_src;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("image_3_src");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_3_src")->isEmpty($data)) { return $this->getValueFromParent("image_3_src");}
 	 return $data;
 }
 
@@ -1539,7 +1539,7 @@ public function getMage_fichepdf () {
 	$preValue = $this->preGetValue("mage_fichepdf"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_fichepdf;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_fichepdf");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_fichepdf")->isEmpty($data)) { return $this->getValueFromParent("mage_fichepdf");}
 	 return $data;
 }
 
@@ -1559,7 +1559,7 @@ public function getMage_invoice_description () {
 	$preValue = $this->preGetValue("mage_invoice_description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_invoice_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_invoice_description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_invoice_description")->isEmpty($data)) { return $this->getValueFromParent("mage_invoice_description");}
 	 return $data;
 }
 
@@ -1579,7 +1579,7 @@ public function getMage_realisations () {
 	$preValue = $this->preGetValue("mage_realisations"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_realisations;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_realisations");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_realisations")->isEmpty($data)) { return $this->getValueFromParent("mage_realisations");}
 	 return $data;
 }
 
@@ -1599,7 +1599,7 @@ public function getMage_config_description () {
 	$preValue = $this->preGetValue("mage_config_description"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_config_description;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_config_description");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_config_description")->isEmpty($data)) { return $this->getValueFromParent("mage_config_description");}
 	 return $data;
 }
 

@@ -217,6 +217,11 @@ abstract class Object_Class_Data
      */
     public function getForWebserviceExport($object)
     {
+        //FB
+        $data = $this->getDataFromObjectParam($object);
+        return $data;
+
+
         $key = $this->getName();
         $getter = "get" . ucfirst($key);
         return $object->$getter();

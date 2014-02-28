@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <plugin>
+        <!-- unique identifier = folder name of plugin  -->
+        <pluginName>Tools</pluginName>
+        <!-- nice name to display in pimcore -->
+        <pluginNiceName>Tools for All</pluginNiceName>
+        <!-- 64x64px plugin icon-->
+        <pluginIcon>/plugins/Tools/static/img/plugin.png</pluginIcon>
+        <pluginDescription>
+            <![CDATA[Frontend Tools libary with Math Fuctions, Geo, Text and and and ....]]></pluginDescription>
+        <!-- content to include in pimcore admin in a 420x340px iframe -->
+        <!-- Plugin Server Host-->
+        <pluginServer></pluginServer>
+        <!-- Version, Revision and Timestamp are updated by createRevision Script !-->
+        <pluginVersion>1.0</pluginVersion>
+        <pluginRevision>0</pluginRevision>
+        <pluginBuildTimestamp>1289145446</pluginBuildTimestamp>
+        <!-- <pluginIframeSrc>/plugin/Tools/backend/overview</pluginIframeSrc> -->
+        <!-- className of the plugin which extends Pimcore_API_Plugin_Abstract-->
+        <pluginClassName>Tools_Plugin</pluginClassName>
+        <!-- include paths relative to plugin-directory -->
+        <pluginIncludePaths>
+            <path>/Tools/lib</path>
+            <path>/Tools/controllers</path>
+
+        </pluginIncludePaths>
+        <!-- namespaces to register with autoloader-->
+        <pluginNamespaces>
+            <namespace>Tools</namespace>
+        </pluginNamespaces>
+        <!-- js files with path relative to plugin-directory -->
+        <pluginJsPaths>
+            <path>/Tools/static/js/editmode.js</path>
+        </pluginJsPaths>
+        <!-- css files with path relative to plugin-directory -->
+        <pluginCssPaths>
+            <path>/Tools/static/css/editmode.css</path>
+        </pluginCssPaths>
+    </plugin>
+</zend-config>

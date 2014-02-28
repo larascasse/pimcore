@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+  <plugin>
+    <pluginName>Texttemplates</pluginName>
+    <pluginNiceName>Texttemplates Module</pluginNiceName>
+    <pluginIcon></pluginIcon>
+    <pluginDescription>Texttemplates for Objects</pluginDescription>
+    <pluginServer>plugins.pimcore.org</pluginServer>
+    <pluginVersion>0.0</pluginVersion>
+    <pluginRevision>1</pluginRevision>
+    <pluginBuildTimestamp>0</pluginBuildTimestamp>
+     <pluginIframeSrc>/plugin/Texttemplates/admin/settings</pluginIframeSrc>
+    <pluginClassName>Texttemplates_Plugin</pluginClassName>
+    <pluginIncludePaths>
+      <path>/Texttemplates/lib</path>
+      <path>/Texttemplates/controllers</path>
+      <path>/Texttemplates/models</path>
+    </pluginIncludePaths>
+    <pluginNamespaces>
+      <namespace>Texttemplates</namespace>
+      <namespace>Object</namespace>
+    </pluginNamespaces>
+    <pluginJsPaths>
+        <path>/Texttemplates/static/js/Texttemplates/plugin.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/texttemplateList.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/helpers.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/texttemplateEditor.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/texttemplateEditor/editTab.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/texttemplateEditor/dependenciesTab.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/TemplateWysiwyg/data/templateWysiwyg.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/TemplateWysiwyg/tags/templateWysiwyg.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/TemplateWysiwyg/tags/templateWysiwyg/ckeditorPlugin.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/TemplateWysiwyg/tags/templateWysiwyg/insertDialog.js</path>
+        <path>/Texttemplates/static/js/Texttemplates/TemplateWysiwyg/tags/templateWysiwyg/selectVariableDialog.js</path>
+    </pluginJsPaths>
+    <pluginCssPaths>
+       <path>/Texttemplates/static/css/backend.css</path>
+    </pluginCssPaths>
+  </plugin>
+</zend-config>
+

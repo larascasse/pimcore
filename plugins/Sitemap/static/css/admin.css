@@ -1,0 +1,107 @@
+
+.indent_field{
+    background: url(/plugins/Sitemap/static/img/dependent.png) left center no-repeat !important;
+}
+
+.indent_field label{
+    left: 15px;
+    width:135px!important;
+}
+
+.indent_field_2{
+    background: url(/plugins/Sitemap/static/img/dependent.png) 12px center no-repeat !important;
+}
+
+.indent_field_2 label{
+    left: 27px;
+    width:123px!important;
+}
+
+.sitemap_icon_document{
+    background: url(/plugins/Sitemap/static/img/document.png) left center no-repeat !important;
+}
+
+.sitemap_icon_doctype{
+    background: url(/plugins/Sitemap/static/img/doctype.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_doctype_r{
+    background: url(/plugins/Sitemap/static/img/doctype.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_doctype_add{
+    background: url(/plugins/Sitemap/static/img/doctype_add.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_docfolder{
+    background: url(/plugins/Sitemap/static/img/folder_page.png) left center no-repeat !important;
+}
+
+.sitemap_icon_object{
+    background: url(/plugins/Sitemap/static/img/object.png) left center no-repeat !important;
+}
+
+.sitemap_icon_objectfolder{
+    background: url(/plugins/Sitemap/static/img/folder_database.png) left center no-repeat !important;
+}
+
+.sitemap_icon_document_r{
+    background: url(/plugins/Sitemap/static/img/r_document.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_docfolder_r{
+    background: url(/plugins/Sitemap/static/img/r_folder_page.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_object_r{
+    background: url(/plugins/Sitemap/static/img/r_object.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_objectfolder_r{
+    background: url(/plugins/Sitemap/static/img/r_folder_database.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_routemap{
+    background: url(/plugins/Sitemap/static/img/routemap.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_root{
+    background: url(/plugins/Sitemap/static/img/menu.png) left center no-repeat !important;
+}
+
+.sitemap_icon_root_add{
+    background: url(/plugins/Sitemap/static/img/menu_add.png) left center no-repeat !important;
+}
+
+.sitemap_icon_item_add{
+    background: url(/plugins/Sitemap/static/img/item_add.png) left center no-repeat !important;
+}
+
+.sitemap_icon_routemap_add{
+    background: url(/plugins/Sitemap/static/img/routemap_add.png) left center no-repeat !important;
+    width:22px !important;
+}
+
+.sitemap_icon_objectfield{
+    background: url(/plugins/Sitemap/static/img/objectfield.png) left center no-repeat !important;
+}
+
+.navigation {
+    list-style-position: inside;
+    list-style-type: inherit;
+    padding-left: 0px
+}
+
+.navigation li,.navigation ul{
+    list-style-position: inside;
+    list-style-type: inherit;
+    padding-left: 10px;
+}

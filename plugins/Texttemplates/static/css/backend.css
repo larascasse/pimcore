@@ -1,0 +1,20 @@
+.pimcore_icon_texttemplate_preview {
+    background: url("/pimcore/static/img/icon/report_magnify.png") no-repeat scroll left center transparent !important
+}
+
+.pimcore_icon_texttemplate_edit {
+    background: url("/pimcore/static/img/icon/report_edit.png") no-repeat scroll left center transparent !important;
+}
+
+.pimcore_icon_texttemplate {
+    background: url("/pimcore/static/img/icon/report.png") no-repeat scroll left center transparent !important;
+}
+
+.pimcore_icon_templateWysiwyg {
+    background: url("/pimcore/static/img/icon/report.png") no-repeat scroll left center transparent !important;
+}
+
+.pimcore_icon_texttemplate_add {
+    background: url("/pimcore/static/img/icon/report_add.png") no-repeat scroll left center transparent !important;
+}
+

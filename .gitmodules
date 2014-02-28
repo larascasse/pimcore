@@ -4,3 +4,6 @@
 [submodule "submodules/google_api"]
 	path = submodules/google_api
 	url = https://github.com/google/google-api-php-client.git
+[submodule "submodules/PHPoAuthLib"]
+	path = submodules/PHPoAuthLib
+	url = https://github.com/Lusitanian/PHPoAuthLib.git

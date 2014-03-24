@@ -62,7 +62,7 @@ public $image_3;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
-public $relatedProducts;
+public $re_skus;
 public $relatedAccessories;
 public $associatedArticles;
 public $meta_title;
@@ -1253,22 +1253,22 @@ public function setFiche_technique_orginale ($fiche_technique_orginale) {
 }
 
 /**
-* @return array
+* @return Object_Data_ObjectMetadata[]
 */
-public function getRelatedProducts () {
-	$preValue = $this->preGetValue("relatedProducts"); 
+public function getRe_skus () {
+	$preValue = $this->preGetValue("re_skus"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->getClass()->getFieldDefinition("relatedProducts")->preGetData($this);
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("relatedProducts")->isEmpty($data)) { return $this->getValueFromParent("relatedProducts");}
+	$data = $this->getClass()->getFieldDefinition("re_skus")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("re_skus")->isEmpty($data)) { return $this->getValueFromParent("re_skus");}
 	 return $data;
 }
 
 /**
-* @param array $relatedProducts
+* @param Object_Data_ObjectMetadata[] $re_skus
 * @return void
 */
-public function setRelatedProducts ($relatedProducts) {
-	$this->relatedProducts = $this->getClass()->getFieldDefinition("relatedProducts")->preSetData($this, $relatedProducts);
+public function setRe_skus ($re_skus) {
+	$this->re_skus = $this->getClass()->getFieldDefinition("re_skus")->preSetData($this, $re_skus);
 	return $this;
 }
 
@@ -1629,9 +1629,9 @@ protected static $_relationFields = array (
   array (
     'type' => 'href',
   ),
-  'relatedProducts' => 
+  're_skus' => 
   array (
-    'type' => 'objects',
+    'type' => 'objectsMetadata',
   ),
   'relatedAccessories' => 
   array (

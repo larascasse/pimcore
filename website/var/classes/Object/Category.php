@@ -9,7 +9,8 @@ public $mage_category_id;
 public $products;
 public $person;
 public $Date;
-public $localizedfields;
+public $test;
+public $test2;
 
 
 /**
@@ -29,7 +30,7 @@ public function getName () {
 	$preValue = $this->preGetValue("name"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->name;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("name");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name")->isEmpty($data)) { return $this->getValueFromParent("name");}
 	 return $data;
 }
 
@@ -49,7 +50,7 @@ public function getMage_category_id () {
 	$preValue = $this->preGetValue("mage_category_id"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->mage_category_id;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("mage_category_id");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_category_id")->isEmpty($data)) { return $this->getValueFromParent("mage_category_id");}
 	 return $data;
 }
 
@@ -69,7 +70,7 @@ public function getProducts () {
 	$preValue = $this->preGetValue("products"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("products");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("products")->isEmpty($data)) { return $this->getValueFromParent("products");}
 	 return $data;
 }
 
@@ -89,7 +90,7 @@ public function getPerson () {
 	$preValue = $this->preGetValue("person"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("person")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("person");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("person")->isEmpty($data)) { return $this->getValueFromParent("person");}
 	 return $data;
 }
 
@@ -109,7 +110,7 @@ public function getDate () {
 	$preValue = $this->preGetValue("Date"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->Date;
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("Date");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("Date")->isEmpty($data)) { return $this->getValueFromParent("Date");}
 	 return $data;
 }
 
@@ -123,41 +124,42 @@ public function setDate ($Date) {
 }
 
 /**
-* @return array
+* @return Object_Data_ObjectMetadata[]
 */
-public function getLocalizedfields () {
-	$preValue = $this->preGetValue("localizedfields"); 
+public function getTest () {
+	$preValue = $this->preGetValue("test"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->getClass()->getFieldDefinition("localizedfields")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("localizedfields");}
+	$data = $this->getClass()->getFieldDefinition("test")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("test")->isEmpty($data)) { return $this->getValueFromParent("test");}
 	 return $data;
 }
 
 /**
-* @return string
-*/
-public function getTes ($language = null) {
-	$data = $this->getLocalizedfields()->getLocalizedValue("tes", $language);
-	$preValue = $this->preGetValue("tes"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	 return $data;
-}
-
-/**
-* @param array $localizedfields
+* @param Object_Data_ObjectMetadata[] $test
 * @return void
 */
-public function setLocalizedfields ($localizedfields) {
-	$this->localizedfields = $localizedfields;
+public function setTest ($test) {
+	$this->test = $this->getClass()->getFieldDefinition("test")->preSetData($this, $test);
 	return $this;
 }
 
 /**
-* @param string $tes
+* @return array
+*/
+public function getTest2 () {
+	$preValue = $this->preGetValue("test2"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->getClass()->getFieldDefinition("test2")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("test2")->isEmpty($data)) { return $this->getValueFromParent("test2");}
+	 return $data;
+}
+
+/**
+* @param array $test2
 * @return void
 */
-public function setTes ($tes, $language = null) {
-	$this->getLocalizedfields()->setLocalizedValue("tes", $tes, $language);
+public function setTest2 ($test2) {
+	$this->test2 = $this->getClass()->getFieldDefinition("test2")->preSetData($this, $test2);
 	return $this;
 }
 
@@ -169,6 +171,14 @@ protected static $_relationFields = array (
   'person' => 
   array (
     'type' => 'href',
+  ),
+  'test' => 
+  array (
+    'type' => 'objectsMetadata',
+  ),
+  'test2' => 
+  array (
+    'type' => 'multihref',
   ),
 );
 

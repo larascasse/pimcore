@@ -1,0 +1,7 @@
+ssh -i ~/.ssh/bitnami-hosting.pem bitnami@shopdev.laparqueterienouvelle.fr
+
+
+#Install
+git init
+git add .
+git commit -m"initial import of pre-existing web files"

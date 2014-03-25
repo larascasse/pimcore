@@ -62,8 +62,8 @@ public $image_3;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
-public $relatedProducts;
-public $relatedAccessories;
+public $re_skus;
+public $cs_skus;
 public $associatedArticles;
 public $meta_title;
 public $meta_description;
@@ -1255,40 +1255,40 @@ public function setFiche_technique_orginale ($fiche_technique_orginale) {
 /**
 * @return array
 */
-public function getRelatedProducts () {
-	$preValue = $this->preGetValue("relatedProducts"); 
+public function getRe_skus () {
+	$preValue = $this->preGetValue("re_skus"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->getClass()->getFieldDefinition("relatedProducts")->preGetData($this);
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("relatedProducts")->isEmpty($data)) { return $this->getValueFromParent("relatedProducts");}
+	$data = $this->getClass()->getFieldDefinition("re_skus")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("re_skus")->isEmpty($data)) { return $this->getValueFromParent("re_skus");}
 	 return $data;
 }
 
 /**
-* @param array $relatedProducts
+* @param array $re_skus
 * @return void
 */
-public function setRelatedProducts ($relatedProducts) {
-	$this->relatedProducts = $this->getClass()->getFieldDefinition("relatedProducts")->preSetData($this, $relatedProducts);
+public function setRe_skus ($re_skus) {
+	$this->re_skus = $this->getClass()->getFieldDefinition("re_skus")->preSetData($this, $re_skus);
 	return $this;
 }
 
 /**
 * @return array
 */
-public function getRelatedAccessories () {
-	$preValue = $this->preGetValue("relatedAccessories"); 
+public function getCs_skus () {
+	$preValue = $this->preGetValue("cs_skus"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->getClass()->getFieldDefinition("relatedAccessories")->preGetData($this);
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("relatedAccessories")->isEmpty($data)) { return $this->getValueFromParent("relatedAccessories");}
+	$data = $this->getClass()->getFieldDefinition("cs_skus")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("cs_skus")->isEmpty($data)) { return $this->getValueFromParent("cs_skus");}
 	 return $data;
 }
 
 /**
-* @param array $relatedAccessories
+* @param array $cs_skus
 * @return void
 */
-public function setRelatedAccessories ($relatedAccessories) {
-	$this->relatedAccessories = $this->getClass()->getFieldDefinition("relatedAccessories")->preSetData($this, $relatedAccessories);
+public function setCs_skus ($cs_skus) {
+	$this->cs_skus = $this->getClass()->getFieldDefinition("cs_skus")->preSetData($this, $cs_skus);
 	return $this;
 }
 
@@ -1629,11 +1629,11 @@ protected static $_relationFields = array (
   array (
     'type' => 'href',
   ),
-  'relatedProducts' => 
+  're_skus' => 
   array (
     'type' => 'objects',
   ),
-  'relatedAccessories' => 
+  'cs_skus' => 
   array (
     'type' => 'objects',
   ),

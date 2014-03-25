@@ -173,6 +173,8 @@
 
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 <script src="/website/static/bootstrap/dist/js/bootstrap.js"></script>
+<script src="http://www.laparqueterienouvelle.fr/wp-content/themes/parqueterie_nouvelle/js/gmaps.js"></script>
+
 
 
 

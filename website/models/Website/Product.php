@@ -238,7 +238,7 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
@@ -248,8 +248,8 @@ class Website_Product extends Object_Product {
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
 
-		if(count($this->getDimensionsString())>0)
-		$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
+		if(strlen($this->getDimensionsString())>0)
+			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
 
 		
 
@@ -383,11 +383,11 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$includeFields = array("finition","fixation","choix","qualite");
+		$includeFields = array("finition","fixation");
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
 
-		if(count($this->getDimensionsString())>0)
+		if(strlen($this->getDimensionsString())>0)
 			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
 
 		foreach($attributes as $key=> $value) {
@@ -419,7 +419,7 @@ class Website_Product extends Object_Product {
 
 					if(is_array($attributeValue)) {
 						$attributeValue = implode($attributeValue);
-						$caracteristiques[] = array("label"=>$attribute." ".$attributeLabel,"content"=>$attributeValue);
+						$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 
 					}
 					//Documents
@@ -442,7 +442,7 @@ class Website_Product extends Object_Product {
 
 		$html ="<p>";
 		foreach ($caracteristiques as $key => $value) {
-			$html.="".$value["label"]." ".$value["content"]."<br />";
+			$html.="".$value["label"].": ".$value["content"]."<br />";
 		}
 		$html .="</p>";
 
@@ -454,7 +454,7 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_1())
-    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_1()->getFullPath();
+    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_1()->getThumbnail("magento_small")->getPath();
 
 	}
 
@@ -473,7 +473,7 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_3())
-    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getFullPath();
+    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getThumbnail("magento_small")->getPath();
 
 	}
 
@@ -525,8 +525,30 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_description() {
-		return "<h2>".$this->getShort_description_title()."</h2><p>".$this->getDescription()."</p>";
+		return "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
 	}
+
+
+	public function getNonOwnerObjects($fieldname){
+	   $def = $this->getClass()->getFieldDefinition($fieldname);
+	   $refKey = $def->getOwnerFieldName();
+	   $refName = $def->getOwnerClassName();
+	   $refClass = Object_Class::getByName($refName);
+	   $refId = $refClass->getId();
+	   $nonOwnerRelations = $this->getRelationData($refKey, false, $refId);
+	   $objects = array();
+	   foreach($nonOwnerRelations as $relation){
+	     $objects[] = Object_Abstract::getById($relation['id'])->getMage_category_id();
+
+	   }
+	   return implode(",",$objects);
+	}
+
+
+	public function getMage_categoryIds() {
+		return $this->getNonOwnerObjects("categories");
+	}
+
 
 
 	public function getMage_realisations() {

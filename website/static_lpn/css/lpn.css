@@ -234,3 +234,48 @@ li {
     padding-bottom: 0px;
     border-bottom: 0px solid #CCC
 }
+
+
+/**** MAP INFOBOX *****/
+
+.infoBox {
+  background-color:#FFFFFF;
+}
+.i-box{
+  width: 200px; 
+}
+.i-box img {
+  width: 230px;
+  margin-top: -22px;  
+}
+.infos_bulle {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 11px;
+    padding: 10px 15px 15px;
+    width: 100%;  
+}
+
+.infos_bulle h3 {
+  color:#000;
+  font-size:16px;
+  font-weight:bold;
+  font-family:Arial;
+  padding-left:0;
+  padding-bottom:3px;
+  margin-top:0;
+  margin-bottom:0px;
+  padding-bottom:0px;
+  width: 100%;
+  text-align:left;
+}
+
+.infos_bulle p {
+    font-family: arial;
+    font-size: 11px;
+    line-height: 18px;
+    margin-top: 5px;
+    padding-bottom: 5px;
+  width: 100%;
+}
+

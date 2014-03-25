@@ -12,7 +12,7 @@
   </items>
   <name>magento_small</name>
   <description/>
-  <format>JPEG</format>
+  <format>PNG</format>
   <quality>100</quality>
   <highResolution>0</highResolution>
 </zend-config>

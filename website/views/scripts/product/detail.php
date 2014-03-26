@@ -105,7 +105,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");;;
 
 			}
 			else {
-					echo   "<b>Existe en : </b>".$subProduct->getDimensionsString()." - ".$subProduct->getEan()." - ".$subProduct->getPrice_4()."€<br />";
+					echo   "<b>- Existe en : </b>".$subProduct->getDimensionsString()." - ".$subProduct->getEan()." - ".$subProduct->getPrice_4()."€<br />";
 
 			}
 		}

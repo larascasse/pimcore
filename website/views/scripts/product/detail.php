@@ -98,7 +98,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");;;
 		foreach ($childrens as $subProduct) {
 			if($subProduct->getEan()=="") {
 				$subProductChildrens = $subProduct->getChilds();
-				echo "<h3>".$subProduct->getMage_short_name();."</h3>";
+				echo "<h3>".$subProduct->getMage_short_name()."</h3>";
 				foreach ($subProductChildrens as $subsubProduct) {
 
 					echo   "<b>Existe en : </b>".$subsubProduct->getDimensionsString()." - ".$subsubProduct->getEan()." - ".$subsubProduct->getPrice_4()."€<br />";

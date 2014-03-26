@@ -33,6 +33,7 @@ public $volume;
 public $hauteur;
 public $conditionnement;
 public $finition;
+public $profil;
 public $characteristics_others;
 public $nbrpp;
 public $unite;
@@ -43,7 +44,6 @@ public $qualite;
 public $essence;
 public $choix;
 public $fixation;
-public $profil;
 public $classe;
 public $epaisseurUsure;
 public $extras;
@@ -673,6 +673,26 @@ public function setFinition ($finition) {
 }
 
 /**
+* @return array
+*/
+public function getProfil () {
+	$preValue = $this->preGetValue("profil"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->profil;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("profil")->isEmpty($data)) { return $this->getValueFromParent("profil");}
+	 return $data;
+}
+
+/**
+* @param array $profil
+* @return void
+*/
+public function setProfil ($profil) {
+	$this->profil = $profil;
+	return $this;
+}
+
+/**
 * @return string
 */
 public function getCharacteristics_others () {
@@ -869,26 +889,6 @@ public function getFixation () {
 */
 public function setFixation ($fixation) {
 	$this->fixation = $fixation;
-	return $this;
-}
-
-/**
-* @return array
-*/
-public function getProfil () {
-	$preValue = $this->preGetValue("profil"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->profil;
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("profil")->isEmpty($data)) { return $this->getValueFromParent("profil");}
-	 return $data;
-}
-
-/**
-* @param array $profil
-* @return void
-*/
-public function setProfil ($profil) {
-	$this->profil = $profil;
 	return $this;
 }
 

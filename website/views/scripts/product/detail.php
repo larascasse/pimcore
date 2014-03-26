@@ -96,7 +96,18 @@ $relatedProducts = $this->product->getRelated("relatedProducts");;;
    		 if(count($childrens)>0) {
 		echo   "<p>";
 		foreach ($childrens as $subProduct) {
-			echo   "<b>Existe en : </b>".$subProduct->getDimensionsString()." - ".$subProduct->getEan()." - ".$subProduct->getPrice_4()."€<br />";
+			if($subProduct->getEan()=="") {
+				$subProductChildrens = $subProduct->getChilds();
+				foreach ($subProductChildrens as $subsubProduct) {
+					echo   "<b>Existe en : </b>".$subsubProduct->getDimensionsString()." - ".$subsubProduct->getEan()." - ".$subsubProduct->getPrice_4()."€<br />";
+
+				}
+
+			}
+			else {
+					echo   "<b>Existe en : </b>".$subProduct->getDimensionsString()." - ".$subProduct->getEan()." - ".$subProduct->getPrice_4()."€<br />";
+
+			}
 		}
 		echo   "</p>";
 	}

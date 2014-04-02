@@ -42,7 +42,7 @@
 
     <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
-
+  
     <?= $this->headLink(); ?>
 
     <?php if($this->editmode) { ?>
@@ -179,6 +179,8 @@
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
 
+
+
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 <script src="/website/static/bootstrap/dist/js/bootstrap.js"></script>
 
@@ -186,6 +188,11 @@
 
 <script src="/website/static/lib/projekktor/projekktor-1.2.25r232.min.js"></script>
 <script src="/website/static/lib/magnific/magnific.js"></script>
+
+  <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
+        <script src="/website/static_lpn/js/dymo.js"></script>
+
+
 <script>
 
     // main menu

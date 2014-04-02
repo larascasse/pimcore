@@ -234,7 +234,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getCharacteristics() {
+	public function getCharacteristics($isHTML=true) {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
@@ -322,12 +322,25 @@ class Website_Product extends Object_Product {
 			}
 								
 		}
-		$html ="<ul>\n";
-		foreach ($caracteristiques as $key => $value) {
-			$html.="<li><strong>".$value["label"]."</strong>: ".$value["content"]."</li>\n";
+
+		if($isHTML) {
+			$html ="<ul>\n";
+			foreach ($caracteristiques as $key => $value) {
+				$html.="<li><strong>".$value["label"]."</strong>: ".$value["content"]."</li>\n";
+			}
+			$html .="</ul>\n";
+			return $html;
+
 		}
-		$html .="</ul>\n";
-		return $html;
+		else {
+			$html ="";
+			foreach ($caracteristiques as $key => $value) {
+				$html.="- ".$value["label"]." : ".$value["content"]."\n";
+			}
+			$html .="";
+			return $html;
+		}
+		
 	}
 
 	public function getMage_guideline() {
@@ -490,6 +503,30 @@ class Website_Product extends Object_Product {
 
 		if(round($this->getLongueur())>0) 
 			$varationString[]= "L: ".round($this->getLongueur())."mm";
+
+		if($this->getVolume())
+			$varationString[]=$this->getVolume()."L";
+
+		if($this->getHauteur())
+			$varationString[]=$this->getHauteur();
+
+		if($this->getConditionnement())
+			$varationString[]=$this->getConditionnement();
+		
+		return count($varationString)>0?implode($varationString," / "):"";
+	}
+
+	public function getDimensionsStringEtiquette() {
+		$varationString =array();
+		if(round($this->getEpaisseur())>0)
+			$varationString[]="".round($this->getEpaisseur())."";
+		
+		if(round($this->getLargeur())>0)
+			$varationString[]="".round($this->getLargeur())."";
+
+
+		if(round($this->getLongueur())>0) 
+			$varationString[]= "".round($this->getLongueur())."";
 
 		if($this->getVolume())
 			$varationString[]=$this->getVolume()."L";

@@ -42,7 +42,6 @@
 
     <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
-
     <?php echo $this->headLink(); ?>
 
     <?php if($this->editmode) { ?>
@@ -180,6 +179,9 @@
 
 <script src="/website/static/lib/projekktor/projekktor-1.2.25r232.min.js"></script>
 <script src="/website/static/lib/magnific/magnific.js"></script>
+
+        <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
+        <script src="/website/static_lpn/js/dymo.js"></script>
 <script>
 
     // main menu
@@ -230,7 +232,7 @@
     <?php } ?>
 </script>
 <script src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
-<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.js"></script>
+<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
 
 

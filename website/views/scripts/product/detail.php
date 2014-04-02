@@ -301,3 +301,63 @@ if($count>0) {
 
 
 </section>
+<script>
+
+<?php
+
+
+
+$strChars = $this->product->getCharacteristics(false);
+$strChars=wordwrap($strChars,70,'\n');
+$strChars=str_replace("\n", "\\n", $strChars);
+
+$strChildren="";
+ if(count($childrens)>0) {
+		$strChildren.="";
+		foreach ($childrens as $subProduct) {
+			if($subProduct->getEan()=="") {
+				$subProductChildrens = $subProduct->getChilds();
+				$strChildren.="\n".$subProduct->getMage_short_name()."\n";
+				foreach ($subProductChildrens as $subsubProduct) {
+
+					$strChildren.=$subsubProduct->getEan()." : ".$subsubProduct->getDimensionsStringEtiquette()."\n";
+
+				}
+
+			}
+			else {
+					$strChildren.=$subProduct->getEan()." : ".$subProduct->getDimensionsStringEtiquette()."\n";
+
+			}
+		}
+	}
+	$strChildren = trim($strChildren);
+
+//$strChildren=wordwrap($strChildren,80,'\n');
+//$strChildren=str_replace("\n", "\\n", $strChildren);
+$width=65;
+
+$str=  wordwrap($this->product->getShort_description(),$width);
+$str.= "\n".wordwrap(strip_tags($this->product->getDescription()),$width);
+
+//$str.= "\n".$this->product->getMage_sub_description();
+
+//$str.="\n\n".$strChildren;
+
+$str=wordwrap($str,800,'\n');
+$str=str_replace("\n", "\\n", $str);
+
+
+$strChildren=wordwrap($strChildren,$width);
+$strChildren=str_replace("\n", "\\n", $strChildren);
+
+
+
+?>
+
+var productName="<?php echo wordwrap($this->product->getName(),60,'\\n'); ?>";
+var productDescription="<?php echo $str; ?>";
+var productChars="<?php echo $strChildren; ?>";
+
+</script>
+<img src="" id="labelImage" />

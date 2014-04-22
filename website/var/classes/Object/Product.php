@@ -21,6 +21,7 @@ public $description;
 public $lesplus;
 public $remarque;
 public $echantillon;
+public $no_stock_delay;
 public $price_1;
 public $price_2;
 public $price_3;
@@ -429,6 +430,26 @@ public function getEchantillon () {
 */
 public function setEchantillon ($echantillon) {
 	$this->echantillon = $echantillon;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getNo_stock_delay () {
+	$preValue = $this->preGetValue("no_stock_delay"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->no_stock_delay;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("no_stock_delay")->isEmpty($data)) { return $this->getValueFromParent("no_stock_delay");}
+	 return $data;
+}
+
+/**
+* @param string $no_stock_delay
+* @return void
+*/
+public function setNo_stock_delay ($no_stock_delay) {
+	$this->no_stock_delay = $no_stock_delay;
 	return $this;
 }
 

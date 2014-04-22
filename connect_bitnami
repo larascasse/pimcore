@@ -2,6 +2,26 @@ ssh -i ~/.ssh/bitnami-hosting.pem bitnami@shopdev.laparqueterienouvelle.fr
 
 
 #Install
-git init
-git add .
-git commit -m"initial import of pre-existing web files"
+sudo git init
+sudo git add .
+sudo git commit -m"initial import of pre-existing web files"
+
+sudo git config --global user.name "Forent B"
+sudo git config --global user.email florent@lesmecaniques.net
+sudo git commit --amend --reset-author
+
+sudo git config core.filemode false
+sudo git config --global core.filemode false
+sudo git config --global alias.br branch
+sudo git config --global alias.ci commit
+sudo git config --global alias.co checkout
+sudo git config --global alias.st status
+sudo git config --global color.ui auto
+
+
+sudo git remote add origin https://larascasse@github.com/larascasse/pimcore.git
+sudo git fetch --all
+sudo git reset --hard origin/master
+
+sudo git submodule init
+sudo git submodule update

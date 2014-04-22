@@ -21,12 +21,21 @@
  	}
 
 
+    function formatPrice($price) {
+        return number_format($price,2,".");
+    }
+
     function convertScienergieName($name) {
 
         $name = strtolower($name);
 
         $name=str_ireplace("CHENE ", "Chêne ", $name);
         $name=str_ireplace("FRENE ", "Frêne ", $name);
+
+        $name=str_ireplace("TETE ", "Tête ", $name);
+
+        $name=str_ireplace("REGLABLE ", "Réglable ", $name);
+
 
 
         $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
@@ -143,9 +152,12 @@
         // determine type
         $dialect = Pimcore_Tool_Admin::determineCsvDialect($file);
 
+        print_r($dialect);
+
         $count = 0;
         if (($handle = fopen($file, "r")) !== false) {
-            while (($rowData = fgetcsv($handle, 100000,";",'"')) !== false) {
+
+            while (($rowData = fgetcsv($handle, 100000,";")) !== false) {
                 if ($count == 0) {
                     $firstRowData = $rowData;
                 }
@@ -213,7 +225,7 @@
         //How many rows
         $csv = new SplFileObject($file);
         $csv->setFlags(SplFileObject::READ_CSV);
-        $csv->setCsvControl(";",'"');
+        $csv->setCsvControl($dialect->delimiter, $dialect->quotechar, $dialect->escapechar);
         $rows = 0;
         $nbFields = 0;
         foreach ($csv as $fields) {
@@ -272,11 +284,11 @@
 
         $count = 0;
         if (($handle = fopen($file, "r")) !== false) {
-            $data = fgetcsv($handle, 100000, ",");
+            $data = fgetcsv($handle, 100000, ";");
         }
         if ($skipFirstRow && $job == 1) {
             //read the next row, we need to skip the head row
-            $data = fgetcsv($handle, 100000, ",");
+            $data = fgetcsv($handle, 100000, ";");
         }
 
         $tmpFile = $file . "_tmp";
@@ -435,13 +447,17 @@
                 if (array_key_exists($key, $mapping) and  $value != null) {
                     if($key=="name") {
                         $splitedName = $this->splitNameType($value);
-                        $object->setValue("subtype", $splitedName[1]);
+                        
                         $object->setValue("name_scienergie",$value);
 
                         $object->setValue("name_scienergie_converti",$this->convertScienergieName($value));
 
                         if($isUpdating) {
                            // continue;
+                        }
+                        if(!$isUpdating) {
+                            if(count($splitedName)>0)
+                                 $object->setValue("subtype", $splitedName[1]);
                         }
                         //a l'insert
                         $value = $this->convertScienergieName($splitedName[0]);
@@ -669,6 +685,13 @@
                         continue;
                     }
 
+                    if($key=="longueur" || $key=="longueur" || $key=="longueur") {
+                        if($value >0)
+                            $value = round($value);
+                        else
+                            $value="";
+                    }
+
                     /*else if($key=="code") {
                         $object->setCode(null);
                         $object->save();
@@ -720,7 +743,6 @@
 
         $userId = 6;
 
-        $mappingRaw = [[0,"Article","code"],[1,"Code_EAN_Article","ean"],[2,"Article Designation","name"],[3,"Epaisseur","epaisseur"],[4,"Largeur","largeur"],[5,"Longueur","longueur"],[6,"Base3",""],[7,"Choix","choix"],[8,"Article Famille","famille"]];
         
         $class = Object_Class::getById($classId );
         $fields = $class->getFieldDefinitions();
@@ -733,7 +755,7 @@
 
         $parent = Object_Abstract::getById($parentId);
 
-        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . $data[$mapping["code"]]);
+        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($product["famille"])."/".$product["code"]);
         //print_r($mapping);
        
 
@@ -746,7 +768,7 @@
 
 
         $existingEan=null;
-        $existingProductList = Object_Product::getByEan($data[$product["ean"]]);
+        $existingProductList = Object_Product::getByEan($product["ean"]);
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
@@ -809,44 +831,96 @@
             $object->setUserOwner($userId);
             $object->setUserModification($userId);
 
-            if ($data[$mapping["published"]] === "1") {
+            if ($product["published"] === "1") {
                 $object->setPublished(true);
             } else {
-                $object->setPublished(false);
+                //$object->setPublished(false);
             }
 
-            $object->setPublished(true);
 
             foreach ($class->getFieldDefinitions() as $key => $field) {
 
 
-                $value = $data[$mapping[$key]];
-                if (array_key_exists($key, $mapping) and  $value != null) {
-                    if($isUpdating && $key=="name")
-                        continue;
+                
+                if (isset($product[$key])) {
+                    $value = $product[$key];
+                    if($key=="name") {
+                        $splitedName = $this->splitNameType($value);
+                        
+                        $object->setValue("name_scienergie",$value);
+
+                        $object->setValue("name_scienergie_converti",$this->convertScienergieName($value));
+
+                        if(!$isUpdating) {
+                            if(count($splitedName)>0)
+                                 $object->setValue("subtype", $splitedName[1]);
+                        }
+                        
+                        if($isUpdating) {
+                           continue;
+                        }
+                        
+                        //a l'insert
+                        $value = $this->convertScienergieName($splitedName[0]);
+
+
+                    }
+
                     if($isUpdating && $key=="code")
                         continue;
                     if($isUpdating && $key=="famille")
                         continue;
-                    // data mapping
-                    $value = $field->getFromCsvImport($value);
+                    
+                    if($key=="longueur" || $key=="longueur" || $key=="longueur") {
+                        if($value >0)
+                            $value = round($value);
+                        else
+                            $value="";
+                    }
+                     
+
+                    /*else if($key=="code") {
+                        $object->setCode(null);
+                        $object->save();
+                        continue;
+                    }
+                    else if($isUpdating && $key=="famille") {
+                        $object->setFamille(null);
+                        $object->save();
+                        continue;
+                    }*/
+                    if($key=="name_scienergie_court") {
+                        $splitedName = $this->splitNameType($value);
+                        $value = $this->convertScienergieName($value);
+                    }
+                    else {
+                       $value = $field->getFromCsvImport($value); 
+                    }
+                    
 
                     if ($value !== null) {
                         $object->setValue($key, $value);
                     }
+
+
                 }
             }
-
+            if(!$isUpdating) {
+                $object->setPublished(false);
+            
+            }
             try {
                 $object->save();
-                if ($isUpdating)
+                if ($isUpdating) {
                      echo "\nrow ".$job." updated ".$objectKey." / ".$object->getFullPath()."\n";
-                else 
+                }
+                else {
                     echo "\nrow ".$job." inserted ".$objectKey." / ".$object->getFullPath()."\n";
-                $this->importEanProcessAction(++$job);
+                    print_r($product);
+                }
 
             } catch (Exception $e) {
-                echo $e->getMessage();
+                echo "Error ".$e->getMessage();
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
         }
@@ -880,21 +954,22 @@
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
-             echo "EAN existe ".$existingEan->getFullPath()."\n";
+             echo "EAN existe ".$existingEan->getFullPath()."-".$product["name"]."\n";
              
         }
         else {
-            echo "n'existe pas ".$product["ean"]."\n";
+            echo "n'existe pas ".$product["ean"]."-".$product["name"]."\n";
             
         }
 
         if ($existingEan) {
            $existingEan->setModificationDate(time());
 
-           $existingEan->setPrice_1($product["price_1"]);
-           $existingEan->setPrice_2($product["price_2"]);
-           $existingEan->setPrice_3($product["price_3"]);
-           $existingEan->setPrice_4($product["price_4"]);
+           $existingEan->setPrice_1($this->formatPrice($product["price_1"]));
+           $existingEan->setPrice_2($this->formatPrice($product["price_2"]));
+           $existingEan->setPrice_3($this->formatPrice($product["price_3"]));
+           $existingEan->setPrice_4($this->formatPrice($product["price_4"]));
+           $existingEan->setPrice($this->formatPrice($product["price"]));
 
             try {
                 $existingEan->save();

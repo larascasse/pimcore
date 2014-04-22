@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
 		<import>
-            <importFileArticles>export_articles_terrasses_20120221.csv</importFileArticles>
+            <importFileArticles>export_article_terrasses_aimporter.csv</importFileArticles>
             <importFileEan>export_ean_terrasses_20120221.csv</importFileEan>
             <folderId>2019</folderId>
 			<classId>5</classId>

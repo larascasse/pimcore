@@ -1,2 +1,2 @@
 
-<? $this->template("/snippets/lpn-slider-realisations-item.php"); ?>
+<?php $this->template("/snippets/lpn-slider-realisations-item.php"); ?>

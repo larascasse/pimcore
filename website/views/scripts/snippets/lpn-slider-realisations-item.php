@@ -9,9 +9,10 @@ if(!$count) {
     $count = 1;
 }
 for($i=0; $i<$count; $i++) {
-
+if($this->image("cImage_".$i)->getThumbnail("magento_realisation"))
 $urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("cImage_".$i)->getThumbnail("magento_realisation")->getPath();
-
+else
+  $urlImage ="";  
 ?>
 
 <li data-zoom="<?= $urlImage ?>">

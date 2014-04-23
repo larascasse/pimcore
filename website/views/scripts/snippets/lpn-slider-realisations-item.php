@@ -10,7 +10,7 @@ if(!$count) {
 }
 for($i=0; $i<$count; $i++) {
 
-$urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("cImage_".$i)->getThumbnail("magento_small")->getPath();
+$urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("cImage_".$i)->getThumbnail("magento_realisation")->getPath();
 
 ?>
 

@@ -618,11 +618,13 @@ class Website_Product extends Object_Product {
 
 				$str .= '<li>
 							<div class="nsg_container">
-								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_small").'"></div>
+								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation").'"></div>
 		                		<div class="nsg_abs">
 		                    		<div class="realisationpicto">Nos r&eacute;alisations</div>
-									<div class="realisationtitle">'.$this->getMage_short_name().'</div>
-									<div class="realisationcontent">'.$this->getName().'</div>
+									<!--<div class="realisationtitle">'.$this->getMage_short_name().'</div>
+									<div class="realisationcontent">'.$this->getName().'</div>-->
+									<div class="realisationtitle"></div>
+									<div class="realisationcontent"></div>
 								</div>
 		                    
 		                	</div>

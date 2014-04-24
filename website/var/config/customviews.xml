@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+  <views>
+    <view>
+      <name>Terrasses</name>
+      <condition/>
+      <icon/>
+      <id>1</id>
+      <rootfolder>/catalogue/_product_base__/10terrasse</rootfolder>
+      <showroot>1</showroot>
+      <classes>5</classes>
+    </view>
+  </views>
+</zend-config>

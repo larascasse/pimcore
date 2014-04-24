@@ -46,6 +46,14 @@ abstract class Element_Abstract extends Pimcore_Model_Abstract implements Elemen
         return array_key_exists($name, $properties);
     }
 
+    /**
+     * @param  $name
+     */
+    public function removeProperty ($name) {
+        $properties = $this->getProperties();
+        unset($properties[$name]);
+        $this->setProperties($properties);
+    }
 
     /**
      * get the cache tag for the element
@@ -139,6 +147,22 @@ abstract class Element_Abstract extends Pimcore_Model_Abstract implements Elemen
         }
 
         return $this->getResource()->isAllowed($type, $currentUser);
+    }
+
+    /**
+     *
+     */
+    public function unlockPropagate() {
+        $type = Element_Service::getType($this);
+        $ids = $this->getResource()->unlockPropagate();
+
+        // invalidate cache items
+        foreach ($ids as $id) {
+            $element = Element_Service::getElementById($type, $id);
+            if($element) {
+                $element->clearDependentCache();
+            }
+        }
     }
 
     /**

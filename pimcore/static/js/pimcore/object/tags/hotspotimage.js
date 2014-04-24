@@ -222,7 +222,8 @@ pimcore.object.tags.hotspotimage = Class.create(pimcore.object.tags.image, {
 
     openHotspotWindow: function() {
         if(this.data) {
-            var editor = new pimcore.element.tag.imagehotspotmarkereditor(this.data, {hotspots: this.hotspots, marker: this.marker}, function (data) {
+            var editor = new pimcore.element.tag.imagehotspotmarkereditor(this.data,
+                                    {hotspots: this.hotspots, marker: this.marker}, function (data) {
                 this.hotspots = data["hotspots"];
                 this.marker = data["marker"];
 
@@ -266,6 +267,7 @@ pimcore.object.tags.hotspotimage = Class.create(pimcore.object.tags.image, {
 
     showPreview: function() {
         if (this.fileinfo) {
+            var i;
             var originalWidth = this.originalWidth;
             var originalHeight = this.originalHeight;
 
@@ -273,7 +275,9 @@ pimcore.object.tags.hotspotimage = Class.create(pimcore.object.tags.image, {
             var addY = (originalHeight - this.fileinfo.height) / 2;
 
             for(i = 0; i < this.previewItems.length; i++) {
-                document.getElementById(this.previewItems[i]).remove();
+                if(Ext.get(this.previewItems[i])) {
+                    Ext.get(this.previewItems[i]).remove();
+                }
             }
             this.previewItems = [];
 
@@ -334,7 +338,7 @@ pimcore.object.tags.hotspotimage = Class.create(pimcore.object.tags.image, {
 
         var functionCallback = function () {
             this.openHotspotWindow();
-        }
+        };
 
         element.addListener('click', functionCallback.bind(this), false);
     }

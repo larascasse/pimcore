@@ -21,14 +21,15 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
     initialize: function (data, fieldConfig) {
         this.data = [];
         this.fieldConfig = fieldConfig;
+        this.visibleFieldsLabels = data["visibleFieldsLabels"];
         var classStore = pimcore.globalmanager.get("object_types_store");
         var className = classStore.getById(fieldConfig.allowedClassId);
 
         var classNameText = (typeof(className) != 'undefined') ? className.data.text : '';
         this.fieldConfig.classes = [{classes: classNameText, id: fieldConfig.allowedClassId}];
 
-        if (data) {
-            this.data = data;
+        if (data["data"]) {
+            this.data = data["data"];
         }
 
         var fields = [];
@@ -77,15 +78,13 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
         var i;
 
         var visibleFields = this.fieldConfig.visibleFields.split(",");
-        var visibleFieldsTitles = this.fieldConfig.visibleFieldTitles.split(",");
 
         var columns = [];
         columns.push({header: 'ID', dataIndex: 'id', width: 50});
 
         for (i = 0; i < visibleFields.length; i++) {
             if(!empty(visibleFields[i])) {
-                columns.push({header: ts(visibleFieldsTitles[i]), dataIndex: visibleFields[i], width: 100, editor: null,
-                    renderer: renderer});
+                columns.push({header: this.visibleFieldsLabels[visibleFields[i]], dataIndex: visibleFields[i], width: 100, editor: null});
             }
         }
 
@@ -129,14 +128,6 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                     displayField: 'label'
                 });
             } else if(this.fieldConfig.columns[i].type == "bool") {
-                if(!readOnly) {
-                    columns.push(new Ext.grid.CheckColumn({
-                        header: ts(this.fieldConfig.columns[i].label),
-                        dataIndex: this.fieldConfig.columns[i].key,
-                        width: width
-                    }));
-                    continue;
-                }
                 renderer = function (value, metaData, record, rowIndex, colIndex, store) {
                     metaData.css += ' x-grid3-check-col-td';
                     if(!value || value == "0") {
@@ -145,6 +136,18 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                     return String.format('<div class="x-grid3-check-col{0}"'
                         + 'style="background-position:10px center;">&#160;</div>', value ? '-on' : '');
                 };
+                editor = new Ext.form.Checkbox({});
+
+
+                if(readOnly) {
+                    columns.push(new Ext.grid.CheckColumn({
+                        header: ts(this.fieldConfig.columns[i].label),
+                        dataIndex: this.fieldConfig.columns[i].key,
+                        width: width,
+                        renderer: renderer
+                    }));
+                    continue;
+                }
 
             }
 

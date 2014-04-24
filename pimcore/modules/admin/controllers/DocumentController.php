@@ -257,7 +257,9 @@ class Admin_DocumentController extends Pimcore_Controller_Action_Admin
             $deletedItems = array();
             foreach ($documents as $document) {
                 $deletedItems[] = $document->getFullPath();
-                $document->delete();
+                if ($document->isAllowed("delete")) {
+                    $document->delete();
+                }
             }
 
             $this->_helper->json(array("success" => true, "deleted" => $deletedItems));
@@ -1176,6 +1178,13 @@ class Admin_DocumentController extends Pimcore_Controller_Action_Admin
             foreach ($props as $name => $value) {
                 if (property_exists($new, $name)) {
                     $new->$name = $value;
+                }
+            }
+
+            if($type == "hardlink" || $type == "folder") {
+                // remove navigation settings
+                foreach (["name", "title", "target", "exclude", "class", "anchor", "parameters", "relation", "accesskey", "tabindex"] as $propertyName) {
+                    $new->removeProperty("navigation_" . $propertyName);
                 }
             }
 

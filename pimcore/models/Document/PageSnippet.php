@@ -88,8 +88,7 @@ abstract class Document_PageSnippet extends Document {
             }
         }
 
-        // update scheduled tasks
-        $this->saveScheduledTasks();
+        // scheduled tasks are saved in $this->saveVersion();
 
         // load data which must be requested
         $this->getProperties();
@@ -111,7 +110,7 @@ abstract class Document_PageSnippet extends Document {
 
         // hook should be also called if "save only new version" is selected
         if($callPluginHook) {
-            Pimcore_API_Plugin_Broker::getInstance()->preUpdateDocument($this);
+            Pimcore::getEventManager()->trigger("document.preUpdate", $this);
         }
 
         // set date
@@ -139,7 +138,7 @@ abstract class Document_PageSnippet extends Document {
 
         // hook should be also called if "save only new version" is selected
         if($callPluginHook) {
-            Pimcore_API_Plugin_Broker::getInstance()->postUpdateDocument($this);
+            Pimcore::getEventManager()->trigger("document.postUpdate", $this);
         }
 
         return $version;

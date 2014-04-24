@@ -50,6 +50,7 @@ if (!defined("PIMCORE_LOG_MAIL_TEMP"))  define("PIMCORE_LOG_MAIL_TEMP", PIMCORE_
 if (!defined("PIMCORE_TEMPORARY_DIRECTORY"))  define("PIMCORE_TEMPORARY_DIRECTORY", PIMCORE_WEBSITE_VAR . "/tmp");
 if (!defined("PIMCORE_CACHE_DIRECTORY"))  define("PIMCORE_CACHE_DIRECTORY", PIMCORE_WEBSITE_VAR . "/cache");
 if (!defined("PIMCORE_CLASS_DIRECTORY"))  define("PIMCORE_CLASS_DIRECTORY", PIMCORE_WEBSITE_VAR . "/classes");
+if (!defined("PIMCORE_CUSTOMLAYOUT_DIRECTORY"))  define("PIMCORE_CUSTOMLAYOUT_DIRECTORY", PIMCORE_CLASS_DIRECTORY . "/customlayouts");
 if (!defined("PIMCORE_BACKUP_DIRECTORY"))  define("PIMCORE_BACKUP_DIRECTORY", PIMCORE_WEBSITE_VAR . "/backup");
 if (!defined("PIMCORE_RECYCLEBIN_DIRECTORY"))  define("PIMCORE_RECYCLEBIN_DIRECTORY", PIMCORE_WEBSITE_VAR . "/recyclebin");
 if (!defined("PIMCORE_SYSTEM_TEMP_DIRECTORY"))  define("PIMCORE_SYSTEM_TEMP_DIRECTORY", PIMCORE_WEBSITE_VAR . "/system");
@@ -109,8 +110,9 @@ if(@is_file($composerStartup)) {
 }
 
 // on pimcore shutdown
-register_shutdown_function("Pimcore::shutdownHandler");
+register_shutdown_function(function () {
+    Pimcore::getEventManager()->trigger("system.shutdown");
+});
 
-// register shutdown function
-Pimcore_Event::register("pimcore.shutdown", array("Pimcore", "shutdown"), array(), 999);
-
+// attach global shutdown event
+Pimcore::getEventManager()->attach("system.shutdown", array("Pimcore", "shutdown"), 9999);

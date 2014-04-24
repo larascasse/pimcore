@@ -63,6 +63,16 @@ class Asset_Image_Thumbnail {
     protected $deferred = false;
 
     /**
+     * @var bool
+     */
+    protected static $pictureElementInUse = false;
+
+    /**
+     * @var bool
+     */
+    protected static $useSrcSet = false;
+
+    /**
      * Generate a thumbnail image.
      * @param Image_Asset Original image
      * @param mixed $selector Name, array or object with the thumbnail configuration.
@@ -95,7 +105,18 @@ class Asset_Image_Thumbnail {
             }
         }
     }
-    
+
+    /**
+     *
+     */
+    public function reset() {
+        $this->path = null;
+        $this->width = null;
+        $this->height = null;
+        $this->realHeight = null;
+        $this->realWidth = null;
+    }
+
     /**
      * Get the public path to the thumbnail image.
      * This method is here for backwards compatility.
@@ -178,7 +199,9 @@ class Asset_Image_Thumbnail {
     */
     public function getHTML($attributes = array()) {
 
+        $image = $this->getAsset();
         $attr = array();
+        $pictureAttribs = []; // this is used for the html5 <picture> element
 
         if(!$this->deferred) {
             if($this->getWidth()) {
@@ -199,29 +222,29 @@ class Asset_Image_Thumbnail {
         }
 
         if(empty($titleText)) {
-            if($this->getAsset()->getMetadata("title")) {
-                $titleText = $this->getAsset()->getMetadata("title");
+            if($image->getMetadata("title")) {
+                $titleText = $image->getMetadata("title");
             }
         }
 
         if(empty($altText)) {
-            if($this->getAsset()->getMetadata("alt")) {
-                $altText = $this->getAsset()->getMetadata("alt");
+            if($image->getMetadata("alt")) {
+                $altText = $image->getMetadata("alt");
             } else {
                 $altText = $titleText;
             }
         }
 
         // get copyright from asset
-        if($this->getAsset()->getMetadata("copyright")) {
+        if($image->getMetadata("copyright")) {
             if(!empty($altText)) {
                 $altText .= " | ";
             }
             if(!empty($titleText)) {
                 $titleText .= " | ";
             }
-            $altText .= ("© " . $this->getAsset()->getMetadata("copyright"));
-            $titleText .= ("© " . $this->getAsset()->getMetadata("copyright"));
+            $altText .= ("© " . $image->getMetadata("copyright"));
+            $titleText .= ("© " . $image->getMetadata("copyright"));
         }
 
         $attributes["alt"] = $altText;
@@ -232,15 +255,83 @@ class Asset_Image_Thumbnail {
         foreach($attributes as $key => $value) {
             //only include attributes with characters a-z and dashes in their name.
             if(preg_match("/^[a-z-]+$/i", $key)) {
-                $attr[$key] = $key.'="'.htmlspecialchars($value).'"';
+                $attr[$key] = $key . '="' . htmlspecialchars($value) . '"';
+
+                // do not include all attributes
+                if(!in_array($key, ["width","height"])) {
+                    $pictureAttribs[$key] = $key . '="' . htmlspecialchars($value) . '"';
+
+                    // some attributes need to be added also as data- attribute, this is specific to picturePolyfill
+                    if(in_array($key, ["alt"])) {
+                        $pictureAttribs["data-" . $key] = "data-" . $key . '="' . htmlspecialchars($value) . '"';
+                    }
+                }
             }
         }
 
         $path = $this->getPath(true);
         $attr['src'] = 'src="'. $path .'"';
 
+        $thumbConfig = $this->getConfig();
 
-        return '<img '.implode(' ', $attr).' />';
+        if($this->getConfig() && !$this->getConfig()->hasMedias()) {
+            // generate the srcset
+            $srcSetValues = [];
+            foreach ([1,2] as $highRes) {
+                $thumbConfigRes = clone $thumbConfig;
+                $thumbConfigRes->setHighResolution($highRes);
+                $srcsetEntry = $image->getThumbnail($thumbConfigRes, true) . " " . $highRes . "x";
+                $srcSetValues[] = $srcsetEntry;
+            }
+            $attr['srcset'] = 'srcset="'. implode(", ", $srcSetValues) .'"';
+        }
+
+        // build html tag
+        $htmlImgTag = '<img '.implode(' ', $attr).' />';
+
+        // $this->getConfig() can be empty, the original image is returned
+        if(!$this->getConfig() || !$this->getConfig()->hasMedias()) {
+            return $htmlImgTag;
+        } else {
+            // output the <picture> - element
+
+            // set this variable so that Pimcore_Controller_Plugin_Thumbnail::dispatchLoopShutdown() knows that
+            // the picture polyfill script needs to be included
+            self::$pictureElementInUse = true;
+
+            $html = '<picture ' . implode(" ", $pictureAttribs) . ' data-default-src="' . $path . '">' . "\n";
+                $mediaConfigs = $thumbConfig->getMedias();
+
+                // currently only max-width is supported, the key of the media is WIDTHw (eg. 400w) according to the srcset specification
+                ksort($mediaConfigs);
+                $mediaConfigs = array_reverse($mediaConfigs, true); // the sorting matters!
+                array_unshift($mediaConfigs, $thumbConfig->getItems()); // add the default config at the beginning
+
+                foreach ($mediaConfigs as $mediaQuery => $config) {
+                    $srcSetValues = [];
+                    foreach ([1,2] as $highRes) {
+                        $thumbConfigRes = clone $thumbConfig;
+                        $thumbConfigRes->selectMedia($mediaQuery);
+                        $thumbConfigRes->setHighResolution($highRes);
+                        $thumb = $image->getThumbnail($thumbConfigRes, true);
+                        $srcSetValues[] = $thumb . " " . $highRes . "x";
+                    }
+
+                    $html .= "\t" . '<source srcset="' . implode(", ", $srcSetValues) .'"';
+                    if($mediaQuery) {
+                        // currently only max-width is supported, so we replace the width indicator (400w) out of the name
+                        $maxWidth = str_replace("w","",$mediaQuery);
+                        $html .= ' media="(max-width: ' . $maxWidth . 'px)"';
+                        $thumb->reset();
+                    }
+                    $html .= ' />' . "\n";
+                }
+
+                $html .= "\t" . '<noscript>' . "\n\t\t" . $htmlImgTag . "\n\t" . '</noscript>' . "\n";
+            $html .= '</picture>' . "\n";
+
+            return $html;
+        }
     }
 
     /**
@@ -311,5 +402,12 @@ class Asset_Image_Thumbnail {
                 $this->height = floor($this->height / $this->config->getHighResolution());
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isPictureElementInUse() {
+        return self::$pictureElementInUse;
     }
 }

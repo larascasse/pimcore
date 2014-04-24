@@ -484,27 +484,6 @@ class Object_Class_Data_KeyValue extends Object_Class_Data {
         }
     }
 
-     /* converts object data to a simple string value or CSV Export
-     * @abstract
-     * @param Object_Abstract $object
-     * @return string
-     */
-     //FB
-    public function getForCsvExport($object) {
-         $data = $this->getDataFromObjectParam($object);
-        if ($data) {
-            $result = array();
-            foreach ($data->arr as $item) {
-                $keyConfig = Object_KeyValue_KeyConfig::getById($item["key"]);
-                $keyName = $keyConfig->getName();
-                $resultItem = $keyName."|".$item["value"];
-                $result[] = $resultItem;
-            }
-            return implode(",",$result);
-        }
-    }
-
-
 
     /**
      * @param boolean $metaVisible
@@ -520,6 +499,13 @@ class Object_Class_Data_KeyValue extends Object_Class_Data {
     public function getMetaVisible()
     {
         return $this->metaVisible;
+    }
+
+    /**
+     * @param Object_Class_Data $masterDefinition
+     */
+    public function synchronizeWithMasterDefinition(Object_Class_Data $masterDefinition) {
+        $this->multivalent = $masterDefinition->multivalent;
     }
 
 }

@@ -166,7 +166,7 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
 
                 var items =  this.getRecursiveLayout(this.fieldConfig, !editable).items;
 
-                panelConf = {
+                var panelConf = {
                     height: "auto",
                     layout: "pimcoreform",
                     border: true,
@@ -183,7 +183,6 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
                 } else {
                     panelConf.autoHeight = true;
                 }
-
 
                 this.tabPanel = new Ext.Panel(panelConf);
 
@@ -310,10 +309,6 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
 
     addToDataFields: function (field, name) {
         this.languageElements[this.currentLanguage].push(field);
-    },
-
-    addFieldsToMask: function (field) {
-        this.object.edit.fieldsToMask.push(field);
     },
 
     addReferencedField: function (field) {

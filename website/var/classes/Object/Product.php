@@ -33,10 +33,10 @@ public $color;
 public $volume;
 public $hauteur;
 public $conditionnement;
+public $nbrpp;
 public $finition;
 public $profil;
 public $characteristics_others;
-public $nbrpp;
 public $unite;
 public $mode_calcul;
 public $rendement;
@@ -57,9 +57,12 @@ public $solRaffraichissant;
 public $country;
 public $colisage;
 public $typeLame;
+public $country_of_manufacture;
+public $pefc;
 public $image_1;
 public $image_2;
 public $image_3;
+public $gallery;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
@@ -676,6 +679,26 @@ public function setConditionnement ($conditionnement) {
 /**
 * @return string
 */
+public function getNbrpp () {
+	$preValue = $this->preGetValue("nbrpp"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->nbrpp;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nbrpp")->isEmpty($data)) { return $this->getValueFromParent("nbrpp");}
+	 return $data;
+}
+
+/**
+* @param string $nbrpp
+* @return void
+*/
+public function setNbrpp ($nbrpp) {
+	$this->nbrpp = $nbrpp;
+	return $this;
+}
+
+/**
+* @return string
+*/
 public function getFinition () {
 	$preValue = $this->preGetValue("finition"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
@@ -730,26 +753,6 @@ public function getCharacteristics_others () {
 */
 public function setCharacteristics_others ($characteristics_others) {
 	$this->characteristics_others = $characteristics_others;
-	return $this;
-}
-
-/**
-* @return string
-*/
-public function getNbrpp () {
-	$preValue = $this->preGetValue("nbrpp"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->nbrpp;
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nbrpp")->isEmpty($data)) { return $this->getValueFromParent("nbrpp");}
-	 return $data;
-}
-
-/**
-* @param string $nbrpp
-* @return void
-*/
-public function setNbrpp ($nbrpp) {
-	$this->nbrpp = $nbrpp;
 	return $this;
 }
 
@@ -1154,6 +1157,46 @@ public function setTypeLame ($typeLame) {
 }
 
 /**
+* @return string
+*/
+public function getCountry_of_manufacture () {
+	$preValue = $this->preGetValue("country_of_manufacture"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->country_of_manufacture;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("country_of_manufacture")->isEmpty($data)) { return $this->getValueFromParent("country_of_manufacture");}
+	 return $data;
+}
+
+/**
+* @param string $country_of_manufacture
+* @return void
+*/
+public function setCountry_of_manufacture ($country_of_manufacture) {
+	$this->country_of_manufacture = $country_of_manufacture;
+	return $this;
+}
+
+/**
+* @return boolean
+*/
+public function getPefc () {
+	$preValue = $this->preGetValue("pefc"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->pefc;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pefc")->isEmpty($data)) { return $this->getValueFromParent("pefc");}
+	 return $data;
+}
+
+/**
+* @param boolean $pefc
+* @return void
+*/
+public function setPefc ($pefc) {
+	$this->pefc = $pefc;
+	return $this;
+}
+
+/**
 * @return Asset_Image
 */
 public function getImage_1 () {
@@ -1210,6 +1253,26 @@ public function getImage_3 () {
 */
 public function setImage_3 ($image_3) {
 	$this->image_3 = $image_3;
+	return $this;
+}
+
+/**
+* @return array
+*/
+public function getGallery () {
+	$preValue = $this->preGetValue("gallery"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->getClass()->getFieldDefinition("gallery")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("gallery")->isEmpty($data)) { return $this->getValueFromParent("gallery");}
+	 return $data;
+}
+
+/**
+* @param array $gallery
+* @return void
+*/
+public function setGallery ($gallery) {
+	$this->gallery = $this->getClass()->getFieldDefinition("gallery")->preSetData($this, $gallery);
 	return $this;
 }
 
@@ -1637,6 +1700,10 @@ protected static $_relationFields = array (
   'extras' => 
   array (
     'type' => 'objects',
+  ),
+  'gallery' => 
+  array (
+    'type' => 'multihref',
   ),
   'realisations' => 
   array (

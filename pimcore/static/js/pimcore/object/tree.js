@@ -135,11 +135,11 @@ pimcore.object.tree = Class.create({
     },
 
     onDragStart: function () {
-        pimcore.helpers.dndMaskFrames();
+        // nothing to do
     },
 
     onDragEnd: function () {
-        pimcore.helpers.dndUnmaskFrames();
+        // nothing to do
     },
 
     onTreeNodeClick: function () {
@@ -618,6 +618,26 @@ pimcore.object.tree = Class.create({
                                 function () {
                                     this.attributes.reference.tree.getRootNode().reload();
                                 }.bind(this));
+                        }.bind(this)
+                    });
+                }
+
+                if(this.attributes["locked"]) {
+                    // add unlock and propagate to children functionality
+                    lockMenu.push({
+                        text: t('unlock_and_propagate_to_children'),
+                        iconCls: "pimcore_icon_lock_delete",
+                        handler: function () {
+                            Ext.Ajax.request({
+                                url: "/admin/element/unlock-propagate",
+                                params: {
+                                    id: this.id,
+                                    type: "object"
+                                },
+                                success: function () {
+                                    this.parentNode.reload();
+                                }.bind(this)
+                            });
                         }.bind(this)
                     });
                 }

@@ -18,6 +18,7 @@
     <lpn-slider>1</lpn-slider>
     <lpn-slider-realisations-item>1</lpn-slider-realisations-item>
     <lpn-slider-realisations>1</lpn-slider-realisations>
+    <lpn-selection>1</lpn-selection>
   </brick>
   <plugin>
     <DynamicDropdown/>

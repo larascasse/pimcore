@@ -20,8 +20,7 @@ class Object_Class_Data_ObjectsMetadata extends Object_Class_Data_Objects {
 
     public $allowedClassId;
     public $visibleFields;
-    public $visibleFieldTitles;
-    public $columns; 
+    public $columns;
 
 
     /**
@@ -135,9 +134,28 @@ class Object_Class_Data_ObjectsMetadata extends Object_Class_Data_Objects {
      * @return array
      */
     public function getDataForEditmode($data, $object = null) {
-        $return = array();
+        $return = array(
+            "visibleFieldsLabels" => [],
+            "data" => false
+        );
+
         $visibleFieldsArray = explode(",", $this->getVisibleFields());
+
+        // add labels
+        $class = Object_Class::getById($this->getAllowedClassId());
+        foreach($visibleFieldsArray as $key) {
+            $field = $class->getFieldDefinition($key);
+            if($field) {
+                $return["visibleFieldsLabels"][$key] = $field->getTitle();
+            } else {
+                // shouldn't be necessary because this data-type is only allowed directly in objects, added just to be sure
+                $return["visibleFieldsLabels"][$key] = $key;
+            }
+        }
+
+        // add data
         if (is_array($data) && count($data) > 0) {
+            $return["data"] = [];
             foreach ($data as $metaObject) {
 
                 $object = $metaObject->getObject();
@@ -156,24 +174,23 @@ class Object_Class_Data_ObjectsMetadata extends Object_Class_Data_Objects {
                                 }
 
                             }
-
                             $value[$key] = $v;
                         }
                     }
+
                     foreach($this->getColumns() as $c) {
                         $getter = "get" . ucfirst($c['key']);
                         $value[$c['key']] = $metaObject->$getter();
                     }
-                    $return[] = $value;
+                    $return["data"][] = $value;
                 }
             }
-            if (empty ($return)) {
-                $return = false;
+            if (empty ($return["data"])) {
+                $return["data"] = false;
             }
-            return $return;
         }
 
-        return false;
+        return $return;
     }
 
     /**
@@ -615,4 +632,14 @@ class Object_Class_Data_ObjectsMetadata extends Object_Class_Data_Objects {
 
         return $data;
     }
+
+    /**
+     * @param Object_Class_Data $masterDefinition
+     */
+    public function synchronizeWithMasterDefinition(Object_Class_Data $masterDefinition) {
+        $this->allowedClassId = $masterDefinition->allowedClassId;
+        $this->visibleFields = $masterDefinition->visibleFields;
+        $this->columns = $masterDefinition->columns;
+    }
+
 }

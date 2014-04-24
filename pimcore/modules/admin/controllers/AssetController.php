@@ -387,7 +387,9 @@ class Admin_AssetController extends Pimcore_Controller_Action_Admin
             $deletedItems = array();
             foreach ($assets as $asset) {
                 $deletedItems[] = $asset->getFullPath();
-                $asset->delete();
+                if ($asset->isAllowed("delete")) {
+                    $asset->delete();
+                }
             }
 
             $this->_helper->json(array("success" => true, "deleted" => $deletedItems));
@@ -689,20 +691,16 @@ class Admin_AssetController extends Pimcore_Controller_Action_Admin
 
     public function webdavAction()
     {
-
         $homeDir = Asset::getById(1);
 
         try {
             $publicDir = new Asset_WebDAV_Folder($homeDir);
             $objectTree = new Asset_WebDAV_Tree($publicDir);
-            $server = new Sabre_DAV_Server($objectTree);
+            $server = new \Sabre\DAV\Server($objectTree);
 
-            $lockBackend = new Sabre_DAV_Locks_Backend_File(PIMCORE_WEBDAV_TEMP . '/locks.dat');
-            $lockPlugin = new Sabre_DAV_Locks_Plugin($lockBackend);
+            $lockBackend = new \Sabre\DAV\Locks\Backend\File(PIMCORE_WEBDAV_TEMP . '/locks.dat');
+            $lockPlugin = new \Sabre\DAV\Locks\Plugin($lockBackend);
             $server->addPlugin($lockPlugin);
-
-            //$plugin = new Sabre_DAV_Browser_Plugin();
-            //$server->addPlugin($plugin);
 
             $server->exec();
         } catch (Exception $e) {
@@ -828,22 +826,33 @@ class Admin_AssetController extends Pimcore_Controller_Action_Admin
 
     public function showVersionAction()
     {
-
-        $version = Version::getById($this->getParam("id"));
+        $id = intval($this->getParam("id"));
+        $version = Version::getById($id);
         $asset = $version->loadData();
 
-        $this->view->asset = $asset;
-
-        $this->render("show-version-" . $asset->getType());
+        if($asset->isAllowed("versions")) {
+            $this->view->asset = $asset;
+            $this->render("show-version-" . $asset->getType());
+        } else {
+            throw new \Exception("Permission denied, version id [" . $id . "]");
+        }
     }
 
     public function getVersionsAction()
     {
-        if ($this->getParam("id")) {
-            $asset = Asset::getById($this->getParam("id"));
-            $versions = $asset->getVersions();
-
-            $this->_helper->json(array("versions" => $versions));
+        $id = intval($this->getParam("id"));
+        if ($id) {
+            $asset = Asset::getById($id);
+            if($asset) {
+                if($asset->isAllowed("versions")) {
+                    $versions = $asset->getVersions();
+                    $this->_helper->json(array("versions" => $versions));
+                } else {
+                    throw new \Exception("Permission denied, asset id [" . $id . "]");
+                }
+            } else {
+                throw new \Exception("Asset with id [" . $id . "] doesn't exist");
+            }
         }
     }
 
@@ -881,6 +890,11 @@ class Admin_AssetController extends Pimcore_Controller_Action_Admin
             } else {
                 $thumbnail = $image->getThumbnailConfig($this->getAllParams());
             }
+        } else {
+            // no high-res images in admin mode (editmode)
+            // this is mostly because of the document's image editable, which doesn't know anything about the thumbnail
+            // configuration, so the dimensions would be incorrect (double the size)
+            $thumbnail->setHighResolution(1);
         }
 
         $format = strtolower($thumbnail->getFormat());

@@ -22,6 +22,9 @@ $content = str_replace("=\"container", "=\"containerWP", $content);
 $content = str_replace("data-original", "data-src", $content);
 $content = str_replace("<section", "<div", $content);
 $content = str_replace("</section", "</div", $content);
+$content = str_replace('src="/', 'src="http://www.laparqueterienouvelle.fr/', $content);
+$content = str_replace('action="/', 'action="http://www.laparqueterienouvelle.fr/', $content);
+
 //$content = str_replace("lazy", "norelazy", $content);
 
 

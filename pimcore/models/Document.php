@@ -348,9 +348,9 @@ class Document extends Element_Abstract {
         $isUpdate = false;
         if ($this->getId()) {
             $isUpdate = true;
-            Pimcore_API_Plugin_Broker::getInstance()->preUpdateDocument($this);
+            Pimcore::getEventManager()->trigger("document.preUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->preAddDocument($this);
+            Pimcore::getEventManager()->trigger("document.preAdd", $this);
         }
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails
@@ -415,9 +415,9 @@ class Document extends Element_Abstract {
         }
 
         if ($isUpdate) {
-            Pimcore_API_Plugin_Broker::getInstance()->postUpdateDocument($this);
+            Pimcore::getEventManager()->trigger("document.postUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->postAddDocument($this);
+            Pimcore::getEventManager()->trigger("document.postAdd", $this);
         }
 
         $additionalTags = array();
@@ -445,7 +445,9 @@ class Document extends Element_Abstract {
 
             $parent = Document::getById($this->getParentId());
             if($parent) {
-                $this->setPath(str_replace("//", "/", $parent->getRealFullPath() . "/"));
+                // use the parent's path from the database here (getCurrentFullPath), to ensure the path really exists and does not rely on the path
+                // that is currently in the parent object (in memory), because this might have changed but wasn't not saved
+                $this->setPath(str_replace("//", "/", $parent->getCurrentFullPath() . "/"));
             } else {
                 // parent document doesn't exist anymore, so delete this document
                 //$this->delete();
@@ -459,7 +461,7 @@ class Document extends Element_Abstract {
         if(Document_Service::pathExists($this->getRealFullPath())) {
             $duplicate = Document::getByPath($this->getRealFullPath());
             if ($duplicate instanceof Document  and $duplicate->getId() != $this->getId()) {
-                throw new Exception("Duplicate full path [ " . $this->getRealFullPath() . " ] - cannot create document");
+                throw new Exception("Duplicate full path [ " . $this->getRealFullPath() . " ] - cannot save document");
             }
         }
 
@@ -630,7 +632,7 @@ class Document extends Element_Abstract {
      */
     public function delete() {
 
-        Pimcore_API_Plugin_Broker::getInstance()->preDeleteDocument($this);
+        Pimcore::getEventManager()->trigger("document.preDelete", $this);
 
         // remove childs
         if ($this->hasChilds()) {
@@ -661,7 +663,7 @@ class Document extends Element_Abstract {
         //set object to registry
         Zend_Registry::set("document_" . $this->getId(), null);
 
-        Pimcore_API_Plugin_Broker::getInstance()->postDeleteDocument($this);
+        Pimcore::getEventManager()->trigger("document.postDelete", $this);
     }
 
     /**

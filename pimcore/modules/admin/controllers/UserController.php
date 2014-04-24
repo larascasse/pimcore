@@ -19,7 +19,7 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
         parent::init();
 
         // check permissions
-        $notRestrictedActions = array("get-current-user", "update-current-user", "get-all-users", "get-available-permissions", "tree-get-childs-by-id", "get-minimal", "get-image", "upload-current-user-image");
+        $notRestrictedActions = array("get-current-user", "update-current-user", "get-available-permissions", "get-minimal", "get-image", "upload-current-user-image");
         if (!in_array($this->getParam("action"), $notRestrictedActions)) {
             $this->checkPermission("users");
         }
@@ -36,7 +36,9 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
         $users = array();
         if(is_array($list->getUsers())){
             foreach ($list->getUsers() as $user) {
-                $users[] = $this->getTreeNodeConfig($user);
+                if($user->getId() && $user->getName() != "system") {
+                    $users[] = $this->getTreeNodeConfig($user);
+                }
             }
         }
         $this->_helper->json($users);
@@ -80,7 +82,7 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
             $user = $className::create(array(
                 "parentId" => intval($this->getParam("parentId")),
                 "name" => trim($this->getParam("name")),
-                "password" => md5(microtime()),
+                "password" => "",
                 "active" => $this->getParam("active")
             ));
 
@@ -157,25 +159,6 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
         $user->save();
 
         $this->_helper->json(array("success" => true));
-    }
-
-    public function getAllUsersAction() {
-        $list = new User_List();
-        $list->load();
-
-        $users = $list->getUsers();
-        if (!empty($users)) {
-            foreach ($users as $user) {
-                if($user instanceof User) {
-                    $user->password = null;
-                    $userList[] = $user;
-                }
-            }
-        }
-
-        $this->_helper->json(array(
-            "users" => $userList
-        ));
     }
 
     public function getAction() {
@@ -286,6 +269,8 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
             if ($user->getId() == $this->getParam("id")) {
                 $values = Zend_Json::decode($this->getParam("data"));
 
+                unset($values["name"]);
+                unset($values["id"]);
                 unset($values["admin"]);
                 unset($values["permissions"]);
                 unset($values["roles"]);
@@ -305,9 +290,9 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
                         });
 
                     } else {
-                        // the password have to match
-                        $oldPassword = Pimcore_Tool_Authentication::getPasswordHash($user->getName(),$values["old_password"]);
-                        if($oldPassword == $user->getPassword()) {
+                        // the password has to match
+                        $checkUser = Pimcore_Tool_Authentication::authenticatePlaintext($user->getName(), $values["old_password"]);
+                        if($checkUser) {
                             $oldPasswordCheck = true;
                         }
                     }
@@ -452,6 +437,9 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
     public function getImageAction() {
 
         if($this->getParam("id")) {
+            if($this->getUser()->getId() != $this->getParam("id")) {
+                $this->checkPermission("users");
+            }
             $id = $this->getParam("id");
         } else {
             $id = $this->getUser()->getId();
@@ -497,5 +485,35 @@ class Admin_UserController extends Pimcore_Controller_Action_Admin {
                 ));
             }
         }
+    }
+
+    public function searchAction() {
+
+        $q = "%" . $this->getParam("query") . "%";
+
+        $list = new User_List();
+        $list->setCondition("name LIKE ? OR firstname LIKE ? OR lastname LIKE ? OR email LIKE ? OR id = ?", [$q, $q, $q, $q, $q]);
+        $list->setOrder("ASC");
+        $list->setOrderKey("name");
+        $list->load();
+
+        $users = array();
+        if(is_array($list->getUsers())){
+            foreach ($list->getUsers() as $user) {
+                if($user->getId() && $user->getName() != "system") {
+                    $users[] = [
+                        "id" => $user->getId(),
+                        "name" => $user->getName(),
+                        "email" => $user->getEmail(),
+                        "firstname" => $user->getFirstname(),
+                        "lastname" => $user->getLastname(),
+                    ];
+                }
+            }
+        }
+        $this->_helper->json([
+            "success" => true,
+            "users" => $users
+        ]);
     }
 }

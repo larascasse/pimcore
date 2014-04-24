@@ -363,6 +363,39 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
             $objectData = $this->filterLocalizedFields($object, $objectData);
 
+            $currentLayoutId = $this->getParam("layoutId");
+
+            $validLayouts = Object_Service::getValidLayouts($object);
+            if(!empty($validLayouts)) {
+                $objectData["validLayouts"] = array( );
+
+                foreach ($validLayouts as $validLayout) {
+                    $objectData["validLayouts"][] = array("id" => $validLayout->getId(), "name" => $validLayout->getName());
+                }
+
+                $user = Pimcore_Tool_Admin::getCurrentUser();
+                if ($currentLayoutId == 0 && !$user->isAdmin()) {
+                    $first = reset($validLayouts);
+                    $currentLayoutId = $first->getId();
+                }
+
+                if ($currentLayoutId > 0) {
+                    // check if user has sufficient rights
+                    if ($validLayouts && $validLayouts[$currentLayoutId]) {
+                        $customLayout = Object_Class_CustomLayout::getById($currentLayoutId);
+                        $customLayoutDefinition = $customLayout->getLayoutDefinitions();
+                        $objectData["layout"] = $customLayoutDefinition;
+                    } else {
+                        $currentLayoutId = 0;
+                    }
+                } else if ($currentLayoutId == -1 && $user->isAdmin()) {
+                    $layout = Object_Service::getSuperLayoutDefinition($object);
+                    $objectData["layout"] = $layout;
+                }
+
+                $objectData["currentLayoutId"] = $currentLayoutId;
+            }
+
             $this->_helper->json($objectData);
         } else {
             Logger::debug("prevented getting object id [ " . $object->getId() . " ] because of missing permissions");
@@ -457,7 +490,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
             }
 
 
-            if ( $fielddefinition->isEmpty($value) && !empty($parent) ) {
+            if ( $fielddefinition->isEmpty($fieldData) && !empty($parent) ) {
                 $this->getDataForField($parent, $key, $fielddefinition, $objectFromVersion, $level + 1);
             } else {
                 $isInheritedValue = $isInheritedValue || ($level != 0);
@@ -649,7 +682,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
                 $object->setPublished(false);
 
                 if ($this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_OBJECT
-                                || $this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_VARIANT) {
+                    || $this->getParam("objecttype") == Object_Abstract::OBJECT_TYPE_VARIANT) {
                     $object->setType($this->getParam("objecttype"));
                 }
 
@@ -734,21 +767,28 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
             $deletedItems = array();
             foreach ($objects as $object) {
                 $deletedItems[] = $object->getFullPath();
-                $object->delete();
+                if ($object->isAllowed("delete")) {
+                    $object->delete();
+                }
             }
 
             $this->_helper->json(array("success" => true, "deleted" => $deletedItems));
 
         } else if ($this->getParam("id")) {
             $object = Object_Abstract::getById($this->getParam("id"));
-            if ($object->isAllowed("delete")) {
-                $object->delete();
-
-                $this->_helper->json(array("success" => true));
+            if($object) {
+                if (!$object->isAllowed("delete")) {
+                    $this->_helper->json(array("success" => false, "message" => "missing_permission"));
+                } else {
+                    $object->delete();
+                }
             }
+
+            // return true, even when the object doesn't exist, this can be the case when using batch delete incl. children
+            $this->_helper->json(array("success" => true));
         }
 
-        $this->_helper->json(array("success" => false, "message" => "missing_permission"));
+
     }
 
     public function deleteInfoAction() {
@@ -1184,31 +1224,60 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
     public function previewVersionAction()
     {
-        $version = Version::getById($this->getParam("id"));
+        $id = intval($this->getParam("id"));
+        $version = Version::getById($id);
         $object = $version->loadData();
 
-        $this->view->object = $object;
+        if($object) {
+            if ($object->isAllowed("versions")) {
+                $this->view->object = $object;
+            } else {
+                throw new \Exception("Permission denied, version id [" . $id . "]");
+            }
+        } else {
+            throw new \Exception("Version with id [" . $id . "] doesn't exist");
+        }
     }
 
     public function diffVersionsAction()
     {
-        $version1 = Version::getById($this->getParam("from"));
+
+        $id1 = intval($this->getParam("from"));
+        $id2 = intval($this->getParam("to"));
+
+        $version1 = Version::getById($id1);
         $object1 = $version1->loadData();
 
-        $version2 = Version::getById($this->getParam("to"));
+        $version2 = Version::getById($id2);
         $object2 = $version2->loadData();
 
-        $this->view->object1 = $object1;
-        $this->view->object2 = $object2;
+        if($object1 && $object2) {
+            if ($object1->isAllowed("versions") && $object2->isAllowed("versions")) {
+                $this->view->object1 = $object1;
+                $this->view->object2 = $object2;
+            } else {
+                throw new \Exception("Permission denied, version ids [" . $id1 . ", " . $id2 . "]");
+            }
+        } else {
+            throw new \Exception("Version with ids [" . $id1 . ", " . $id2 . "] doesn't exist");
+        }
     }
 
     public function getVersionsAction()
     {
-        if ($this->getParam("id")) {
-            $object = Object_Abstract::getById($this->getParam("id"));
-            $versions = $object->getVersions();
-
-            $this->_helper->json(array("versions" => $versions));
+        $id = intval($this->getParam("id"));
+        if ($id) {
+            $object = Object_Abstract::getById($id);
+            if($object) {
+                if ($object->isAllowed("versions")) {
+                    $versions = $object->getVersions();
+                    $this->_helper->json(array("success" => true, "versions" => $versions));
+                } else {
+                    throw new \Exception("Permission denied, object id [" . $id . "]");
+                }
+            } else {
+                throw new \Exception("Object with id [" . $id . "] doesn't exist");
+            }
         }
     }
 
@@ -1237,7 +1306,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
 
                     $user = Pimcore_Tool_Admin::getCurrentUser();
                     if (!$user->isAdmin()) {
-                        $languagePermissions = $object->getLocalizedPermissions("lEdit", $user);
+                        $languagePermissions = $object->getPermissions("lEdit", $user);
                         $languagePermissions = explode(",", $languagePermissions["lEdit"]);
 
                     }
@@ -1289,8 +1358,7 @@ class Admin_ObjectController extends Pimcore_Controller_Action_Admin
                                     if($localized instanceof Object_Class_Data_Localizedfields) {
                                         $field = $localized->getFieldDefinition($key);
                                         if ($field) {
-                                            $currentLocale = Zend_Registry::get("Zend_Locale");
-                                            $currentLocale = $currentLocale->getLanguage();
+                                            $currentLocale = (string) Zend_Registry::get("Zend_Locale");
                                             if (!in_array($currentLocale, $languagePermissions)) {
                                                 continue;
                                             }

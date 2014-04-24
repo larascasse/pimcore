@@ -104,36 +104,7 @@ pimcore.object.classes.layout.layout = Class.create({
                             value: this.datax.bodyStyle
                         }
                     ]
-                }/*,
-                {
-                    xtype: "form",
-                    title: t("display_layout_to_users"),
-                    bodyStyle: "padding: 10px;",
-                    style: "margin: 10px 0 10px 0",
-                    items: [new Ext.ux.form.SuperField({
-                        allowEdit: true,
-                        name: "permissions",
-                        values:this.datax.permissions,
-                        stripeRows:false,
-                        items: [
-                            new Ext.form.ComboBox({
-                                fieldLabel: t("username"),
-                                name: "username",
-                                triggerAction: 'all',
-                                editable: false,
-                                store: new Ext.data.JsonStore({
-                                    url: '/admin/user/get-all-users',
-                                    fields: ["username"],
-                                    root: "users"
-                                }),
-                                displayField: "username",
-                                valueField: "username",
-                                summaryDisplay:true
-                            })
-                        ]
-                    })
-                    ]
-                }*/
+                }
             ]
         });
 
@@ -189,6 +160,14 @@ pimcore.object.classes.layout.layout = Class.create({
 
         this.datax.fieldtype = this.getType();
         this.datax.datatype = "layout";
+    },
+
+    setInCustomLayoutEditor: function(inCustomLayoutEditor) {
+        this.inCustomLayoutEditor = inCustomLayoutEditor;
+    },
+
+    isInCustomLayoutEditor: function() {
+        return this.inCustomLayoutEditor;
     }
 
 });

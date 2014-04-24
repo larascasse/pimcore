@@ -419,9 +419,9 @@ class Asset extends Element_Abstract {
         $isUpdate = false;
         if ($this->getId()) {
             $isUpdate = true;
-            Pimcore_API_Plugin_Broker::getInstance()->preUpdateAsset($this);
+            Pimcore::getEventManager()->trigger("asset.preUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->preAddAsset($this);
+            Pimcore::getEventManager()->trigger("asset.preAdd", $this);
         }
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails
@@ -480,9 +480,9 @@ class Asset extends Element_Abstract {
         }
 
         if ($isUpdate) {
-            Pimcore_API_Plugin_Broker::getInstance()->postUpdateAsset($this);
+            Pimcore::getEventManager()->trigger("asset.postUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->postAddAsset($this);
+            Pimcore::getEventManager()->trigger("asset.postAdd", $this);
         }
 
 
@@ -497,6 +497,7 @@ class Asset extends Element_Abstract {
             }
         }
         $this->clearDependentCache($additionalTags);
+        $this->setDataChanged(false);
 
         return $this;
     }
@@ -511,7 +512,9 @@ class Asset extends Element_Abstract {
 
             $parent = Asset::getById($this->getParentId());
             if($parent) {
-                $this->setPath(str_replace("//", "/", $parent->getFullPath() . "/"));
+                // use the parent's path from the database here (getCurrentFullPath), to ensure the path really exists and does not rely on the path
+                // that is currently in the parent object (in memory), because this might have changed but wasn't not saved
+                $this->setPath(str_replace("//", "/", $parent->getCurrentFullPath() . "/"));
             } else {
                 // parent document doesn't exist anymore, so delete this document
                 //$this->delete();
@@ -531,7 +534,7 @@ class Asset extends Element_Abstract {
         if(Asset_Service::pathExists($this->getFullPath())) {
             $duplicate = Asset::getByPath($this->getFullPath());
             if ($duplicate instanceof Asset  and $duplicate->getId() != $this->getId()) {
-                throw new Exception("Duplicate full path [ " . $this->getFullPath() . " ] - cannot create asset");
+                throw new Exception("Duplicate full path [ " . $this->getFullPath() . " ] - cannot save asset");
             }
         }
 
@@ -563,9 +566,7 @@ class Asset extends Element_Abstract {
         }
 
         if ($this->getType() != "folder") {
-
             if($this->getDataChanged()) {
-
                 $src = $this->getStream();
                 $streamMeta = stream_get_meta_data($src);
                 if($destinationPath != $streamMeta["uri"]) {
@@ -587,23 +588,15 @@ class Asset extends Element_Abstract {
                 $this->setMimetype($mimetype);
 
                 // set type
-                $this->setTypeFromMapping();
+                $typeChanged = false;
+                $type = self::getTypeFromMimeMapping($mimetype, $this->getFilename());
+                if($type != $this->getType()) {
+                    $this->setType($type);
+                    $typeChanged = true;
+                }
             }
 
-            // update scheduled tasks
-            $this->saveScheduledTasks();
-
-            // only create a new version if there is at least 1 allowed
-            if(Pimcore_Config::getSystemConfig()->assets->versions->steps
-                || Pimcore_Config::getSystemConfig()->assets->versions->days) {
-                $version = new Version();
-                $version->setCid($this->getId());
-                $version->setCtype("asset");
-                $version->setDate($this->getModificationDate());
-                $version->setUserId($this->getUserModification());
-                $version->setData($this);
-                $version->save();
-            }
+            // scheduled tasks are saved in $this->saveVersion();
         }
 
 
@@ -641,18 +634,61 @@ class Asset extends Element_Abstract {
 
         //set object to registry
         Zend_Registry::set("asset_" . $this->getId(), $this);
+        if(get_class($this) == "Asset" || $typeChanged) {
+            // get concrete type of asset
+            // this is important because at the time of creating an asset it's not clear which type (resp. class) it will have
+            // the type (image, document, ...) depends on the mime-type
+            Zend_Registry::set("asset_" . $this->getId(), null);
+            $asset = self::getById($this->getId());
+            Zend_Registry::set("asset_" . $this->getId(), $asset);
+        }
+
+        // lastly create a new version if necessary
+        // this has to be after the registry update and the DB update, otherwise this would cause problem in the
+        // $this->__wakeUp() method which is called by $version->save(); (path correction for version restore)
+        if($this->getType() != "folder") {
+            $this->saveVersion(false, false);
+        }
 
         $this->closeStream();
     }
 
-    /**
-     * detects the pimcore internal asset type based on the mime-type and file extension
-     *
-     * @return void
-     */
-    public function setTypeFromMapping () {
-        $this->setType(self::getTypeFromMimeMapping($this->getMimetype(), $this->getFilename()));
-        return $this;
+    public function saveVersion($setModificationDate = true, $callPluginHook = true) {
+
+        // hook should be also called if "save only new version" is selected
+        if($callPluginHook) {
+            Pimcore::getEventManager()->trigger("asset.preUpdate", $this);
+        }
+
+        // set date
+        if ($setModificationDate) {
+            $this->setModificationDate(time());
+        }
+
+        // scheduled tasks are saved always, they are not versioned!
+        $this->saveScheduledTasks();
+
+        // create version
+        $version = null;
+
+        // only create a new version if there is at least 1 allowed
+        if(Pimcore_Config::getSystemConfig()->assets->versions->steps
+            || Pimcore_Config::getSystemConfig()->assets->versions->days) {
+            $version = new Version();
+            $version->setCid($this->getId());
+            $version->setCtype("asset");
+            $version->setDate($this->getModificationDate());
+            $version->setUserId($this->getUserModification());
+            $version->setData($this);
+            $version->save();
+        }
+
+        // hook should be also called if "save only new version" is selected
+        if($callPluginHook) {
+            Pimcore::getEventManager()->trigger("asset.postUpdate", $this);
+        }
+
+        return $version;
     }
 
     /**
@@ -727,7 +763,7 @@ class Asset extends Element_Abstract {
             throw new Exception("root-node cannot be deleted");
         }
 
-        Pimcore_API_Plugin_Broker::getInstance()->preDeleteAsset($this);
+        Pimcore::getEventManager()->trigger("asset.preDelete", $this);
 
         $this->closeStream();
 
@@ -780,18 +816,10 @@ class Asset extends Element_Abstract {
         //set object to registry
         Zend_Registry::set("asset_" . $this->getId(), null);
 
-        Pimcore_API_Plugin_Broker::getInstance()->postDeleteAsset($this);
+        Pimcore::getEventManager()->trigger("asset.postDelete", $this);
     }
 
     public function clearDependentCache($additionalTags = array()) {
-
-        // get concrete type of asset
-        // this is important because at the time of creating an asset it's not clear which type (resp. class) it will have
-        // the type (image, document, ...) depends on the mime-type
-        Zend_Registry::set("asset_" . $this->getId(), null);
-        $asset = self::getById($this->getId());
-        Zend_Registry::set("asset_" . $this->getId(), $asset);
-
 
         try {
             $tags = array("asset_" . $this->getId(), "properties", "output");
@@ -1393,7 +1421,9 @@ class Asset extends Element_Abstract {
      * @return string
      */
     public function getImageThumbnailSavePath() {
-        $path = PIMCORE_TEMPORARY_DIRECTORY . "/image-thumbnails/" . $this->getId();
+        // group the thumbnails because of limitations of some filesystems (eg. ext3 allows only 32k subfolders)
+        $group = floor($this->getId() / 10000) * 10000;
+        $path = PIMCORE_TEMPORARY_DIRECTORY . "/image-thumbnails/" . $group . "/" . $this->getId();
         return $path;
     }
 
@@ -1401,7 +1431,9 @@ class Asset extends Element_Abstract {
      * @return string
      */
     public function getVideoThumbnailSavePath() {
-        $path = PIMCORE_TEMPORARY_DIRECTORY . "/video-thumbnails/" . $this->getId();
+        // group the thumbnails because of limitations of some filesystems (eg. ext3 allows only 32k subfolders)
+        $group = floor($this->getId() / 10000) * 10000;
+        $path = PIMCORE_TEMPORARY_DIRECTORY . "/video-thumbnails/" . $group . "/" . $this->getId();
         return $path;
     }
 

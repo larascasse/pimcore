@@ -1,4 +1,5 @@
 <?php
+include ("../../pimcore/cli/startup.php");
 
 // valid languages is new in system config
 $configArray = Pimcore_Config::getSystemConfig()->toArray();

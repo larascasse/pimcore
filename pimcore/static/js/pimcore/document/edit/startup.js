@@ -41,6 +41,7 @@ if (typeof pimcore == "object") {
 
     pimcore.globalmanager = parent.pimcore.globalmanager;
     pimcore.helpers = parent.pimcore.helpers;
+    pimcore.settings = parent.pimcore.settings;
 }
 
 if (pimcore_document_id) {
@@ -123,15 +124,6 @@ Ext.onReady(function () {
             item.setAttribute("rel", "stylesheet");
         });
 
-        // handler for Esc
-        var mapEsc = new Ext.KeyMap(document, {
-            key: [27],
-            fn: function () {
-                closeCKeditors();
-            },
-            stopEvent: true
-        });
-
         // register the global key bindings
         pimcore.helpers.registerKeyBindings(document, Ext);
 
@@ -196,6 +188,9 @@ Ext.onReady(function () {
         }
 
     }
+
+    // put a mask over all iframe, because they would break the dnd functionality
+    editWindow.maskFrames();
 
     // enable the edit tab again
     editWindow.loadMask.hide();

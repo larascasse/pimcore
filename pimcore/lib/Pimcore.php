@@ -26,6 +26,11 @@ class Pimcore {
     private static $inShutdown = false;
 
     /**
+     * @var Zend_EventManager_EventManager
+     */
+    private static $eventManager;
+
+    /**
      * @static
      * @throws Exception|Zend_Controller_Router_Exception
      */
@@ -67,19 +72,32 @@ class Pimcore {
             }
         }
 
+        if(self::inDebugMode() && $frontend && !defined("HHVM_VERSION")) {
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $jsonErrorHandler = new \Whoops\Handler\JsonResponseHandler;
+            $jsonErrorHandler->onlyForAjaxRequests(true);
+            $whoops->pushHandler($jsonErrorHandler);
+            $whoops->register();
+
+            // add event handler before Pimcore::shutdown() to ensure fatal errors are handled by Whoops
+            self::getEventManager()->attach("system.shutdown", array($whoops, "handleShutdown"), 10000);
+        }
+
         $front->registerPlugin(new Pimcore_Controller_Plugin_ErrorHandler(), 1);
         $front->registerPlugin(new Pimcore_Controller_Plugin_Maintenance(), 2);
 
         // register general pimcore plugins for frontend
         if ($frontend) {
+            $front->registerPlugin(new Pimcore_Controller_Plugin_Thumbnail(), 795);
             $front->registerPlugin(new Pimcore_Controller_Plugin_Less(), 799);
             $front->registerPlugin(new Pimcore_Controller_Plugin_AdminButton(), 806);
         }
 
         if (Pimcore_Tool::useFrontendOutputFilters(new Zend_Controller_Request_Http())) {
+            $front->registerPlugin(new Pimcore_Controller_Plugin_HybridAuth(), 792);
             $front->registerPlugin(new Pimcore_Controller_Plugin_QrCode(), 793);
             $front->registerPlugin(new Pimcore_Controller_Plugin_CommonFilesFilter(), 794);
-            $front->registerPlugin(new Pimcore_Controller_Plugin_Thumbnail(), 795);
             $front->registerPlugin(new Pimcore_Controller_Plugin_WysiwygAttributes(), 796);
             $front->registerPlugin(new Pimcore_Controller_Plugin_Webmastertools(), 797);
             $front->registerPlugin(new Pimcore_Controller_Plugin_Analytics(), 798);
@@ -214,8 +232,7 @@ class Pimcore {
 
         $front->setRouter($router);
 
-        Pimcore_API_Plugin_Broker::getInstance()->preDispatch();
-
+        self::getEventManager()->trigger("system.startup", $front);
 
         // throw exceptions also when in preview or in editmode (documents) to see it immediately when there's a problem with this page
         $throwExceptions = false;
@@ -243,11 +260,15 @@ class Pimcore {
                 $front->dispatch();
             }
             catch (Zend_Controller_Router_Exception $e) {
-                header("HTTP/1.0 404 Not Found");
+                if(!headers_sent()) {
+                    header("HTTP/1.0 404 Not Found");
+                }
                 throw new Zend_Controller_Router_Exception("No route, document, custom route or redirect is matching the request: " . $_SERVER["REQUEST_URI"] . " | \n" . "Specific ERROR: " . $e->getMessage());
             }
             catch (Exception $e) {
-                header("HTTP/1.0 500 Internal Server Error");
+                if(!headers_sent()) {
+                    header("HTTP/1.0 500 Internal Server Error");
+                }
                 throw $e;
             }
         }
@@ -585,7 +606,7 @@ class Pimcore {
         $autoloader->registerNamespace('User');
         $autoloader->registerNamespace('Property');
         $autoloader->registerNamespace('Version');
-        $autoloader->registerNamespace('Sabre_');
+        $autoloader->registerNamespace('Sabre');
         $autoloader->registerNamespace('Site');
         $autoloader->registerNamespace('Services_');
         $autoloader->registerNamespace('HTTP_');
@@ -608,7 +629,7 @@ class Pimcore {
         $autoloader->registerNamespace('Webservice');
         $autoloader->registerNamespace('Search');
         $autoloader->registerNamespace('Tool');
-        $autoloader->registerNamespace('KeyValue');
+        $autoloader->registerNamespace('Whoops');
 
         Pimcore_Tool::registerClassModelMappingNamespaces();
     }
@@ -733,6 +754,16 @@ class Pimcore {
         }
 
         return false;
+    }
+
+    /**
+     * @return Zend_EventManager_EventManager
+     */
+    public static function getEventManager() {
+        if(!self::$eventManager) {
+            self::$eventManager = new Zend_EventManager_EventManager();
+        }
+        return self::$eventManager;
     }
 
     /**
@@ -930,14 +961,6 @@ class Pimcore {
 
         // disable logging - otherwise this will cause problems in the ongoing shutdown process (session write, __destruct(), ...)
         Logger::resetLoggers();
-    }
-
-    /**
-     * @static
-     *
-     */
-    public static function shutdownHandler () {
-        Pimcore_Event::fire("pimcore.shutdown");
     }
 }
 

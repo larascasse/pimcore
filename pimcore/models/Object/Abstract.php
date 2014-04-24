@@ -426,7 +426,7 @@ class Object_Abstract extends Element_Abstract {
      */
     public function delete() {
 
-        Pimcore_API_Plugin_Broker::getInstance()->preDeleteObject($this);
+        Pimcore::getEventManager()->trigger("object.preDelete", $this);
 
         // delete childs
         if ($this->hasChilds(array(self::OBJECT_TYPE_OBJECT, self::OBJECT_TYPE_FOLDER, self::OBJECT_TYPE_VARIANT))) {
@@ -457,7 +457,7 @@ class Object_Abstract extends Element_Abstract {
         //set object to registry
         Zend_Registry::set("object_" . $this->getId(), null);
 
-        Pimcore_API_Plugin_Broker::getInstance()->postDeleteObject($this);
+        Pimcore::getEventManager()->trigger("object.postDelete", $this);
     }
 
 
@@ -469,9 +469,9 @@ class Object_Abstract extends Element_Abstract {
         $isUpdate = false;
         if ($this->getId()) {
             $isUpdate = true;
-            Pimcore_API_Plugin_Broker::getInstance()->preUpdateObject($this);
+            Pimcore::getEventManager()->trigger("object.preUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->preAddObject($this);
+            Pimcore::getEventManager()->trigger("object.preAdd", $this);
         }
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails
@@ -489,6 +489,9 @@ class Object_Abstract extends Element_Abstract {
 
                 if(!Pimcore_Tool::isValidKey($this->getKey()) && $this->getId() != 1){
                     throw new Exception("invalid key for object with id [ ".$this->getId()." ] key is: [" . $this->getKey() . "]");
+                }
+                if(!in_array($this->getType(), self::$types)) {
+                    throw new \Exception("invalid object type given: [" . $this->getType() . "]");
                 }
 
                 $this->correctPath();
@@ -535,9 +538,9 @@ class Object_Abstract extends Element_Abstract {
         }
 
         if ($isUpdate) {
-            Pimcore_API_Plugin_Broker::getInstance()->postUpdateObject($this);
+            Pimcore::getEventManager()->trigger("object.postUpdate", $this);
         } else {
-            Pimcore_API_Plugin_Broker::getInstance()->postAddObject($this);
+            Pimcore::getEventManager()->trigger("object.postAdd", $this);
         }
 
         $additionalTags = array();
@@ -567,7 +570,9 @@ class Object_Abstract extends Element_Abstract {
             $parent = Object_Abstract::getById($this->getParentId());
 
             if($parent) {
-                $this->setPath(str_replace("//","/",$parent->getFullPath()."/"));
+                // use the parent's path from the database here (getCurrentFullPath), to ensure the path really exists and does not rely on the path
+                // that is currently in the parent object (in memory), because this might have changed but wasn't not saved
+                $this->setPath(str_replace("//","/",$parent->getCurrentFullPath()."/"));
             } else {
                 // parent document doesn't exist anymore, so delete this document
                 //$this->delete();
@@ -581,7 +586,7 @@ class Object_Abstract extends Element_Abstract {
         if(Object_Service::pathExists($this->getFullPath())) {
             $duplicate = Object_Abstract::getByPath($this->getFullPath());
             if($duplicate instanceof Object_Abstract and $duplicate->getId() != $this->getId()){
-                throw new Exception("Duplicate full path [ ".$this->getFullPath()." ] - cannot create object");
+                throw new Exception("Duplicate full path [ ".$this->getFullPath()." ] - cannot save object");
             }
         }
     }

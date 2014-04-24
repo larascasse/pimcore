@@ -40,7 +40,7 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
      * @param $imagePath
      * @return bool|Pimcore_Image_Adapter|Pimcore_Image_Adapter_Imagick
      */
-    public function load ($imagePath) {
+    public function load ($imagePath, $options = []) {
 
         if($this->resource) {
             unset($this->resource);
@@ -48,27 +48,37 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
         }
 
         try {
-            $this->resource = new Imagick();
+            $i = new Imagick();
+            $this->imagePath = $imagePath;
 
-            $this->resource->setBackgroundColor(new ImagickPixel('transparent')); //set .png transparent (print)
-            $this->resource->setcolorspace(Imagick::COLORSPACE_SRGB);
+            $i->setcolorspace(Imagick::COLORSPACE_SRGB);
+            $i->setBackgroundColor(new ImagickPixel('transparent')); //set .png transparent (print)
 
-            if(!$this->resource->readImage($imagePath."[0]") || !filesize($imagePath)) {
+            if(isset($options["resolution"])) {
+                // set the resolution to 2000x2000 for known vector formats
+                // otherwise this will cause problems with eg. cropPercent in the image editable (select specific area)
+                // maybe there's a better solution but for now this fixes the problem
+                $i->setResolution($options["resolution"]["x"], $options["resolution"]["y"]);
+            }
+
+            if(!$i->readImage($imagePath) || !filesize($imagePath)) {
                 return false;
             }
 
+            $this->resource = $i; // this is because of HHVM which has problems with $this->resource->readImage();
+
             $this->setColorspaceToRGB();
 
-            $this->imagePath = $imagePath;
-
         } catch (Exception $e) {
+            Logger::error("Unable to load image: " . $imagePath);
             Logger::error($e);
             return false;
         }
 
         // set dimensions
-        $this->setWidth($this->resource->getImageWidth());
-        $this->setHeight($this->resource->getImageHeight());
+        $dimensions = $this->getDimensions();
+        $this->setWidth($dimensions["width"]);
+        $this->setHeight($dimensions["height"]);
 
         $this->setModified(false);
 
@@ -88,30 +98,36 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
             $format = "png";
         }
 
+        $i = $this->resource; // this is because of HHVM which has problems with $this->resource->writeImage();
+
         $originalFilename = null;
         if(!$this->reinitializing) {
             if($this->getUseContentOptimizedFormat()) {
                 $format = "jpeg";
-                if($this->resource->getImageAlphaChannel()) {
+                if($i->getImageAlphaChannel()) {
                     $format = "png";
                 }
             }
         }
 
-        $this->resource->stripimage();
-        $this->resource->profileImage('*', null);
-        $this->resource->setImageFormat($format);
+        $i->stripimage();
+        $i->profileImage('*', null);
+        $i->setImageFormat($format);
 
         if($quality) {
-            $this->resource->setCompressionQuality((int) $quality);
-            $this->resource->setImageCompressionQuality((int) $quality);
+            $i->setCompressionQuality((int) $quality);
+            $i->setImageCompressionQuality((int) $quality);
         }
 
         if($format == "tiff") {
-            $this->resource->setCompression(Imagick::COMPRESSION_LZW);
+            $i->setCompression(Imagick::COMPRESSION_LZW);
         }
 
-        $this->resource->writeImage($format . ":" . $path);
+        if(defined("HHVM_VERSION")) {
+            $i->writeImage($path);
+        } else {
+            $i->writeImage($format . ":" . $path);
+        }
 
         return $this;
     }
@@ -238,8 +254,8 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
         if($this->isVectorGraphic()) {
             // the resolution has to be set before loading the image, that's why we have to destroy the instance and load it again
             $res = $this->resource->getImageResolution();
-            $x_ratio = $res['x'] / $this->resource->getImageWidth();
-            $y_ratio = $res['y'] / $this->resource->getImageHeight();
+            $x_ratio = $res['x'] / $this->getWidth();
+            $y_ratio = $res['y'] / $this->getHeight();
             $this->resource->removeImage();
 
             $this->resource->setResolution($width * $x_ratio, $height * $y_ratio);
@@ -300,7 +316,7 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
 
 
         $newImage = $this->createImage($width, $height);
-        $newImage->compositeImage($this->resource, Imagick::COMPOSITE_COPY , $x, $y);
+        $newImage->compositeImage($this->resource, Imagick::COMPOSITE_DEFAULT , $x, $y);
         $this->resource = $newImage;
 
         $this->setWidth($width);
@@ -527,19 +543,77 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
         return $this;
     }
 
-    public function isVectorGraphic () {
+    public function isVectorGraphic ($imagePath = null) {
 
-        try {
-            $type = $this->resource->getimageformat();
-            $vectorTypes = array("EPT","EPDF","EPI","EPS","EPS2","EPS3","EPSF","EPSI","EPT","PDF","PFA","PFB","PFM","PS","PS2","PS3","PSB","SVG","SVGZ");
+        if($imagePath) {
+            // use file-extension if filename is provided
+            return in_array(Pimcore_File::getFileExtension($imagePath), ["svg","svgz","eps","pdf","ps"]);
+        } else {
+            try {
+                $type = $this->resource->getimageformat();
+                $vectorTypes = array("EPT","EPDF","EPI","EPS","EPS2","EPS3","EPSF","EPSI","EPT","PDF","PFA","PFB","PFM","PS","PS2","PS3","SVG","SVGZ");
 
-            if(in_array($type,$vectorTypes)) {
-                return true;
+                if(in_array($type,$vectorTypes)) {
+                    return true;
+                }
+            } catch (Exception $e) {
+                Logger::err($e);
             }
-        } catch (Exception $e) {
-            Logger::err($e);
         }
 
         return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDimensions() {
+
+        if($vectorDimensions = $this->getVectorFormatEmbeddedRasterDimensions()) {
+            return $vectorDimensions;
+        }
+
+        return [
+            "width" => $this->resource->getImageWidth(),
+            "height" => $this->resource->getImageHeight()
+        ];
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getVectorFormatEmbeddedRasterDimensions() {
+        if(in_array($this->resource->getimageformat(), ["EPT","EPDF","EPI","EPS","EPS2","EPS3","EPSF","EPSI","EPT","PDF","PFA","PFB","PFM","PS","PS2","PS3"])) {
+            // we need a special handling for PhotoShop EPS
+            $i = 0;
+
+            ini_set("auto_detect_line_endings", true); // we need to turn this on, as the damn f****** Mac has different line endings in EPS files, Prost Mahlzeit!
+
+            $epsFile = fopen($this->imagePath, 'r');
+            while (($eps_line = fgets($epsFile)) && ($i < 100)) {
+                if(preg_match("/%ImageData: ([0-9]+) ([0-9]+)/i", $eps_line,$matches)) {
+                    return [
+                        "width" => $matches[1],
+                        "height" => $matches[2]
+                    ];
+                    break;
+                }
+                $i++;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVectorRasterDimensions() {
+
+        if($vectorDimensions = $this->getVectorFormatEmbeddedRasterDimensions()) {
+            return $vectorDimensions;
+        }
+
+        return parent::getVectorRasterDimensions();
     }
 }

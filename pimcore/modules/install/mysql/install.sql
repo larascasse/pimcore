@@ -17,6 +17,7 @@ CREATE TABLE `assets` (
   KEY `path` (`path`)
 ) AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `assets_metadata`;
 CREATE TABLE `assets_metadata` (
   `cid` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -112,6 +113,19 @@ CREATE TABLE `content_index` (
   `lastUpdate` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lastUpdate` (`lastUpdate`)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `custom_layouts` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`classId` INT(11) UNSIGNED NOT NULL,
+	`name` VARCHAR(255) NULL DEFAULT NULL,
+	`description` TEXT NULL,
+	`creationDate` BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+	`modificationDate` BIGINT(20) UNSIGNED NULL DEFAULT NULL,
+	`userOwner` INT(11) UNSIGNED NULL DEFAULT NULL,
+	`userModification` INT(11) UNSIGNED NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `name` (`name`, `classId`)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `dependencies` ;
@@ -322,18 +336,20 @@ CREATE TABLE `keyvalue_groups` (
 
 DROP TABLE IF EXISTS `keyvalue_keys`;
 CREATE TABLE `keyvalue_keys` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL DEFAULT '',
-  `description` TEXT,
-  `type` enum('bool','number','select','text') DEFAULT NULL,
-  `unit` VARCHAR(255),
-  `possiblevalues` TEXT,
-  `group` INT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `description` text,
+  `type` enum('bool','number','select','text','translated') DEFAULT NULL,
+  `unit` varchar(255) DEFAULT NULL,
+  `possiblevalues` text,
+  `group` int(11) DEFAULT NULL,
   `creationDate` bigint(20) unsigned DEFAULT '0',
   `modificationDate` bigint(20) unsigned DEFAULT '0',
+  `translator` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `group` (`group`)
-) DEFAULT CHARSET=utf8;
+  KEY `group` (`group`),
+  CONSTRAINT `keyvalue_keys_ibfk_1` FOREIGN KEY (`group`) REFERENCES `keyvalue_groups` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `locks`;
 CREATE TABLE `locks` (
@@ -723,6 +739,7 @@ CREATE TABLE `users_workspaces_object` (
   `properties` tinyint(1) unsigned DEFAULT '0',
   `lEdit` text,
   `lView` text,
+  `layouts` text,
   PRIMARY KEY (`cid`, `userId`),
   KEY `cid` (`cid`),
   KEY `userId` (`userId`)

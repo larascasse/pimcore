@@ -15,8 +15,10 @@
 pimcore.registerNS("pimcore.object.object");
 pimcore.object.object = Class.create(pimcore.object.abstract, {
 
-    initialize: function(id) {
+    initialize: function(id, options) {
         pimcore.plugin.broker.fireEvent("preOpenObject", this, "object");
+
+        this.options = options;
 
         this.addLoadingPanel();
 
@@ -36,9 +38,16 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
     },
 
     getData: function () {
+        var params = {id: this.id};
+        if (this.options !== undefined) {
+            if (this.options.layoutId) {
+                params.layoutId = this.options.layoutId;
+            }
+        }
+
         Ext.Ajax.request({
             url: "/admin/object/get/",
-            params: {id: this.id},
+            params: params,
             success: this.getDataComplete.bind(this)
         });
     },
@@ -210,9 +219,15 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
             items.push(reportLayout);
         }
 
-        if (this.isAllowed("settings")) {
-            items.push(this.notes.getLayout());
+
+
+        var user = pimcore.globalmanager.get("user");
+        if (user.admin || (this.isAllowed("settings") && in_array("notes_events", user.permissions))) {
+            if (this.isAllowed("settings")) {
+                items.push(this.notes.getLayout());
+            }
         }
+
 
         if(this.data.childdata.data.classes.length > 0) {
             this.search = new pimcore.object.search(this.data.childdata);
@@ -291,12 +306,32 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
                 handler: this.unpublish.bind(this)
             });
 
-            this.toolbarButtons.reload = new Ext.Button({
+            var reloadConfig = {
                 text: t('reload'),
                 iconCls: "pimcore_icon_reload_medium",
                 scale: "medium",
-                handler: this.reload.bind(this)
-            });
+                handler: this.reload.bind(this, this.data.currentLayoutId)
+            }
+
+            if (this.data["validLayouts"] && this.data.validLayouts.length > 1) {
+                var menu = [];
+                for (var i = 0; i < this.data.validLayouts.length; i++) {
+                    var menuLabel = ts(this.data.validLayouts[i].name);
+                    if (Number(this.data.currentLayoutId) == this.data.validLayouts[i].id) {
+                        menuLabel = "<b>" + menuLabel + "</b>";
+                    }
+                    menu.push(
+                        {
+                            text: menuLabel,
+                            iconCls: "pimcore_icon_reload",
+                            handler: this.reload.bind(this, this.data.validLayouts[i].id)
+                        });
+                    reloadConfig.menu = menu;
+                }
+                this.toolbarButtons.reload = new Ext.SplitButton(reloadConfig);
+            } else {
+                this.toolbarButtons.reload = new Ext.Button(reloadConfig);
+            }
 
             this.toolbarButtons.remove = new Ext.Button({
                 text: t("delete"),
@@ -373,7 +408,7 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
 
             // check for newer version than the published
             if (this.data.versions.length > 0) {
-                if (this.data.general.o_modificationDate != this.data.versions[0].date) {
+                if (this.data.general.o_modificationDate < this.data.versions[0].date) {
                     this.newerVersionNotification.show();
                 }
             }
@@ -403,18 +438,6 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
     activate: function () {
         var tabId = "object_" + this.id;
         this.tabPanel.activate(tabId);
-    },
-
-    maskFrames: function () {
-        if (this.edit) {
-            this.edit.maskFrames();
-        }
-    },
-
-    unmaskFrames: function () {
-        if (this.edit) {
-            this.edit.unmaskFrames();
-        }
     },
 
     getSaveData : function (only, omitMandatoryCheck) {
@@ -550,7 +573,7 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
 
             // check for version notification
             if(this.newerVersionNotification) {
-                if(task == "publish") {
+                if(task == "publish" || task == "unpublish") {
                     this.newerVersionNotification.hide();
                 } else if(task != "session") {
                     this.newerVersionNotification.show();
@@ -613,9 +636,13 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
         return this.data.userPermissions[key];
     },
 
-    reload: function () {
+    reload: function (layoutId) {
+        var options = {};
+        if (layoutId) {
+            options.layoutId = layoutId;
+        }
         window.setTimeout(function (id) {
-            pimcore.helpers.openObject(id, "object");
+            pimcore.helpers.openObject(id, "object", options);
         }.bind(window, this.id), 500);
 
         pimcore.helpers.closeObject(this.id);

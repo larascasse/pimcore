@@ -96,7 +96,7 @@ pimcore.helpers.openWelcomePage = function() {
     }
 }
 
-pimcore.helpers.openAsset = function (id, type, ignoreForHistory) {
+pimcore.helpers.openAsset = function (id, type, options) {
 
     if (pimcore.globalmanager.exists("asset_" + id) == false) {
 
@@ -111,9 +111,11 @@ pimcore.helpers.openAsset = function (id, type, ignoreForHistory) {
 
         pimcore.helpers.rememberOpenTab("asset_" + id + "_" + type);
 
-        if (ignoreForHistory) {
-            var element = pimcore.globalmanager.get("asset_" + id);
-            element.setAddToHistory(false);
+        if (options != undefined) {
+            if (options.ignoreForHistory) {
+                var element = pimcore.globalmanager.get("asset_" + id);
+                element.setAddToHistory(false);
+            }
         }
 
     }
@@ -132,16 +134,18 @@ pimcore.helpers.closeAsset = function (id) {
     pimcore.globalmanager.remove("asset_" + id);
 };
 
-pimcore.helpers.openDocument = function (id, type, ignoreForHistory) {
+pimcore.helpers.openDocument = function (id, type, options) {
     if (pimcore.globalmanager.exists("document_" + id) == false) {
         if (pimcore.document[type]) {
             pimcore.helpers.addTreeNodeLoadingIndicator("document", id);
             pimcore.globalmanager.add("document_" + id, new pimcore.document[type](id));
             pimcore.helpers.rememberOpenTab("document_" + id + "_" + type);
 
-            if (ignoreForHistory) {
-                var element = pimcore.globalmanager.get("document_" + id);
-                element.setAddToHistory(false);
+            if (options !== undefined) {
+                if (options.ignoreForHistory) {
+                    var element = pimcore.globalmanager.get("document_" + id);
+                    element.setAddToHistory(false);
+                }
             }
         }
     }
@@ -161,7 +165,7 @@ pimcore.helpers.closeDocument = function (id) {
     pimcore.globalmanager.remove("document_" + id);
 };
 
-pimcore.helpers.openObject = function (id, type, ignoreForHistory) {
+pimcore.helpers.openObject = function (id, type, options) {
     if (pimcore.globalmanager.exists("object_" + id) == false) {
         pimcore.helpers.addTreeNodeLoadingIndicator("object", id);
 
@@ -169,12 +173,14 @@ pimcore.helpers.openObject = function (id, type, ignoreForHistory) {
             type = "object";
         }
 
-        pimcore.globalmanager.add("object_" + id, new pimcore.object[type](id));
+        pimcore.globalmanager.add("object_" + id, new pimcore.object[type](id, options));
         pimcore.helpers.rememberOpenTab("object_" + id + "_" + type);
 
-        if (ignoreForHistory) {
-            var element = pimcore.globalmanager.get("object_" + id);
-            element.setAddToHistory(false);
+        if (options !== undefined) {
+            if (options.ignoreForHistory) {
+                var element = pimcore.globalmanager.get("object_" + id);
+                element.setAddToHistory(false);
+            }
         }
     }
     else {
@@ -339,47 +345,6 @@ pimcore.helpers.openSeemode = function () {
     }
 };
 
-pimcore.helpers.dndMaskFrames = function () {
-    var tabpanel = Ext.getCmp("pimcore_panel_tabs");
-    var activeTab = tabpanel.getActiveTab();
-
-    if (activeTab) {
-        // check for opened document
-        if (activeTab.initialConfig.document) {
-            if (typeof activeTab.initialConfig.document.maskFrames == "function") {
-                activeTab.initialConfig.document.maskFrames();
-            }
-        }
-        // check for opened object
-        if (activeTab.initialConfig.object) {
-            if (typeof activeTab.initialConfig.object.maskFrames == "function") {
-                activeTab.initialConfig.object.maskFrames();
-            }
-        }
-    }
-};
-
-pimcore.helpers.dndUnmaskFrames = function () {
-    var tabpanel = Ext.getCmp("pimcore_panel_tabs");
-    var activeTab = tabpanel.getActiveTab();
-
-    if (activeTab) {
-        // check for opened document
-        if (activeTab.initialConfig.document) {
-            if (typeof activeTab.initialConfig.document.unmaskFrames == "function") {
-                activeTab.initialConfig.document.unmaskFrames();
-            }
-        }
-        // check for opened object
-        if (activeTab.initialConfig.object) {
-            if (typeof activeTab.initialConfig.object.unmaskFrames == "function") {
-                activeTab.initialConfig.object.unmaskFrames();
-            }
-        }
-    }
-
-};
-
 pimcore.helpers.isValidFilename = function (value) {
     var result = value.match(/[a-zA-Z0-9_.\-~]+/);
     if (result == value) {
@@ -481,14 +446,23 @@ pimcore.helpers.handleCtrlS = function () {
 
     if (activeTab) {
         // for document
-        if (activeTab.initialConfig.document) {
-            activeTab.initialConfig.document.publish();
+        var el = activeTab.initialConfig;
+        if (el.document) {
+            if(el.document.data.published) {
+                el.document.publish();
+            } else {
+                el.document.unpublish();
+            }
         }
-        else if (activeTab.initialConfig.object) {
-            activeTab.initialConfig.object.publish();
+        else if (el.object) {
+            if(el.object.data.general.o_published) {
+                el.object.publish();
+            } else {
+                el.object.unpublish();
+            }
         }
-        else if (activeTab.initialConfig.asset) {
-            activeTab.initialConfig.asset.save();
+        else if (el.asset) {
+            el.asset.save();
         }
     }
 };
@@ -655,8 +629,13 @@ pimcore.helpers.deleteAssetCheckDependencyComplete = function (id, callback, res
     try {
         var res = Ext.decode(response.responseText);
         var message = res.batchDelete ? t('delete_message_batch') : t('delete_message');
+
         if (res.hasDependencies) {
-            var message = t('delete_message_dependencies');
+            message += "<br />" + t('delete_message_dependencies');
+        }
+
+        if(res["childs"] > 100) {
+            message += "<br /><br /><b>" + t("too_many_children_for_recyclebin") + "</b>";
         }
 
         Ext.MessageBox.show({
@@ -782,9 +761,15 @@ pimcore.helpers.deleteDocumentCheckDependencyComplete = function (id, callback, 
     try {
         var res = Ext.decode(response.responseText);
         var message = t('delete_message');
+
         if (res.hasDependencies) {
-            message = t('delete_message_dependencies');
+            message += "<br />" + t('delete_message_dependencies');
         }
+
+        if(res["childs"] > 100) {
+            message += "<br /><br /><b>" + t("too_many_children_for_recyclebin") + "</b>";
+        }
+
         Ext.MessageBox.show({
             title:t('delete'),
             msg: message,
@@ -908,8 +893,13 @@ pimcore.helpers.deleteObjectCheckDependencyComplete = function (id, callback, re
         var res = Ext.decode(response.responseText);
         var message = res.batchDelete ? t('delete_message_batch') : t('delete_message');
         if (res.hasDependencies) {
-            var message = t('delete_message_dependencies');
+            message += "<br />" + t('delete_message_dependencies');
         }
+
+        if(res["childs"] > 100) {
+            message += "<br /><br /><b>" + t("too_many_children_for_recyclebin") + "</b>";
+        }
+
         Ext.MessageBox.show({
             title:t('delete'),
             msg: message,
@@ -1029,7 +1019,7 @@ pimcore.helpers.getOpenTab = function () {
 
 pimcore.helpers.clearOpenTab = function () {
     localStorage.setItem("pimcore_opentabs", JSON.stringify([]));
-}
+};
 
 pimcore.helpers.rememberOpenTab = function (item) {
     var openTabs = pimcore.helpers.getOpenTab();
@@ -1067,15 +1057,15 @@ pimcore.helpers.openMemorizedTabs = function () {
     for(var i=0; i<openTabs.length; i++) {
         if(!empty(openTabs[i])) {
             if(!in_array(openTabs[i], openedTabs)) {
-                parts = openTabs[i].split("_");
+                var parts = openTabs[i].split("_");
                 window.setTimeout(function (parts) {
                     if(parts[1] && parts[2]) {
                         if(parts[0] == "asset") {
-                            pimcore.helpers.openAsset(parts[1], parts[2], true);
+                            pimcore.helpers.openAsset(parts[1], parts[2], { ignoreForHistory: true});
                         } else if(parts[0] == "document") {
-                            pimcore.helpers.openDocument(parts[1], parts[2], true);
+                            pimcore.helpers.openDocument(parts[1], parts[2], { ignoreForHistory: true});
                         } else if(parts[0] == "object") {
-                            pimcore.helpers.openObject(parts[1], parts[2], true);
+                            pimcore.helpers.openObject(parts[1], parts[2], { ignoreForHistory: true});
                         }
                     }
                 }.bind(this, parts), 200);
@@ -1439,14 +1429,16 @@ pimcore.helpers.treeNodeThumbnailPreview = function (tree, parent, node, index) 
                 if(thumbnails && thumbnails.length) {
                     imageHtml += '<div class="thumbnails">';
                     for(var i=0; i<thumbnails.length; i++) {
-                        imageHtml += '<div class="thumb small"><img src="' + uriPrefix + thumbnails[i] + '" onload="this.parentNode.className += \' complete\';" /></div>';
+                        imageHtml += '<div class="thumb small"><img src="' + uriPrefix + thumbnails[i]
+                            + '" onload="this.parentNode.className += \' complete\';" /></div>';
                     }
                     imageHtml += '</div>';
                 }
 
                 var thumbnail = node.attributes.thumbnail;
                 if(thumbnail) {
-                    imageHtml = '<div class="thumb big"><img src="' + uriPrefix + thumbnail + '" onload="this.parentNode.className += \' complete\';" /></div>';
+                    imageHtml = '<div class="thumb big"><img src="' + uriPrefix + thumbnail
+                                    + '" onload="this.parentNode.className += \' complete\';" /></div>';
                 }
 
                 if(imageHtml) {
@@ -1556,7 +1548,7 @@ pimcore.helpers.showUser = function(specificUser) {
             panel.activate();
         }
         catch (e) {
-            panel = new pimcore.settings.user.panel()
+            panel = new pimcore.settings.user.panel();
             pimcore.globalmanager.add("users", panel);
         }
 
@@ -1729,7 +1721,7 @@ pimcore.helpers.searchAndMove = function (parentId, callback, type) {
             specific: {
                 classes: null
             }
-        }
+        };
     } else {
         config = {
             type: [type]

@@ -16,27 +16,12 @@ pimcore.registerNS("pimcore.settings.user.workspace.language");
 
 pimcore.settings.user.workspace.language = Class.create({
 
-    initialize: function (callback, data, path) {
-        this.callback = callback;
+    initialize: function (type, data) {
+        this.type = type;
         this.data = data;
-        this.path = path;
     },
 
-    show: function() {
-        this.window = new Ext.Window({
-            layout:'fit',
-            width:500,
-            height:500,
-            autoScroll: true,
-            closeAction:'close',
-            modal: true
-        });
-
-
-        var panelConfig = {
-            items: []
-        };
-
+    getLayout: function() {
         var data = [];
         var nrOfLanguages = pimcore.settings.websiteLanguages.length;
         for (var i = 0; i < nrOfLanguages; i++) {
@@ -51,36 +36,29 @@ pimcore.settings.user.workspace.language = Class.create({
             editable: false,
             store: data,
             hideLabel: true,
-            width: 460,
-            height: 390,
+            width: 350,
+            height: 480,
             value: this.data
+
         };
 
         this.box = new Ext.ux.form.MultiSelect(options);
 
-
-        panelConfig.items.push({
+        this.window = new Ext.Panel({
             xtype: "form",
             bodyStyle: "padding: 10px;",
-            items: [this.box],
-            title: this.path,
-            bbar: ["->",
-                {
-                    xtype: "button",
-                    iconCls: "pimcore_icon_apply",
-                    text: t('apply'),
-                    handler: this.applyData.bind(this)
-                }
-            ]
+            items: [this.box]
         });
 
-        this.window.add(new Ext.Panel(panelConfig));
-        this.window.show();
+        return this.window;
     },
 
-    applyData: function() {
+    getValue: function() {
         var value = this.box.getValue();
-        this.window.close();
-        this.callback(value);
+        return value;
+    },
+
+    getType: function() {
+        return this.type;
     }
 });

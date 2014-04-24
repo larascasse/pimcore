@@ -1,4 +1,5 @@
 <?php
+include ("../../pimcore/cli/startup.php");
 
 // get db connection
 $db = Pimcore_Resource::get();

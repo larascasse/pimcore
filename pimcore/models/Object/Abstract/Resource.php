@@ -340,6 +340,15 @@ class Object_Abstract_Resource extends Element_Resource
         return false;
     }
 
+    /**
+     *
+     */
+    public function unlockPropagate() {
+        $lockIds = $this->db->fetchCol("SELECT o_id from objects WHERE o_path LIKE " . $this->db->quote($this->model->getFullPath() . "/%") . " OR o_id = " . $this->model->getId());
+        $this->db->delete("tree_locks", "type = 'object' AND id IN (" . implode(",", $lockIds) . ")");
+        return $lockIds;
+    }
+
     public function getClasses()
     {
         if ($this->getChildAmount()) {
@@ -411,21 +420,48 @@ class Object_Abstract_Resource extends Element_Resource
         return false;
     }
 
-    public function getLocalizedPermissions($type, $user) {
+    public function getPermissions($type, $user, $quote = true) {
         $parentIds = $this->collectParentIds();
 
         $userIds = $user->getRoles();
         $userIds[] = $user->getId();
 
         try {
-            $permissions = $this->db->fetchRow("SELECT `" . $type . "` FROM users_workspaces_object WHERE cid IN (" . implode(",", $parentIds) . ") AND userId IN (" . implode(",", $userIds) . ") ORDER BY LENGTH(cpath) DESC LIMIT 1");
+            if ($type && $quote) {
+                $type = "`" . $type . "`";
+            } else {
+                $type = "*";
+            }
+
+            $permissions = $this->db->fetchRow("SELECT " . $type . " FROM users_workspaces_object WHERE cid IN (" . implode(",", $parentIds) . ") AND userId IN (" . implode(",", $userIds) . ") ORDER BY LENGTH(cpath) DESC LIMIT 1");
         } catch (Exception $e) {
             Logger::warn("Unable to get permission " . $type . " for object " . $this->model->getId());
         }
 
         return $permissions;
-
     }
 
+    public function getChildPermissions($type, $user, $quote = true) {
+//        $parentIds = $this->collectParentIds();
+
+        $userIds = $user->getRoles();
+        $userIds[] = $user->getId();
+
+        try {
+            if ($type && $quote) {
+                $type = "`" . $type . "`";
+            } else {
+                $type = "*";
+            }
+
+            $cid = $this->model->getId();
+            $sql = "SELECT " . $type . " FROM users_workspaces_object WHERE cid != " . $cid . " AND cpath LIKE " . $this->db->quote($this->model->getFullPath() . "%") . " AND userId IN (" . implode(",", $userIds) . ") ORDER BY LENGTH(cpath) DESC";
+            $permissions = $this->db->fetchAll($sql);
+        } catch (Exception $e) {
+            Logger::warn("Unable to get permission " . $type . " for object " . $this->model->getId());
+        }
+
+        return $permissions;
+    }
 
 }

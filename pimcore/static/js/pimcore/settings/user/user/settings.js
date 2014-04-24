@@ -56,7 +56,7 @@ pimcore.settings.user.user.settings = Class.create({
             enableKeyEvents: true,
             listeners: {
                 keyup: function (el) {
-                    if(/^(?=.*\d)(?=.*[a-zA-Z]).{6,50}$/.test(el.getValue())) {
+                    if(/^(?=.*\d)(?=.*[a-zA-Z]).{6,100}$/.test(el.getValue())) {
                         el.getEl().addClass("password_valid");
                         el.getEl().removeClass("password_invalid");
                     } else {
@@ -98,11 +98,13 @@ pimcore.settings.user.user.settings = Class.create({
                 xtype:"button",
                 text: t("upload"),
                 handler: function () {
-                    pimcore.helpers.uploadDialog("/admin/user/upload-image?id=" + this.currentUser.id, null, function () {
-                        var cont = Ext.getCmp("pimcore_user_image_" + this.currentUser.id);
-                        var date = new Date();
-                        cont.update('<img src="/admin/user/get-image?id=' + this.currentUser.id + '&_dc=' + date.getTime() + '" />');
-                    }.bind(this))
+                    pimcore.helpers.uploadDialog("/admin/user/upload-image?id=" + this.currentUser.id, null,
+                        function () {
+                            var cont = Ext.getCmp("pimcore_user_image_" + this.currentUser.id);
+                            var date = new Date();
+                            cont.update('<img src="/admin/user/get-image?id='
+                                                    + this.currentUser.id + '&_dc=' + date.getTime() + '" />');
+                        }.bind(this));
                 }.bind(this)
             }]
         });
@@ -259,7 +261,8 @@ pimcore.settings.user.user.settings = Class.create({
                     success: function (response) {
                         var res = Ext.decode(response.responseText);
                         if(res["link"]) {
-                            Ext.MessageBox.alert("", t("login_as_this_user_description") + ' <br /><br /><textarea style="width:100%;height:70px;">' + res["link"] + "</textarea>");
+                            Ext.MessageBox.alert("", t("login_as_this_user_description")
+                                            + ' <br /><br /><textarea style="width:100%;height:70px;">' + res["link"] + "</textarea>");
                         }
                     }
                 });
@@ -334,7 +337,7 @@ pimcore.settings.user.user.settings = Class.create({
 
         var values = this.panel.getForm().getFieldValues();
         if(values["password"]) {
-            if(!/^(?=.*\d)(?=.*[a-zA-Z]).{6,50}$/.test(values["password"])) {
+            if(!/^(?=.*\d)(?=.*[a-zA-Z]).{6,100}$/.test(values["password"])) {
                 delete values["password"];
                 Ext.MessageBox.alert(t('error'), t("password_was_not_changed"));
             }

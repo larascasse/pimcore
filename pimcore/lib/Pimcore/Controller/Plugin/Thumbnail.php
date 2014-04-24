@@ -31,7 +31,7 @@ class Pimcore_Controller_Plugin_Thumbnail extends Zend_Controller_Plugin_Abstrac
                 try {
 
                     $thumbnailConfig = null;
-                    $deferredConfig = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/thumb_" . $assetId . "__" . $thumbnailName . "." . $format . ".deferred.config";
+                    $deferredConfig = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/thumb_" . $assetId . "__" . md5($request->getPathInfo()) . ".deferred.config";
                     if(file_exists($deferredConfig)) {
                         $thumbnailConfig = unserialize(file_get_contents($deferredConfig));
                         @unlink($deferredConfig); // cleanup, this isn't needed anymore
@@ -83,5 +83,31 @@ class Pimcore_Controller_Plugin_Thumbnail extends Zend_Controller_Plugin_Abstrac
                 }
             }
         }
+    }
+
+
+    public function dispatchLoopShutdown() {
+
+        if(!Asset_Image_Thumbnail::isPictureElementInUse()) {
+            return;
+        }
+
+        if(!Pimcore_Tool::isHtmlResponse($this->getResponse())) {
+            return;
+        }
+
+
+        // analytics
+        $body = $this->getResponse()->getBody();
+
+        // search for the end <head> tag, and insert the google analytics code before
+        // this method is much faster than using simple_html_dom and uses less memory
+        $code = '<script type="text/javascript" src="/pimcore/static/js/frontend/picturePolyfill.min.js" defer></script>';
+        $headEndPosition = stripos($body, "</head>");
+        if($headEndPosition !== false) {
+            $body = substr_replace($body, $code."</head>", $headEndPosition, 7);
+        }
+
+        $this->getResponse()->setBody($body);
     }
 }

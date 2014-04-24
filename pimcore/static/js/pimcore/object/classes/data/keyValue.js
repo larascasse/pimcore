@@ -67,6 +67,7 @@ pimcore.object.classes.data.keyValue = Class.create(pimcore.object.classes.data.
         var multivalent = 0;
         var metavisible = 0;
         var metaWidth = 200;
+        var metaVisible = false;
 
         if (this.datax.keyWidth) {
             keyWidth = this.datax.keyWidth;
@@ -161,6 +162,7 @@ pimcore.object.classes.data.keyValue = Class.create(pimcore.object.classes.data.
                 name: "multivalent",
                 value: multivalent,
                 checked: multivalent,
+                disabled: this.isInCustomLayoutEditor(),
                 fieldLabel: t("keyvalue_data_multivalent"),
                 width: 300
             }

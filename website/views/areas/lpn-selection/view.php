@@ -1,6 +1,6 @@
 
 <?php if (!$this->editmode) { ?>
-<textarea>
+<!--<textarea>-->
 <?php } ?>
 <?php while($this->block("block")->loop()) {
     $ean="";
@@ -107,5 +107,5 @@
 
 
 <?php if (!$this->editmode) { ?>
-</textarea>
+<!--<t/extarea>-->
 <?php } ?>

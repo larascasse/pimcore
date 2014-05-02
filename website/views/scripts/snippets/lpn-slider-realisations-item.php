@@ -1,5 +1,5 @@
 <?php if (!$this->editmode) { ?>
-<textarea>
+<!--<textarea>-->
 <?php } ?>
 <div id="home_realisation" class="row">
 <ul id="slider_realisation">
@@ -59,14 +59,16 @@ else
 <div class="realisationcontent"><?php if($this->editmode) echo "Content";?><?= $this->input("cContent_".$i, ["width" => 900]); ?></div>
 <div class="jspush">
 <?php if ($this->editmode) { 
-    echo $this->href("cProduct".$i,array(
+    echo 'Product :'.$this->href("cProduct".$i,array(
         "types"=>array("object"),
         "classes" => array("product"),
         "reload" => true,
+        "width" =>200,
     )); 
 
-    echo $this->href("cGallery".$i,array(
+    echo 'Gallery :'.$this->href("cGallery".$i,array(
         "types"=>array("asset"),
+        "width" =>200,
     )); 
 
 
@@ -79,10 +81,16 @@ else
                 $ean =  $product->getCode();
         }
         else {
-            $ean = $this->image("cImage_".$i)->getImage()->getMetadata("product");
-            $product = Object_Product::getByEan($ean)->objects[0];
+            $product = $this->image("cImage_".$i)->getImage()->getProperty("product");
             if(!$product) {
-                $product = Object_Product::getByCode($ean)->objects[0];
+                $ean = $this->image("cImage_".$i)->getImage()->getMetadata("product");
+                $product = Object_Product::getByEan($ean)->objects[0];
+                if(!$product) {
+                    $product = Object_Product::getByCode($ean)->objects[0];
+                }
+            }
+            else {
+                $ean=$product->getEan()?$product->getEan():$product->getCode();
             }
             
         }
@@ -126,5 +134,5 @@ else
 <?php } ?>
 
 <?php if (!$this->editmode) { ?>
-</textarea>
+<!--</textarea>-->
 <?php } ?>

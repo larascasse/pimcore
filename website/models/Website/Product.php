@@ -235,10 +235,19 @@ class Website_Product extends Object_Product {
 
 
 	public function getCharacteristics($isHTML=true) {
+
+		 $inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+   
+  
+
+
+
+
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
@@ -322,6 +331,7 @@ class Website_Product extends Object_Product {
 			}
 								
 		}
+		 Object_Abstract::setGetInheritedValues($inheritance); 
 
 		if($isHTML) {
 			$html ="<ul>\n";
@@ -343,10 +353,16 @@ class Website_Product extends Object_Product {
 			$html .="";
 			return $html;
 		}
+		  
 		
 	}
 
 	public function getMage_guideline() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+
 		$articles = $this->getAssociatedArticles();
 		$str="";
 		if($articles) {
@@ -362,6 +378,7 @@ class Website_Product extends Object_Product {
 			}
 			$str.="</ul>";
 		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 	}
 	public function getMage_fichepdf() {
@@ -370,25 +387,39 @@ class Website_Product extends Object_Product {
 		return null;
 	}
 	public function getMage_short_name() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
-    	if(strlen($this->getShort_name())>0)
+    	if(strlen($this->getShort_name())>0) {
+    		Object_Abstract::setGetInheritedValues($inheritance); 
+
     		return $this->getShort_name();
+    	}
     	else if($this->getName()) {
 
     		$str = $this->getName();
     		$str = str_replace($this->getSubtype(), "", $str);
     		$str =trim($str);
     		$str = substr($str,0,50);
+    		Object_Abstract::setGetInheritedValues($inheritance); 
+
     		return $str;
     	}
 
 	}
 
 	public function getMage_sub_descrition() {
-		return "toto";
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true);
+
 		if($this->mage_sub_descrition)
 			return $this->mage_sub_descrition;
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
 
 		return parent::getMage_sub_descrition();
 	}
@@ -396,6 +427,10 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_config_description() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
@@ -450,11 +485,10 @@ class Website_Product extends Object_Product {
 			}
 								
 		}
-		/*$html ="<ul>\n";
-		foreach ($caracteristiques as $key => $value) {
-			$html.="<li>".$value["label"]." ".$value["content"]."</li>\n";
-		}
-		$html .="</ul>\n";*/
+		
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
+
 
 		$html ="<p>";
 		foreach ($caracteristiques as $key => $value) {
@@ -494,21 +528,115 @@ class Website_Product extends Object_Product {
 	}
 
 
+	public static function getFormatedDimension($value,$prefix="",$suffix="",$rounded=true) {
+		$value = str_replace(",",".", $value);
+		$rounded = false;
+
+		if(strlen($value)==1 && ($value=="0" || $value=="" || $value==0)) {
+			//echo $value."die";
+			return;
+		}
+
+        if(floatval($value)==$value && strlen($value)==strlen(floatval($value))) {
+        	//echo $value.floatval($value)."\n";
+        	$value = $rounded ? round($value):$value;
+        	if(strlen($suffix)>0) {
+	        	$value.=$suffix;
+	        }
+        }
+
+        if(strpos($value,"/")>0 && strlen($suffix)>0) {
+        	$value.=$suffix;
+        }
+        //echo "<br /> /--".$value."--/------";
+        if(strlen($prefix)>0) {
+        	$value= $prefix.": ".$value;
+        }
+       //echo "/--".$value."--/------";
+        if(strlen($value)>0) {
+        	//echo "OK !! $value\n";
+        	return $value;
+        }
+    }
+
+	private function getSingleDimentionString($field,$prefix,$suffix="mm",$rounded=true) {
+		$childrens = $this->getChilds();
+		$value = $this->$field;
+		$getter = "get" . ucfirst($field);
+			
+
+		
+		if(strlen($value)>0) {
+			//if($field="volume")
+				//self::getFormatedDimension($value,$prefix,$suffix,$rounded);
+			$varationString=self::getFormatedDimension($value,$prefix,$suffix,$rounded);
+
+			//if($field=="volume")
+			//	echo self::getFormatedDimension($value,$prefix,$suffix,$rounded);;
+		}
+		else if(!empty($this) && method_exists($this, $getter) && strlen($value = $this->getValueFromParent($field))>0) {
+
+			$varationString=self::getFormatedDimension($value,$prefix,$suffix,$rounded);
+		
+		}
+		else {
+			$childsDimension = array();
+
+			foreach ($childrens as $subProduct) {
+
+				if($subProduct->getEan()=="") {
+					$subProductChildrens = $subProduct->getChilds();
+					foreach ($subProductChildrens as $subsubProduct) {
+						if($subsubProduct->$field) {
+							$childsDimension[$subsubProduct->$field] = self::getFormatedDimension($subsubProduct->$field,"","",$rounded);
+						}
+					}
+
+				}
+				else {
+						
+						if($subProduct->$field) {
+							//if($field="volume")
+							//	self::getFormatedDimension($subProduct->$field,"","",$rounded);
+							$childsDimension[$subProduct->$field] = self::getFormatedDimension($subProduct->$field,"","",$rounded);
+							
+						}
+				}
+			}
+
+			if(count($childsDimension)>0) {
+				$varationString= self::getFormatedDimension(implode("/",$childsDimension),$prefix,$suffix,false);
+			}
+		}
+		/*if($field=="volume") {
+			print_r($childsDimension);
+			echo $varationString;
+		}*/
+		return $varationString;
+
+	}
+
+
 
 	public function getDimensionsString() {
+		$childrens = $this->getChilds();
 		$varationString =array();
-		if(round($this->getEpaisseur())>0)
-			$varationString[]="Ep: ".round($this->getEpaisseur())."mm";
+
+		if(strlen($value=$this->getSingleDimentionString("epaisseur","Ep"))>0) {
+			$varationString[]=$value;
+		}
+		if(strlen($value=$this->getSingleDimentionString("largeur","l"))>0) {
+			$varationString[]=$value;
+		}
+		if(strlen($value=$this->getSingleDimentionString("longueur","L"))>0) {
+			$varationString[]=$value;
+		}
+
+		if(strlen($value=$this->getSingleDimentionString("volume","V","",false))>0) {
+			$varationString[]=$value;
+		}
+
 		
-		if(round($this->getLargeur())>0)
-			$varationString[]="l: ".round($this->getLargeur())."mm";
-
-
-		if(round($this->getLongueur())>0) 
-			$varationString[]= "L: ".round($this->getLongueur())."mm";
-
-		if($this->getVolume())
-			$varationString[]=$this->getVolume()."L";
 
 		if($this->getHauteur())
 			$varationString[]=$this->getHauteur();
@@ -516,7 +644,7 @@ class Website_Product extends Object_Product {
 		if($this->getConditionnement())
 			$varationString[]=$this->getConditionnement();
 		
-		return count($varationString)>0?implode($varationString," / "):"";
+		return count($varationString)>0?implode($varationString,", "):"";
 	}
 
 	public function getDimensionsStringEtiquette() {
@@ -540,7 +668,7 @@ class Website_Product extends Object_Product {
 		if($this->getConditionnement())
 			$varationString[]=$this->getConditionnement();
 		
-		return count($varationString)>0?implode($varationString," / "):"";
+		return count($varationString)>0?implode($varationString,"/"):"";
 	}
 
 	public function getLesPlusArray() {
@@ -550,22 +678,34 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getMage_lesplus() {
+			$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
 
 		$lesplus = explode("\n",trim($this->getLesplus()));
 		$str="";
 		if(count($lesplus)) {
 			$str.="<ul>";
 			foreach ($lesplus as $item) {
+				$item = str_replace(": ","<br />",$item);
+				$item = str_replace(":","<br />",$item);
 				$str.="<li>".$item."</li>";			
 			}
 			$str.="</ul>";
 		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+
 		return $str;
 	}
 
 
 	public function getMage_description() {
-		return "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
+			$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+   		 $str = "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
+   		  Object_Abstract::setGetInheritedValues($inheritance); 
+		return $str;
+		   		
+
 	}
 
 
@@ -592,6 +732,9 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_realisations() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
 		$str="";
 		$realisations =$this->getRealisations();
 
@@ -621,7 +764,7 @@ class Website_Product extends Object_Product {
 
 				$str .= '<li>
 							<div class="nsg_container">
-								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation").'"></div>
+								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'"></div>
 		                		<div class="nsg_abs">
 		                    		<div class="realisationpicto">Nos r&eacute;alisations</div>
 									<!--<div class="realisationtitle">'.$this->getMage_short_name().'</div>
@@ -640,6 +783,7 @@ class Website_Product extends Object_Product {
 		    <a class="right carousel-control" href="#myCarousel2" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>';
 			$str .= '</div>';*/
 		}
+		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 	}
 

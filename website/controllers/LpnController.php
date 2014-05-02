@@ -21,6 +21,11 @@ class LpnController extends Website_Controller_Action
         $this->enableLayout();
     }
 
+    public function magentoAction() {
+        $this->view->layout()->setLayout("layout_magento");
+        $this->enableLayout();
+    }
+
 
     public function contactFormAction() {
         $success = false;

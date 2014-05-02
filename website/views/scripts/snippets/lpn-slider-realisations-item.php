@@ -1,6 +1,3 @@
-<?php if (!$this->editmode) { ?>
-<!--<textarea>-->
-<?php } ?>
 <div id="home_realisation" class="row">
 <ul id="slider_realisation">
 
@@ -50,7 +47,7 @@ else
 
 } else { 
 
-    echo '<img src="'.$urlImage.'" title="'.$this->image("cImage_".$i)->getText().'" alt="'.$this->image("cImage_".$i)->getAlt().'" class="norelazy" />';
+    echo '<img src="'.$urlImage.'" title="'.$this->image("cImage_".$i)->getText().'" alt="'.$this->image("cImage_".$i)->getAlt().'" class="'.($i==0?'norelazy':'').'" />';
 }
 ?></div>
 <div class="nsg_abs">
@@ -105,8 +102,8 @@ else
         }
         
 
-        echo '<div class="realisationpush">'.$name.'<br />'.$description .' | EAN : '.$ean.'</div>';
-        echo '<div class="realisationlink">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow"}}</div>';
+        echo '<div class="realisationpush col-xs-16 col-md-10">'.$name.'<br />'.$description .' | EAN : '.$ean.'</div>';
+        echo '<div class="realisationlink col-xs-16 col-md-6">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow pull-right"}}</div>';
         
 
   }
@@ -121,7 +118,7 @@ else
 </ul>
 <div class="clearfix">&nbsp;</div>
 <a id="slider_realisation_prev" class="prev" style="display: block;" href="#">&lt;</a> <a id="slider_realisation_next" class="next" style="display: block;" href="#">&gt;</a>
-<div id="slider_realisation_push">&nbsp;</div>
+<div id="slider_realisation_push" class="row">&nbsp;</div>
 </div>
 <?php if($this->editmode) { ?>
     <div class="container" style="padding-bottom: 40px">
@@ -131,8 +128,4 @@ else
             "store" => [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[9,9]]
         ]); ?>
     </div>
-<?php } ?>
-
-<?php if (!$this->editmode) { ?>
-<!--</textarea>-->
 <?php } ?>

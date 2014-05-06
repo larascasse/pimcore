@@ -22,7 +22,7 @@
 
 
     function formatPrice($price) {
-        return number_format($price,2,".");
+        return number_format($price,2,".","");
     }
 
     function convertScienergieName($name) {
@@ -251,6 +251,8 @@
 
     // ARTICLE
     public function importProcessAction($job=1) {
+                Object_Abstract::setGetInheritedValues(false);
+
 
         $success = true;
 
@@ -376,7 +378,7 @@
                 
                  if(empty($currentArticle->Ean)) {
                     $existingArticle = $currentArticle;
-                     echo "ARTICLE existe ".$existingArticle->getFullPath()."\n";
+                     //echo "ARTICLE existe ".$existingArticle->getFullPath()."\n";
                     
                     $intendedPath = $existingArticle->getFullPath();
                     $realParentId = $existingArticle->getParent()->getId();
@@ -385,7 +387,7 @@
             }
 
             if(!$existingArticle) {
-                echo "n'existe pas".$data[$keyCol]."\n";
+                echo "ARTICLE n'existe pas".$data[$keyCol]."\n";
 
             }
 
@@ -499,6 +501,8 @@
     }
     //
     public function importEanProcessAction($job=1) {
+                Object_Abstract::setGetInheritedValues(false);
+
 
         $success = true;
 
@@ -734,6 +738,10 @@
 
     public function importProduct($product) {
 
+
+        $inheritedValues = Object_Abstract::doGetInheritedValues();
+        Object_Abstract::setGetInheritedValues(false);
+
       
         $o_className = "product";
         $className=$o_className;
@@ -755,16 +763,20 @@
 
         $parent = Object_Abstract::getById($parentId);
 
+        Object_Abstract::setGetInheritedValues(false);
         $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($product["famille"])."/".$product["code"]);
-        //print_r($mapping);
-       
+        
 
         $objectKey = Pimcore_File::getValidFilename($product["ean"]);
         
    
         $overwrite = true;
         $canInsert = true;
-        $isUpdateing = false;
+        $isUpdating = false;
+
+
+
+
 
 
         $existingEan=null;
@@ -791,50 +803,49 @@
             else if($articleParent) {
                 $intendedPath = $articleParent->getFullPath() . "/" . $objectKey;
                 $objectParentId = $articleParent->getId();
+                 echo "article existe\n";
             }
-            if ($overwrite) {
-                $object = Object_Abstract::getByPath($intendedPath);
-                
-                if (!$object instanceof Object_Concrete) {
-                    //create new object
-                    $object = new $className();
-                } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
-                    //delete the old object it is of a different class
-                    $object->delete();
-                    $object = new $className();
-                } else if (object instanceof Object_Folder) {
-                    //delete the folder
-                    $object->delete();
-                    $object = new $className();
-                } else {
-                    $isUpdating = true;
-
-                }
-            } else {
-                $counter = 1;
-                while (Object_Abstract::getByPath($intendedPath) != null) {
-                    $objectKey .= "_" . $counter;
-                    $intendedPath = $parent->getFullPath() . "/" . $objectKey;
-                    $counter++;
-                }
+            
+            Object_Abstract::setGetInheritedValues(false);
+            $object = Object_Abstract::getByPath($intendedPath);
+            
+            if (!$object instanceof Object_Concrete) {
+                //create new object
                 $object = new $className();
+            } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
+                //delete the old object it is of a different class
+                $object->delete();
+                $object = new $className();
+            } else if (object instanceof Object_Folder) {
+                //delete the folder
+                $object->delete();
+                $object = new $className();
+            } else {
+                $isUpdating = true;
+
             }
-            $object->setClassId($classId);
-            $object->setClassName($o_className);
+           
+            
             $object->setParentId($objectParentId);
-            $object->setKey($objectKey);
-            if(!$isUpdating)
+            
+            if(!$isUpdating){
+                $object->setClassId($classId);
+                $object->setClassName($o_className);
                 $object->setCreationDate(time());
+                $object->setKey($objectKey);
+                $object->setUserOwner($userId);
+            }
+            
             if($isUpdating)
                 $object->setModificationDate(time());
 
-            $object->setUserOwner($userId);
+           
             $object->setUserModification($userId);
 
-            if ($product["published"] === "1") {
+            if ($product["published"]) {
                 $object->setPublished(true);
             } else {
-                //$object->setPublished(false);
+                $object->setPublished(false);
             }
 
 
@@ -923,6 +934,7 @@
                 echo "Error ".$e->getMessage();
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
+             Object_Abstract::setGetInheritedValues($inheritedValues);
         }
 
 
@@ -930,6 +942,7 @@
     }
 
     public function importProductPrice($product) {
+        Object_Abstract::setGetInheritedValues(false);
 
       
         $o_className = "product";
@@ -980,9 +993,75 @@
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
         }
+                Object_Abstract::setGetInheritedValues(true);
+
 
 
         //$this->_helper->json(array("success" => $success));
     }
+
+    public function clearInheritedValues($product) {
+        //if($product["ean"]!="3760102970126")
+        //    return;
+        
+        $inheritedValues = Object_Abstract::doGetInheritedValues();
+        Object_Abstract::setGetInheritedValues(false);
+
+      
+        $o_className = "product";
+        $className=$o_className;
+        $parentId = 2019;
+        $classId = 5;
+        $keyCol = 1;
+
+        $userId = 6;
+
+        $class = Object_Class::getById($classId );
+        $fields = $class->getFieldDefinitions();
+       
+
+        // create new object
+        $className = "Object_" . ucfirst($className);
+
+        $className = Pimcore_Tool::getModelClassMapping($className);
+        
+
+        $parent = Object_Abstract::getById($parentId);
+
+        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($product["famille"])."/".$product["code"]);
+        
+
+        $objectKey = Pimcore_File::getValidFilename($product["ean"]);
+        
+
+        $existingEan=null;
+        $existingProductList = Object_Product::getByEan($product["ean"]);
+        //print_r($parent);
+        if($existingProductList->count()==1) {
+            $existingEan = $existingProductList->current();
+             echo "EAN existe ".$existingEan->getFullPath()."\n";
+             
+        }
+        Object_Abstract::setGetInheritedValues(true); 
+
+        if($existingEan) {
+            $objectParent = $existingEan->getParent();
+            foreach ($class->getFieldDefinitions() as $key => $field) {
+                //echo "try ".$key." ".$field->fieldtype."\n";
+                $getter = "get" . ucfirst($key);
+                if($field->fieldtype!="nonownerobjects" && $field->fieldtype!="objects" && $existingEan->$key==$objectParent->$getter()) {
+                   // echo "clear ".$key." ".$field->fieldtype."\n";
+                    $existingEan->setValue($key,null);
+                }
+            
+           }
+           echo 'clear'.$product["ean"].'/n';
+           $existingEan->save();
+        }
+
+
+        //$this->_helper->json(array("success" => $success));
+    }
+
 
  }

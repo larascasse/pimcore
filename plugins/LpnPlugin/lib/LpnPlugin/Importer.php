@@ -764,7 +764,16 @@
         $parent = Object_Abstract::getById($parentId);
 
         Object_Abstract::setGetInheritedValues(false);
-        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($product["famille"])."/".$product["code"]);
+
+        $articleParentList = new Object_Product_List();
+        $articleParentList->setCondition('o_key = ?', $product["code"]);
+
+        if($articleParentList->count()!=1) {
+            $articleParent = null;
+        }
+        else {
+            $articleParent =  $articleParentList->current();
+        }
         
 
         $objectKey = Pimcore_File::getValidFilename($product["ean"]);
@@ -781,6 +790,7 @@
 
         $existingEan=null;
         $existingProductList = Object_Product::getByEan($product["ean"]);
+
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();

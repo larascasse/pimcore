@@ -84,6 +84,8 @@ public $mage_fichepdf;
 public $mage_invoice_description;
 public $mage_realisations;
 public $mage_config_description;
+public $mage_re_skus;
+public $mage_cs_skus;
 
 
 /**
@@ -1693,6 +1695,46 @@ public function getMage_config_description () {
 */
 public function setMage_config_description ($mage_config_description) {
 	$this->mage_config_description = $mage_config_description;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getMage_re_skus () {
+	$preValue = $this->preGetValue("mage_re_skus"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mage_re_skus;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_re_skus")->isEmpty($data)) { return $this->getValueFromParent("mage_re_skus");}
+	 return $data;
+}
+
+/**
+* @param string $mage_re_skus
+* @return void
+*/
+public function setMage_re_skus ($mage_re_skus) {
+	$this->mage_re_skus = $mage_re_skus;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getMage_cs_skus () {
+	$preValue = $this->preGetValue("mage_cs_skus"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mage_cs_skus;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_cs_skus")->isEmpty($data)) { return $this->getValueFromParent("mage_cs_skus");}
+	 return $data;
+}
+
+/**
+* @param string $mage_cs_skus
+* @return void
+*/
+public function setMage_cs_skus ($mage_cs_skus) {
+	$this->mage_cs_skus = $mage_cs_skus;
 	return $this;
 }
 

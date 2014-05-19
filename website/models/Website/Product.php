@@ -247,7 +247,7 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery","re_skus","cs_skus","us_skus");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
@@ -766,8 +766,8 @@ class Website_Product extends Object_Product {
 							<div class="nsg_container">
 								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'"></div>
 		                		<div class="nsg_abs">
-		                    		<div class="realisationpicto">Nos r&eacute;alisations</div>
-									<!--<div class="realisationtitle">'.$this->getMage_short_name().'</div>
+		                    		<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
+									<div class="realisationtitle">'.$this->getMage_short_name().'</div>
 									<div class="realisationcontent">'.$this->getName().'</div>-->
 									<div class="realisationtitle"></div>
 									<div class="realisationcontent"></div>
@@ -787,7 +787,7 @@ class Website_Product extends Object_Product {
 		return $str;
 	}
 
-	public function getRelated($field) {
+	public function getRelated($field,$onlyId=false) {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		$attributes = $this->getClass()->getFieldDefinitions();
 
@@ -804,13 +804,25 @@ class Website_Product extends Object_Product {
 					foreach($attributeValue as $object) {
 		
 						if($object->getClassName()=="product"  || $object->getClassName()=="article" || $object->getClassName()=="productExtra") {
-							$returnValue[] = $object;
+							if($onlyId) {
+								$returnValue[] = $object->getId();
+							}
+							else {
+								$returnValue[] = $object;
+							}
+							
 	
 						}
 						else if($object->getClassName()=="category") {
 							$products = $object->getProducts();
 							foreach ($products as $product) {
-								$returnValue[] = $product;
+								if($onlyId) {
+									$returnValue[] = $product->getId();
+								}
+								else {
+									$returnValue[] = $product;
+								}
+								
 							}	
 							
 						}
@@ -822,6 +834,32 @@ class Website_Product extends Object_Product {
 								
 		}
 		return $returnValue;
+	}
+
+	function getMage_re_skus() {
+		$skus=array();
+		$products = $this->getRelated("re_skus",false);
+		foreach ($products as $product) { 
+			if(strlen($product->getEan())>0)
+				$skus[] = $product->getEan();
+			else
+				$skus[] = $product->getCode();
+			# code...
+		};
+		return implode(",",$skus);
+	}
+	
+	function getMage_cs_skus() {
+		$skus=array();
+		$products = $this->getRelated("cs_skus",false);
+		foreach ($products as $product) { 
+			if(strlen($product->getEan())>0)
+				$skus[] = $product->getEan();
+			else
+				$skus[] = $product->getCode();
+			# code...
+		};
+		return implode(",",$skus);	
 	}
 
 

@@ -128,7 +128,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");;;
 	<?php echo nl2br($this->product->getMage_description()); ?>
 	</div>
 	<div class="caracteristiques col-md-4">
-	<h3>Vous le choisirez pour: </h3>
+	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
 	<?php echo nl2br($this->product->getMage_lesplus()); ?>
 	</div>
 

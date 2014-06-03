@@ -31,7 +31,7 @@ else
     $datazoom = $urlImage;
 ?>
 
-<li data-zoom="<?= $datazoom ?>">
+<li data-zoom="<?= $datazoom ?>" class="<?= ($i==0?'norelazy':'') ?>">
 <div class="nsg_container col-md-16">
 <div>
 <?php if ($this->editmode) { ?>

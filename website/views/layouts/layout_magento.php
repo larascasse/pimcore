@@ -23,7 +23,7 @@
 <script type="text/javascript" src="http://shopdev.laparqueterienouvelle.fr:81/magento/skin/frontend/lpn/default/js/plugins.js"></script>
 <script type="text/javascript" src="http://shopdev.laparqueterienouvelle.fr:81/magento/skin/frontend/lpn/default/js/main.js"></script>
 <script type="text/javascript" src="http://shopdev.laparqueterienouvelle.fr:81/magento/skin/frontend/lpn/default/js/lpn_wp_js.js"></script>
-
+<meta name="google-site-verification" content="vspiOogrzIcUVBbVJByK4IT4qHpr_Ts089uOQW5ZoyA" />
 </head>
 <body class=" cms-index-index cms-home">
 

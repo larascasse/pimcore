@@ -34,7 +34,7 @@
     ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="google-site-verification" content="vspiOogrzIcUVBbVJByK4IT4qHpr_Ts089uOQW5ZoyA" />
     <!-- Le styles -->
     <link href="/website/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 

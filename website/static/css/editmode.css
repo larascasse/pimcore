@@ -67,3 +67,8 @@
 .x-panel label {
     margin:0;
 }
+
+.pimcore_tag_checkbox{   
+    width: 400px;
+    float: none;
+}

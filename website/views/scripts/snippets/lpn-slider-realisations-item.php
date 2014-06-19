@@ -1,5 +1,7 @@
+
+<!-- Begin Realisations -->
 <div id="home_realisation" class="row">
-<ul id="slider_realisation">
+<ul class="slider_lpn">
 
 <?php
 $count = $this->select("carouselSlides")->getData();
@@ -51,7 +53,8 @@ else
 }
 ?></div>
 <div class="nsg_abs">
-<div class="realisationpicto">Nos r&eacute;alisations</div>
+<?php if ($this->editmode) { echo $this->checkbox("cHidden_".$i,array('boxLabel'=>'Cacher le picto','width'=>200)); echo '<br/>'; } ?>
+<div class="<?= $this->checkbox("cHidden_".$i)->isChecked() ? "realisationpictohidden" : "realisationpicto" ?>">Réalisations</div>
 <div class="realisationtitle"><?php if($this->editmode) echo "Titre";?><?= $this->input("cTitle_".$i, ["width" => 900]); ?></div>
 <div class="realisationcontent"><?php if($this->editmode) echo "Content";?><?= $this->input("cContent_".$i, ["width" => 900]); ?></div>
 <div class="jspush">
@@ -117,8 +120,8 @@ else
 <?php } ?>
 </ul>
 <div class="clearfix">&nbsp;</div>
-<a id="slider_realisation_prev" class="prev" style="display: block;" href="#">&lt;</a> <a id="slider_realisation_next" class="next" style="display: block;" href="#">&gt;</a>
-<div id="slider_realisation_push" class="row">&nbsp;</div>
+<a class="slider_lpn_prev prev" style="display: block;" href="#">&lt;</a> <a class="slider_lpn_next next" style="display: block;" href="#">&gt;</a>
+<div class="slider_lpn_push row">&nbsp;</div>
 </div>
 <?php if($this->editmode) { ?>
     <div class="container" style="padding-bottom: 40px">
@@ -129,3 +132,4 @@ else
         ]); ?>
     </div>
 <?php } ?>
+<!-- END Realisations -->

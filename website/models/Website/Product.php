@@ -333,12 +333,16 @@ class Website_Product extends Object_Product {
 		}
 		 Object_Abstract::setGetInheritedValues($inheritance); 
 
+
 		if($isHTML) {
 			$html ="<ul>\n";
 			foreach ($caracteristiques as $key => $value) {
-				$html.="<li>";
-				$html.= strlen($value["label"])>0?"<strong>".$value["label"]."</strong>:":"";
+				$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
+				$html.= strlen($value["label"])>0?$value["label"]:"";
+				$html.= '</div></div>';
+				$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
 				$html.= $value["content"];
+				$html.= '</div>';
 				$html.="</li>\n";
 			}
 			$html .="</ul>\n";
@@ -424,7 +428,14 @@ class Website_Product extends Object_Product {
 		return parent::getMage_sub_descrition();
 	}
 
-
+	public function getMage_origine_arbre() {
+		return '<div class="nsg_fullbkgimg col-md-8 col-sd-8  col-md-offset-4  col-sd-offset-4" data-img="{{media url="wysiwyg/meleze.jpg"}}">
+<div class="nsg_origine_cnt">
+<h3>M&eacute;l&egrave;ze</h3>
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus</p>
+</div>
+</div>';
+	}
 
 	public function getMage_config_description() {
 

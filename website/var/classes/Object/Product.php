@@ -86,6 +86,8 @@ public $mage_realisations;
 public $mage_config_description;
 public $mage_re_skus;
 public $mage_cs_skus;
+public $mage_visibility;
+public $mage_origine_arbre;
 
 
 /**
@@ -1735,6 +1737,46 @@ public function getMage_cs_skus () {
 */
 public function setMage_cs_skus ($mage_cs_skus) {
 	$this->mage_cs_skus = $mage_cs_skus;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getMage_visibility () {
+	$preValue = $this->preGetValue("mage_visibility"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mage_visibility;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_visibility")->isEmpty($data)) { return $this->getValueFromParent("mage_visibility");}
+	 return $data;
+}
+
+/**
+* @param string $mage_visibility
+* @return void
+*/
+public function setMage_visibility ($mage_visibility) {
+	$this->mage_visibility = $mage_visibility;
+	return $this;
+}
+
+/**
+* @return string
+*/
+public function getMage_origine_arbre () {
+	$preValue = $this->preGetValue("mage_origine_arbre"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->mage_origine_arbre;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_origine_arbre")->isEmpty($data)) { return $this->getValueFromParent("mage_origine_arbre");}
+	 return $data;
+}
+
+/**
+* @param string $mage_origine_arbre
+* @return void
+*/
+public function setMage_origine_arbre ($mage_origine_arbre) {
+	$this->mage_origine_arbre = $mage_origine_arbre;
 	return $this;
 }
 

@@ -2,7 +2,7 @@
 <hr class="featurette-divider">
 
 <?php while($this->block("block")->loop()) { ?>
-    <div class="row featurette">
+    <div class="row featurette section">
 
         <?php
             $position = $this->select("postition")->getData();
@@ -11,17 +11,17 @@
             }
         ?>
 
-        <div class="col-sm-7 col-sm-<?= ($position == "right") ? "push" : ""; ?>-5">
-            <h2 class="featurette-heading">
+        <div class="col-sm-8 col-sm-<?= ($position == "right") ? "push" : ""; ?>-8 ">
+            <h2 class="featurette-heading <?= ($position == "left") ? " homselectiontxtright__" : ""; ?>">
                 <?= $this->input("headline", ["width" => 400]); ?>
                 <span class="text-muted"><?= $this->input("subline", ["width" => 400]); ?></span>
             </h2>
-            <div class="lead">
+            <div class="featurette-text <?= ($position == "left") ? " homselectiontxtright__" : ""; ?>">
                 <?= $this->wysiwyg("content", ["width" => 350, "height" => 200]); ?>
             </div>
         </div>
 
-        <div class="col-sm-5 col-sm-<?= ($position == "right") ? "pull" : ""; ?>-7">
+        <div class="col-sm-8 col-sm-<?= ($position == "right") ? "pull" : ""; ?>-8">
             <?php if($this->editmode) { ?>
                 <div class="editmode-label">
                     <label>Orientation:</label>
@@ -43,14 +43,21 @@
                 } else {
                     $imgConfig = [
                         "class" => "featurette-image img-responsive",
-                        "thumbnail" => "featurerette"
+                        "thumbnail" => "magento_selection"
                     ];
 
                     if($this->editmode) {
                         $imgConfig["width"] = 300;
+                        echo $this->image("image", $imgConfig);
                     }
-
-                    echo $this->image("image", $imgConfig);
+                    else {
+                        if($this->image("image")->getThumbnail("magento_selection"))
+                            $urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("image")->getThumbnail("magento_selection")->getPath();
+                        else
+                          $urlImage =""; 
+                        echo '<img lass="featurette-image img-responsive" src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'"  />';
+                    }
+                    
                 }
             ?>
         </div>

@@ -100,8 +100,6 @@ pimcore.helpers.openAsset = function (id, type, options) {
 
     if (pimcore.globalmanager.exists("asset_" + id) == false) {
 
-        pimcore.helpers.addTreeNodeLoadingIndicator("asset", id);
-
         if (!pimcore.asset[type]) {
             pimcore.globalmanager.add("asset_" + id, new pimcore.asset.unknown(id));
         }
@@ -137,7 +135,6 @@ pimcore.helpers.closeAsset = function (id) {
 pimcore.helpers.openDocument = function (id, type, options) {
     if (pimcore.globalmanager.exists("document_" + id) == false) {
         if (pimcore.document[type]) {
-            pimcore.helpers.addTreeNodeLoadingIndicator("document", id);
             pimcore.globalmanager.add("document_" + id, new pimcore.document[type](id));
             pimcore.helpers.rememberOpenTab("document_" + id + "_" + type);
 
@@ -167,7 +164,6 @@ pimcore.helpers.closeDocument = function (id) {
 
 pimcore.helpers.openObject = function (id, type, options) {
     if (pimcore.globalmanager.exists("object_" + id) == false) {
-        pimcore.helpers.addTreeNodeLoadingIndicator("object", id);
 
         if(type != "folder" && type != "variant" && type != "object") {
             type = "object";
@@ -294,6 +290,17 @@ pimcore.helpers.openElement = function (id, type, subtype) {
     }
 };
 
+pimcore.helpers.getElementTypeByObject = function (object) {
+    var type = null;
+    if(object instanceof pimcore.document.document) {
+        type = "document";
+    } else if (object instanceof  pimcore.asset.asset) {
+        type = "asset";
+    } else if (object instanceof pimcore.object.abstract) {
+        type = "object";
+    }
+    return type;
+};
 
 pimcore.helpers.addTreeNodeLoadingIndicator = function (type, id) {
     // display loading indicator on treenode
@@ -500,7 +507,7 @@ pimcore.helpers.lockManager = function (cid, ctype, csubtype, data) {
     if(data.editlock.user) {
         lockDetails += "<b>" + t("user") + ":</b> " + data.editlock.user.name + "<br />";
     }
-    lockDetails += "<b>" + t("since") + ": </b>" + Ext.util.Format.date(lockDate);
+    lockDetails += "<b>" + t("since") + ": </b>" + Ext.util.Format.date(lockDate, "Y-m-d H:i");
     lockDetails += "<br /><br />" + t("element_lock_question");
 
     Ext.MessageBox.confirm(t("element_is_locked"), t("element_lock_message") + lockDetails,
@@ -1021,7 +1028,7 @@ pimcore.helpers.clearOpenTab = function () {
     localStorage.setItem("pimcore_opentabs", JSON.stringify([]));
 };
 
-pimcore.helpers.rememberOpenTab = function (item) {
+pimcore.helpers.rememberOpenTab = function (item, forceOpenTab) {
     var openTabs = pimcore.helpers.getOpenTab();
 
     if(!in_array(item, openTabs)) {
@@ -1035,6 +1042,9 @@ pimcore.helpers.rememberOpenTab = function (item) {
 
     // using native JSON functionalities here because of /admin/login/deeplink -> No ExtJS should be loaded
     localStorage.setItem("pimcore_opentabs", JSON.stringify(openTabs));
+    if (forceOpenTab) {
+        localStorage.setItem("pimcore_opentabs_forceopenonce", true);
+    }
 };
 
 pimcore.helpers.forgetOpenTab = function (item) {
@@ -1049,6 +1059,14 @@ pimcore.helpers.forgetOpenTab = function (item) {
     // using native JSON functionalities here because of /admin/login/deeplink -> No ExtJS should be loaded
     localStorage.setItem("pimcore_opentabs", JSON.stringify(openTabs));
 };
+
+pimcore.helpers.forceOpenMemorizedTabsOnce = function() {
+    if (localStorage.getItem("pimcore_opentabs_forceopenonce")) {
+        localStorage.removeItem("pimcore_opentabs_forceopenonce");
+        return true;
+    }
+    return false;
+}
 
 pimcore.helpers.openMemorizedTabs = function () {
     var openTabs = pimcore.helpers.getOpenTab();

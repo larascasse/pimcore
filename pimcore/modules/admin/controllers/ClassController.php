@@ -84,7 +84,7 @@ class Admin_ClassController extends Pimcore_Controller_Action_Admin {
         else
         {
             // group classes
-            $cnf['matchCount'] = 3;     // min chars to group
+            $cnf['matchCount'] = 3; // min chars to group
 
             /**
              * @param string $str1
@@ -233,7 +233,7 @@ class Admin_ClassController extends Pimcore_Controller_Action_Admin {
     }
 
     public function addCustomLayoutAction() {
-        $customLayout = Object_Class_CustomLayout::create(array('name' => $this->correctClassname($this->getParam("name")),
+        $customLayout = Object_Class_CustomLayout::create(array('name' => $this->getParam("name"),
                 'userOwner' => $this->user->getId(),
                 "classId" => $this->getParam("classId"))
         );

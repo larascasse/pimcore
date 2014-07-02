@@ -18,14 +18,12 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
     initialize: function(id, options) {
         pimcore.plugin.broker.fireEvent("preOpenObject", this, "object");
 
-        this.options = options;
-
+        this.id = intval(id);
         this.addLoadingPanel();
 
-        this.id = intval(id);
+        this.options = options;
 
         this.edit = new pimcore.object.edit(this);
-
         this.preview = new pimcore.object.preview(this);
         this.properties = new pimcore.element.properties(this, "object");
         this.versions = new pimcore.object.versions(this);
@@ -384,13 +382,6 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
             buttons.push("-");
             buttons.push({
                 xtype: 'tbtext',
-                text: t("parent_id") + " " + this.data.general.o_parentId,
-                scale: "medium"
-            });
-
-            buttons.push("-");
-            buttons.push({
-                xtype: 'tbtext',
                 text: ts(this.data.general.o_className),
                 scale: "medium"
             });
@@ -500,16 +491,16 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
     },
 
     publishClose: function(){
-        if(this.publish()) {
+        this.publish(null, function () {
             var tabPanel = Ext.getCmp("pimcore_panel_tabs");
             tabPanel.remove(this.tab);
-        }
+        }.bind(this))
     },
 
 
-    publish: function (only) {
+    publish: function (only, callback) {
         this.data.general.o_published = true;
-        var state = this.save("publish", only);
+        var state = this.save("publish", only, callback);
 
         if(state) {
             // toogle buttons
@@ -602,18 +593,18 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
                             pimcore.helpers.showNotification(t("error"), t("error_saving_object"), "error");
                         }
                         // reload versions
-                        if (this.versions) {
+                        if (this.isAllowed("versions")) {
                             if (typeof this.versions.reload == "function") {
                                 this.versions.reload();
                             }
                         }
                     }
 
+                    this.tab.enable();
+
                     if(typeof callback == "function") {
                         callback();
                     }
-
-                    this.tab.enable();
                 }.bind(this),
                 failure: function () {
                     this.tab.enable();
@@ -659,8 +650,14 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
                 name: "path",
                 value: this.data.general.fullpath
             }, {
+                name: "parentid",
+                value: this.data.general.o_parentId
+            }, {
                 name: "classid",
                 value: this.data.general.o_classId
+            }, {
+                name: "class",
+                value: this.data.general.o_className
             }, {
                 name: "modificationdate",
                 type: "date",
@@ -677,11 +674,6 @@ pimcore.object.object = Class.create(pimcore.object.abstract, {
                 name: "userowner",
                 type: "user",
                 value: this.data.general.o_userOwner
-            },
-            {
-                name: "published",
-                type: "user",
-                value: this.data.general.o_published
             },
             {
                 name: "deeplink",

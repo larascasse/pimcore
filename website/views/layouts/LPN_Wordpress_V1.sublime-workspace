@@ -1,0 +1,724 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"array_m",
+				"array_merge"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"pro",
+				"products"
+			],
+			[
+				"in",
+				"inheritance"
+			],
+			[
+				"pre",
+				"prefix"
+			],
+			[
+				"u",
+				"urlImage"
+			],
+			[
+				"ar",
+				"arrayImages"
+			],
+			[
+				"num",
+				"number_format"
+			],
+			[
+				"strip",
+				"strip_tags"
+			],
+			[
+				"set",
+				"setObjectText"
+			],
+			[
+				"pr",
+				"printerName"
+			],
+			[
+				"getCh",
+				"getChilds"
+			],
+			[
+				"to",
+				"tokenOutput"
+			],
+			[
+				"custom",
+				"CustomHeaders"
+			],
+			[
+				"url",
+				"urlencode"
+			],
+			[
+				"la",
+				"largeur"
+			],
+			[
+				"strto",
+				"strtolower"
+			],
+			[
+				"ut",
+				"utf8_encode"
+			],
+			[
+				"user",
+				"userId"
+			],
+			[
+				"entit",
+				"entities"
+			],
+			[
+				"fic",
+				"getFiche_technique_lpn"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"fi",
+				"firstRowString"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"is_",
+				"is_array"
+			],
+			[
+				"Ta",
+				"TARIF_DETAIL"
+			],
+			[
+				"TARIF_D",
+				"TARIF_DETAILs"
+			],
+			[
+				"Code_E",
+				"Code_EAN_Article"
+			],
+			[
+				"config",
+				"configurable"
+			],
+			[
+				"is",
+				"isUpdating"
+			],
+			[
+				"html",
+				"htmlspecialchars"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"ca",
+				"caracteristiques"
+			],
+			[
+				"asso",
+				"associatedArticles"
+			],
+			[
+				"rela",
+				"relatedProducts"
+			],
+			[
+				"do",
+				"document"
+			],
+			[
+				"Docu",
+				"Document_Page"
+			],
+			[
+				"va",
+				"varationString"
+			],
+			[
+				"fo",
+				"foreach	foreach …"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"pa",
+				"param"
+			],
+			[
+				"Pare",
+				"parentId"
+			],
+			[
+				"get",
+				"getId"
+			],
+			[
+				"getB",
+				"getByPath"
+			],
+			[
+				"impor",
+				"importProcessAction"
+			],
+			[
+				"can",
+				"canInsert"
+			],
+			[
+				"key",
+				"keyCol"
+			],
+			[
+				"cl",
+				"className"
+			],
+			[
+				"clas",
+				"className"
+			],
+			[
+				"class",
+				"classId"
+			],
+			[
+				"over",
+				"overwrite"
+			],
+			[
+				"Lpn",
+				"lpnPlugin"
+			],
+			[
+				"getField",
+				"getFieldDefinition"
+			],
+			[
+				"ret",
+				"returnValue"
+			],
+			[
+				"att",
+				"attributeValue"
+			],
+			[
+				"Fie",
+				"fieldCollection"
+			],
+			[
+				"fiel",
+				"fieldCollection"
+			],
+			[
+				"fie",
+				"fieldCollection"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"ter",
+				"Open in terminal"
+			],
+			[
+				"Contr",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: Lis",
+				"Package Control: List Packages"
+			],
+			[
+				"Pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"Subl",
+				"Preferences: SublimeClang Settings – User"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"Inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0,
+		"history":
+		[
+			"ls",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/layouts/layout_magento.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-selection/view.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/log/debug.log",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/pimcore/import_ean_to_pimcore.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Tool/Authentication.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Controller/Action/Webservice.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/log/usagelog.log",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Tool/Session.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Tool.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Controller/Plugin/Frontend/Editmode.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Whoops/Resources/pretty-template.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Concrete.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/models/Website/Product.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/scripts/snippets/lpn-slider-realisations-item.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/layouts/layout_blank.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-snippet/area.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-snippet/view.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-slider-realisations/view.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/scripts/lpn/magento.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/config/extensions.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Abstract.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/layouts/layout.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/scripts/product/detail.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/pimcore/import_price_to_pimore.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/functions.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/import_articles.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/import_cms.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-selection/area.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/layouts/layout-lpn.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/controllers/ProductController.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/export_article_terrasses_aimporter.csv",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/export_article_terrasses_aimporter.csvimport",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-slider-realisations/area.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/lib/LpnPlugin/Importer.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/import.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/import_cms.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/static_lpn/js/dymo.js",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_adresse.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/LICENSE.txt",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/connect_bitnami",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Controller/Action/Admin.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/LPNEntities.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_tarifs.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_catalogue_ean.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/test_oauth.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/static_lpn/js/lpn.js",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/static_lpn/css/lpn.css",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/framework/Context/ObjectContext.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_EAN.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_products.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/import.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_tarif.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_client.php",
+		"/Users/florent/Desktop/test",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/areas/lpn-slider/view.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_clients.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_entity.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/classes/Object/BlogCategory.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/classes/Object/Article.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/export_articles_terrasses_20120221.csv",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/import_all.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3080/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3051/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_stocks.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3025/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3027/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3044/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3045/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/3086/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/controllers/LpnController.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/scripts/lpn/blank.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/modules/admin/controllers/ObjectController.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_commandes.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_commandes_detail.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_commande.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/views/scripts/snippets/lpn-slider-item.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/import_adresses.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/entities/lpn_stock.php",
+		"/Users/florent/Library/Application Support/Sublime Text 3/Packages/MacTerminal/MacTerminal.sublime-settings",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/tests.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/.htaccess",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/LPNDataServiceQuery.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/urldef.php",
+		"/Users/florent/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/florent/Library/Application Support/Sublime Text 3/Packages/User/MacTerminal.sublime-settings",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/classes/definition_7.psf",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/backup/dump 4.sql",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/backup/dump.sql",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/odata/lpnservices/styles.css",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/controllers/ContentController.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/cli/export.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Tool/RestClient.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/tests/lib/Test/RestClient.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/classes/Object/Product.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/2944/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/2978/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/2992/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/lib/LpnPlugin/Exporter.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/update/2994/postupdate.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website_demo/models/Website/Product.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website_demo/var/config/system.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website_demo/var/classes/Object/Product.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Tool/ContentAnalysis.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Site/List/Resource.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Tool/Frontend.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/export_ean_for_magento.csv",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/config/system.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Select.php",
+		"/Users/florent/Downloads/Homeland S03 720p HDTV x264-4370/subs/Homeland.S03E01.720p.HDTV.x264-4370.srt",
+		"/Users/florent/Downloads/Squarespace-Wordpress-Export-12-20-2013.xml",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Objects.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Link.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/KeyValue.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/plugins/LpnPlugin/config/export_configurables_for_magento.csv",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Date.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Document/Tag/Interface.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/User.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Document.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/lib/Pimcore/Resource/Wrapper.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/modules/webservice/controllers/RestController.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Checkbox.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Fieldcollections.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Geobounds.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Object/Class/Data/Href.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Webservice/Data/Object/Concrete.php",
+		"/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/pimcore/models/Webservice/Service.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"trackPage",
+			"trackPageView",
+			"http://www.laparqueterie",
+			"www.laparqueterie",
+			"Location:",
+			"Vous le cho",
+			"Vous le chs",
+			"getRea",
+			"norelazy",
+			"getCha",
+			"Mage_Catalog_Block_Layer_View",
+			"getRelated\ngetRelated",
+			"getRelated",
+			"reali",
+			"realis",
+			"Quantite_Unite",
+			"formatPrice",
+			"function setGetInheritedValues",
+			"setGetInheritedValues",
+			"getF",
+			"$getter",
+			"foreach ($class->getFieldDefinitions()",
+			"unsetAdminMode",
+			"function authenticateSession",
+			"PIMCORE_ADMIN",
+			"setGetInheritedValues",
+			"col-md-offset-2",
+			"home_selection",
+			".realisationpush",
+			"jspush",
+			"range = $frame->getFileLines($line - 8, 10);",
+			"LPN Slider Item",
+			"lpn-slider-item",
+			"Le choix de votre terrasse ou de votre deck de piscine est déterminant : il va donner le ton à cet espace de vie extérieur.",
+			"href",
+			"content",
+			"cGallery",
+			"You have to define a",
+			"You have to define a <html>, <head>, <body>",
+			"You have to define a <html>, <head>, <body>\nHTML-tag in your view/layout markup!",
+			"<textarea>",
+			"textarea",
+			"layout-lpn",
+			"<?= $this->layout()->content; ?>",
+			"setGetInheritedValues",
+			"getLesplus",
+			"getDim",
+			"getSingleDimentionString",
+			"\"ou\"",
+			"ou",
+			"\" / \"",
+			"/",
+			"h2",
+			"getMa",
+			"getAssociatedArticles",
+			"getAllowInherit",
+			"getInheritedValues",
+			"doGetInheritedValues",
+			"others",
+			"override",
+			"$getInheritedValues",
+			"getInheritedValues",
+			"function getInheritedValues",
+			"getInheritedValues",
+			"k",
+			"kkkk",
+			"getInheritedValues",
+			"function doGetInheritedValues",
+			"echo",
+			"stics_others",
+			"getChara",
+			"getChar",
+			"100",
+			",",
+			"Longu",
+			"getLongueur()",
+			"getHideUnpublished",
+			"static",
+			"function getInhe",
+			"getInhe",
+			"getInhe\ngetInhe",
+			"inh",
+			"getter",
+			"Properties[",
+			"getProperties",
+			"o_properties",
+			"tion getProperties",
+			"function getProperties",
+			"getProperties",
+			"class Object_Abstract",
+			"$getter",
+			"get",
+			"childrens",
+			"child",
+			"getDimensionsString",
+			"Mage_config_description",
+			"magento_realisation",
+			"real",
+			"push8",
+			"urlImage",
+			"zerezr",
+			"zeze",
+			"pn-selection",
+			"nbrpp",
+			"haracteristics_others",
+			"fields",
+			"getCharacteristics",
+			"Asset_Folder",
+			"reali",
+			"ttp://pimcore.florent.local",
+			"content",
+			"templa",
+			"/snippets/lpn-slider-realisations-item.php",
+			"img",
+			"magento_small",
+			"Object_Product_List",
+			"Object_Product",
+			"getEan",
+			"slider-item",
+			"reali",
+			"slider_realisation",
+			"price",
+			"Unit",
+			"Unite",
+			"name_scienergie2",
+			"classId",
+			"mapping",
+			"mappingRaw"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"ttp://mediastaging.laparqueterienouvelle.fr",
+			"",
+			"COMMANDE_DETAIL",
+			"COMMANDE",
+			"Adresse",
+			"ADRESSE",
+			"CLIENT",
+			"col-md-10",
+			"col-md-4",
+			"class=\"row",
+			"col-md-8",
+			"class=\"row",
+			"col-md-8",
+			"class=\"row",
+			"class=\"row ",
+			"col-md-8",
+			"grid8",
+			" class=\"row\"",
+			"Stock",
+			"STOCK",
+			"lpn.lesmecaniques.net",
+			"",
+			"TARIF_DETAIL",
+			"",
+			"è",
+			"ê",
+			"à",
+			"é",
+			"\"\n\"",
+			"\";\"",
+			"user_state_disabled_message\nuser_state_disabled_cancel\nuser_state_disabled_enable\nuser_state_deleted_message\nuser_state_deleted_cancel\nuser_state_deleted_contact\nuser_state_blacklisted_message\nuser_state_blacklisted_cancel\nuser_state_blacklisted_contact\nuser_state_bounced_message\nuser_state_bounced_cancel\nuser_state_bounced_update"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "LPN_Wordpress_V1.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 303.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

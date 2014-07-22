@@ -69,6 +69,7 @@ public $fiche_technique_orginale;
 public $re_skus;
 public $cs_skus;
 public $associatedArticles;
+public $origineArticles;
 public $meta_title;
 public $meta_description;
 public $meta_keywords;
@@ -1401,6 +1402,26 @@ public function setAssociatedArticles ($associatedArticles) {
 }
 
 /**
+* @return array
+*/
+public function getOrigineArticles () {
+	$preValue = $this->preGetValue("origineArticles"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	$data = $this->getClass()->getFieldDefinition("origineArticles")->preGetData($this);
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("origineArticles")->isEmpty($data)) { return $this->getValueFromParent("origineArticles");}
+	 return $data;
+}
+
+/**
+* @param array $origineArticles
+* @return void
+*/
+public function setOrigineArticles ($origineArticles) {
+	$this->origineArticles = $this->getClass()->getFieldDefinition("origineArticles")->preSetData($this, $origineArticles);
+	return $this;
+}
+
+/**
 * @return string
 */
 public function getMeta_title () {
@@ -1810,6 +1831,10 @@ protected static $_relationFields = array (
     'type' => 'objects',
   ),
   'associatedArticles' => 
+  array (
+    'type' => 'objects',
+  ),
+  'origineArticles' => 
   array (
     'type' => 'objects',
   ),

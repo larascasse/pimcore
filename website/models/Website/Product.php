@@ -247,7 +247,7 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery","re_skus","cs_skus","us_skus");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","origineArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery","re_skus","cs_skus","us_skus");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
@@ -429,12 +429,42 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getMage_origine_arbre() {
-		return '<div class="nsg_fullbkgimg col-md-8 col-sd-8  col-md-offset-4  col-sd-offset-4" data-img="{{media url="wysiwyg/meleze.jpg"}}">
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+
+		$articles = $this->getOrigineArticles();
+		$str="";
+		if($articles) {
+			//$str.="<ul>";
+			$index=1;
+			foreach ($articles as $key => $article) {
+				
+				$associatedDocuments = $article->getDocuments();
+				foreach ($associatedDocuments as $document) {
+					$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_realisation")->getPath();						
+				}
+
+				$str.= '<div class="nsg_fullbkgimg col-md-8 col-sd-8  col-md-offset-4  col-sd-offset-4" data-img="'.$url.'">
+						<div class="nsg_origine_cnt">
+						<h3>'.$article->getName().'</h3>
+						'.$article->getContent().'
+						</div>
+						</div>';
+
+			}
+			$str.="";
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return $str;
+
+		/*return '<div class="nsg_fullbkgimg col-md-8 col-sd-8  col-md-offset-4  col-sd-offset-4" data-img="{{media url="wysiwyg/meleze.jpg"}}">
 <div class="nsg_origine_cnt">
 <h3>M&eacute;l&egrave;ze</h3>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus</p>
 </div>
-</div>';
+</div>';*/
 	}
 
 	public function getMage_config_description() {

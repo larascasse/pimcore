@@ -18,11 +18,11 @@
 
 ?>
 		</div>
-		<div class="nsg_abs">			
+		<div class="nsg_abs topgradient">			
 			<h1 class="catTitle"> <?= $this->wysiwyg("title", ["width" => 800]); ?></h1>
 			<div class="catLine">&nbsp;</div>
 			<div class="catDesc"> <?= $this->wysiwyg("description", ["width" => 800]); ?></div>						
-			<div class="catScrollDown"><a title="scroll down" href="#"><span class="hidden">scroll down</span></a></div>
+			<!--<div class="catScrollDown"><a title="scroll down" href="#"><span class="hidden">scroll down</span></a></div>-->
 		</div>
 	</div>
 </div>

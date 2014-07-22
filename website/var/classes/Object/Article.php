@@ -24,7 +24,7 @@ public function getLocalizedfields () {
 	$preValue = $this->preGetValue("localizedfields"); 
 	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
 	$data = $this->getClass()->getFieldDefinition("localizedfields")->preGetData($this);
-	if(!$data && Object_Abstract::doGetInheritedValues()) { return $this->getValueFromParent("localizedfields");}
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("localizedfields")->isEmpty($data)) { return $this->getValueFromParent("localizedfields");}
 	 return $data;
 }
 

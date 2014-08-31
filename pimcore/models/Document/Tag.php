@@ -11,7 +11,7 @@
  *
  * @category   Pimcore
  * @package    Document
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -236,6 +236,10 @@ abstract class Document_Tag extends Pimcore_Model_Abstract implements Document_T
                 $return = $this->frontend();
             }
         } catch (Exception $e) {
+            if(Pimcore::inDebugMode()){
+                // the __toString method isn't allowed to throw exceptions
+                $return = '<b style="color:#f00">__toString not possible - ' . $e->getMessage().'</b><br/>'.$e->getTraceAsString();
+            }
             Logger::error("to string not possible - " . $e->getMessage());
         }
 

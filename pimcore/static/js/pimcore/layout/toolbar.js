@@ -8,7 +8,7 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.pimcore.org/license
  *
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -524,6 +524,14 @@ pimcore.layout.toolbar = Class.create({
             });
         }
 
+        if (user.isAllowed("predefined_properties")) {
+            settingsItems.push({
+                text: t("predefined_metadata_definitions"),
+                iconCls: "pimcore_icon_metadata",
+                handler: this.editPredefinedMetadata
+            });
+        }
+
         if (user.isAllowed("system_settings")) {
             settingsItems.push({
                 text: t("system"),
@@ -1007,6 +1015,19 @@ pimcore.layout.toolbar = Class.create({
             pimcore.globalmanager.add("predefined_properties", new pimcore.settings.properties.predefined());
         }
     },
+
+
+    editPredefinedMetadata: function () {
+
+        try {
+            pimcore.globalmanager.get("predefined_metadata").activate();
+        }
+        catch (e) {
+            pimcore.globalmanager.add("predefined_metadata", new pimcore.settings.metadata.predefined());
+        }
+    },
+
+
 
     backup: function () {
         var backup = new pimcore.settings.backup();

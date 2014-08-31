@@ -9,7 +9,7 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.pimcore.org/license
  *
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -246,6 +246,9 @@ class Pimcore_Tool {
      * @return string
      */
     public static function getHostname() {
+        if(isset($_SERVER["HTTP_X_FORWARDED_HOST"]) && !empty($_SERVER["HTTP_X_FORWARDED_HOST"])) {
+            return $_SERVER["HTTP_X_FORWARDED_HOST"];
+        }
         return $_SERVER["HTTP_HOST"];
     }
 

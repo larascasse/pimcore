@@ -8,7 +8,7 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.pimcore.org/license
  *
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -76,6 +76,9 @@ Ext.onReady(function () {
     Ext.Ajax.method = "GET";
     Ext.Ajax.disableCaching = true;
     Ext.Ajax.timeout = 900000;
+    Ext.Ajax.defaultHeaders = {
+        'X-pimcore-csrf-token': pimcore.settings["csrfToken"]
+    };
     Ext.Ajax.on('requestexception', function (conn, response, options) {
         console.log("xhr request failed");
 
@@ -308,8 +311,7 @@ Ext.onReady(function () {
     // check for maintenance
     if (!pimcore.settings.maintenance_active) {
         statusbar.add('<div class="pimcore_statusbar_maintenance">'
-                + '<a href="http://www.pimcore.org/wiki/display/PIMCORE/'
-                + 'Installation+and+Upgrade+Guide#InstallationandUpgradeGuide-SetuptheMaintenanceScript"'
+                + '<a href="http://www.pimcore.org/wiki/pages/viewpage.action?pageId=12124463" '
                 + 'target="_blank">'
                 + t("maintenance_not_active") + "</a></div>");
         statusbar.add("-");

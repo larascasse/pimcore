@@ -9,7 +9,7 @@
  * It is also available through the world-wide-web at this URL:
  * http://www.pimcore.org/license
  *
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -204,6 +204,16 @@ class Pimcore {
             $router->addRoute('searchadmin', $routeSearchAdmin);
             if ($conf instanceof Zend_Config and $conf->webservice and $conf->webservice->enabled) {
                     $router->addRoute('webservice', $routeWebservice);
+            }
+
+            // check if this request routes into a plugin, if so check if the plugin is enabled
+            if (preg_match("@^/plugin/([^/]+)/.*@", $_SERVER["REQUEST_URI"], $matches)) {
+                $pluginName = $matches[1];
+                if(!Pimcore_ExtensionManager::isEnabled("plugin", $pluginName)) {
+                    while (@ob_end_flush());
+                    die("Plugin is disabled. To use this plugin please enable it in the extension manager!");
+                    exit;
+                }
             }
 
             // force the main (default) domain for "admin" requests

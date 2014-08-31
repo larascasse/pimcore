@@ -11,7 +11,7 @@
  *
  * @category   Pimcore
  * @package    Asset
- * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
@@ -253,7 +253,7 @@ class Asset extends Element_Abstract {
                 return null;
             }
         }
-        
+
         if(!$asset) {
             return null;
         }
@@ -305,7 +305,10 @@ class Asset extends Element_Abstract {
                 unlink($tmpFile);
             } else {
                 $mimeType = Pimcore_Tool_Mime::detect($data["sourcePath"], $data["filename"]);
-                $data["stream"] = fopen($data["sourcePath"], "r+");
+                if (is_file($data["sourcePath"])) {
+                    $data["stream"] = fopen($data["sourcePath"], "r+");
+                }
+
                 unset($data["sourcePath"]);
             }
 
@@ -373,6 +376,10 @@ class Asset extends Element_Abstract {
      * @return int|string
      */
     public static function getTypeFromMimeMapping ($mimeType, $filename) {
+
+        if ($mimeType == "directory") {
+            return "folder";
+        }
 
         $type = "unknown";
 
@@ -463,7 +470,12 @@ class Asset extends Element_Abstract {
 
                 break; // transaction was successfully completed, so we cancel the loop here -> no restart required
             } catch (Exception $e) {
-                $this->rollBack();
+                try {
+                    $this->rollBack();
+                } catch (\Exception $er) {
+                    // PDO adapter throws exceptions if rollback fails
+                    Logger::error($er);
+                }
 
                 // we try to start the transaction $maxRetries times again (deadlocks, ...)
                 if($retries < ($maxRetries-1)) {
@@ -525,8 +537,8 @@ class Asset extends Element_Abstract {
 
         }
 
-        // do not allow PHP files
-        if(preg_match("@\.ph(p[345]?|t|tml|ps)$@i", $this->getFilename())) {
+        // do not allow PHP and .htaccess files
+        if(preg_match("@\.ph(p[345]?|t|tml|ps)$@i", $this->getFilename()) || $this->getFilename() == ".htaccess") {
             $this->setFilename($this->getFilename() . ".txt");
         }
 
@@ -701,7 +713,7 @@ class Asset extends Element_Abstract {
         return $path;
     }
 
-    
+
     /**
      * @return array
      */
@@ -942,6 +954,7 @@ class Asset extends Element_Abstract {
      */
     public function setParentId($parentId) {
         $this->parentId = (int) $parentId;
+        $this->parent = Asset::getById($parentId);
         return $this;
     }
 
@@ -1281,6 +1294,31 @@ class Asset extends Element_Abstract {
         $this->metadata = $metadata;
     }
 
+
+    public function addMetadata($name, $type, $data = null, $language = null) {
+        if ($name && $type) {
+            $metadata = $this->metadata;
+
+            $tmp = array();
+            if (!is_array($this->metadata)) {
+                $this->metadata = array();
+            }
+
+            foreach ($this->metadata as $item) {
+                if ($item["name"] != $name || $language != $item["language"]) {
+                    $tmp[] = $item;
+                }
+            }
+            $tmp[] = array(
+                "name" => $name,
+                "type" => $type,
+                "data" => $data,
+                "language" => $language
+            );
+            $this->metadata = $tmp;
+        }
+    }
+
     /**
      * @return array
      */
@@ -1464,7 +1502,7 @@ class Asset extends Element_Abstract {
 
         return $finalVars;
     }
-    
+
     public function __wakeup() {
         if(isset($this->_fulldump)) {
             // set current key and path this is necessary because the serialized data can have a different path than the original element (element was renamed or moved)
@@ -1483,11 +1521,11 @@ class Asset extends Element_Abstract {
             unset($this->_fulldump);
         }
     }
-    
+
     public function removeInheritedProperties () {
-        
+
         $myProperties = $this->getProperties();
-        
+
         if($myProperties) {
             foreach ($this->getProperties() as $name => $property) {
                 if($property->getInherited()) {
@@ -1495,10 +1533,10 @@ class Asset extends Element_Abstract {
                 }
             }
         }
-        
+
         $this->setProperties($myProperties);
     }
-    
+
     public function renewInheritedProperties () {
         $this->removeInheritedProperties();
 

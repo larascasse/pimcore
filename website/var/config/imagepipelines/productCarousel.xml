@@ -7,6 +7,7 @@
         <width>350</width>
         <height>400</height>
         <positioning>center</positioning>
+        <doNotScaleUp>1</doNotScaleUp>
       </arguments>
     </item>
   </items>

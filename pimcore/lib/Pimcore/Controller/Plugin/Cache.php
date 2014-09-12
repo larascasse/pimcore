@@ -96,6 +96,16 @@ class Pimcore_Controller_Plugin_Cache extends Zend_Controller_Plugin_Abstract {
             return $this->disable();
         }
 
+        // disable the output-cache if browser wants the most recent version
+        // unfortunately only Chrome + Firefox
+        if(isset($_SERVER["HTTP_CACHE_CONTROL"]) && $_SERVER["HTTP_CACHE_CONTROL"] == "no-cache") {
+            return $this->disable("HTTP Header Cache-Control: no-cache was sent");
+        }
+
+        if(isset($_SERVER["HTTP_PRAGMA"]) && $_SERVER["HTTP_PRAGMA"] == "no-cache") {
+            return $this->disable("HTTP Header Pragma: no-cache was sent");
+        }
+
         try {
             $conf = Pimcore_Config::getSystemConfig();
             if ($conf->cache) {
@@ -160,7 +170,8 @@ class Pimcore_Controller_Plugin_Cache extends Zend_Controller_Plugin_Abstract {
 
         $this->cacheKey = "output_" . md5(Pimcore_Tool::getHostname() . $requestUri) . $appendKey;
 
-        if ($cacheItem = Pimcore_Model_Cache::load($this->cacheKey, true)) {
+        $cacheItem = Pimcore_Model_Cache::load($this->cacheKey, true);
+        if (is_array($cacheItem) && !empty($cacheItem)) {
             header("X-Pimcore-Output-Cache-Tag: " . $this->cacheKey, true, 200);
             header("X-Pimcore-Output-Cache-Date: " . $cacheItem["date"]);
             

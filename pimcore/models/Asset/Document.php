@@ -32,7 +32,7 @@ class Asset_Document extends Asset {
             try {
                 $pageCount = $this->readPageCount($tmpFile);
                 if($pageCount !== null && $pageCount > 0) {
-                    $this->setProperty("document_page_count", "text", $pageCount);
+                    $this->setCustomSetting("document_page_count", $pageCount);
                 }
             } catch (\Exception $e) {
 
@@ -68,7 +68,7 @@ class Asset_Document extends Asset {
     }
 
     public function getPageCount() {
-        if(!$pageCount = $this->getProperty("document_page_count")) {
+        if(!$pageCount = $this->getCustomSetting("document_page_count")) {
             $pageCount = $this->readPageCount();
         }
         return $pageCount;
@@ -122,7 +122,7 @@ class Asset_Document extends Asset {
 
     public function getText($page = null) {
         if(Pimcore_Document::isAvailable() && Pimcore_Document::isFileTypeSupported($this->getFilename())) {
-            $cacheKey = "asset_document_text_" . ($page ? $page : "all");
+            $cacheKey = "asset_document_text_" . $this->getId() . "_" . ($page ? $page : "all");
             if(!$text = Pimcore_Model_Cache::load($cacheKey)) {
                 $document = Pimcore_Document::getInstance();
                 $text = $document->getText($page, $this->getFileSystemPath());

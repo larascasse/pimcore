@@ -31,6 +31,12 @@ class Pimcore {
     private static $eventManager;
 
     /**
+     * @var array items to be excluded from garbage collection
+     */
+    private static $globallyProtectedItems;
+
+
+    /**
      * @static
      * @throws Exception|Zend_Controller_Router_Exception
      */
@@ -72,7 +78,7 @@ class Pimcore {
             }
         }
 
-        if(self::inDebugMode() && $frontend && !defined("HHVM_VERSION")) {
+        if(self::inDebugMode() && $frontend && !$conf->general->disable_whoops && !defined("HHVM_VERSION")) {
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $jsonErrorHandler = new \Whoops\Handler\JsonResponseHandler;
@@ -321,6 +327,9 @@ class Pimcore {
             // redirect php error_log to /website/var/log/php.log
             if($conf->general->custom_php_logfile) {
                 $phpLog = PIMCORE_LOG_DIRECTORY . "/php.log";
+                if(!file_exists($phpLog)) {
+                    touch($phpLog);
+                }
                 if(is_writable($phpLog)) {
                     ini_set("error_log", $phpLog);
                     ini_set("log_errors", "1");
@@ -640,6 +649,7 @@ class Pimcore {
         $autoloader->registerNamespace('Search');
         $autoloader->registerNamespace('Tool');
         $autoloader->registerNamespace('Whoops');
+        $autoloader->registerNamespace('Google');
 
         Pimcore_Tool::registerClassModelMappingNamespaces();
     }
@@ -776,6 +786,38 @@ class Pimcore {
         return self::$eventManager;
     }
 
+    /** Add $keepItems to the list of items which are protected from garbage collection.
+     * @param $keepItems
+     */
+    public static function addToGloballyProtectedItems($keepItems) {
+        if (is_string($keepItems)) {
+            $keepItems = array($keepItems);
+        }
+        if (!is_array(self::$globallyProtectedItems) && $keepItems) {
+            self::$globallyProtectedItems = array();
+        }
+        self::$globallyProtectedItems = array_merge(self::$globallyProtectedItems, $keepItems);
+    }
+
+
+    /** Items to be deleted.
+     * @param $deleteItems
+     */
+    public static function removeFromGloballyProtectedItems($deleteItems) {
+        if (is_string($deleteItems)) {
+            $deleteItems = array($deleteItems);
+        }
+
+        if (is_array($deleteItems) && is_array(self::$globallyProtectedItems)) {
+            foreach ($deleteItems as $item) {
+                $key = array_search($item,self::$globallyProtectedItems);
+                if($key!==false){
+                    unset(self::$globallyProtectedItems[$key]);
+                }
+            }
+        }
+    }
+
     /**
      * Forces a garbage collection.
      * @static
@@ -806,6 +848,10 @@ class Pimcore {
 
         if(is_array($keepItems) && count($keepItems) > 0) {
             $protectedItems = array_merge($protectedItems, $keepItems);
+        }
+
+        if (is_array(self::$globallyProtectedItems) && count(self::$globallyProtectedItems)) {
+            $protectedItems = array_merge($protectedItems, self::$globallyProtectedItems);
         }
 
         $registryBackup = array();
@@ -866,6 +912,13 @@ class Pimcore {
             return $data;
         }
 
+        // cleanup headers, ensure all headers are unique
+        // this is necessary since eg. session_start() sends Set-Cookie headers again and again, which causes problems with e.g. varnish and other HTTP clients
+        foreach(headers_list() as $header) {
+            header($header, true);
+        }
+
+        // force closing the connection at the client, this enables to do certain tasks (writing the cache) in the "background"
         header("Connection: close\r\n");
 
         // check for supported content-encodings
@@ -958,6 +1011,10 @@ class Pimcore {
 
         // flush everything
         flush();
+
+        if(function_exists("fastcgi_finish_request")) {
+            fastcgi_finish_request();
+        }
 
         // clear tags scheduled for the shutdown
         Pimcore_Model_Cache::clearTagsOnShutdown();

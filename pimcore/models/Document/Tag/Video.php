@@ -140,14 +140,14 @@ class Document_Tag_Video extends Document_Tag
      * @see Document_Tag_Interface::frontend
      * @return string
      */
-    public function frontend()
+    public function frontend($inAdmin = false)
     {
 
         if (!$this->id || !$this->type) {
             return $this->getEmptyCode();
         }
         else if ($this->type == "asset") {
-            return $this->getAssetCode();
+            return $this->getAssetCode($inAdmin);
         }
         else if ($this->type == "youtube") {
             return $this->getYoutubeCode();
@@ -230,7 +230,7 @@ class Document_Tag_Video extends Document_Tag
 
         // get frontendcode for preview
         // put the video code inside the generic code
-        $html = str_replace("</div>", $this->frontend() . "</div>", $html);
+        $html = str_replace("</div>", $this->frontend(true) . "</div>", $html);
 
         return $html;
     }
@@ -313,7 +313,7 @@ class Document_Tag_Video extends Document_Tag
     }
 
 
-    public function getAssetCode()
+    public function getAssetCode($inAdmin = false)
     {
         $asset = Asset::getById($this->id);
         $options = $this->getOptions();
@@ -348,12 +348,19 @@ class Document_Tag_Video extends Document_Tag
                     if($asset->getCustomSetting("image_thumbnail_asset")) {
                         $image = $asset->getImageThumbnail($imageThumbnailConf);
                     } else {
-                        if ($thumbnail["status"] == "finished") {
+                        if ($thumbnail["status"] == "finished" && (array_key_exists("animatedGifPreview", $options) && $options["animatedGifPreview"] !== false)) {
                             $image = $asset->getPreviewAnimatedGif(null, null, $imageThumbnailConf);
                         } else {
                             $image = $asset->getImageThumbnail($imageThumbnailConf);
                         }
                     }
+                }
+
+                if($inAdmin && isset($options["editmodeImagePreview"]) && $options["editmodeImagePreview"]) {
+                    $code = '<div id="pimcore_video_' . $this->getName() . '" class="pimcore_tag_video">';
+                    $code .= '<img width="' . $this->getWidth() . '" src="' . $image . '" />';
+                    $code .= '</div';
+                    return $code;
                 }
 
                 if ($thumbnail["status"] == "finished") {
@@ -369,7 +376,7 @@ class Document_Tag_Video extends Document_Tag
                     return $this->getErrorCode("The video conversion failed, please see the debug.log for more details.");
                 }
             } else {
-                return $this->getErrorCode("The given thumbnail doesn't exist");
+                return $this->getErrorCode("The given thumbnail doesn't exist: '" . $options["thumbnail"] . "'");
             }
         }
     }
@@ -605,9 +612,10 @@ class Document_Tag_Video extends Document_Tag
 
             $urls = array_reverse($urls); // use webm as the preferred format
 
-                foreach ($urls as $type => $url) {
-                    $code .= '<source type="video/' . $type . '" src="' . $url . '" />' . "\n";
-                }
+            foreach ($urls as $type => $url) {
+                $code .= '<source type="video/' . $type . '" src="' . $url . '" />' . "\n";
+            }
+
             $code .= '</video>' . "\n";
             $code .= '</div>' . "\n";
         }
@@ -706,8 +714,8 @@ class Document_Tag_Video extends Document_Tag
                 $this->type = $data->type;
 
             } else if (in_array($data->type,array("vimeo","youtube","url"))) {
-                  $this->id = $data->id;
-                  $this->type = $data->type;
+                $this->id = $data->id;
+                $this->type = $data->type;
             } else {
                 throw new Exception("cannot get values from web service import - type must be asset,youtube,url or vimeo ");
             }

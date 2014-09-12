@@ -1,3 +1,4 @@
+"converting","Converting"
 "do_not_scale_up","Do not scale up"
 "ratio","Ratio"
 "disable_whoops_error_handler","Disable Whoops error handler"
@@ -1534,6 +1535,7 @@
 "definitions_saved","Definitions saved"
 "warning_bulk_import","The Bulk Import will overwrite your class/fieldcollection/objectbrick definitions without warning! Do you want to continue?"
 "customlayout","Custom Layout"
+"scheduled","Scheduled"
 "","Chemin absolu vers qtfaststart"
 "","Ajouter un rapport SQL"
 "","Ajouter un groupe d'utilisateurs"

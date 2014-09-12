@@ -23,7 +23,7 @@ class Asset_Image_Thumbnail_Processor {
         "scaleByWidth" => array("width"),
         "scaleByHeight" => array("height"),
         "contain" => array("width","height"),
-        "cover" => array("width","height","positioning"),
+        "cover" => array("width","height","positioning","doNotScaleUp"),
         "frame" => array("width","height"),
         "rotate" => array("angle"),
         "crop" => array("x","y","width","height"),
@@ -189,12 +189,7 @@ class Asset_Image_Thumbnail_Processor {
                     }
 
                     ksort($arguments);
-                    if(count($mapping) == count($arguments)) {
-                        call_user_func_array(array($image,$transformation["method"]),$arguments);
-                    } else {
-                        $message = "Image Transform failed: cannot call method `" . $transformation["method"] . "´ with arguments `" . implode(",",$arguments) . "´ because there are too few arguments";
-                        Logger::error($message);
-                    }
+                    call_user_func_array(array($image,$transformation["method"]),$arguments);
                 }
             }
         }
@@ -203,6 +198,15 @@ class Asset_Image_Thumbnail_Processor {
 
         if($contentOptimizedFormat) {
             Pimcore_Image_Optimizer::optimize($fsPath);
+        }
+
+        clearstatcache();
+
+        // quick bugfix / workaround, it seems that imagemagick / image optimizers creates sometimes empty PNG chunks (total size 33 bytes)
+        // no clue why it does so as this is not continuous reproducible, and this is the only fix we can do for now
+        // if the file is corrupted the file will be created on the fly when requested by the browser (because it's deleted here)
+        if(is_file($fsPath) && filesize($fsPath) < 50) {
+            unlink($fsPath);
         }
 
         return $path;

@@ -417,19 +417,7 @@ pimcore.helpers.showNotification = function (title, text, type, errorText, hideD
                 handler: function () {
                     errWin.close();
                 }
-            }],
-            listeners: {
-                afterrender: function (el) {
-                    var myRobotId = "robot-" + Math.random();
-                    el.getEl().addClass("swing animated");
-                    el.getEl().insertHtml("afterBegin", '<div class="error-robot" id="' + myRobotId + '"><img src="/admin/misc/robohash" /></div><div class="error-bubble"></div> ');
-                    window.setTimeout(function () {
-                        Ext.get(myRobotId).animate({left: {from: "0px", to: "-300px"}}, 0.3, function () {
-                            Ext.get(Ext.query(".error-bubble")[0]).show();
-                        }, "easeOut", "run");
-                    }, 1000);
-                }
-            }
+            }]
         });
         errWin.show();
     } else {
@@ -543,7 +531,7 @@ pimcore.helpers.closeAllUnmodified = function () {
     pimcore.helpers.closeAllElements(unmodifiedElements);
 }
 
-pimcore.helpers.closeAllElements = function (except) {
+pimcore.helpers.closeAllElements = function (except, tabPanel) {
 
     var exceptions = [];
     if(except instanceof Ext.Panel) {
@@ -552,12 +540,16 @@ pimcore.helpers.closeAllElements = function (except) {
         exceptions = except;
     }
 
-    var tabs = Ext.getCmp("pimcore_panel_tabs").items;
+    if(typeof tabPanel == "undefined") {
+        tabPanel = Ext.getCmp("pimcore_panel_tabs");
+    }
+
+    var tabs = tabPanel.items;
     if (tabs.getCount() > 0) {
         tabs.each(function (item, index, length) {
             window.setTimeout(function () {
                 if(!in_array(item, exceptions)) {
-                    Ext.getCmp("pimcore_panel_tabs").remove(item);
+                    tabPanel.remove(item);
                 }
             }, 100*index);
         });
@@ -1593,22 +1585,20 @@ pimcore.helpers.insertTextAtCursorPosition = function (text) {
 
 
 pimcore.helpers.handleTabRightClick = function (tabPanel, el, index) {
+
+
     if(Ext.get(el.tabEl)) {
         Ext.get(el.tabEl).on("contextmenu", function (e) {
-            var menu = new Ext.menu.Menu({
-                items: [{
+
+            var items = [];
+
+            // this is only for the main tab panel
+            if(tabPanel.getId() == "pimcore_panel_tabs") {
+                items = [{
                     text: t('close_others'),
                     iconCls: "",
                     handler: function (item) {
                         pimcore.helpers.closeAllElements(el);
-                        // clear the opentab store, so that also non existing elements are flushed
-                        pimcore.helpers.clearOpenTab();
-                    }.bind(this)
-                }, {
-                    text: t('close_all'),
-                    iconCls: "",
-                    handler: function (item) {
-                        pimcore.helpers.closeAllElements();
                         // clear the opentab store, so that also non existing elements are flushed
                         pimcore.helpers.clearOpenTab();
                     }.bind(this)
@@ -1620,20 +1610,24 @@ pimcore.helpers.handleTabRightClick = function (tabPanel, el, index) {
                         // clear the opentab store, so that also non existing elements are flushed
                         pimcore.helpers.clearOpenTab();
                     }.bind(this)
-                }]
+                }];
+            }
+
+            // every tab panel can get this
+            items.push({
+                text: t('close_all'),
+                iconCls: "",
+                handler: function (item) {
+                    pimcore.helpers.closeAllElements(null,tabPanel);
+                    // clear the opentab store, so that also non existing elements are flushed
+                    pimcore.helpers.clearOpenTab();
+                }.bind(this)
             });
 
 
-
-            /*menu.add(new Ext.menu.Item({
-             text: t('close_all'),
-             iconCls: "",
-             handler: function (item) {
-             pimcore.helpers.closeAllElements();
-             // clear the opentab store, so that also non existing elements are flushed
-             pimcore.helpers.clearOpenTab();
-             }.bind(this)
-             }));*/
+            var menu = new Ext.menu.Menu({
+                items: items
+            });
 
             menu.showAt(e.getXY());
             e.stopEvent();
@@ -1882,3 +1876,402 @@ pimcore.helpers.sendTestEmail = function () {
 
 };
 
+/* this is here so that it can be opened in the parent window when in editmode frame */
+pimcore.helpers.openImageCropper = function (imageId, data, saveCallback, config) {
+    var cropper = new top.pimcore.element.tag.imagecropper(imageId, data, saveCallback, config);
+    return cropper;
+};
+
+/* this is here so that it can be opened in the parent window when in editmode frame */
+pimcore.helpers.openImageHotspotMarkerEditor = function (imageId, data, saveCallback) {
+    var editor = new pimcore.element.tag.imagehotspotmarkereditor(imageId, data, saveCallback);
+    return editor;
+};
+
+
+pimcore.helpers.editmode = {};
+
+pimcore.helpers.editmode.openLinkEditPanel = function (data, callback) {
+
+    var fieldPath = new Ext.form.TextField({
+        fieldLabel: t('path'),
+        value: data.path,
+        name: "path",
+        width: 320,
+        cls: "pimcore_droptarget_input",
+        enableKeyEvents: true,
+        listeners: {
+            keyup: function (el) {
+                if(el.getValue().match(/^www\./)) {
+                    el.setValue("http://" + el.getValue());
+                }
+            }
+        }
+    });
+
+
+    fieldPath.on("render", function (el) {
+        // add drop zone
+        new Ext.dd.DropZone(el.getEl(), {
+            reference: this,
+            ddGroup: "element",
+            getTargetFromEvent: function(e) {
+                return fieldPath.getEl();
+            },
+
+            onNodeOver : function(target, dd, e, data) {
+                return Ext.dd.DropZone.prototype.dropAllowed;
+            }.bind(this),
+
+            onNodeDrop : function (target, dd, e, data) {
+                if (data.node.attributes.elementType == "asset" || data.node.attributes.elementType == "document") {
+                    fieldPath.setValue(data.node.attributes.path);
+                    return true;
+                }
+                return false;
+            }.bind(this)
+        });
+    }.bind(this));
+
+    /*fieldPath.on("render", function (el) {
+        // register at global DnD manager
+        dndManager.addDropTarget(el.getEl(), this.onNodeOver.bind(this), this.onNodeDrop.bind(this));
+    }.bind(this));*/
+
+    var form = new Ext.FormPanel({
+        itemId: "form",
+        items: [
+            {
+                xtype:'tabpanel',
+                activeTab: 0,
+                deferredRender: false,
+                defaults:{autoHeight:true, bodyStyle:'padding:10px'},
+                border: false,
+                items: [
+                    {
+                        title:t('basic'),
+                        layout:'form',
+                        border: false,
+                        defaultType: 'textfield',
+                        items: [
+                            {
+                                fieldLabel: t('text'),
+                                name: 'text',
+                                value: data.text
+                            },
+                            {
+                                xtype: "compositefield",
+                                items: [fieldPath, {
+                                    xtype: "button",
+                                    iconCls: "pimcore_icon_search",
+                                    handler: function () {
+                                        pimcore.helpers.itemselector(false, function (item) {
+                                            if (item) {
+                                                fieldPath.setValue(item.fullpath);
+                                                return true;
+                                            }
+                                        }, {
+                                            type: ["asset","document"]
+                                        });
+                                    }
+                                }]
+                            },
+                            {
+                                xtype:'fieldset',
+                                title: t('properties'),
+                                collapsible: false,
+                                autoHeight:true,
+                                defaultType: 'textfield',
+                                items :[
+                                    {
+                                        xtype: "combo",
+                                        fieldLabel: t('target'),
+                                        name: 'target',
+                                        triggerAction: 'all',
+                                        editable: true,
+                                        mode: "local",
+                                        store: ["","_blank","_self","_top","_parent"],
+                                        value: data.target
+                                    },
+                                    {
+                                        fieldLabel: t('parameters'),
+                                        name: 'parameters',
+                                        value: data.parameters
+                                    },
+                                    {
+                                        fieldLabel: t('anchor'),
+                                        name: 'anchor',
+                                        value: data.anchor
+                                    },
+                                    {
+                                        fieldLabel: t('title'),
+                                        name: 'title',
+                                        value: data.title
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: t('advanced'),
+                        layout:'form',
+                        defaultType: 'textfield',
+                        border: false,
+                        items: [
+                            {
+                                fieldLabel: t('accesskey'),
+                                name: 'accesskey',
+                                value: data.accesskey
+                            },
+                            {
+                                fieldLabel: t('relation'),
+                                name: 'rel',
+                                width: 300,
+                                value: data.rel
+                            },
+                            {
+                                fieldLabel: ('tabindex'),
+                                name: 'tabindex',
+                                value: data.tabindex
+                            },
+                            {
+                                fieldLabel: t('class'),
+                                name: 'class',
+                                width: 300,
+                                value: data["class"]
+                            },
+                            {
+                                fieldLabel: t('attributes') + ' (key="value")',
+                                name: 'attributes',
+                                width: 300,
+                                value: data["attributes"]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        buttons: [
+            {
+                text: t("empty"),
+                listeners:  {
+                    "click": callback["empty"]
+                }
+            },
+            {
+                text: t("cancel"),
+                listeners:  {
+                    "click": callback["cancel"]
+                }
+            },
+            {
+                text: t("save"),
+                listeners: {
+                    "click": callback["save"]
+                },
+                icon: "/pimcore/static/img/icon/tick.png"
+            }
+        ]
+    });
+
+
+    var window = new Ext.Window({
+        modal: false,
+        width: 500,
+        height: 330,
+        title: t("edit_link"),
+        items: [form],
+        layout: "fit"
+    });
+
+    window.show();
+
+    return window;
+};
+
+
+pimcore.helpers.editmode.openVideoEditPanel = function (data, callback) {
+
+    var form = null;
+    var fieldPath = new Ext.form.TextField({
+        fieldLabel: t('path'),
+        value: data.path,
+        name: "path",
+        width: 320,
+        cls: "pimcore_droptarget_input",
+        enableKeyEvents: true,
+        listeners: {
+            keyup: function (el) {
+                if(el.getValue().indexOf("you") >= 0 && el.getValue().indexOf("http") >= 0) {
+                    form.getComponent("type").setValue("youtube");
+                } else if (el.getValue().indexOf("vim") >= 0 && el.getValue().indexOf("http") >= 0) {
+                    form.getComponent("type").setValue("vimeo");
+                }
+            }.bind(this)
+        }
+    });
+
+    var poster = new Ext.form.TextField({
+        fieldLabel: t('poster_image'),
+        value: data.poster,
+        name: "poster",
+        width: 320,
+        cls: "pimcore_droptarget_input",
+        enableKeyEvents: true,
+        listeners: {
+            keyup: function (el) {
+                //el.setValue(data.poster)
+            }.bind(this)
+        }
+    });
+
+    var initDD = function (el) {
+        // register at global DnD manager
+        new Ext.dd.DropZone(el.getEl(), {
+            reference: this,
+            ddGroup: "element",
+            getTargetFromEvent: function(e) {
+                return el.getEl();
+            },
+
+            onNodeOver : function(target, dd, e, data) {
+                if (target && target.getAttribute("name") == "poster") {
+                    if (data.node.attributes.elementType == "asset" && data.node.attributes.type == "image") {
+                        return Ext.dd.DropZone.prototype.dropAllowed;
+                    }
+                } else {
+                    if (data.node.attributes.elementType == "asset" && data.node.attributes.type == "video") {
+                        return Ext.dd.DropZone.prototype.dropAllowed;
+                    }
+                }
+                return Ext.dd.DropZone.prototype.dropNotAllowed;
+            }.bind(this),
+
+            onNodeDrop : function (target, dd, e, data) {
+                if(target) {
+                    if(target.getAttribute("name") == "path") {
+                        if (data.node.attributes.elementType == "asset" && data.node.attributes.type == "video") {
+                            fieldPath.setValue(data.node.attributes.path);
+                            form.getComponent("type").setValue("asset");
+                            return true;
+                        }
+                    } else if (target.getAttribute("name") == "poster") {
+                        if (data.node.attributes.elementType == "asset" && data.node.attributes.type == "image") {
+                            poster.setValue(data.node.attributes.path);
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }.bind(this)
+        });
+    };
+
+    fieldPath.on("render", initDD);
+    poster.on("render", initDD);
+
+    var searchButton = new Ext.Button({
+        iconCls: "pimcore_icon_search",
+        handler: function () {
+            pimcore.helpers.itemselector(false, function (item) {
+                if (item) {
+                    fieldPath.setValue(item.fullpath);
+                    return true;
+                }
+            }, {
+                type: ["asset"],
+                subtype: {
+                    asset: ["video"]
+                }
+            });
+        }
+    });
+
+    var updateType = function (type) {
+        searchButton.enable();
+        var labelEl = form.getComponent("pathContainer").label;
+        labelEl.update(t("path"));
+
+        if(type != "asset") {
+            searchButton.disable();
+        }
+        if(type == "youtube") {
+            labelEl.update("URL / ID");
+        }
+        if(type == "vimeo") {
+            labelEl.update("URL");
+        }
+    };
+
+    form = new Ext.FormPanel({
+        itemId: "form",
+        bodyStyle: "padding:10px;",
+        items: [{
+            xtype: "combo",
+            itemId: "type",
+            fieldLabel: t('type'),
+            name: 'type',
+            triggerAction: 'all',
+            editable: true,
+            mode: "local",
+            store: ["asset","youtube","vimeo"],
+            value: data.type,
+            listeners: {
+                select: function (combo) {
+                    var type = combo.getValue();
+                    updateType(type);
+                }.bind(this)
+            }
+        }, {
+            xtype: "compositefield",
+            itemId: "pathContainer",
+            items: [fieldPath, searchButton]
+        }, poster,{
+            xtype: "textfield",
+            name: "title",
+            fieldLabel: t('title'),
+            width: 320,
+            value: data.title
+        },{
+            xtype: "textarea",
+            name: "description",
+            fieldLabel: t('description'),
+            width: 320,
+            height: 50,
+            value: data.description
+        }],
+        buttons: [
+            {
+                text: t("cancel"),
+                listeners:  {
+                    "click": callback["cancel"]
+                }
+            },
+            {
+                text: t("save"),
+                listeners: {
+                    "click": callback["save"]
+                },
+                icon: "/pimcore/static/img/icon/tick.png"
+            }
+        ]
+    });
+
+
+    var window = new Ext.Window({
+        width: 500,
+        height: 250,
+        title: t("video"),
+        items: [form],
+        layout: "fit",
+        listeners: {
+            afterrender: function () {
+                updateType(data.type);
+            }.bind(this)
+        }
+    });
+    window.show();
+
+    return window;
+};

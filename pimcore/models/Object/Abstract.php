@@ -525,7 +525,7 @@ class Object_Abstract extends Element_Abstract {
                     $this->rollBack();
                 } catch (\Exception $er) {
                     // PDO adapter throws exceptions if rollback fails
-                    Logger::error($er);
+                    Logger::info($er);
                 }
 
                 // we try to start the transaction $maxRetries times again (deadlocks, ...)
@@ -537,6 +537,7 @@ class Object_Abstract extends Element_Abstract {
                     usleep($waitTime); // wait specified time until we restart the transaction
                 } else {
                     // if the transaction still fail after $maxRetries retries, we throw out the exception
+                    Logger::error("Finally giving up restarting the same transaction again and again, last message: " . $e->getMessage());
                     throw $e;
                 }
             }

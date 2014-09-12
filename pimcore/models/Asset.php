@@ -461,9 +461,14 @@ class Asset extends Element_Abstract {
                 // if the old path is different from the new path, update all children
                 $updatedChildren = array();
                 if($oldPath && $oldPath != $this->getFullPath()) {
-                    @rename(PIMCORE_ASSET_DIRECTORY . $oldPath, $this->getFileSystemPath());
-                    $this->getResource()->updateWorkspaces();
-                    $updatedChildren = $this->getResource()->updateChildsPaths($oldPath);
+                    $oldFullPath = PIMCORE_ASSET_DIRECTORY . $oldPath;
+                    if(is_file($oldFullPath) || is_dir($oldFullPath)) {
+                        if(!@rename(PIMCORE_ASSET_DIRECTORY . $oldPath, $this->getFileSystemPath())) {
+                            throw new \Exception("Unable to rename asset " . $this->getId() . " on the filesystem: " . $oldFullPath);
+                        }
+                        $this->getResource()->updateWorkspaces();
+                        $updatedChildren = $this->getResource()->updateChildsPaths($oldPath);
+                    }
                 }
 
                 $this->commit();
@@ -573,7 +578,9 @@ class Asset extends Element_Abstract {
 
         $dirPath = dirname($destinationPath);
         if (!is_dir($dirPath)) {
-            Pimcore_File::mkdir($dirPath);
+            if(!Pimcore_File::mkdir($dirPath)) {
+                throw new \Exception("Unable to create directory: ". $dirPath . " for asset :" . $this->getId());
+            }
         }
 
         if ($this->getType() != "folder") {
@@ -582,11 +589,17 @@ class Asset extends Element_Abstract {
                 $streamMeta = stream_get_meta_data($src);
                 if($destinationPath != $streamMeta["uri"]) {
                     $dest = fopen($destinationPath, "w+");
-                    stream_copy_to_stream($src, $dest);
-                    fclose($dest);
+                    if($dest) {
+                        stream_copy_to_stream($src, $dest);
+                        if(!fclose($dest)) {
+                            throw new \Exception("Unable to close file handle " . $destinationPath . " for asset " . $this->getId());
+                        }
+                    } else {
+                        throw new \Exception("Unable to open file: " . $destinationPath . " for asset " . $this->getId());
+                    }
                 }
 
-                chmod($destinationPath, Pimcore_File::getDefaultMode());
+                @chmod($destinationPath, Pimcore_File::getDefaultMode());
 
                 // check file exists
                 if (!is_file($destinationPath)) {
@@ -1209,7 +1222,7 @@ class Asset extends Element_Abstract {
         stream_copy_to_stream($src, $dest);
         fclose($dest);
 
-        chmod($destinationPath, Pimcore_File::getDefaultMode());
+        @chmod($destinationPath, Pimcore_File::getDefaultMode());
 
         if($fullPath) {
             return $destinationPath;
@@ -1243,7 +1256,9 @@ class Asset extends Element_Abstract {
      * @param string $name
      */
     public function removeCustomSetting($key) {
-        unset($this->customSettings[$key]);
+        if(is_array($this->customSettings) && array_key_exists($key, $this->customSettings)) {
+            unset($this->customSettings[$key]);
+        }
     }
 
     /**
@@ -1264,6 +1279,10 @@ class Asset extends Element_Abstract {
 
         if ($customSettings instanceof stdClass) {
             $customSettings = (array) $customSettings;
+        }
+
+        if(!is_array($customSettings)) {
+            $customSettings = array();
         }
 
         $this->customSettings = $customSettings;

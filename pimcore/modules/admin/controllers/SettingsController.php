@@ -189,7 +189,7 @@ class Admin_SettingsController extends Pimcore_Controller_Action_Admin {
         function delete ($dir, $thumbnail, &$matches = array()) {
             $dirs = glob($dir . '/*', GLOB_ONLYDIR);
             foreach ($dirs as $dir) {
-                if(preg_match("@/thumb__" . $thumbnail . "$@", $dir)) {
+                if(preg_match("@/thumb__" . $thumbnail . "$@", $dir) || preg_match("@/thumb__" . $thumbnail . "_auto", $dir)) {
                     recursiveDelete($dir);
                 }
                 delete($dir, $thumbnail, $matches);
@@ -338,6 +338,7 @@ class Admin_SettingsController extends Pimcore_Controller_Action_Admin {
                 ),
                 "custom_php_logfile" => $values["general.custom_php_logfile"],
                 "debugloglevel" => $values["general.debugloglevel"],
+                "disable_whoops" => $values["general.disable_whoops"],
                 "debug_admin_translations" => $values["general.debug_admin_translations"],
                 "devmode" => $values["general.devmode"],
                 "logrecipient" => $values["general.logrecipient"],

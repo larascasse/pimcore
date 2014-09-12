@@ -333,11 +333,6 @@ Ext.onReady(function () {
     statusbar.add('&copy by <a href="http://www.pimcore.org/" target="_blank" style="color:#fff;">'
                 + 'pimcore GmbH</a> - pimcore Version: ' + pimcore.settings.version + " (Build: " + pimcore.settings.build + ")");
 
-    if (!empty(pimcore.settings.liveconnectToken)) {
-        pimcore.settings.liveconnect.setToken(pimcore.settings.liveconnectToken);
-        pimcore.settings.liveconnect.addToStatusBar();
-    }
-
     // check for updates
     window.setTimeout(function () {
         var script = document.createElement("script");
@@ -374,7 +369,6 @@ Ext.onReady(function () {
                             split:true,
                             width:250,
                             minSize:175,
-                            maxSize:400,
                             collapsible:true,
                             animCollapse:false,
                             layout:'accordion',
@@ -403,7 +397,6 @@ Ext.onReady(function () {
                             split:true,
                             width:250,
                             minSize:175,
-                            maxSize:400,
                             collapsible:true,
                             collapsed:true,
                             animCollapse:false,

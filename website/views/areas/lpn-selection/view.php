@@ -110,7 +110,7 @@
             <div class="paddingleft20 col-sm-8  col-sm-<?= ($position == "right") ? "pull-" : ""; ?>8 <?= ($position == "right") ? " homselectiontxtright" : ""; ?>">
                 <h2><span><?= $this->input("headline", ["width" => 400]); ?></span></h2>
                 <div class="selectioncontent"><?= $this->textarea("content1", ["width" => 350, "height" => 200]); ?></div>
-                <div class="selectionlink">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_1_<?= $ean ?>" product_sku="<?= $ean ?>"}}</div>
+                <!--<div class="selectionlink">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_1_<?= $ean ?>" product_sku="<?= $ean ?>"}}</div>-->
                 <div class="selectionlink"><?= $this->textarea("content2", ["width" => 350, "height" => 100]); ?></div>
                 <div class="selectioncontent"><?= $this->textarea("link2", ["width" => 350, "height" => 100]); ?></div>
 

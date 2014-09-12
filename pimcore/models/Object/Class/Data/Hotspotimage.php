@@ -47,6 +47,48 @@ class Object_Class_Data_Hotspotimage extends Object_Class_Data_Image {
 
 
     /**
+     * @var int
+     */
+    public $ratioX;
+
+    /**
+     * @var int
+     */
+    public $ratioY;
+
+    /**
+     * @param int $ratioX
+     */
+    public function setRatioX($ratioX)
+    {
+        $this->ratioX = $ratioX;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRatioX()
+    {
+        return $this->ratioX;
+    }
+
+    /**
+     * @param int $ratioY
+     */
+    public function setRatioY($ratioY)
+    {
+        $this->ratioY = $ratioY;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRatioY()
+    {
+        return $this->ratioY;
+    }
+
+    /**
      * @see Object_Class_Data::getDataForResource
      * @param Object_Data_Hotspotimage $data
      * @param null|Object_Abstract $object
@@ -385,8 +427,40 @@ class Object_Class_Data_Hotspotimage extends Object_Class_Data_Image {
      * @param mixed $value
      * @return mixed
      */
-    public function getFromWebserviceImport($value, $object = null, $idMapper = null) {
-        return $this->getFromCsvImport($value);
+    public function getFromWebserviceImport($value, $relatedObject = null, $idMapper = null) {
+        $hotspotImage = $this->getFromCsvImport($value);
+        /** @var $hotspotImage Object_Data_Hotspotimage */
+
+        if(!$hotspotImage) {
+            return null;
+        }
+
+        $theImage = $hotspotImage->getImage();
+
+        if (!$theImage) {
+            return null;
+        }
+
+        $id = $theImage->getId();
+
+        if ($idMapper && !empty($id)) {
+            $id = $idMapper->getMappedId("asset", $id);
+            $fromMapper = true;
+        }
+
+        $asset = Asset::getById($id);
+        if(empty($id) && !$fromMapper){
+            return null;
+        } else if (is_numeric($id) and $asset instanceof Asset) {
+            $hotspotImage->setImage($asset);
+            return $hotspotImage;
+        } else {
+            if (!$idMapper || !$idMapper->ignoreMappingFailures()) {
+                throw new Exception("cannot get values from web service import - invalid data, referencing unknown (hotspot) asset with id [ ".$id." ]");
+            } else {
+                $idMapper->recordMappingFailure("object", $relatedObject->getId(), "asset", $value);
+            }
+        }
     }
 
     /**

@@ -58,6 +58,8 @@ pimcore.object.classes.data.select = Class.create(pimcore.object.classes.data.da
         });
 
         this.valueGrid = new Ext.grid.EditorGridPanel({
+            enableDragDrop: true,
+            ddGroup: 'objectclassselect',
             tbar: [{
                 xtype: "tbtext",
                 text: t("selection_options")
@@ -78,9 +80,9 @@ pimcore.object.classes.data.select = Class.create(pimcore.object.classes.data.da
             selModel:new Ext.grid.RowSelectionModel({singleSelect:true}),
             columnLines: true,
             columns: [
-                {header: t("display_name"), sortable: false, dataIndex: 'key', editor: new Ext.form.TextField({}),
+                {header: t("display_name"), sortable: true, dataIndex: 'key', editor: new Ext.form.TextField({}),
                                     width: 200},
-                {header: t("value"), sortable: false, dataIndex: 'value', editor: new Ext.form.TextField({}),
+                {header: t("value"), sortable: true, dataIndex: 'value', editor: new Ext.form.TextField({}),
                                     width: 200},
                 {
                     xtype:'actioncolumn',
@@ -133,6 +135,37 @@ pimcore.object.classes.data.select = Class.create(pimcore.object.classes.data.da
             autoHeight: true
         });
 
+
+        this.valueGrid.on("afterrender", function () {
+
+            var dropTargetEl = this.valueGrid.getEl();
+            var gridDropTarget = new Ext.dd.DropZone(dropTargetEl, {
+                ddGroup    : 'objectclassselect',
+                getTargetFromEvent: function(e) {
+                    return this.valueGrid.getEl().dom;
+                }.bind(this),
+                onNodeOver: function (overHtmlNode, ddSource, e, data) {
+                    if(data["grid"] && data["grid"] == this.valueGrid) {
+                        return Ext.dd.DropZone.prototype.dropAllowed;
+                    }
+                    return Ext.dd.DropZone.prototype.dropNotAllowed;
+                }.bind(this),
+                onNodeDrop : function(target, dd, e, data) {
+                    if(data["grid"] && data["grid"] == this.valueGrid) {
+                        var rowIndex = this.valueGrid.getView().findRowIndex(e.target);
+                        if(rowIndex !== false) {
+                            var store = this.valueGrid.getStore();
+                            var rec = store.getAt(data.rowIndex);
+                            store.removeAt(data.rowIndex);
+                            store.insert(rowIndex, [rec]);
+                        }
+                    }
+                    return false;
+                }.bind(this)
+            });
+        }.bind(this));
+
+
         $super();
 
         this.specificPanel.removeAll();
@@ -164,5 +197,18 @@ pimcore.object.classes.data.select = Class.create(pimcore.object.classes.data.da
         });
 
         this.datax.options = options;
+    },
+
+    applySpecialData: function(source) {
+        if (source.datax) {
+            if (!this.datax) {
+                this.datax =  {};
+            }
+            Ext.apply(this.datax,
+                {
+                    options: source.datax.options,
+                    width: source.datax.width
+                });
+        }
     }
 });

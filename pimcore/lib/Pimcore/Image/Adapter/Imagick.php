@@ -60,7 +60,10 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
             $i = new Imagick();
             $this->imagePath = $imagePath;
 
-            $i->setcolorspace(Imagick::COLORSPACE_SRGB);
+            if(method_exists($i, "setcolorspace")) {
+                $i->setcolorspace(Imagick::COLORSPACE_SRGB);
+            }
+
             $i->setBackgroundColor(new ImagickPixel('transparent')); //set .png transparent (print)
 
             if(isset($options["resolution"])) {
@@ -143,6 +146,15 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
             $i->writeImage($path);
         } else {
             $i->writeImage($format . ":" . $path);
+        }
+
+        // force progressive JPEG if filesize >= 10k
+        // better compression, smaller filesize, especially for web optimization
+        if($format == "jpeg") {
+            if(filesize($path) >= 10240) {
+                $i->setinterlacescheme(Imagick::INTERLACE_PLANE);
+                $i->writeImage($path);
+            }
         }
 
         return $this;
@@ -301,7 +313,7 @@ class Pimcore_Image_Adapter_Imagick extends Pimcore_Image_Adapter {
 
             // only use the calculated resolution if we need a higher one that the one we got from the metadata (getImageResolution)
             // this is because sometimes the quality is much better when using the "native" resulution from the metadata
-            if($newRes["x"] > $res["x"] && $newRes["y"] > $newRes["y"]) {
+            if($newRes["x"] > $res["x"] && $newRes["y"] > $res["y"]) {
                 $this->resource->setResolution($newRes["x"], $newRes["y"]);
             } else {
                 $this->resource->setResolution($res["x"], $res["y"]);

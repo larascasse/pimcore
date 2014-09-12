@@ -26,6 +26,16 @@ class Asset_Video extends Asset {
      * @return void
      */
     protected function update() {
+
+        // only do this if the file exists and contains data
+        if($this->getDataChanged() || !$this->getCustomSetting("duration")) {
+            try {
+                $this->setCustomSetting("duration", $this->getDurationFromBackend());
+            } catch (\Exception $e) {
+                Logger::err("Unable to get duration of video: " . $this->getId());
+            }
+        }
+
         $this->clearThumbnails();
         parent::update();
     }
@@ -161,7 +171,15 @@ class Asset_Video extends Asset {
         }
 
         if(!is_file($path)) {
-            $converter->saveImage($path, $timeOffset);
+            $lockKey = "video_image_thumbnail_" . $this->getId() . "_" . $timeOffset;
+            Tool_Lock::acquire($lockKey);
+
+            // after we got the lock, check again if the image exists in the meantime - if not - generate it
+            if(!is_file($path)) {
+                $converter->saveImage($path, $timeOffset);
+            }
+
+            Tool_Lock::release($lockKey);
         }
 
         $thumbnail = $this->getImageThumbnailConfig($thumbnailName);
@@ -220,12 +238,20 @@ class Asset_Video extends Asset {
                 $frameImage = $this->getImageThumbnail($thumbnailConfig, $i*$sampleRate);
                 $frameImage = PIMCORE_DOCUMENT_ROOT . $frameImage;
 
-                $thumbnails[] = $frameImage;
-                $delays[] = $delay;
+                if(preg_match("/\.gif$/", $frameImage) && filesize($frameImage) > 10) {
+                    // check if the image is correct and not a "not supported" placeholder
+                    $thumbnails[] = $frameImage;
+                    $delays[] = $delay;
+                }
             }
 
-            $animator = new Pimcore_Image_GifAnimator($thumbnails, $delays, 0, 2, 255, 255, 255, "url");
-            $animGifContent = $animator->GetAnimation();
+            try {
+                $animator = new Pimcore_Image_GifAnimator($thumbnails, $delays, 0, 2, 255, 255, 255, "url");
+                $animGifContent = $animator->GetAnimation();
+            } catch (\Exception $e) {
+                Logger::error($e);
+                $animGifContent = file_get_contents($thumbnails[0]);
+            }
 
             Pimcore_File::put($animGifPath, $animGifContent);
         }
@@ -235,15 +261,29 @@ class Asset_Video extends Asset {
         return $animGifPath;
     }
 
+    protected function getDurationFromBackend() {
+        if(Pimcore_Video::isAvailable()) {
+            $converter = Pimcore_Video::getInstance();
+            $converter->load($this->getFileSystemPath());
+            return $converter->getDuration();
+        }
+        return null;
+    }
+
     /**
      * @return mixed
      */
     public function getDuration () {
-        if(Pimcore_Video::isAvailable()) {
-            $converter = Pimcore_Video::getInstance();
-            $converter->load($this->getFileSystemPath());
+        $duration = $this->getCustomSetting("duration");
+        if(!$duration) {
+            $duration = $this->getDurationFromBackend();
+            $this->setCustomSetting("duration", $duration);
 
-            return $converter->getDuration();
+            Version::disable();
+            $this->save(); // auto save
+            Version::enable();
         }
+
+        return $duration;
     }
 }

@@ -22,26 +22,14 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
         this.data = [];
         this.fieldConfig = fieldConfig;
 
-        if (data && data["visibleFieldsLabels"]) {
-            this.visibleFieldsLabels = data["visibleFieldsLabels"];
-        } else {
-            this.visibleFieldsLabels = [];
-        }
-
-        if (data && data["visibleFieldsData"]) {
-            this.visibleFieldsData = data["visibleFieldsData"];
-        } else {
-            this.visibleFieldsData = [];
-        }
-
         var classStore = pimcore.globalmanager.get("object_types_store");
         var className = classStore.getById(fieldConfig.allowedClassId);
 
         var classNameText = (typeof(className) != 'undefined') ? className.data.text : '';
         this.fieldConfig.classes = [{classes: classNameText, id: fieldConfig.allowedClassId}];
 
-        if (data && data["data"]) {
-            this.data = data["data"];
+        if (data) {
+            this.data = data;
         }
 
         var fields = [];
@@ -101,16 +89,17 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
 
         for (i = 0; i < visibleFields.length; i++) {
             if(!empty(visibleFields[i])) {
-                var layout = this.visibleFieldsData[visibleFields[i]];
+                var layout = this.fieldConfig.visibleFieldDefinitions[visibleFields[i]];
+
                 var field = {
                     key: visibleFields[i],
-                    label: this.visibleFieldsLabels[visibleFields[i]],
+                    label: layout.title,
                     layout: layout,
                     position: i,
                     type: layout.fieldtype
                 };
 
-                var fc = pimcore.object.tags[field.type].prototype.getGridColumnConfig(field);
+                var fc = pimcore.object.tags[layout.fieldtype].prototype.getGridColumnConfig(field);
 
                 fc.width = 100;
                 fc.hidden = false;

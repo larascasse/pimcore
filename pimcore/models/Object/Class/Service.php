@@ -32,6 +32,9 @@ class Object_Class_Service  {
         unset($data->userOwner);
         unset($data->userModification);
         unset($data->fieldDefinitions);
+        
+        //add propertyVisibility to export data
+        $data->propertyVisibility = $class->propertyVisibility;
 
         $json = Zend_Json::encode($data);
         $json = Zend_Json::prettyPrint($json);
@@ -43,7 +46,7 @@ class Object_Class_Service  {
      * @param $json
      * @return bool
      */
-    public static function importClassDefinitionFromJson($class, $json) {
+    public static function importClassDefinitionFromJson($class, $json, $throwException = false) {
 
         $userId = 0;
         $user = Pimcore_Tool_Admin::getCurrentUser();
@@ -54,7 +57,10 @@ class Object_Class_Service  {
         $importData = Zend_Json::decode($json);
 
         // set layout-definition
-        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"]);
+        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"], $throwException);
+        if ($layout === false) {
+            return false;
+        }
         $class->setLayoutDefinitions($layout);
 
         // set properties of class
@@ -92,11 +98,11 @@ class Object_Class_Service  {
      * @param $json
      * @return bool
      */
-    public static function importFieldCollectionFromJson($fieldCollection, $json) {
+    public static function importFieldCollectionFromJson($fieldCollection, $json, $throwException = false) {
 
         $importData = Zend_Json::decode($json);
 
-        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"]);
+        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"], $throwException);
         $fieldCollection->setLayoutDefinitions($layout);
         $fieldCollection->setParentClass($importData["parentClass"]);
         $fieldCollection->save();
@@ -105,7 +111,7 @@ class Object_Class_Service  {
     }
 
     /**
-     * @param $fieldCollection
+     * @param $objectBrick
      * @return string
      */
     public static function generateObjectBrickJson($objectBrick){
@@ -134,7 +140,7 @@ class Object_Class_Service  {
      * @param $json
      * @return bool
      */
-    public static function importObjectBrickFromJson($objectBrick, $json) {
+    public static function importObjectBrickFromJson($objectBrick, $json, $throwException = false) {
 
         $importData = Zend_Json::decode($json);
 
@@ -150,7 +156,7 @@ class Object_Class_Service  {
             }
         }
 
-        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"]);
+        $layout = self::generateLayoutTreeFromArray($importData["layoutDefinitions"], $throwException);
         $objectBrick->setLayoutDefinitions($layout);
         $objectBrick->setClassDefinitions($importData["classDefinitions"]);
         $objectBrick->setParentClass($importData["parentClass"]);
@@ -159,7 +165,7 @@ class Object_Class_Service  {
         return true;
     }
 
-    public static function generateLayoutTreeFromArray($array) {
+    public static function generateLayoutTreeFromArray($array, $throwException = false) {
 
         if (is_array($array) && count($array) > 0) {
 
@@ -172,12 +178,19 @@ class Object_Class_Service  {
                     $item->setValues($array, array("childs"));
 
                     if(is_array($array) && is_array($array["childs"]) && $array["childs"]["datatype"]){
-                         $childO = self::generateLayoutTreeFromArray($array["childs"]);
-                            $item->addChild($childO);
+                        $childO = self::generateLayoutTreeFromArray($array["childs"], $throwException);
+                        $item->addChild($childO);
                     } else if (is_array($array["childs"]) && count($array["childs"]) > 0) {
                         foreach ($array["childs"] as $child) {
-                            $childO = self::generateLayoutTreeFromArray($child);
-                            $item->addChild($childO);
+                            $childO = self::generateLayoutTreeFromArray($child, $throwException);
+                            if ($childO !== false) {
+                                $item->addChild($childO);
+                            } else {
+                                if ($throwException) {
+                                    throw new Exception("Could not add child " . var_export($child, true));
+                                }
+                                return false;
+                            }
                         }
                     }
                 } else {
@@ -187,7 +200,58 @@ class Object_Class_Service  {
                 return $item;
             }
         }
+        if ($throwException) {
+            throw new Exception("Could not add child " . var_export($array, true));
+        }
         return false;
     }
+
+
+
+    public static function updateTableDefinitions(&$tableDefinitions, $tableNames) {
+        if (!is_array($tableDefinitions)) {
+            $tableDefinitions = array();
+        }
+
+        $db = Pimcore_Resource::get();
+        $tmp = array();
+        foreach ($tableNames as $tableName) {
+            $tmp[$tableName] = $db->fetchAll("show columns from " . $tableName);
+        }
+
+        foreach ($tmp as $tableName => $columns) {
+            foreach($columns as $column) {
+                $column["Type"] = strtolower($column["Type"]);
+                if (strtolower($column["Null"]) == "yes") {
+                    $column["Null"] = "null";
+                }
+//                $fieldName = strtolower($column["Field"]);
+                $fieldName = $column["Field"];
+                $tableDefinitions[$tableName][$fieldName] = $column;
+            }
+        }
+    }
+
+    public static function skipColumn($tableDefinitions, $table, $colName, $type, $default, $null) {
+        $tableDefinition = $tableDefinitions[$table];
+        if ($tableDefinition) {
+//            $colName = strtolower($colName);
+            $colDefinition = $tableDefinition[$colName];
+            if ($colDefinition) {
+                if (!strlen($default) && strtolower($null) === "null") {
+                    $default = null;
+                }
+
+                if (  $colDefinition["Type"] == $type && strtolower($colDefinition["Null"]) == strtolower($null)
+                    && $colDefinition["Default"] == $default) {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
+
 
 }

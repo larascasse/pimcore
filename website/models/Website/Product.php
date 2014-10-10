@@ -247,10 +247,10 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","origineArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","conditionnement","gallery","re_skus","cs_skus","us_skus");
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","origineArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","gallery","re_skus","cs_skus","us_skus","rendement","accessoirepopin","colisage","nbrpp");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
-			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0) {
+			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0 || strpos($attribute,"_not_configurable")>0) {
 				$ignoreFields[]=$attribute;
 			}
 		}
@@ -601,6 +601,9 @@ class Website_Product extends Object_Product {
     }
 
 	private function getSingleDimentionString($field,$prefix,$suffix="mm",$rounded=true) {
+		$excludefiled = $field."_not_configurable";
+		if($this->$excludefiled)
+			return;
 		$childrens = $this->getChilds();
 		$value = $this->$field;
 		$getter = "get" . ucfirst($field);
@@ -740,9 +743,12 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_description() {
-			$inheritance = Object_Abstract::doGetInheritedValues(); 
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
-   		 $str = "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
+
+   		 $str="";
+   		 if(strlen(trim($this->getDescription())))
+   		 	$str = "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
    		  Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 		   		
@@ -917,6 +923,19 @@ class Website_Product extends Object_Product {
 			# code...
 		};
 		return implode(",",$skus);	
+	}
+
+	function getMage_accessoirepopin() {
+		$skus=array();
+		$products = $this->getRelated("accessoirepopin",false);
+		foreach ($products as $product) { 
+			if(strlen($product->getEan())>0)
+				$skus[] = $product->getEan();
+			else
+				$skus[] = $product->getCode();
+			# code...
+		};
+		return implode(",",$skus);
 	}
 
 

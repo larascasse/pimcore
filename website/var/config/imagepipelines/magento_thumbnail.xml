@@ -11,6 +11,6 @@
   <name>magento_thumbnail</name>
   <description/>
   <format>SOURCE</format>
-  <quality>90</quality>
+  <quality>80</quality>
   <highResolution>0</highResolution>
 </zend-config>

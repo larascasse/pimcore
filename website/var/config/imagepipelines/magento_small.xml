@@ -13,7 +13,8 @@
   </items>
   <name>magento_small</name>
   <description/>
-  <format>PNG</format>
-  <quality>100</quality>
+  <format>SOURCE</format>
+  <quality>80</quality>
   <highResolution>0</highResolution>
+  <filenameSuffix/>
 </zend-config>

@@ -446,7 +446,7 @@ class Website_Product extends Object_Product {
 					$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_realisation")->getPath();						
 				}
 
-				$str.= '<div class="nsg_fullbkgimg col-md-8 col-sd-8  col-md-offset-4  col-sd-offset-4" data-img="'.$url.'">
+				$str.= '<div class="nsg_fullbkgimg col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-2" data-img="'.$url.'">
 						<div class="nsg_origine_cnt">
 						<h3>'.$article->getName().'</h3>
 						'.$article->getContent().'

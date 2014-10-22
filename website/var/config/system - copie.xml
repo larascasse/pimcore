@@ -15,7 +15,7 @@
     <contactemail>florent@lesmecaniques.net</contactemail>
     <loginscreencustomimage/>
     <disableusagestatistics/>
-    <debug>1</debug>
+    <debug></debug>
     <debug_ip/>
     <http_auth>
       <username/>
@@ -27,10 +27,10 @@
       <info/>
       <notice/>
       <warning/>
-      <error>1</error>
-      <critical>1</critical>
-      <alert>1</alert>
-      <emergency>1</emergency>
+      <error></error>
+      <critical></critical>
+      <alert></alert>
+      <emergency></emergency>
     </loglevel>
     <debug_admin_translations/>
     <devmode/>

@@ -64,6 +64,14 @@ class Website_Product extends Object_Product {
 	*/
 	public function getChoixString () {
 		$preValue = $this->getChoix(); 
+
+		$data = Object_Abstract::getByPath('/choix/'.strtolower($preValue));
+
+		if($data instanceof Object_Taxonomy)
+		return ucwords(strtolower($data->getLabel()));
+
+
+
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
@@ -104,6 +112,11 @@ class Website_Product extends Object_Product {
 	*/
 	public function getEssenceString () {
 		$preValue = $this->getEssence(); 
+		//return strtolower('/essence/'.strtolower($preValue));
+		$data = Object_Abstract::getByPath('/essence/'.strtolower($preValue));
+
+		if($data instanceof Object_Taxonomy)
+			return ucwords(strtolower($data->getLabel()));
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
@@ -143,6 +156,10 @@ class Website_Product extends Object_Product {
 	*/
 	public function getQualiteString () {
 		$preValue = $this->getQualite(); 
+		$data = Object_Abstract::getByPath('/qualite/'.strtolower($preValue));
+		if($data instanceof Object_Taxonomy)
+			return ucwords(strtolower($data->getLabel()));
+
 		$datas = Object_Taxonomy::getByCode($preValue);
 		foreach ($datas as $data) {
 		    // do something with the cities
@@ -315,12 +332,31 @@ class Website_Product extends Object_Product {
 					}
 
 					else if(is_array($attributeValue)) {
-						$attributeValue = implode(",",$attributeValue);
-						$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						if($value->fieldtype=="multiselect") {
+							$display = array();
+							foreach ($attributeValue as $optionSelect => $valueSelect) {
+								$display[]=Object_Service::getOptionsForSelectField($this,$attribute)[$valueSelect];
+
+							}
+
+							$attributeValue = implode(", ",$display);
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						}
+						else {
+							$attributeValue = implode(", ",$attributeValue);
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						}
+						
+
 
 					}
-					//Documents
+					else if($value->fieldtype=="select") {
+							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+					}
+					
 					else {
+						//Documents
 						if($value->fieldtype=="href"){
 							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
 						}
@@ -338,10 +374,10 @@ class Website_Product extends Object_Product {
 			$html ="<ul>\n";
 			foreach ($caracteristiques as $key => $value) {
 				$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
-				$html.= strlen($value["label"])>0?$value["label"]:"";
+				$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
 				$html.= '</div></div>';
 				$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
-				$html.= $value["content"];
+				$html.= ucfirst(trim($value["content"]));
 				$html.= '</div>';
 				$html.="</li>\n";
 			}
@@ -510,12 +546,31 @@ class Website_Product extends Object_Product {
 							continue;
 
 					if(is_array($attributeValue)) {
-						$attributeValue = implode($attributeValue);
-						$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						if($value->fieldtype=="multiselect" || $value->fieldtype=="multiselect") {
+							$display = array();
+							foreach ($attributeValue as $optionSelect => $valueSelect) {
+								$display[]=Object_Service::getOptionsForSelectField($this,$attribute)[$valueSelect];
+
+							}
+
+							$attributeValue = implode(", ",$display);
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						}
+						else {
+							$attributeValue = implode(", ",$attributeValue);
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+						}
+						
+
 
 					}
-					//Documents
+					else if($value->fieldtype=="select") {
+							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
+							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+					}
+					
 					else {
+						//Documents
 						if($value->fieldtype=="href"){
 							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
 						}
@@ -627,6 +682,8 @@ class Website_Product extends Object_Product {
 			$childsDimension = array();
 
 			foreach ($childrens as $subProduct) {
+				if(!$subProduct->getPublished())
+					continue;
 
 				if($subProduct->getEan()=="") {
 					$subProductChildrens = $subProduct->getChilds();
@@ -791,7 +848,7 @@ class Website_Product extends Object_Product {
 		for ($i=0; $i < $count; $i++) { 
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				foreach ($assets as $asset) {
-					$assetsArray[] = $asset;
+					$assetsArray[$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
 				}
 		}
 

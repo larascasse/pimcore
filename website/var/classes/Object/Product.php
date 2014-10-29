@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2014-10-01T15:49:36+02:00 */
+/** Generated at 2014-10-28T12:00:50+01:00 */
 
 /**
 * Inheritance: yes
@@ -49,9 +49,13 @@ public $volume_not_configurable;
 public $hauteur;
 public $hauteur_not_configurable;
 public $conditionnement;
+public $conditionnement_not_configurable;
 public $nbrpp;
 public $finition;
 public $profil;
+public $profil_not_configurable;
+public $fixation;
+public $fixation_not_configurable;
 public $characteristics_others;
 public $unite;
 public $mode_calcul;
@@ -60,7 +64,6 @@ public $famille;
 public $qualite;
 public $essence;
 public $choix;
-public $fixation;
 public $classe;
 public $epaisseurUsure;
 public $extras;
@@ -1030,6 +1033,32 @@ public function setConditionnement ($conditionnement) {
 }
 
 /**
+* Get conditionnement_not_configurable - Conditionnement non configurable
+* @return boolean
+*/
+public function getConditionnement_not_configurable () {
+	$preValue = $this->preGetValue("conditionnement_not_configurable"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->conditionnement_not_configurable;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("conditionnement_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("conditionnement_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set conditionnement_not_configurable - Conditionnement non configurable
+* @param boolean $conditionnement_not_configurable
+* @return Object_Product
+*/
+public function setConditionnement_not_configurable ($conditionnement_not_configurable) {
+	$this->conditionnement_not_configurable = $conditionnement_not_configurable;
+	return $this;
+}
+
+/**
 * Get nbrpp - NBRPP
 * @return string
 */
@@ -1104,6 +1133,84 @@ public function getProfil () {
 */
 public function setProfil ($profil) {
 	$this->profil = $profil;
+	return $this;
+}
+
+/**
+* Get profil_not_configurable - Profil non configurable
+* @return boolean
+*/
+public function getProfil_not_configurable () {
+	$preValue = $this->preGetValue("profil_not_configurable"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->profil_not_configurable;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("profil_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("profil_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set profil_not_configurable - Profil non configurable
+* @param boolean $profil_not_configurable
+* @return Object_Product
+*/
+public function setProfil_not_configurable ($profil_not_configurable) {
+	$this->profil_not_configurable = $profil_not_configurable;
+	return $this;
+}
+
+/**
+* Get fixation - Type de pose / Fixation
+* @return array
+*/
+public function getFixation () {
+	$preValue = $this->preGetValue("fixation"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->fixation;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation")->isEmpty($data)) {
+		return $this->getValueFromParent("fixation");
+	}
+	return $data;
+}
+
+/**
+* Set fixation - Type de pose / Fixation
+* @param array $fixation
+* @return Object_Product
+*/
+public function setFixation ($fixation) {
+	$this->fixation = $fixation;
+	return $this;
+}
+
+/**
+* Get fixation_not_configurable - Fixation non configurable
+* @return boolean
+*/
+public function getFixation_not_configurable () {
+	$preValue = $this->preGetValue("fixation_not_configurable"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->fixation_not_configurable;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("fixation_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set fixation_not_configurable - Fixation non configurable
+* @param boolean $fixation_not_configurable
+* @return Object_Product
+*/
+public function setFixation_not_configurable ($fixation_not_configurable) {
+	$this->fixation_not_configurable = $fixation_not_configurable;
 	return $this;
 }
 
@@ -1312,32 +1419,6 @@ public function getChoix () {
 */
 public function setChoix ($choix) {
 	$this->choix = $choix;
-	return $this;
-}
-
-/**
-* Get fixation - Type de pose / Fixation
-* @return array
-*/
-public function getFixation () {
-	$preValue = $this->preGetValue("fixation"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->fixation;
-	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation")->isEmpty($data)) {
-		return $this->getValueFromParent("fixation");
-	}
-	return $data;
-}
-
-/**
-* Set fixation - Type de pose / Fixation
-* @param array $fixation
-* @return Object_Product
-*/
-public function setFixation ($fixation) {
-	$this->fixation = $fixation;
 	return $this;
 }
 

@@ -1,12 +1,12 @@
 <?php 
 
-/** Generated at 2014-10-28T12:00:50+01:00 */
+/** Generated at 2014-11-06T12:19:28+01:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          127.0.0.1
+* IP:          ::1
 */
 
 
@@ -32,6 +32,7 @@ public $lesplus;
 public $remarque;
 public $echantillon;
 public $no_stock_delay;
+public $leadtime;
 public $price_1;
 public $price_2;
 public $price_3;
@@ -565,7 +566,7 @@ public function setEchantillon ($echantillon) {
 }
 
 /**
-* Get no_stock_delay - Délai de livraison
+* Get no_stock_delay - Délai de livraison (Display)
 * @return string
 */
 public function getNo_stock_delay () {
@@ -581,12 +582,38 @@ public function getNo_stock_delay () {
 }
 
 /**
-* Set no_stock_delay - Délai de livraison
+* Set no_stock_delay - Délai de livraison (Display)
 * @param string $no_stock_delay
 * @return Object_Product
 */
 public function setNo_stock_delay ($no_stock_delay) {
 	$this->no_stock_delay = $no_stock_delay;
+	return $this;
+}
+
+/**
+* Get leadtime - Délai de Livraison
+* @return string
+*/
+public function getLeadtime () {
+	$preValue = $this->preGetValue("leadtime"); 
+	if($preValue !== null && !Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->leadtime;
+	if(Object_Abstract::doGetInheritedValues() && $this->getClass()->getFieldDefinition("leadtime")->isEmpty($data)) {
+		return $this->getValueFromParent("leadtime");
+	}
+	return $data;
+}
+
+/**
+* Set leadtime - Délai de Livraison
+* @param string $leadtime
+* @return Object_Product
+*/
+public function setLeadtime ($leadtime) {
+	$this->leadtime = $leadtime;
 	return $this;
 }
 

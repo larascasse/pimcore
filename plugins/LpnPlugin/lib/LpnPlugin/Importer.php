@@ -736,6 +736,113 @@
         }
     }
 
+    public function createArticle($productEAN) {
+        $o_className = "product";
+        $className=$o_className;
+        $parentId = 2019;
+        $classId = 5;
+        $keyCol = 1;
+
+        $userId = 6;
+        $class = Object_Class::getById($classId );
+        $fields = $class->getFieldDefinitions();
+
+        // create new object
+        $className = "Object_" . ucfirst($className);
+        $className = Pimcore_Tool::getModelClassMapping($className);
+        $parent = Object_Abstract::getById($parentId);
+
+
+       
+
+        $familleKey = Pimcore_File::getValidFilename($productEAN["famille"]);
+        $pathFamille = $parent->getFullPath() . "/" . $familleKey;
+        $productFamille = Object_Abstract::getByPath($pathFamille);
+
+        //On cree la famille
+        if (!$productFamille instanceof Object_Concrete) {
+            //Create Famille
+            $productFamille = new $className();
+            $productFamille->setParentId($parentId);
+            $productFamille->setClassId($classId);
+            $productFamille->setClassName($o_className);
+            $productFamille->setCreationDate(time());
+            $productFamille->setKey($familleKey);
+            $productFamille->setUserOwner($userId);
+            $productFamille->setModificationDate(time());
+            $productFamille->setUserModification($userId);
+            $productFamille->setPublished(true);
+            $productFamille->save();
+        }
+
+        //ON CREE L4ARTICLE
+        $articleKey = Pimcore_File::getValidFilename($productEAN["code"]);
+        $pathArticle = $productFamille->getFullPath().'/'.$articleKey;
+
+
+        $productArticle = new $className();
+        $productArticle->setParentId($productFamille->getId());
+        $productArticle->setClassId($classId);
+        $productArticle->setClassName($o_className);
+        $productArticle->setCreationDate(time());
+        $productArticle->setKey($articleKey);
+        $productArticle->setUserOwner($userId);
+        $productArticle->setModificationDate(time());
+        $productArticle->setUserModification($userId);
+        $productArticle->setPublished(true);
+
+        
+        foreach ($class->getFieldDefinitions() as $key => $field) {
+   
+            if (isset($productEAN[$key])) {
+                $value = $productEAN[$key];
+                if($key=="name") {
+                    $splitedName = $this->splitNameType($value);
+                    
+                    $productArticle->setValue("name_scienergie",$value);
+
+                    $productArticle->setValue("name_scienergie_converti",$this->convertScienergieName($value));
+
+                    if(!$isUpdating) {
+                        if(count($splitedName)>0)
+                             $productArticle->setValue("subtype", $splitedName[1]);
+                    }
+ 
+                    $value = $this->convertScienergieName($splitedName[0]);
+
+
+                }
+
+                if($key=="longueur" || $key=="largeur" || $key=="epaisseur"  || $key=="ean") {
+                    continue;
+                }
+                 
+                if($key=="name_scienergie_court") {
+                    $splitedName = $this->splitNameType($value);
+                    $value = $this->convertScienergieName($value);
+                }
+                else {
+                   $value = $field->getFromCsvImport($value); 
+                }
+                
+
+                if ($value !== null) {
+                    $productArticle->setValue($key, $value);
+                }
+
+            }
+        }
+        $productArticle->save();
+
+
+
+
+
+         return $productArticle;
+
+
+    }
+
     public function importProduct($product) {
 
 
@@ -770,6 +877,9 @@
 
         if($articleParentList->count()!=1) {
             $articleParent = null;
+            //Pad d'object Parrent, on le cree
+            $articleParent = $this->createArticle($product);
+
         }
         else {
             $articleParent =  $articleParentList->current();
@@ -813,7 +923,11 @@
             else if($articleParent) {
                 $intendedPath = $articleParent->getFullPath() . "/" . $objectKey;
                 $objectParentId = $articleParent->getId();
-                 echo "article existe\n";
+                 echo "article existe ".$articleParent->getFullPath()."\n";
+            }
+            else {
+                 echo "article parent n'existe pas...\n";
+                return;
             }
             
             Object_Abstract::setGetInheritedValues(false);

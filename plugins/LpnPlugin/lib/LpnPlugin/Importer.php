@@ -28,6 +28,26 @@
     function convertScienergieName($name) {
 
         $name = strtolower($name);
+        $name=str_ireplace("QUALITE ", "qualité ", $name);
+        $name=str_ireplace("PRESENCE ", "présence ", $name);
+        $name=str_ireplace("RABOTE ", "raboté ", $name);
+        $name=str_ireplace("ECOLOGIQUE ", "écologique ", $name);
+        $name=str_ireplace("BROSSE ", "brossé ", $name);
+        $name=str_ireplace("LEGER ", "léger ", $name);
+        $name=str_ireplace("RESISTANCE ", "résistance ", $name);
+        $name=str_ireplace("FABRIQUE ", "fabriqué ", $name);
+        $name=str_ireplace("ETUVE ", "étuvé ", $name);
+        $name=str_ireplace("RESIDU ", "résidu ", $name);
+        $name=str_ireplace("PIECE ", "brossé ", $name);
+        $name=str_ireplace("TRAITE ", "brossé ", $name);
+        
+        //$name=str_ireplace("BROSSE ", "brossé ", $name);
+        //$name=str_ireplace("BROSSE ", "brossé ", $name);
+
+
+
+
+
 
         $name=str_ireplace("CHENE ", "Chêne ", $name);
         $name=str_ireplace("FRENE ", "Frêne ", $name);
@@ -40,7 +60,7 @@
 
         $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
         $name=str_ireplace("STRUCTURE ", "Structuré ", $name);
-                $name=str_ireplace("BOMBE ", "Bombé ", $name);
+        $name=str_ireplace("BOMBE ", "Bombé ", $name);
 
         $name=str_ireplace("ANTIDERAPANT", "Antidérapant", $name);
         $name=str_ireplace("IPE ", "Ipé ", $name);

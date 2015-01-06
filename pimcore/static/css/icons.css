@@ -215,6 +215,10 @@
     background: url(/pimcore/static/img/icon/help.png) no-repeat !important;
 }
 
+.pimcore_icon_menu_webbrowser {
+    background: url(/pimcore/static/img/icon/web-browser_small.png) no-repeat !important;
+}
+
 .pimcore_icon_users {
     background: url(/pimcore/static/img/icon/folder_user.png) left center no-repeat !important;
 }
@@ -1372,4 +1376,21 @@
 
 .pimcore_icon_search_and_move {
     background: url(/pimcore/static/img/icon/database_copy.png) left center no-repeat !important;
+}
+
+.pimcore_icon_merge {
+    background: url(/pimcore/static/img/icon/arrow_join.png) left center no-repeat !important;
+}
+
+.pimcore_icon_arrow_right  {
+    background: url(/pimcore/static/img/icon/arrow_right.png) left center no-repeat !important;
+}
+
+
+.pimcore_icon_revert  {
+    background: url(/pimcore/static/img/icon/arrow_rotate_clockwise.png) left center no-repeat !important;
+}
+
+.pimcore_icon_hourglass  {
+    background: url(/pimcore/static/img/icon/hourglass.png) left center no-repeat !important;
 }

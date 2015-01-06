@@ -1,6 +1,20 @@
 <?php 
 
-class Object_ProductExtra extends Object_Concrete {
+/** Generated at 2015-01-06T10:28:50+01:00 */
+
+/**
+* Inheritance: no
+* Variants   : no
+* Changed by : florent (6)
+* IP:          ::1
+*/
+
+
+namespace Pimcore\Model\Object;
+
+
+
+class ProductExtra extends Concrete {
 
 public $o_classId = 9;
 public $o_className = "productExtra";
@@ -10,27 +24,31 @@ public $content;
 
 /**
 * @param array $values
-* @return Object_ProductExtra
+* @return \Pimcore\Model\Object\ProductExtra
 */
 public static function create($values = array()) {
-	$object = new self();
+	$object = new static();
 	$object->setValues($values);
 	return $object;
 }
 
 /**
+* Get name - Nom
 * @return string
 */
 public function getName () {
 	$preValue = $this->preGetValue("name"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	$data = $this->name;
-	 return $data;
+	return $data;
 }
 
 /**
+* Set name - Nom
 * @param string $name
-* @return void
+* @return \Pimcore\Model\Object\ProductExtra
 */
 public function setName ($name) {
 	$this->name = $name;
@@ -38,18 +56,22 @@ public function setName ($name) {
 }
 
 /**
+* Get content - Contenu
 * @return string
 */
 public function getContent () {
 	$preValue = $this->preGetValue("content"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	$data = $this->getClass()->getFieldDefinition("content")->preGetData($this);
-	 return $data;
+	return $data;
 }
 
 /**
+* Set content - Contenu
 * @param string $content
-* @return void
+* @return \Pimcore\Model\Object\ProductExtra
 */
 public function setContent ($content) {
 	$this->content = $content;

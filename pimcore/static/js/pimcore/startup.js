@@ -108,7 +108,7 @@ Ext.onReady(function () {
                 if(options["params"]) {
                     errorMessage += "Params:\n";
                     Ext.iterate(options.params, function (key, value) {
-                        errorMessage += ( "-> " + key + ": " + value + "\n");
+                        errorMessage += ( "-> " + key + ": " + value.substr(0,500) + "\n");
                     });
                 }
                 if(options["method"]) {
@@ -491,7 +491,7 @@ Ext.onReady(function () {
     }
 
 
-    if (pimcore.globalmanager.get("user").welcomescreen) {
+    if (user.isAllowed("dashboards") && pimcore.globalmanager.get("user").welcomescreen) {
         layoutPortal = new pimcore.layout.portal();
         pimcore.globalmanager.add("layout_portal", layoutPortal);
     }
@@ -505,8 +505,10 @@ Ext.onReady(function () {
 });
 
 
+pimcore["intervals"] = {};
+
 //add missing translation keys
-window.setInterval(function () {
+pimcore["intervals"]["translations_admin_missing"] = window.setInterval(function () {
     var missingTranslations = pimcore.globalmanager.get("translations_admin_missing");
     var addedTranslations = pimcore.globalmanager.get("translations_admin_added");
     if (missingTranslations.length > 0) {
@@ -525,7 +527,7 @@ window.setInterval(function () {
 }, 30000);
 
 // session renew
-window.setInterval(function () {
+pimcore["intervals"]["ping"] = window.setInterval(function () {
     Ext.Ajax.request({
         url:"/admin/misc/ping",
         success:function (response) {

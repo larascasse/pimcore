@@ -1,6 +1,20 @@
 <?php 
 
-class Object_ProductKit extends Object_Concrete {
+/** Generated at 2015-01-06T10:28:50+01:00 */
+
+/**
+* Inheritance: no
+* Variants   : no
+* Changed by : florent (6)
+* IP:          ::1
+*/
+
+
+namespace Pimcore\Model\Object;
+
+
+
+class ProductKit extends Concrete {
 
 public $o_classId = 10;
 public $o_className = "productKit";
@@ -10,27 +24,31 @@ public $products;
 
 /**
 * @param array $values
-* @return Object_ProductKit
+* @return \Pimcore\Model\Object\ProductKit
 */
 public static function create($values = array()) {
-	$object = new self();
+	$object = new static();
 	$object->setValues($values);
 	return $object;
 }
 
 /**
+* Get ean - EAN
 * @return string
 */
 public function getEan () {
 	$preValue = $this->preGetValue("ean"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	$data = $this->ean;
-	 return $data;
+	return $data;
 }
 
 /**
+* Set ean - EAN
 * @param string $ean
-* @return void
+* @return \Pimcore\Model\Object\ProductKit
 */
 public function setEan ($ean) {
 	$this->ean = $ean;
@@ -38,18 +56,22 @@ public function setEan ($ean) {
 }
 
 /**
+* Get products - Produits
 * @return Object_Data_ObjectMetadata[]
 */
 public function getProducts () {
 	$preValue = $this->preGetValue("products"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
-	 return $data;
+	return $data;
 }
 
 /**
+* Set products - Produits
 * @param Object_Data_ObjectMetadata[] $products
-* @return void
+* @return \Pimcore\Model\Object\ProductKit
 */
 public function setProducts ($products) {
 	$this->products = $this->getClass()->getFieldDefinition("products")->preSetData($this, $products);

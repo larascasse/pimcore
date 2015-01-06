@@ -13,7 +13,11 @@
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
-class Pimcore_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
+namespace Pimcore\Navigation\Page;
+
+use Pimcore\Model\Document;
+
+class Uri extends \Zend_Navigation_Page_Uri
 {
 
     /**
@@ -32,10 +36,9 @@ class Pimcore_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     protected $_relation;
 
     /**
-     * @var Document
+     * @var int
      */
-    protected $_document;
-
+    protected $_documentId;
 
     /**
      * @param  $tabindex
@@ -56,8 +59,8 @@ class Pimcore_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     }
 
     /**
-     * @param  $accesskey
-     * @return void
+     * @param null $character
+     * @return $this|\Zend_Navigation_Page
      */
     public function setAccesskey($character = null)
     {
@@ -92,11 +95,16 @@ class Pimcore_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     }
 
     /**
-     * @param Document $document
+     * @param $document
+     * @return $this
      */
     public function setDocument($document)
     {
-        $this->_document = $document;
+        if($document instanceof Document\Hardlink\Wrapper\WrapperInterface) {
+            $this->setDocumentId($document->getHardlinkSource()->getId());
+        } else if($document instanceof Document) {
+            $this->setDocumentId($document->getId());
+        }
         return $this;
     }
 
@@ -105,6 +113,31 @@ class Pimcore_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
      */
     public function getDocument()
     {
-        return $this->_document;
+        $docId = $this->getDocumentId();
+        if($docId) {
+            $doc = Document::getById($docId);
+            if($doc instanceof Document\Hardlink) {
+                $doc = Document\Hardlink\Service::wrap($doc);
+            }
+            return $doc;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDocumentId()
+    {
+        return $this->_documentId;
+    }
+
+    /**
+     * @param int $documentId
+     */
+    public function setDocumentId($documentId)
+    {
+        $this->_documentId = $documentId;
     }
 }

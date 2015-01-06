@@ -27,7 +27,15 @@ pimcore.document.tags.input = Class.create(pimcore.document.tag, {
 
         this.element = Ext.get(id);
         this.element.dom.setAttribute("contenteditable", true);
-        this.element.update(data);
+
+        // set min height for IE, as he isn't able to update :after css selector
+        this.element.update("|"); // dummy content to get appropriate height
+        this.element.applyStyles({
+            "min-height": this.element.getHeight() + "px"
+        });
+
+        this.element.update(data + "<br>");
+
         this.checkValue();
 
         this.element.on("keyup", this.checkValue.bind(this));
@@ -37,6 +45,27 @@ pimcore.document.tags.input = Class.create(pimcore.document.tag, {
                 e.stopEvent();
             }
         });
+
+        this.element.dom.addEventListener("paste", function(e) {
+            e.preventDefault();
+
+            var text = "";
+            if(e.clipboardData) {
+                text = e.clipboardData.getData("text/plain");
+            } else if (window.clipboardData) {
+                text = window.clipboardData.getData("Text");
+            }
+
+            text = this.clearText(text);
+            text = htmlentities(text, "ENT_NOQUOTES", null, false);
+
+            try {
+                document.execCommand("insertHTML", false, text);
+            } catch (e) {
+                // IE <= 10
+                document.selection.createRange().pasteHTML(text);
+            }
+        }.bind(this));
 
         if(options["width"]) {
             this.element.applyStyles({
@@ -55,23 +84,39 @@ pimcore.document.tags.input = Class.create(pimcore.document.tag, {
     },
 
     checkValue: function () {
-        var value = this.getValue();
+        var value = trim(this.element.dom.innerHTML);
         var origValue = value;
-        value = strip_tags(value);
 
-        if(value != origValue) {
-            this.element.update(value);
-        }
+        var textLength = trim(strip_tags(value)).length;
 
-        if(trim(value).length < 1) {
+        if(textLength < 1) {
             this.element.addClass("empty");
+            value = ""; // set to "" since it can contain an <br> at the end
         } else {
             this.element.removeClass("empty");
+        }
+
+        if(value != origValue) {
+            this.element.update(this.getValue());
         }
     },
 
     getValue: function () {
-        return this.element.dom.innerHTML;
+        var text = "";
+        if(typeof this.element.dom.textContent != "undefined") {
+            text = this.element.dom.textContent;
+        } else {
+            text = this.element.dom.innerText;
+        }
+
+        text = this.clearText(text);
+        return text;
+    },
+
+    clearText: function (text) {
+        text = str_replace("\r\n", " ", text);
+        text = str_replace("\n", " ", text);
+        return text;
     },
 
     getType: function () {

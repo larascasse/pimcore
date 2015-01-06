@@ -48,7 +48,7 @@ RewriteRule ^.*modules/.*/static.* - [PT,L]
 RewriteRule ^pimcore/static.* - [PT,L]
 
 #FB
-RewriteRule ^plugins/LpnPlugin/odata/lpnservices/.* - [PT,L]
+#RewriteRule ^plugins/LpnPlugin/odata/lpnservices/.* - [PT,L]
 
 # forbid the direct access to pimcore-internal data (eg. config-files, ...)
 RewriteRule ^website/var/(?!tmp|assets|plugins|areas) / [F,L]

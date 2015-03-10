@@ -42,8 +42,8 @@
         $name=str_ireplace("TRAITE ", "brossé ", $name);
         $name=str_ireplace("DELIGNE ", "déligné ", $name);
         $name=str_ireplace("ABIMEES ", "abimées ", $name);
-        $name=str_ireplace("PREPRATINE ", "prépratiné ", $name);
-        $name=str_ireplace("ELEGANCE ", "élégance ", $name);
+        $name=str_ireplace("PREPATINE ", "prépratiné ", $name);
+        $name=str_ireplace("ELEGANCE ", "Elégance ", $name);
 
 
         
@@ -51,6 +51,7 @@
         //$name=str_ireplace("BROSSE ", "brossé ", $name);
 
 
+        $name=str_ireplace("CONTRECOLLE ", "Contrecollé ", $name);
 
 
 

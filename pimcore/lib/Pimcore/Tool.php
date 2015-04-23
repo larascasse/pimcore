@@ -554,7 +554,7 @@ class Tool {
         }
 
         $ips = explode(",", $ip);
-        $ip = trim(array_pop($ips));
+        $ip = trim(array_shift($ips));
 
         return $ip;
     }
@@ -582,7 +582,7 @@ class Tool {
         // but to be save we log the errors into the debug.log, so if anything else happens we can see it there
         // the normal warning is e.g. Warning: include_once(Path/To/Class.php): failed to open stream: No such file or directory in ...
         set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-            \Logger::debug(implode(" ", func_get_args()));
+            \Logger::debug(implode(" ", [$errno, $errstr, $errfile, $errline]));
         });
 
         \Zend_Loader_Autoloader::getInstance()->suppressNotFoundWarnings(true);
@@ -625,6 +625,9 @@ class Tool {
      * @param $message
      */
     public static function exitWithError($message) {
+
+        while (@ob_end_flush());
+
         header('HTTP/1.1 503 Service Temporarily Unavailable');
         die($message);
     }

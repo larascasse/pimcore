@@ -96,6 +96,8 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 
         if ($this->getParam("limit")) {
             $this->_helper->json(array(
+                "offset" => $offset,
+                "limit" => $limit,
                 "total" => $document->getChildAmount($this->getUser()),
                 "nodes" => $documents
             ));
@@ -884,6 +886,9 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 
         // add icon
         $tmpDocument["iconCls"] = "pimcore_icon_" . $childDocument->getType();
+        if (\Pimcore\Tool\Admin::isExtJS5()) {
+            $tmpDocument["expandable"] = $childDocument->hasChilds();
+        }
 
         // set type specific settings
         if ($childDocument->getType() == "page") {

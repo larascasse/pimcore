@@ -37,7 +37,12 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
 
             if ($this->getParam("xaction") == "destroy") {
 
-                $id = \Zend_Json::decode($this->getParam("data"));
+                $data = \Zend_Json::decode($this->getParam("data"));
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $id = $data["id"];
+                } else {
+                    $id = $data;
+                }
 
                 $metadata = Metadata\Predefined::getById($id);
                 $metadata->delete();
@@ -136,7 +141,12 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
 
             if ($this->getParam("xaction") == "destroy") {
 
-                $id = \Zend_Json::decode($this->getParam("data"));
+                $data = \Zend_Json::decode($this->getParam("data"));
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $id = $data["id"];
+                } else {
+                    $id = $data;
+                }
 
                 $property = Property\Predefined::getById($id);
                 $property->delete();
@@ -300,8 +310,6 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
         );
 
         $this->_helper->json($response);
-
-        $this->_helper->json(false);
     }
 
     public function setSystemAction() {
@@ -331,6 +339,16 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
             }
         }
 
+        // delete views from old languages
+        $oldLanguages = explode(",",$oldConfig->get("general")->toArray()["validLanguages"]);
+        $newLanguages = $languages;
+        $dbName = $oldConfig->get("database")->toArray()["params"]["dbname"];
+        foreach ($oldLanguages as $oldLanguage){
+            if (!in_array($oldLanguage, $newLanguages)) {
+                $this->deleteViews($oldLanguage, $dbName);
+            }
+        }
+
         $settings = array(
             "general" => array(
                 "timezone" => $values["general.timezone"],
@@ -351,6 +369,7 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
                     "password" => $values["general.http_auth.password"]
                 ),
                 "custom_php_logfile" => $values["general.custom_php_logfile"],
+                "environment" => $values["general.environment"],
                 "debugloglevel" => $values["general.debugloglevel"],
                 "disable_whoops" => $values["general.disable_whoops"],
                 "debug_admin_translations" => $values["general.debug_admin_translations"],
@@ -358,6 +377,7 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
                 "logrecipient" => $values["general.logrecipient"],
                 "viewSuffix" => $values["general.viewSuffix"],
                 "instanceIdentifier" => $values["general.instanceIdentifier"],
+                "show_cookie_notice" => $values["general.show_cookie_notice"],
             ),
             "database" => $oldValues["database"], // db cannot be changed here
             "documents" => array(
@@ -507,17 +527,9 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
         $db->query("truncate table cache");
 
         // empty cache directory
-        $files = scandir(PIMCORE_CACHE_DIRECTORY);
-        foreach ($files as $file) {
-            if ($file == ".dummy") {
-                // PIMCORE-1854 Deleting cache cleans whole folder inclusive .dummy
-                continue;
-            }
-            $filename = PIMCORE_CACHE_DIRECTORY . "/" . $file;
-            if (is_file($filename)) {
-                unlink($filename);
-            }
-        }
+        recursiveDelete(PIMCORE_CACHE_DIRECTORY, false);
+        // PIMCORE-1854 - recreate .dummy file => should remain
+        \Pimcore\File::put(PIMCORE_CACHE_DIRECTORY . "/.dummy", "");
 
         $this->_helper->json(array("success" => true));
 
@@ -546,6 +558,10 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
         // system files
         recursiveDelete(PIMCORE_SYSTEM_TEMP_DIRECTORY, false);
 
+        // recreate .dummy files # PIMCORE-2629
+        \Pimcore\File::put(PIMCORE_TEMPORARY_DIRECTORY . "/.dummy", "");
+        \Pimcore\File::put(PIMCORE_SYSTEM_TEMP_DIRECTORY . "/.dummy", "");
+
         $this->_helper->json(array("success" => true));
     }
 
@@ -565,7 +581,14 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
             }
 
             if ($this->getParam("xaction") == "destroy") {
-                $route = Staticroute::getById($data);
+                $data = \Zend_Json::decode($this->getParam("data"));
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $id = $data["id"];
+                } else {
+                    $id = $data;
+                }
+
+                $route = Staticroute::getById($id);
                 $route->delete();
 
                 $this->_helper->json(array("success" => true, "data" => array()));
@@ -657,8 +680,12 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
             $this->checkPermission("redirects");
 
             if ($this->getParam("xaction") == "destroy") {
-
-                $id = \Zend_Json::decode($this->getParam("data"));
+                $data = \Zend_Json::decode($this->getParam("data"));
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $id = $data["id"];
+                } else {
+                    $id = $data;
+                }
 
                 $redirect = Redirect::getById($id);
                 $redirect->delete();
@@ -765,7 +792,12 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
 
             if ($this->getParam("xaction") == "destroy") {
 
-                $id = \Zend_Json::decode($this->getParam("data"));
+                $data = \Zend_Json::decode($this->getParam("data"));
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $id = $data["id"];
+                } else {
+                    $id = $data;
+                }
 
                 $glossary = Glossary::getById($id);
                 $glossary->delete();
@@ -1277,6 +1309,12 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
         }
         $tag->setParams($params);
 
+        if($this->getParam("name") != $data["name"]) {
+            $tag->setName($this->getParam("name")); // set the old name again, so that the old file get's deleted
+            $tag->delete(); // delete the old config / file
+            $tag->setName($data["name"]);
+        }
+
         $tag->save();
 
         $this->_helper->json(array("success" => true));
@@ -1298,7 +1336,13 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
                 }
 
                 if ($this->getParam("xaction") == "destroy") {
-                    $setting = WebsiteSetting::getById($data);
+                    if (\Pimcore\Tool\Admin::isExtJS5()) {
+                        $id = $data["id"];
+                    } else {
+                        $id = $data;
+                    }
+
+                    $setting = WebsiteSetting::getById($id);
                     $setting->delete();
 
                     $this->_helper->json(array("success" => true, "data" => array()));
@@ -1426,4 +1470,23 @@ class Admin_SettingsController extends \Pimcore\Controller\Action\Admin {
 
     }
 
+    /**
+     * deleteViews
+     * delete views for localized fields when languages are removed to
+     * prevent mysql errors
+     * @param $language
+     * @param $dbName
+     */
+    protected function deleteViews ($language, $dbName) {
+
+        $db = \Pimcore\Resource::get();
+        $views = $db->fetchAll("SHOW FULL TABLES IN " . $db->quoteIdentifier($dbName) . " WHERE TABLE_TYPE LIKE 'VIEW'");
+
+        foreach($views as $view) {
+            if (preg_match("/^object_localized_[0-9]+_" . $language . "$/", $view["Tables_in_" . $dbName])){
+                $sql = "DROP VIEW " . $db->quoteIdentifier($view["Tables_in_" . $dbName]);
+                $db->query($sql);
+            }
+        }
+    }
 }

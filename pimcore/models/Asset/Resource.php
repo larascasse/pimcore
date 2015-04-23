@@ -378,16 +378,16 @@ class Resource extends Model\Element\Resource
     public function getChildAmount($user = null)
     {
         if ($user and !$user->isAdmin()) {
-                    $userIds = $user->getRoles();
-                    $userIds[] = $user->getId();
+            $userIds = $user->getRoles();
+            $userIds[] = $user->getId();
 
-                    $query = "select count(*) from assets a where parentId = ?
-                                    and (select list as locate from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(cpath,CONCAT(a.path,a.filename))=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1;";
+            $query = "select count(*) from assets a where parentId = ?
+                            and (select list as locate from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(cpath,CONCAT(a.path,a.filename))=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1;";
 
 
-                } else {
-                    $query = "SELECT COUNT(*) AS count FROM assets WHERE parentId = ?";
-                }
+        } else {
+            $query = "SELECT COUNT(*) AS count FROM assets WHERE parentId = ?";
+        }
 
 
 
@@ -464,7 +464,7 @@ class Resource extends Model\Element\Resource
         $userIds[] = $user->getId();
 
         try {
-            $permissionsParent = $this->db->fetchOne("SELECT `" . $type . "` FROM users_workspaces_asset WHERE cid IN (" . implode(",", $parentIds) . ") AND userId IN (" . implode(",", $userIds) . ") ORDER BY LENGTH(cpath) DESC, ABS(userId-" . $user->getId() . ") ASC LIMIT 1");
+            $permissionsParent = $this->db->fetchOne("SELECT `" . $type . "` FROM users_workspaces_asset WHERE cid IN (" . implode(",", $parentIds) . ") AND userId IN (" . implode(",", $userIds) . ") AND `" . $type . "` = 1 ORDER BY LENGTH(cpath) DESC, ABS(userId-" . $user->getId() . ") ASC LIMIT 1");
 
             if ($permissionsParent) {
                 return true;

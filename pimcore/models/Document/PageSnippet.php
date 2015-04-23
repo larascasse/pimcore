@@ -108,11 +108,13 @@ abstract class PageSnippet extends Model\Document {
     }
 
     /**
-     * Save the current object as version
-     *
-     * @return void
+     * @param bool $setModificationDate
+     * @param bool $callPluginHook
+     * @param bool $force
+     * @return null|Model\Version
+     * @throws \Exception
      */
-    public function saveVersion($setModificationDate = true, $callPluginHook = true) {
+    public function saveVersion($setModificationDate = true, $callPluginHook = true, $force = false) {
 
         // hook should be also called if "save only new version" is selected
         if($callPluginHook) {
@@ -132,7 +134,7 @@ abstract class PageSnippet extends Model\Document {
 
         // only create a new version if there is at least 1 allowed
         if(Config::getSystemConfig()->documents->versions->steps
-            || Config::getSystemConfig()->documents->versions->days) {
+            || Config::getSystemConfig()->documents->versions->days || $force) {
             $version = new Model\Version();
             $version->setCid($this->getId());
             $version->setCtype("document");
@@ -386,6 +388,10 @@ abstract class PageSnippet extends Model\Document {
 
         if(empty($contentMasterDocumentId)) {
             $contentMasterDocument = null;
+        }
+
+        if($contentMasterDocumentId == $this->getId()) {
+            throw new \Exception("You cannot use the current document as a master document, please choose a different one.");
         }
 
         $this->contentMasterDocumentId = $contentMasterDocumentId;

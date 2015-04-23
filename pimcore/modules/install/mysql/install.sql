@@ -4,7 +4,7 @@ CREATE TABLE `assets` (
   `parentId` int(11) unsigned DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
   `filename` varchar(255) DEFAULT '',
-  `path` varchar(255) DEFAULT NULL,
+  `path` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `mimetype` varchar(255) DEFAULT NULL,
   `creationDate` bigint(20) unsigned DEFAULT NULL,
   `modificationDate` bigint(20) unsigned DEFAULT NULL,
@@ -12,6 +12,7 @@ CREATE TABLE `assets` (
   `userModification` int(11) unsigned DEFAULT NULL,
   `customSettings` text,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `fullpath` (`path`,`filename`),
   KEY `parentId` (`parentId`),
   KEY `filename` (`filename`),
   KEY `path` (`path`)
@@ -77,62 +78,13 @@ CREATE TABLE `classes` (
   `allowInherit` tinyint(1) unsigned DEFAULT '0',
   `allowVariants` tinyint(1) unsigned DEFAULT '0',
   `parentClass` varchar(255) DEFAULT NULL,
+  `useTraits` varchar(255) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `previewUrl` varchar(255) DEFAULT NULL,
   `propertyVisibility` text,
   `showVariants` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `content_analysis`;
-CREATE TABLE `content_analysis` (
-  `id` varchar(44) NOT NULL DEFAULT '',
-  `host` varchar(255) DEFAULT NULL,
-  `site` int(11) DEFAULT NULL,
-  `url` varchar(2000) NOT NULL DEFAULT '',
-  `type` enum('document','route') DEFAULT NULL,
-  `typeReference` int(11) DEFAULT NULL,
-  `facebookShares` int(11) DEFAULT NULL,
-  `googlePlusOne` int(11) DEFAULT NULL,
-  `links` int(5) DEFAULT NULL,
-  `linksExternal` int(5) DEFAULT NULL,
-  `h1` int(3) DEFAULT NULL,
-  `h2` int(3) DEFAULT NULL,
-  `h3` int(3) DEFAULT NULL,
-  `h4` int(3) DEFAULT NULL,
-  `h5` int(3) DEFAULT NULL,
-  `h6` int(3) DEFAULT NULL,
-  `h1Text` varchar(1000) DEFAULT NULL,
-  `imgWithoutAlt` int(3) DEFAULT NULL,
-  `imgWithAlt` int(3) DEFAULT NULL,
-  `title` varchar(1000) DEFAULT NULL,
-  `description` varchar(1000) DEFAULT NULL,
-  `urlLength` int(4) DEFAULT NULL,
-  `urlParameters` int(2) DEFAULT NULL,
-  `microdata` int(3) DEFAULT NULL,
-  `opengraph` int(3) DEFAULT NULL,
-  `twitter` int(3) DEFAULT NULL,
-  `robotsTxtBlocked` tinyint(1) DEFAULT NULL,
-  `robotsMetaBlocked` tinyint(1) DEFAULT NULL,
-  `lastUpdate` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `host` (`host`),
-  KEY `lastUpdate` (`lastUpdate`),
-  KEY `site` (`site`)
-) DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `content_index`;
-CREATE TABLE `content_index` (
-  `id` varchar(44) NOT NULL DEFAULT '',
-  `site` int(11) DEFAULT NULL,
-  `url` varchar(2000) NOT NULL DEFAULT '',
-  `content` longblob,
-  `type` enum('document','route') DEFAULT NULL,
-  `typeReference` int(11) DEFAULT NULL,
-  `lastUpdate` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `lastUpdate` (`lastUpdate`)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `custom_layouts` ;
@@ -169,7 +121,7 @@ CREATE TABLE `documents` (
   `parentId` int(11) unsigned DEFAULT NULL,
   `type` enum('page','link','snippet','folder','hardlink','email') DEFAULT NULL,
   `key` varchar(255) DEFAULT '',
-  `path` varchar(255) DEFAULT NULL,
+  `path` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `index` int(11) unsigned DEFAULT '0',
   `published` tinyint(1) unsigned DEFAULT '1',
   `creationDate` bigint(20) unsigned DEFAULT NULL,
@@ -177,6 +129,7 @@ CREATE TABLE `documents` (
   `userOwner` int(11) unsigned DEFAULT NULL,
   `userModification` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `fullpath` (`path`,`key`),
   KEY `parentId` (`parentId`),
   KEY `key` (`key`),
   KEY `path` (`path`),
@@ -332,23 +285,23 @@ CREATE TABLE `glossary` (
 
 DROP TABLE IF EXISTS `http_error_log`;
 CREATE TABLE `http_error_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `path` varchar(1000) DEFAULT NULL,
+  `uri` varchar(3000) CHARACTER SET ascii DEFAULT NULL,
   `code` int(3) DEFAULT NULL,
   `parametersGet` longtext,
   `parametersPost` longtext,
   `cookies` longtext,
   `serverVars` longtext,
   `date` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `path` (`path`(255)),
+  `count` bigint(20) DEFAULT NULL,
+  KEY (`uri` (765)),
   KEY `code` (`code`),
-  KEY `date` (`date`)
+  KEY `date` (`date`),
+  KEY `count` (`count`)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `keyvalue_groups`;
 CREATE TABLE `keyvalue_groups` (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL DEFAULT '',
     `description` VARCHAR(255),
     `creationDate` bigint(20) unsigned DEFAULT '0',
@@ -421,7 +374,7 @@ CREATE TABLE `objects` (
   `o_parentId` int(11) unsigned DEFAULT NULL,
   `o_type` enum('object','folder','variant') DEFAULT NULL,
   `o_key` varchar(255) default '',
-  `o_path` varchar(255) DEFAULT NULL,
+  `o_path` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `o_index` int(11) unsigned DEFAULT '0',
   `o_published` tinyint(1) unsigned DEFAULT '1',
   `o_creationDate` bigint(20) unsigned DEFAULT NULL,
@@ -431,6 +384,7 @@ CREATE TABLE `objects` (
   `o_classId` int(11) unsigned DEFAULT NULL,
   `o_className` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`o_id`),
+  UNIQUE KEY `fullpath` (`o_path`,`o_key`),
   KEY `key` (`o_key`),
   KEY `path` (`o_path`),
   KEY `published` (`o_published`),
@@ -442,7 +396,7 @@ DROP TABLE IF EXISTS `properties`;
 CREATE TABLE `properties` (
   `cid` int(11) unsigned NOT NULL DEFAULT '0',
   `ctype` enum('document','asset','object') NOT NULL DEFAULT 'document',
-  `cpath` varchar(255) DEFAULT NULL,
+  `cpath` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `name` varchar(255) NOT NULL DEFAULT '',
   `type` enum('text','date','document','asset','object','bool','select') DEFAULT NULL,
   `data` text,
@@ -481,7 +435,7 @@ CREATE TABLE `recyclebin` (
   `id` int(11) NOT NULL auto_increment,
   `type` varchar(20) default NULL,
   `subtype` varchar(20) default NULL,
-  `path` varchar(255) default NULL,
+  `path` varchar(765) default NULL,
   `amount` int(3) default NULL,
   `date` bigint(20) default NULL,
   `deletedby` varchar(50) DEFAULT NULL,
@@ -531,7 +485,7 @@ CREATE TABLE `schedule_tasks` (
 DROP TABLE IF EXISTS `search_backend_data`;
 CREATE TABLE `search_backend_data` (
   `id` int(11) NOT NULL,
-  `fullpath` varchar(330) DEFAULT NULL,
+  `fullpath` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `maintype` varchar(8) NOT NULL DEFAULT '',
   `type` varchar(20) DEFAULT NULL,
   `subtype` varchar(255) DEFAULT NULL,
@@ -609,6 +563,19 @@ CREATE TABLE `targeting_rules` (
   `conditions` longtext,
   `actions` longtext,
   PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tmp_store` (
+  `id` varchar(255) NOT NULL DEFAULT '',
+  `tag` varchar(255) DEFAULT NULL,
+  `data` longtext,
+  `serialized` tinyint(2) NOT NULL DEFAULT '0',
+  `date` int(10) DEFAULT NULL,
+  `expiryDate` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag` (`tag`),
+  KEY `date` (`date`),
+  KEY `expiryDate` (`expiryDate`)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `tracking_events`;
@@ -717,7 +684,7 @@ CREATE TABLE `users_permission_definitions` (
 DROP TABLE IF EXISTS `users_workspaces_asset`;
 CREATE TABLE `users_workspaces_asset` (
   `cid` int(11) unsigned NOT NULL DEFAULT '0',
-  `cpath` varchar(255) DEFAULT NULL,
+  `cpath` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `userId` int(11) NOT NULL DEFAULT '0',
   `list` tinyint(1) DEFAULT '0',
   `view` tinyint(1) DEFAULT '0',
@@ -736,7 +703,7 @@ CREATE TABLE `users_workspaces_asset` (
 DROP TABLE IF EXISTS `users_workspaces_document`;
 CREATE TABLE `users_workspaces_document` (
   `cid` int(11) unsigned NOT NULL DEFAULT '0',
-  `cpath` varchar(255) DEFAULT NULL,
+  `cpath` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `userId` int(11) NOT NULL DEFAULT '0',
   `list` tinyint(1) unsigned DEFAULT '0',
   `view` tinyint(1) unsigned DEFAULT '0',
@@ -757,7 +724,7 @@ CREATE TABLE `users_workspaces_document` (
 DROP TABLE IF EXISTS `users_workspaces_object`;
 CREATE TABLE `users_workspaces_object` (
   `cid` int(11) unsigned NOT NULL DEFAULT '0',
-  `cpath` varchar(255) DEFAULT NULL,
+  `cpath` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `userId` int(11) NOT NULL DEFAULT '0',
   `list` tinyint(1) unsigned DEFAULT '0',
   `view` tinyint(1) unsigned DEFAULT '0',

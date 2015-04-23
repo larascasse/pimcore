@@ -32,7 +32,6 @@ class Asset extends Element\AbstractElement {
      */
     public static $types = array("folder", "image", "text", "audio", "video", "document", "archive", "unknown");
 
-
     /**
      * Unique ID
      *
@@ -208,7 +207,6 @@ class Asset extends Element\AbstractElement {
      * @param string $path
      * @return Asset
      */
-
     public static function getByPath($path) {
 
         $path = Element\Service::correctPath($path);
@@ -572,7 +570,12 @@ class Asset extends Element\AbstractElement {
                 $this->setParentId(1);
                 $this->setPath("/");
             }
-
+        } else if($this->getId() == 1) {
+            // some data in root node should always be the same
+            $this->setParentId(0);
+            $this->setPath("/");
+            $this->setFilename("");
+            $this->setType("folder");
         }
 
         // do not allow PHP and .htaccess files
@@ -587,6 +590,9 @@ class Asset extends Element\AbstractElement {
             }
         }
 
+        if(strlen($this->getFullPath()) > 765) {
+            throw new \Exception("Full path is limited to 765 characters, reduce the length of your parent's path");
+        }
     }
 
     /**
@@ -633,6 +639,8 @@ class Asset extends Element\AbstractElement {
                         throw new \Exception("Unable to open file: " . $destinationPath . " for asset " . $this->getId());
                     }
                 }
+
+                $this->stream = null; // set stream to null, so that the source stream isn't used anymore after saving
 
                 @chmod($destinationPath, File::getDefaultMode());
 
@@ -927,7 +935,7 @@ class Asset extends Element\AbstractElement {
     public function clearDependentCache($additionalTags = array()) {
 
         try {
-            $tags = array("asset_" . $this->getId(), "properties", "output");
+            $tags = array("asset_" . $this->getId(), "asset_properties", "output");
             $tags = array_merge($tags, $additionalTags);
 
             Cache::clearTags($tags);
@@ -1196,7 +1204,7 @@ class Asset extends Element\AbstractElement {
             if (!is_array($properties)) {
                 $properties = $this->getResource()->getProperties();
                 $elementCacheTag = $this->getCacheTag();
-                $cacheTags = array("properties" => "properties", $elementCacheTag => $elementCacheTag);
+                $cacheTags = array("asset_properties" => "asset_properties", $elementCacheTag => $elementCacheTag);
                 Cache::save($properties, $cacheKey, $cacheTags);
             }
 

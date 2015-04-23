@@ -38,10 +38,12 @@
         $name=str_ireplace("FABRIQUE ", "fabriqué ", $name);
         $name=str_ireplace("ETUVE ", "étuvé ", $name);
         $name=str_ireplace("RESIDU ", "résidu ", $name);
-        $name=str_ireplace("PIECE ", "brossé ", $name);
-        $name=str_ireplace("TRAITE ", "brossé ", $name);
+        $name=str_ireplace("PIECE ", "pièce ", $name);
+        $name=str_ireplace("TRAITE ", "traité ", $name);
         $name=str_ireplace("DELIGNE ", "déligné ", $name);
         $name=str_ireplace("ABIMEES ", "abimées ", $name);
+        $name=str_ireplace("ABIMES ", "abimés ", $name);
+
         $name=str_ireplace("PREPATINE ", "prépratiné ", $name);
         $name=str_ireplace("ELEGANCE ", "Elégance ", $name);
 
@@ -81,6 +83,8 @@
         $name=str_ireplace("RESINEUX ", "Résineux ", $name);
         $name=str_ireplace("( ", "(", $name);
         $name=str_ireplace(") ", ")", $name);
+
+
 
 
 

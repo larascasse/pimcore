@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
+    <link rel="icon" type="image/png" href="/pimcore/static/img/favicon/favicon-32x32.png" />
+
     <style type="text/css">
         body {
             /* this stops the loading indicator from hopping around */
@@ -256,6 +258,7 @@ $scripts = array(
     "pimcore/object/helpers/classTree.js",
     "pimcore/object/helpers/gridTabAbstract.js",
     "pimcore/object/helpers/customLayoutEditor.js",
+    "pimcore/object/helpers/optionEditor.js",
     "pimcore/element/selector/object.js",
 
     // documents
@@ -426,9 +429,6 @@ $scripts = array(
     "pimcore/report/analytics/elementexplorer.js",
     "pimcore/report/analytics/elementnavigation.js",
     "pimcore/report/webmastertools/settings.js",
-    "pimcore/report/contentanalysis/settings.js",
-    "pimcore/report/seo/detail.js",
-    "pimcore/report/seo/socialoverview.js",
     "pimcore/report/custom/item.js",
     "pimcore/report/custom/panel.js",
     "pimcore/report/custom/settings.js",

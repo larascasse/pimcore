@@ -44,6 +44,16 @@ abstract class Frontend extends Action {
     /**
      * @var bool
      */
+    protected $viewRendered = false;
+
+    /**
+     * @var \Zend_Locale|null
+     */
+    protected $previousLocale;
+
+    /**
+     * @var bool
+     */
     public static $isInitial = true;
 
     /**
@@ -87,7 +97,7 @@ abstract class Frontend extends Action {
                 // otherwise there'll be notices like:  Notice: 'No translation for the language 'XX' available.'
                 if($parentDocument = Document::getById($this->getParam("pimcore_parentDocument"))) {
                     if($parentDocument->getProperty("language")) {
-                        $this->setLocale($parentDocument->getProperty("language"));
+                        $this->setLocaleFromDocument($parentDocument->getProperty("language"));
                     }
                 }
             }
@@ -100,7 +110,7 @@ abstract class Frontend extends Action {
 
             // register global locale if the document has the system property "language"
             if($this->getDocument()->getProperty("language")) {
-                $this->setLocale($this->getDocument()->getProperty("language"));
+                $this->setLocaleFromDocument($this->getDocument()->getProperty("language"));
             }
 
             if(self::$isInitial) {
@@ -266,6 +276,24 @@ abstract class Frontend extends Action {
     /**
      * @param $locale
      */
+    protected function setLocaleFromDocument($locale) {
+
+        // we need to backup the locale that is currently set (if so), so that we can restore it on ::postDispatch()
+        // this is especially important when a document includes another document ($this->inc, $this->snippet, ...)
+        // and the included document has a different locale. If we do not restore the previous locale this would have
+        // the effect that the parent document will have a wrong language from the point on where the document with
+        // the different locale was included, so e.g. $this->translate() would end in wrong translations
+        if(\Zend_Registry::isRegistered("Zend_Locale")) {
+            if( (string) \Zend_Registry::get("Zend_Locale") != (string) $locale) {
+                $this->previousLocale = \Zend_Registry::get("Zend_Locale");
+            }
+        }
+        self::setLocale($locale);
+    }
+
+    /**
+     * @param $locale
+     */
     public function setLocale($locale) {
         if(\Zend_Locale::isLocale($locale)) {
             $locale = new \Zend_Locale($locale);
@@ -375,15 +403,12 @@ abstract class Frontend extends Action {
      *
      */
     protected function forceRender() {
-
         if (!$this->viewRendered) {
             if ($script = $this->getRenderScript()) {
                 $this->renderScript($script);
-                $this->viewRendered = true;
             }
-            else {
+        else {
                 $this->render();
-                $this->viewRendered = true;
             }
         }
     }
@@ -394,8 +419,10 @@ abstract class Frontend extends Action {
      * @param bool $noController
      */
     public function render($action = null, $name = null, $noController = false) {
-        parent::render($action, $name, $noController);
-        $this->viewRendered = true;
+        if(!$this->viewRendered) {
+            $this->viewRendered = true;
+            parent::render($action, $name, $noController);
+        }
     }
 
     /**
@@ -403,8 +430,10 @@ abstract class Frontend extends Action {
      * @param null $name
      */
     public function renderScript($script, $name = null) {
-        parent::renderScript($script, $name);
-        $this->viewRendered = true;
+        if(!$this->viewRendered) {
+            $this->viewRendered = true;
+            parent::renderScript($script, $name);
+        }
     }
 
     /**
@@ -442,6 +471,14 @@ abstract class Frontend extends Action {
             \Zend_Registry::set("pimcore_tag_block_current", $this->parentBlockCurrent);
             \Zend_Registry::set("pimcore_tag_block_numeration", $this->parentBlockNumeration);
         }
+
+        // restore the previois set locale if available
+        // for a detailed description on this, please have a look at $this->setLocaleFromDocument()
+        if($this->previousLocale) {
+            $this->forceRender();
+            $this->setLocale($this->previousLocale);
+            $this->previousLocale = null;
+        }
     }
 
     /**
@@ -455,6 +492,13 @@ abstract class Frontend extends Action {
                     header('HTTP/1.1 404 Not Found');
                     //$this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
                     $this->getResponse()->setHttpResponseCode(404);
+
+                    // check if the resource that wasn't found is a common static file
+                    // for them we don't show the error page, as generating this is very heavy in terms of performance
+                    if(preg_match("/\.(js|css|png|jpe?g|gif|eot|ttf|woff|svg|ico|map|swf|txt)$/", $this->getRequest()->getPathInfo())) {
+                        echo "HTTP/1.1 404 Not Found\nFiltered by error handler (static file exception)";
+                        exit;
+                    }
                 }
                 else {
                     header('HTTP/1.1 503 Service Temporarily Unavailable');
@@ -462,7 +506,7 @@ abstract class Frontend extends Action {
                     $this->getResponse()->setHttpResponseCode(503);
                 }
 
-                \Logger::error("Unable to load URL: " . $_SERVER["REQUEST_URI"]);
+                \Logger::error("Unable to find URL: " . $_SERVER["REQUEST_URI"]);
                 \Logger::error($error->exception);
 
                 try {

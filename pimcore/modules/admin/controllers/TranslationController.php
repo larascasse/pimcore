@@ -35,7 +35,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
         $overwrite = $merge ? false : true;
 
         if($admin){
-            $delta = Translation\Admin::importTranslationsFromFile($tmpFile, $overwrite);
+            $delta = Translation\Admin::importTranslationsFromFile($tmpFile, $overwrite, Tool\Admin::getLanguages());
         } else {
             $delta = Translation\Website::importTranslationsFromFile($tmpFile, $overwrite);
         }
@@ -222,7 +222,11 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
 
             if ($this->getParam("xaction") == "destroy") {
                 $data = \Zend_Json::decode($this->getParam("data"));
-                $t = $class::getByKey($data);
+                if (\Pimcore\Tool\Admin::isExtJS5()) {
+                    $t = $class::getByKey($data["key"]);
+                } else {
+                    $t = $class::getByKey($data);
+                }
                 $t->delete();
 
                 $this->_helper->json(array("success" => true, "data" => array()));
@@ -431,9 +435,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
         $exportFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . $id . ".xliff";
         if(!is_file($exportFile)) {
             // create initial xml file structure
-            $xliff = new \SimpleXMLElement('<xliff></xliff>');
-            $xliff->addAttribute('version', '1.2');
-            $xliff->asXML($exportFile);
+            File::put($exportFile, '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<xliff version="1.2"></xliff>');
         }
 
         $xliff = simplexml_load_file($exportFile, null, LIBXML_NOCDATA);
@@ -651,7 +653,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
         list($type, $id) = explode("-", $file["original"]);
         $element = Element\Service::getElementById($type, $id);
 
-        if($element) {
+        if(true || $element) {
             foreach($file->body->{"trans-unit"} as $transUnit) {
                 list($fieldType, $name) = explode("~-~", $transUnit["id"]);
                 $content = $transUnit->target->asXml();
@@ -660,9 +662,11 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
                 if($element instanceof Document) {
                     if($fieldType == "tag" && method_exists($element, "getElement")) {
                         $tag = $element->getElement($name);
-                        $tag->setDataFromEditmode($content);
-                        $tag->setInherited(false);
-                        $element->setElement($tag->getName(), $tag);
+                        if($tag) {
+                            $tag->setDataFromEditmode($content);
+                            $tag->setInherited(false);
+                            $element->setElement($tag->getName(), $tag);
+                        }
                     }
 
                     if($fieldType == "settings" && $element instanceof Document\Page) {
@@ -690,7 +694,16 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
                 }
             }
 
-            $element->save();
+            try {
+                // allow to save objects although there are mandatory fields
+                if($element instanceof Object\AbstractObject) {
+                    $element->setOmitMandatoryCheck(true);
+                }
+
+                $element->save();
+            } catch (\Exception $e) {
+                throw new \Exception("Unable to save " . Element\Service::getElementType($element) . " with id " . $element->getId() . " because of the following reason: " . $e->getMessage());
+            }
         }
 
         $this->_helper->json(array(
@@ -715,6 +728,8 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin {
     protected function unescapeXliff($content) {
 
         $content = preg_replace("/<\/?(target|mrk)([^>.]+)?>/i", "", $content);
+        // we have to do this again but with html entities because of CDATA content
+        $content = preg_replace("/&lt;\/?(target|mrk)((?!&gt;).)*&gt;/i", "", $content);
 
         if(preg_match("/<\/?(bpt|ept)/", $content)) {
             $xml = str_get_html($content);

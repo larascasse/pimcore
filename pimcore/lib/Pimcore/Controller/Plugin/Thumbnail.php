@@ -16,6 +16,7 @@
 namespace Pimcore\Controller\Plugin;
 
 use Pimcore\Model\Asset;
+use Pimcore\Model\Tool\TmpStore;
 
 class Thumbnail extends \Zend_Controller_Plugin_Abstract {
 
@@ -34,11 +35,13 @@ class Thumbnail extends \Zend_Controller_Plugin_Abstract {
             if($asset = Asset::getById($assetId)) {
                 try {
 
+                    $thumbnailFile = null;
                     $thumbnailConfig = null;
-                    $deferredConfig = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/thumb_" . $assetId . "__" . md5($request->getPathInfo()) . ".deferred.config";
-                    if(file_exists($deferredConfig)) {
-                        $thumbnailConfig = unserialize(file_get_contents($deferredConfig));
-                        @unlink($deferredConfig); // cleanup, this isn't needed anymore
+                    $deferredConfigId = "thumb_" . $assetId . "__" . md5($request->getPathInfo());
+                    if($thumbnailConfigItem = TmpStore::get($deferredConfigId)) {
+                        $thumbnailConfig = $thumbnailConfigItem->getData();
+                        TmpStore::delete($deferredConfigId);
+
                         if(!$thumbnailConfig instanceof Asset\Image\Thumbnail\Config) {
                             throw new \Exception("Deferred thumbnail config file doesn't contain a valid \\Asset\\Image\\Thumbnail\\Config object");
                         }
@@ -69,18 +72,21 @@ class Thumbnail extends \Zend_Controller_Plugin_Abstract {
                         $thumbnailFile = PIMCORE_DOCUMENT_ROOT . $asset->getThumbnail($thumbnailConfig);
                     }
 
-                    $imageContent = file_get_contents($thumbnailFile);
-                    $fileExtension = \Pimcore\File::getFileExtension($thumbnailFile);
-                    if(in_array($fileExtension, array("gif","jpeg","jpeg","png","pjpeg"))) {
-                        header("Content-Type: image/".$fileExtension, true);
-                    } else {
-                        header("Content-Type: " . $asset->getMimetype(), true);
+                    if($thumbnailFile && file_exists($thumbnailFile)) {
+                        $fileExtension = \Pimcore\File::getFileExtension($thumbnailFile);
+                        if(in_array($fileExtension, array("gif","jpeg","jpeg","png","pjpeg"))) {
+                            header("Content-Type: image/".$fileExtension, true);
+                        } else {
+                            header("Content-Type: " . $asset->getMimetype(), true);
+                        }
+
+                        header("Content-Length: " . filesize($thumbnailFile), true);
+                        while (@ob_end_flush()) ;
+                        flush();
+
+                        readfile($thumbnailFile);
+                        exit;
                     }
-
-                    header("Content-Length: " . filesize($thumbnailFile), true);
-                    echo $imageContent;
-                    exit;
-
                 } catch (\Exception $e) {
                     // nothing to do
                     \Logger::error("Thumbnail with name '" . $thumbnailName . "' doesn't exist");

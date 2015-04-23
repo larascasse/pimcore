@@ -357,7 +357,7 @@ class AbstractObject extends Model\Element\AbstractElement {
 
         $className = "\\Pimcore\\Model\\Object";
         // get classname
-        if(get_called_class() != "\\Pimcore\\Model\\Object\\AbstractObject" && get_called_class() != "\\Pimcore\\Model\\Object\\Concrete") {
+        if(get_called_class() != "Pimcore\\Model\\Object\\AbstractObject" && get_called_class() != "Pimcore\\Model\\Object\\Concrete") {
             $tmpObject = new static();
             $className = "\\Pimcore\\Model\\Object\\" . ucfirst($tmpObject->getClassName());
         }
@@ -651,6 +651,12 @@ class AbstractObject extends Model\Element\AbstractElement {
                 $this->setParentId(1);
                 $this->setPath("/");
             }
+        } else if($this->getId() == 1) {
+            // some data in root node should always be the same
+            $this->setParentId(0);
+            $this->setPath("/");
+            $this->setKey("");
+            $this->setType("folder");
         }
 
         if(Service::pathExists($this->getFullPath())) {
@@ -658,6 +664,10 @@ class AbstractObject extends Model\Element\AbstractElement {
             if($duplicate instanceof self and $duplicate->getId() != $this->getId()){
                 throw new \Exception("Duplicate full path [ ".$this->getFullPath()." ] - cannot save object");
             }
+        }
+
+        if(strlen($this->getFullPath()) > 765) {
+            throw new \Exception("Full path is limited to 765 characters, reduce the length of your parent's path");
         }
     }
 
@@ -720,7 +730,7 @@ class AbstractObject extends Model\Element\AbstractElement {
      */
     public function clearDependentCache($additionalTags = array()) {
         try {
-            $tags = array("object_" . $this->getId(), "properties", "output");
+            $tags = array("object_" . $this->getId(), "object_properties", "output");
             $tags = array_merge($tags, $additionalTags);
 
             Cache::clearTags($tags);
@@ -960,7 +970,7 @@ class AbstractObject extends Model\Element\AbstractElement {
             if (!is_array($properties)) {
                 $properties = $this->getResource()->getProperties();
                 $elementCacheTag = $this->getCacheTag();
-                $cacheTags = array("properties" => "properties", $elementCacheTag => $elementCacheTag);
+                $cacheTags = array("object_properties" => "object_properties", $elementCacheTag => $elementCacheTag);
                 Cache::save($properties, $cacheKey, $cacheTags);
             }
 

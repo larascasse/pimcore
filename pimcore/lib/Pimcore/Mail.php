@@ -16,7 +16,6 @@
 namespace Pimcore;
 
 use Pimcore\Helper\Mail as MailHelper;
-use Pimcore\Model\Document;
 use Pimcore\Model;
 
 class Mail extends \Zend_Mail
@@ -52,7 +51,7 @@ class Mail extends \Zend_Mail
     /**
      * Contains the email document
      *
-     * @var object Document\Email
+     * @var Model\Document\Email
      */
     protected $document;
 
@@ -526,7 +525,7 @@ class Mail extends \Zend_Mail
     {
         $document = $this->getDocument();
 
-        if ($document instanceof Document\Email) {
+        if ($document instanceof Model\Document\Email) {
 
             if(!$this->recipientsCleared){
                 $to = $document->getToAsArray();
@@ -546,10 +545,13 @@ class Mail extends \Zend_Mail
             }
 
             //if more than one "from" email address is defined -> we set the first one
-            list($from) = $document->getFromAsArray();
-            if ($from) {
-                $this->clearFrom();
-                $this->setFrom($from);
+            $fromArray = $document->getFromAsArray();
+            if(!empty($fromArray)) {
+                list($from) = $fromArray;
+                if ($from) {
+                    $this->clearFrom();
+                    $this->setFrom($from);
+                }
             }
         }
 
@@ -609,7 +611,7 @@ class Mail extends \Zend_Mail
 
         $result = parent::send($transport);
 
-        if ($this->loggingIsEnabled() && $this->getDocument()) {
+        if ($this->loggingIsEnabled()) {
             try {
                 MailHelper::logEmail($this);
             } catch (\Exception $e) {
@@ -712,7 +714,7 @@ class Mail extends \Zend_Mail
         if ($html instanceof \Zend_Mime_Part) {
             $rawHtml = $html->getRawContent();
             $content = $this->placeholderObject->replacePlaceholders($rawHtml, $this->getParams(), $this->getDocument(),$this->getEnableLayoutOnPlaceholderRendering());
-        } elseif ($this->getDocument() instanceof Document) {
+        } elseif ($this->getDocument() instanceof Model\Document) {
             $content = $this->placeholderObject->replacePlaceholders($this->getDocument(), $this->getParams(), $this->getDocument(),$this->getEnableLayoutOnPlaceholderRendering());
         } else {
             $content = null;
@@ -781,13 +783,13 @@ class Mail extends \Zend_Mail
      */
     public function setDocument($document)
     {
-        if ($document instanceof Document) { //document passed
+        if ($document instanceof Model\Document) { //document passed
             $this->document = $document;
             $this->setDocumentSettings();
         } elseif ((int)$document > 0) { //id of document passed
-            $this->setDocument(Document::getById($document));
+            $this->setDocument(Model\Document::getById($document));
         } elseif (is_string($document) && $document != "") { //path of document passed
-            $this->setDocument(Document::getByPath($document));
+            $this->setDocument(Model\Document::getByPath($document));
         } else {
             throw new \Exception("$document is not an instance of \\Document\\Email or at least \\Document");
         }
@@ -797,7 +799,7 @@ class Mail extends \Zend_Mail
     /**
      * Returns the Document
      *
-     * @return Document\Email | null
+     * @return Model\Document\Email | null
      */
     public function getDocument()
     {
@@ -879,5 +881,17 @@ class Mail extends \Zend_Mail
         }
     }
 
+    /**
+     * Sets From-header and sender of the message
+     *
+     * @param  string $email
+     * @return \Zend_Mail Provides fluent interface
+     */
+    public function setSender($email) {
+        $email = $this->_filterEmail($email);
+        $this->sender = $email;
+        $this->_storeHeader('Sender', $this->_formatAddress($email,null), true);
+        return $this;
+    }
 
 }

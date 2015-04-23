@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Pimcore
  *
@@ -16,8 +16,8 @@
 use Pimcore\Config;
 use Pimcore\Model\Cache;
 use Pimcore\Controller;
-use Pimcore\Tool; 
-use Pimcore\File; 
+use Pimcore\Tool;
+use Pimcore\File;
 use Pimcore\Resource;
 use Pimcore\ExtensionManager;
 use Pimcore\Model\User;
@@ -119,8 +119,8 @@ class Pimcore {
             $front->registerPlugin(new Controller\Plugin\Analytics(), 798);
             $front->registerPlugin(new Controller\Plugin\TagManagement(), 804);
             $front->registerPlugin(new Controller\Plugin\Targeting(), 805);
+            $front->registerPlugin(new Controller\Plugin\EuCookieLawNotice(), 807);
             $front->registerPlugin(new Controller\Plugin\HttpErrorLog(), 850);
-            $front->registerPlugin(new Controller\Plugin\ContentLog(), 851);
             $front->registerPlugin(new Controller\Plugin\Cache(), 901); // for caching
         }
 
@@ -219,16 +219,14 @@ class Pimcore {
             $router->addRoute('reports', $routeReports);
             $router->addRoute('searchadmin', $routeSearchAdmin);
             if ($conf instanceof \Zend_Config and $conf->webservice and $conf->webservice->enabled) {
-                    $router->addRoute('webservice', $routeWebservice);
+                $router->addRoute('webservice', $routeWebservice);
             }
 
             // check if this request routes into a plugin, if so check if the plugin is enabled
             if (preg_match("@^/plugin/([^/]+)/.*@", $_SERVER["REQUEST_URI"], $matches)) {
                 $pluginName = $matches[1];
                 if(!Pimcore\ExtensionManager::isEnabled("plugin", $pluginName)) {
-                    while (@ob_end_flush());
-                    die("Plugin is disabled. To use this plugin please enable it in the extension manager!");
-                    exit;
+                    \Pimcore\Tool::exitWithError("Plugin is disabled. To use this plugin please enable it in the extension manager!");
                 }
             }
 
@@ -384,7 +382,7 @@ class Pimcore {
         \Logger::setPriorities($prios);
 
         if (is_writable(PIMCORE_LOG_DEBUG)) {
-            
+
             // check for big logfile, empty it if it's bigger than about 200M
             if (filesize(PIMCORE_LOG_DEBUG) > 200000000) {
                 rename(PIMCORE_LOG_DEBUG, PIMCORE_LOG_DEBUG . "-archive-" . date("m-d-Y-H-i")); // archive log (will be cleaned up by maintenance)
@@ -537,7 +535,7 @@ class Pimcore {
                         if (is_array($p['plugin']['pluginNamespaces']['namespace'])) {
                             foreach ($p['plugin']['pluginNamespaces']['namespace'] as $namespace) {
                                 $autoloader->registerNamespace($namespace);
-                    }
+                            }
                         }
                         else if ($p['plugin']['pluginNamespaces']['namespace'] != null) {
                             $autoloader->registerNamespace($p['plugin']['pluginNamespaces']['namespace']);
@@ -558,7 +556,17 @@ class Pimcore {
                     }
 
                     $jsPaths = array();
-                    if (is_array($p['plugin']['pluginJsPaths'])
+                    $isExtJs5 = \Pimcore\Tool\Admin::isExtJS5();
+
+                    if ($isExtJs5 && is_array($p['plugin']['pluginJsPaths-extjs5'])
+                        && isset($p['plugin']['pluginJsPaths-extjs5']['path'])
+                        && is_array($p['plugin']['pluginJsPaths-extjs5']['path'])) {
+                        $jsPaths = $p['plugin']['pluginJsPaths-extjs5']['path'];
+                    }
+                    else if ($isExtJs5 && is_array($p['plugin']['pluginJsPaths-extjs5'])
+                        && $p['plugin']['pluginJsPaths-extjs5']['path'] != null) {
+                        $jsPaths[0] = $p['plugin']['pluginJsPaths-extjs5']['path'];
+                    } else  if (is_array($p['plugin']['pluginJsPaths'])
                         && isset($p['plugin']['pluginJsPaths']['path'])
                         && is_array($p['plugin']['pluginJsPaths']['path'])) {
                         $jsPaths = $p['plugin']['pluginJsPaths']['path'];
@@ -577,7 +585,15 @@ class Pimcore {
                     }
 
                     $cssPaths = array();
-                    if (is_array($p['plugin']['pluginCssPaths'])
+                    if ($isExtJs5 && is_array($p['plugin']['pluginCssPaths-extjs5'])
+                        && isset($p['plugin']['pluginCssPaths-extjs5']['path'])
+                        && is_array($p['plugin']['pluginCssPaths-extjs5']['path'])) {
+                        $cssPaths = $p['plugin']['pluginCssPaths-extjs5']['path'];
+                    }
+                    else if ($isExtJs5 && is_array($p['plugin']['pluginCssPaths-extjs5'])
+                        && $p['plugin']['pluginCssPaths-extjs5']['path'] != null) {
+                        $cssPaths[0] = $p['plugin']['pluginCssPaths-extjs5']['path'];
+                    } else  if (is_array($p['plugin']['pluginCssPaths'])
                         && isset($p['plugin']['pluginCssPaths']['path'])
                         && is_array($p['plugin']['pluginCssPaths']['path'])) {
                         $cssPaths = $p['plugin']['pluginCssPaths']['path'];
@@ -599,7 +615,7 @@ class Pimcore {
                     try {
                         $className = $p['plugin']['pluginClassName'];
                         if (!empty($className) && Tool::classExists($className)) {
-                         
+
                             $plugin = new $className($jsPaths, $cssPaths);
                             if ($plugin instanceof \Pimcore\API\Plugin\AbstractPlugin) {
                                 $broker->registerPlugin($plugin);
@@ -666,7 +682,7 @@ class Pimcore {
      * @return bool
      */
     public static function initConfiguration() {
-               
+
         // init configuration
         try {
             $conf = Config::getSystemConfig();
@@ -679,7 +695,7 @@ class Pimcore {
             }
 
             $debug = self::inDebugMode();
-            
+
             if (!defined("PIMCORE_DEBUG")) define("PIMCORE_DEBUG", $debug);
             if (!defined("PIMCORE_DEVMODE")) define("PIMCORE_DEVMODE", (bool) $conf->general->devmode);
 
@@ -695,7 +711,7 @@ class Pimcore {
         catch (\Exception $e) {
             $m = "Couldn't load system configuration";
             \Logger::err($m);
-            
+
             //@TODO check here for /install otherwise exit here
         }
 
@@ -919,85 +935,95 @@ class Pimcore {
             return $data;
         }
 
-        // cleanup headers, ensure all headers are unique
-        // this is necessary since eg. session_start() sends Set-Cookie headers again and again, which causes problems with e.g. varnish and other HTTP clients
-        foreach(headers_list() as $header) {
-            header($header, true);
-        }
-
-        // force closing the connection at the client, this enables to do certain tasks (writing the cache) in the "background"
-        header("Connection: close\r\n");
-
-        // check for supported content-encodings
-        if(strpos($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip") !== false) {
-            $contentEncoding = "gzip";
-        }
-
-        // only send this headers in the shutdown-function, so that it is also possible to get the contents of this buffer earlier without sending headers
-        if(self::$inShutdown && !headers_sent() && !empty($data) && $contentEncoding) {
-            ignore_user_abort(true);
-
-            // find the content-type of the response
-            $front = \Zend_Controller_Front::getInstance();
-            $a = $front->getResponse()->getHeaders();
-            $b = array_merge(headers_list(), $front->getResponse()->getRawHeaders());
-
-            $contentType = null;
-
-            // first check headers in headers_list() because they overwrite all other headers => see SOAP controller
-            foreach ($b as $header) {
-                if(stripos($header, "content-type") !== false) {
-                    $parts = explode(":", $header);
-                    if(strtolower(trim($parts[0])) == "content-type") {
-                        $contentType = trim($parts[1]);
-                        break;
-                    }
-                }
-            }
-
-            if(!$contentType) {
-                foreach ($a as $header) {
-                    if(strtolower(trim($header["name"])) == "content-type") {
-                        $contentType = $header["value"];
-                        break;
-                    }
-                }
-            }
-
-            // prepare the response to be sent (gzip or not)
-            // do not add text/xml or a wildcard for text/* here because this causes problems with the SOAP server
-            $gzipContentTypes = array("@text/html@i","@application/json@","@text/javascript@","@text/css@");
-            $gzipIt = false;
-            foreach ($gzipContentTypes as $type) {
-                if(@preg_match($type, $contentType)) {
-                    $gzipIt = true;
+        // cleanup admin session Set-Cookie headers if needed
+        // a detailed description why this is necessary can be found in the doc-block of \Pimcore\Tool\Session::$sessionCookieCleanupNeeded
+        if(Tool\Session::isSessionCookieCleanupNeeded()) {
+            $headers = headers_list();
+            $headers = array_reverse($headers);
+            foreach($headers as $header) {
+                if(strpos($header, Tool\Session::getOption("name")) !== false) {
+                    header($header, true); // setting the header again with 2nd arg = true, overrides all duplicates
                     break;
                 }
             }
+        }
 
-            // gzip the contents and send connection close tthat the process can run in the background to finish
-            // some tasks like writing the cache ...
-            // using mb_strlen() because of PIMCORE-1509
-            if($gzipIt) {
-                $output = "\x1f\x8b\x08\x00\x00\x00\x00\x00".
-                    substr(gzcompress($data, 2), 0, -4).
-                    pack('V', crc32($data)). // packing the CRC and the strlen is still required
-                    pack('V', mb_strlen($data, "latin1")); // (although all modern browsers don't need it anymore) to work properly with google adwords check & co.
+        // only send this headers in the shutdown-function, so that it is also possible to get the contents of this buffer earlier without sending headers
+        if(self::$inShutdown) {
 
-                header("Content-Encoding: $contentEncoding\r\n");
+            // force closing the connection at the client, this enables to do certain tasks (writing the cache) in the "background"
+            header("Connection: close\r\n");
+
+            // check for supported content-encodings
+            if(strpos($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip") !== false) {
+                $contentEncoding = "gzip";
             }
-        }
 
-        // no gzip/deflate encoding
-        if(!$output) {
-            $output = $data;
-        }
+            if (!empty($data) && $contentEncoding) {
+                ignore_user_abort(true);
 
-        if(strlen($output) > 0) {
-            // check here if there is actually content, otherwise readfile() and similar functions are not working anymore
-            header("Content-Length: " . mb_strlen($output, "latin1"));
+                // find the content-type of the response
+                $front = \Zend_Controller_Front::getInstance();
+                $a = $front->getResponse()->getHeaders();
+                $b = array_merge(headers_list(), $front->getResponse()->getRawHeaders());
+
+                $contentType = null;
+
+                // first check headers in headers_list() because they overwrite all other headers => see SOAP controller
+                foreach ($b as $header) {
+                    if (stripos($header, "content-type") !== false) {
+                        $parts = explode(":", $header);
+                        if (strtolower(trim($parts[0])) == "content-type") {
+                            $contentType = trim($parts[1]);
+                            break;
+                        }
+                    }
+                }
+
+                if (!$contentType) {
+                    foreach ($a as $header) {
+                        if (strtolower(trim($header["name"])) == "content-type") {
+                            $contentType = $header["value"];
+                            break;
+                        }
+                    }
+                }
+
+                // prepare the response to be sent (gzip or not)
+                // do not add text/xml or a wildcard for text/* here because this causes problems with the SOAP server
+                $gzipContentTypes = array("@text/html@i", "@application/json@", "@text/javascript@", "@text/css@");
+                $gzipIt = false;
+                foreach ($gzipContentTypes as $type) {
+                    if (@preg_match($type, $contentType)) {
+                        $gzipIt = true;
+                        break;
+                    }
+                }
+
+                // gzip the contents and send connection close tthat the process can run in the background to finish
+                // some tasks like writing the cache ...
+                // using mb_strlen() because of PIMCORE-1509
+                if ($gzipIt) {
+                    $output = "\x1f\x8b\x08\x00\x00\x00\x00\x00" .
+                        substr(gzcompress($data, 2), 0, -4) .
+                        pack('V', crc32($data)) . // packing the CRC and the strlen is still required
+                        pack('V', mb_strlen($data, "latin1")); // (although all modern browsers don't need it anymore) to work properly with google adwords check & co.
+
+                    header("Content-Encoding: $contentEncoding\r\n");
+                }
+            }
+
+            // no gzip/deflate encoding
+            if (!$output) {
+                $output = $data;
+            }
+
+            if (strlen($output) > 0) {
+                // check here if there is actually content, otherwise readfile() and similar functions are not working anymore
+                header("Content-Length: " . mb_strlen($output, "latin1"));
+            }
+            header("X-Powered-By: pimcore", true);
         }
-        header("X-Powered-By: pimcore");
 
         // return the data unchanged
         return $output;

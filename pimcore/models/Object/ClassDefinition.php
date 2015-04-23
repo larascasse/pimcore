@@ -66,6 +66,8 @@ class ClassDefinition extends Model\AbstractModel {
      */
     public $parentClass;
 
+    public $useTraits;
+
     /**
      * @var boolean
      */
@@ -263,9 +265,23 @@ class ClassDefinition extends Model\AbstractModel {
         $cd .= "namespace Pimcore\\Model\\Object;";
         $cd .= "\n\n";
         $cd .= "\n\n";
+        $cd .= "/**\n";
+        if (is_array($this->getFieldDefinitions()) && count($this->getFieldDefinitions())) {
+            foreach ($this->getFieldDefinitions() as $key => $def) {
+                if (!(method_exists($def,"isRemoteOwner") and $def->isRemoteOwner())) {
+                    $cd .= "* @method static \\Pimcore\\Model\\Object\\" . ucfirst($this->getName()) . ' getBy' . ucfirst($def->getName()) . ' ($value, $limit = 0) ' ."\n";
+                }
+            }
+        }
+        $cd .= "*/\n\n";
 
         $cd .= "class " . ucfirst($this->getName()) . " extends " . $extendClass . " {";
         $cd .= "\n\n";
+
+        if ($this->getUseTraits()) {
+          $cd .= 'use ' . $this->getUseTraits() . ";\n";
+          $cd .= "\n";
+        }
 
         $cd .= 'public $o_classId = ' . $this->getId() . ";\n";
         $cd .= 'public $o_className = "' . $this->getName() . '"' . ";\n";
@@ -342,6 +358,10 @@ class ClassDefinition extends Model\AbstractModel {
         $cd .= "namespace Pimcore\\Model\\Object\\" . ucfirst($this->getName()) . ";";
         $cd .= "\n\n";
         $cd .= "use Pimcore\\Model\\Object;";
+        $cd .= "\n\n";
+        $cd .= "/**\n";
+        $cd .= " * @method Object\\" . ucfirst($this->getName()) . " current()\n";
+        $cd .= " */";
         $cd .= "\n\n";
         $cd .= "class Listing extends Object\\Listing\\Concrete {";
         $cd .= "\n\n";
@@ -622,6 +642,22 @@ class ClassDefinition extends Model\AbstractModel {
      */
     public function getParentClass() {
         return $this->parentClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUseTraits() {
+      return $this->useTraits;
+    }
+
+    /**
+     * @param string $useTraits
+     * @return ClassDefinition
+     */
+    public function setUseTraits($useTraits) {
+      $this->useTraits = $useTraits;
+      return $this;
     }
 
     /**

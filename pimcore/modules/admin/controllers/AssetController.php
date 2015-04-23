@@ -132,11 +132,11 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
                 $userIds = $this->getUser()->getRoles();
                 $userIds[] = $this->getUser()->getId();
                 $childsList->setCondition("parentId = ? and
-                                                    (
-                                                    (select list from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(CONCAT(path,filename),cpath)=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1
-                                                    or
-                                                    (select list from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(cpath,CONCAT(path,filename))=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1
-                                                    )", $asset->getId());
+                    (
+                    (select list from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(CONCAT(path,filename),cpath)=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1
+                    or
+                    (select list from users_workspaces_asset where userId in (" . implode(',', $userIds) . ") and LOCATE(cpath,CONCAT(path,filename))=1  ORDER BY LENGTH(cpath) DESC LIMIT 1)=1
+                    )", $asset->getId());
             }
             $childsList->setLimit($limit);
             $childsList->setOffset($offset);
@@ -154,6 +154,8 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
 
         if ($this->getParam("limit")) {
             $this->_helper->json(array(
+                "offset" => $offset,
+                "limit" => $limit,
                 "total" => $asset->getChildAmount($this->getUser()),
                 "nodes" => $assets
             ));
@@ -208,7 +210,22 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             $parent = Asset::getById($this->getParam("parentId"));
             $newPath = $parent->getFullPath() . "/" . trim($this->getParam("dir"), "/ ");
 
-            $newParent = Asset\Service::createFolderByPath($newPath);
+            $maxRetries = 5;
+            for ($retries=0; $retries<$maxRetries; $retries++) {
+                try {
+                    $newParent = Asset\Service::createFolderByPath($newPath);
+                    break;
+                } catch (\Exception $e) {
+                    if($retries < ($maxRetries-1)) {
+                        $waitTime = rand(100000, 900000); // microseconds
+                        usleep($waitTime); // wait specified time until we restart the transaction
+                    } else {
+                        // if the transaction still fail after $maxRetries retries, we throw out the exception
+                        throw $e;
+                    }
+                }
+            }
+
             $this->setParam("parentId", $newParent->getId());
         } else if (!$this->getParam("parentId") && $this->getParam("parentPath")) {
             $parent = Asset::getByPath($this->getParam("parentPath"));
@@ -1273,8 +1290,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
 
                 $assetList = new Asset\Listing();
                 $assetList->setCondition("path LIKE ?", $parentPath . "/%");
-                $assetList->setOrderKey("LENGTH(path)", false);
-                $assetList->setOrder("ASC");
+                $assetList->setOrderKey("LENGTH(path) ASC, id ASC", false);
                 $assetList->setOffset((int)$this->getParam("offset"));
                 $assetList->setLimit((int)$this->getParam("limit"));
 

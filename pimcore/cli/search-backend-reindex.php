@@ -13,6 +13,8 @@
  * @license    http://www.pimcore.org/license     New BSD License
  */
 
+chdir(__DIR__);
+
 include_once("startup.php");
 
 use Pimcore\Model\Search;
@@ -27,6 +29,10 @@ $types = array("asset","document","object");
 foreach ($types as $type) {
     $listClassName = "\\Pimcore\\Model\\" . ucfirst($type) . "\\Listing";
     $list = new $listClassName();
+    if(method_exists($list, "setUnpublished")) {
+        $list->setUnpublished(true);
+    }
+
     $elementsTotal = $list->getTotalCount();
 
     for($i=0; $i<(ceil($elementsTotal/$elementsPerLoop)); $i++) {

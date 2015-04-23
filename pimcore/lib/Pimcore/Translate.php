@@ -102,6 +102,22 @@ class Translate extends \Zend_Translate_Adapter {
 
 
     /**
+     * @param string|\Zend_Locale $locale
+     * @return \Zend_Translate_Adapter
+     * @throws \Zend_Translate_Exception
+     */
+    public function setLocale($locale) {
+
+        // load data before calling the parent
+        $l = (string) $locale;
+        if(empty($this->_translate[$l])) {
+            $this->_loadTranslationData(null,$l);
+        }
+
+        return parent::setLocale($locale);
+    }
+
+    /**
      * @param array|string $messageId
      * @param null $locale
      * @return array|string
@@ -160,6 +176,16 @@ class Translate extends \Zend_Translate_Adapter {
                     }
                 }
             }
+
+            // check if there is a translation in a lower step (without reverting the keys)
+            $tmpKey = $messageId;
+            if(strrpos($tmpKey,':')){
+                while($tmpKey = substr($tmpKey,0,strrpos($tmpKey,':'))){
+                    if (!empty($this->_translate[$locale][$tmpKey])) {
+                        return $this->_translate[$locale][$tmpKey];
+                    }
+                }
+            }
         }
 
         // do not create a new translation if it is only empty, but do not return empty values
@@ -168,6 +194,12 @@ class Translate extends \Zend_Translate_Adapter {
         } else {
             // look for a fallback translation
             foreach(Tool::getFallbackLanguagesFor($locale) as $fallbackLanguage) {
+
+                // check if data for fallback language is loaded, if not force it
+                if(empty($this->_translate[$fallbackLanguage])) {
+                    $this->_loadTranslationData(null,$fallbackLanguage);
+                }
+
                 if (!empty($this->_translate[$fallbackLanguage][$messageId])) {
                     return $this->_translate[$fallbackLanguage][$messageId];
                 }

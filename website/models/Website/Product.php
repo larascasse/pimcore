@@ -426,6 +426,28 @@ class Website_Product extends Object_Product {
 			return "http://".$_SERVER["HTTP_HOST"].$this->getFiche_technique_lpn()->getFullPath();
 		return null;
 	}
+
+	public function getMage_name() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+		//Shortname
+		$str = $this->getName();
+		$str = str_replace($this->getSubtype(), "", $str);
+		$str =trim($str);
+		if(strlen($this->getPimonly_name_suffixe())>0) {
+			$str .=" ".$this->getPimonly_name_suffixe();
+		}
+		$str =trim($str);
+		$str = substr($str,0,50);
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return $str;
+    	
+
+	}
+
+
 	public function getMage_short_name() {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 

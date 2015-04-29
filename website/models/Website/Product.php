@@ -757,6 +757,9 @@ class Website_Product extends Object_Product {
 		return count($varationString)>0?implode($varationString,", "):"";
 	}
 
+
+
+
 	public function getDimensionsStringEtiquette() {
 		$varationString =array();
 		if(round($this->getEpaisseur())>0)
@@ -780,6 +783,31 @@ class Website_Product extends Object_Product {
 		
 		return count($varationString)>0?implode($varationString,"/"):"";
 	}
+
+	public function getPimonly_dimensions() {
+		$varationString =array();
+		if(round($this->getEpaisseur())>0)
+			$varationString[]="".round($this->getEpaisseur())."";
+		
+		if(round($this->getLargeur())>0)
+			$varationString[]="".round($this->getLargeur())."";
+
+
+		if(round($this->getLongueur())>0) 
+			$varationString[]= "".round($this->getLongueur())."";
+
+		if($this->getVolume())
+			$varationString[]=$this->getVolume()."L";
+
+		if($this->getHauteur())
+			$varationString[]=$this->getHauteur();
+
+		if($this->getConditionnement())
+			$varationString[]=$this->getConditionnement();
+		
+		return count($varationString)>0?implode($varationString,"x"):"";
+	}
+
 
 	public function getLesPlusArray() {
 

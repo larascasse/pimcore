@@ -47,6 +47,14 @@
         $name=str_ireplace("PREPATINE ", "prépratiné ", $name);
         $name=str_ireplace("ELEGANCE ", "Elégance ", $name);
 
+        $name=str_ireplace(" PAVE ", " Pavé ", $name);
+
+        $name=str_ireplace(" FLOTTE ", " Flotté ", $name);
+        $name=str_ireplace(" METAL ", " Métal ", $name);
+
+
+
+
 
         
         //$name=str_ireplace("BROSSE ", "brossé ", $name);
@@ -68,7 +76,9 @@
 
 
         $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
-        $name=str_ireplace("STRUCTURE ", "Structuré ", $name);
+        $name=str_ireplace(" STRUCTURE ", " Structuré ", $name);
+        $name=str_ireplace("DESTRUCTURE ", " Déstructuré ", $name);
+
         $name=str_ireplace("BOMBE ", "Bombé ", $name);
 
         $name=str_ireplace("ANTIDERAPANT", "Antidérapant", $name);

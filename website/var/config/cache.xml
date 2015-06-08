@@ -6,7 +6,7 @@
         <type>File</type>
         <options>
             <cache_file_perm>0755</cache_file_perm>
-            <cache_dir>/Users/florent/Dropbox/01_LESMECANIQUES/00_softs/pimcore_blank/website/var/cache</cache_dir>
+            <cache_dir>/home/pimcore/www/website/var/cache</cache_dir>
         </options>
     </backend>
 

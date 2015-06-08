@@ -6,7 +6,7 @@
         <type>File</type>
         <options>
             <cache_file_perm>0755</cache_file_perm>
-            <cache_dir>/opt/bitnami/apps/pimcore/www/website/var/cache</cache_dir>
+            <cache_dir>/opt/bitnami/apps/pimcore/website/var/cache</cache_dir>
         </options>
     </backend>
 

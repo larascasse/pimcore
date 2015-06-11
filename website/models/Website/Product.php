@@ -992,15 +992,18 @@ class Website_Product extends Object_Product {
 						}
 						else if($object->getClassName()=="category") {
 							$products = $object->getProducts();
-							foreach ($products as $product) {
-								if($onlyId) {
-									$returnValue[] = $product->getId();
-								}
-								else {
-									$returnValue[] = $product;
-								}
-								
-							}	
+							if(is_array($products)) {
+								foreach ($products as $product) {
+									if($onlyId) {
+										$returnValue[] = $product->getId();
+									}
+									else {
+										$returnValue[] = $product;
+									}
+									
+								}	
+							}
+							
 							
 						}
 						

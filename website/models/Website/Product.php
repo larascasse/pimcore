@@ -957,6 +957,7 @@ class Website_Product extends Object_Product {
 								</div>';*/
 		                    
 		           $str .= '      	</div>
+		           			</div>
 	            		</li>';
 	            $index++;
 			}

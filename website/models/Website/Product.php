@@ -947,7 +947,7 @@ class Website_Product extends Object_Product {
 				
 				$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
 							<div class="nsg_container">
-								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'></div>
+								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"></div>
 		                		<div class="nsg_abs">';
 		        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
 									<div class="realisationtitle">'.$this->getMage_short_name().'</div>

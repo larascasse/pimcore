@@ -839,6 +839,19 @@ class Website_Product extends Object_Product {
 		return count($varationString)>0?implode($varationString,"x").'mm':"";
 	}
 
+	public function getMage_section() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		Object_Abstract::setGetInheritedValues(true); 
+   		$str = "";
+		if($this->getUseSection()) {
+			return $this->getPimonly_section();
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+
+		return $str;
+	}
+
+
 
 
 	public function getLesPlusArray() {

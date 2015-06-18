@@ -843,7 +843,7 @@ class Website_Product extends Object_Product {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		Object_Abstract::setGetInheritedValues(true); 
    		$str = "";
-		if($this->getUseSection()) {
+		if($this->getSection_not_configurable()) {
 			return $this->getPimonly_section();
 		}
 		Object_Abstract::setGetInheritedValues($inheritance); 

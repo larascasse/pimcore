@@ -842,8 +842,9 @@ class Website_Product extends Object_Product {
 	public function getMage_section() {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		Object_Abstract::setGetInheritedValues(true); 
-   		$str = "".$this->getSection_not_configurable();
-		if(!$this->getSection_not_configurable()) {
+   		$str = "":
+   		//attention $this->getSection_not_configurable() veut dire l'inverse, sinon ca sauvetage pas dans la liste view ....
+		if($this->getSection_not_configurable()) {
 			return $this->getPimonly_section();
 		}
 		Object_Abstract::setGetInheritedValues($inheritance); 

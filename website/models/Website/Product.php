@@ -828,6 +828,18 @@ class Website_Product extends Object_Product {
 		return count($varationString)>0?implode($varationString,"x"):"";
 	}
 
+	public function getPimonly_section() {
+		$varationString =array();
+		if(round($this->getEpaisseur())>0)
+			$varationString[]="".round($this->getEpaisseur())."";
+		
+		if(round($this->getLargeur())>0)
+			$varationString[]="".round($this->getLargeur())."";
+		
+		return count($varationString)>0?implode($varationString,"x").'mm':"";
+	}
+
+
 
 	public function getLesPlusArray() {
 
@@ -947,7 +959,7 @@ class Website_Product extends Object_Product {
 				
 				$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
 							<div class="nsg_container">
-								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"></div>
+								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
 		                		<div class="nsg_abs">';
 		        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
 									<div class="realisationtitle">'.$this->getMage_short_name().'</div>

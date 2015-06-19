@@ -257,14 +257,10 @@ class Website_Product extends Object_Product {
    		 Object_Abstract::setGetInheritedValues(true); 
    
   
-
-
-
-
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","origineArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","gallery","re_skus","cs_skus","us_skus","rendement","accessoirepopin","colisage","nbrpp","leadtime",'shipping_type','longueur_max','longueur_min');
+		$ignoreFields = array("price","characteristics","name","description", "lesplus","short_description_title","short_description","image_1","image_2","image_3","ean","relatedAccessories","associatedArticles","origineArticles","extras","relatedProducts","code","famille","magentoshort","subtype","nbrpp","fiche_technique_orginale","fiche_technique_lpn","short_name","echantillon","realisations","name_scienergie","mode_calcul","name_scienergie_converti","unite","name_scienergie_court","epaisseur","longueur","largeur","epaisseur_txt","longueur_txt","largeur_txt","price_1","price_2","price_3","price_4","getMage_categoryIds","no_stock_delay","gallery","re_skus","cs_skus","us_skus","rendement","accessoirepopin","colisage","nbrpp","leadtime",'shipping_type','longueur_max','longueur_min');
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0) {
@@ -274,12 +270,12 @@ class Website_Product extends Object_Product {
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
 
-		if(strlen($this->getDimensionsString())>0)
-			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsString());
+		if(strlen($this->getDimensionsStringExtended())>0)
+			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsStringExtended());
 
 		
 
-		$fields = array("epaisseur","longueur");
+		//$fields = array("epaisseur","longueur");
 		foreach($attributes as $key=> $value) {
 
 			$attribute  =  $value->getName();
@@ -752,13 +748,24 @@ class Website_Product extends Object_Product {
 		$childrens = $this->getChilds();
 		$varationString =array();
 
-		if(strlen($value=$this->getSingleDimentionString("epaisseur","Ep"))>0) {
+		if(strlen($value=$this->getEpaisseur_txt())>0) {
 			$varationString[]=$value;
 		}
-		if(strlen($value=$this->getSingleDimentionString("largeur","l"))>0) {
+		elseif(strlen($value=$this->getSingleDimentionString("epaisseur","Ep"))>0) {
 			$varationString[]=$value;
 		}
-		if(strlen($value=$this->getSingleDimentionString("longueur","L"))>0) {
+		
+		if(strlen($value=$this->getLargeur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(strlen($value=$this->getSingleDimentionString("largeur","l"))>0) {
+			$varationString[]=$value;
+		}
+		
+		if(strlen($value=$this->getLongueur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(strlen($value=$this->getSingleDimentionString("longueur","L"))>0) {
 			$varationString[]=$value;
 		}
 
@@ -777,20 +784,69 @@ class Website_Product extends Object_Product {
 		return count($varationString)>0?implode($varationString,", "):"";
 	}
 
+	public function getDimensionsStringExtended() {
+		$childrens = $this->getChilds();
+		$varationString =array();
 
+		if(strlen($value=$this->getEpaisseur_txt())>0) {
+			$varationString[]=$value;
+		}
+		else if(strlen($value=$this->getSingleDimentionString("epaisseur","Epaisseur: "))>0) {
+			$varationString[]=$value;
+		}
+		
+		if(strlen($value=$this->getLargeur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(strlen($value=$this->getSingleDimentionString("largeur","l"))>0) {
+			$varationString[]=$value;
+		}
+		
+		if(strlen($value=$this->getLongueur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(strlen($value=$this->getSingleDimentionString("longueur","L"))>0) {
+			$varationString[]=$value;
+		}
+
+		if(strlen($value=$this->getSingleDimentionString("volume","V","",false))>0) {
+			$varationString[]=$value;
+		}
+
+		
+
+		if($this->getHauteur())
+			$varationString[]=$this->getHauteur();
+
+		if($this->getConditionnement())
+			$varationString[]=$this->getConditionnement();
+		
+		return count($varationString)>0?implode($varationString,"<br />"):"";
+	}
 
 
 	public function getDimensionsStringEtiquette() {
 		$varationString =array();
-		if(round($this->getEpaisseur())>0)
+		
+		if(strlen($value=$this->getEpaisseur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(round($this->getEpaisseur())>0)
 			$varationString[]="".round($this->getEpaisseur())."";
 		
-		if(round($this->getLargeur())>0)
+		if(strlen($value=$this->getLargeur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(round($this->getLargeur())>0)
 			$varationString[]="".round($this->getLargeur())."";
 
 
-		if(round($this->getLongueur())>0) 
+		if(strlen($value=$this->getLongueur_txt())>0) {
+			$varationString[]=$value;
+		}
+		elseif(round($this->getLongueur())>0) 
 			$varationString[]= "".round($this->getLongueur())."";
+
 
 		if($this->getVolume())
 			$varationString[]=$this->getVolume()."L";

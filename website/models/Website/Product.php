@@ -791,25 +791,25 @@ class Website_Product extends Object_Product {
 		if(strlen($value=$this->getEpaisseur_txt())>0) {
 			$varationString[]=$value;
 		}
-		else if(strlen($value=$this->getSingleDimentionString("epaisseur","Epaisseur: "))>0) {
+		else if(strlen($value=$this->getSingleDimentionString("epaisseur","Epaisseur"))>0) {
 			$varationString[]=$value;
 		}
 		
 		if(strlen($value=$this->getLargeur_txt())>0) {
 			$varationString[]=$value;
 		}
-		elseif(strlen($value=$this->getSingleDimentionString("largeur","l"))>0) {
+		elseif(strlen($value=$this->getSingleDimentionString("largeur","Largeur"))>0) {
 			$varationString[]=$value;
 		}
 		
 		if(strlen($value=$this->getLongueur_txt())>0) {
 			$varationString[]=$value;
 		}
-		elseif(strlen($value=$this->getSingleDimentionString("longueur","L"))>0) {
+		elseif(strlen($value=$this->getSingleDimentionString("longueur","Longueur"))>0) {
 			$varationString[]=$value;
 		}
 
-		if(strlen($value=$this->getSingleDimentionString("volume","V","",false))>0) {
+		if(strlen($value=$this->getSingleDimentionString("volume","Volume","",false))>0) {
 			$varationString[]=$value;
 		}
 

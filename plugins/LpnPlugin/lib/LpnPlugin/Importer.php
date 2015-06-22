@@ -91,6 +91,10 @@
         $name=str_ireplace("THERMOCHAUFFE ", "Thermochauffé ", $name);
         $name=str_ireplace("STRIEE ", "Striée ", $name);
         $name=str_ireplace("RESINEUX ", "Résineux ", $name);
+
+        $name=str_ireplace("d'aujourd' hui", "d'aujourd'hui", $name);
+        $name=str_ireplace("d' orgine", "d'orgine", $name);
+
         $name=str_ireplace("( ", "(", $name);
         $name=str_ireplace(") ", ")", $name);
 

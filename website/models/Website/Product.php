@@ -1007,13 +1007,13 @@ class Website_Product extends Object_Product {
 
 				 }
 				 
-				 $realisationObj = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+				 $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages);
 			    
 
 			}
 			
 		}
-		 Object_Abstract::setGetInheritedValues($inheritance); 
+		Object_Abstract::setGetInheritedValues($inheritance); 
 		return Zend_Json::encode($return);
 	}
 

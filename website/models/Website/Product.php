@@ -973,6 +973,51 @@ class Website_Product extends Object_Product {
 
 
 
+	public function getMage_realisationsJson() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+		$return = array();
+
+		$realisations =$this->getRealisations();
+
+		//print_r( $realisations);
+		$count=count($realisations);
+		$assetsArray=array();
+		for ($i=0; $i < $count; $i++) { 
+				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
+				$assetsArray[$i]=array();
+				foreach ($assets as $asset) {
+					$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+				}
+		}
+
+		//$count=count($assetsArray);
+		if($count>0) {
+			
+			for ($i=0; $i < $count; $i++) { 
+				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
+				 $arrayImages = array();
+
+				 if(count($assets)>0) {
+				 	$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+				 	foreach ($assets as $asset) {
+				    	$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				    }
+
+				 }
+				 
+				 $realisationObj = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+			    
+
+			}
+			
+		}
+		 Object_Abstract::setGetInheritedValues($inheritance); 
+		return Zend_Json::encode($return);
+	}
+
+
 	public function getMage_realisations() {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
@@ -1051,6 +1096,7 @@ class Website_Product extends Object_Product {
 		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 	}
+
 
 	public function getRelated($field,$onlyId=false) {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`

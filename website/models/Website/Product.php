@@ -363,11 +363,12 @@ class Website_Product extends Object_Product {
 			}
 								
 		}
-		 Object_Abstract::setGetInheritedValues($inheritance); 
+		$catalogue = $this->getCatalogue();
+		Object_Abstract::setGetInheritedValues($inheritance); 
 
 
 		if($isHTML) {
-			if(strtolower($this->getCatalogue())=="matieres" || strtolower($this->getCatalogue())=="matières") {
+			if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
 				$html ="<dl  class=\"dl-horizontal\">\n";
 				foreach ($caracteristiques as $key => $value) {
 					$html.= '<dt>';

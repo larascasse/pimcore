@@ -367,17 +367,33 @@ class Website_Product extends Object_Product {
 
 
 		if($isHTML) {
-			$html ="<ul>\n";
-			foreach ($caracteristiques as $key => $value) {
-				$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
-				$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-				$html.= '</div></div>';
-				$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
-				$html.= ucfirst(trim($value["content"]));
-				$html.= '</div>';
-				$html.="</li>\n";
+			if(strtolower($this->getCatalogue())=="matieres" || strtolower($this->getCatalogue())=="matières") {
+				$html ="<dl  class=\"dl-horizontal\">\n";
+				foreach ($caracteristiques as $key => $value) {
+					$html.= '<dt>';
+					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$html.= '</dt>';
+					$html.= '<dd>';
+					$html.= ucfirst(trim($value["content"]));
+					$html.= '</dd>';
+					//$html.="</li>\n";
+				}
+				$html .="</dl>\n";
 			}
-			$html .="</ul>\n";
+			else {
+				$html ="<ul>\n";
+				foreach ($caracteristiques as $key => $value) {
+					$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
+					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$html.= '</div></div>';
+					$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
+					$html.= ucfirst(trim($value["content"]));
+					$html.= '</div>';
+					$html.="</li>\n";
+				}
+				$html .="</ul>\n";
+			}
+			
 			return $html;
 
 		}

@@ -317,15 +317,15 @@ class Website_Product extends Object_Product {
 								if(count($explode)>1) {
 									if(count($caracteristiques)>0)
 										$currentRowTitle++;	
-									$caracteristiques[$currentRowTitle] = array("label"=>$explode[0],"content"=>$explode[1]);
+									$caracteristiques[$currentRowTitle] = array("label"=>trim($explode[0]),"content"=>trim($explode[1]);
 								}
 								elseif ($currentRowTitle==0) {
-									$caracteristiques[$currentRowTitle] = array("label"=>"","content"=>$item);
+									$caracteristiques[$currentRowTitle] = array("label"=>"","content"=>trim($item));
 									
 
 								}
 								else {
-									$caracteristiques[$currentRowTitle]["content"] .="<br />".$item;
+									$caracteristiques[$currentRowTitle]["content"] .="<br />".trim($item);
 								}
 								
 									

@@ -305,21 +305,30 @@ class Website_Product extends Object_Product {
 							continue;
 
 					if($attribute=="characteristics_others") {
+
 						$others = explode("\n",trim($attributeValue));
 					
 						if(count($others)>0) {
-							
+							$row = 0;
+							$currentRowTitle = 0; // pour les ligne sans titre, on ajoute a précedement
+							$contentWithoutTitle = array();
 							foreach ($others as $item) {
 								$explode = explode(":",$item);
 								if(count($explode)>1) {
-									$caracteristiques[] = array("label"=>$explode[0],"content"=>$explode[1]);
+									if(count($caracteristiques)>0)
+										$currentRowTitle++;	
+									$caracteristiques[$currentRowTitle] = array("label"=>$explode[0],"content"=>$explode[1]);
 								}
-								else {
-									$caracteristiques[] = array("label"=>"","content"=>$item);
+								elseif ($currentRowTitle==0) {
+									$caracteristiques[$currentRowTitle] = array("label"=>"","content"=>$item);
+									
 
 								}
+								else {
+									$caracteristiques[$currentRowTitle]["content"] .="<br />".$item;
+								}
 								
-										
+									
 							}
 							
 						}

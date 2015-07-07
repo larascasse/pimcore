@@ -380,7 +380,7 @@ class Website_Product extends Object_Product {
 				}
 				$html .="</dl>\n";
 			}
-			else {
+			else {
 				$html ="<ul>\n";
 				foreach ($caracteristiques as $key => $value) {
 					$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';

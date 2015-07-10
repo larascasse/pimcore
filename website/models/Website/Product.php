@@ -1051,7 +1051,8 @@ class Website_Product extends Object_Product {
 
 		$galleryImages =$this->getGallery();
 
-		foreach($galleryImages as $element) {
+		if(is_array($galleryImages)) {
+			foreach($galleryImages as $element) {
 			if($element instanceof Asset_Folder) {
 				$assets=Asset_Folder::getById($element->id)->getChilds();
 				$assetsArray[$i]=array();
@@ -1066,6 +1067,10 @@ class Website_Product extends Object_Product {
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return implode(";",$return);
+
+		}
+		return "";
+		
 
 	}
 

@@ -1057,11 +1057,11 @@ class Website_Product extends Object_Product {
 				$assets=Asset_Folder::getById($element->id)->getChilds();
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
-					$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+					$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
 				}
 			}
 			elseif($element instanceof Asset_Image) {
-				$return[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
+				$return[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath()."::realisation";
 			}
 		}
 

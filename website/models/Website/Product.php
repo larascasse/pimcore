@@ -1060,7 +1060,7 @@ class Website_Product extends Object_Product {
 					$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
 				}
 			}
-			else {
+			elseif($element instanceof Asset_Image) {
 				$return[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
 			}
 		}

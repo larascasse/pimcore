@@ -1043,6 +1043,67 @@ class Website_Product extends Object_Product {
 		return Zend_Json::encode($return);
 	}
 
+	public function getMage_mediagallery() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+		$return = array();
+
+		$galleryImages =$this->getGallery();
+
+		foreach($galleryImages as $element) {
+			if($element instanceof Asset_Folder) {
+
+			}
+			else {
+				$return[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
+			}
+		}
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return implode($return);
+
+		
+		//print_r( $galleryImages);
+		$count=count($galleryImages);
+		$assetsArray=array();
+		for ($i=0; $i < $count; $i++) { 
+
+				if($data instanceof Object_Taxonomy)
+				$assets=Asset_Folder::getById($galleryImages[$i]->id)->getChilds();
+				$assetsArray[$i]=array();
+				foreach ($assets as $asset) {
+					$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+				}
+		}
+
+		//$count=count($assetsArray);
+		if($count>0) {
+			
+			for ($i=0; $i < $count; $i++) { 
+				$assets=Asset_Folder::getById($galleryImages[$i]->id)->getChilds();
+				 $arrayImages = array();
+
+				 if(count($assets)>0) {
+				 	$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+				 	foreach ($assets as $asset) {
+				    	$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				    }
+
+				 }
+				 
+				 $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+			    
+
+			}
+			
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return implode($return);
+	}
+
+
+
 
 	public function getMage_realisations() {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 

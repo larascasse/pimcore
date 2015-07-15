@@ -2,8 +2,10 @@
     <?= $this->multihref("multihref"); ?>
 <?php } else { ?>
     <!-- you can iterate through the elements using directly the tag -->
+    
+    <?php 
     $arrayImages = array();
-    <?php foreach($this->multihref("multihref") as $element) { 
+    foreach($this->multihref("multihref") as $element) { 
     	
 		 if($element instanceof Asset_Folder) {
 
@@ -18,10 +20,10 @@
 		    $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation");
 		}
 
-        //Element_Service::getElementType($element); ?>: 
-        <?php //$element->getFullPath(); 
+        //Element_Service::getElementType($element); 
         ?>
         
     <?php } ?>
-    <?php print_r($arrayImages) ?>;
+    <?php //print_r($arrayImages) ?><br />
+    <textarea rows="20" cols="100"><?php echo implode('|',$arrayImages) ?></textarea>
 <?php } ?>

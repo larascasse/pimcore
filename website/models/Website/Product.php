@@ -304,6 +304,11 @@ class Website_Product extends Object_Product {
 					if(!$showEmptyAttribute && empty($attributeValue))
 							continue;
 
+					//Blooean on affiche oui
+					if($value->fieldtype=="checkbox" && $attributeValue==1) {
+						$attributeValue = "Oui";
+					}
+
 					if($attribute=="characteristics_others") {
 
 						$others = explode("\n",trim($attributeValue));

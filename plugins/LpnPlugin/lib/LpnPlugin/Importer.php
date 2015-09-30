@@ -877,7 +877,13 @@
 
             }
         }
-        $productArticle->save();
+
+        try {
+            $productArticle->save();
+        }
+        catch (Exception $e) {
+            echo $e->getMessage()."\n";
+        }
 
 
 
@@ -924,6 +930,10 @@
             $articleParent = null;
             //Pad d'object Parrent, on le cree
             $articleParent = $this->createArticle($product);
+            if(!is_object($articleParent)) {
+                echo 'Creation article parent impossoble '.$product["ean"]."skip\n";
+                return;
+            }
 
         }
         else {
@@ -1092,10 +1102,10 @@
             try {
                 $object->save();
                 if ($isUpdating) {
-                     echo "\nrow ".$job." updated ".$objectKey." / ".$object->getFullPath()."\n";
+                     echo "row ".$job." updated ".$objectKey." / ".$object->getFullPath()."\n";
                 }
                 else {
-                    echo "\nrow ".$job." inserted ".$objectKey." / ".$object->getFullPath()."\n";
+                    echo "row ".$job." inserted ".$objectKey." / ".$object->getFullPath()."\n";
                     print_r($product);
                 }
 

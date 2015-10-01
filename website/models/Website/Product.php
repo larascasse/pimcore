@@ -270,8 +270,9 @@ class Website_Product extends Object_Product {
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
 
-		if(strlen($this->getDimensionsStringExtended())>0)
-			$caracteristiques[] = array("label"=>"Dimensions","content"=>$this->getDimensionsStringExtended());
+		$dimentionsStringExtended = $this->getDimensionsStringExtended();
+		if(strlen($dimentionsStringExtended)>0)
+			$caracteristiques[] = array("label"=>"Dimensions","content"=>$dimentionsStringExtended);
 
 		
 
@@ -309,10 +310,11 @@ class Website_Product extends Object_Product {
 						$attributeValue = "Oui";
 					}
 
+
 					if($attribute=="characteristics_others") {
 
 						$others = explode("\n",trim($attributeValue));
-					
+						$caracteristiquesOthers=array();
 						if(count($others)>0) {
 							$row = 0;
 							$currentRowTitle = 0; // pour les ligne sans titre, on ajoute a précedement
@@ -320,22 +322,27 @@ class Website_Product extends Object_Product {
 							foreach ($others as $item) {
 								$explode = explode(":",$item);
 								if(count($explode)>1) {
-									if(count($caracteristiques)>0)
+									if(count($caracteristiquesOthers)>0)
 										$currentRowTitle++;	
-									$caracteristiques[$currentRowTitle] = array("label"=>trim($explode[0]),"content"=>trim($explode[1]));
+									$caracteristiquesOthers[$currentRowTitle] = array("label"=>trim($explode[0]),"content"=>trim($explode[1]));
 								}
 								elseif ($currentRowTitle==0) {
-									$caracteristiques[$currentRowTitle] = array("label"=>"","content"=>trim($item));
+									$caracteristiquesOthers[$currentRowTitle] = array("label"=>"","content"=>trim($item));
 									
 
 								}
 								else {
-									$caracteristiques[$currentRowTitle]["content"] .="<br />".trim($item);
+									$caracteristiquesOthers[$currentRowTitle]["content"] .="<br />".trim($item);
 								}
 								
 									
 							}
 							
+						}
+						if(count($caracteristiquesOthers)>0) {
+							foreach ($caracteristiquesOthers as $keyOthers => $valueOther) {
+								$caracteristiques[] = $valueOther;
+							}
 						}
 						
 
@@ -818,7 +825,7 @@ class Website_Product extends Object_Product {
 	public function getDimensionsStringExtended() {
 		$childrens = $this->getChilds();
 		$varationString =array();
-
+		
 		if(strlen($value=$this->getEpaisseur_txt())>0) {
 			$varationString[]=$value;
 		}
@@ -852,7 +859,7 @@ class Website_Product extends Object_Product {
 		if($this->getConditionnement())
 			$varationString[]=$this->getConditionnement();
 		
-		return count($varationString)>0?implode($varationString,"<br />"):"";
+		return count($varationString)>0?implode("<br />",$varationString):"";
 	}
 
 

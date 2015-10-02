@@ -768,7 +768,10 @@ class Website_Product extends Object_Product {
 				}
 			}
 
-			if(count($childsDimension)>0) {
+			if(count($childsDimension)==2) {
+				$varationString= self::getFormatedDimension(implode(" ou ",$childsDimension),$prefix,$suffix,false);
+			}
+			else if(count($childsDimension)>0) {
 				$varationString= self::getFormatedDimension(implode("/",$childsDimension),$prefix,$suffix,false);
 			}
 		}

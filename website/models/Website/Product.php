@@ -707,6 +707,9 @@ class Website_Product extends Object_Product {
         if(strpos($value,"/")>0 && strlen($suffix)>0) {
         	$value.=$suffix;
         }
+        if(strpos($value," ou ")>0 && strlen($suffix)>0) {
+        	$value.=$suffix;
+        }
         //echo "<br /> /--".$value."--/------";
         if(strlen($prefix)>0) {
         	$value= $prefix.": ".$value;

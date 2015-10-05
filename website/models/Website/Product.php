@@ -1109,7 +1109,9 @@ class Website_Product extends Object_Product {
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
-					$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+					if($asset instanceof Asset_Image) {
+						$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+					}
 				}
 		}
 

@@ -1032,7 +1032,9 @@ class Website_Product extends Object_Product {
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
-					$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+					if($asset instanceof Asset_Image) {
+						$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
+					}
 				}
 		}
 
@@ -1046,7 +1048,9 @@ class Website_Product extends Object_Product {
 				 if(count($assets)>0) {
 				 	$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
 				 	foreach ($assets as $asset) {
-				    	$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				 		if($asset instanceof Asset_Image) {
+				    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				    	}
 				    }
 
 				 }
@@ -1075,7 +1079,9 @@ class Website_Product extends Object_Product {
 				$assets=Asset_Folder::getById($element->id)->getChilds();
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
-					$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
+					if($asset instanceof Asset_Image) {
+						$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
+					}
 				}
 			}
 			elseif($element instanceof Asset_Image) {

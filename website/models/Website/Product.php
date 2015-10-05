@@ -1045,17 +1045,20 @@ class Website_Product extends Object_Product {
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				 $arrayImages = array();
 
-				 if(count($assets)>0) {
+				 if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
+				 
 				 	$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+				 
 				 	foreach ($assets as $asset) {
 				 		if($asset instanceof Asset_Image) {
 				    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
 				    	}
 				    }
+				    $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages);
 
 				 }
 				 
-				 $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+				
 			    
 
 			}

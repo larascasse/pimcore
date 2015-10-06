@@ -1145,11 +1145,12 @@ class Website_Product extends Object_Product {
 				 $arrayImages = array();
 				   
 			    foreach ($assetsArray[$i] as $asset) {
-			    	$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+			    	if($asset instanceof Asset_Image) 
+			    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
 			    }
 
-
-				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+			    if($asset instanceof Asset_Image) 
+					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
 
 				if(count($arrayImages)>0) {
 					$zooms = array_merge(array($urlImage),$arrayImages);
@@ -1158,21 +1159,22 @@ class Website_Product extends Object_Product {
 				else
 				    $datazoom = $urlImage;
 
-				
-				$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
-							<div class="nsg_container">
-								<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
-		                		<div class="nsg_abs">';
-		        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
-									<div class="realisationtitle">'.$this->getMage_short_name().'</div>
-									<div class="realisationcontent">'.$this->getName().'</div>-->
-									<div class="realisationtitle"></div>
-									<div class="realisationcontent"></div>
-								</div>';*/
-		                    
-		           $str .= '      	</div>
-		           			</div>
-	            		</li>';
+				if($asset instanceof Asset_Image)  {
+					$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
+								<div class="nsg_container">
+									<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
+			                		<div class="nsg_abs">';
+			        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
+										<div class="realisationtitle">'.$this->getMage_short_name().'</div>
+										<div class="realisationcontent">'.$this->getName().'</div>-->
+										<div class="realisationtitle"></div>
+										<div class="realisationcontent"></div>
+									</div>';*/
+			                    
+			           $str .= '      	</div>
+			           			</div>
+		            		</li>';
+		            }
 	            $index++;
 			}
 			$str.="</ul>";

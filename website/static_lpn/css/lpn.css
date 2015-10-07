@@ -208,7 +208,15 @@ body { padding-top: 50px; }
   margin-top:20px;
   left: 0;
 
+
 }
+
+.product-detail #myCarousel.carousel, .product-detail #myCarousel .item {
+  height: 600px;
+
+}
+
+
 .product-detail #myCarousel .carousel-inner > .item > img {
   height: auto;
 }

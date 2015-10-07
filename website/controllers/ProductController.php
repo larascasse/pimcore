@@ -125,9 +125,9 @@ class ProductController extends Website_Controller_Action
         //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
 
         $conditionFilters = array(
-                "name LIKE '%" . $query . "%'",
+                "LOWER(name) LIKE LOWER('%" . $query . "%')",
                 "lENGTH(code)>0",
-                "ean is NULL"
+                "(ean is NULL or lENGTH(ean)=0)"
 
             );
 
@@ -136,6 +136,8 @@ class ProductController extends Website_Controller_Action
 
         $condition .= " OR ean LIKE '" . $query . "%'";
         $productList->setCondition($condition);
+        $productList->setLimit(30);
+
 
 
 

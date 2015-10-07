@@ -395,7 +395,7 @@ echo $content;
 
     public function searchAction () {
         $this->view->layout()->setLayout("layout-search");
-        if ($this->getParam("q")) {
+        /*if ($this->getParam("q")) {
             try {
                 $page = $this->getParam('page');
                 if (empty($page)) {
@@ -417,7 +417,7 @@ echo $content;
                 Logger::err($e);
                 echo $e->getMessage();exit;
             }
-        }
+        }*/
     }
 
 

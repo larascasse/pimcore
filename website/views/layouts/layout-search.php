@@ -3,35 +3,6 @@
 <head>
     <meta charset="utf-8">
 
-    <?php
-        // portal detection => portal needs an adapted version of the layout
-        $isPortal = false;
-        if($this->getParam("controller") == "content" && $this->getParam("action") == "portal") {
-            $isPortal = true;
-        }
-
-        // output the collected meta-data
-        if(!$this->document) {
-            // use "home" document as default if no document is present
-            $this->document = Document::getById(1);
-        }
-
-        if($this->document->getTitle()) {
-            // use the manually set title if available
-            $this->headTitle()->set($this->document->getTitle());
-        }
-
-        if($this->document->getDescription()) {
-            // use the manually set description if available
-            $this->headMeta()->appendName('description', $this->document->getDescription());
-        }
-
-        //$this->headTitle()->append("pimcore Demo");
-        $this->headTitle()->setSeparator(" : ");
-
-        echo $this->headTitle();
-        echo $this->headMeta();
-    ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="vspiOogrzIcUVBbVJByK4IT4qHpr_Ts089uOQW5ZoyA" />
@@ -42,7 +13,6 @@
 
     <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
-    <?php echo $this->headLink(); ?>
 
     <?php if($this->editmode) { ?>
         <link href="/website/static/css/editmode.css?_dc=<?php echo time(); ?>" rel="stylesheet">
@@ -76,7 +46,7 @@
 
 <?php
     // include a document-snippet - in this case the footer document
-    echo $this->inc("/" . $this->language . "/shared/includes/footer");
+    //echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
 
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>

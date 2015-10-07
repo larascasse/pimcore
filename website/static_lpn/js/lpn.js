@@ -5,16 +5,15 @@ $(document).ready(function() {
     }
 
 
-var products = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  limit: 30,
-  //prefetch: '../data/films/post_1960.json',
-   remote: {
-    url: '/ajax/autocompleteList/%QUERY',
-        wildcard: '%QUERY'
-      }
-});
+    var products = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.whitespace,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      //prefetch: '../data/films/post_1960.json',
+       remote: {
+        url: '/ajax/autocompleteList/%QUERY',
+            wildcard: '%QUERY'
+          }
+    });
 
 
 $('.typeahead').typeahead(
@@ -34,39 +33,6 @@ $('.typeahead').typeahead(
             console.log(datum.link);
             window.document.location = datum.link;
         });
-
-
-//var compiledTemplate = Hogan.compile('<p class="title">{{name}}</p><p class="short">{{short}}</p>');
-	
-	$('.typeahead___').typeahead(
-
-        {
-            highlight : true,
-
-        }
-        ,
-  {
-    limit: 10,
-    valueKey: 'name',
-    name: 'autocomplete_product',
-    //remote: '/ajax/autocompleteList/%QUERY',
-     source : products,
-    templates: {
-        suggestion: function(data) { // data is an object as returned by suggestion engine
-            return '<div class="tt-suggest-page">' + data.value + '</div>';
-        }
-    }
-    //template: '<p class="title">{{name}}</p><p class="short">{{short}}</p>',
-    //engine: Hogan,
-
-  }
-).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
-            console.log(datum.link);
-            window.document.location = datum.link;
-        });;
-
-    
-
 
 
 });

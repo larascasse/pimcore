@@ -141,7 +141,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 <div class="col-md-12">
 		<hr />
-    	<h3>Images</h3>
+    	<h3>Images Produits</h3>
         <?php for($i=1; $i<=3; $i++) { ?>
             <?php
                 $image = $this->product->{"getImage_" . $i}();
@@ -157,17 +157,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
     </div>
 
 
-<div class="row">
 
-	<div class="caracteristiques col-md-8">
-	<?php echo nl2br($this->product->getMage_description()); ?>
-	</div>
-	<div class="caracteristiques col-md-4">
-	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
-	<?php echo nl2br($this->product->getMage_lesplus()); ?>
-	</div>
-
-</div>
 
 
 
@@ -189,6 +179,8 @@ for ($i=0; $i < $count; $i++) {
 
 $count=count($assetsArray);
 if($count>0) {
+	echo '<hr /><h3>Réalisation</h3><br /><br />';
+
 	echo '<div id="myCarousel2" class="carousel slide">';
 	echo '<ol class="carousel-indicators">
         <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
@@ -222,6 +214,19 @@ if($count>0) {
  ?>
 
 </div>
+</div>
+
+
+<div class="row">
+
+	<div class="caracteristiques col-md-8">
+	<?php echo nl2br($this->product->getMage_description()); ?>
+	</div>
+	<div class="caracteristiques col-md-4">
+	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
+	<?php echo nl2br($this->product->getMage_lesplus()); ?>
+	</div>
+
 </div>
 
 

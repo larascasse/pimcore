@@ -8,6 +8,7 @@ $(document).ready(function() {
 var products = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
+  limit: 30,
   //prefetch: '../data/films/post_1960.json',
    remote: {
     url: '/ajax/autocompleteList/%QUERY',

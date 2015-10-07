@@ -179,9 +179,10 @@
 
 <script src="/website/static/lib/projekktor/projekktor-1.2.25r232.min.js"></script>
 <script src="/website/static/lib/magnific/magnific.js"></script>
-
+<!--
         <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
         <script src="/website/static_lpn/js/dymo.js"></script>
+-->
 <script>
 
     // main menu

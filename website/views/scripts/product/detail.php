@@ -1,9 +1,13 @@
+
 <?php 
-$this->document->setProperty("leftNavHide","bool",true);
-$this->layout()->setLayout("layout-lpn"); 
 
 
-$relatedProducts = $this->product->getRelated("relatedProducts");;;
+//$this->document->setProperty("leftNavHide","bool",true);
+//$this->layout()->setLayout("layout-lpn"); 
+
+
+$relatedProducts = $this->product->getRelated("relatedProducts");
+
 	$associatedArticles = $this->product->getRelated("associatedArticles");
 	$relatedAccessories = $this->product->getRelated("relatedAccessories");
 	$caracteristiques = $this->product->getCharacteristicsFo();
@@ -11,6 +15,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");;;
 
 	$childrens = $this->product->getChilds();
 	$lesplus = $this->product->getLesPlusArray();
+
 
 ?>
 

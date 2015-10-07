@@ -18,12 +18,7 @@ var products = new Bloodhound({
 
 
 $('.typeahead').typeahead(
-    {
-  hint: true,
-  highlight: true,
-  minLength: 1,
-
-}
+   null
 , {
   name: 'best-pictures',
  display: 'name',
@@ -32,8 +27,9 @@ $('.typeahead').typeahead(
             return '<div class="tt-suggest-page"><p class="title">' + data.name + '</p><p class="short">'+data.short+'</p></div>';
         }
     },
-  source: products,
-  limit: 30
+    limit: 30,
+  source: products
+  
 }).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
             console.log(datum.link);
             window.document.location = datum.link;

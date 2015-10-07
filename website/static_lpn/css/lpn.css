@@ -156,6 +156,43 @@ body { padding-top: 50px; }
   font-size : 12px;
 }
 
+
+#main-search {
+  width:100%;
+  display:block;
+  text-align:center;
+}
+
+#main-search .header-image {
+  margin-bottom: 50px;
+  width:658px;
+  height: 207px;
+}
+#main-search .search {
+  padding:10px;
+  border:1px solid #CCCCCC;
+}
+
+#main-search .typeahead {
+  width:638px;
+  background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw%3D%3D);
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+  position: absolute;
+  z-index: 6;
+  left: 0px;
+  outline: none;
+  background-position: initial initial;
+  background-repeat: initial initial;
+  box-shadow:none;
+
+
+}
+
+
 .product-detail .page-header {
   margin-top:0px;
 

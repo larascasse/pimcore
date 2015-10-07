@@ -1,17 +1,18 @@
 
 <?php if(!$this->getParam("q")) { ?>
-    <?php $this->template("/content/default.php"); ?>
+    <?php //$this->template("/content/default.php"); ?>
 <?php } else { ?>
-    <?php $this->template("/includes/content-headline.php"); ?>
+    <?php //$this->template("/includes/content-headline.php"); ?>
 <?php } ?>
 
-<div>
+<div id="main-search">
+<img src="http://pim.laparqueterienouvelle.fr/website/var/assets/lpn/content/header/lpn_header_6.jpg" height="237" width="658" class="header-image"/>
 
     <form class="form-inline" role="form">
-        <div class="form-group">
-            <input type="text" name="q" class="form-control typeahead" placeholder="<?php echo $this->translate("Keyword"); ?>">
+        <div class="form-group search">
+            <input type="text" name="q" class="form-control typeahead" placeholder="<?php echo $this->translate("Rechercher ..."); ?>">
         </div>
-        <button type="submit" name="submit" class="btn btn-default"><?php echo $this->translate("Search"); ?></button>
+        <!--<button type="submit" name="submit" class="btn btn-default"><?php echo $this->translate("Search"); ?></button>-->
     </form>
 
     <?php if ($this->paginator) { ?>
@@ -69,7 +70,7 @@
         </div>
     <?php } else { ?>
         <div>
-            Type your keyword and press search
+            <!--Type your keyword and press search-->
         </div>
     <?php } ?>
 </div>

@@ -139,6 +139,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 </div> <!-- row -->
 
+<div class="row">
 <div class="col-md-12">
 		<hr />
     	<h3>Images Produits</h3>
@@ -155,6 +156,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
             <?php } ?>
         <?php } ?>
     </div>
+</div>
 
 
 

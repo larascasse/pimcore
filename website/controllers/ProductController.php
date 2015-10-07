@@ -151,7 +151,8 @@ class ProductController extends Website_Controller_Action
             $name = trim(substr($product->getName(),0,150));
             //$name = $this->highlightWords($name,array($this->getParam("query")));
             //$name = htmlspecialchars($name);
-            $desc = strlen($product->getShort_description())>0?$product->getShort_description():"";
+            //$desc = strlen($product->getShort_description())>0?$product->getShort_description():"";
+            $desc = $product->getCode()." ".$product->getDimensionsString();
             $products[]= array("name"=>$name,"code"=>$product->getCode(),"short"=>$desc,"link"=>$detailLink);
 
             

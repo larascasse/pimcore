@@ -151,7 +151,9 @@ body { padding-top: 50px; }
 }
 
 .tt-suggestion p.title {
-  font-weight: bold;
+  /*font-weight: bold;*/
+  font-size : 18px;
+  padding-bottom: 5px 0;
 }
 
 .tt-suggestion p.short {

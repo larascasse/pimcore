@@ -92,7 +92,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
  <!-- Fin product Caroussel -->  
 
 <!-- Product Header -->
-<div class="col-md-8">
+<div class="col-md-6">
 
     <div class="page-header">
         <div class="lead">
@@ -103,7 +103,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
     </div>
 </div>
 
-<div class="col-md-8">
+<div class="col-md-6">
 
     <div class="page-header">
        
@@ -139,36 +139,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 </div> <!-- row -->
 
-<div class="row">
-
-	<div class="caracteristiques col-md-8">
-	<?php echo nl2br($this->product->getMage_description()); ?>
-	</div>
-	<div class="caracteristiques col-md-4">
-	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
-	<?php echo nl2br($this->product->getMage_lesplus()); ?>
-	</div>
-
-</div>
-
-<div class="row">
-
-	<div class="caracteristiques col-md-6">
-		<hr />
-	     <h3>Caractéristiques</h3>
-	     <?php echo $this->product->getCharacteristics()?>
-	     <?php
-		echo "<p>";
-		foreach ($caracteristiques as $caracteristique) { 
-				$string =  $caracteristique["label"]!="Divers"?$caracteristique["label"]." : ":"";       
-				$string .= ($caracteristique["label"]!="Divers"?$caracteristique["content"]:nl2br($caracteristique["content"]))."<br />";
-				echo $string;
-			}
-		echo "</p>";
-		?>
-	</div>
-
-	<div class="col-md-6">
+<div class="col-md-12">
 		<hr />
     	<h3>Images</h3>
         <?php for($i=1; $i<=3; $i++) { ?>
@@ -184,7 +155,20 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
             <?php } ?>
         <?php } ?>
     </div>
+
+
+<div class="row">
+
+	<div class="caracteristiques col-md-8">
+	<?php echo nl2br($this->product->getMage_description()); ?>
+	</div>
+	<div class="caracteristiques col-md-4">
+	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
+	<?php echo nl2br($this->product->getMage_lesplus()); ?>
+	</div>
+
 </div>
+
 
 
 <div class="row">
@@ -239,6 +223,29 @@ if($count>0) {
 
 </div>
 </div>
+
+
+<div class="row">
+
+	<div class="caracteristiques col-md-12">
+		<hr />
+	     <h3>Caractéristiques</h3>
+	     <?php echo $this->product->getCharacteristics()?>
+	     <?php
+		echo "<p>";
+		foreach ($caracteristiques as $caracteristique) { 
+				$string =  $caracteristique["label"]!="Divers"?$caracteristique["label"]." : ":"";       
+				$string .= ($caracteristique["label"]!="Divers"?$caracteristique["content"]:nl2br($caracteristique["content"]))."<br />";
+				echo $string;
+			}
+		echo "</p>";
+		?>
+	</div>
+
+	
+</div>
+
+
 
 	
 

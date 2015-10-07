@@ -163,9 +163,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 
 
-<div class="row">
-<!-- Product Carousel -->
-<div class="col-md-12">
+
  <?php 
 $realisations =$this->product->getRealisations();
 
@@ -181,7 +179,13 @@ for ($i=0; $i < $count; $i++) {
 
 $count=count($assetsArray);
 if($count>0) {
-	echo '<hr /><h3>Réalisation</h3><br /><br />';
+	echo '
+<!-- Product Carousel -->
+<div class="row">
+<div class="col-md-12"><hr /><h3>Réalisation</h3><br /></div>
+</div>
+<div class="row">
+<div class="col-md-12">';
 
 	echo '<div id="myCarousel2" class="carousel slide">';
 	echo '<ol class="carousel-indicators">
@@ -211,12 +215,12 @@ if($count>0) {
 	echo '</div>';
 	echo '<a class="left carousel-control" href="#myCarousel2" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#myCarousel2" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>';
-	echo '</div>';
+	echo '</div></div>
+</div>';
 }
  ?>
 
-</div>
-</div>
+
 
 
 <div class="row">

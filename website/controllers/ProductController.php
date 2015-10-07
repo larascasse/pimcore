@@ -136,7 +136,7 @@ class ProductController extends Website_Controller_Action
 
         $condition .= " OR ean LIKE '" . $query . "%'";
         $productList->setCondition($condition);
-        $productList->setLimit(30);
+        $productList->setLimit(15);
 
 
 

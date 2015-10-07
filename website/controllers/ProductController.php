@@ -131,7 +131,7 @@ class ProductController extends Website_Controller_Action
             $detailLink=$router->assemble(array('id' => $product->getId(),'text'=>$product->getName()));
              
 
-            $name = trim(substr($product->getName(),0,60));
+            $name = trim(substr($product->getName(),0,150));
             //$name = $this->highlightWords($name,array($this->getParam("query")));
             //$name = htmlspecialchars($name);
             $desc = strlen($product->getShort_description())>0?$product->getShort_description():"";

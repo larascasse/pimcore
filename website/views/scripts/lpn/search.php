@@ -9,7 +9,7 @@
 
     <form class="form-inline" role="form">
         <div class="form-group">
-            <input type="text" name="q" class="form-control" placeholder="<?php echo $this->translate("Keyword"); ?>">
+            <input type="text" name="q" class="form-control typeahead" placeholder="<?php echo $this->translate("Keyword"); ?>">
         </div>
         <button type="submit" name="submit" class="btn btn-default"><?php echo $this->translate("Search"); ?></button>
     </form>

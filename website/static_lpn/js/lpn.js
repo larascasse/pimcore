@@ -1,23 +1,61 @@
 $(document).ready(function() {
-
+    console.log("DOCU READY",$('.typeahead').typeahead,Bloodhound);
     if(jQuery('#carte').height() > 1) {
         affichePlan(jQuery('#carte').data( 'showroom' ));
     }
 
 
+var products = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  //prefetch: '../data/films/post_1960.json',
+   remote: {
+    url: '/ajax/autocompleteList/%QUERY',
+        wildcard: '%QUERY'
+      }
+});
+
+
+$('.typeahead').typeahead(null, {
+  name: 'best-pictures',
+ display: 'name',
+ templates: {
+        suggestion: function(data) { // data is an object as returned by suggestion engine
+            return '<div class="tt-suggest-page"><p class="title">' + data.name + '</p><p class="short">'+data.short+'</p></div>';
+        }
+    },
+  source: products
+}).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
+            console.log(datum.link);
+            window.document.location = datum.link;
+        });
+
+
+//var compiledTemplate = Hogan.compile('<p class="title">{{name}}</p><p class="short">{{short}}</p>');
 	
-	$('.typeahead').typeahead([
+	$('.typeahead___').typeahead(
+
+        {
+            highlight : true,
+
+        }
+        ,
   {
     limit: 10,
     valueKey: 'name',
     name: 'autocomplete_product',
-    remote: '/ajax/autocompleteList/%QUERY',
-    /*prefetch: '../data/films/post_1960.json',*/
-    template: '<p class="title">{{name}}</p><p class="short">{{short}}</p>',
-    engine: Hogan,
+    //remote: '/ajax/autocompleteList/%QUERY',
+     source : products,
+    templates: {
+        suggestion: function(data) { // data is an object as returned by suggestion engine
+            return '<div class="tt-suggest-page">' + data.value + '</div>';
+        }
+    }
+    //template: '<p class="title">{{name}}</p><p class="short">{{short}}</p>',
+    //engine: Hogan,
 
   }
-]).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
+).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
             console.log(datum.link);
             window.document.location = datum.link;
         });;

@@ -231,8 +231,7 @@
     });
     <?php } ?>
 </script>
-<script src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
-<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
 
 

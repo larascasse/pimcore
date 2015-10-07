@@ -393,4 +393,32 @@ echo $content;
     exit;
 }
 
+    public function searchAction () {
+        $this->view->layout()->setLayout("layout-search");
+        if ($this->getParam("q")) {
+            try {
+                $page = $this->getParam('page');
+                if (empty($page)) {
+                    $page = 1;
+                }
+                $perPage = 10;
+
+                $result = Pimcore_Google_Cse::search($this->getParam("q"), (($page - 1) * $perPage), null, [
+                    "cx" => "002859715628130885299:baocppu9mii"
+                ], $this->getParam("facet"));
+
+                $paginator = Zend_Paginator::factory($result);
+                $paginator->setCurrentPageNumber($page);
+                $paginator->setItemCountPerPage($perPage);
+                $this->view->paginator = $paginator;
+                $this->view->result = $result;
+            } catch (Exception $e) {
+                // something went wrong: eg. limit exceeded, wrong configuration, ...
+                Logger::err($e);
+                echo $e->getMessage();exit;
+            }
+        }
+    }
+
+
 }

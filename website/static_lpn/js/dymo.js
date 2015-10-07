@@ -83,9 +83,12 @@ function printLabel(print) {
 
    // if(productName)
     //  record.setText("Nom",productName);
-    label.setObjectText("Nom",productName);
+    if(typeof(productName) !='undefined') {
+      label.setObjectText("Nom",productName);
     label.setObjectText("Description",productDescription);
     label.setObjectText("TEXTE",productChars);
+    }
+    
    // alert(productChars)
 
     

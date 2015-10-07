@@ -394,6 +394,8 @@ echo $content;
 }
 
     public function searchAction () {
+        
+        $this->enableLayout();
         $this->view->layout()->setLayout("layout-search");
         /*if ($this->getParam("q")) {
             try {

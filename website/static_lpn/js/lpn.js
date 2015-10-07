@@ -10,7 +10,7 @@ $(document).ready(function() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       //prefetch: '../data/films/post_1960.json',
        remote: {
-        url: '/ajax/autocompleteList/%QUERY',
+        url: 'http://pim.laparqueterienouvelle.fr/ajax/autocompleteList/%QUERY',
             wildcard: '%QUERY'
           }
     });

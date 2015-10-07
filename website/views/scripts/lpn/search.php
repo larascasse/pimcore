@@ -1,4 +1,4 @@
-
+<?php $this->layout()->setLayout("layout-search"); ?>
 <?php if(!$this->getParam("q")) { ?>
     <?php //$this->template("/content/default.php"); ?>
 <?php } else { ?>

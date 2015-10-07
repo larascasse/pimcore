@@ -17,7 +17,14 @@ var products = new Bloodhound({
 });
 
 
-$('.typeahead').typeahead(null, {
+$('.typeahead').typeahead(
+    {
+  hint: true,
+  highlight: true,
+  minLength: 1,
+  limit: 30,
+}
+, {
   name: 'best-pictures',
  display: 'name',
  templates: {

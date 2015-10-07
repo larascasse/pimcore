@@ -2,8 +2,8 @@
 <?php 
 
 
-//$this->document->setProperty("leftNavHide","bool",true);
-//$this->layout()->setLayout("layout-lpn"); 
+$this->document->setProperty("leftNavHide","bool",true);
+$this->layout()->setLayout("layout-lpn"); 
 
 
 $relatedProducts = $this->product->getRelated("relatedProducts");

@@ -33,7 +33,7 @@
             echo $this->headMeta();
         
         } catch (Exception $e) {
-            //Bug si ce n'est pas un document !!
+            //Bug si ce n'est pas un document !! (ex produit)
         }
     ?>
 

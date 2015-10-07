@@ -23,6 +23,7 @@ $('.typeahead').typeahead(
  display: 'name',
  templates: {
         suggestion: function(data) { // data is an object as returned by suggestion engine
+            console.log('loaded'+data.name+" "+data.id);
             return '<div class="tt-suggest-page"><p class="title">' + data.name + '</p><p class="short">'+data.short+'</p></div>';
         }
     },

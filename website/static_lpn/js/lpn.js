@@ -22,7 +22,7 @@ $('.typeahead').typeahead(
   hint: true,
   highlight: true,
   minLength: 1,
-  limit: 30,
+
 }
 , {
   name: 'best-pictures',
@@ -32,7 +32,8 @@ $('.typeahead').typeahead(
             return '<div class="tt-suggest-page"><p class="title">' + data.name + '</p><p class="short">'+data.short+'</p></div>';
         }
     },
-  source: products
+  source: products,
+  limit: 30
 }).on('typeahead:selected typeahead:autocompleted', function(e, datum) {
             console.log(datum.link);
             window.document.location = datum.link;

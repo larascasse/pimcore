@@ -117,11 +117,15 @@ class ProductController extends Website_Controller_Action
     public function autocompleteListAjax($query) {
         // get a list of news objects and order them by date
         $productList = new Object_Product_List();
-        $conditionFilters = array("lENGTH(code)>0","ean is NULL");
+        //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
 
-        $conditionFilters = array("name LIKE '%" . $query . "%'");
+        $conditionFilters = array(
+                "name LIKE '%" . $query . "%'",
+                "lENGTH(code)>0",
+                "ean is NULL"
 
-                $productList->setCondition(implode(" AND ", $conditionFilters));
+            );
+        $productList->setCondition(implode(" AND ", $conditionFilters));
 
 
         $productList->load();

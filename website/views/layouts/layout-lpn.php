@@ -9,28 +9,32 @@
         if($this->getParam("controller") == "content" && $this->getParam("action") == "portal") {
             $isPortal = true;
         }
+        try {
+            // output the collected meta-data
+            if(!$this->document) {
+                // use "home" document as default if no document is present
+                $this->document = Document::getById(1);
+            }
 
-        // output the collected meta-data
-        if(!$this->document) {
-            // use "home" document as default if no document is present
-            $this->document = Document::getById(1);
+            if($this->document->getTitle()) {
+                // use the manually set title if available
+                $this->headTitle()->set($this->document->getTitle());
+            }
+
+            if($this->document->getDescription()) {
+                // use the manually set description if available
+                $this->headMeta()->appendName('description', $this->document->getDescription());
+            }
+
+            //$this->headTitle()->append("pimcore Demo");
+            $this->headTitle()->setSeparator(" : ");
+
+            echo $this->headTitle();
+            echo $this->headMeta();
+        
+        } catch (Exception $e) {
+            //Bug si ce n'est pas un document !!
         }
-
-        if($this->document->getTitle()) {
-            // use the manually set title if available
-            $this->headTitle()->set($this->document->getTitle());
-        }
-
-        if($this->document->getDescription()) {
-            // use the manually set description if available
-            $this->headMeta()->appendName('description', $this->document->getDescription());
-        }
-
-        //$this->headTitle()->append("pimcore Demo");
-        $this->headTitle()->setSeparator(" : ");
-
-        echo $this->headTitle();
-        echo $this->headMeta();
     ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -130,7 +130,13 @@ class ProductController extends Website_Controller_Action
                 "ean is NULL"
 
             );
-        $productList->setCondition(implode(" AND ", $conditionFilters));
+
+
+        $condition = "(".implode(" AND ", $conditionFilters).")";
+
+        $condition .= " OR ean LIKE '" . $query . "%'";
+        $productList->setCondition($condition);
+
 
 
         $productList->load();

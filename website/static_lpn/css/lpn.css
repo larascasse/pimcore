@@ -202,16 +202,20 @@ body { padding-top: 50px; }
 
 }
 
-.product-detail .carousel {
+.product-detail #myCarousel.carousel {
   position: relative !important;
   /*top:100px;*/
   margin-top:20px;
   left: 0;
-  height:800px;
+
+}
+.product-detail #myCarousel .carousel-inner > .item > img {
+  height: auto;
 }
 
+
 #myCarousel2.carousel .item, #myCarousel2 .carousel-inner > .item > img, #myCarousel2.carousel {
-  height:auto !important;
+  height:600px !important;;
 }
 
 .product-detail h1 {

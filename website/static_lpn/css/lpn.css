@@ -211,7 +211,7 @@ body { padding-top: 50px; }
 }
 
 #myCarousel2.carousel .item, #myCarousel2 .carousel-inner > .item > img, #myCarousel2.carousel {
-  height:800px !important;;
+  height:auto !important;
 }
 
 .product-detail h1 {

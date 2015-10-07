@@ -210,7 +210,7 @@ body { padding-top: 50px; }
 }
 
 #myCarousel2.carousel .item, #myCarousel2 .carousel-inner > .item > img, #myCarousel2.carousel {
-  height:600px !important;;
+  height:800px !important;;
 }
 
 .product-detail h1 {
@@ -223,6 +223,10 @@ body { padding-top: 50px; }
 
 .product-detail h3 {
   font-size:18px;
+}
+
+.product-detail  .caracteristiques a{
+    font-size:18px;
 }
 
 h2 {

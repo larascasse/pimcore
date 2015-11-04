@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2015-11-04T16:18:42+01:00 */
+/** Generated at 2015-11-04T16:36:27+01:00 */
 
 /**
 * Inheritance: yes
@@ -109,8 +109,8 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByFiche_technique_orginale ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByRe_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCs_skus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByPimonly_category_entretien ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPimonly_category_pose ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_category_entretien ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByAssociatedArticles ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByOrigineArticles ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMeta_title ($value, $limit = 0) 
@@ -239,8 +239,8 @@ public $fiche_technique_lpn;
 public $fiche_technique_orginale;
 public $re_skus;
 public $cs_skus;
-public $pimonly_category_entretien;
 public $pimonly_category_pose;
+public $pimonly_category_entretien;
 public $associatedArticles;
 public $origineArticles;
 public $meta_title;
@@ -2726,6 +2726,32 @@ public function setCs_skus ($cs_skus) {
 }
 
 /**
+* Get pimonly_category_pose - pimonly_category_pose
+* @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
+*/
+public function getPimonly_category_pose () {
+	$preValue = $this->preGetValue("pimonly_category_pose"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_category_pose")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_category_pose");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_category_pose - pimonly_category_pose
+* @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_pose
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_category_pose ($pimonly_category_pose) {
+	$this->pimonly_category_pose = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preSetData($this, $pimonly_category_pose);
+	return $this;
+}
+
+/**
 * Get pimonly_category_entretien - pimonly_category_entretien
 * @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
 */
@@ -2748,32 +2774,6 @@ public function getPimonly_category_entretien () {
 */
 public function setPimonly_category_entretien ($pimonly_category_entretien) {
 	$this->pimonly_category_entretien = $this->getClass()->getFieldDefinition("pimonly_category_entretien")->preSetData($this, $pimonly_category_entretien);
-	return $this;
-}
-
-/**
-* Get pimonly_category_pose - pimonly_category_entretien
-* @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
-*/
-public function getPimonly_category_pose () {
-	$preValue = $this->preGetValue("pimonly_category_pose"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_category_pose")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_category_pose");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_category_pose - pimonly_category_entretien
-* @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_pose
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_category_pose ($pimonly_category_pose) {
-	$this->pimonly_category_pose = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preSetData($this, $pimonly_category_pose);
 	return $this;
 }
 
@@ -3534,11 +3534,11 @@ protected static $_relationFields = array (
   array (
     'type' => 'objects',
   ),
-  'pimonly_category_entretien' => 
+  'pimonly_category_pose' => 
   array (
     'type' => 'href',
   ),
-  'pimonly_category_pose' => 
+  'pimonly_category_entretien' => 
   array (
     'type' => 'href',
   ),

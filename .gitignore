@@ -1,3 +1,8 @@
 website/var/recyclebin/*
 website/var/system/*
+website/var/tmp/*
+website/var/log/*
+website/var/versions/*
+website/var/cache/*
+
 

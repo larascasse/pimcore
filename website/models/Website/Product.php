@@ -431,10 +431,20 @@ class Website_Product extends Object_Product {
 		
 	}
 
+	public function getMage_produitspose() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		Object_Abstract::setGetInheritedValues(true); 
+   		$category = $this->getPimonly_category_entretien();
+   		if($category instanceof Object_Category) {
+   			return $category->getMage_category_id();
+   		}
+
+	}
+
 	public function getMage_guideline() {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
-   		 Object_Abstract::setGetInheritedValues(true); 
+   		Object_Abstract::setGetInheritedValues(true); 
 
 
 		$articles = $this->getAssociatedArticles();

@@ -4,5 +4,7 @@ website/var/tmp/*
 website/var/log/*
 website/var/versions/*
 website/var/cache/*
+website/var/backup/*
+
 
 

@@ -434,7 +434,7 @@ class Website_Product extends Object_Product {
 	public function getMage_produitspose() {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		Object_Abstract::setGetInheritedValues(true); 
-   		$category = $this->getPimonly_category_entretien();
+   		$category = $this->getPimonly_category_pose();
    		if($category instanceof Object_Category) {
    			return $category->getMage_category_id();
    		}

@@ -1,12 +1,12 @@
 <?php 
 
-/** Generated at 2015-09-11T09:13:38+02:00 */
+/** Generated at 2015-11-04T16:18:42+01:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          82.67.203.190
+* IP:          79.84.166.173
 */
 
 
@@ -109,6 +109,8 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByFiche_technique_orginale ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByRe_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCs_skus ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_category_entretien ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_category_pose ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByAssociatedArticles ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByOrigineArticles ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMeta_title ($value, $limit = 0) 
@@ -132,6 +134,8 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByMage_realisationsJson ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_config_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_re_skus ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMage_produitspose ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMage_produitsentretien ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_cs_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_visibility ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_origine_arbre ($value, $limit = 0) 
@@ -235,6 +239,8 @@ public $fiche_technique_lpn;
 public $fiche_technique_orginale;
 public $re_skus;
 public $cs_skus;
+public $pimonly_category_entretien;
+public $pimonly_category_pose;
 public $associatedArticles;
 public $origineArticles;
 public $meta_title;
@@ -258,6 +264,8 @@ public $mage_realisations;
 public $mage_realisationsJson;
 public $mage_config_description;
 public $mage_re_skus;
+public $mage_produitspose;
+public $mage_produitsentretien;
 public $mage_cs_skus;
 public $mage_visibility;
 public $mage_origine_arbre;
@@ -2718,6 +2726,58 @@ public function setCs_skus ($cs_skus) {
 }
 
 /**
+* Get pimonly_category_entretien - pimonly_category_entretien
+* @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
+*/
+public function getPimonly_category_entretien () {
+	$preValue = $this->preGetValue("pimonly_category_entretien"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("pimonly_category_entretien")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_category_entretien")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_category_entretien");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_category_entretien - pimonly_category_entretien
+* @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_entretien
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_category_entretien ($pimonly_category_entretien) {
+	$this->pimonly_category_entretien = $this->getClass()->getFieldDefinition("pimonly_category_entretien")->preSetData($this, $pimonly_category_entretien);
+	return $this;
+}
+
+/**
+* Get pimonly_category_pose - pimonly_category_entretien
+* @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
+*/
+public function getPimonly_category_pose () {
+	$preValue = $this->preGetValue("pimonly_category_pose"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_category_pose")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_category_pose");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_category_pose - pimonly_category_entretien
+* @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_pose
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_category_pose ($pimonly_category_pose) {
+	$this->pimonly_category_pose = $this->getClass()->getFieldDefinition("pimonly_category_pose")->preSetData($this, $pimonly_category_pose);
+	return $this;
+}
+
+/**
 * Get associatedArticles - Articles associés
 * @return array
 */
@@ -3316,6 +3376,58 @@ public function setMage_re_skus ($mage_re_skus) {
 }
 
 /**
+* Get mage_produitspose - Category Magentà Pose
+* @return string
+*/
+public function getMage_produitspose () {
+	$preValue = $this->preGetValue("mage_produitspose"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_produitspose;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_produitspose")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_produitspose");
+	}
+	return $data;
+}
+
+/**
+* Set mage_produitspose - Category Magentà Pose
+* @param string $mage_produitspose
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_produitspose ($mage_produitspose) {
+	$this->mage_produitspose = $mage_produitspose;
+	return $this;
+}
+
+/**
+* Get mage_produitsentretien - Category Magento Entretien
+* @return string
+*/
+public function getMage_produitsentretien () {
+	$preValue = $this->preGetValue("mage_produitsentretien"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_produitsentretien;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_produitsentretien")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_produitsentretien");
+	}
+	return $data;
+}
+
+/**
+* Set mage_produitsentretien - Category Magento Entretien
+* @param string $mage_produitsentretien
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_produitsentretien ($mage_produitsentretien) {
+	$this->mage_produitsentretien = $mage_produitsentretien;
+	return $this;
+}
+
+/**
 * Get mage_cs_skus - Crossels SKUS
 * @return string
 */
@@ -3421,6 +3533,14 @@ protected static $_relationFields = array (
   'cs_skus' => 
   array (
     'type' => 'objects',
+  ),
+  'pimonly_category_entretien' => 
+  array (
+    'type' => 'href',
+  ),
+  'pimonly_category_pose' => 
+  array (
+    'type' => 'href',
   ),
   'associatedArticles' => 
   array (

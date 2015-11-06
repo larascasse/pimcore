@@ -561,8 +561,10 @@ class Website_Product extends Object_Product {
 			foreach ($articles as $key => $article) {
 				
 				$associatedDocuments = $article->getDocuments();
+				$url="";
 				foreach ($associatedDocuments as $document) {
-					$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_realisation")->getPath();						
+					if($document instanceof Asset_Image) {
+						$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_origine")->getPath();						
 				}
 
 				$str.= '<div class="nsg_fullbkgimg col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-2" data-img="'.$url.'">

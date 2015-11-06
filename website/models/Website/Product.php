@@ -563,7 +563,7 @@ class Website_Product extends Object_Product {
 				$associatedDocuments = $article->getDocuments();
 				$url="";
 				foreach ($associatedDocuments as $document) {
-					if($document instanceof Asset_Image) {
+					if($document instanceof Asset_Image) 
 						$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_origine")->getPath();						
 				}
 

@@ -600,7 +600,7 @@ class Website_Product extends Object_Product {
 
 		 	 $meta = $this->getShort_name();
 		 	 if(strlen($meta)<45)
-		 	 	$meta .= ", ".$this->getSubtype();
+		 	 	$meta = $this->getSubtype()." ".$meta;
 		 	 if(strlen($meta)<45)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }

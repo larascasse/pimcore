@@ -856,7 +856,7 @@ class Website_Product extends Object_Product {
 			$varationString[]=$value;
 		}
 
-		if(strlen($value=$this->getSingleDimentionString("volume","V","",false))>0) {
+		if(strlen($value=$this->getSingleDimentionString("volume","Vol.","L",false))>0) {
 			$varationString[]=$value;
 		}
 
@@ -896,7 +896,7 @@ class Website_Product extends Object_Product {
 			$varationString[]=$value;
 		}
 
-		if(strlen($value=$this->getSingleDimentionString("volume","Volume","",false))>0) {
+		if(strlen($value=$this->getSingleDimentionString("volume","Volume","l",false))>0) {
 			$varationString[]=$value;
 		}
 

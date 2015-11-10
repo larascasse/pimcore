@@ -1,12 +1,12 @@
 <?php 
 
-/** Generated at 2015-11-04T16:36:27+01:00 */
+/** Generated at 2015-11-10T15:10:35+01:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          79.84.166.173
+* IP:          89.156.18.229
 */
 
 
@@ -120,6 +120,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByMage_accessoirepopin ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_short_name ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMage_meta_title ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_lesplus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCharacteristics ($value, $limit = 0) 
@@ -250,6 +251,7 @@ public $accessoirepopin;
 public $mage_accessoirepopin;
 public $mage_name;
 public $mage_short_name;
+public $mage_meta_title;
 public $mage_lesplus;
 public $mage_description;
 public $characteristics;
@@ -3008,6 +3010,32 @@ public function getMage_short_name () {
 */
 public function setMage_short_name ($mage_short_name) {
 	$this->mage_short_name = $mage_short_name;
+	return $this;
+}
+
+/**
+* Get mage_meta_title - Mage Métas Title
+* @return string
+*/
+public function getMage_meta_title () {
+	$preValue = $this->preGetValue("mage_meta_title"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_meta_title;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_meta_title")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_meta_title");
+	}
+	return $data;
+}
+
+/**
+* Set mage_meta_title - Mage Métas Title
+* @param string $mage_meta_title
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_meta_title ($mage_meta_title) {
+	$this->mage_meta_title = $mage_meta_title;
 	return $this;
 }
 

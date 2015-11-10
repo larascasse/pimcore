@@ -588,6 +588,21 @@ class Website_Product extends Object_Product {
 </div>';*/
 	}
 
+
+	public function getMage_meta_title() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+   		 $meta = "La Parqueterie Nouvelle";
+   		 if($this->mage_meta_title && strlen($this->mage_meta_title)>0)
+			 $meta = $this->mage_meta_title;
+		 else
+		 	 $meta = $this->getShort_name()." - ".$this->getSubtype()." - La Parqueterie Nouvelle";
+
+   		 Object_Abstract::setGetInheritedValues($inheritance); 
+   		 return $meta;
+   	}
+
 	public function getMage_config_description() {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 

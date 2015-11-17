@@ -1316,7 +1316,7 @@ class Website_Product extends Object_Product {
 		if(is_array($objects)) {
 			foreach ($objects as $object) {
 				if($object instanceof Object_Category) {
-		   			$skus[] = 'cat'.$category->getMage_category_id();
+		   			$skus[] = 'cat'.$object->getMage_category_id();
 		   		}
 			}
 		}

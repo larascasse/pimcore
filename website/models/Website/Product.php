@@ -1313,11 +1313,14 @@ class Website_Product extends Object_Product {
 		$skus=array();
 
 		$objects = $this->getAccessoirepopin();
-		foreach ($objects as $object) {
-			if($object instanceof Object_Category) {
-	   			$skus[] = 'cat'.$category->getMage_category_id();
-	   		}
+		if(is_array($objects)) {
+			foreach ($objects as $object) {
+				if($object instanceof Object_Category) {
+		   			$skus[] = 'cat'.$category->getMage_category_id();
+		   		}
+			}
 		}
+		
 
 		
 

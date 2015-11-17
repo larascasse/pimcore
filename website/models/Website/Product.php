@@ -1231,7 +1231,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getRelated($field,$onlyId=false) {
+	public function getRelated($field,$onlyId=false,$removeCategoryProduct=false) {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		$attributes = $this->getClass()->getFieldDefinitions();
 
@@ -1257,7 +1257,7 @@ class Website_Product extends Object_Product {
 							
 	
 						}
-						else if($object->getClassName()=="category") {
+						else if($object->getClassName()=="category" && !$removeCategoryProduct) {
 							$products = $object->getProducts();
 							if(is_array($products)) {
 								foreach ($products as $product) {
@@ -1311,14 +1311,27 @@ class Website_Product extends Object_Product {
 
 	function getMage_accessoirepopin() {
 		$skus=array();
-		$products = $this->getRelated("accessoirepopin",false);
-		foreach ($products as $product) { 
-			if(strlen($product->getEan())>0)
-				$skus[] = $product->getEan();
-			else
-				$skus[] = $product->getCode();
-			# code...
-		};
+
+		$objects = $this->getAccessoirepopin();
+		foreach ($objects as $object) {
+			if($object instanceof Object_Category) {
+	   			$skus[] = 'cat'.$category->getMage_category_id();
+	   		}
+		}
+
+		
+
+		$products = $this->getRelated("accessoirepopin",false,true);
+		if(is_array($products)) {
+			foreach ($products as $product) { 
+				if(strlen($product->getEan())>0)
+					$skus[] = $product->getEan();
+				else
+					$skus[] = $product->getCode();
+				# code...
+			};
+		}
+		
 		return implode(",",$skus);
 	}
 

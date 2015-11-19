@@ -10,5 +10,23 @@
       <showroot>1</showroot>
       <classes>5</classes>
     </view>
+    <view>
+      <name>Categories</name>
+      <condition/>
+      <icon/>
+      <id>2</id>
+      <rootfolder>/categories</rootfolder>
+      <showroot>1</showroot>
+      <classes>8</classes>
+    </view>
+   <view>
+      <name>Categories</name>
+      <condition/>
+      <icon/>
+      <id>3</id>
+      <rootfolder>/articles</rootfolder>
+      <showroot>1</showroot>
+      <classes>7</classes>
+    </view>
   </views>
 </zend-config>

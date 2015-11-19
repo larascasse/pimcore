@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2015-11-17T18:14:27+01:00 */
+/** Generated at 2015-11-19T10:28:32+01:00 */
 
 /**
 * Inheritance: yes
@@ -110,6 +110,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByRe_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCs_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPimonly_category_pose ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_category_finition ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPimonly_category_entretien ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByAssociatedArticles ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByOrigineArticles ($value, $limit = 0) 
@@ -136,6 +137,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByMage_config_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_re_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_produitspose ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMage_produitsfinition ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_produitsentretien ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_cs_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_visibility ($value, $limit = 0) 
@@ -241,6 +243,7 @@ public $fiche_technique_orginale;
 public $re_skus;
 public $cs_skus;
 public $pimonly_category_pose;
+public $pimonly_category_finition;
 public $pimonly_category_entretien;
 public $associatedArticles;
 public $origineArticles;
@@ -267,6 +270,7 @@ public $mage_realisationsJson;
 public $mage_config_description;
 public $mage_re_skus;
 public $mage_produitspose;
+public $mage_produitsfinition;
 public $mage_produitsentretien;
 public $mage_cs_skus;
 public $mage_visibility;
@@ -882,7 +886,7 @@ public function setLeadtime ($leadtime) {
 }
 
 /**
-* Get shipping_type - Categorie de Livraison
+* Get shipping_type - Type de Livraison
 * @return string
 */
 public function getShipping_type () {
@@ -898,7 +902,7 @@ public function getShipping_type () {
 }
 
 /**
-* Set shipping_type - Categorie de Livraison
+* Set shipping_type - Type de Livraison
 * @param string $shipping_type
 * @return \Pimcore\Model\Object\Product
 */
@@ -2728,7 +2732,7 @@ public function setCs_skus ($cs_skus) {
 }
 
 /**
-* Get pimonly_category_pose - pimonly_category_pose
+* Get pimonly_category_pose - Catégorie Accessoire Pose
 * @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
 */
 public function getPimonly_category_pose () {
@@ -2744,7 +2748,7 @@ public function getPimonly_category_pose () {
 }
 
 /**
-* Set pimonly_category_pose - pimonly_category_pose
+* Set pimonly_category_pose - Catégorie Accessoire Pose
 * @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_pose
 * @return \Pimcore\Model\Object\Product
 */
@@ -2754,7 +2758,33 @@ public function setPimonly_category_pose ($pimonly_category_pose) {
 }
 
 /**
-* Get pimonly_category_entretien - pimonly_category_entretien
+* Get pimonly_category_finition - Catégorie Accessoire Finition
+* @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
+*/
+public function getPimonly_category_finition () {
+	$preValue = $this->preGetValue("pimonly_category_finition"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("pimonly_category_finition")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_category_finition")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_category_finition");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_category_finition - Catégorie Accessoire Finition
+* @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_finition
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_category_finition ($pimonly_category_finition) {
+	$this->pimonly_category_finition = $this->getClass()->getFieldDefinition("pimonly_category_finition")->preSetData($this, $pimonly_category_finition);
+	return $this;
+}
+
+/**
+* Get pimonly_category_entretien - Catégorie Accessoires Entretien
 * @return \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject
 */
 public function getPimonly_category_entretien () {
@@ -2770,7 +2800,7 @@ public function getPimonly_category_entretien () {
 }
 
 /**
-* Set pimonly_category_entretien - pimonly_category_entretien
+* Set pimonly_category_entretien - Catégorie Accessoires Entretien
 * @param \Pimcore\Model\Document\Page | \Pimcore\Model\Document\Snippet | \Pimcore\Model\Document | \Pimcore\Model\Asset | \Pimcore\Model\Object\AbstractObject $pimonly_category_entretien
 * @return \Pimcore\Model\Object\Product
 */
@@ -3144,7 +3174,7 @@ public function setMage_guideline ($mage_guideline) {
 }
 
 /**
-* Get image_1_src - Image 1 src
+* Get image_1_src - Image 1 SRC
 * @return string
 */
 public function getImage_1_src () {
@@ -3160,7 +3190,7 @@ public function getImage_1_src () {
 }
 
 /**
-* Set image_1_src - Image 1 src
+* Set image_1_src - Image 1 SRC
 * @param string $image_1_src
 * @return \Pimcore\Model\Object\Product
 */
@@ -3430,6 +3460,32 @@ public function setMage_produitspose ($mage_produitspose) {
 }
 
 /**
+* Get mage_produitsfinition - Category Magento Finition
+* @return string
+*/
+public function getMage_produitsfinition () {
+	$preValue = $this->preGetValue("mage_produitsfinition"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_produitsfinition;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_produitsfinition")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_produitsfinition");
+	}
+	return $data;
+}
+
+/**
+* Set mage_produitsfinition - Category Magento Finition
+* @param string $mage_produitsfinition
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_produitsfinition ($mage_produitsfinition) {
+	$this->mage_produitsfinition = $mage_produitsfinition;
+	return $this;
+}
+
+/**
 * Get mage_produitsentretien - Category Magento Entretien
 * @return string
 */
@@ -3563,6 +3619,10 @@ protected static $_relationFields = array (
     'type' => 'objects',
   ),
   'pimonly_category_pose' => 
+  array (
+    'type' => 'href',
+  ),
+  'pimonly_category_finition' => 
   array (
     'type' => 'href',
   ),

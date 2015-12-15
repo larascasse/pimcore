@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2015-11-19T10:28:32+01:00 */
+/** Generated at 2015-11-26T17:11:42+01:00 */
 
 /**
 * Inheritance: yes
@@ -74,6 +74,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByFinition_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByProfil ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByProfil_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCharacteristics_others ($value, $limit = 0) 
@@ -207,6 +208,7 @@ public $finition;
 public $finition_not_configurable;
 public $profil;
 public $profil_not_configurable;
+public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
 public $characteristics_others;
@@ -1818,6 +1820,32 @@ public function getProfil_not_configurable () {
 */
 public function setProfil_not_configurable ($profil_not_configurable) {
 	$this->profil_not_configurable = $profil_not_configurable;
+	return $this;
+}
+
+/**
+* Get pimonly_profil_label - Label pour attribut configurable
+* @return string
+*/
+public function getPimonly_profil_label () {
+	$preValue = $this->preGetValue("pimonly_profil_label"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_profil_label;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_profil_label")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_profil_label");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_profil_label - Label pour attribut configurable
+* @param string $pimonly_profil_label
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_profil_label ($pimonly_profil_label) {
+	$this->pimonly_profil_label = $pimonly_profil_label;
 	return $this;
 }
 

@@ -4,16 +4,17 @@
     <item>
       <method>cover</method>
       <arguments>
-        <width>350</width>
-        <height>400</height>
-        <positioning>center</positioning>
+        <width>1400</width>
+        <height>1000</height>
+        <positioning>bottomcenter</positioning>
         <doNotScaleUp>1</doNotScaleUp>
       </arguments>
     </item>
   </items>
   <name>productCarousel</name>
-  <description/>
+  <description></description>
   <format>SOURCE</format>
   <quality>90</quality>
   <highResolution>0</highResolution>
+  <filenameSuffix></filenameSuffix>
 </zend-config>

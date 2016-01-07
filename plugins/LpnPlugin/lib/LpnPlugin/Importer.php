@@ -929,7 +929,7 @@
         $isUpdating = false;
 
         //on ne cree pas des produits non actif et obsolete
-        $canCreate = !$p["obsolete"] && $p["actif_web"];
+        $canCreate = !$product["obsolete"] && $product["actif_web"];
 
 
 
@@ -970,10 +970,14 @@
            
             if(!$canCreate) {
                  echo $product["ean"]." n'existe pas et ne sera pas crée : SKIP\n";
+                 /*if($product["ean"]=='0001162502000') {
+                    print_r($product);
+                    die;
+                    }*/
                  return;
              }
              else
-                 echo $product["ean"]." existe  et sera crée\n";
+                 echo $product["ean"]." n'existe pas  et sera crée\n";
         }
 
 
@@ -997,7 +1001,7 @@
                  echo "Article parent n'existe pas... SKIP\n";
                 return;
             }
-            
+
            
             
             Object_Abstract::setGetInheritedValues(false);
@@ -1005,8 +1009,9 @@
             
             if (!$object instanceof Object_Concrete) {
                 //create new object
-                if($canCreate)
+                if($canCreate) {
                   $object = new $className();
+                }
                 else {
                   echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
                   return false;
@@ -1165,6 +1170,7 @@
             }
              Object_Abstract::setGetInheritedValues($inheritedValues);
         }
+        return true;
 
 
         //$this->_helper->json(array("success" => $success));

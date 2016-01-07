@@ -967,14 +967,60 @@
              
         }
         else {
-            echo "n'existe pas\n";
+            echo $product["ean"]." n'existe pas\n";
         }
 
 
 
         if ($canInsert && $objectKey) {
 
-            $objectParentId = $parentId;
+           
+            
+            Object_Abstract::setGetInheritedValues(false);
+            $object = Object_Abstract::getByPath($intendedPath);
+            
+            if (!$object instanceof Object_Concrete) {
+                //create new object
+                if($canCreate)
+                  $object = new $className();
+                else {
+                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
+                  return false;
+                }
+
+            } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
+                //delete the old object it is of a different class
+                $object->delete();
+
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else {
+                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
+                  return false;
+                }
+
+            } else if (object instanceof Object_Folder) {
+                //delete the folder
+               
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else {
+                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
+                  return false;
+                }
+
+            } else {
+                $isUpdating = true;
+
+            }
+            
+
+            /* PARENT */
+             $objectParentId = $parentId;
             $intendedPath = $parent->getFullPath() . "/" . $objectKey;
 
             if($existingEan) {
@@ -990,43 +1036,7 @@
                  echo "article parent n'existe pas...\n";
                 return;
             }
-            
-            Object_Abstract::setGetInheritedValues(false);
-            $object = Object_Abstract::getByPath($intendedPath);
-            
-            if (!$object instanceof Object_Concrete) {
-                //create new object
-                if($canCreate)
-                  $object = new $className();
-                else
-                  return false;
 
-            } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
-                //delete the old object it is of a different class
-                $object->delete();
-
-                if($canCreate) {
-                  $object->delete();
-                  $object = new $className();
-                }
-                else
-                  return false;
-
-            } else if (object instanceof Object_Folder) {
-                //delete the folder
-               
-                if($canCreate) {
-                  $object->delete();
-                  $object = new $className();
-                }
-                else
-                  return false;
-
-            } else {
-                $isUpdating = true;
-
-            }
-           
             
             $object->setParentId($objectParentId);
             

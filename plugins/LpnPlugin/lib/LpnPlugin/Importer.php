@@ -1021,11 +1021,7 @@
            
             $object->setUserModification($userId);
 
-            if ($product["published"]) {
-                $object->setPublished(true);
-            } else {
-                $object->setPublished(false);
-            }
+           
 
 
             foreach ($class->getFieldDefinitions() as $key => $field) {
@@ -1061,7 +1057,7 @@
                     if($isUpdating && $key=="famille")
                         continue;
                     
-                    if($key=="longueur" || $key=="longueur" || $key=="longueur") {
+                    if($key=="longueur" || $key=="largeur" || $key=="epaisseur") {
                         if($value >0)
                             $value = round($value);
                         else
@@ -1095,10 +1091,22 @@
 
                 }
             }
+
+             
+
+
             if(!$isUpdating) {
                 $object->setPublished(false);
             
             }
+            else {
+                if ($product["published"]) {
+                    $object->setPublished(true);
+                } else {
+                    $object->setPublished(false);
+                }
+            }
+
             try {
                 $object->save();
                 if ($isUpdating) {

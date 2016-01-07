@@ -923,35 +923,39 @@
 
         Object_Abstract::setGetInheritedValues(false);
 
-        $articleParentList = new Object_Product_List();
-        $articleParentList->setCondition('o_key = ?', $product["code"]);
 
-        if($articleParentList->count()!=1) {
-            $articleParent = null;
-            //Pad d'object Parrent, on le cree
-            $articleParent = $this->createArticle($product);
-            if(!is_object($articleParent)) {
-                echo 'Creation article parent impossoble '.$product["ean"]."skip\n";
-                return;
-            }
-
-        }
-        else {
-            $articleParent =  $articleParentList->current();
-        }
-        
-
-        $objectKey = Pimcore_File::getValidFilename($product["ean"]);
-        
-   
         $overwrite = true;
         $canInsert = true;
         $isUpdating = false;
 
+        //on ne cree pas des produits non actif et obsolete
+        $canCreate = !$p["obsolete"] && $p["actif_web"];
 
 
 
+        if($canCreate) {
+            //On check si le parent existe, sinon on le crée
+            $articleParentList = new Object_Product_List();
+            $articleParentList->setCondition('o_key = ?', $product["code"]);
 
+            if($articleParentList->count()!=1) {
+                $articleParent = null;
+                //Pad d'object Parrent, on le cree
+                $articleParent = $this->createArticle($product);
+                if(!is_object($articleParent)) {
+                    echo 'Creation article parent impossoble '.$product["ean"]."skip\n";
+                    return;
+                }
+
+            }
+            else {
+                $articleParent =  $articleParentList->current();
+            }
+        }
+        
+        
+
+        $objectKey = Pimcore_File::getValidFilename($product["ean"]);
 
         $existingEan=null;
         $existingProductList = Object_Product::getByEan($product["ean"]);
@@ -965,6 +969,8 @@
         else {
             echo "n'existe pas\n";
         }
+
+
 
         if ($canInsert && $objectKey) {
 
@@ -990,15 +996,32 @@
             
             if (!$object instanceof Object_Concrete) {
                 //create new object
-                $object = new $className();
+                if($canCreate)
+                  $object = new $className();
+                else
+                  return false;
+
             } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
                 //delete the old object it is of a different class
                 $object->delete();
-                $object = new $className();
+
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else
+                  return false;
+
             } else if (object instanceof Object_Folder) {
                 //delete the folder
-                $object->delete();
-                $object = new $className();
+               
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else
+                  return false;
+
             } else {
                 $isUpdating = true;
 
@@ -1007,7 +1030,7 @@
             
             $object->setParentId($objectParentId);
             
-            if(!$isUpdating){
+            if(!$isUpdating && $canCreate){
                 $object->setClassId($classId);
                 $object->setClassName($o_className);
                 $object->setCreationDate(time());

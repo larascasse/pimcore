@@ -963,17 +963,41 @@
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
-             echo "EAN existe ".$existingEan->getFullPath()."\n";
+             echo $product["ean"]." existe ".$existingEan->getFullPath()."\n";
              
         }
         else {
-            echo $product["ean"]." n'existe pas\n";
+           
+            if(!$canCreate) {
+                 echo $product["ean"]." n'existe pas et ne sera pas crée : SKIP\n";
+                 return;
+             }
+             else
+                 echo $product["ean"]." existe  et sera crée\n";
         }
 
 
 
         if ($canInsert && $objectKey) {
 
+            /* PARENT */
+            $objectParentId = $parentId;
+            $intendedPath = $parent->getFullPath() . "/" . $objectKey;
+
+            if($existingEan) {
+                $intendedPath = $existingEan->getFullPath();
+                $objectParentId = $existingEan->getParent()->getId();
+            }
+            else if($articleParent) {
+                $intendedPath = $articleParent->getFullPath() . "/" . $objectKey;
+                $objectParentId = $articleParent->getId();
+                //echo "article existe ".$articleParent->getFullPath()."\n";
+            }
+            else {
+                 echo "Article parent n'existe pas... SKIP\n";
+                return;
+            }
+            
            
             
             Object_Abstract::setGetInheritedValues(false);
@@ -997,7 +1021,7 @@
                   $object = new $className();
                 }
                 else {
-                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
+                  echo $product["ean"]." ".$product["name"]." existe  sous une autre class : SKIP\n";
                   return false;
                 }
 
@@ -1009,33 +1033,18 @@
                   $object = new $className();
                 }
                 else {
-                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
+                  echo $product["ean"]." ".$product["name"]." est un dossier : SKIP\n";
                   return false;
                 }
 
             } else {
+                echo $product["ean"]." ".$product["name"]." sera mis à jour\n";
                 $isUpdating = true;
 
             }
             
 
-            /* PARENT */
-             $objectParentId = $parentId;
-            $intendedPath = $parent->getFullPath() . "/" . $objectKey;
-
-            if($existingEan) {
-                $intendedPath = $existingEan->getFullPath();
-                $objectParentId = $existingEan->getParent()->getId();
-            }
-            else if($articleParent) {
-                $intendedPath = $articleParent->getFullPath() . "/" . $objectKey;
-                $objectParentId = $articleParent->getId();
-                 echo "article existe ".$articleParent->getFullPath()."\n";
-            }
-            else {
-                 echo "article parent n'existe pas...\n";
-                return;
-            }
+            
 
             
             $object->setParentId($objectParentId);

@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2015-11-26T17:11:42+01:00 */
+/** Generated at 2016-01-11T10:55:57+01:00 */
 
 /**
 * Inheritance: yes
@@ -77,6 +77,9 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMin_quantity ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMin_quantity_txt ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByMin_quantity_txt_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCharacteristics_others ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByUnite ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMode_calcul ($value, $limit = 0) 
@@ -211,6 +214,9 @@ public $profil_not_configurable;
 public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
+public $min_quantity;
+public $min_quantity_txt;
+public $min_quantity_txt_not_configurable;
 public $characteristics_others;
 public $unite;
 public $mode_calcul;
@@ -1898,6 +1904,84 @@ public function getFixation_not_configurable () {
 */
 public function setFixation_not_configurable ($fixation_not_configurable) {
 	$this->fixation_not_configurable = $fixation_not_configurable;
+	return $this;
+}
+
+/**
+* Get min_quantity - Quantité Minimum à commander (txt)
+* @return string
+*/
+public function getMin_quantity () {
+	$preValue = $this->preGetValue("min_quantity"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->min_quantity;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity")->isEmpty($data)) {
+		return $this->getValueFromParent("min_quantity");
+	}
+	return $data;
+}
+
+/**
+* Set min_quantity - Quantité Minimum à commander (txt)
+* @param string $min_quantity
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMin_quantity ($min_quantity) {
+	$this->min_quantity = $min_quantity;
+	return $this;
+}
+
+/**
+* Get min_quantity_txt - Quantité Minimum à commander (txt)
+* @return string
+*/
+public function getMin_quantity_txt () {
+	$preValue = $this->preGetValue("min_quantity_txt"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->min_quantity_txt;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity_txt")->isEmpty($data)) {
+		return $this->getValueFromParent("min_quantity_txt");
+	}
+	return $data;
+}
+
+/**
+* Set min_quantity_txt - Quantité Minimum à commander (txt)
+* @param string $min_quantity_txt
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMin_quantity_txt ($min_quantity_txt) {
+	$this->min_quantity_txt = $min_quantity_txt;
+	return $this;
+}
+
+/**
+* Get min_quantity_txt_not_configurable - min_quantity_not_configurable
+* @return boolean
+*/
+public function getMin_quantity_txt_not_configurable () {
+	$preValue = $this->preGetValue("min_quantity_txt_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->min_quantity_txt_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity_txt_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("min_quantity_txt_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set min_quantity_txt_not_configurable - min_quantity_not_configurable
+* @param boolean $min_quantity_txt_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMin_quantity_txt_not_configurable ($min_quantity_txt_not_configurable) {
+	$this->min_quantity_txt_not_configurable = $min_quantity_txt_not_configurable;
 	return $this;
 }
 

@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-01-11T11:28:40+01:00 */
+/** Generated at 2016-01-11T11:33:48+01:00 */
 
 /**
 * Inheritance: yes
@@ -1910,7 +1910,7 @@ public function setFixation_not_configurable ($fixation_not_configurable) {
 }
 
 /**
-* Get quantity_min - Quantité Minimum à commander (txt)
+* Get quantity_min - Quantité Minimum à commander (par rapport à l'unité colisage)
 * @return string
 */
 public function getQuantity_min () {
@@ -1926,7 +1926,7 @@ public function getQuantity_min () {
 }
 
 /**
-* Set quantity_min - Quantité Minimum à commander (txt)
+* Set quantity_min - Quantité Minimum à commander (par rapport à l'unité colisage)
 * @param string $quantity_min
 * @return \Pimcore\Model\Object\Product
 */
@@ -1936,7 +1936,7 @@ public function setQuantity_min ($quantity_min) {
 }
 
 /**
-* Get quantity_max - Quantité Maximum à commander (txt)
+* Get quantity_max - Quantité Maximum à commander (par rapport à l'unité colisage)
 * @return string
 */
 public function getQuantity_max () {
@@ -1952,7 +1952,7 @@ public function getQuantity_max () {
 }
 
 /**
-* Set quantity_max - Quantité Maximum à commander (txt)
+* Set quantity_max - Quantité Maximum à commander (par rapport à l'unité colisage)
 * @param string $quantity_max
 * @return \Pimcore\Model\Object\Product
 */

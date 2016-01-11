@@ -28,6 +28,8 @@
     function convertScienergieName($name) {
 
         $name = strtolower($name);
+        $name = trim($name);
+        $name=str_ireplace("  ", " ", $name);
         $name=str_ireplace("QUALITE ", "qualité ", $name);
         $name=str_ireplace("PRESENCE ", "présence ", $name);
         $name=str_ireplace("RABOTE ", "raboté ", $name);
@@ -51,7 +53,7 @@
 
         $name=str_ireplace(" FLOTTE ", " flotté ", $name);
         $name=str_ireplace(" METAL ", " métal ", $name);
-        $name=str_ireplace(" BETON ", " méton ", $name);
+        $name=str_ireplace(" BETON ", " béton ", $name);
         $name=str_ireplace(" FONCE ", " foncé ", $name);
 
 
@@ -78,15 +80,15 @@
 
         $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
         $name=str_ireplace(" STRUCTURE ", " Structuré ", $name);
-        $name=str_ireplace("DESTRUCTURE ", " Déstructuré ", $name);
+        $name=str_ireplace(" DESTRUCTURE ", " Déstructuré ", $name);
 
-        $name=str_ireplace("BOMBE ", "Bombé ", $name);
+        $name=str_ireplace(" BOMBE ", " Bombé ", $name);
 
         $name=str_ireplace("ANTIDERAPANT", "Antidérapant", $name);
         $name=str_ireplace("IPE ", "Ipé ", $name);
         $name=str_ireplace("IPE/", "Ipé/", $name);
 
-        $name=str_ireplace(" A ", " à  ", $name);
+        $name=str_ireplace(" A ", " à ", $name);
         $name=str_ireplace("MELEZE ", "Mélèze ", $name);
         $name=str_ireplace("PEIGNE", "Peigné", $name);
         $name=str_ireplace("THERMOCHAUFFE ", "Thermochauffé ", $name);
@@ -103,7 +105,7 @@
 
 
 
-        $name=str_ireplace("  ", " ", $name);
+    
         $name=str_ireplace(".", "", $name);
         //$name = strtolower($name);
         $name = ucwords($name);

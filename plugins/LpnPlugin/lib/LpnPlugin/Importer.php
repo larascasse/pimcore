@@ -46,16 +46,22 @@
         $name=str_ireplace("DELIGNE ", "déligné ", $name);
         $name=str_ireplace("ABIMEES ", "abimées ", $name);
         $name=str_ireplace("ABIMES ", "abimés ", $name);
+        $name=str_ireplace("STRATIFIE ", "stratifié ", $name);
+
 
         $name=str_ireplace("PREPATINE ", "prépratiné ", $name);
-        $name=str_ireplace("ELEGANCE ", "Elégance ", $name);
+        $name=str_ireplace("ELEGANCE ", "elégance ", $name);
 
-        $name=str_ireplace(" PAVE ", " Pavé ", $name);
+        $name=str_ireplace(" PAVE ", " pavé ", $name);
 
         $name=str_ireplace(" FLOTTE ", " flotté ", $name);
         $name=str_ireplace(" METAL ", " métal ", $name);
         $name=str_ireplace(" BETON ", " béton ", $name);
         $name=str_ireplace(" FONCE ", " foncé ", $name);
+
+        $name=str_ireplace(" DECOFFRAGE ", " décoffrage ", $name);
+        $name=str_ireplace(" DECOFRAGE ", " décoffrage ", $name);
+        
 
 
 

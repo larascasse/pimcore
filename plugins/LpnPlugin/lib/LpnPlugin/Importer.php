@@ -30,6 +30,7 @@
         $name = strtolower($name);
         $name = trim($name);
         $name=str_ireplace("  ", " ", $name);
+        $name=str_ireplace("\n", " ", $name);
         $name=str_ireplace("QUALITE ", "qualité ", $name);
         $name=str_ireplace("PRESENCE ", "présence ", $name);
         $name=str_ireplace("RABOTE ", "raboté ", $name);

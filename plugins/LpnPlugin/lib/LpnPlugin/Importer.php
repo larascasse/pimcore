@@ -49,9 +49,10 @@
 
         $name=str_ireplace(" PAVE ", " Pavé ", $name);
 
-        $name=str_ireplace(" FLOTTE ", " Flotté ", $name);
-        $name=str_ireplace(" METAL ", " Métal ", $name);
-
+        $name=str_ireplace(" FLOTTE ", " flotté ", $name);
+        $name=str_ireplace(" METAL ", " métal ", $name);
+        $name=str_ireplace(" BETON ", " méton ", $name);
+        $name=str_ireplace(" FONCE ", " foncé ", $name);
 
 
 

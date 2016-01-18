@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-01-11T10:55:57+01:00 */
+/** Generated at 2016-01-11T11:33:48+01:00 */
 
 /**
 * Inheritance: yes
@@ -77,9 +77,10 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByMin_quantity ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByMin_quantity_txt ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByMin_quantity_txt_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByQuantity_min ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByQuantity_max ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByQuantity_min_txt ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByQuantity_min_txt_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCharacteristics_others ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByUnite ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMode_calcul ($value, $limit = 0) 
@@ -214,9 +215,10 @@ public $profil_not_configurable;
 public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
-public $min_quantity;
-public $min_quantity_txt;
-public $min_quantity_txt_not_configurable;
+public $quantity_min;
+public $quantity_max;
+public $quantity_min_txt;
+public $quantity_min_txt_not_configurable;
 public $characteristics_others;
 public $unite;
 public $mode_calcul;
@@ -1908,80 +1910,106 @@ public function setFixation_not_configurable ($fixation_not_configurable) {
 }
 
 /**
-* Get min_quantity - Quantité Minimum à commander (txt)
+* Get quantity_min - Quantité Minimum à commander (par rapport à l'unité colisage)
 * @return string
 */
-public function getMin_quantity () {
-	$preValue = $this->preGetValue("min_quantity"); 
+public function getQuantity_min () {
+	$preValue = $this->preGetValue("quantity_min"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->min_quantity;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity")->isEmpty($data)) {
-		return $this->getValueFromParent("min_quantity");
+	$data = $this->quantity_min;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("quantity_min")->isEmpty($data)) {
+		return $this->getValueFromParent("quantity_min");
 	}
 	return $data;
 }
 
 /**
-* Set min_quantity - Quantité Minimum à commander (txt)
-* @param string $min_quantity
+* Set quantity_min - Quantité Minimum à commander (par rapport à l'unité colisage)
+* @param string $quantity_min
 * @return \Pimcore\Model\Object\Product
 */
-public function setMin_quantity ($min_quantity) {
-	$this->min_quantity = $min_quantity;
+public function setQuantity_min ($quantity_min) {
+	$this->quantity_min = $quantity_min;
 	return $this;
 }
 
 /**
-* Get min_quantity_txt - Quantité Minimum à commander (txt)
+* Get quantity_max - Quantité Maximum à commander (par rapport à l'unité colisage)
 * @return string
 */
-public function getMin_quantity_txt () {
-	$preValue = $this->preGetValue("min_quantity_txt"); 
+public function getQuantity_max () {
+	$preValue = $this->preGetValue("quantity_max"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->min_quantity_txt;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity_txt")->isEmpty($data)) {
-		return $this->getValueFromParent("min_quantity_txt");
+	$data = $this->quantity_max;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("quantity_max")->isEmpty($data)) {
+		return $this->getValueFromParent("quantity_max");
 	}
 	return $data;
 }
 
 /**
-* Set min_quantity_txt - Quantité Minimum à commander (txt)
-* @param string $min_quantity_txt
+* Set quantity_max - Quantité Maximum à commander (par rapport à l'unité colisage)
+* @param string $quantity_max
 * @return \Pimcore\Model\Object\Product
 */
-public function setMin_quantity_txt ($min_quantity_txt) {
-	$this->min_quantity_txt = $min_quantity_txt;
+public function setQuantity_max ($quantity_max) {
+	$this->quantity_max = $quantity_max;
 	return $this;
 }
 
 /**
-* Get min_quantity_txt_not_configurable - min_quantity_not_configurable
+* Get quantity_min_txt - Quantité Minimum à commander (txt)
+* @return string
+*/
+public function getQuantity_min_txt () {
+	$preValue = $this->preGetValue("quantity_min_txt"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->quantity_min_txt;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("quantity_min_txt")->isEmpty($data)) {
+		return $this->getValueFromParent("quantity_min_txt");
+	}
+	return $data;
+}
+
+/**
+* Set quantity_min_txt - Quantité Minimum à commander (txt)
+* @param string $quantity_min_txt
+* @return \Pimcore\Model\Object\Product
+*/
+public function setQuantity_min_txt ($quantity_min_txt) {
+	$this->quantity_min_txt = $quantity_min_txt;
+	return $this;
+}
+
+/**
+* Get quantity_min_txt_not_configurable - min_quantity_not_configurable
 * @return boolean
 */
-public function getMin_quantity_txt_not_configurable () {
-	$preValue = $this->preGetValue("min_quantity_txt_not_configurable"); 
+public function getQuantity_min_txt_not_configurable () {
+	$preValue = $this->preGetValue("quantity_min_txt_not_configurable"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->min_quantity_txt_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("min_quantity_txt_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("min_quantity_txt_not_configurable");
+	$data = $this->quantity_min_txt_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("quantity_min_txt_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("quantity_min_txt_not_configurable");
 	}
 	return $data;
 }
 
 /**
-* Set min_quantity_txt_not_configurable - min_quantity_not_configurable
-* @param boolean $min_quantity_txt_not_configurable
+* Set quantity_min_txt_not_configurable - min_quantity_not_configurable
+* @param boolean $quantity_min_txt_not_configurable
 * @return \Pimcore\Model\Object\Product
 */
-public function setMin_quantity_txt_not_configurable ($min_quantity_txt_not_configurable) {
-	$this->min_quantity_txt_not_configurable = $min_quantity_txt_not_configurable;
+public function setQuantity_min_txt_not_configurable ($quantity_min_txt_not_configurable) {
+	$this->quantity_min_txt_not_configurable = $quantity_min_txt_not_configurable;
 	return $this;
 }
 

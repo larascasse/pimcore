@@ -627,7 +627,7 @@ class Website_Product extends Object_Product {
 			 $meta = $this->mage_meta_title;
 		 else {
 
-		 	 $meta = $this->getShort_name();
+		 	 $meta = $this->getMage_short_name();
 		 	 if(strlen($meta)<45)
 		 	 	$meta = $this->getSubtype()." ".$meta;
 		 	 if(strlen($meta)<45)

@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-01-11T11:33:48+01:00 */
+/** Generated at 2016-01-12T11:01:31+01:00 */
 
 /**
 * Inheritance: yes
@@ -105,6 +105,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPefc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFsc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByParquet_de_france ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getBySupport ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByImage_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByImage_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByImage_3 ($value, $limit = 0) 
@@ -243,6 +244,7 @@ public $solRaffraichissant;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
+public $support;
 public $image_1;
 public $image_2;
 public $image_3;
@@ -662,7 +664,7 @@ public function setPrice ($price) {
 }
 
 /**
-* Get short_description - Description courte
+* Get short_description - Description courte / Accroche
 * @return string
 */
 public function getShort_description () {
@@ -678,7 +680,7 @@ public function getShort_description () {
 }
 
 /**
-* Set short_description - Description courte
+* Set short_description - Description courte / Accroche
 * @param string $short_description
 * @return \Pimcore\Model\Object\Product
 */
@@ -688,7 +690,7 @@ public function setShort_description ($short_description) {
 }
 
 /**
-* Get mage_sub_description - Sous description
+* Get mage_sub_description - Sous description / Liste de caract.
 * @return string
 */
 public function getMage_sub_description () {
@@ -704,7 +706,7 @@ public function getMage_sub_description () {
 }
 
 /**
-* Set mage_sub_description - Sous description
+* Set mage_sub_description - Sous description / Liste de caract.
 * @param string $mage_sub_description
 * @return \Pimcore\Model\Object\Product
 */
@@ -2634,6 +2636,32 @@ public function getParquet_de_france () {
 */
 public function setParquet_de_france ($parquet_de_france) {
 	$this->parquet_de_france = $parquet_de_france;
+	return $this;
+}
+
+/**
+* Get support - Support (Contrecollé)
+* @return string
+*/
+public function getSupport () {
+	$preValue = $this->preGetValue("support"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->support;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("support")->isEmpty($data)) {
+		return $this->getValueFromParent("support");
+	}
+	return $data;
+}
+
+/**
+* Set support - Support (Contrecollé)
+* @param string $support
+* @return \Pimcore\Model\Object\Product
+*/
+public function setSupport ($support) {
+	$this->support = $support;
 	return $this;
 }
 

@@ -21,7 +21,6 @@
 		    foreach ($assets as $asset) {
 		        $assetsArray[] = $asset;
 		        $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation");
-                echo $asset->getThumbnail("magento_realisation")->getPath();
                 $assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
 		    }
 		}
@@ -81,6 +80,9 @@
 
     ?>
     <?php //print_r($arrayImages) ?><br />
+    Data ZOOM : 
     <textarea rows="20" cols="100"><?php echo implode('|',$arrayImages) ?></textarea>
+
+    JSON
     <textarea rows="20" cols="100"><?php echo Zend_Json::encode($return); ?></textarea>
 <?php } ?>

@@ -12,6 +12,7 @@
     $realisations=array();
     foreach($realisationsHref as $element) { 
         $realisations[]= $element; 
+        $assetsArray[$i] = array();
     	
 		 if($element instanceof Asset_Folder) {
 
@@ -20,7 +21,7 @@
 		    foreach ($assets as $asset) {
 		        $assetsArray[] = $asset;
 		        $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation");
-
+                echo $asset->getThumbnail("magento_realisation")->getPath();
                 $assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
 		    }
 		}

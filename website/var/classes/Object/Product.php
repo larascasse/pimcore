@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-02-16T13:59:58+01:00 */
+/** Generated at 2016-04-06T14:55:18+02:00 */
 
 /**
 * Inheritance: yes
@@ -105,6 +105,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPefc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFsc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByParquet_de_france ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByNorme_sanitaire ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getBySupport ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByImage_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByImage_2 ($value, $limit = 0) 
@@ -244,6 +245,7 @@ public $solRaffraichissant;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
+public $norme_sanitaire;
 public $support;
 public $image_1;
 public $image_2;
@@ -2636,6 +2638,32 @@ public function getParquet_de_france () {
 */
 public function setParquet_de_france ($parquet_de_france) {
 	$this->parquet_de_france = $parquet_de_france;
+	return $this;
+}
+
+/**
+* Get norme_sanitaire - Norme Sanitaire
+* @return string
+*/
+public function getNorme_sanitaire () {
+	$preValue = $this->preGetValue("norme_sanitaire"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->norme_sanitaire;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("norme_sanitaire")->isEmpty($data)) {
+		return $this->getValueFromParent("norme_sanitaire");
+	}
+	return $data;
+}
+
+/**
+* Set norme_sanitaire - Norme Sanitaire
+* @param string $norme_sanitaire
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNorme_sanitaire ($norme_sanitaire) {
+	$this->norme_sanitaire = $norme_sanitaire;
 	return $this;
 }
 

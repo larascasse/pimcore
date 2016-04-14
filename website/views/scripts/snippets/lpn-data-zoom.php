@@ -62,6 +62,10 @@
 
                         }
                     }
+                    else {
+                         $urlImage = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
+                         $return[] = (object) array("base"=>$urlImage,"images"=>array($urlImage));
+                    }
                 }
            
                  
@@ -77,5 +81,5 @@
     ?>
     <?php //print_r($arrayImages) ?><br />
     <textarea rows="20" cols="100"><?php echo implode('|',$arrayImages) ?></textarea>
-    <textarea rows="20" cols="100"><?php echo Zend_Json::encode($return) ?></textarea>
+    <textarea rows="20" cols="100"><?php echo Zend_Json::encode($return); ?></textarea>
 <?php } ?>

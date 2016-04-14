@@ -8,10 +8,10 @@
 
     $i=0;
     $realisationsHref = $this->multihref("multihref");
-    $count=count($this->multihref("multihref"));
+    $count=count($realisationsHref);
     $realisations=array();
     foreach($realisationsHref as $element) { 
-        $realisations[$element]; 
+        $realisations[]= $element; 
     	
 		 if($element instanceof Asset_Folder) {
 

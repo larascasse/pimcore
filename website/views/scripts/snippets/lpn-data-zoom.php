@@ -7,11 +7,11 @@
     $arrayImages = array();
 
     $i=0;
-    $realisations = $this->multihref("multihref");
+    $realisationsHref = $this->multihref("multihref");
     $count=count($this->multihref("multihref"));
-
-    foreach($realisations as $element) { 
-
+    $realisations=array();
+    foreach($realisationsHref as $element) { 
+        $realisations[$element]; 
     	
 		 if($element instanceof Asset_Folder) {
 

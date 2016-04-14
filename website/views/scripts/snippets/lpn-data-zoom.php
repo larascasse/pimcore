@@ -8,7 +8,7 @@
 
     $i=0;
     $realisationsHref = $this->multihref("multihref");
-    
+    $assetsArray = array();
     $realisations=array();
     foreach($realisationsHref as $element) { 
         $realisations[]= $element; 

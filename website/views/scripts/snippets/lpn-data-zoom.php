@@ -8,7 +8,7 @@
 
     $i=0;
     $realisationsHref = $this->multihref("multihref");
-    $count=count($realisationsHref);
+    
     $realisations=array();
     foreach($realisationsHref as $element) { 
         $realisations[]= $element; 
@@ -39,6 +39,7 @@
 
     //ON remplit le JSON
     $return = array();
+    $count=count($realisations);
     //$count=count($assetsArray);
         if($count>0) {
            

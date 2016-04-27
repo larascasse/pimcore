@@ -104,8 +104,13 @@
 
         $name=str_ireplace("d'aujourd' hui", "d'aujourd'hui", $name);
         $name=str_ireplace("d' orgine", "d'orgine", $name);
+        $name=str_ireplace(" '", "'", $name);
+        $name=str_ireplace("' ", "'", $name);
 
         $name=str_ireplace("( ", "(", $name);
+        $name=str_ireplace("(", " (", $name);
+        $name=str_ireplace("  (", " (", $name);
+
         $name=str_ireplace(") ", ")", $name);
 
 
@@ -115,7 +120,7 @@
     
         $name=str_ireplace(".", "", $name);
         //$name = strtolower($name);
-        $name = ucwords($name);
+        $name = ucfirst($name);
 
 
         return trim($name);
@@ -1120,6 +1125,8 @@
                         else
                             $value="";
                     }
+
+                    //TODO: weight
                      
 
                     /*else if($key=="code") {

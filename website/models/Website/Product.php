@@ -274,7 +274,8 @@ class Website_Product extends Object_Product {
 			'getMage_categoryIds','no_stock_delay','gallery','re_skus','cs_skus','us_skus',
 			'rendement','accessoirepopin','colisage','nbrpp','leadtime','shipping_type',
 			'longueur','longueur_max','longueur_min','longueur_txt',
-			'quantity_min','quantity_max','quantity_min_max_txt'
+			'quantity_min','quantity_max','quantity_min_max_txt',
+			'extra_content1','extra_content2'
 
 
 			);

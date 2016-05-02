@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-04-06T14:55:18+02:00 */
+/** Generated at 2016-05-02T14:23:51+02:00 */
 
 /**
 * Inheritance: yes
@@ -15,6 +15,8 @@ namespace Pimcore\Model\Object;
 
 
 /**
+* @method static \Pimcore\Model\Object\Product getByActif_web ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByObsolete ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCode ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByEan ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByName_scienergie ($value, $limit = 0) 
@@ -29,10 +31,12 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_name_suffixe ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPimonly_dimensions ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPrice ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByWeight ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByShort_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByMage_sub_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByShort_description_title ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByDescription ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByExtra_content1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByLesplus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByRemarque ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByEchantillon ($value, $limit = 0) 
@@ -77,6 +81,8 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByConfigurable_free_1 ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByConfigurable_free_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_max ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_min_txt ($value, $limit = 0) 
@@ -155,6 +161,8 @@ class Product extends Concrete {
 
 public $o_classId = 5;
 public $o_className = "product";
+public $actif_web;
+public $obsolete;
 public $code;
 public $ean;
 public $name_scienergie;
@@ -169,10 +177,12 @@ public $short_name;
 public $pimonly_name_suffixe;
 public $pimonly_dimensions;
 public $price;
+public $weight;
 public $short_description;
 public $mage_sub_description;
 public $short_description_title;
 public $description;
+public $extra_content1;
 public $lesplus;
 public $remarque;
 public $echantillon;
@@ -217,6 +227,8 @@ public $profil_not_configurable;
 public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
+public $configurable_free_1;
+public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
 public $quantity_min_txt;
@@ -299,6 +311,58 @@ public static function create($values = array()) {
 	$object = new static();
 	$object->setValues($values);
 	return $object;
+}
+
+/**
+* Get actif_web - Actif Web ?
+* @return boolean
+*/
+public function getActif_web () {
+	$preValue = $this->preGetValue("actif_web"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->actif_web;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("actif_web")->isEmpty($data)) {
+		return $this->getValueFromParent("actif_web");
+	}
+	return $data;
+}
+
+/**
+* Set actif_web - Actif Web ?
+* @param boolean $actif_web
+* @return \Pimcore\Model\Object\Product
+*/
+public function setActif_web ($actif_web) {
+	$this->actif_web = $actif_web;
+	return $this;
+}
+
+/**
+* Get obsolete - Obsolete ?
+* @return boolean
+*/
+public function getObsolete () {
+	$preValue = $this->preGetValue("obsolete"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->obsolete;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("obsolete")->isEmpty($data)) {
+		return $this->getValueFromParent("obsolete");
+	}
+	return $data;
+}
+
+/**
+* Set obsolete - Obsolete ?
+* @param boolean $obsolete
+* @return \Pimcore\Model\Object\Product
+*/
+public function setObsolete ($obsolete) {
+	$this->obsolete = $obsolete;
+	return $this;
 }
 
 /**
@@ -666,6 +730,32 @@ public function setPrice ($price) {
 }
 
 /**
+* Get weight - Poids pour qte unitaire (pas le poids de la lame)
+* @return string
+*/
+public function getWeight () {
+	$preValue = $this->preGetValue("weight"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->weight;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("weight")->isEmpty($data)) {
+		return $this->getValueFromParent("weight");
+	}
+	return $data;
+}
+
+/**
+* Set weight - Poids pour qte unitaire (pas le poids de la lame)
+* @param string $weight
+* @return \Pimcore\Model\Object\Product
+*/
+public function setWeight ($weight) {
+	$this->weight = $weight;
+	return $this;
+}
+
+/**
 * Get short_description - Description courte / Accroche
 * @return string
 */
@@ -766,6 +856,32 @@ public function getDescription () {
 */
 public function setDescription ($description) {
 	$this->description = $description;
+	return $this;
+}
+
+/**
+* Get extra_content1 - Contenu supplémenataire
+* @return string
+*/
+public function getExtra_content1 () {
+	$preValue = $this->preGetValue("extra_content1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("extra_content1")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("extra_content1")->isEmpty($data)) {
+		return $this->getValueFromParent("extra_content1");
+	}
+	return $data;
+}
+
+/**
+* Set extra_content1 - Contenu supplémenataire
+* @param string $extra_content1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setExtra_content1 ($extra_content1) {
+	$this->extra_content1 = $extra_content1;
 	return $this;
 }
 
@@ -1910,6 +2026,58 @@ public function getFixation_not_configurable () {
 */
 public function setFixation_not_configurable ($fixation_not_configurable) {
 	$this->fixation_not_configurable = $fixation_not_configurable;
+	return $this;
+}
+
+/**
+* Get configurable_free_1 - Configurable libre 1
+* @return string
+*/
+public function getConfigurable_free_1 () {
+	$preValue = $this->preGetValue("configurable_free_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_1");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_1 - Configurable libre 1
+* @param string $configurable_free_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_1 ($configurable_free_1) {
+	$this->configurable_free_1 = $configurable_free_1;
+	return $this;
+}
+
+/**
+* Get configurable_free_2 - Configurable libre 2
+* @return string
+*/
+public function getConfigurable_free_2 () {
+	$preValue = $this->preGetValue("configurable_free_2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_2")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_2");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_2 - Configurable libre 2
+* @param string $configurable_free_2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_2 ($configurable_free_2) {
+	$this->configurable_free_2 = $configurable_free_2;
 	return $this;
 }
 

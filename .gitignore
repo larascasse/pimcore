@@ -6,5 +6,6 @@ website/var/versions/*
 website/var/cache/*
 website/var/backup/*
 website/var/webdav/delete.dat
+website/var/assets/*
 
 

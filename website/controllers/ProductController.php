@@ -60,6 +60,46 @@ class ProductController extends Website_Controller_Action
 
     }
 
+    public function detailByEanAction() {
+
+        $this->enableLayout();
+        $this->setLayout("layout-lpn");
+
+        $definition = Object_Class::getByName("Product")->getFieldDefinitions();
+        
+        
+
+        
+
+        $productList = new Object_Product_List();
+        $conditionFilters = array("ean = '" . $this->getParam("ean") . "' OR code = '" . $this->getParam("ean") . "'");
+
+  
+
+        //$catalogList->setOrderKey("date");
+        $productList    ->setCondition(implode(" AND ", $conditionFilters))
+                        ->setOrder("ASC")
+                        ->getItems(0, 1);
+
+        if(count( $productList)>0) {
+            // "id" is the named parameters in "Static Routes"
+            $product = Object_Product::getById($productList[0]->getId());
+        }
+
+        
+
+
+        if(!$product instanceof Object_Product || !$product->isPublished()) {
+            // this will trigger a 404 error response
+            throw new \Zend_Controller_Router_Exception("invalid request");
+        }
+
+        $this->view->product = $product;
+        //$this->view->attributes = $definition;
+
+    }
+
+
     public function detailIntraAction() {
 
         $this->enableLayout();

@@ -81,9 +81,9 @@ class ProductController extends Website_Controller_Action
                         ->setOrder("ASC")
                         ->getItems(0, 1);
 
-        if(count( $productList)>0) {
+        if($productList->count()>0) {
             // "id" is the named parameters in "Static Routes"
-            $product = Object_Product::getById($productList[0]->getId());
+            $product = Object_Product::getById($productList->current()->getId());
         }
 
         

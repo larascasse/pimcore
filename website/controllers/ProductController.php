@@ -63,7 +63,7 @@ class ProductController extends Website_Controller_Action
     public function detailByEanAction() {
 
         $this->enableLayout();
-        $this->setLayout("layout-lpn");
+        $this->setLayout("layout-produit");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         

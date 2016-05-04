@@ -87,55 +87,7 @@
         <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
         <script src="/website/static_lpn/js/dymo.js"></script>
 -->
-<script>
 
-    // main menu
-    $(".navbar-wrapper ul.nav>li>ul").each(function () {
-        var li = $(this).parent();
-        var a = $("a.main", li);
-
-        $(this).addClass("dropdown-menu");
-        li.addClass("dropdown");
-        a.addClass("dropdown-toggle");
-        li.on("mouseenter", function () {
-            $("ul", $(this)).show();
-        });
-        li.on("mouseleave", function () {
-            $("ul", $(this)).hide();
-        });
-    });
-
-    // side menu
-    $(".bs-sidenav ul").each(function () {
-        $(this).addClass("nav");
-    });
-
-    <?php if(!$this->editmode) { ?>
-    $(document).ready(function() {
-        // initialize projekktor, the HTML5 video player
-        projekktor(
-            'video',
-            {playerFlashMP4: "/website/static/lib/projekktor/jarisplayer.swf"}
-        );
-
-        // lightbox (magnific)
-        $('a.thumbnail').magnificPopup({
-            type:'image',
-            gallery: {
-                enabled: true
-            }
-        });
-
-        $(".image-hotspot").tooltip();
-        $(".image-marker").tooltip({
-            title: function () {
-                //return 'Title: ' + info.data("title") + ' Description: ' + info.data('desc');
-                return $(this).attr("desc");
-            }
-        });
-    });
-    <?php } ?>
-</script>
 <script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
 

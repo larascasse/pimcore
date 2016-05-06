@@ -61,6 +61,7 @@
 
         $name=str_ireplace(" DECOFFRAGE ", " décoffrage ", $name);
         $name=str_ireplace(" DECOFRAGE ", " décoffrage ", $name);
+        $name=str_ireplace(" DECOR ", " décor ", $name);
         
 
 
@@ -122,6 +123,11 @@
         //$name = strtolower($name);
         $name = ucfirst($name);
 
+        $name=str_ireplace("pefc", "PEFC", $name);
+        $name=str_ireplace("prbis", "PRBis", $name);
+        $name=str_ireplace("epfl", "EPFL", $name);
+        $name=str_ireplace("epfl", "EPFL", $name);
+
 
         return trim($name);
 
@@ -133,7 +139,7 @@
             "TERRASSE FINITION" => "Produit de finition",
             "STRUCTURE" => "Produit de structure",
             "TERRASSE ACCESSOIRE" => "Accessoire pour terrasse",
-            "TERRASSE DALLE" => "Dalle de terasse",
+            "TERRASSE DALLE" => "Dalle de terrasse",
             );
         foreach ($types as $key => $value) {
             $splitted = explode($key." ", $name);

@@ -87,6 +87,10 @@
         <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
         <script src="/website/static_lpn/js/dymo.js"></script>
 -->
+ <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+
+
 
 <script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>

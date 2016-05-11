@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-05-02T14:23:51+02:00 */
+/** Generated at 2016-05-10T14:44:56+02:00 */
 
 /**
 * Inheritance: yes
@@ -15,6 +15,7 @@ namespace Pimcore\Model\Object;
 
 
 /**
+* @method static \Pimcore\Model\Object\Product getByConfigurable_free_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByActif_web ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByObsolete ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCode ($value, $limit = 0) 
@@ -81,7 +82,6 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByConfigurable_free_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByConfigurable_free_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_max ($value, $limit = 0) 
@@ -161,6 +161,7 @@ class Product extends Concrete {
 
 public $o_classId = 5;
 public $o_className = "product";
+public $configurable_free_1;
 public $actif_web;
 public $obsolete;
 public $code;
@@ -227,7 +228,6 @@ public $profil_not_configurable;
 public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
-public $configurable_free_1;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -311,6 +311,32 @@ public static function create($values = array()) {
 	$object = new static();
 	$object->setValues($values);
 	return $object;
+}
+
+/**
+* Get configurable_free_1 - Configurable libre 1
+* @return string
+*/
+public function getConfigurable_free_1 () {
+	$preValue = $this->preGetValue("configurable_free_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_1");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_1 - Configurable libre 1
+* @param string $configurable_free_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_1 ($configurable_free_1) {
+	$this->configurable_free_1 = $configurable_free_1;
+	return $this;
 }
 
 /**
@@ -730,7 +756,7 @@ public function setPrice ($price) {
 }
 
 /**
-* Get weight - Poids pour qte unitaire (pas le poids de la lame)
+* Get weight - Poids de base
 * @return string
 */
 public function getWeight () {
@@ -746,7 +772,7 @@ public function getWeight () {
 }
 
 /**
-* Set weight - Poids pour qte unitaire (pas le poids de la lame)
+* Set weight - Poids de base
 * @param string $weight
 * @return \Pimcore\Model\Object\Product
 */
@@ -2026,32 +2052,6 @@ public function getFixation_not_configurable () {
 */
 public function setFixation_not_configurable ($fixation_not_configurable) {
 	$this->fixation_not_configurable = $fixation_not_configurable;
-	return $this;
-}
-
-/**
-* Get configurable_free_1 - Configurable libre 1
-* @return string
-*/
-public function getConfigurable_free_1 () {
-	$preValue = $this->preGetValue("configurable_free_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->configurable_free_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
-		return $this->getValueFromParent("configurable_free_1");
-	}
-	return $data;
-}
-
-/**
-* Set configurable_free_1 - Configurable libre 1
-* @param string $configurable_free_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setConfigurable_free_1 ($configurable_free_1) {
-	$this->configurable_free_1 = $configurable_free_1;
 	return $this;
 }
 

@@ -32,7 +32,7 @@ search.on('render', function() {
 var hitTemplate =
   '<article class="hit">' +
       '<div class="product-picture-wrapper">' +
-        '<div class="product-picture"><img src="http:{{image_url}}" /></div>' +
+        '<div class="product-picture"><a href="#" onclick="showGallery(\'{{sku}}\');return false;"><img src="http:{{image_url}}" /></a></div>' +
       '</div>' +
       '<div class="product-desc-wrapper">' +
        '<div class="product-type"><a href="http://pim.laparqueterienouvelle.fr/ean/{{sku}}" target="_blank">Voir plus</a></div>' +

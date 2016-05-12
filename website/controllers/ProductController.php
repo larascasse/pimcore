@@ -257,6 +257,42 @@ class ProductController extends Website_Controller_Action
         }
     }
 
+    //http://pimcore.florent.local/ajax/jsonProductList/4416
+    public function jsonProductListAjax($categoryId) {
+        //$this->enableLayout();
+        
+        $categoryPath = Object_Category::getById($categoryId)->getFullPath();
+        $list = Object_Category::getList(array(
+                'limit' => 10,
+                'condition' => 'o_path LIKE \''.$categoryPath.'%\''
+      ));
+
+       
+        $childs = $list;
+        $categories = array();
+        foreach($childs as $child){
+            //OK on a toutes les categories parentes
+            $categories[] = $child->getFullPath();
+
+            //On recupere la liste des produits par categories
+            //On assigne les categories au produit
+            //On fait un export des produits avec la liste des categories !
+
+        }
+
+
+
+        $this->response = $categories;
+        $this->_helper->json->sendJson($this->response);
+    }
+
+    // http://pimcore.florent.local/ajax/jsonProductImages/3196
+    public function jsonProductImagesAjax($productId) {
+        $product  = Object_Product::getById($productId);
+        $this->response =  $product->getMage_realisationsJson($includeProductImage=true,$includeProductName=true);
+        $this->response = Zend_Json::decode($this->response);
+        $this->_helper->json->sendJson($this->response);
+    }
 
     
 

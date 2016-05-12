@@ -1088,9 +1088,104 @@ class Website_Product extends Object_Product {
 		return $this->getNonOwnerObjects("categories");
 	}
 
+	//Retourn le premier produit dont l'asset est depdenat
+	private function _getProductFromAsset($asset) {
+		//echo $asset->getId().'/';
+
+		//Ca marche,mais en fait prendre le produit courant marche bien ..
+		//Commenter la ligne ci dessous pour avec un prodiot référencé dans l'asset ou les dépenances
+		//A voir si c'est onction en full, on ne la met pas dans la classe Website_Asset, ou dans un helper
+		return $this;
 
 
-	public function getMage_realisationsJson() {
+		if($asset instanceof Asset) {
+
+			//D'abord on regarde si un produit n'st pas associé comme medtata
+			$product = $asset->getProperty("product");
+ 			if(!$product) {
+                $ean = $asset->getMetadata("product");
+
+                 $list = Object_Product::getList(array(
+	                'limit' => 1,
+	                'condition' => 'ean = \''.$ean.'\''
+	      			));
+
+                $product = $list->current();
+                if(!$product) {
+                    $list = Object_Product::getList(array(
+	                'limit' => 1,
+	                'condition' => 'code = \''.$ean.'\''
+	      			));
+	      			$product = $list->current();
+                }
+            }
+            if($product) {
+            	return $product;
+            }
+
+            //A partie de la on regarde dans les dépendances
+
+			$dependencies = $asset->getDependencies()->getRequiredBy();
+
+
+			//echo count($dependencies);
+
+			//si âs de depdance, on prend le folter au dessus
+		
+
+			if(count($dependencies)) {
+
+				foreach ($dependencies as $dependencie) {
+					//print_r($dependencie);
+
+
+
+					if(is_array($dependencie) && count($dependencie)>0 && is_array($dependencie[0])) {
+
+
+						$product = Object_Abstract::getById($dependencie[0]['id']);
+						if($product instanceof Object_Product)
+							return $product;
+						
+					}
+					else if(is_array($dependencie) && count($dependencie)>0 && $dependencie['type']  == 'object') {
+				
+
+						$product = Object_Abstract::getById($dependencie['id']);
+						if($product instanceof Object_Product)
+							return $product;
+						
+					}
+					else if(is_int($dependencie)) {
+			
+						$product = Object_Abstract::getById($dependencie);
+						if($product instanceof Object_Product && $product->getId()>0)
+							return $product;
+					}
+				}
+			}
+			//OK, pas de depenance, on regarde le folder du dessus
+			if(($folder = Asset::getById($asset->getParentId())) instanceof Asset_Folder) {
+				return $this->_getProductFromAsset($folder);
+			}
+
+		}
+		//die;
+		return;
+
+	}
+
+	public function getSku($product=false) {
+		if(!$product)
+			$product = $this;
+
+		if(strlen($product->getEan())>0)
+			return $product->getEan();
+		else
+			return $product->getCode();
+	}
+
+	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
@@ -1101,7 +1196,60 @@ class Website_Product extends Object_Product {
 		//print_r( $realisations);
 		$count=count($realisations);
 		$assetsArray=array();
-		for ($i=0; $i < $count; $i++) { 
+
+		$i=0;
+		if($includeProductImage) {
+			
+		
+			if($this->getImage_1()) {
+				
+				if($product) {
+					$return[] = $product->getName();
+				}
+
+				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_1()->getThumbnail("magento_realisation")->getPath();
+
+				$returnArray  = (object) array("base"=>$urlImage,"images"=>array($urlImage));
+
+				if($includeProductName) {
+					$returnArray->name = $this->getName();
+					$returnArray->sku = $this->getSku();
+				}
+
+				$return[] = $returnArray;
+
+    			/*$assetsArray[] = array (
+    				$this->getImage_1()->getThumbnail("magento_realisation")->getPath() => $this->getImage_1());*/
+    			$i++;
+			}
+		}
+		if($includeProductImage) {
+			
+			if($this->getImage_2()) {
+				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_2()->getThumbnail("magento_realisation")->getPath();
+				$return[count($return)-1]->images[] = $urlImage;
+				//$return[] = (object) array("base"=>$urlImage,"images"=>array($urlImage));
+
+    			/*$assetsArray[] = array (
+    				$this->getImage_2()->getThumbnail("magento_realisation")->getPath() => $this->getImage_2());
+    			$i++;*/
+			}
+		}
+		if($includeProductImage) {
+			if($this->getImage_3()) {
+				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_3()->getThumbnail("magento_realisation")->getPath();
+				$return[count($return)-1]->images[] = $urlImage;
+
+
+    			/*$assetsArray[] = array (
+    				$this->getImage_3()->getThumbnail("magento_realisation")->getPath() => $this->getImage_3());
+    			$i++;*/
+			}
+		}
+
+
+
+		/*for ($i=$i; $i < $count; $i++) { 
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
@@ -1109,7 +1257,10 @@ class Website_Product extends Object_Product {
 						$assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
 					}
 				}
-		}
+		}*/
+
+		
+
 
 		//$count=count($assetsArray);
 		if($count>0) {
@@ -1127,7 +1278,19 @@ class Website_Product extends Object_Product {
 				    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
 				    	}
 				    }
-				    $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+				    
+				    $returnArray  = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+
+					if($includeProductName) {
+						//echo $assets[0]->getId()."/";
+
+						$product = $this->_getProductFromAsset($assets[0]);
+						$returnArray->name = $product?$product->getName():"";
+						$returnArray->sku = $product?$product->getSku():"";
+					}
+
+					$return[] = $returnArray;
+
 
 				 }
 				 

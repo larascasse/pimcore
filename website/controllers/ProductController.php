@@ -289,9 +289,32 @@ class ProductController extends Website_Controller_Action
     // http://pimcore.florent.local/ajax/jsonProductImages/3196
     public function jsonProductImagesAjax($productId) {
         $product  = Object_Product::getById($productId);
-        $this->response =  $product->getMage_realisationsJson($includeProductImage=true,$includeProductName=true);
+        $this->response =  $product->getMage_realisationsJson($includeProductImage=true,$includeProductName=true,$includeTumb=true);
         $this->response = Zend_Json::decode($this->response);
         $this->_helper->json->sendJson($this->response);
+    }
+
+    // http://pimcore.florent.local/ajax/jsonProductImages/3196
+    public function jsonProductImagesByEanAjax($ean) {
+        $list = Object_Product::getList(array(
+                    'limit' => 1,
+                    'condition' => 'ean = \''.$ean.'\''
+                    ));
+
+        $product = $list->current();
+        //print_r($product);
+        if(!$product) {
+
+            $list = Object_Product::getList(array(
+            'limit' => 1,
+            'condition' => 'code = \''.$ean.'\''
+            ));
+            $product = $list->current();
+        }
+        if($product){
+
+            $this->jsonProductImagesAjax($product->getId());
+        }
     }
 
     

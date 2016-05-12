@@ -1185,7 +1185,7 @@ class Website_Product extends Object_Product {
 			return $product->getCode();
 	}
 
-	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false) {
+	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false,$includeProductThumb) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
@@ -1211,6 +1211,11 @@ class Website_Product extends Object_Product {
 
 				$returnArray  = (object) array("base"=>$urlImage,"images"=>array($urlImage));
 
+				if($includeProductThumb) {
+					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_1()->getThumbnail("galleryThumbnail")->getPath();
+					$returnArray->thumb = array($urlImage);
+				}
+
 				if($includeProductName) {
 					$returnArray->name = $this->getName();
 					$returnArray->sku = $this->getSku();
@@ -1228,17 +1233,22 @@ class Website_Product extends Object_Product {
 			if($this->getImage_2()) {
 				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_2()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
-				//$return[] = (object) array("base"=>$urlImage,"images"=>array($urlImage));
-
-    			/*$assetsArray[] = array (
-    				$this->getImage_2()->getThumbnail("magento_realisation")->getPath() => $this->getImage_2());
-    			$i++;*/
+				
+				if($includeProductThumb) {
+					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_2()->getThumbnail("galleryThumbnail")->getPath();
+					$return[count($return)-1]->thumb[] = $urlImage;
+				}
 			}
 		}
 		if($includeProductImage) {
 			if($this->getImage_3()) {
 				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_3()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
+
+				if($includeProductThumb) {
+					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_3()->getThumbnail("galleryThumbnail")->getPath();
+					$return[count($return)-1]->thumb[] = $urlImage;
+				}
 
 
     			/*$assetsArray[] = array (
@@ -1280,6 +1290,11 @@ class Website_Product extends Object_Product {
 				    }
 				    
 				    $returnArray  = (object) array("base"=>$urlImage,"images"=>$arrayImages);
+
+				    if($includeProductThumb) {
+					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("galleryThumbnail")->getPath();
+					$returnArray->thumb = array($urlImage);
+				}
 
 					if($includeProductName) {
 						//echo $assets[0]->getId()."/";

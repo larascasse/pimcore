@@ -46,6 +46,12 @@
 
     <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
+
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css" />
+  <link rel="stylesheet" type="text/css" href="/website/static_lpn/algolia/main.css" />
+
+
     <?php echo $this->headLink(); ?>
 
     <?php if($this->editmode) { ?>
@@ -185,7 +191,7 @@
     <ol class="indicator"></ol>
 </div>
 
-
+<script src="http://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 <script src="/website/static/bootstrap/dist/js/bootstrap.js"></script>
 <script src="http://www.laparqueterienouvelle.fr/wp-content/themes/parqueterie_nouvelle/js/gmaps.js"></script>
@@ -251,8 +257,11 @@
 <script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
 
+
+
 <link rel="stylesheet" href="/website/static_lpn/blueimp/css/blueimp-gallery.min.css">
 <script src="/website/static_lpn/blueimp/js/blueimp-gallery.min.js"></script>
+<script src="/website/static_lpn/algolia/search.js"></script>
 
 
 </body>

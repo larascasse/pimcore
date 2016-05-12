@@ -26,6 +26,11 @@ class LpnController extends Website_Controller_Action
         $this->enableLayout();
     }
 
+     public function algoliaAction() {
+        $this->view->layout()->setLayout("layout-algolia");
+        $this->enableLayout();
+    }
+
 
     public function contactFormAction() {
         $success = false;

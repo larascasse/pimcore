@@ -4,7 +4,7 @@
 var search = instantsearch({
   appId: 'R7ZI25KI5A',
   apiKey: '4d94d16a91186890589b12392cf37a3b',
-  indexName: 'magentoprod_terrasses_storeview_fr_products'
+  indexName: 'magentoprod_matieres_fr_products'
 });
 
 search.addWidget(

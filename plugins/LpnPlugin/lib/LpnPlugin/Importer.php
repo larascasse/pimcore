@@ -50,7 +50,7 @@
 
 
         $name=str_ireplace("PREPATINE ", "prépratiné ", $name);
-        $name=str_ireplace("ELEGANCE ", "elégance ", $name);
+        $name=str_ireplace("ELEGANCE ", "élégance ", $name);
 
         $name=str_ireplace(" PAVE ", " pavé ", $name);
 
@@ -79,6 +79,7 @@
 
         $name=str_ireplace("CHENE ", "Chêne ", $name);
         $name=str_ireplace("FRENE ", "Frêne ", $name);
+        $name=str_ireplace("HETRE ", "Hêtre ", $name);
 
         $name=str_ireplace("TETE ", "Tête ", $name);
 
@@ -87,21 +88,21 @@
 
 
         $name=str_ireplace("DEGRISEUR ", "Dégriseur ", $name);
-        $name=str_ireplace(" STRUCTURE ", " Structuré ", $name);
-        $name=str_ireplace(" DESTRUCTURE ", " Déstructuré ", $name);
+        $name=str_ireplace(" STRUCTURE ", " structuré ", $name);
+        $name=str_ireplace(" DESTRUCTURE ", " déstructuré ", $name);
 
         $name=str_ireplace(" BOMBE ", " Bombé ", $name);
 
-        $name=str_ireplace("ANTIDERAPANT", "Antidérapant", $name);
+        $name=str_ireplace("ANTIDERAPANT", "antidérapant", $name);
         $name=str_ireplace("IPE ", "Ipé ", $name);
         $name=str_ireplace("IPE/", "Ipé/", $name);
 
         $name=str_ireplace(" A ", " à ", $name);
         $name=str_ireplace("MELEZE ", "Mélèze ", $name);
         $name=str_ireplace("PEIGNE", "Peigné", $name);
-        $name=str_ireplace("THERMOCHAUFFE ", "Thermochauffé ", $name);
-        $name=str_ireplace("STRIEE ", "Striée ", $name);
-        $name=str_ireplace("RESINEUX ", "Résineux ", $name);
+        $name=str_ireplace("THERMOCHAUFFE ", "thermochauffé ", $name);
+        $name=str_ireplace("STRIEE ", "striée ", $name);
+        $name=str_ireplace("RESINEUX ", "résineux ", $name);
 
         $name=str_ireplace("d'aujourd' hui", "d'aujourd'hui", $name);
         $name=str_ireplace("d' orgine", "d'orgine", $name);
@@ -128,6 +129,8 @@
         $name=str_ireplace("prbis", "PRBis", $name);
         $name=str_ireplace("epfl", "EPFL", $name);
         $name=str_ireplace("epfl", "EPFL", $name);
+        $name=str_ireplace("upec", "UPEC", $name);
+
 
 
         return trim($name);

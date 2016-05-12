@@ -174,6 +174,18 @@
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
 
+<!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 <script src="/website/static/bootstrap/dist/js/bootstrap.js"></script>
 <script src="http://www.laparqueterienouvelle.fr/wp-content/themes/parqueterie_nouvelle/js/gmaps.js"></script>
@@ -238,6 +250,9 @@
 </script>
 <script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
+
+<link rel="stylesheet" href="/website/static_lpn/blueimp/css/blueimp-gallery.min.css">
+<script src="/website/static_lpn/blueimp/js/blueimp-gallery.min.js"></script>
 
 
 </body>

@@ -1278,6 +1278,7 @@ class Website_Product extends Object_Product {
 			for ($i=0; $i < $count; $i++) { 
 				$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 				 $arrayImages = array();
+				 $arrayThumbs = array();
 
 				 if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
 				 
@@ -1286,15 +1287,19 @@ class Website_Product extends Object_Product {
 				 	foreach ($assets as $asset) {
 				 		if($asset instanceof Asset_Image) {
 				    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				    		
+				    		if($includeProductThumb) {
+				    			$arrayThumbs[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("galleryThumbnail")->getPath();
+				    		}
 				    	}
 				    }
 				    
 				    $returnArray  = (object) array("base"=>$urlImage,"images"=>$arrayImages);
 
 				    if($includeProductThumb) {
-					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("galleryThumbnail")->getPath();
-					$returnArray->thumb = array($urlImage);
-				}
+				
+						$returnArray->thumb = $arrayThumbs;
+					}
 
 					if($includeProductName) {
 						//echo $assets[0]->getId()."/";

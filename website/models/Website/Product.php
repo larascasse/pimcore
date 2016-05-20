@@ -1185,7 +1185,7 @@ class Website_Product extends Object_Product {
 			return $product->getCode();
 	}
 
-	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false,$includeProductThumb) {
+	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false,$includeProductThumb=false) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 

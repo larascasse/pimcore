@@ -275,7 +275,8 @@ class Website_Product extends Object_Product {
 			'rendement','accessoirepopin','colisage','nbrpp','leadtime','shipping_type',
 			'longueur','longueur_max','longueur_min','longueur_txt',
 			'quantity_min','quantity_max','quantity_min_max_txt',
-			'extra_content1','extra_content2'
+			'extra_content1','extra_content2',
+			'actif_web'
 
 
 			);

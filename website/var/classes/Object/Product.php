@@ -1,6 +1,6 @@
 <?php 
 
-/** Generated at 2016-05-10T14:44:56+02:00 */
+/** Generated at 2016-05-24T14:33:42+02:00 */
 
 /**
 * Inheritance: yes
@@ -96,6 +96,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByEssence ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByChoix ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByClasse ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByClasse_service ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByEpaisseurUsure ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByExtras ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByChanfreins ($value, $limit = 0) 
@@ -242,6 +243,7 @@ public $qualite;
 public $essence;
 public $choix;
 public $classe;
+public $classe_service;
 public $epaisseurUsure;
 public $extras;
 public $chanfreins;
@@ -2394,7 +2396,7 @@ public function setChoix ($choix) {
 }
 
 /**
-* Get classe - Classe
+* Get classe - Classe d'usage
 * @return string
 */
 public function getClasse () {
@@ -2410,12 +2412,38 @@ public function getClasse () {
 }
 
 /**
-* Set classe - Classe
+* Set classe - Classe d'usage
 * @param string $classe
 * @return \Pimcore\Model\Object\Product
 */
 public function setClasse ($classe) {
 	$this->classe = $classe;
+	return $this;
+}
+
+/**
+* Get classe_service - Classe de service
+* @return string
+*/
+public function getClasse_service () {
+	$preValue = $this->preGetValue("classe_service"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->classe_service;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("classe_service")->isEmpty($data)) {
+		return $this->getValueFromParent("classe_service");
+	}
+	return $data;
+}
+
+/**
+* Set classe_service - Classe de service
+* @param string $classe_service
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_service ($classe_service) {
+	$this->classe_service = $classe_service;
 	return $this;
 }
 

@@ -457,6 +457,16 @@ aside {
      width: 100%;
     margin-bottom: 10px
   }
+
+  .product-name {
+    height: 40px;
+    overflow:hidden;
+    margin-bottom: 0px;
+  }
+  .product-desc-wrapper {
+    //padding: 70px 10px 10px ($sidebar-width + 60px);
+    height: 160px;
+  }
  
 }
 .btn {
@@ -467,3 +477,4 @@ aside {
   background-color: #35d2ff;
   border-color: #35d2ff;
 }
+

@@ -346,6 +346,12 @@ aside {
   .hit .btn-secondary {
     width: 100%;
     margin-bottom: 10px; }
+  .hit .product-name {
+    height: 40px;
+    overflow: hidden;
+    margin-bottom: 0px; }
+  .hit .product-desc-wrapper {
+    height: 160px; }
 
 .btn {
   border-radius: 1px; }

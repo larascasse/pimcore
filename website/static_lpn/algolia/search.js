@@ -44,7 +44,7 @@ var hitTemplate =
       '<div class="product-desc-wrapper">' +
      
        '<div class="product-type">{{{_highlightResult.subtype.value}}}</div>' +
-        '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.name.value}}}</a></div>' +
+        '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.short_name.value}}}{{short_name}}</a></div>' +
         '<div class="product-type">{{sku}}</div>' +
         '<button type="button" class="btn btn-secondary" onclick="showStock(\'{{sku}}\');return false;">stock: {{stock_qty}} <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>' +
        '<button type="button" class="btn btn-secondary" onclick="showGallery(\'{{sku}}\');return false;">photos <span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></button>' +

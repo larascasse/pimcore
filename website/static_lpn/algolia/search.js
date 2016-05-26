@@ -5,6 +5,12 @@ var search = instantsearch({
   appId: 'R7ZI25KI5A',
   apiKey: '4d94d16a91186890589b12392cf37a3b',
   indexName: 'magentoprod_matieres_fr_products'
+  //
+  //searchFunction] A hook that will be called each time a search needs to be done, with the
+   //helper as a parameter. It's your responsibility to call helper.search(). This option allows you to avoid doing
+   //searches at page load for example.numberLocale
+   //searchParameters] Additional parameters to pass to the Algolia API.
+   //urlSync] Url synchronization configuration
 });
 
 search.addWidget(
@@ -32,22 +38,24 @@ search.on('render', function() {
 var hitTemplate =
   '<article class="hit">' +
       '<div class="product-picture-wrapper">' +
-        '<div class="product-picture"><a href="#" onclick="showGallery(\'{{sku}}\');return false;"><img src="http:{{image_url}}" /></a></div>' +
+
+        '<div class="product-picture"><a href="#" onclick="showGallery(\'{{sku}}\');return false;"><img src="http://eshop.laparqueterienouvelle.fr/media/{{image_url}}" /></a></div>' +
       '</div>' +
       '<div class="product-desc-wrapper">' +
-       '<div class="product-type"><a href="http://pim.laparqueterienouvelle.fr/ean/{{sku}}" target="_blank">Voir plus</a></div>' +
-       '<div class="product-type"><a href="#" onclick="showGallery(\'{{sku}}\');return false;">Photos</a></div>' +
-
+     
+       '<div class="product-type">{{{_highlightResult.subtype.value}}}</div>' +
         '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.name.value}}}</a></div>' +
-
-        '<div class="product-type">{{{_highlightResult.subtype.value}}}</div>' +
+        '<div class="product-type">{{sku}}</div>' +
+        '<button type="button" class="btn btn-secondary" onclick="showStock(\'{{sku}}\');return false;">stock: {{stock_qty}} <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>' +
+       '<button type="button" class="btn btn-secondary" onclick="showGallery(\'{{sku}}\');return false;">photos <span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></button>' +
+        '<a href="http://pim.laparqueterienouvelle.fr/ean/{{sku}}" target="_blank">Voir plus</a>' +
         '<div class="product-price">{{price.default_formated}}</div>' +
         //'<div class="product-rating">{{#stars}}<span class="ais-star-rating--star{{^.}}__empty{{/.}}"></span>{{/stars}}</div>' +
       '</div>' +
   '</article>';
 
 var noResultsTemplate =
-  '<div class="text-center">No results found matching <strong>{{query}}</strong>.</div>';
+  '<div class="text-center">Aucun résultat sur la recherche <strong>{{query}}</strong>.</div>';
 
 var menuTemplate =
   '<a href="javascript:void(0);" class="facet-item {{#isRefined}}active{{/isRefined}}"><span class="facet-name"><i class="fa fa-angle-right"></i> {{name}}</span class="facet-name"></a>';
@@ -75,7 +83,8 @@ search.addWidget(
         hit.stars.push(i <= hit.rating);
       }
       return hit;
-    }
+    },
+    //getConfiguration : Let the widget update the configuration of the search with new parameters
   })
 );
 
@@ -86,8 +95,8 @@ search.addWidget(
       active: 'active'
     },
     labels: {
-      previous: '<i class="fa fa-angle-left fa-2x"></i> Previous page',
-      next: 'Next page <i class="fa fa-angle-right fa-2x"></i>'
+      previous: '<i class="fa fa-angle-left fa-2x"></i> précedent',
+      next: 'suivant <i class="fa fa-angle-right fa-2x"></i>'
     },
     showFirstLast: false
   })
@@ -142,14 +151,13 @@ search.addWidget(
 );
 
 search.addWidget(
-  instantsearch.widgets.toggle({
+  instantsearch.widgets.refinementList({
     container: '#stock',
-    attributeName: 'in_stock',
-    userValues : {on: '1', off: '0'},
-    label : 'En stock',
+    attributeName: 'stock_qty',
+    label : 'Qté en stock',
     templates: {
       item: facetTemplateCheckbox,
-      header: '<div class="facet-title">En stock</div class="facet-title">'
+      header: '<div class="facet-title">Qté. stock</div class="facet-title">'
     }
   })
 );
@@ -176,7 +184,7 @@ search.addWidget(
       active: 'active'
     },
     templates: {
-      header: '<div class="facet-title">Prices</div class="facet-title">',
+      header: '<div class="facet-title">Prix</div class="facet-title">',
       //item : ''
     }
   })
@@ -198,7 +206,7 @@ search.addWidget(
   instantsearch.widgets.clearAll({
     container: '#clear-all',
     templates: {
-      link: '<i class="fa fa-eraser"></i> Clear all filters'
+      link: '<i class="fa fa-eraser"></i> Effacer les filtres'
     },
     cssClasses: {
       root: 'btn btn-block btn-default'

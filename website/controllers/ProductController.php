@@ -1,5 +1,13 @@
 <?php
 
+ini_set('display_errors', 1);
+        error_reporting(E_ALL);
+
+        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/urldef.php';
+        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/LPNEntities.php';
+        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/functions.php';
+
+
 class ProductController extends Website_Controller_Action
 {
     
@@ -315,6 +323,90 @@ class ProductController extends Website_Controller_Action
 
             $this->jsonProductImagesAjax($product->getId());
         }
+    }
+
+    // http://pimcore.florent.local/ajax/jsonProductStockByEan/6303002861800
+    public function jsonProductStockByEanAjax($ean) {
+        
+        try {
+            $svc = new LPNEntities(LPN_SERVICE_URL); 
+            $query = getQuery($svc,"ean-stock",$ean,0,false); 
+            $response = $query->Execute();
+            do
+                {
+                if($nextProductToken != null)  {            
+                    $response = $svc->Execute($nextProductToken);
+                }
+                 $stockResponse=array();
+                 $stockResponse["total_dispo"] = 0;
+                 $stockResponse["total_commande"] = 0;
+                 $stockResponse["dispo"] =false;
+
+                
+
+
+
+                 $stockResponse["data"] = array();
+
+                 foreach($response->Result as $Stock)
+                    {
+
+                         $nombre = $Stock->Nombre;
+
+             
+                         $colisage = $Stock->CATALOGUE_EAN[0]->colisage;
+         
+                          if($colisage && $colisage>0 && $colisage!=1)
+                           $nombre = $nombre * $colisage; 
+
+
+                        if(!isset($stockResponse["product"]))
+                    $stockResponse["product"] = $Stock->CATALOGUE_EAN[0];
+                      $p = array();
+        
+                      $stockResponse["data"][$Stock->Code_Depot] = array();
+                      $stockResponse["data"][$Stock->Code_Depot] = $nombre;
+
+                      if(stristr($Stock->Code_Depot, "C")!==false) {
+                         $stockResponse["total_commande"] += -$nombre;
+                      }
+                      else {
+                        $stockResponse["total_dispo"] += $nombre;
+                      }
+
+                     
+
+                }
+                $stockResponse["dispo"] = $stockResponse["total_dispo"] >0;
+
+                 $this->response =  $stockResponse;
+                 
+                    $this->_helper->json->sendJson($this->response);
+            }
+            while(($nextProductToken = $response->GetContinuation()) != null);
+
+        }
+        catch(DataServiceRequestException $ex)
+        {
+                echo 'Error: while running the query ' . $ex->Response->getQuery();
+                echo "<br/>";
+                echo $ex->Response->getError();        
+        }
+        catch (ODataServiceException $e)
+        {
+            print_r($e);
+             echo "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getDetailedError();
+        }
+        catch (InternalError $e)
+        {
+            print_r($e);
+             echo "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getDetailedError();
+        }
+        if($product){
+
+            $this->jsonProductImagesAjax($product->getId());
+        }
+        echo "klmklmklm";
     }
 
     

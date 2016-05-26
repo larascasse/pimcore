@@ -1,3 +1,5 @@
+// /Users/florent/Dropbox/01_LESMECANIQUES/OBD/19_Pim/htdocs/website/static_lpn/algolia/main.css
+
 $gray-light: #EEE;
 $gray: #888;
 $dark-blue: #222F3F;
@@ -99,7 +101,7 @@ aside {
   bottom: 0;
   width: $sidebar-width;
   padding: 20px;
-  border-right: 1px solid $gray-light;
+  //border-right: 1px solid $gray-light;
   background: #FFFFFF;
   .facet-category-title {
     font-size: 1.2em;
@@ -295,7 +297,7 @@ aside {
 }
 
 .results-wrapper {
-  padding: 70px 10px 10px ($sidebar-width + 10px);
+  padding: 70px 10px 10px ($sidebar-width + 20px);
 }
 
 #results-topbar {
@@ -367,7 +369,7 @@ aside {
     }
   }
   .product-desc-wrapper {
-    height: 100px;
+    height: 150px;
     width: 100%;
     overflow: hidden;
   }
@@ -439,4 +441,29 @@ aside {
   text-align: center;
   font-size: .8em;
   padding: 10px;
+}
+
+
+//FB
+.product-name a, a {
+  color:#000000;
+}
+.hit {
+  width: 30%;
+  .product-type {
+    margin-bottom: 5px;
+  }
+  .btn-secondary {
+     width: 100%;
+    margin-bottom: 10px
+  }
+ 
+}
+.btn {
+  border-radius: 1px;
+}
+.btn-secondary {
+  color: #ffffff;
+  background-color: #35d2ff;
+  border-color: #35d2ff;
 }

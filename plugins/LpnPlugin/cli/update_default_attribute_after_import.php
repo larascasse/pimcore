@@ -32,9 +32,10 @@ Pimcore_Model_Cache::disable();
         $list->load();
 
         $objects = array();
-        Logger::debug("objects in list:" . count($list->getObjects()));
+         echo "objects in list ".count($list->getObjects()).'\n';
+        //Logger::debug("objects in list:" . count($list->getObjects()));
         foreach ($list->getObjects() as $object) {
-
+            echo "update ".$object->getName().'\n';
             //COPIE DE SCIERGNER COURT
             $value  = $object->getValueForFieldName('name_scienergie_court');
             $object->setValue('name',NULL);

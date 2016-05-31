@@ -44,7 +44,7 @@ foreach ($list->getObjects() as $object) {
     $value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
-    $object->setValue('name',null);
+    /*$object->setValue('name',null);
     $object->setValue('lesplus',null);
     $object->setValue('catalogue',null);
     $object->setValue('subtype',null);
@@ -59,8 +59,27 @@ foreach ($list->getObjects() as $object) {
     $object->setValue('support',null);
     $object->setValue('pefc',null);
     $object->setValue('meta_title',null);
-    $object->setValue('meta_description',null);
+    $object->setValue('meta_description',null);*/
+
     
+    $object->name='';
+$object->lesplus='';
+$object->catalogue='';
+$object->subtype='';
+$object->price='';
+$object->weight='';
+$object->leadtime='';
+$object->shipping_type='';
+$object->characteristics_others='';
+$object->origine_bois='';
+$object->country_of_manufacture='';
+$object->norme_sanitaire='';
+$object->support='';
+$object->pefc='';
+$object->meta_title='';
+$object->meta_description='';
+
+
     $object->setValue('configurable_free_1',$value);
     $object->setValue('pimonly_name_suffixe',$value);
     $object->setPublished(true);

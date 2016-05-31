@@ -14,34 +14,37 @@ define("PIMCORE_ADMIN", true);
 Pimcore_Model_Cache::disable();
 
 
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mebj0000bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mebj0240bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mebs1000bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mepsb000bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mepsh000bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000meqro000bf' . "/%'");
-        $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mesco000bf' . "/%'");
+$conditionFilters = array("
+       o_path LIKE '/catalogue/_product_base__/20strat/ap000mebj0000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mebj0240bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mebs1000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mepsb000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mepsh000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000meqro000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mesco000bf/%'
+
+    ");
 
 
-        $list = new Pimcore\Model\Object\Listing();
-        $list->setCondition(implode(" OR ", $conditionFilters));
-        $list->setOrder("ASC");
-        $list->setOrderKey("o_id");
+$list = new Pimcore\Model\Object\Listing();
+$list->setCondition(implode(" AND ", $conditionFilters));
+//$list->setOrder("ASC");
+//$list->setOrderKey("o_id");
 
- 
-        $list->load();
 
-        $objects = array();
-         echo "objects in list ".count($list->getObjects()).'\n';
-        //Logger::debug("objects in list:" . count($list->getObjects()));
-        foreach ($list->getObjects() as $object) {
-            echo "update ".$object->getName().'\n';
-            //COPIE DE SCIERGNER COURT
-            $value  = $object->getValueForFieldName('name_scienergie_court');
-            $object->setValue('name',NULL);
-            $object->setValue('configurable_free_1',null);
-            $object->setValue('pimonly_name_suffixe',$value);
-            $object->save();
-        }
+$list->load();
+
+$objects = array();
+ echo "objects in list ".count($list->getObjects()).'\n';
+//Logger::debug("objects in list:" . count($list->getObjects()));
+foreach ($list->getObjects() as $object) {
+    echo "update ".$object->getName().'\n';
+    //COPIE DE SCIERGNER COURT
+    $value  = $object->getValueForFieldName('name_scienergie_court');
+    $object->setValue('name',NULL);
+    $object->setValue('configurable_free_1',null);
+    $object->setValue('pimonly_name_suffixe',$value);
+    $object->save();
+}
 
 ?>

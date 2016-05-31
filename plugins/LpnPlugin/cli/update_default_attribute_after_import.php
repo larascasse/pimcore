@@ -41,10 +41,25 @@ $objects = array();
 foreach ($list->getObjects() as $object) {
     echo "update ".$object->getName().'\n';
     //COPIE DE SCIERGNER COURT
-    $value  = $object->getValueForFieldName('name_scienergie_court');
+    $value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
     $inheritance = Object_Abstract::doGetInheritedValues(); 
-    Object_Abstract::setGetInheritedValues(true); 
+    Object_Abstract::setGetInheritedValues(false); 
     $object->setValue('name','');
+    $object->setValue('lesplus','');
+    $object->setValue('catalogue','');
+    $object->setValue('subtype','');
+    $object->setValue('price','');
+    $object->setValue('weight','');
+    $object->setValue('leadtime','');
+    $object->setValue('shipping_type','');
+    $object->setValue('characteristics_others','');
+    $object->setValue('origine_bois','');
+    $object->setValue('country_of_manufacture','');
+    $object->setValue('norme_sanitaire','');
+    $object->setValue('support','');
+    $object->setValue('pefc','');
+    $object->setValue('meta_title','');
+    $object->setValue('meta_description','');
     $object->setValue('configurable_free_1',$value);
     $object->setValue('pimonly_name_suffixe',$value);
     $object->save();

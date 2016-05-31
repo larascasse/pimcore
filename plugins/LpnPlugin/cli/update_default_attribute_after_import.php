@@ -18,11 +18,11 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebj0000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebj0240bf/%'
+       o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-barre-jonction/ap000mebj0000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-barre-jonction/ap000mebj0240bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebs1000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mepsb000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mepsh000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-plinthes/ap000mepsb000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-plinthes/ap000mepsh000bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000meqro000bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mesco000bf/%'
 
@@ -79,7 +79,7 @@ foreach ($list->getObjects() as $object) {
 
     $objectToSave->setPublished(true);
     $objectToSave->save();
-    
+
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }

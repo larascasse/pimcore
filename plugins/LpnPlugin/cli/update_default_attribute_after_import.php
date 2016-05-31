@@ -43,7 +43,7 @@ foreach ($list->getObjects() as $object) {
     //COPIE DE SCIERGNER COURT
     $value  = $object->getValueForFieldName('name_scienergie_court');
     $object->setValue('name','');
-    $object->setValue('configurable_free_1',null);
+    $object->setValue('configurable_free_1',$value);
     $object->setValue('pimonly_name_suffixe',$value);
     $object->save();
 }

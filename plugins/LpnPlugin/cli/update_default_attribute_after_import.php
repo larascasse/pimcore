@@ -62,6 +62,7 @@ foreach ($list->getObjects() as $object) {
     $object->setValue('meta_description','');
     $object->setValue('configurable_free_1',$value);
     $object->setValue('pimonly_name_suffixe',$value);
+    $object->setPublished(true);
     $object->save();
     Object_Abstract::setGetInheritedValues($inheritance); 
 

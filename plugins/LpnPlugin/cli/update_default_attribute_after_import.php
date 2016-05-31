@@ -27,6 +27,7 @@ $conditionFilters = array("
 
 
 $list = new Pimcore\Model\Object\Listing();
+$list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
@@ -41,7 +42,7 @@ foreach ($list->getObjects() as $object) {
     echo "update ".$object->getName().'\n';
     //COPIE DE SCIERGNER COURT
     $value  = $object->getValueForFieldName('name_scienergie_court');
-    $object->setValue('name',NULL);
+    $object->setValue('name','');
     $object->setValue('configurable_free_1',null);
     $object->setValue('pimonly_name_suffixe',$value);
     $object->save();

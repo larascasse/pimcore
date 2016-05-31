@@ -9,19 +9,22 @@ ini_set("max_execution_time", "-1");
 
 //execute in admin mode
 define("PIMCORE_ADMIN", true);
+Pimcore::setAdminMode();
+Object_Abstract::setHideUnpublished(false);
+Object_Abstract::setGetInheritedValues(false);
 
 
 Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/20strat/ap000mebj0000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mebj0240bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mebs1000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mepsb000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mepsh000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000meqro000bf/%'
-    OR o_path LIKE '/catalogue/_product_base__/20strat/ap000mesco000bf/%'
+       o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebj0000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebj0240bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebs1000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mepsb000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mepsh000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000meqro000bf/%'
+    OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mesco000bf/%'
 
     ");
 

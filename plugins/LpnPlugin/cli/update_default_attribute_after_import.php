@@ -42,10 +42,14 @@ foreach ($list->getObjects() as $object) {
     echo "update ".$object->getName().'\n';
     //COPIE DE SCIERGNER COURT
     $value  = $object->getValueForFieldName('name_scienergie_court');
+    $inheritance = Object_Abstract::doGetInheritedValues(); 
+    Object_Abstract::setGetInheritedValues(true); 
     $object->setValue('name','');
     $object->setValue('configurable_free_1',$value);
     $object->setValue('pimonly_name_suffixe',$value);
     $object->save();
+    Object_Abstract::setGetInheritedValues($inheritance); 
+
 }
 
 ?>

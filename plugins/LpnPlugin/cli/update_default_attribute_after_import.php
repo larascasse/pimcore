@@ -44,46 +44,36 @@ foreach ($list->getObjects() as $object) {
     $value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
-    /*$object->setValue('name',null);
-    $object->setValue('lesplus',null);
-    $object->setValue('catalogue',null);
-    $object->setValue('subtype',null);
-    $object->setValue('price',null);
-    $object->setValue('weight',null);
-    $object->setValue('leadtime',null);
-    $object->setValue('shipping_type',null);
-    $object->setValue('characteristics_others',null);
-    $object->setValue('origine_bois',null);
-    $object->setValue('country_of_manufacture',null);
-    $object->setValue('norme_sanitaire',null);
-    $object->setValue('support',null);
-    $object->setValue('pefc',null);
-    $object->setValue('meta_title',null);
-    $object->setValue('meta_description',null);*/
 
+    $objectToSave = Object::getById($object->getId());
+
+    $values = array();
     
-    $object->name='';
-$object->lesplus='';
-$object->catalogue='';
-$object->subtype='';
-$object->price='';
-$object->weight='';
-$object->leadtime='';
-$object->shipping_type='';
-$object->characteristics_others='';
-$object->origine_bois='';
-$object->country_of_manufacture='';
-$object->norme_sanitaire='';
-$object->support='';
-$object->pefc='';
-$object->meta_title='';
-$object->meta_description='';
+    $values['name']='';
+    $values['lesplus']='';
+    $values['catalogue']='';
+    $values['subtype']='';
+    $values['price']='';
+    $values['weight']='';
+    $values['leadtime']='';
+    $values['shipping_type']='';
+    $values['characteristics_others']='';
+    $values['origine_bois']='';
+    $values['country_of_manufacture']='';
+    $values['norme_sanitaire']='';
+    $values['support']='';
+    $values['pefc']='';
+    $values['meta_title']='';
+    $values['meta_description']='';
 
 
-    $object->setValue('configurable_free_1',$value);
-    $object->setValue('pimonly_name_suffixe',$value);
-    $object->setPublished(true);
-    $object->save();
+    $values['configurable_free_1'] = $value;
+    $values['pimonly_name_suffixe'] = $value;
+    $objectToSave->setValues($values);
+
+
+    $objectToSave->setPublished(true);
+    $objectToSave->save();
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }

@@ -68,15 +68,18 @@ foreach ($list->getObjects() as $object) {
     $values['pefc']='';
     $values['meta_title']='';
     $values['meta_description']='';
+    $values['no_stock_delay']='';
 
 
     $values['configurable_free_1'] = $value;
     $values['pimonly_name_suffixe'] = $value;
+
     $objectToSave->setValues($values);
 
 
     $objectToSave->setPublished(true);
     $objectToSave->save();
+    
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }

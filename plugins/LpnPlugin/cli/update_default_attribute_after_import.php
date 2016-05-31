@@ -23,7 +23,7 @@ Pimcore_Model_Cache::disable();
         $conditionFilters = array("o_path LIKE '" . '/catalogue/_product_base__/20strat/ap000mesco000bf' . "/%'");
 
 
-        $list = new $listClass();
+        $list = new Object_Product_List();
         $list->setCondition(implode(" OR ", $conditionFilters));
         $list->setOrder("ASC");
         $list->setOrderKey("o_id");

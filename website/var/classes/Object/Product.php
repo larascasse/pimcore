@@ -1,12 +1,12 @@
 <?php 
 
-/** Generated at 2016-05-24T14:33:42+02:00 */
+/** Generated at 2016-06-09T10:21:22+02:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          89.156.18.229
+* IP:          85.169.95.236
 */
 
 
@@ -16,6 +16,10 @@ namespace Pimcore\Model\Object;
 
 /**
 * @method static \Pimcore\Model\Object\Product getByConfigurable_free_1 ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_name_suffixe ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByPimonly_dimensions ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByShort_name ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByName_scienergie_court ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByActif_web ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByObsolete ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCode ($value, $limit = 0) 
@@ -23,14 +27,11 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByName_scienergie ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByCatalogue ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getBySubtype ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getBySubtype2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByTeinte_lpn ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByName_scienergie_court ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByName_scienergie_converti ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByName_scienergie2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByName ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByShort_name ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByPimonly_name_suffixe ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByPimonly_dimensions ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByPrice ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByWeight ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByShort_description ($value, $limit = 0) 
@@ -163,6 +164,10 @@ class Product extends Concrete {
 public $o_classId = 5;
 public $o_className = "product";
 public $configurable_free_1;
+public $pimonly_name_suffixe;
+public $pimonly_dimensions;
+public $short_name;
+public $name_scienergie_court;
 public $actif_web;
 public $obsolete;
 public $code;
@@ -170,14 +175,11 @@ public $ean;
 public $name_scienergie;
 public $catalogue;
 public $subtype;
+public $subtype2;
 public $teinte_lpn;
-public $name_scienergie_court;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
-public $short_name;
-public $pimonly_name_suffixe;
-public $pimonly_dimensions;
 public $price;
 public $weight;
 public $short_description;
@@ -316,7 +318,7 @@ public static function create($values = array()) {
 }
 
 /**
-* Get configurable_free_1 - Configurable libre 1
+* Get configurable_free_1 - Option configurable
 * @return string
 */
 public function getConfigurable_free_1 () {
@@ -332,12 +334,116 @@ public function getConfigurable_free_1 () {
 }
 
 /**
-* Set configurable_free_1 - Configurable libre 1
+* Set configurable_free_1 - Option configurable
 * @param string $configurable_free_1
 * @return \Pimcore\Model\Object\Product
 */
 public function setConfigurable_free_1 ($configurable_free_1) {
 	$this->configurable_free_1 = $configurable_free_1;
+	return $this;
+}
+
+/**
+* Get pimonly_name_suffixe - Suffixe Nom
+* @return string
+*/
+public function getPimonly_name_suffixe () {
+	$preValue = $this->preGetValue("pimonly_name_suffixe"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_name_suffixe;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_name_suffixe")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_name_suffixe");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_name_suffixe - Suffixe Nom
+* @param string $pimonly_name_suffixe
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_name_suffixe ($pimonly_name_suffixe) {
+	$this->pimonly_name_suffixe = $pimonly_name_suffixe;
+	return $this;
+}
+
+/**
+* Get pimonly_dimensions - Dimensions générées
+* @return string
+*/
+public function getPimonly_dimensions () {
+	$preValue = $this->preGetValue("pimonly_dimensions"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_dimensions;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_dimensions")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_dimensions");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_dimensions - Dimensions générées
+* @param string $pimonly_dimensions
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_dimensions ($pimonly_dimensions) {
+	$this->pimonly_dimensions = $pimonly_dimensions;
+	return $this;
+}
+
+/**
+* Get short_name - Nom court
+* @return string
+*/
+public function getShort_name () {
+	$preValue = $this->preGetValue("short_name"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->short_name;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
+		return $this->getValueFromParent("short_name");
+	}
+	return $data;
+}
+
+/**
+* Set short_name - Nom court
+* @param string $short_name
+* @return \Pimcore\Model\Object\Product
+*/
+public function setShort_name ($short_name) {
+	$this->short_name = $short_name;
+	return $this;
+}
+
+/**
+* Get name_scienergie_court - Nom scienergie Court
+* @return string
+*/
+public function getName_scienergie_court () {
+	$preValue = $this->preGetValue("name_scienergie_court"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->name_scienergie_court;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_court")->isEmpty($data)) {
+		return $this->getValueFromParent("name_scienergie_court");
+	}
+	return $data;
+}
+
+/**
+* Set name_scienergie_court - Nom scienergie Court
+* @param string $name_scienergie_court
+* @return \Pimcore\Model\Object\Product
+*/
+public function setName_scienergie_court ($name_scienergie_court) {
+	$this->name_scienergie_court = $name_scienergie_court;
 	return $this;
 }
 
@@ -524,6 +630,32 @@ public function setSubtype ($subtype) {
 }
 
 /**
+* Get subtype2 - Sous Type 2
+* @return string
+*/
+public function getSubtype2 () {
+	$preValue = $this->preGetValue("subtype2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->subtype2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("subtype2")->isEmpty($data)) {
+		return $this->getValueFromParent("subtype2");
+	}
+	return $data;
+}
+
+/**
+* Set subtype2 - Sous Type 2
+* @param string $subtype2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setSubtype2 ($subtype2) {
+	$this->subtype2 = $subtype2;
+	return $this;
+}
+
+/**
 * Get teinte_lpn - Teinte
 * @return string
 */
@@ -546,32 +678,6 @@ public function getTeinte_lpn () {
 */
 public function setTeinte_lpn ($teinte_lpn) {
 	$this->teinte_lpn = $teinte_lpn;
-	return $this;
-}
-
-/**
-* Get name_scienergie_court - Nom scienergie Court
-* @return string
-*/
-public function getName_scienergie_court () {
-	$preValue = $this->preGetValue("name_scienergie_court"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->name_scienergie_court;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_court")->isEmpty($data)) {
-		return $this->getValueFromParent("name_scienergie_court");
-	}
-	return $data;
-}
-
-/**
-* Set name_scienergie_court - Nom scienergie Court
-* @param string $name_scienergie_court
-* @return \Pimcore\Model\Object\Product
-*/
-public function setName_scienergie_court ($name_scienergie_court) {
-	$this->name_scienergie_court = $name_scienergie_court;
 	return $this;
 }
 
@@ -650,84 +756,6 @@ public function getName () {
 */
 public function setName ($name) {
 	$this->name = $name;
-	return $this;
-}
-
-/**
-* Get short_name - Nom court
-* @return string
-*/
-public function getShort_name () {
-	$preValue = $this->preGetValue("short_name"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->short_name;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
-		return $this->getValueFromParent("short_name");
-	}
-	return $data;
-}
-
-/**
-* Set short_name - Nom court
-* @param string $short_name
-* @return \Pimcore\Model\Object\Product
-*/
-public function setShort_name ($short_name) {
-	$this->short_name = $short_name;
-	return $this;
-}
-
-/**
-* Get pimonly_name_suffixe - Suffixe Nom
-* @return string
-*/
-public function getPimonly_name_suffixe () {
-	$preValue = $this->preGetValue("pimonly_name_suffixe"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->pimonly_name_suffixe;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_name_suffixe")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_name_suffixe");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_name_suffixe - Suffixe Nom
-* @param string $pimonly_name_suffixe
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_name_suffixe ($pimonly_name_suffixe) {
-	$this->pimonly_name_suffixe = $pimonly_name_suffixe;
-	return $this;
-}
-
-/**
-* Get pimonly_dimensions - Dimensions générées
-* @return string
-*/
-public function getPimonly_dimensions () {
-	$preValue = $this->preGetValue("pimonly_dimensions"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->pimonly_dimensions;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_dimensions")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_dimensions");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_dimensions - Dimensions générées
-* @param string $pimonly_dimensions
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_dimensions ($pimonly_dimensions) {
-	$this->pimonly_dimensions = $pimonly_dimensions;
 	return $this;
 }
 

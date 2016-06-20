@@ -6,7 +6,7 @@ var search;
 
 function loadSearch(indexName) {
   console.log("Load Search",indexName);
-  if(typeof(search) != "undefined") {
+  if(typeof(search) != "undefined" && search.destroy) {
     search.destroy();
   }
   search = instantsearch({

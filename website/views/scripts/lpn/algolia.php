@@ -7,6 +7,14 @@
         <span class="input-group-btn">
           <button class="btn btn-default"><i class="fa fa-search"></i></button>
         </span>
+        <div class="selector">
+        <select id="indexNmae">
+          <option value="magentoprod_terrasses_storeview_fr_products">Terrasses</option>
+          <option value="magentoprod_matieres_fr_products">Matères</option>
+          <option value="magentoprod_tables_storeview_fr_products">Tables</option>
+          <option value="magentoprod_sol_stratifie_vinyle_lvt_fr_products">Vinyle / Strat</option>
+        </select>
+        </div>
       </div>
     </header>
 

@@ -8,7 +8,7 @@
           <button class="btn btn-default"><i class="fa fa-search"></i></button>
         </span>
         <div class="selector">
-        <select id="indexNmae">
+        <select id="index_selector" onchange="changeIndex();">
           <option value="magentoprod_terrasses_storeview_fr_products">Terrasses</option>
           <option value="magentoprod_matieres_fr_products">Matères</option>
           <option value="magentoprod_tables_storeview_fr_products">Tables</option>
@@ -67,6 +67,15 @@
 
 
 <script>
+
+function changeIndex() {
+  var indexName = jQuery('#index_selector').val();
+  console.log("chandeIndex",search,indexName);
+  if(search) {
+    loadSearch(indexName);
+
+  }
+}
 function showGallery(ean) {
   loader.begin();
   jQuery.ajax({

@@ -354,7 +354,7 @@ class ProductController extends Website_Controller_Action
                         $qty = $nombre = $Stock->Nombre;
 
 
-                        $colisage = $Stock->CATALOGUE_EAN[0]->colisage;
+                        $colisage = $Stock->CATALOGUE_EAN[0]->Colisage;
 
                         if($colisage && $colisage>0 && $colisage!=1)
                             $$qty = $nombre * $colisage; 

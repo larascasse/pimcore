@@ -351,27 +351,29 @@ class ProductController extends Website_Controller_Action
                  foreach($response->Result as $Stock)
                     {
 
-                         $nombre = $Stock->Nombre;
+                        $qty = $nombre = $Stock->Nombre;
 
-             
-                         $colisage = $Stock->CATALOGUE_EAN[0]->colisage;
-         
-                          if($colisage && $colisage>0 && $colisage!=1)
-                           $nombre = $nombre * $colisage; 
+
+                        $colisage = $Stock->CATALOGUE_EAN[0]->colisage;
+
+                        if($colisage && $colisage>0 && $colisage!=1)
+                            $$qty = $nombre * $colisage; 
 
 
                         if(!isset($stockResponse["product"]))
-                    $stockResponse["product"] = $Stock->CATALOGUE_EAN[0];
-                      $p = array();
+                            $stockResponse["product"] = $Stock->CATALOGUE_EAN[0];
+                        
+                        $p = array();
         
-                      $stockResponse["data"][$Stock->Code_Depot] = array();
-                      $stockResponse["data"][$Stock->Code_Depot] = $nombre;
+                        //$stockResponse["data"][$Stock->Code_Depot] = array();
+                        $stockResponse["data"][$Stock->Code_Depot] = $$qty;
+                        $stockResponse["data"][$Stock->Code_Depot."-nombre"] = $nombre;
 
                       if(stristr($Stock->Code_Depot, "C")!==false) {
-                         $stockResponse["total_commande"] += -$nombre;
+                         $stockResponse["total_commande"] += -$qty;
                       }
                       else {
-                        $stockResponse["total_dispo"] += $nombre;
+                        $stockResponse["total_dispo"] += $$qty;
                       }
 
                      
@@ -379,9 +381,8 @@ class ProductController extends Website_Controller_Action
                 }
                 $stockResponse["dispo"] = $stockResponse["total_dispo"] >0;
 
-                 $this->response =  $stockResponse;
-                 
-                    $this->_helper->json->sendJson($this->response);
+                $this->response =  $stockResponse;
+                $this->_helper->json->sendJson($this->response);
             }
             while(($nextProductToken = $response->GetContinuation()) != null);
 
@@ -406,7 +407,6 @@ class ProductController extends Website_Controller_Action
 
             $this->jsonProductImagesAjax($product->getId());
         }
-        echo "klmklmklm";
     }
 
     

@@ -357,7 +357,7 @@ class ProductController extends Website_Controller_Action
                         $colisage = $Stock->CATALOGUE_EAN[0]->Colisage;
 
                         if($colisage && $colisage>0 && $colisage!=1)
-                            $$qty = $nombre * $colisage; 
+                            $qty = $nombre * $colisage; 
 
 
                         if(!isset($stockResponse["product"]))
@@ -366,14 +366,14 @@ class ProductController extends Website_Controller_Action
                         $p = array();
         
                         //$stockResponse["data"][$Stock->Code_Depot] = array();
-                        $stockResponse["data"][$Stock->Code_Depot] = $$qty;
+                        $stockResponse["data"][$Stock->Code_Depot] = $qty;
                         $stockResponse["data"][$Stock->Code_Depot."-nombre"] = $nombre;
 
                       if(stristr($Stock->Code_Depot, "C")!==false) {
                          $stockResponse["total_commande"] += -$qty;
                       }
                       else {
-                        $stockResponse["total_dispo"] += $$qty;
+                        $stockResponse["total_dispo"] += $qty;
                       }
 
                      

@@ -368,6 +368,7 @@ class ProductController extends Website_Controller_Action
                         //$stockResponse["data"][$Stock->Code_Depot] = array();
                         $stockResponse["data"][$Stock->Code_Depot] = $qty;
                         $stockResponse["data"][$Stock->Code_Depot."-nombre"] = $nombre;
+                        $stockResponse["data"][$Stock->Code_Depot."-colisage"] = $colisage;
 
                       if(stristr($Stock->Code_Depot, "C")!==false) {
                          $stockResponse["total_commande"] += -$qty;

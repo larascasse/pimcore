@@ -7,5 +7,8 @@ website/var/cache/*
 website/var/backup/*
 website/var/webdav/delete.dat
 website/var/assets/*
-
+.htaccess__
+fichier sans titre
+plugins/LpnPlugin/cli/.htaccess
+website/var/config/system.xml
 

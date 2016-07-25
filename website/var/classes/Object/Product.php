@@ -1,12 +1,12 @@
 <?php 
 
-/** Generated at 2016-06-09T10:21:22+02:00 */
+/** Generated at 2016-07-01T17:58:11+02:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          85.169.95.236
+* IP:          92.154.6.232
 */
 
 
@@ -83,6 +83,8 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByPimonly_profil_label ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByFixation_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByChoix ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product getByChoix_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByConfigurable_free_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQuantity_max ($value, $limit = 0) 
@@ -95,7 +97,6 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product getByFamille ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByQualite ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByEssence ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product getByChoix ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByClasse ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByClasse_service ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product getByEpaisseurUsure ($value, $limit = 0) 
@@ -231,6 +232,8 @@ public $profil_not_configurable;
 public $pimonly_profil_label;
 public $fixation;
 public $fixation_not_configurable;
+public $choix;
+public $choix_not_configurable;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -243,7 +246,6 @@ public $rendement;
 public $famille;
 public $qualite;
 public $essence;
-public $choix;
 public $classe;
 public $classe_service;
 public $epaisseurUsure;
@@ -630,7 +632,7 @@ public function setSubtype ($subtype) {
 }
 
 /**
-* Get subtype2 - Sous Type 2
+* Get subtype2 - Catégorie
 * @return string
 */
 public function getSubtype2 () {
@@ -646,7 +648,7 @@ public function getSubtype2 () {
 }
 
 /**
-* Set subtype2 - Sous Type 2
+* Set subtype2 - Catégorie
 * @param string $subtype2
 * @return \Pimcore\Model\Object\Product
 */
@@ -2086,6 +2088,58 @@ public function setFixation_not_configurable ($fixation_not_configurable) {
 }
 
 /**
+* Get choix - Choix
+* @return string
+*/
+public function getChoix () {
+	$preValue = $this->preGetValue("choix"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choix;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
+		return $this->getValueFromParent("choix");
+	}
+	return $data;
+}
+
+/**
+* Set choix - Choix
+* @param string $choix
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoix ($choix) {
+	$this->choix = $choix;
+	return $this;
+}
+
+/**
+* Get choix_not_configurable - Choix non configurable
+* @return boolean
+*/
+public function getChoix_not_configurable () {
+	$preValue = $this->preGetValue("choix_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choix_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("choix_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set choix_not_configurable - Choix non configurable
+* @param boolean $choix_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoix_not_configurable ($choix_not_configurable) {
+	$this->choix_not_configurable = $choix_not_configurable;
+	return $this;
+}
+
+/**
 * Get configurable_free_2 - Configurable libre 2
 * @return string
 */
@@ -2394,32 +2448,6 @@ public function getEssence () {
 */
 public function setEssence ($essence) {
 	$this->essence = $essence;
-	return $this;
-}
-
-/**
-* Get choix - Choix
-* @return string
-*/
-public function getChoix () {
-	$preValue = $this->preGetValue("choix"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->choix;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
-		return $this->getValueFromParent("choix");
-	}
-	return $data;
-}
-
-/**
-* Set choix - Choix
-* @param string $choix
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChoix ($choix) {
-	$this->choix = $choix;
 	return $this;
 }
 

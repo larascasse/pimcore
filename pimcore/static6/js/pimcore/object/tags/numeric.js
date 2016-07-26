@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.object.tags.numeric");
@@ -72,6 +71,11 @@ pimcore.object.tags.numeric = Class.create(pimcore.object.tags.abstract, {
             input.width = 350;
         }
 
+        if (this.fieldConfig.labelWidth) {
+            input.labelWidth = this.fieldConfig.labelWidth;
+        }
+        input.width += input.labelWidth;
+
         if (this.fieldConfig["unsigned"]) {
             input.minValue = 0;
         }
@@ -102,7 +106,7 @@ pimcore.object.tags.numeric = Class.create(pimcore.object.tags.abstract, {
         var input = {
             fieldLabel:this.fieldConfig.title,
             name:this.fieldConfig.name,
-            itemCls:"object_field"
+            componentCls:"object_field"
         };
 
         if (!isNaN(this.data)) {
@@ -112,6 +116,12 @@ pimcore.object.tags.numeric = Class.create(pimcore.object.tags.abstract, {
         if (this.fieldConfig.width) {
             input.width = this.fieldConfig.width;
         }
+
+        if (this.fieldConfig.labelWidth) {
+            input.labelWidth = this.fieldConfig.labelWidth;
+        }
+
+        input.width += input.labelWidth;
 
         this.component = new Ext.form.TextField(input);
         this.component.disable();

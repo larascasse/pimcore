@@ -2,20 +2,20 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 namespace Pimcore\Tool;
 
-class XmlWriter extends \Zend_Config_Writer_Xml {
+class XmlWriter extends \Zend_Config_Writer_Xml
+{
 
     /**
      * name of the root element
@@ -29,7 +29,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      *
      * @var array
      */
-    protected $rootElementAttributes = array();
+    protected $rootElementAttributes = [];
 
     /**
      * @var string
@@ -41,10 +41,11 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      *
      * @param array $options
      */
-    public function __construct($options = array()){
-        foreach($options as $key => $value){
+    public function __construct($options = [])
+    {
+        foreach ($options as $key => $value) {
             $setter = "set" . ucfirst($key);
-            if(method_exists($this,$setter)){
+            if (method_exists($this, $setter)) {
                 $this->$setter($value);
             }
         }
@@ -71,6 +72,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
     public function setRootElementAttributes($rootElementAttributes)
     {
         $this->rootElementAttributes = $rootElementAttributes;
+
         return $this;
     }
 
@@ -79,8 +81,10 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      *
      * @return $this
      */
-    public function setRootElementName($name){
+    public function setRootElementName($name)
+    {
         $this->rootElementName = $name;
+
         return $this;
     }
 
@@ -91,7 +95,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      */
     public function setConfig($config)
     {
-        if(is_array($config)){
+        if (is_array($config)) {
             $config = new \Zend_Config($config);
         }
         $this->_config = $config;
@@ -102,7 +106,8 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
     /**
      * @return string
      */
-    public function getRootElementName(){
+    public function getRootElementName()
+    {
         return $this->rootElementName;
     }
 
@@ -111,15 +116,18 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      *
      * @return $this
      */
-    public function setEncoding($encoding){
+    public function setEncoding($encoding)
+    {
         $this->encoding  = $encoding;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getEncoding(){
+    public function getEncoding()
+    {
         return $this->encoding;
     }
 
@@ -139,16 +147,20 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
     public function setFormatOutput($formatOutput)
     {
         $this->formatOutput = $formatOutput;
+
         return $this;
     }
 
-    protected function addChildConsiderCdata($xml,$key,$data){
+    protected function addChildConsiderCdata($xml, $key, $data)
+    {
         $sData = (string) $data;
         $child = @$xml->addChild($key, $sData);
 
-        if((string)$child != $sData){
-            $child = $xml->$key->addCData((string) $data);
+        if ((string)$child != $sData) {
+            $xml->{$key} = null;
+            $child = $xml->{$key}->addCData((string) $data);
         }
+
         return $child;
     }
 
@@ -160,9 +172,8 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
      */
     public function render()
     {
-
         $xml         = new SimpleXMLExtended('<'.$this->getRootElementName().' />');
-        if($this->_config){
+        if ($this->_config) {
             $extends     = $this->_config->getExtends();
             $sectionName = $this->_config->getSectionName();
             if (is_string($sectionName)) {
@@ -172,7 +183,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
             } else {
                 foreach ($this->_config as $sectionName => $data) {
                     if (!($data instanceof \Zend_Config)) {
-                        $this->addChildConsiderCdata($xml,$sectionName,$data);
+                        $this->addChildConsiderCdata($xml, $sectionName, $data);
                     } else {
                         $child = $xml->addChild($sectionName);
                         if (isset($extends[$sectionName])) {
@@ -185,7 +196,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
         }
 
         $dom = dom_import_simplexml($xml)->ownerDocument;
-        if($encoding = $this->getEncoding()){
+        if ($encoding = $this->getEncoding()) {
             $dom->encoding = $encoding;
         }
         
@@ -219,7 +230,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
                 } else {
                     $branchType = 'string';
                 }
-            } else if ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
+            } elseif ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
                 // require_once 'Zend/Config/Exception.php';
                 throw new \Zend_Config_Exception('Mixing of string and numeric keys is not allowed');
             }
@@ -238,7 +249,7 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
 
                     $this->_addBranch($value, $child, $xml);
                 } else {
-                    $this->addChildConsiderCdata($xml,$key,$value);
+                    $this->addChildConsiderCdata($xml, $key, $value);
                 }
             }
         }
@@ -249,8 +260,9 @@ class XmlWriter extends \Zend_Config_Writer_Xml {
     /**
      *  displays the rendered XML
      */
-    public function displayXML(){
-       # header("Content-Type: application/xml");
+    public function displayXML()
+    {
+        // header("Content-Type: application/xml");
         die($this->render());
     }
 }

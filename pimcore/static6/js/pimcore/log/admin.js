@@ -1,7 +1,20 @@
+/**
+ * Pimcore
+ *
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
+ */
+
 pimcore.registerNS("pimcore.log.admin");
 pimcore.log.admin = Class.create({
 
-    searchParams: {start: 0, limit: 25},
+    searchParams: {},
 
 	initialize: function () {
 		this.getTabPanel();
@@ -31,11 +44,11 @@ pimcore.log.admin = Class.create({
                 pimcore.globalmanager.remove("pimcore_applicationlog_admin");
             }.bind(this));
 
-            var itemsPerPage = 20;
+            var itemsPerPage = pimcore.helpers.grid.getDefaultPageSize();
             this.store = pimcore.helpers.grid.buildDefaultStore(
                 '/admin/log/show?',
                 [
-                    'id', 'message', 'priority', 'timestamp', 'fileobject', 'filename', 'component', 'relatedobject', 'source'
+                    'id', 'pid', 'message', 'priority', 'timestamp', 'fileobject', 'filename', 'component', 'relatedobject', 'source'
                 ],
                 itemsPerPage
             );
@@ -43,7 +56,7 @@ pimcore.log.admin = Class.create({
             reader.setRootProperty('p_results');
             reader.setTotalProperty('p_totalCount');
 
-            this.pagingToolbar = pimcore.helpers.grid.buildDefaultPagingToolbar(this.store, itemsPerPage);
+            this.pagingToolbar = pimcore.helpers.grid.buildDefaultPagingToolbar(this.store);
 
             this.resultpanel = new Ext.grid.GridPanel({
                     store: this.store,
@@ -58,8 +71,13 @@ pimcore.log.admin = Class.create({
                         dataIndex: 'timestamp',
                         width: 150,
                         align: 'left',
-                        /*hidden: true,*/
                         sortable: true
+                    },{
+                        header: t("log_pid"),
+                        dataIndex: 'pid',
+                        flex: 40,
+                        sortable: true,
+                        hidden: true
                     },{
                         id: 'p_message',
                         header: t("log_message"),
@@ -152,11 +170,11 @@ pimcore.log.admin = Class.create({
                 buttons: [{
                     text: t("log_reset_search"),
                     handler: this.clearValues.bind(this),
-                    iconCls: "pimcore_icon_cancel"
+                    iconCls: "pimcore_icon_stop"
                 },{
                     text: t("log_search"),
                     handler: this.find.bind(this),
-                    iconCls: "pimcore_icon_tab_search"
+                    iconCls: "pimcore_icon_search"
                 }],
                 items: [ {
                     xtype:'fieldset',
@@ -253,7 +271,6 @@ pimcore.log.admin = Class.create({
 
             this.panel.add(this.layout);
             this.store.load();
-            //this.store.load({params:this.searchParams});
             pimcore.layout.refresh();
 		}
 		return this.panel;
@@ -293,8 +310,6 @@ pimcore.log.admin = Class.create({
         //this.store.baseParams = this.searchParams;
 
         this.pagingToolbar.moveFirst();
-
-        //this.store.reload();
     }
 
 

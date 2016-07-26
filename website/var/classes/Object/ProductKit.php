@@ -1,18 +1,23 @@
 <?php 
 
-/** Generated at 2015-01-06T10:28:50+01:00 */
+/** Generated at 2016-07-26T10:22:33+02:00 */
 
 /**
 * Inheritance: no
 * Variants   : no
 * Changed by : florent (6)
-* IP:          ::1
+* IP:          92.154.6.232
 */
 
 
 namespace Pimcore\Model\Object;
 
 
+
+/**
+* @method static \Pimcore\Model\Object\ProductKit\Listing getByEan ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\ProductKit\Listing getByProducts ($value, $limit = 0) 
+*/
 
 class ProductKit extends Concrete {
 
@@ -57,7 +62,7 @@ public function setEan ($ean) {
 
 /**
 * Get products - Produits
-* @return Object_Data_ObjectMetadata[]
+* @return \Pimcore\Model\Object\AbstractObject[]
 */
 public function getProducts () {
 	$preValue = $this->preGetValue("products"); 
@@ -70,7 +75,7 @@ public function getProducts () {
 
 /**
 * Set products - Produits
-* @param Object_Data_ObjectMetadata[] $products
+* @param \Pimcore\Model\Object\AbstractObject[] $products
 * @return \Pimcore\Model\Object\ProductKit
 */
 public function setProducts ($products) {

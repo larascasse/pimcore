@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 /*global CKEDITOR*/
@@ -47,6 +46,9 @@ pimcore.document.tags.wysiwyg = Class.create(pimcore.document.tag, {
         if (options.height) {
             textareaHeight = options.height;
         }
+        if (options.placeholder) {
+            this.textarea.setAttribute('data-placeholder', options["placeholder"]);
+        }
 
         var inactiveContainerWidth = options.width + "px";
         if (typeof options.width == "string" && options.width.indexOf("%") >= 0) {
@@ -60,7 +62,6 @@ pimcore.document.tags.wysiwyg = Class.create(pimcore.document.tag, {
 
         // register at global DnD manager
         if (typeof dndManager !== 'undefined') {
-            //TODO EXTJS6
             dndManager.addDropTarget(Ext.get(id), this.onNodeOver.bind(this), this.onNodeDrop.bind(this));
         }
 
@@ -129,12 +130,6 @@ pimcore.document.tags.wysiwyg = Class.create(pimcore.document.tag, {
                     urlField.getParent().getParent().getParent().show();
                 }
             });
-
-            // HACK - clean all pasted html
-            this.ckeditor.on('paste', function(evt) {
-                evt.data.dataValue = '<!--class="Mso"-->' + evt.data.dataValue;
-            }, null, null, 1);
-
         }
         catch (e) {
             console.log(e);

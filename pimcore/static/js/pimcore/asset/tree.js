@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.asset.tree");
@@ -242,8 +241,7 @@ pimcore.asset.tree = Class.create({
                 win.doLayout();
 
                 pimcore.helpers.uploadAssetFromFileObject(file,
-                    "/admin/asset/add-asset/?pimcore_admin_sid="
-                    + pimcore.settings.sessionId + "&parentId=" + parentNode.id + "&dir=" + path,
+                    "/admin/asset/add-asset/?parentId=" + parentNode.id + "&dir=" + path,
                     finishedErrorHandler,
                     function (evt) {
                         //progress
@@ -474,7 +472,7 @@ pimcore.asset.tree = Class.create({
 
         if (this.attributes.permissions.rename && this.id != 1 && !this.attributes.locked) {
             menu.add(new Ext.menu.Item({
-                text: t('edit_filename'),
+                text: t('rename'),
                 iconCls: "pimcore_icon_edit_key",
                 handler: this.attributes.reference.editAssetFilename.bind(this)
             }));

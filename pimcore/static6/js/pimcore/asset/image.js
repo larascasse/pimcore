@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.asset.image");
@@ -28,6 +27,7 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
         this.scheduler = new pimcore.element.scheduler(this, "asset");
         this.dependencies = new pimcore.element.dependencies(this, "asset");
         this.notes = new pimcore.element.notes(this, "asset");
+        this.tagAssignment = new pimcore.element.tag.assignment(this, "asset");
         this.metadata = new pimcore.asset.metadata(this);
 
         this.getData();
@@ -62,6 +62,11 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
             items.push(this.notes.getLayout());
         }
 
+        var user = pimcore.globalmanager.get("user");
+        if (user.isAllowed("tags_assignment")) {
+            items.push(this.tagAssignment.getLayout());
+        }
+
         this.tabbar = new Ext.TabPanel({
             tabPosition: "top",
             region:'center',
@@ -78,66 +83,20 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
     getEditPanel: function () {
 
         if (!this.editPanel) {
-
             this.editPanel = new Ext.Panel({
                 title: t("edit_image"),
-                tbar: [
-                    {
-                        text: t("simple"),
-                        iconCls: "pimcore_icon_image_editor_simple",
-                        handler: function () {
-                            Ext.get("asset_image_edit_" + this.id).dom.src = this.getEditUrlPixlr("express");
-                        }.bind(this)
-                    },"-",
-                    {
-                        text: t("advanced"),
-                        iconCls: "pimcore_icon_image_editor_advanced",
-                        handler: function () {
-                            Ext.get("asset_image_edit_" + this.id).dom.src = this.getEditUrlPixlr("editor");
-                        }.bind(this)
-                    }
-                ],
-                html: '<iframe src="' + this.getEditUrlPixlr("express") + '" frameborder="0" id="asset_image_edit_'
-                                                                            + this.id + '"></iframe>',
-                iconCls: "pimcore_icon_tab_edit"
+                html: '<iframe src="/admin/asset/image-editor/id/' + this.id + '" frameborder="0" ' +
+                    'style="width: 100%;" id="asset_image_edit_' + this.id + '"></iframe>',
+                iconCls: "pimcore_icon_edit"
             });
             this.editPanel.on("resize", function (el, width, height, rWidth, rHeight) {
                 Ext.get("asset_image_edit_" + this.id).setStyle({
-                    width: width + "px",
-                    height: (height - 25) + "px"
+                    height: (height - 7) + "px"
                 });
             }.bind(this));
         }
 
         return this.editPanel;
-    },
-
-    getEditUrlPixlr: function (type) {
-
-        var parts = this.data.filename.split(".");
-        var imageType = parts[parts.length-1].toLowerCase();
-        var validImageTypes = ["png","jpg","gif"];
-
-        if(!in_array(imageType,validImageTypes)) {
-            imageType = "png";
-        }
-
-        var imageUrl = document.location.protocol + "//" + window.location.hostname
-                                                  + "/admin/asset/get-image-thumbnail/id/"
-                                                  + this.id + "/width/1000/aspectratio/true/pimcore_admin_sid/"
-                                                  + pimcore.settings.sessionId + "/" + this.data.filename;
-        var targetUrl = document.location.protocol + "//" + window.location.hostname
-                                                   + "/admin/asset/save-image-pixlr/?pimcore_admin_sid="
-                                                   + pimcore.settings.sessionId + "&id=" + this.id;
-        var editorUrl = "https://www.pixlr.com/" + type + "/?image=" + escape(imageUrl) + "&title="
-                                                 + this.data.filename + "&locktitle=true&locktarget=true&locktype="
-                                                 + imageType + "&wmode=transparent&target=" + escape(targetUrl);
-
-        if (type == "editor") {
-            editorUrl = editorUrl + "&redirect=false";
-        }
-
-        return editorUrl;
     },
 
     getDisplayPanel: function () {
@@ -163,6 +122,7 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
                         scrollOffset: 2
                     }
                 });
+                dimensionPanel.plugins[0].disable();
                 dimensionPanel.getStore().sort("name","DESC");
 
                 details.push(dimensionPanel);
@@ -188,7 +148,7 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
                     store: [["JPEG", "JPEG"],["PNG","PNG"]],
                     mode: "local",
                     value: "JPEG",
-                    width: 180
+                    editable: false
                 }, {
                     xtype: "numberfield",
                     name: "width",
@@ -225,9 +185,9 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
                 var exifPanel = new Ext.grid.PropertyGrid({
                     title: t("exif_data"),
                     source: this.data.imageInfo.exif,
-                    clicksToEdit: 1000,
-                    autoHeight: true
+                    clicksToEdit: 1000
                 });
+                exifPanel.plugins[0].disable();
 
                 details.push(exifPanel);
             }
@@ -235,18 +195,17 @@ pimcore.asset.image = Class.create(pimcore.asset.asset, {
             this.displayPanel = new Ext.Panel({
                 title: t("view"),
                 layout: "border",
-                iconCls: "pimcore_icon_tab_view",
+                iconCls: "pimcore_icon_view",
                 items: [{
                     region: "center",
                     html: '&nbsp;',
                     bodyStyle: "background: url(/admin/asset/get-image-thumbnail/id/" + this.id +
                         "/treepreview/true_dc=" + dc + ") center center no-repeat;"
                 },{
-                    title: t("image_details"),
                     region: "east",
                     width: 300,
                     items: details,
-                    autoScroll: true
+                    scrollable: "y"
                 }]
             });
         }

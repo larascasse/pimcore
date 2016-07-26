@@ -1,18 +1,22 @@
 <?php 
 
-/** Generated at 2015-01-06T10:28:49+01:00 */
+/** Generated at 2016-07-26T10:22:15+02:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          ::1
+* IP:          92.154.6.232
 */
 
 
 namespace Pimcore\Model\Object;
 
 
+
+/**
+* @method static \Pimcore\Model\Object\Article\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
+*/
 
 class Article extends Concrete {
 
@@ -33,7 +37,7 @@ public static function create($values = array()) {
 
 /**
 * Get localizedfields - 
-* @return array
+* @return \Pimcore\Model\Object\Localizedfield
 */
 public function getLocalizedfields () {
 	$preValue = $this->preGetValue("localizedfields"); 
@@ -54,7 +58,9 @@ public function getLocalizedfields () {
 public function getName ($language = null) {
 	$data = $this->getLocalizedfields()->getLocalizedValue("name", $language);
 	$preValue = $this->preGetValue("name"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	 return $data;
 }
 
@@ -65,24 +71,28 @@ public function getName ($language = null) {
 public function getContent ($language = null) {
 	$data = $this->getLocalizedfields()->getLocalizedValue("content", $language);
 	$preValue = $this->preGetValue("content"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	 return $data;
 }
 
 /**
 * Get documents - Documents
-* @return array
+* @return \Pimcore\Model\Asset\document[] | \Pimcore\Model\Asset\image[]
 */
 public function getDocuments ($language = null) {
 	$data = $this->getLocalizedfields()->getLocalizedValue("documents", $language);
 	$preValue = $this->preGetValue("documents"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { return $preValue;}
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
 	 return $data;
 }
 
 /**
 * Set localizedfields - 
-* @param array $localizedfields
+* @param \Pimcore\Model\Object\Localizedfield $localizedfields
 * @return \Pimcore\Model\Object\Article
 */
 public function setLocalizedfields ($localizedfields) {
@@ -112,7 +122,7 @@ public function setContent ($content, $language = null) {
 
 /**
 * Set documents - Documents
-* @param array $documents
+* @param \Pimcore\Model\Asset\document[] | \Pimcore\Model\Asset\image[] $documents
 * @return \Pimcore\Model\Object\Article
 */
 public function setDocuments ($documents, $language = null) {

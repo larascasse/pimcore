@@ -1,18 +1,28 @@
 <?php 
 
-/** Generated at 2015-01-06T10:28:49+01:00 */
+/** Generated at 2016-07-26T10:22:22+02:00 */
 
 /**
 * Inheritance: yes
 * Variants   : no
 * Changed by : florent (6)
-* IP:          ::1
+* IP:          92.154.6.232
 */
 
 
 namespace Pimcore\Model\Object;
 
 
+
+/**
+* @method static \Pimcore\Model\Object\Category\Listing getByName ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByMage_category_id ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByProducts ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByDate ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByTest ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Category\Listing getByTest2 ($value, $limit = 0) 
+*/
 
 class Category extends Concrete {
 
@@ -91,7 +101,7 @@ public function setMage_category_id ($mage_category_id) {
 
 /**
 * Get products - Produits
-* @return array
+* @return \Pimcore\Model\Object\product[]
 */
 public function getProducts () {
 	$preValue = $this->preGetValue("products"); 
@@ -107,7 +117,7 @@ public function getProducts () {
 
 /**
 * Set products - Produits
-* @param array $products
+* @param \Pimcore\Model\Object\product[] $products
 * @return \Pimcore\Model\Object\Category
 */
 public function setProducts ($products) {
@@ -117,7 +127,7 @@ public function setProducts ($products) {
 
 /**
 * Get person - Client
-* @return Document_Page | Document_Snippet | Document | Asset | Object_Abstract
+* @return \Pimcore\Model\Object\person
 */
 public function getPerson () {
 	$preValue = $this->preGetValue("person"); 
@@ -133,7 +143,7 @@ public function getPerson () {
 
 /**
 * Set person - Client
-* @param Document_Page | Document_Snippet | Document | Asset | Object_Abstract $person
+* @param \Pimcore\Model\Object\person $person
 * @return \Pimcore\Model\Object\Category
 */
 public function setPerson ($person) {
@@ -143,7 +153,7 @@ public function setPerson ($person) {
 
 /**
 * Get Date - date
-* @return Zend_Date
+* @return \Pimcore\Date
 */
 public function getDate () {
 	$preValue = $this->preGetValue("Date"); 
@@ -159,7 +169,7 @@ public function getDate () {
 
 /**
 * Set Date - date
-* @param Zend_Date $Date
+* @param \Pimcore\Date $Date
 * @return \Pimcore\Model\Object\Category
 */
 public function setDate ($Date) {
@@ -169,7 +179,7 @@ public function setDate ($Date) {
 
 /**
 * Get test - test
-* @return Object_Data_ObjectMetadata[]
+* @return \Pimcore\Model\Object\AbstractObject[]
 */
 public function getTest () {
 	$preValue = $this->preGetValue("test"); 
@@ -185,7 +195,7 @@ public function getTest () {
 
 /**
 * Set test - test
-* @param Object_Data_ObjectMetadata[] $test
+* @param \Pimcore\Model\Object\AbstractObject[] $test
 * @return \Pimcore\Model\Object\Category
 */
 public function setTest ($test) {
@@ -195,7 +205,7 @@ public function setTest ($test) {
 
 /**
 * Get test2 - test2
-* @return array
+* @return \Pimcore\Model\Asset\image[]
 */
 public function getTest2 () {
 	$preValue = $this->preGetValue("test2"); 
@@ -211,7 +221,7 @@ public function getTest2 () {
 
 /**
 * Set test2 - test2
-* @param array $test2
+* @param \Pimcore\Model\Asset\image[] $test2
 * @return \Pimcore\Model\Object\Category
 */
 public function setTest2 ($test2) {

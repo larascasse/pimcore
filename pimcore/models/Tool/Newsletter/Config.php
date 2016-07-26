@@ -2,24 +2,24 @@
 /**
  * Pimcore
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
  * @category   Pimcore
  * @package    Tool
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 namespace Pimcore\Model\Tool\Newsletter;
 
 use Pimcore\Model;
 
-class Config {
+class Config extends Model\AbstractModel
+{
 
     /**
      * @var string
@@ -62,89 +62,37 @@ class Config {
     public $googleAnalytics = true;
 
     /**
-     * @param $name
-     * @return Config
-     * @throws \Exception
+     * @var int
      */
-    public static function getByName ($name) {
-        $letter = new self();
-        $letter->setName($name);
-        if(!$letter->load()) {
-            throw new \Exception("newsletter definition : " . $name . " does not exist");
+    public $modificationDate;
+
+    /**
+     * @var int
+     */
+    public $creationDate;
+
+    /**
+     * @param $name
+     * @return null|Config
+     */
+    public static function getByName($name)
+    {
+        try {
+            $letter = new self();
+            $letter->getDao()->getByName($name);
+        } catch (\Exception $e) {
+            return null;
         }
 
         return $letter;
     }
 
     /**
-     * @static
      * @return string
      */
-    public static function getWorkingDir () {
-        $dir = PIMCORE_CONFIGURATION_DIRECTORY . "/newsletter";
-        if(!is_dir($dir)) {
-            \Pimcore\File::mkdir($dir);
-        }
-
-        return $dir;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPidFile() {
+    public function getPidFile()
+    {
         return PIMCORE_SYSTEM_TEMP_DIRECTORY . "/newsletter__" . $this->getName() . ".pid";
-    }
-
-    /**
-     * @return void
-     */
-    public function save () {
-
-        $arrayConfig = object2array($this);
-
-        $config = new \Zend_Config($arrayConfig);
-        $writer = new \Zend_Config_Writer_Xml(array(
-            "config" => $config,
-            "filename" => $this->getConfigFile()
-        ));
-        $writer->write();
-
-        return true;
-    }
-
-    /**
-     * @return void
-     */
-    public function load () {
-
-        $configXml = new \Zend_Config_Xml($this->getConfigFile());
-        $configArray = $configXml->toArray();
-
-        foreach ($configArray as $key => $value) {
-            $setter = "set" . ucfirst($key);
-            if(method_exists($this, $setter)) {
-                $this->$setter($value);
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @return void
-     */
-    public function delete() {
-        if(is_file($this->getConfigFile())) {
-            unlink($this->getConfigFile());
-        }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getConfigFile () {
-        return self::getWorkingDir() . "/" . $this->getName() . ".xml";
     }
 
     /**
@@ -154,6 +102,7 @@ class Config {
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -172,6 +121,7 @@ class Config {
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -206,6 +156,7 @@ class Config {
     public function setGoogleAnalytics($googleAnalytics)
     {
         $this->googleAnalytics = (bool) $googleAnalytics;
+
         return $this;
     }
 
@@ -279,5 +230,37 @@ class Config {
     public function getPersonas()
     {
         return $this->personas;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModificationDate()
+    {
+        return $this->modificationDate;
+    }
+
+    /**
+     * @param int $modificationDate
+     */
+    public function setModificationDate($modificationDate)
+    {
+        $this->modificationDate = $modificationDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param int $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 }

@@ -1,18 +1,23 @@
 <?php 
 
-/** Generated at 2015-01-06T10:28:50+01:00 */
+/** Generated at 2016-07-26T10:22:28+02:00 */
 
 /**
 * Inheritance: no
 * Variants   : no
-* Changed by : admin (2)
-* IP:          ::1
+* Changed by : florent (6)
+* IP:          92.154.6.232
 */
 
 
 namespace Pimcore\Model\Object;
 
 
+
+/**
+* @method static \Pimcore\Model\Object\Taxonomy\Listing getByCode ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Taxonomy\Listing getByLabel ($value, $limit = 0) 
+*/
 
 class Taxonomy extends Concrete {
 

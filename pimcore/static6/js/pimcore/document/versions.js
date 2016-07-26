@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.document.versions");
@@ -60,16 +59,8 @@ pimcore.document.versions = Class.create({
                     reader: {
                         type: 'json',
                         rootProperty: 'versions'
-
-                        //totalProperty:'total',            // default
-                        //successProperty:'success'         // default
                     }
-                    //,                                     // default
-                    //writer: {
-                    //    type: 'json'
-                    //}
                 }
-
             });
 
             this.store.on("update", this.dataUpdate.bind(this));
@@ -97,7 +88,7 @@ pimcore.document.versions = Class.create({
                 columns: [
                     checkShow,
                     {header: "ID", sortable: true, dataIndex: 'id', editable: false, width: 40},
-                    {header: t("date"), width:130, sortable: true, dataIndex: 'date', renderer: function(d) {
+                    {header: t("date"), width:150, sortable: true, dataIndex: 'date', renderer: function(d) {
                         var date = new Date(d * 1000);
                         return Ext.Date.format(date, "Y-m-d H:i:s");
                     }, editable: false},
@@ -116,9 +107,10 @@ pimcore.document.versions = Class.create({
                 columnLines: true,
                 trackMouseOver: true,
                 stripeRows: true,
-                width:600,
+                width:620,
                 title: t('available_versions'),
                 region: "west",
+                split: true,
                 viewConfig: {
                     getRowClass: function(record, rowIndex, rp, ds) {
                         if (record.data.date == this.document.data.modificationDate) {
@@ -139,8 +131,8 @@ pimcore.document.versions = Class.create({
             var preview = new Ext.Panel({
                 title: t("preview"),
                 region: "center",
-                bodyStyle: "-webkit-overflow-scrolling:touch;",
-                html: '<iframe src="about:blank" frameborder="0" id="document_version_iframe_'
+                bodyCls: "pimcore_overflow_scrolling",
+                html: '<iframe src="about:blank" frameborder="0" style="width:100%;" id="document_version_iframe_'
                     + this.document.id + '"></iframe>'
             });
 
@@ -148,24 +140,19 @@ pimcore.document.versions = Class.create({
                 title: t('versions'),
                 border: false,
                 layout: "border",
-                iconCls: "pimcore_icon_tab_versions",
+                iconCls: "pimcore_icon_versions",
                 items: [this.grid,preview]
             });
 
-            preview.on("resize", this.onLayoutResize.bind(this));
+            preview.on("resize", this.setLayoutFrameDimensions.bind(this));
         }
 
         return this.layout;
     },
 
-    onLayoutResize: function (el, width, height, rWidth, rHeight) {
-        this.setLayoutFrameDimensions(width, height);
-    },
-
-    setLayoutFrameDimensions: function (width, height) {
+    setLayoutFrameDimensions: function (el, width, height, rWidth, rHeight) {
         Ext.get("document_version_iframe_" + this.document.id).setStyle({
-            width: width + "px",
-            height: (height - 25) + "px"
+            height: (height - 38) + "px"
         });
     },
 
@@ -209,14 +196,14 @@ pimcore.document.versions = Class.create({
         if(this.store.getAt(rowIndex).get("public")) {
             menu.add(new Ext.menu.Item({
                 text: t('open'),
-                iconCls: "pimcore_icon_menu_webbrowser",
+                iconCls: "pimcore_icon_cursor",
                 handler: this.openVersion.bind(this, rowIndex, grid)
             }));
         }
 
         menu.add(new Ext.menu.Item({
             text: t('edit'),
-            iconCls: "pimcore_icon_menu_settings",
+            iconCls: "pimcore_icon_edit",
             handler: this.editVersion.bind(this, rowIndex, grid)
         }));
 
@@ -287,7 +274,7 @@ pimcore.document.versions = Class.create({
 
         if (operation == "edit") {
             Ext.Ajax.request({
-                url: "/admin/document/version-update",
+                url: "/admin/element/version-update",
                 params: {
                     data: Ext.encode(record.data)
                 }

@@ -2,17 +2,16 @@
 /**
  * Pimcore
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
  * @category   Pimcore
  * @package    Object\Fieldcollection
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 namespace Pimcore\Model\Object\Fieldcollection;
@@ -20,9 +19,10 @@ namespace Pimcore\Model\Object\Fieldcollection;
 use Pimcore\Model;
 use Pimcore\Model\Object;
 use Pimcore\File;
-use Pimcore\Tool\Serialize; 
+use Pimcore\Tool\Serialize;
 
-class Definition extends Model\AbstractModel {
+class Definition extends Model\AbstractModel
+{
     
     /**
      * @var string
@@ -42,88 +42,103 @@ class Definition extends Model\AbstractModel {
     /**
      * @return string
      */
-    public function getKey() {
+    public function getKey()
+    {
         return $this->key;
     }
 
     /**
      * @param string $key
-     * @return void
+     * @return $this
      */
-    public function setKey($key) {
+    public function setKey($key)
+    {
         $this->key = $key;
+
         return $this;
     }
     
     /**
      * @return string
      */
-    public function getParentClass() {
+    public function getParentClass()
+    {
         return $this->parentClass;
     }
 
     /**
      * @param string $parentClass
-     * @return void
+     * @return $this
      */
-    public function setParentClass($parentClass) {
+    public function setParentClass($parentClass)
+    {
         $this->parentClass = $parentClass;
+
         return $this;
     }
     
     /**
      * @return array
      */
-    public function getLayoutDefinitions() {
+    public function getLayoutDefinitions()
+    {
         return $this->layoutDefinitions;
     }
 
     /**
      * @param array $layoutDefinitions
-     * @return void
+     * @return $this
      */
-    public function setLayoutDefinitions($layoutDefinitions) {
+    public function setLayoutDefinitions($layoutDefinitions)
+    {
         $this->layoutDefinitions = $layoutDefinitions;
         
-        $this->fieldDefinitions = array();
+        $this->fieldDefinitions = [];
         $this->extractDataDefinitions($this->layoutDefinitions);
+
         return $this;
     }
     
     /**
      * @return array
      */
-    public function getFieldDefinitions() {
+    public function getFieldDefinitions()
+    {
         return $this->fieldDefinitions;
     }
 
     /**
      * @param array $fieldDefinitions
-     * @return void
+     * @return $this
      */
-    public function setFieldDefinitions($fieldDefinitions) {
+    public function setFieldDefinitions($fieldDefinitions)
+    {
         $this->fieldDefinitions = $fieldDefinitions;
+
         return $this;
     }
 
     /**
      * @param string $key
      * @param Object\ClassDefinition\Data $data
-     * @return void
+     * @return $this
      */
-    public function addFieldDefinition($key, $data) {
+    public function addFieldDefinition($key, $data)
+    {
         $this->fieldDefinitions[$key] = $data;
+
         return $this;
     }
 
     /**
      * @return Object\ClassDefinition\Data
      */
-    public function getFieldDefinition($key) {
-
+    public function getFieldDefinition($key)
+    {
         if (array_key_exists($key, $this->fieldDefinitions)) {
             return $this->fieldDefinitions[$key];
         }
+
         return false;
     }
     
@@ -131,8 +146,8 @@ class Definition extends Model\AbstractModel {
      * @param array|Object\ClassDefinition\Layout|Object\ClassDefinition\Data $def
      * @return void
      */
-    public function extractDataDefinitions($def) {
-
+    public function extractDataDefinitions($def)
+    {
         if ($def instanceof Object\ClassDefinition\Layout) {
             if ($def->hasChilds()) {
                 foreach ($def->getChilds() as $child) {
@@ -150,21 +165,21 @@ class Definition extends Model\AbstractModel {
      * @param $key
      * @throws \Exception
      */
-    public static function getByKey ($key) {
-
+    public static function getByKey($key)
+    {
         $fc = null;
         $cacheKey = "fieldcollection_" . $key;
 
         try {
             $fc = \Zend_Registry::get($cacheKey);
-            if(!$fc) {
+            if (!$fc) {
                 throw new \Exception("FieldCollection in registry is not valid");
             }
         } catch (\Exception $e) {
             $fieldCollectionFolder = PIMCORE_CLASS_DIRECTORY . "/fieldcollections";
 
             $fieldFile = $fieldCollectionFolder . "/" . $key . ".psf";
-            if(is_file($fieldFile)) {
+            if (is_file($fieldFile)) {
                 $fcData = file_get_contents($fieldFile);
                 $fc = Serialize::unserialize($fcData);
 
@@ -172,7 +187,7 @@ class Definition extends Model\AbstractModel {
             }
         }
 
-        if($fc) {
+        if ($fc) {
             return $fc;
         }
         
@@ -182,16 +197,16 @@ class Definition extends Model\AbstractModel {
     /**
      * @throws \Exception
      */
-    public function save () {
-        
-        if(!$this->getKey()) {
+    public function save()
+    {
+        if (!$this->getKey()) {
             throw new \Exception("A field-collection needs a key to be saved!");
         }
         
         $fieldCollectionFolder = PIMCORE_CLASS_DIRECTORY . "/fieldcollections";
         
         // create folder if not exist
-        if(!is_dir($fieldCollectionFolder)) {
+        if (!is_dir($fieldCollectionFolder)) {
             File::mkdir($fieldCollectionFolder);
         }
         
@@ -199,7 +214,7 @@ class Definition extends Model\AbstractModel {
 
         $definitionFile = $fieldCollectionFolder . "/" . $this->getKey() . ".psf";
 
-        if(!is_writable(dirname($definitionFile)) || (is_file($definitionFile) && !is_writable($definitionFile))) {
+        if (!is_writable(dirname($definitionFile)) || (is_file($definitionFile) && !is_writable($definitionFile))) {
             throw new \Exception("Cannot write definition file in: " . $definitionFile . " please check write permission on this directory.");
         }
 
@@ -247,7 +262,7 @@ class Definition extends Model\AbstractModel {
         $cd .= "\n\n";
 
         if (is_array($this->getFieldDefinitions()) && count($this->getFieldDefinitions())) {
-            $relationTypes = array();
+            $relationTypes = [];
             foreach ($this->getFieldDefinitions() as $key => $def) {
 
                 /**
@@ -255,35 +270,56 @@ class Definition extends Model\AbstractModel {
                  */
 
                 $cd .= $def->getGetterCodeFieldcollection($this);
+
+                if ($def instanceof Object\ClassDefinition\Data\Localizedfields) {
+                    foreach ($def->getFieldDefinitions() as $localizedFd) {
+
+                        /**
+                         * @var $fd Object\ClassDefinition\Data
+                         */
+                        $cd .= $localizedFd->getGetterCodeLocalizedfields($this);
+                    }
+                }
+
                 $cd .= $def->getSetterCodeFieldcollection($this);
+
+                if ($def instanceof Object\ClassDefinition\Data\Localizedfields) {
+                    foreach ($def->getFieldDefinitions() as $localizedFd) {
+
+                        /**
+                         * @var $fd Object\ClassDefinition\Data
+                         */
+                        $cd .= $localizedFd->getSetterCodeLocalizedfields($this);
+                    }
+                }
             }
         }
 
         $cd .= "}\n";
         $cd .= "\n";
         
-        $fieldClassFolder = PIMCORE_CLASS_DIRECTORY . "/Object/Fieldcollection/Data"; 
-        if(!is_dir($fieldClassFolder)) {
+        $fieldClassFolder = PIMCORE_CLASS_DIRECTORY . "/Object/Fieldcollection/Data";
+        if (!is_dir($fieldClassFolder)) {
             File::mkdir($fieldClassFolder);
         }
 
 
         $classFile = $fieldClassFolder . "/" . ucfirst($this->getKey()) . ".php";
-        if(!is_writable(dirname($classFile)) || (is_file($classFile) && !is_writable($classFile))) {
+        if (!is_writable(dirname($classFile)) || (is_file($classFile) && !is_writable($classFile))) {
             throw new \Exception("Cannot write definition file in: " . $classFile . " please check write permission on this directory.");
         }
 
-        File::put($classFile,$cd);
+        File::put($classFile, $cd);
         
         // update classes
         $classList = new Object\ClassDefinition\Listing();
         $classes = $classList->load();
-        if(is_array($classes)){
-            foreach($classes as $class){
+        if (is_array($classes)) {
+            foreach ($classes as $class) {
                 foreach ($class->getFieldDefinitions() as $fieldDef) {
-                    if($fieldDef instanceof Object\ClassDefinition\Data\Fieldcollections) {
-                        if(in_array($this->getKey(), $fieldDef->getAllowedTypes())) {
-                            $this->getResource()->createUpdateTable($class);
+                    if ($fieldDef instanceof Object\ClassDefinition\Data\Fieldcollections) {
+                        if (in_array($this->getKey(), $fieldDef->getAllowedTypes())) {
+                            $this->getDao()->createUpdateTable($class);
                             break;
                         }
                     }
@@ -295,13 +331,14 @@ class Definition extends Model\AbstractModel {
     /**
      *
      */
-    public function delete () {
+    public function delete()
+    {
         $fieldCollectionFolder = PIMCORE_CLASS_DIRECTORY . "/fieldcollections";
         $fieldFile = $fieldCollectionFolder . "/" . $this->getKey() . ".psf";
         
         @unlink($fieldFile);
         
-        $fieldClassFolder = PIMCORE_CLASS_DIRECTORY . "/Object/Fieldcollection/Data"; 
+        $fieldClassFolder = PIMCORE_CLASS_DIRECTORY . "/Object/Fieldcollection/Data";
         $fieldClass = $fieldClassFolder . "/" . ucfirst($this->getKey()) . ".php";
         
         @unlink($fieldClass);
@@ -309,12 +346,12 @@ class Definition extends Model\AbstractModel {
         // update classes
         $classList = new Object\ClassDefinition\Listing();
         $classes = $classList->load();
-        if(is_array($classes)){
-            foreach($classes as $class){
+        if (is_array($classes)) {
+            foreach ($classes as $class) {
                 foreach ($class->getFieldDefinitions() as $fieldDef) {
-                    if($fieldDef instanceof Object\ClassDefinition\Data\Fieldcollections) {
-                        if(in_array($this->getKey(), $fieldDef->getAllowedTypes())) {
-                            $this->getResource()->delete($class);
+                    if ($fieldDef instanceof Object\ClassDefinition\Data\Fieldcollections) {
+                        if (in_array($this->getKey(), $fieldDef->getAllowedTypes())) {
+                            $this->getDao()->delete($class);
                             break;
                         }
                     }

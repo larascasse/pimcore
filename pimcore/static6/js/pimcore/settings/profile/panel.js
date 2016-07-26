@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.settings.profile.panel");
@@ -185,9 +184,11 @@ pimcore.settings.profile.panel = Class.create({
             checked:this.currentUser.memorizeTabs
         });
 
+        this.editorSettings = new pimcore.settings.user.editorSettings(this, this.currentUser.contentLanguages);
+
         this.userPanel = new Ext.form.FormPanel({
             border:false,
-            items:generalItems,
+            items: [{ items: generalItems}, this.editorSettings.getPanel()],
             labelWidth:130,
             buttons:[
                 {
@@ -204,6 +205,9 @@ pimcore.settings.profile.panel = Class.create({
 
     saveCurrentUser:function () {
         var values = this.userPanel.getForm().getFieldValues();
+        var contentLanguages = this.editorSettings.getContentLanguages();
+        values.contentLanguages = contentLanguages;
+
         if(values["new_password"]) {
             if(!/^(?=.*\d)(?=.*[a-zA-Z]).{6,100}$/.test(values["new_password"]) || values["new_password"] != values["retype_password"]) {
                 delete values["new_password"];
@@ -235,6 +239,10 @@ pimcore.settings.profile.panel = Class.create({
                         }
 
                         pimcore.helpers.showNotification(t("success"), t("user_save_success"), "success");
+                        if (contentLanguages) {
+                            pimcore.settings.websiteLanguages = contentLanguages;
+                            pimcore.currentuser.contentLanguages = contentLanguages.join(',');
+                        }
                     } else {
                         pimcore.helpers.showNotification(t("error"), t("user_save_error"), "error", t(res.message));
                     }

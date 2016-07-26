@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.report.newsletter.item");
@@ -48,13 +47,13 @@ pimcore.report.newsletter.item = Class.create({
 
         panelButtons.push({
             text: t("send_test_newsletter"),
-            iconCls: "pimcore_icon_send_test",
+            iconCls: "pimcore_icon_email pimcore_icon_overlay_error",
             handler: this.sendTest.bind(this)
         });
 
         panelButtons.push({
             text: t("send_newsletter"),
-            iconCls: "pimcore_icon_send",
+            iconCls: "pimcore_icon_email pimcore_icon_overlay_go",
             handler: this.send.bind(this)
         });
 
@@ -379,9 +378,10 @@ pimcore.report.newsletter.item = Class.create({
                         var start = new Date(res["data"]["start"] * 1000);
 
                         this.statusPanel.getComponent("progress").setValue(res["data"]["current"] + " / " + res["data"]["total"]);
-                        this.statusPanel.getComponent("start").setValue(start.format("Y-m-d H:i:s"));
-                        this.statusPanel.getComponent("lastUpdate").setValue(lastUpdate.format("Y-m-d H:i:s"));
+                        this.statusPanel.getComponent("start").setValue(Ext.Date.format(start, "Y-m-d H:i:s"));
+                        this.statusPanel.getComponent("lastUpdate").setValue(Ext.Date.format(lastUpdate, "Y-m-d H:i:s"));
                     } catch (e) {
+                        console.log(e);
                         clearInterval(this.updateStatusInterval);
                     }
                 } else {

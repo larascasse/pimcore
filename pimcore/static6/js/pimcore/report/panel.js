@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.report.panel");
@@ -38,13 +37,13 @@ pimcore.report.panel = Class.create({
     },
 
     getLayout: function () {
-        
+
         var user = pimcore.globalmanager.get("user");
-        
+
         if(!user.isAllowed("reports")) {
             return;
         }
-        
+
         if (this.layout == null) {
 
             if (this.getReportCount() < 1 && this.type != "global") {
@@ -54,15 +53,15 @@ pimcore.report.panel = Class.create({
             this.tree = Ext.create('Ext.tree.Panel', {
                 region: "west",
                 title: t("select_a_report"),
-                width: 200,
+                width: 250,
                 enableDD: false,
+                split: true,
                 autoScroll: true,
                 collapsible: true,
                 rootVisible: false,
                 root: {
                     id: 0
                 },
-                bodyStyle: "padding: 5px;",
                 listeners: {
                     //"click": function () {
                     //    this.expand();
@@ -97,6 +96,7 @@ pimcore.report.panel = Class.create({
                 if (typeof pimcore.report.broker.reports[group.id] == "object") {
                     for (var r = 0; r < pimcore.report.broker.reports[group.id].length; r++) {
                         reportClass = pimcore.report.broker.reports[group.id][r]["class"];
+                        reportClass = stringToFunction(reportClass);
                         reportConfig = pimcore.report.broker.reports[group.id][r]["config"];
                         if(!reportConfig) {
                             reportConfig = {};
@@ -164,6 +164,20 @@ pimcore.report.panel = Class.create({
         return this.layout;
     },
 
+    openReportViaToolbar: function (reportClass, reportConfig) {
+
+        reportClass = stringToFunction(reportClass);
+
+        var report = new reportClass(this, this.type, null, reportConfig);
+
+        var store = this.tree.getStore();
+        var record = store.findRecord('text', reportConfig.name);
+        if (record) {
+            var selModel = this.tree.getSelectionModel();
+            selModel.select(record);
+        }
+    },
+
     openReport: function (tree, record, item, index, e, eOpts ) {
         record.expand();
 
@@ -193,8 +207,10 @@ pimcore.report.panel = Class.create({
             // add reports to group
             if (typeof pimcore.report.broker.reports[group.id] == "object") {
                 for (var r = 0; r < pimcore.report.broker.reports[group.id].length; r++) {
-                    report = pimcore.report.broker.reports[group.id][r]["class"];
-                    if (report.prototype.matchType(this.type)) {
+                    reportClass = pimcore.report.broker.reports[group.id][r]["class"];
+                    reportClass = stringToFunction(reportClass);
+
+                    if (reportClass.prototype.matchType(this.type)) {
                         reportCount++;
                     }
                 }

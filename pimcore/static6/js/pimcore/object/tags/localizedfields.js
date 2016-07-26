@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.object.tags.localizedfields");
@@ -166,9 +165,8 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
 
                 var panelConf = {
                     height: "auto",
-                    border: true,
+                    border: false,
                     padding: "10px",
-                    title: pimcore.available_languages[this.frontendLanguages[i]],
                     items: items,
                     hidden: (i > 0)     //TODO default language
                 };
@@ -214,46 +212,6 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
                 panelConf.autoHeight = false;
             }
 
-            // this is because the tabpanel has a strange behavior with automatic height, this corrects the problem
-            //panelConf.listeners = {
-            //
-            //    afterlayout: function () {
-            //        if (this.component.heightAlreadyFixed) {
-            //            return;
-            //        }
-            //
-            //        this.tabPanelAdjustIntervalCounter = 0;
-            //        this.tabPanelAdjustInterval = window.setInterval(function () {
-            //            if(!this.fieldConfig.height && !this.fieldConfig.region) {
-            //                this.tabPanelAdjustIntervalCounter++;
-            //                if(this.tabPanelAdjustIntervalCounter > 20) {
-            //                    clearInterval(this.tabPanelAdjustInterval);
-            //                }
-            //
-            //                try {
-            //                    var panelBodies = this.tabPanel.items.first().getEl().query(".x-panel-body");
-            //                    var panelBody = Ext.get(panelBodies[0]);
-            //                    panelBody.applyStyles("height: auto;");
-            //                    var height = panelBody.getHeight();
-            //                    if (height > 0) {
-            //                        // 100 is just a fixed value which seems to be ok(caused by title bar, tabs itself, ... )
-            //                        this.component.setHeight(height+100);
-            //                        clearInterval(this.tabPanelAdjustInterval);
-            //
-            //                        //this.tabPanel.getEl().applyStyles("position:relative;");
-            //                        this.component.updateLayout();
-            //                        this.component.heightAlreadyFixed = true;
-            //
-            //                    }
-            //
-            //                } catch (e) {
-            //                    console.log(e);
-            //                }
-            //            }
-            //        }.bind(this), 100);
-            //    }.bind(this)
-            //};
-
             for (var i=0; i < nrOfLanguages; i++) {
                 this.currentLanguage = this.frontendLanguages[i];
                 this.languageElements[this.currentLanguage] = [];
@@ -281,13 +239,10 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
                 panelConf.items.push(item);
             }
 
-
-
             this.tabPanel = new Ext.TabPanel(panelConf);
 
             wrapperConfig.items = [this.tabPanel];
         }
-
 
         wrapperConfig.border = true;
         wrapperConfig.style = "margin-bottom: 10px";
@@ -295,6 +250,10 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
 
         this.component = new Ext.Panel(wrapperConfig);
         this.component.updateLayout();
+
+        this.fieldConfig.datatype ="data";
+        this.fieldConfig.fieldtype = "localizedfields";
+
         return this.component;
     },
 
@@ -353,9 +312,18 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
             localizedData[currentLanguage] = {};
 
             for (var s=0; s<this.languageElements[currentLanguage].length; s++) {
-                if(this.languageElements[currentLanguage][s].isDirty()) {
-                    localizedData[currentLanguage][this.languageElements[currentLanguage][s].getName()]
-                        = this.languageElements[currentLanguage][s].getValue();
+                try {
+
+                    if(this.languageElements[currentLanguage][s].isDirty()) {
+                        localizedData[currentLanguage][this.languageElements[currentLanguage][s].getName()]
+                            = this.languageElements[currentLanguage][s].getValue();
+                    }
+
+                } catch (e) {
+
+                    console.log(e);
+                    localizedData[currentLanguage][this.languageElements[currentLanguage][s].getName()] = "";
+
                 }
             }
         }
@@ -479,7 +447,6 @@ pimcore.object.tags.localizedfields = Class.create(pimcore.object.tags.abstract,
                 this.referencedFields[r].dataIsNotInherited();
             }
         }
-
 
         if (!this.inherited) {
             return true;

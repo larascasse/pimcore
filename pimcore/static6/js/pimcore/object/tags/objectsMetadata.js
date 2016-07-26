@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
  * @copyright  Copyright (c) 2009-2013 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 pimcore.registerNS("pimcore.object.tags.objectsMetadata");
@@ -158,7 +157,7 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                         return '<div style="text-align: center"><div role="button" class="x-grid-checkcolumn" style=""></div></div>';
                     }
                 };
-                editor = new Ext.form.Checkbox({});
+                editor = Ext.create('Ext.form.field.Checkbox', {style: 'margin-top: 2px;'});
 
 
                 if(readOnly) {
@@ -192,7 +191,7 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                 items: [
                     {
                         tooltip: t('up'),
-                        icon: "/pimcore/static6/img/icon/arrow_up.png",
+                        icon: "/pimcore/static6/img/flat-color-icons/up.svg",
                         handler: function (grid, rowIndex) {
                             if(rowIndex > 0) {
                                 var rec = grid.getStore().getAt(rowIndex);
@@ -209,7 +208,7 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                 items: [
                     {
                         tooltip: t('down'),
-                        icon: "/pimcore/static6/img/icon/arrow_down.png",
+                        icon: "/pimcore/static6/img/flat-color-icons/down.svg",
                         handler: function (grid, rowIndex) {
                             if(rowIndex < (grid.getStore().getCount()-1)) {
                                 var rec = grid.getStore().getAt(rowIndex);
@@ -228,7 +227,7 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
             items: [
                 {
                     tooltip: t('open'),
-                    icon: "/pimcore/static6/img/icon/pencil_go.png",
+                    icon: "/pimcore/static6/img/flat-color-icons/cursor.svg",
                     handler: function (grid, rowIndex) {
                         var data = grid.getStore().getAt(rowIndex);
                         pimcore.helpers.openObject(data.data.id, "object");
@@ -244,7 +243,7 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                 items: [
                     {
                         tooltip: t('remove'),
-                        icon: "/pimcore/static6/img/icon/cross.png",
+                        icon: "/pimcore/static6/img/flat-color-icons/delete.svg",
                         handler: function (grid, rowIndex) {
                             grid.getStore().removeAt(rowIndex);
                         }.bind(this)
@@ -312,13 +311,16 @@ pimcore.object.tags.objectsMetadata = Class.create(pimcore.object.tags.objects, 
                 cls: "pimcore_force_auto_width"
             },
             autoHeight: autoHeight,
-            bodyCssClass: "pimcore_object_tag_objects",
+            bodyCls: "pimcore_object_tag_objects pimcore_editable_grid",
             plugins: [
                 this.cellEditing
             ]
         });
 
-        this.component.on("rowcontextmenu", this.onRowContextmenu);
+        if(!readOnly) {
+            this.component.on("rowcontextmenu", this.onRowContextmenu);
+        }
+        
         this.component.reference = this;
 
         if(!readOnly) {

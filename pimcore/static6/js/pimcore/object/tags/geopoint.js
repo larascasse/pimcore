@@ -1,15 +1,14 @@
 /**
  * Pimcore
  *
- * LICENSE
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Enterprise License (PEL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.pimcore.org/license
- *
- * @copyright  Copyright (c) 2009-2014 pimcore GmbH (http://www.pimcore.org)
- * @license    http://www.pimcore.org/license     New BSD License
+ * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
 /*global google */
@@ -32,8 +31,11 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
         this.latitude = new Ext.form.NumberField(coordConf);
 
         if (this.data) {
-            this.longitude.setValue(this.data.longitude);
-            this.latitude.setValue(this.data.latitude);
+            //set raw values to stop values being initially dirty
+            this.longitude.setRawValue(this.data.longitude);
+            this.longitude.resetOriginalValue();
+            this.latitude.setRawValue(this.data.latitude);
+            this.latitude.resetOriginalValue();
         }
 
 
@@ -47,9 +49,7 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
             height: 370,
             width: 650,
             componentCls: "object_field object_geo_field",
-            html: '<div id="google_maps_container_' + this.mapImageID + '" align="center">'
-                  + '<img align="center" width="300" height="300" src="'
-                  + this.getMapUrl(this.fieldConfig, this.data) + '" /></div>',
+            html: '<div id="google_maps_container_' + this.mapImageID + '" align="center"></div>',
             bbar: [
                 t('latitude'),
                 this.latitude,
@@ -59,7 +59,7 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
                 '-', {
                     xtype: 'button',
                     text: t('empty'),
-                    icon: '/pimcore/static6/img/icon/bin.png',
+                    iconCls: "pimcore_icon_empty",
                     handler: function () {
                         this.latitude.setValue(null);
                         this.longitude.setValue(null);
@@ -68,7 +68,7 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
                 }, '->', {
                     xtype: 'button',
                     text: t('open_search_editor'),
-                    icon: '/pimcore/static6/img/icon/magnifier.png',
+                    iconCls: "pimcore_icon_search",
                     handler: this.openPicker.bind(this)
                 }
             ]
@@ -120,12 +120,12 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
                 + lat + "," + lng + "&zoom=" + mapZoom +
                 '&size=' + px + 'x' + py
                 + '&markers=color:red|' + lat + ',' + lng
-                + '&sensor=false&maptype=' + fieldConfig.mapType;
+                + '&maptype=' + fieldConfig.mapType;
         } else {
             mapUrl = 'https://maps.googleapis.com/maps/api/staticmap?center='
                 + lat + "," + lng + "&zoom=" + mapZoom +
                 '&size=' + px + 'x' + py
-                + '&sensor=false&maptype=' + fieldConfig.mapType;
+                + '&maptype=' + fieldConfig.mapType;
         }
 
         if (pimcore.settings.google_maps_api_key) {
@@ -157,19 +157,19 @@ pimcore.object.tags.geopoint = Class.create(pimcore.object.tags.geo.abstract, {
             bbar: [this.searchfield,{
                 xtype: 'button',
                 text: t('search'),
-                icon: '/pimcore/static6/img/icon/magnifier.png',
+                iconCls: "pimcore_icon_search",
                 handler: this.geocode.bind(this)
             }, '->', {
                 xtype: 'button',
                 text: t('cancel'),
-                icon: '/pimcore/static6/img/icon/cancel.png',
+                iconCls: "pimcore_icon_cancel",
                 handler: function () {
                     this.searchWindow.close();
                 }.bind(this)
             },{
                 xtype: 'button',
                 text: 'OK',
-                icon: '/pimcore/static6/img/icon/tick.png',
+                iconCls: "pimcore_icon_save",
                 handler: function () {
                     if (this.overlay) {
                         var point = this.overlay.getPosition();

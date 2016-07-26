@@ -12,3 +12,5 @@ fichier sans titre
 plugins/LpnPlugin/cli/.htaccess
 website/var/config/system.xml
 
+/pimcore/.htaccess
+/website/var/config/system.php

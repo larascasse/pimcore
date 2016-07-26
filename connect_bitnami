@@ -1,10 +1,50 @@
-ssh -i ~/.ssh/bitnami-hosting.pem bitnami@shopdev.laparqueterienouvelle.fr
+ssh -i ~/.ssh/LPN_AWS.pem bitnami@ec2-52-59-93-104.eu-central-1.compute.amazonaws.com
+
+
+//REDIS
+sudo apt-get install tcl
+
+
+
+sudo wget http://download.redis.io/redis-stable.tar.gz
+sudo tar xvzf redis-stable.tar.gz
+cd redis-stable
+sudo make
+
+cd redis-stable
+
+
+
+sudo cp redis-server /usr/local/bin/edis-server 
+sudo cp redis-cli /usr/local/bin/
+
+
+sudo mkdir /opt/bitnami/redis/
+sudo mkdir /opt/bitnami/redis/bin
+
+sudo cp  /usr/local/bin/redis-server /opt/bitnami/redis/bin/
+sudo cp /usr/local/bin/redis-cli /opt/bitnami/redis/bin/
+
+sudo chmod +x /opt/bitnami/redis/bin/redis-cli
+sudo chmod +x /opt/bitnami/redis/bin/redis-server
+
+sudo cp utils/redis_init_script /etc/init.d/redis_6379
+sudo mkdir /etc/redis
+sudo cp redis.conf /etc/redis/6379.conf
+sudo mkdir /var/redis
+sudo mkdir /var/redis/6379
+
+
+
+//GIT
+sudo apt-get install git-core
+
 
 
 #Install
 sudo git init
-sudo git add .
-sudo git commit -m"initial import of pre-existing web files"
+#sudo git add .
+#sudo git commit -m"initial import of pre-existing web files"
 
 sudo git config --global user.name "Forent B"
 sudo git config --global user.email florent@lesmecaniques.net
@@ -25,3 +65,8 @@ sudo git reset --hard origin/master
 
 sudo git submodule init
 sudo git submodule update
+
+
+MY.ncf
+innodb_file_per_table
+innodb_file_format = Barracuda

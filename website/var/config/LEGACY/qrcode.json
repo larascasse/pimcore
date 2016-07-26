@@ -1,0 +1,18 @@
+{
+	"laparqueterienouvelle":{
+		"description":"",
+		"url":"http:\/\/www.laparqueterirnouvelle.fr",
+		"foreColor":"",
+		"backgroundColor":"",
+		"googleAnalytics":true,
+		"id":"laparqueterienouvelle"
+	},
+	"test":{
+		"description":"blablh",
+		"url":"\/terrasses\/lames-terrasse-composite",
+		"foreColor":"",
+		"backgroundColor":"",
+		"googleAnalytics":true,
+		"id":"test"
+	}
+}

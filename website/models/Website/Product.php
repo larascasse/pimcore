@@ -409,7 +409,7 @@ class Website_Product extends Object_Product {
 
 
 		if($isHTML) {
-			if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
+			//if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
 				$html ="<dl  class=\"dl-horizontal\">\n";
 				foreach ($caracteristiques as $key => $value) {
 					$html.= '<dt>';
@@ -421,7 +421,7 @@ class Website_Product extends Object_Product {
 					//$html.="</li>\n";
 				}
 				$html .="</dl>\n";
-			}
+			/*}
 			else {
 				$html ="<ul>\n";
 				foreach ($caracteristiques as $key => $value) {
@@ -434,7 +434,7 @@ class Website_Product extends Object_Product {
 					$html.="</li>\n";
 				}
 				$html .="</ul>\n";
-			}
+			}*/
 			
 			return $html;
 

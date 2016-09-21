@@ -648,8 +648,8 @@ class Website_Product extends Object_Product {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";
-   		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle - Magasin de Parquet et Terrasses") {
-			 $meta = $this->mage_meta_title;
+   		 if($this->meta_description && strlen($this->meta_description)>0 && $this->meta_description!="La Parqueterie Nouvelle - Magasin de Parquet et Terrasses") {
+			 $meta = $this->meta_description;
    		 }
 		 else {;
 		 	

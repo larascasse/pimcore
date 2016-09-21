@@ -656,7 +656,7 @@ class Website_Product extends Object_Product {
 		 	 $meta = $this->getMage_short_name();
 		 	 $meta = $this->getSubtype()." ".$meta;
 		 	 $meta .= " - ".$this->getShort_description();
-		 	 $meta = "La Parqueterie Nouvelle, ".$meta;
+		 	 $meta .= " - La Parqueterie Nouvelle";
 		 	 
 		 	 
 		 	 

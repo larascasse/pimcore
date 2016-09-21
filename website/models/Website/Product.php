@@ -627,14 +627,14 @@ class Website_Product extends Object_Product {
    		 Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";
    		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle") {
-			 $meta = $this->mage_meta_title;
+			 $meta = $this->meta_title;
    		 }
 		 else {
 
 		 	 $meta = $this->getMage_short_name();
 		 	 if(strlen($meta)<45)
 		 	 	$meta = $this->getSubtype()." ".$meta;
-		 	 if(strlen($meta)<30)
+		 	 if(strlen($meta)<29)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }
 

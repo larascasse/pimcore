@@ -626,20 +626,46 @@ class Website_Product extends Object_Product {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";
-   		 if($this->mage_meta_title && strlen($this->mage_meta_title)>0)
+   		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle") {
 			 $meta = $this->mage_meta_title;
+   		 }
 		 else {
 
 		 	 $meta = $this->getMage_short_name();
 		 	 if(strlen($meta)<45)
 		 	 	$meta = $this->getSubtype()." ".$meta;
-		 	 if(strlen($meta)<45)
+		 	 if(strlen($meta)<30)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }
 
    		 Object_Abstract::setGetInheritedValues($inheritance); 
    		 return $meta;
    	}
+
+
+   	public function getMage_meta_description() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+   		 $meta = "La Parqueterie Nouvelle";
+   		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle - Magasin de Parquet et Terrasses") {
+			 $meta = $this->mage_meta_title;
+   		 }
+		 else {;
+		 	
+		 	 $meta .= $this->getMage_short_name();
+		 	 $meta = $this->getSubtype()." ".$meta;
+		 	 $meta .= " - ".$this->getShort_descripton();
+		 	 $meta = "La Parqueterie Nouvelle, ".$meta;
+		 	 
+		 	 
+		 	 
+		 }
+
+   		 Object_Abstract::setGetInheritedValues($inheritance); 
+   		 return $meta;
+   	}
+
 
 	public function getMage_config_description() {
 

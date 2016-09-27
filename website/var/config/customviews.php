@@ -45,7 +45,7 @@ return [
             "id" => "4",
             "rootfolder" => "/teintes/teintes/_import_",
             "showroot" => "1",
-            "classes" => "13"
+            "classes" => ""
         ]
     ]
 ];

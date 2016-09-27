@@ -37,6 +37,15 @@ return [
             "rootfolder" => "/catalogue/_product_base__/20strat",
             "showroot" => "1",
             "classes" => "5"
+        ],
+        [
+            "name" => "Import Teintes",
+            "condition" => "",
+            "icon" => "",
+            "id" => "4",
+            "rootfolder" => "/teintes/teintes/_import_",
+            "showroot" => "1",
+            "classes" => "13"
         ]
     ]
 ];

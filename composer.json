@@ -69,7 +69,8 @@
         "mpratt/embera": "~1",
         "defuse/php-encryption": "~2",
         "nesbot/carbon": "~1",
-        "php-di/php-di": "~5"
+        "php-di/php-di": "~5",
+        "egulias/email-validator": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

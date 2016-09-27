@@ -1,30 +1,172 @@
 <?php 
 
-/** Generated at 2016-07-26T10:27:23+02:00 */
-
-/**
+/** 
+* Generated at: 2016-09-27T10:19:54+02:00
 * Inheritance: yes
-* Variants   : no
-* Changed by : florent (6)
-* IP:          92.154.6.232
-*/
+* Variants: no
+* Changed by: florent (6)
+* IP: 92.154.6.232
 
+
+Fields Summary: 
+- actif_web [checkbox]
+- obsolete [checkbox]
+- code [input]
+- ean [input]
+- name_scienergie [input]
+- name_scienergie_court [input]
+- catalogue [select]
+- subtype [input]
+- subtype2 [input]
+- teinte_lpn [select]
+- name_scienergie_converti [input]
+- name_scienergie2 [input]
+- name [input]
+- short_name [input]
+- pimonly_name_suffixe [input]
+- pimonly_dimensions [input]
+- price [input]
+- weight [input]
+- short_description [textarea]
+- mage_sub_description [textarea]
+- short_description_title [input]
+- description [textarea]
+- extra_content1 [wysiwyg]
+- lesplus [textarea]
+- remarque [textarea]
+- echantillon [checkbox]
+- no_stock_delay [input]
+- leadtime [input]
+- shipping_type [select]
+- mage_qty_description [textarea]
+- mage_custom_option [textarea]
+- price_1 [input]
+- price_2 [input]
+- price_3 [input]
+- price_4 [input]
+- epaisseur [input]
+- epaisseur_txt [input]
+- epaisseur_type [select]
+- epaisseur_not_configurable [checkbox]
+- largeur [input]
+- largeur_txt [input]
+- largeur_not_configurable [checkbox]
+- longueur [input]
+- longueur_txt [input]
+- longueur_min [input]
+- longueur_max [input]
+- longueur_not_configurable [checkbox]
+- mage_longueur [input]
+- mage_section [input]
+- pimonly_section [input]
+- mage_use_section_as_configurable [checkbox]
+- hauteur [input]
+- hauteur_not_configurable [checkbox]
+- color [select]
+- color_not_configurable [checkbox]
+- volume [input]
+- volume_not_configurable [checkbox]
+- conditionnement [input]
+- conditionnement_not_configurable [checkbox]
+- nbrpp [input]
+- finition [select]
+- finition_not_configurable [checkbox]
+- profil [multiselect]
+- profil_not_configurable [checkbox]
+- pimonly_profil_label [input]
+- fixation [multiselect]
+- fixation_not_configurable [checkbox]
+- choix [input]
+- choix_not_configurable [checkbox]
+- configurable_free_1 [input]
+- configurable_free_2 [input]
+- quantity_min [input]
+- quantity_max [input]
+- quantity_min_txt [input]
+- quantity_min_txt_not_configurable [checkbox]
+- characteristics_others [textarea]
+- unite [input]
+- mode_calcul [input]
+- rendement [input]
+- famille [input]
+- qualite [input]
+- essence [input]
+- classe [input]
+- classe_service [input]
+- epaisseurUsure [input]
+- extras [objects]
+- chanfreins [input]
+- origine_bois [input]
+- country_of_manufacture [input]
+- colisage [input]
+- typeLame [select]
+- pieceHumide [checkbox]
+- sousCoucheIntegree [checkbox]
+- chauffantBasseTemperature [checkbox]
+- chauffantAccumulationBasseTemperature [checkbox]
+- solRaffraichissant [checkbox]
+- pefc [checkbox]
+- fsc [checkbox]
+- parquet_de_france [checkbox]
+- norme_sanitaire [select]
+- support [select]
+- image_1 [image]
+- image_2 [image]
+- image_3 [image]
+- gallery [multihref]
+- realisations [multihref]
+- fiche_technique_lpn [href]
+- fiche_technique_orginale [href]
+- re_skus [objects]
+- cs_skus [objects]
+- pimonly_category_pose [href]
+- pimonly_category_finition [href]
+- pimonly_category_entretien [href]
+- associatedArticles [objects]
+- origineArticles [objects]
+- Categories [nonownerobjects]
+- meta_title [input]
+- meta_description [input]
+- meta_keywords [input]
+- accessoirepopin [objects]
+- mage_accessoirepopin [input]
+- mage_name [textarea]
+- mage_short_name [textarea]
+- mage_meta_title [input]
+- mage_meta_description [textarea]
+- mage_lesplus [textarea]
+- mage_description [textarea]
+- characteristics [textarea]
+- mage_guideline [textarea]
+- image_1_src [input]
+- image_2_src [input]
+- image_3_src [input]
+- mage_mediagallery [input]
+- mage_fichepdf [input]
+- mage_invoice_description [textarea]
+- mage_realisations [textarea]
+- mage_realisationsJson [textarea]
+- mage_config_description [textarea]
+- mage_re_skus [input]
+- mage_produitspose [input]
+- mage_produitsfinition [input]
+- mage_produitsentretien [input]
+- mage_cs_skus [input]
+- mage_visibility [select]
+- mage_origine_arbre [textarea]
+*/ 
 
 namespace Pimcore\Model\Object;
 
 
 
 /**
-* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByShort_name ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
@@ -32,6 +174,9 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByShort_name ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByWeight ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByShort_description ($value, $limit = 0) 
@@ -67,12 +212,12 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_section ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByPimonly_section ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_use_section_as_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByHauteur ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByHauteur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByColor ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByColor_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByVolume ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByVolume_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByHauteur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByHauteur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByConditionnement ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByConditionnement_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
@@ -85,6 +230,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
@@ -138,6 +284,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_short_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_title ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_lesplus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCharacteristics ($value, $limit = 0) 
@@ -164,16 +311,12 @@ class Product extends Concrete {
 
 public $o_classId = 5;
 public $o_className = "product";
-public $configurable_free_1;
-public $pimonly_name_suffixe;
-public $pimonly_dimensions;
-public $short_name;
-public $name_scienergie_court;
 public $actif_web;
 public $obsolete;
 public $code;
 public $ean;
 public $name_scienergie;
+public $name_scienergie_court;
 public $catalogue;
 public $subtype;
 public $subtype2;
@@ -181,6 +324,9 @@ public $teinte_lpn;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
+public $short_name;
+public $pimonly_name_suffixe;
+public $pimonly_dimensions;
 public $price;
 public $weight;
 public $short_description;
@@ -216,12 +362,12 @@ public $mage_longueur;
 public $mage_section;
 public $pimonly_section;
 public $mage_use_section_as_configurable;
+public $hauteur;
+public $hauteur_not_configurable;
 public $color;
 public $color_not_configurable;
 public $volume;
 public $volume_not_configurable;
-public $hauteur;
-public $hauteur_not_configurable;
 public $conditionnement;
 public $conditionnement_not_configurable;
 public $nbrpp;
@@ -234,6 +380,7 @@ public $fixation;
 public $fixation_not_configurable;
 public $choix;
 public $choix_not_configurable;
+public $configurable_free_1;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -287,6 +434,7 @@ public $mage_accessoirepopin;
 public $mage_name;
 public $mage_short_name;
 public $mage_meta_title;
+public $mage_meta_description;
 public $mage_lesplus;
 public $mage_description;
 public $characteristics;
@@ -317,136 +465,6 @@ public static function create($values = array()) {
 	$object = new static();
 	$object->setValues($values);
 	return $object;
-}
-
-/**
-* Get configurable_free_1 - Option configurable
-* @return string
-*/
-public function getConfigurable_free_1 () {
-	$preValue = $this->preGetValue("configurable_free_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->configurable_free_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
-		return $this->getValueFromParent("configurable_free_1");
-	}
-	return $data;
-}
-
-/**
-* Set configurable_free_1 - Option configurable
-* @param string $configurable_free_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setConfigurable_free_1 ($configurable_free_1) {
-	$this->configurable_free_1 = $configurable_free_1;
-	return $this;
-}
-
-/**
-* Get pimonly_name_suffixe - Suffixe Nom
-* @return string
-*/
-public function getPimonly_name_suffixe () {
-	$preValue = $this->preGetValue("pimonly_name_suffixe"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->pimonly_name_suffixe;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_name_suffixe")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_name_suffixe");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_name_suffixe - Suffixe Nom
-* @param string $pimonly_name_suffixe
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_name_suffixe ($pimonly_name_suffixe) {
-	$this->pimonly_name_suffixe = $pimonly_name_suffixe;
-	return $this;
-}
-
-/**
-* Get pimonly_dimensions - Dimensions générées
-* @return string
-*/
-public function getPimonly_dimensions () {
-	$preValue = $this->preGetValue("pimonly_dimensions"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->pimonly_dimensions;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_dimensions")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_dimensions");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_dimensions - Dimensions générées
-* @param string $pimonly_dimensions
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_dimensions ($pimonly_dimensions) {
-	$this->pimonly_dimensions = $pimonly_dimensions;
-	return $this;
-}
-
-/**
-* Get short_name - Nom court
-* @return string
-*/
-public function getShort_name () {
-	$preValue = $this->preGetValue("short_name"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->short_name;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
-		return $this->getValueFromParent("short_name");
-	}
-	return $data;
-}
-
-/**
-* Set short_name - Nom court
-* @param string $short_name
-* @return \Pimcore\Model\Object\Product
-*/
-public function setShort_name ($short_name) {
-	$this->short_name = $short_name;
-	return $this;
-}
-
-/**
-* Get name_scienergie_court - Nom scienergie Court
-* @return string
-*/
-public function getName_scienergie_court () {
-	$preValue = $this->preGetValue("name_scienergie_court"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->name_scienergie_court;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_court")->isEmpty($data)) {
-		return $this->getValueFromParent("name_scienergie_court");
-	}
-	return $data;
-}
-
-/**
-* Set name_scienergie_court - Nom scienergie Court
-* @param string $name_scienergie_court
-* @return \Pimcore\Model\Object\Product
-*/
-public function setName_scienergie_court ($name_scienergie_court) {
-	$this->name_scienergie_court = $name_scienergie_court;
-	return $this;
 }
 
 /**
@@ -576,6 +594,32 @@ public function getName_scienergie () {
 */
 public function setName_scienergie ($name_scienergie) {
 	$this->name_scienergie = $name_scienergie;
+	return $this;
+}
+
+/**
+* Get name_scienergie_court - Nom scienergie Court
+* @return string
+*/
+public function getName_scienergie_court () {
+	$preValue = $this->preGetValue("name_scienergie_court"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->name_scienergie_court;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name_scienergie_court")->isEmpty($data)) {
+		return $this->getValueFromParent("name_scienergie_court");
+	}
+	return $data;
+}
+
+/**
+* Set name_scienergie_court - Nom scienergie Court
+* @param string $name_scienergie_court
+* @return \Pimcore\Model\Object\Product
+*/
+public function setName_scienergie_court ($name_scienergie_court) {
+	$this->name_scienergie_court = $name_scienergie_court;
 	return $this;
 }
 
@@ -758,6 +802,84 @@ public function getName () {
 */
 public function setName ($name) {
 	$this->name = $name;
+	return $this;
+}
+
+/**
+* Get short_name - Nom court
+* @return string
+*/
+public function getShort_name () {
+	$preValue = $this->preGetValue("short_name"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->short_name;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
+		return $this->getValueFromParent("short_name");
+	}
+	return $data;
+}
+
+/**
+* Set short_name - Nom court
+* @param string $short_name
+* @return \Pimcore\Model\Object\Product
+*/
+public function setShort_name ($short_name) {
+	$this->short_name = $short_name;
+	return $this;
+}
+
+/**
+* Get pimonly_name_suffixe - Suffixe Nom
+* @return string
+*/
+public function getPimonly_name_suffixe () {
+	$preValue = $this->preGetValue("pimonly_name_suffixe"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_name_suffixe;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_name_suffixe")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_name_suffixe");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_name_suffixe - Suffixe Nom
+* @param string $pimonly_name_suffixe
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_name_suffixe ($pimonly_name_suffixe) {
+	$this->pimonly_name_suffixe = $pimonly_name_suffixe;
+	return $this;
+}
+
+/**
+* Get pimonly_dimensions - Dimensions générées
+* @return string
+*/
+public function getPimonly_dimensions () {
+	$preValue = $this->preGetValue("pimonly_dimensions"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_dimensions;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_dimensions")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_dimensions");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_dimensions - Dimensions générées
+* @param string $pimonly_dimensions
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_dimensions ($pimonly_dimensions) {
+	$this->pimonly_dimensions = $pimonly_dimensions;
 	return $this;
 }
 
@@ -1672,6 +1794,58 @@ public function setMage_use_section_as_configurable ($mage_use_section_as_config
 }
 
 /**
+* Get hauteur - Hauteur / Rattrapage
+* @return string
+*/
+public function getHauteur () {
+	$preValue = $this->preGetValue("hauteur"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->hauteur;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur")->isEmpty($data)) {
+		return $this->getValueFromParent("hauteur");
+	}
+	return $data;
+}
+
+/**
+* Set hauteur - Hauteur / Rattrapage
+* @param string $hauteur
+* @return \Pimcore\Model\Object\Product
+*/
+public function setHauteur ($hauteur) {
+	$this->hauteur = $hauteur;
+	return $this;
+}
+
+/**
+* Get hauteur_not_configurable - Hauteur non configurable
+* @return boolean
+*/
+public function getHauteur_not_configurable () {
+	$preValue = $this->preGetValue("hauteur_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->hauteur_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("hauteur_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set hauteur_not_configurable - Hauteur non configurable
+* @param boolean $hauteur_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setHauteur_not_configurable ($hauteur_not_configurable) {
+	$this->hauteur_not_configurable = $hauteur_not_configurable;
+	return $this;
+}
+
+/**
 * Get color - Couleur / Teinte
 * @return string
 */
@@ -1772,58 +1946,6 @@ public function getVolume_not_configurable () {
 */
 public function setVolume_not_configurable ($volume_not_configurable) {
 	$this->volume_not_configurable = $volume_not_configurable;
-	return $this;
-}
-
-/**
-* Get hauteur - Hauteur / Rattrapage
-* @return string
-*/
-public function getHauteur () {
-	$preValue = $this->preGetValue("hauteur"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->hauteur;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur")->isEmpty($data)) {
-		return $this->getValueFromParent("hauteur");
-	}
-	return $data;
-}
-
-/**
-* Set hauteur - Hauteur / Rattrapage
-* @param string $hauteur
-* @return \Pimcore\Model\Object\Product
-*/
-public function setHauteur ($hauteur) {
-	$this->hauteur = $hauteur;
-	return $this;
-}
-
-/**
-* Get hauteur_not_configurable - Hauteur non configurable
-* @return boolean
-*/
-public function getHauteur_not_configurable () {
-	$preValue = $this->preGetValue("hauteur_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->hauteur_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("hauteur_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set hauteur_not_configurable - Hauteur non configurable
-* @param boolean $hauteur_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setHauteur_not_configurable ($hauteur_not_configurable) {
-	$this->hauteur_not_configurable = $hauteur_not_configurable;
 	return $this;
 }
 
@@ -2136,6 +2258,32 @@ public function getChoix_not_configurable () {
 */
 public function setChoix_not_configurable ($choix_not_configurable) {
 	$this->choix_not_configurable = $choix_not_configurable;
+	return $this;
+}
+
+/**
+* Get configurable_free_1 - Option configurable
+* @return string
+*/
+public function getConfigurable_free_1 () {
+	$preValue = $this->preGetValue("configurable_free_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_1");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_1 - Option configurable
+* @param string $configurable_free_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_1 ($configurable_free_1) {
+	$this->configurable_free_1 = $configurable_free_1;
 	return $this;
 }
 
@@ -3514,6 +3662,32 @@ public function getMage_meta_title () {
 */
 public function setMage_meta_title ($mage_meta_title) {
 	$this->mage_meta_title = $mage_meta_title;
+	return $this;
+}
+
+/**
+* Get mage_meta_description - Mage Métas Description
+* @return string
+*/
+public function getMage_meta_description () {
+	$preValue = $this->preGetValue("mage_meta_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_meta_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_meta_description")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_meta_description");
+	}
+	return $data;
+}
+
+/**
+* Set mage_meta_description - Mage Métas Description
+* @param string $mage_meta_description
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_meta_description ($mage_meta_description) {
+	$this->mage_meta_description = $mage_meta_description;
 	return $this;
 }
 

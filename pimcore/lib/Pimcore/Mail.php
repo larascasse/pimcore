@@ -16,6 +16,9 @@ namespace Pimcore;
 
 use Pimcore\Helper\Mail as MailHelper;
 use Pimcore\Model;
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
+use Pimcore\Logger;
 
 class Mail extends \Zend_Mail
 {
@@ -296,7 +299,7 @@ class Mail extends \Zend_Mail
         if (is_string($options)) {
             $this->html2textOptions = $options;
         } else {
-            \Logger::warn('Html2Text options ignored. You have to pass a string');
+            Logger::warn('Html2Text options ignored. You have to pass a string');
         }
 
         return $this;
@@ -465,7 +468,7 @@ class Mail extends \Zend_Mail
         if (is_string($key) || is_integer($key)) {
             $this->params[$key] = $value;
         } else {
-            \Logger::warn('$key has to be a string - Param ignored!');
+            Logger::warn('$key has to be a string - Param ignored!');
         }
 
         return $this;
@@ -518,7 +521,7 @@ class Mail extends \Zend_Mail
         if (is_string($key) || is_integer($key)) {
             unset($this->params[$key]);
         } else {
-            \Logger::warn('$key has to be a string - unsetParam ignored!');
+            Logger::warn('$key has to be a string - unsetParam ignored!');
         }
 
         return $this;
@@ -614,6 +617,34 @@ class Mail extends \Zend_Mail
      */
     public function send($transport = null)
     {
+        $this->setSubject($this->getSubjectRendered());
+
+        $bodyHtmlRendered = $this->getBodyHtmlRendered();
+        if ($bodyHtmlRendered) {
+            $this->setBodyHtml($bodyHtmlRendered);
+        }
+
+        $bodyTextRendered = $this->getBodyTextRendered();
+        if ($bodyTextRendered) {
+            $this->setBodyText($bodyTextRendered);
+        }
+
+        if ($this->ignoreDebugMode == false) {
+            $this->checkDebugMode();
+        }
+
+        return $this->sendWithoutRendering($transport);
+    }
+
+    /**
+     * sends mail without (re)rendering the content.
+     * see also comments of send() method
+     *
+     * @param null $transport
+     * @return \Zend_Mail
+     */
+    public function sendWithoutRendering($transport = null)
+    {
         // filter email addresses
         $blockedAddresses = [];
         foreach ($this->getRecipients() as $recipient) {
@@ -635,29 +666,13 @@ class Mail extends \Zend_Mail
             }
         }
 
-        $this->setSubject($this->getSubjectRendered());
-
-        $bodyHtmlRendered = $this->getBodyHtmlRendered();
-        if ($bodyHtmlRendered) {
-            $this->setBodyHtml($bodyHtmlRendered);
-        }
-
-        $bodyTextRendered = $this->getBodyTextRendered();
-        if ($bodyTextRendered) {
-            $this->setBodyText($bodyTextRendered);
-        }
-
-        if ($this->ignoreDebugMode == false) {
-            $this->checkDebugMode();
-        }
-
         $result = parent::send($transport);
 
         if ($this->loggingIsEnabled()) {
             try {
                 MailHelper::logEmail($this);
             } catch (\Exception $e) {
-                \Logger::emerg("Couldn't log Email");
+                Logger::emerg("Couldn't log Email");
             }
         }
 
@@ -720,19 +735,10 @@ class Mail extends \Zend_Mail
      */
     public static function isValidEmailAddress($emailAddress)
     {
-        $hostnameValidator = new \Zend_Validate_Hostname([
-            "idn" => false,
-            "tld" => false
-        ]);
-        $validator = new \Zend_Validate_EmailAddress([
-            "mx" => false,
-            "deep" => false,
-            "hostname" => $hostnameValidator
-        ]);
-        
-        return $validator->isValid($emailAddress);
-    }
+        $validator = new EmailValidator();
 
+        return $validator->isValid($emailAddress, new RFCValidation());
+    }
 
     /**
      * Replaces the placeholders with the content and returns the rendered Subject
@@ -750,7 +756,6 @@ class Mail extends \Zend_Mail
 
         return $this->placeholderObject->replacePlaceholders($subject, $this->getParams(), $this->getDocument(), $this->getEnableLayoutOnPlaceholderRendering());
     }
-
 
     /**
      * Replaces the placeholders with the content and returns the rendered Html
@@ -816,7 +821,7 @@ class Mail extends \Zend_Mail
                 }
                 $content = $this->html2Text($htmlContent);
             } catch (\Exception $e) {
-                \Logger::err($e);
+                Logger::err($e);
                 $content = "";
             }
         }
@@ -902,7 +907,7 @@ class Mail extends \Zend_Mail
     public static function getHtml2textInstalled()
     {
         if (is_null(self::$html2textInstalled)) {
-            self::determineHtml2TextIsInstalled();
+            self::$html2textInstalled = self::determineHtml2TextIsInstalled();
         }
 
         return self::$html2textInstalled;

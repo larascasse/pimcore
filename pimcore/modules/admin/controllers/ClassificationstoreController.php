@@ -226,7 +226,7 @@ class Admin_ClassificationstoreController extends \Pimcore\Controller\Action\Adm
 
             $allowedCollectionIds = [];
             if ($this->getParam("oid")) {
-                $object = Object_Concrete::getById($this->getParam("oid"));
+                $object = Object\Concrete::getById($this->getParam("oid"));
                 $class = $object->getClass();
                 $fd = $class->getFieldDefinition($this->getParam("fieldname"));
                 $allowedGroupIds = $fd->getAllowedGroupIds();
@@ -407,7 +407,7 @@ class Admin_ClassificationstoreController extends \Pimcore\Controller\Action\Adm
             }
 
             if ($this->getParam("oid")) {
-                $object = Object_Concrete::getById($this->getParam("oid"));
+                $object = Object\Concrete::getById($this->getParam("oid"));
                 $class = $object->getClass();
                 $fd = $class->getFieldDefinition($this->getParam("fieldname"));
                 $allowedGroupIds = $fd->getAllowedGroupIds();
@@ -462,17 +462,24 @@ class Admin_ClassificationstoreController extends \Pimcore\Controller\Action\Adm
             $dataParam = $this->getParam("data");
             $data = \Zend_Json::decode($dataParam);
 
-            $colId = $data["colId"];
-            $groupId = $data["groupId"];
-            $sorter = $data["sorter"];
+            if (count($data) == count($data, 1)) {
+                $data = [$data];
+            }
 
-            $config = new Classificationstore\CollectionGroupRelation();
-            $config->setGroupId($groupId);
-            $config->setColId($colId);
-            $config->setSorter($sorter);
+            foreach ($data as &$row) {
+                $colId = $row["colId"];
+                $groupId = $row["groupId"];
+                $sorter = $row["sorter"];
 
-            $config->save();
-            $data["id"] = $config->getColId() . "-" . $config->getGroupId();
+                $config = new Classificationstore\CollectionGroupRelation();
+                $config->setGroupId($groupId);
+                $config->setColId($colId);
+                $config->setSorter($sorter);
+
+                $config->save();
+
+                $row["id"] = $config->getColId() . "-" . $config->getGroupId();
+            }
 
             $this->_helper->json(["success" => true, "data" => $data]);
         } else {
@@ -831,7 +838,7 @@ class Admin_ClassificationstoreController extends \Pimcore\Controller\Action\Adm
             $allowedGroupIds = null;
 
             if ($this->getParam("oid")) {
-                $object = Object_Concrete::getById($this->getParam("oid"));
+                $object = Object\Concrete::getById($this->getParam("oid"));
                 $class = $object->getClass();
                 $fd = $class->getFieldDefinition($this->getParam("fieldname"));
                 $allowedGroupIds = $fd->getAllowedGroupIds();

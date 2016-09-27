@@ -14,19 +14,111 @@
 
 namespace Pimcore\Tool;
 
+use Pimcore\Document\Newsletter\SendingParamContainer;
 use Pimcore\Mail;
 use Pimcore\Tool;
 use Pimcore\Model\Object;
 use Pimcore\Model\Document;
 use Pimcore\Model;
+use Pimcore\Logger;
 
 class Newsletter
 {
+    const SENDING_MODE_BATCH = "batch";
+    const SENDING_MODE_SINGLE = "single";
 
     /**
      * @var Object\ClassDefinition
      */
     protected $class;
+
+    /**
+     * @param Document\Newsletter $newsletterDocument
+     * @param SendingParamContainer|null $sendingContainer
+     * @param string|null $hostUrl
+     * @return Mail
+     */
+    public static function prepareMail(Document\Newsletter $newsletterDocument, SendingParamContainer $sendingContainer = null, $hostUrl = null)
+    {
+        $mail = new Mail();
+        $mail->setIgnoreDebugMode(true);
+
+        if (\Pimcore\Config::getSystemConfig()->newsletter->usespecific) {
+            $mail->init("newsletter");
+        }
+
+        if (!Tool::getHostUrl() && $hostUrl) {
+            $mail->setHostUrl($hostUrl);
+        }
+
+        $mail->setDocument($newsletterDocument);
+
+        if ($sendingContainer && $sendingContainer->getParams()) {
+            $mail->setParams($sendingContainer->getParams());
+        }
+
+        $contentHTML = $mail->getBodyHtmlRendered();
+        $contentText = $mail->getBodyTextRendered();
+
+        // render the document and rewrite the links (if analytics is enabled)
+        if ($newsletterDocument->getEnableTrackingParameters()) {
+            if ($contentHTML) {
+                include_once("simple_html_dom.php");
+
+                $html = str_get_html($contentHTML);
+                if ($html) {
+                    $links = $html->find("a");
+                    foreach ($links as $link) {
+                        if (preg_match("/^(mailto)/", trim(strtolower($link->href)))) {
+                            continue;
+                        }
+
+                        $glue = "?";
+                        if (strpos($link->href, "?")) {
+                            $glue = "&";
+                        }
+                        $link->href = $link->href . $glue .
+                            "utm_source=" . $newsletterDocument->getTrackingParameterSource() .
+                            "&utm_medium=" . $newsletterDocument->getTrackingParameterMedium() .
+                            "&utm_campaign=" . $newsletterDocument->getTrackingParameterName();
+                    }
+
+                    $contentHTML = $html->save();
+
+                    $html->clear();
+                    unset($html);
+                }
+
+                $mail->setBodyHtml($contentHTML);
+            }
+        }
+
+        $mail->setBodyHtml($contentHTML);
+        $mail->setBodyText($contentText);
+        $mail->setSubject($mail->getSubjectRendered());
+
+        return $mail;
+    }
+
+    /**
+     * @param Mail $mail
+     * @param SendingParamContainer $sendingContainer
+     */
+    public static function sendNewsletterDocumentBasedMail(Mail $mail, SendingParamContainer $sendingContainer)
+    {
+        $mail->setTo($sendingContainer->getEmail());
+        $mail->sendWithoutRendering();
+
+        Logger::info("Sent newsletter to: " . self::obfuscateEmail($sendingContainer->getEmail()) . " [" . $mail->getDocument()->getId() . "]");
+    }
+
+    protected static function obfuscateEmail($email)
+    {
+        $email = substr_replace($email, ".xxx", strrpos($email, "."));
+
+        return $email;
+    }
+
 
     /**
      * @param Model\Tool\Newsletter\Config $newsletter

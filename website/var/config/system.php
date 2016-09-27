@@ -3,37 +3,34 @@
 return [
     "general" => [
         "timezone" => "Europe/Berlin",
+        "path_variable" => "/opt/bitnami/common:/opt/bitnami/php/bin",
         "domain" => "",
-        "redirect_to_maindomain" => "",
+        "redirect_to_maindomain" => FALSE,
         "language" => "fr",
         "validLanguages" => "en,fr_FR",
         "fallbackLanguages" => [
             "en" => "",
-            "fr_FR" => ""
+            "fr_FR" => "en"
         ],
-        "defaultLanguage" => "fr_FR",
-        "theme" => "",
-        "contactemail" => "florent@lesmecaniques.net",
+        "defaultLanguage" => "en",
         "extjs6" => "1",
         "loginscreencustomimage" => "",
-        "disableusagestatistics" => "1",
-        "debug" => "",
+        "disableusagestatistics" => TRUE,
+        "debug" => FALSE,
         "debug_ip" => "",
         "http_auth" => [
             "username" => "",
             "password" => ""
         ],
-        "custom_php_logfile" => "1",
-        "environment" => "",
+        "custom_php_logfile" => TRUE,
         "debugloglevel" => "error",
-        "disable_whoops" => "",
-        "debug_admin_translations" => "",
-        "devmode" => "",
-        "logrecipient" => "",
+        "disable_whoops" => FALSE,
+        "debug_admin_translations" => FALSE,
+        "devmode" => FALSE,
+        "logrecipient" => NULL,
         "viewSuffix" => "",
         "instanceIdentifier" => "",
-        "show_cookie_notice" => "",
-        "path_variable" => "/opt/bitnami/common:/opt/bitnami/php/bin"
+        "show_cookie_notice" => FALSE
     ],
     "database" => [
         "adapter" => "Mysqli",
@@ -48,43 +45,36 @@ return [
     ],
     "documents" => [
         "versions" => [
-            "days" => "",
-            "steps" => "1"
+            "days" => NULL,
+            "steps" => 1
         ],
         "default_controller" => "default",
         "default_action" => "default",
         "error_pages" => [
             "default" => "/error"
         ],
-        "createredirectwhenmoved" => "1",
+        "createredirectwhenmoved" => TRUE,
         "allowtrailingslash" => "no",
         "allowcapitals" => "no",
-        "generatepreview" => "1",
-        "wkhtmltoimage" => "/home/bitnami/wkhtmltopdf/wkhtmltopdf/static-build/trusty-amd64/app/bin/wkhtmltoimage",
-        "wkhtmltopdf" => "/home/bitnami/wkhtmltopdf/wkhtmltopdf/static-build/trusty-amd64/app/bin/wkhtmltopdf"
+        "generatepreview" => TRUE
     ],
     "objects" => [
         "versions" => [
-            "days" => "",
-            "steps" => "1"
+            "days" => NULL,
+            "steps" => 1
         ]
     ],
     "assets" => [
-        "webdav" => [
-            "hostname" => "pim.webdav.laparqueterienouvelle.fr"
-        ],
         "versions" => [
-            "days" => "",
-            "steps" => "1"
+            "days" => NULL,
+            "steps" => 1
         ],
         "icc_rgb_profile" => "",
         "icc_cmyk_profile" => "",
-        "hide_edit_image" => "1"
+        "hide_edit_image" => TRUE,
+        "disable_tree_preview" => FALSE
     ],
     "services" => [
-        "translate" => [
-            "apikey" => ""
-        ],
         "google" => [
             "client_id" => "",
             "email" => "",
@@ -93,17 +83,17 @@ return [
         ]
     ],
     "cache" => [
-        "enabled" => "1",
-        "lifetime" => "",
+        "enabled" => TRUE,
+        "lifetime" => NULL,
         "excludePatterns" => "",
         "excludeCookie" => ""
     ],
     "outputfilters" => [
-        "less" => "",
+        "less" => FALSE,
         "lesscpath" => ""
     ],
     "webservice" => [
-        "enabled" => "1"
+        "enabled" => TRUE
     ],
     "httpclient" => [
         "adapter" => "Zend_Http_Client_Adapter_Socket",
@@ -114,8 +104,8 @@ return [
     ],
     "applicationlog" => [
         "mail_notification" => [
-            "send_log_summary" => "",
-            "filter_priority" => "",
+            "send_log_summary" => FALSE,
+            "filter_priority" => NULL,
             "mail_receiver" => ""
         ],
         "archive_treshold" => "30",
@@ -138,8 +128,7 @@ return [
             "name" => "",
             "auth" => [
                 "method" => "",
-                "username" => "",
-                "password" => ""
+                "username" => ""
             ]
         ],
         "debug" => [
@@ -154,7 +143,7 @@ return [
                 "port" => "",
                 "username" => "",
                 "password" => "",
-                "ssl" => ""
+                "ssl" => FALSE
             ]
         ]
     ],
@@ -167,7 +156,7 @@ return [
             "name" => "",
             "email" => ""
         ],
-        "method" => "",
+        "method" => NULL,
         "smtp" => [
             "host" => "",
             "port" => "",
@@ -175,11 +164,10 @@ return [
             "name" => "",
             "auth" => [
                 "method" => "",
-                "username" => "",
-                "password" => ""
+                "username" => ""
             ]
         ],
-        "usespecific" => ""
+        "usespecific" => FALSE
     ],
     "flags" => [
         "useZendDate" => TRUE

@@ -15,6 +15,7 @@
 namespace Pimcore;
 
 use Pimcore\Cache;
+use Pimcore\Logger;
 
 class Tool
 {
@@ -424,7 +425,7 @@ class Tool
             $systemConfig = Config::getSystemConfig()->toArray();
             $hostname = $systemConfig['general']['domain'];
             if (!$hostname) {
-                \Logger::warn('Couldn\'t determine HTTP Host. No Domain set in "Settings" -> "System" -> "Website" -> "Domain"');
+                Logger::warn('Couldn\'t determine HTTP Host. No Domain set in "Settings" -> "System" -> "Website" -> "Domain"');
 
                 return "";
             }
@@ -528,9 +529,9 @@ class Tool
     {
         $config = Config::getSystemConfig();
         $clientConfig = $config->httpclient->toArray();
-        $clientConfig["adapter"] = $clientConfig["adapter"] ? $clientConfig["adapter"] : "Zend_Http_Client_Adapter_Socket";
-        $clientConfig["maxredirects"] = $options["maxredirects"] ? $options["maxredirects"] : 2;
-        $clientConfig["timeout"] = $options["timeout"] ? $options["timeout"] : 3600;
+        $clientConfig["adapter"] =  isset($clientConfig["adapter"]) ? $clientConfig["adapter"] : "Zend_Http_Client_Adapter_Socket";
+        $clientConfig["maxredirects"] =  isset($options["maxredirects"]) ? $options["maxredirects"] : 2;
+        $clientConfig["timeout"] =  isset($options["timeout"]) ? $options["timeout"] : 3600;
         $type = empty($type) ? "Zend_Http_Client" : $type;
 
         $type = "\\" . ltrim($type, "\\");
@@ -686,7 +687,7 @@ class Tool
         // but to be save we log the errors into the debug.log, so if anything else happens we can see it there
         // the normal warning is e.g. Warning: include_once(Path/To/Class.php): failed to open stream: No such file or directory in ...
         set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-            //\Logger::debug(implode(" ", [$errno, $errstr, $errfile, $errline]));
+            //Logger::debug(implode(" ", [$errno, $errstr, $errfile, $errline]));
         });
 
         \Zend_Loader_Autoloader::getInstance()->suppressNotFoundWarnings(true);

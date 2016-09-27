@@ -19,6 +19,7 @@ use Pimcore\Config;
 use Pimcore\Model\Document;
 use Pimcore\Model\Version;
 use Pimcore\Model\Site;
+use Pimcore\Logger;
 
 class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 {
@@ -222,17 +223,17 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
                             }
                             break;
                         } else {
-                            \Logger::debug("Unknown document type, can't add [ " . $this->getParam("type") . " ] ");
+                            Logger::debug("Unknown document type, can't add [ " . $this->getParam("type") . " ] ");
                         }
                         break;
                 }
             } else {
                 $errorMessage = "prevented adding a document because document with same path+key [ $intendedPath ] already exists";
-                \Logger::debug($errorMessage);
+                Logger::debug($errorMessage);
             }
         } else {
             $errorMessage = "prevented adding a document because of missing permissions";
-            \Logger::debug($errorMessage);
+            Logger::debug($errorMessage);
         }
 
         if ($success) {
@@ -291,7 +292,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
                     $document->delete();
                     $this->_helper->json(["success" => true]);
                 } catch (\Exception $e) {
-                    \Logger::err($e);
+                    Logger::err($e);
                     $this->_helper->json(["success" => false, "message" => $e->getMessage()]);
                 }
             }
@@ -308,7 +309,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
             $document = Document::getById($this->getParam("id"));
             $hasDependency = $document->getDependencies()->isRequired();
         } catch (\Exception $e) {
-            \Logger::err("failed to access document with id: " . $this->getParam("id"));
+            Logger::err("failed to access document with id: " . $this->getParam("id"));
         }
 
         $deleteJobs = [];
@@ -418,7 +419,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 
                 if (!$document->isAllowed("rename") && $this->getParam("key")) {
                     $blockedVars[] = "key";
-                    \Logger::debug("prevented renaming document because of missing permissions ");
+                    Logger::debug("prevented renaming document because of missing permissions ");
                 }
 
                 foreach ($this->getAllParams() as $key => $value) {
@@ -454,7 +455,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
                 }
             } else {
                 $msg = "Prevented moving document, because document with same path+key already exists or the document is locked. ID: " . $document->getId();
-                \Logger::debug($msg);
+                Logger::debug($msg);
                 $this->_helper->json(["success" => false, "message" => $msg]);
             }
         } elseif ($document->isAllowed("rename") && $this->getParam("key")) {
@@ -468,7 +469,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
                 $this->_helper->json(["success" => false, "message" => $e->getMessage()]);
             }
         } else {
-            \Logger::debug("Prevented update document, because of missing permissions.");
+            Logger::debug("Prevented update document, because of missing permissions.");
         }
 
         $this->_helper->json(["success" => $success]);
@@ -805,10 +806,10 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 
                     $success = true;
                 } else {
-                    \Logger::error("prevended copy/paste because document with same path+key already exists in this location");
+                    Logger::error("prevended copy/paste because document with same path+key already exists in this location");
                 }
             } else {
-                \Logger::error("could not execute copy/paste because of missing permissions on target [ " . $targetId . " ]");
+                Logger::error("could not execute copy/paste because of missing permissions on target [ " . $targetId . " ]");
                 $this->_helper->json(["success" => false, "message" => "missing_permission"]);
             }
         }
@@ -988,9 +989,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
 
         $root = Document::getById(1);
         if ($root->isAllowed("list")) {
-            $nodeConfig = $this->getTreeNodeConfig($root);
-            $nodeConfig["title"] = $root->getTitle();
-            $nodeConfig["description"] = $root->getDescription();
+            $nodeConfig = $this->getSeoNodeConfig($root);
 
             $this->_helper->json($nodeConfig);
         }
@@ -1021,106 +1020,7 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
                     $list->setCondition("path LIKE ? and type = ?", [$childDocument->getRealFullPath() . "/%", "page"]);
 
                     if ($childDocument instanceof Document\Page || $list->getTotalCount() > 0) {
-                        $nodeConfig = $this->getTreeNodeConfig($childDocument);
-
-                        if (method_exists($childDocument, "getTitle") && method_exists($childDocument, "getDescription")) {
-
-                            // anaylze content
-                            $nodeConfig["links"] = 0;
-                            $nodeConfig["externallinks"] = 0;
-                            $nodeConfig["h1"] = 0;
-                            $nodeConfig["h1_text"] = "";
-                            $nodeConfig["hx"] = 0;
-                            $nodeConfig["imgwithalt"] = 0;
-                            $nodeConfig["imgwithoutalt"] = 0;
-
-                            $title = null;
-                            $description = null;
-
-                            try {
-
-                                // cannot use the rendering service from Document\Service::render() because of singleton's ...
-                                // $content = Document\Service::render($childDocument, array("pimcore_admin" => true, "pimcore_preview" => true), true);
-
-                                $request = $this->getRequest();
-
-                                $contentUrl = $request->getScheme() . "://" . $request->getHttpHost() . $childDocument->getRealFullPath();
-                                $content = Tool::getHttpData($contentUrl, [
-                                    "pimcore_preview" => true,
-                                    "pimcore_admin" => true,
-                                    "_dc" => time()
-                                ]);
-
-                                if ($content) {
-                                    include_once("simple_html_dom.php");
-                                    $html = str_get_html($content);
-                                    if ($html) {
-                                        $nodeConfig["links"] = count($html->find("a"));
-                                        $nodeConfig["externallinks"] = count($html->find("a[href^=http]"));
-                                        $nodeConfig["h1"] = count($html->find("h1"));
-
-                                        $h1 = $html->find("h1", 0);
-                                        if ($h1) {
-                                            $nodeConfig["h1_text"] = strip_tags($h1->innertext);
-                                        }
-
-                                        $title = $html->find("title", 0);
-                                        if ($title) {
-                                            $title = html_entity_decode(trim(strip_tags($title->innertext)), null, "UTF-8");
-                                        }
-
-                                        $description = $html->find("meta[name=description]", 0);
-                                        if ($description) {
-                                            $description = html_entity_decode(trim(strip_tags($description->content)), null, "UTF-8");
-                                        }
-
-                                        $nodeConfig["hx"] = count($html->find("h2,h2,h4,h5"));
-
-                                        $images = $html->find("img");
-                                        if ($images) {
-                                            foreach ($images as $image) {
-                                                $alt = $image->alt;
-                                                if (empty($alt)) {
-                                                    $nodeConfig["imgwithoutalt"]++;
-                                                } else {
-                                                    $nodeConfig["imgwithalt"]++;
-                                                }
-                                            }
-                                        }
-
-                                        $html->clear();
-                                        unset($html);
-                                    }
-                                }
-                            } catch (\Exception $e) {
-                                \Logger::debug($e);
-                            }
-
-                            if (!$title) {
-                                $title = $childDocument->getTitle();
-                            }
-                            if (!$description) {
-                                $description = $childDocument->getDescription();
-                            }
-
-                            $nodeConfig["title"] = $title;
-                            $nodeConfig["description"] = $description;
-
-                            $nodeConfig["title_length"] = mb_strlen($title);
-                            $nodeConfig["description_length"] = mb_strlen($description);
-
-                            if (mb_strlen($title) > 80
-                                || mb_strlen($title) < 5
-                                || mb_strlen($description) > 180
-                                || mb_strlen($description) < 20
-                                || $nodeConfig["h1"] != 1
-                                || $nodeConfig["hx"] < 1
-                            ) {
-                                $nodeConfig["cls"] = "pimcore_document_seo_warning";
-                            }
-                        }
-
-                        $documents[] = $nodeConfig;
+                        $documents[] = $this->getSeoNodeConfig($childDocument);
                     }
                 }
             }
@@ -1219,5 +1119,132 @@ class Admin_DocumentController extends \Pimcore\Controller\Action\Admin\Element
             "success" => $success,
             "language" => $language
         ]);
+    }
+
+    private function getSeoNodeConfig($document)
+    {
+        $nodeConfig = $this->getTreeNodeConfig($document);
+
+        if (method_exists($document, "getTitle") && method_exists($document, "getDescription")) {
+
+            // anaylze content
+            $nodeConfig["links"]         = 0;
+            $nodeConfig["externallinks"] = 0;
+            $nodeConfig["h1"]            = 0;
+            $nodeConfig["h1_text"]       = "";
+            $nodeConfig["hx"]            = 0;
+            $nodeConfig["imgwithalt"]    = 0;
+            $nodeConfig["imgwithoutalt"] = 0;
+
+            $title       = null;
+            $description = null;
+
+            try {
+
+                // cannot use the rendering service from Document\Service::render() because of singleton's ...
+                // $content = Document\Service::render($childDocument, array("pimcore_admin" => true, "pimcore_preview" => true), true);
+
+                $request = $this->getRequest();
+
+                $contentUrl = $request->getScheme() . "://" . $request->getHttpHost() . $document->getFullPath();
+                $content    = Tool::getHttpData($contentUrl, ["pimcore_preview" => true, "pimcore_admin" => true, "_dc" => time()]);
+
+                if ($content) {
+                    include_once("simple_html_dom.php");
+                    $html = str_get_html($content);
+                    if ($html) {
+                        $nodeConfig["links"]         = count($html->find("a"));
+                        $nodeConfig["externallinks"] = count($html->find("a[href^=http]"));
+                        $nodeConfig["h1"]            = count($html->find("h1"));
+
+                        $h1 = $html->find("h1", 0);
+                        if ($h1) {
+                            $nodeConfig["h1_text"] = strip_tags($h1->innertext);
+                        }
+
+                        $title = $html->find("title", 0);
+                        if ($title) {
+                            $title = html_entity_decode(trim(strip_tags($title->innertext)), null, "UTF-8");
+                        }
+
+                        $description = $html->find("meta[name=description]", 0);
+                        if ($description) {
+                            $description = html_entity_decode(trim(strip_tags($description->content)), null, "UTF-8");
+                        }
+
+                        $nodeConfig["hx"] = count($html->find("h2,h2,h4,h5"));
+
+                        $images = $html->find("img");
+                        if ($images) {
+                            foreach ($images as $image) {
+                                $alt = $image->alt;
+                                if (empty($alt)) {
+                                    $nodeConfig["imgwithoutalt"]++;
+                                } else {
+                                    $nodeConfig["imgwithalt"]++;
+                                }
+                            }
+                        }
+
+                        $html->clear();
+                        unset($html);
+                    }
+                }
+            } catch (\Exception $e) {
+                Logger::debug($e);
+            }
+
+            if (!$title) {
+                $title = $document->getTitle();
+            }
+            if (!$description) {
+                $description = $document->getDescription();
+            }
+
+            $nodeConfig["title"]       = $title;
+            $nodeConfig["description"] = $description;
+
+            $nodeConfig["title_length"]       = mb_strlen($title);
+            $nodeConfig["description_length"] = mb_strlen($description);
+
+            $qtip = "";
+            /** @var \Zend_Translate_Adapter $t */
+            $t = \Zend_Registry::get("Zend_Translate");
+            if (mb_strlen($title) > 80) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= $t->translate("The title is too long, it should have 5 to 80 characters.<br>");
+            }
+
+            if (mb_strlen($title) < 5) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= $t->translate("The title is too short, it should have 5 to 80 characters.<br>");
+            }
+
+            if (mb_strlen($description) > 180) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= $t->translate("The description is too long, it should have 20 to 180 characters.<br>");
+            }
+
+            if (mb_strlen($description) < 20) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= $t->translate("The description is too short, it should have 20 to 180 characters.<br>");
+            }
+
+            if ($nodeConfig["h1"] != 1) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= sprintf($t->translate("The document should have one h1, but has %s.<br>"), $nodeConfig["h1"]);
+            }
+
+            if ($nodeConfig["hx"] < 1) {
+                $nodeConfig["cls"] = "pimcore_document_seo_warning";
+                $qtip .= $t->translate("The document should some headlines other than h1, but has none.<br>");
+            }
+
+            if ($qtip) {
+                $nodeConfig["qtip"] = $qtip;
+            }
+        }
+
+        return $nodeConfig;
     }
 }

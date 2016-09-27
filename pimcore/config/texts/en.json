@@ -3353,6 +3353,10 @@
         "definition": "Add object"
     },
     {
+        "term": "add_object_mbx_title",
+        "definition": "Add a new %s object"
+    },
+    {
         "term": "basic_configuration",
         "definition": "Basic configuration"
     },
@@ -6015,5 +6019,81 @@
     {
         "term": "element_unsaved_changes_message",
         "definition": "All unsaved changes will be lost, are you really sure?"
+    },
+    {
+        "term": "empty_newsletter",
+        "definition": "Empty Newsletter"
+    },
+    {
+        "term": "newsletter_enableTrackingParameters",
+        "definition": "Add Tracking Parameters to Links"
+    },
+    {
+        "term": "newsletter_enableTrackingParameters",
+        "definition": "Add Tracking Parameters to Links"
+    },
+    {
+        "term": "newsletter_trackingParameterMedium",
+        "definition": "Tracking Parameter 'Medium'"
+    },
+    {
+        "term": "newsletter_trackingParameterSource",
+        "definition": "Tracking Parameter 'Source'"
+    },
+    {
+        "term": "newsletter_trackingParameterName",
+        "definition": "Tracking Parameter 'Name'"
+    },
+    {
+        "term": "newsletter_sendingMode",
+        "definition": "Sending Mode"
+    },
+    {
+        "term": "newsletter_sendingmode_single",
+        "definition": "Single (Render every Mail individually)"
+    },
+    {
+        "term": "newsletter_sendingmode_batch",
+        "definition": "Batch (Render Mail only once)"
+    },
+    {
+        "term": "newsletter_sendingPanel",
+        "definition": "Newsletter Sending Panel"
+    },
+    {
+        "term": "newsletter_dirty_warning",
+        "definition": "Newsletter is not saved yet. Please save first."
+    },
+    {
+        "term": "newsletter_sending",
+        "definition": "Sending Newsletter"
+    },
+    {
+        "term": "newsletter_sourceAdapter",
+        "definition": "Address Source Adapter"
+    },
+    {
+        "term": "newsletter_default",
+        "definition": "Default Object List"
+    },
+    {
+        "term": "newsletter_csvList",
+        "definition": "CSV List"
+    },
+    {
+        "term": "newsletter_testsend",
+        "definition": "Newsletter Test Sending"
+    },
+    {
+        "term": "newsletter_csvList",
+        "definition": "CSV List"
+    },
+    {
+        "term": "newsletter_test_sent_message",
+        "definition": "Test Newsletter sent successfully"
+    },
+    {
+        "term": "add_object_mbx_title",
+        "definition": "Add object of type "
     }
 ]

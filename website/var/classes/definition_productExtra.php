@@ -1,0 +1,131 @@
+<?php 
+
+/** Generated at 2016-08-30T17:26:16+02:00 */
+
+
+return Pimcore\Model\Object\ClassDefinition::__set_state(array(
+   'name' => 'productExtra',
+   'description' => '',
+   'creationDate' => 1383133493,
+   'modificationDate' => 1383579802,
+   'userOwner' => 6,
+   'userModification' => 6,
+   'parentClass' => '',
+   'useTraits' => NULL,
+   'allowInherit' => false,
+   'allowVariants' => false,
+   'showVariants' => false,
+   'layoutDefinitions' => 
+  Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+     'fieldtype' => 'panel',
+     'labelWidth' => 100,
+     'layout' => NULL,
+     'name' => 'pimcore_root',
+     'type' => NULL,
+     'region' => NULL,
+     'title' => NULL,
+     'width' => NULL,
+     'height' => NULL,
+     'collapsible' => NULL,
+     'collapsed' => NULL,
+     'bodyStyle' => NULL,
+     'datatype' => 'layout',
+     'permissions' => NULL,
+     'childs' => 
+    array (
+      0 => 
+      Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+         'fieldtype' => 'panel',
+         'labelWidth' => 100,
+         'layout' => '',
+         'name' => 'Layout',
+         'type' => NULL,
+         'region' => '',
+         'title' => '',
+         'width' => '',
+         'height' => '',
+         'collapsible' => false,
+         'collapsed' => false,
+         'bodyStyle' => '',
+         'datatype' => 'layout',
+         'permissions' => NULL,
+         'childs' => 
+        array (
+          0 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => 400,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 255,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'name',
+             'title' => 'Nom',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => true,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+          )),
+          1 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
+             'fieldtype' => 'wysiwyg',
+             'width' => '',
+             'height' => '',
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'toolbarConfig' => '',
+             'name' => 'content',
+             'title' => 'Contenu',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => NULL,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+          )),
+        ),
+         'locked' => false,
+      )),
+    ),
+     'locked' => NULL,
+  )),
+   'icon' => '',
+   'previewUrl' => '',
+   'group' => NULL,
+   'propertyVisibility' => 
+  array (
+    'grid' => 
+    array (
+      'id' => true,
+      'path' => true,
+      'published' => true,
+      'modificationDate' => true,
+      'creationDate' => true,
+    ),
+    'search' => 
+    array (
+      'id' => true,
+      'path' => true,
+      'published' => true,
+      'modificationDate' => true,
+      'creationDate' => true,
+    ),
+  ),
+   'dao' => NULL,
+));

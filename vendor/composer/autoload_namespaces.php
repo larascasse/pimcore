@@ -8,8 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'Zend_' => array($vendorDir . '/zendframework/zendframework1/library'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'MaxMind' => array($vendorDir . '/maxmind-db/reader/src'),
     'Less' => array($vendorDir . '/oyejorge/less.php/lib'),
     'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
     'Embera' => array($vendorDir . '/mpratt/embera/Lib'),
+    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
 );

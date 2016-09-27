@@ -75,21 +75,7 @@ CREATE TABLE `cache_tags` (
 DROP TABLE IF EXISTS `classes` ;
 CREATE TABLE `classes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `creationDate` bigint(20) unsigned DEFAULT NULL,
-  `modificationDate` bigint(20) unsigned DEFAULT NULL,
-  `userOwner` int(11) unsigned DEFAULT NULL,
-  `userModification` int(11) unsigned DEFAULT NULL,
-  `allowInherit` tinyint(1) unsigned DEFAULT '0',
-  `allowVariants` tinyint(1) unsigned DEFAULT '0',
-  `parentClass` varchar(255) DEFAULT NULL,
-  `useTraits` varchar(255) DEFAULT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  `previewUrl` varchar(255) DEFAULT NULL,
-  `propertyVisibility` text,
-  `showVariants` tinyint(1) DEFAULT NULL,
-  `group` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) DEFAULT CHARSET=utf8;
@@ -126,7 +112,7 @@ DROP TABLE IF EXISTS `documents` ;
 CREATE TABLE `documents` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parentId` int(11) unsigned DEFAULT NULL,
-  `type` enum('page','link','snippet','folder','hardlink','email','printpage','printcontainer') DEFAULT NULL,
+  `type` enum('page','link','snippet','folder','hardlink','email','newsletter','printpage','printcontainer') DEFAULT NULL,
   `key` varchar(255) DEFAULT '',
   `path` varchar(765) CHARACTER SET ascii DEFAULT NULL, /* path in ascii using the full key length of 765 bytes (PIMCORE-2654) */
   `index` int(11) unsigned DEFAULT '0',
@@ -166,6 +152,23 @@ CREATE TABLE `documents_email` (
   `cc` varchar(255) DEFAULT NULL,
   `bcc` varchar(255) DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `documents_newsletter`;
+CREATE TABLE `documents_newsletter` (
+  `id` int(11) unsigned NOT NULL DEFAULT '0',
+  `module` varchar(255) DEFAULT NULL,
+  `controller` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `template` varchar(255) DEFAULT NULL,
+  `from` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `trackingParameterSource` varchar(255) DEFAULT NULL,
+  `trackingParameterMedium` varchar(255) DEFAULT NULL,
+  `trackingParameterName` varchar(255) DEFAULT NULL,
+  `enableTrackingParameters` tinyint(1) unsigned DEFAULT NULL,
+  `sendingMode` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
@@ -236,6 +239,7 @@ CREATE TABLE `documents_printpage` (
   `template` varchar(255) DEFAULT NULL,
   `lastGenerated` int(11) DEFAULT NULL,
   `lastGenerateMessage` text CHARACTER SET utf8,
+  `contentMasterDocumentId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 

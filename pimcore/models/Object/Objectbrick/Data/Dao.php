@@ -18,6 +18,7 @@ namespace Pimcore\Model\Object\Objectbrick\Data;
 
 use Pimcore\Model;
 use Pimcore\Model\Object;
+use Pimcore\Logger;
 
 class Dao extends Model\Dao\AbstractDao
 {
@@ -57,7 +58,7 @@ class Dao extends Model\Dao\AbstractDao
         try {
             $this->db->delete("object_relations_" . $object->getClassId(), "src_id = " . $object->getId() . " AND ownertype = 'objectbrick' AND ownername = '" . $this->model->getFieldname() . "' AND (position = '" . $this->model->getType() . "' OR position IS NULL OR position = '')");
         } catch (\Exception $e) {
-            \Logger::warning("Error during removing old relations: " . $e);
+            Logger::warning("Error during removing old relations: " . $e);
         }
 
         foreach ($fieldDefinitions as $key => $fd) {
@@ -138,7 +139,10 @@ class Dao extends Model\Dao\AbstractDao
 
                 if ($inheritanceEnabled) {
                     //get changed fields for inheritance
-                    if ($fd->isRelationType()) {
+                    if ($fd instanceof Object\ClassDefinition\Data\CalculatedValue) {
+                        // nothing to do, see https://github.com/pimcore/pimcore/issues/727
+                        continue;
+                    } elseif ($fd->isRelationType()) {
                         if (is_array($insertData)) {
                             $doInsert = false;
                             foreach ($insertData as $insertDataKey => $insertDataValue) {

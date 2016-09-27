@@ -42,8 +42,8 @@ return [
             "name" => "Import Teintes",
             "condition" => "",
             "icon" => "",
-            "id" => "4",
-            "rootfolder" => "/teintes/teintes/_import_",
+            "id" => "5",
+            "rootfolder" => "/teintes/_import_",
             "showroot" => "1",
             "classes" => ""
         ]

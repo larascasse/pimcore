@@ -3,6 +3,7 @@
 // define a custom class,  for example:
 class Website_Product extends Object_Product {
 
+	private $_teintePath;
 	/**
      * Dummy which can be overwritten by a parent class, this is a hook executed in every getter of the properties in the object
      * @param string $key
@@ -785,6 +786,88 @@ class Website_Product extends Object_Product {
     	if($this->getImage_3())
     	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getThumbnail("magento_small")->getPath();
 
+	}
+
+	public function getTeintePath() {
+		if(!$this->_teintePath) {
+			$teintesName=[];
+			$objects = $this->getPimonly_teinte_rel();
+			if(is_array($objects)) {
+				foreach ($objects as $object) {
+					if($object instanceof Object_Teinte) {
+			   			$teintesName[] = $object->getName();
+			   			$parentObject = $object->getParent();
+			   			if($parentObject) {
+			   				$teintesName[] = $parentObject->getName();
+
+			   				$parentParentObject = $parentObject->getParent();
+				   			if($parentParentObject && strlen($parentParentObject->getName())>0) {
+				   				$teintesName[] = $parentParentObject->getName();
+
+				   				$parentParentParentObject = $parentParentObject->getParent();
+					   			if($parentParentParentObject && strlen($parentParentParentObject->getName())>0) {
+					   				$teintesName[] = $parentParentParentObject->getName();
+					   			}
+
+				   			}
+
+
+			   			}
+
+			   		}
+				}
+			}
+		
+
+			/*
+
+			$teintes = $this->getRelated("pimonly_teinte_rel",false,true);
+			if(is_array($teintes)) {
+				foreach ($teintes as $teinte) { 
+					$teintesName[] = $product->getName();
+					
+					# code...
+				};
+			}*/
+			$this->_teintesName = array_reverse($teintesName);
+		}
+		return $this->_teintesName;
+
+	}
+
+
+	public function getMage_teinte() {
+		$objects = $this->getPimonly_teinte_rel();
+		if(is_array($objects)) {
+			foreach ($objects as $object) {
+				if($object instanceof Object_Teinte) {
+		   			return $object->getName();
+		   		}
+		   	}
+		}
+
+	}
+
+
+	public function getMage_teinte_level0() {
+		$arr = $this->getTeintePath();
+		array_splice($arr, 1);
+		return implode(" > ",$arr);
+		
+	}
+
+	public function getMage_teinte_level1() {
+		$arr = $this->getTeintePath();
+		array_splice($arr, 2);
+		return implode(" > ",$arr);
+		
+	}
+
+	public function getMage_teinte_level2() {
+		$arr = $this->getTeintePath();
+		array_splice($arr, 3);
+		return implode(" > ",$arr);
+		
 	}
 
 

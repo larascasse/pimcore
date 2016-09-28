@@ -39,13 +39,22 @@ return [
             "classes" => "5"
         ],
         [
-            "name" => "Import Teintes",
+            "name" => "Teintes",
             "condition" => "",
             "icon" => "",
             "id" => "5",
-            "rootfolder" => "/teintes/_import_",
+            "rootfolder" => "/teintes/teintes",
             "showroot" => "1",
             "classes" => ""
+        ],
+        [
+            "name" => "Catalogue",
+            "condition" => "",
+            "icon" => "",
+            "id" => "6",
+            "rootfolder" => "/catalogue/_product_base__",
+            "showroot" => "1",
+            "classes" => "5"
         ]
     ]
 ];

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T11:19:54+02:00
+* Generated at: 2016-09-27T12:52:53+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
@@ -21,7 +21,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'test',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1474967994,
+   'modificationDate' => 1474973573,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -123,7 +123,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
             array (
               0 => 
               array (
-                'classes' => 'taxonomy',
+                'classes' => 'teinte',
               ),
             ),
              'name' => 'objettest',
@@ -310,7 +310,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',

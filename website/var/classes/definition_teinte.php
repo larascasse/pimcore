@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T12:06:49+02:00
+* Generated at: 2016-09-28T10:35:09+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -9,9 +9,8 @@
 
 
 Fields Summary: 
-- localizedfields [localizedfields]
--- name [input]
--- description [textarea]
+- name [input]
+- description [textarea]
 - image [image]
 - hexacolor [input]
 */ 
@@ -21,7 +20,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1474970808,
+   'modificationDate' => 1475051708,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -66,136 +65,53 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
          'childs' => 
         array (
           0 => 
-          Pimcore\Model\Object\ClassDefinition\Data\Localizedfields::__set_state(array(
-             'fieldtype' => 'localizedfields',
-             'phpdocType' => '\\Pimcore\\Model\\Object\\Localizedfield',
-             'childs' => 
-            array (
-              0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'name',
-                 'title' => 'Nom',
-                 'tooltip' => '',
-                 'mandatory' => true,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
-              )),
-              1 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
-                 'fieldtype' => 'textarea',
-                 'width' => '',
-                 'height' => '',
-                 'queryColumnType' => 'longtext',
-                 'columnType' => 'longtext',
-                 'phpdocType' => 'string',
-                 'name' => 'description',
-                 'title' => 'Description',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-            ),
-             'name' => 'localizedfields',
-             'region' => NULL,
-             'layout' => NULL,
-             'title' => 'Traductions',
-             'width' => '',
-             'height' => '',
-             'maxTabs' => NULL,
-             'labelWidth' => NULL,
-             'referencedFields' => 
-            array (
-            ),
-             'fieldDefinitionsCache' => 
-            array (
-              'name' => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'name',
-                 'title' => 'Nom',
-                 'tooltip' => '',
-                 'mandatory' => true,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
-              )),
-              'description' => 
-              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
-                 'fieldtype' => 'textarea',
-                 'width' => '',
-                 'height' => '',
-                 'queryColumnType' => 'longtext',
-                 'columnType' => 'longtext',
-                 'phpdocType' => 'string',
-                 'name' => 'description',
-                 'title' => 'Description',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-            ),
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 255,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'name',
+             'title' => 'Nom',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
-             'index' => NULL,
+             'index' => true,
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
-             'columnType' => NULL,
-             'queryColumnType' => NULL,
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,
              'visibleSearch' => true,
           )),
           1 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+             'fieldtype' => 'textarea',
+             'width' => '',
+             'height' => '',
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'name' => 'description',
+             'title' => 'Description',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          2 => 
           Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
              'fieldtype' => 'image',
              'width' => '',
@@ -219,7 +135,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          2 => 
+          3 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,

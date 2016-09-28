@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T12:06:49+02:00
+* Generated at: 2016-09-28T10:35:09+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -9,9 +9,8 @@
 
 
 Fields Summary: 
-- localizedfields [localizedfields]
--- name [input]
--- description [textarea]
+- name [input]
+- description [textarea]
 - image [image]
 - hexacolor [input]
 */ 
@@ -21,7 +20,8 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\Teinte\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
+* @method static \Pimcore\Model\Object\Teinte\Listing getByName ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Teinte\Listing getByDescription ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
 */
@@ -30,7 +30,8 @@ class Teinte extends Concrete {
 
 public $o_classId = 13;
 public $o_className = "teinte";
-public $localizedfields;
+public $name;
+public $description;
 public $image;
 public $hexacolor;
 
@@ -46,55 +47,19 @@ public static function create($values = array()) {
 }
 
 /**
-* Get localizedfields - Traductions
-* @return \Pimcore\Model\Object\Localizedfield
-*/
-public function getLocalizedfields () {
-	$preValue = $this->preGetValue("localizedfields"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->getClass()->getFieldDefinition("localizedfields")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("localizedfields")->isEmpty($data)) {
-		return $this->getValueFromParent("localizedfields");
-	}
-	return $data;
-}
-
-/**
 * Get name - Nom
 * @return string
 */
-public function getName ($language = null) {
-	$data = $this->getLocalizedfields()->getLocalizedValue("name", $language);
+public function getName () {
 	$preValue = $this->preGetValue("name"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	 return $data;
-}
-
-/**
-* Get description - Description
-* @return string
-*/
-public function getDescription ($language = null) {
-	$data = $this->getLocalizedfields()->getLocalizedValue("description", $language);
-	$preValue = $this->preGetValue("description"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
+	$data = $this->name;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name")->isEmpty($data)) {
+		return $this->getValueFromParent("name");
 	}
-	 return $data;
-}
-
-/**
-* Set localizedfields - Traductions
-* @param \Pimcore\Model\Object\Localizedfield $localizedfields
-* @return \Pimcore\Model\Object\Teinte
-*/
-public function setLocalizedfields ($localizedfields) {
-	$this->localizedfields = $localizedfields;
-	return $this;
+	return $data;
 }
 
 /**
@@ -102,9 +67,25 @@ public function setLocalizedfields ($localizedfields) {
 * @param string $name
 * @return \Pimcore\Model\Object\Teinte
 */
-public function setName ($name, $language = null) {
-	$this->getLocalizedfields()->setLocalizedValue("name", $name, $language);
+public function setName ($name) {
+	$this->name = $name;
 	return $this;
+}
+
+/**
+* Get description - Description
+* @return string
+*/
+public function getDescription () {
+	$preValue = $this->preGetValue("description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("description")->isEmpty($data)) {
+		return $this->getValueFromParent("description");
+	}
+	return $data;
 }
 
 /**
@@ -112,8 +93,8 @@ public function setName ($name, $language = null) {
 * @param string $description
 * @return \Pimcore\Model\Object\Teinte
 */
-public function setDescription ($description, $language = null) {
-	$this->getLocalizedfields()->setLocalizedValue("description", $description, $language);
+public function setDescription ($description) {
+	$this->description = $description;
 	return $this;
 }
 

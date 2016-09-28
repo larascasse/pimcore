@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T11:19:54+02:00
+* Generated at: 2016-09-27T12:52:53+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
@@ -74,7 +74,7 @@ public function setTeinte ($teinte) {
 
 /**
 * Get objettest - objettest
-* @return \Pimcore\Model\Object\taxonomy[]
+* @return \Pimcore\Model\Object\teinte[]
 */
 public function getObjettest () {
 	$preValue = $this->preGetValue("objettest"); 
@@ -87,7 +87,7 @@ public function getObjettest () {
 
 /**
 * Set objettest - objettest
-* @param \Pimcore\Model\Object\taxonomy[] $objettest
+* @param \Pimcore\Model\Object\teinte[] $objettest
 * @return \Pimcore\Model\Object\Test
 */
 public function setObjettest ($objettest) {

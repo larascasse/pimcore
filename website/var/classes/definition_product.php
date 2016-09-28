@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T10:19:54+02:00
+* Generated at: 2016-09-28T11:25:29+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -19,6 +19,7 @@ Fields Summary:
 - subtype [input]
 - subtype2 [input]
 - teinte_lpn [select]
+- pimonly_teinte_rel [objects]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -133,6 +134,9 @@ Fields Summary:
 - mage_name [textarea]
 - mage_short_name [textarea]
 - mage_meta_title [input]
+- mage_teinte_level0 [input]
+- mage_teinte_level1 [input]
+- mage_teinte_level2 [input]
 - mage_meta_description [textarea]
 - mage_lesplus [textarea]
 - mage_description [textarea]
@@ -161,7 +165,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1474964394,
+   'modificationDate' => 1475054726,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -517,6 +521,38 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => false,
               )),
               10 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
+                 'fieldtype' => 'objects',
+                 'width' => '',
+                 'height' => '',
+                 'maxItems' => 2,
+                 'queryColumnType' => 'text',
+                 'phpdocType' => 'array',
+                 'relationType' => true,
+                 'lazyLoading' => false,
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'teinte',
+                  ),
+                ),
+                 'name' => 'pimonly_teinte_rel',
+                 'title' => 'Teinte',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => true,
+              )),
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -540,7 +576,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              11 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -564,7 +600,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              12 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -588,7 +624,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              13 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -612,7 +648,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              14 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -636,7 +672,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              15 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -660,7 +696,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              16 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -684,7 +720,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              17 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -708,7 +744,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -731,7 +767,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -754,7 +790,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -778,7 +814,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -801,7 +837,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -825,7 +861,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -848,7 +884,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -871,7 +907,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -893,7 +929,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -917,7 +953,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -941,7 +977,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              28 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -987,7 +1023,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1010,7 +1046,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1689,7 +1725,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                 ),
-                 'locked' => NULL,
+                 'locked' => false,
               )),
               4 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
@@ -4296,6 +4332,78 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 600,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 65,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'mage_teinte_level0',
+                 'title' => 'Mage Teinte Level0',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 600,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 65,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'mage_teinte_level1',
+                 'title' => 'Mage Teinte Level1',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              7 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 600,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 65,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'mage_teinte_level2',
+                 'title' => 'Mage Teinte Level2',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4318,7 +4426,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              6 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4341,7 +4449,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              7 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4364,7 +4472,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              8 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4387,7 +4495,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              9 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4410,7 +4518,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4434,7 +4542,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              11 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -4458,7 +4566,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              12 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -4482,7 +4590,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -4506,7 +4614,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4530,7 +4638,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4553,7 +4661,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              16 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4576,7 +4684,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4599,7 +4707,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -4622,7 +4730,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4646,7 +4754,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4670,7 +4778,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4694,7 +4802,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4718,7 +4826,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -4742,7 +4850,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -4788,7 +4896,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,

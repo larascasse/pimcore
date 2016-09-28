@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-27T10:19:54+02:00
+* Generated at: 2016-09-28T11:25:29+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -19,6 +19,7 @@ Fields Summary:
 - subtype [input]
 - subtype2 [input]
 - teinte_lpn [select]
+- pimonly_teinte_rel [objects]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -133,6 +134,9 @@ Fields Summary:
 - mage_name [textarea]
 - mage_short_name [textarea]
 - mage_meta_title [input]
+- mage_teinte_level0 [input]
+- mage_teinte_level1 [input]
+- mage_teinte_level2 [input]
 - mage_meta_description [textarea]
 - mage_lesplus [textarea]
 - mage_description [textarea]
@@ -171,6 +175,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
@@ -284,6 +289,9 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_short_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_title ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level0 ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level1 ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_lesplus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
@@ -321,6 +329,7 @@ public $catalogue;
 public $subtype;
 public $subtype2;
 public $teinte_lpn;
+public $pimonly_teinte_rel;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
@@ -434,6 +443,9 @@ public $mage_accessoirepopin;
 public $mage_name;
 public $mage_short_name;
 public $mage_meta_title;
+public $mage_teinte_level0;
+public $mage_teinte_level1;
+public $mage_teinte_level2;
 public $mage_meta_description;
 public $mage_lesplus;
 public $mage_description;
@@ -724,6 +736,32 @@ public function getTeinte_lpn () {
 */
 public function setTeinte_lpn ($teinte_lpn) {
 	$this->teinte_lpn = $teinte_lpn;
+	return $this;
+}
+
+/**
+* Get pimonly_teinte_rel - Teinte
+* @return \Pimcore\Model\Object\teinte[]
+*/
+public function getPimonly_teinte_rel () {
+	$preValue = $this->preGetValue("pimonly_teinte_rel"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_teinte_rel");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_teinte_rel - Teinte
+* @param \Pimcore\Model\Object\teinte[] $pimonly_teinte_rel
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_teinte_rel ($pimonly_teinte_rel) {
+	$this->pimonly_teinte_rel = $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->preSetData($this, $pimonly_teinte_rel);
 	return $this;
 }
 
@@ -3666,6 +3704,84 @@ public function setMage_meta_title ($mage_meta_title) {
 }
 
 /**
+* Get mage_teinte_level0 - Mage Teinte Level0
+* @return string
+*/
+public function getMage_teinte_level0 () {
+	$preValue = $this->preGetValue("mage_teinte_level0"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_teinte_level0;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_teinte_level0")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_teinte_level0");
+	}
+	return $data;
+}
+
+/**
+* Set mage_teinte_level0 - Mage Teinte Level0
+* @param string $mage_teinte_level0
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_teinte_level0 ($mage_teinte_level0) {
+	$this->mage_teinte_level0 = $mage_teinte_level0;
+	return $this;
+}
+
+/**
+* Get mage_teinte_level1 - Mage Teinte Level1
+* @return string
+*/
+public function getMage_teinte_level1 () {
+	$preValue = $this->preGetValue("mage_teinte_level1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_teinte_level1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_teinte_level1")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_teinte_level1");
+	}
+	return $data;
+}
+
+/**
+* Set mage_teinte_level1 - Mage Teinte Level1
+* @param string $mage_teinte_level1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_teinte_level1 ($mage_teinte_level1) {
+	$this->mage_teinte_level1 = $mage_teinte_level1;
+	return $this;
+}
+
+/**
+* Get mage_teinte_level2 - Mage Teinte Level2
+* @return string
+*/
+public function getMage_teinte_level2 () {
+	$preValue = $this->preGetValue("mage_teinte_level2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_teinte_level2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_teinte_level2")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_teinte_level2");
+	}
+	return $data;
+}
+
+/**
+* Set mage_teinte_level2 - Mage Teinte Level2
+* @param string $mage_teinte_level2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_teinte_level2 ($mage_teinte_level2) {
+	$this->mage_teinte_level2 = $mage_teinte_level2;
+	return $this;
+}
+
+/**
 * Get mage_meta_description - Mage Métas Description
 * @return string
 */
@@ -4212,6 +4328,10 @@ public function setMage_origine_arbre ($mage_origine_arbre) {
 }
 
 protected static $_relationFields = array (
+  'pimonly_teinte_rel' => 
+  array (
+    'type' => 'objects',
+  ),
   'extras' => 
   array (
     'type' => 'objects',

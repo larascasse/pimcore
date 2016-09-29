@@ -794,18 +794,18 @@ class Website_Product extends Object_Product {
 			$objects = $this->getPimonly_teinte_rel();
 			if(is_array($objects)) {
 				foreach ($objects as $object) {
-					if($object instanceof Object_Teinte) {
+					if($object instanceof Object_Teinte && $object->getName()!="Teintes") {
 			   			$teintesName[] = $object->getName();
 			   			$parentObject = $object->getParent();
-			   			if($parentObject && $parentObject instanceof Object_Teinte) {
+			   			if($parentObject && $parentObject instanceof Object_Teinte  && $parentObject->getName()!="Teintes") {
 			   				$teintesName[] = $parentObject->getName();
 
 			   				$parentParentObject = $parentObject->getParent();
-				   			if($parentParentObject && $parentParentObject instanceof Object_Teinte && strlen($parentParentObject->getName())>0) {
+				   			if($parentParentObject && $parentParentObject instanceof Object_Teinte && strlen($parentParentObject->getName())>0  && $parentParentObject->getName()!="Teintes") {
 				   				$teintesName[] = $parentParentObject->getName();
 
 				   				$parentParentParentObject = $parentParentObject->getParent();
-					   			if($parentParentParentObject && $parentParentParentObject instanceof Object_Teinte && strlen($parentParentParentObject->getName())>0) {
+					   			if($parentParentParentObject && $parentParentParentObject instanceof Object_Teinte && strlen($parentParentParentObject->getName())>0  && $parentParentParentObject->getName()!="Teintes") {
 					   				$teintesName[] = $parentParentParentObject->getName();
 					   			}
 

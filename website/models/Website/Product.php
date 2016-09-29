@@ -797,15 +797,15 @@ class Website_Product extends Object_Product {
 					if($object instanceof Object_Teinte) {
 			   			$teintesName[] = $object->getName();
 			   			$parentObject = $object->getParent();
-			   			if($parentObject) {
+			   			if($parentObject && $parentObject instanceof Object_Teinte) {
 			   				$teintesName[] = $parentObject->getName();
 
 			   				$parentParentObject = $parentObject->getParent();
-				   			if($parentParentObject && strlen($parentParentObject->getName())>0) {
+				   			if($parentParentObject && $parentParentObject instanceof Object_Teinte && strlen($parentParentObject->getName())>0) {
 				   				$teintesName[] = $parentParentObject->getName();
 
 				   				$parentParentParentObject = $parentParentObject->getParent();
-					   			if($parentParentParentObject && strlen($parentParentParentObject->getName())>0) {
+					   			if($parentParentParentObject && $parentParentParentObject instanceof Object_Teinte && strlen($parentParentParentObject->getName())>0) {
 					   				$teintesName[] = $parentParentParentObject->getName();
 					   			}
 

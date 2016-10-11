@@ -91,7 +91,7 @@ The following classes are available for you to use:
 
 In this scenario, our threat model is as follows. Alice is a server
 administrator responsible for managing a trusted web server. Eve is a database
-administrator responsibile for managing a database server. Dave is a web
+administrator responsible for managing a database server. Dave is a web
 developer working on code that will eventually run on the trusted web server.
 
 Let's say Alice and Dave trust each other, and Alice is going to host Dave's
@@ -221,7 +221,7 @@ logged in during the attack.
 
     $protected_key_encoded = // ... load it from the user's account record
     $protected_key = KeyProtectedByPassword::loadFromAsciiSafeString($protected_key_encoded);
-    $user_key = $protected_key->unlock($password);
+    $user_key = $protected_key->unlockKey($password);
     $user_key_encoded = $user_key->saveToAsciiSafeString();
     // ... save $user_key_encoded in the session
 ```

@@ -82,6 +82,8 @@ signing (ID: 7B4B2D98) available.
 
 Once you have those tools installed and the key available follow these steps:
 
+**Remember to set the version number in `composer.json`!**
+
 Make a fresh clone of the repository:
 
 ```
@@ -94,11 +96,38 @@ Check out the branch you want to release:
 git checkout <branchname>
 ```
 
-Generate and sign the `.phar`:
+Check that the version number in composer.json is correct:
+
+```
+cat composer.json
+```
+
+Run the tests:
+
+```
+composer install
+./test.sh
+```
+
+Generate the `.phar`:
 
 ```
 cd dist
-make
+make build-phar
+```
+
+Test the `.phar`:
+
+```
+cd ../
+./test.sh dist/defuse-crypto.phar
+```
+
+Sign the `.phar`:
+
+```
+cd dist
+make sign-phar
 ```
 
 Tag the release:

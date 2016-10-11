@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-28T11:25:29+02:00
+* Generated at: 2016-09-28T12:39:01+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -134,6 +134,7 @@ Fields Summary:
 - mage_name [textarea]
 - mage_short_name [textarea]
 - mage_meta_title [input]
+- mage_teinte [input]
 - mage_teinte_level0 [input]
 - mage_teinte_level1 [input]
 - mage_teinte_level2 [input]
@@ -289,6 +290,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_short_name ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_title ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level0 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level2 ($value, $limit = 0) 
@@ -443,6 +445,7 @@ public $mage_accessoirepopin;
 public $mage_name;
 public $mage_short_name;
 public $mage_meta_title;
+public $mage_teinte;
 public $mage_teinte_level0;
 public $mage_teinte_level1;
 public $mage_teinte_level2;
@@ -3700,6 +3703,32 @@ public function getMage_meta_title () {
 */
 public function setMage_meta_title ($mage_meta_title) {
 	$this->mage_meta_title = $mage_meta_title;
+	return $this;
+}
+
+/**
+* Get mage_teinte - Mage Teinte
+* @return string
+*/
+public function getMage_teinte () {
+	$preValue = $this->preGetValue("mage_teinte"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_teinte;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_teinte")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_teinte");
+	}
+	return $data;
+}
+
+/**
+* Set mage_teinte - Mage Teinte
+* @param string $mage_teinte
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_teinte ($mage_teinte) {
+	$this->mage_teinte = $mage_teinte;
 	return $this;
 }
 

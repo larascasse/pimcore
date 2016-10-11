@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
+class ComposerStaticInit1a4d34242b73922a61a1d2fc67562279
 {
     public static $files = array (
         '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
@@ -277,6 +277,13 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
             'Hybrid' => 
             array (
                 0 => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth',
+            ),
+        ),
+        'F' => 
+        array (
+            'ForceUTF8\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/neitanod/forceutf8/src',
             ),
         ),
         'E' => 
@@ -586,6 +593,7 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
         'Endroid\\QrCode\\QrCode' => __DIR__ . '/..' . '/endroid/qrcode/src/QrCode.php',
         'Facebook' => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/Facebook/facebook.php',
         'FacebookApiException' => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/Facebook/base_facebook.php',
+        'ForceUTF8\\Encoding' => __DIR__ . '/..' . '/neitanod/forceutf8/src/ForceUTF8/Encoding.php',
         'GeoIp2\\Compat\\JsonSerializable' => __DIR__ . '/..' . '/geoip2/geoip2/src/Compat/JsonSerializable.php',
         'GeoIp2\\Database\\Reader' => __DIR__ . '/..' . '/geoip2/geoip2/src/Database/Reader.php',
         'GeoIp2\\Exception\\AddressNotFoundException' => __DIR__ . '/..' . '/geoip2/geoip2/src/Exception/AddressNotFoundException.php',
@@ -912,8 +920,8 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
         'Pimcore\\Console\\Command\\Definition\\Import\\ClassCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/Definition/Import/ClassCommand.php',
         'Pimcore\\Console\\Command\\Definition\\Import\\FieldCollectionCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/Definition/Import/FieldCollectionCommand.php',
         'Pimcore\\Console\\Command\\Definition\\Import\\ObjectBrickCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/Definition/Import/ObjectBrickCommand.php',
+        'Pimcore\\Console\\Command\\DeleteClassificationStoreCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/DeleteClassificationStoreCommand.php',
         'Pimcore\\Console\\Command\\InternalNewsletterDocumentSendCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/InternalNewsletterDocumentSendCommand.php',
-        'Pimcore\\Console\\Command\\InternalNewsletterSendCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/InternalNewsletterSendCommand.php',
         'Pimcore\\Console\\Command\\InternalUnicodeCldrLanguageTerritoryGeneratorCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/InternalUnicodeCldrLanguageTerritoryGeneratorCommand.php',
         'Pimcore\\Console\\Command\\InternalUpdateProcessorCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/InternalUpdateProcessorCommand.php',
         'Pimcore\\Console\\Command\\InternalVideoConverterCommand' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Console/Command/InternalVideoConverterCommand.php',
@@ -972,6 +980,7 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
         'Pimcore\\Document\\Newsletter\\AddressSourceAdapterInterface' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Document/Newsletter/AddressSourceAdapterInterface.php',
         'Pimcore\\Document\\Newsletter\\AddressSourceAdapter\\CsvList' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Document/Newsletter/AddressSourceAdapter/CsvList.php',
         'Pimcore\\Document\\Newsletter\\AddressSourceAdapter\\DefaultAdapter' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Document/Newsletter/AddressSourceAdapter/DefaultAdapter.php',
+        'Pimcore\\Document\\Newsletter\\AddressSourceAdapter\\ReportAdapter' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Document/Newsletter/AddressSourceAdapter/ReportAdapter.php',
         'Pimcore\\Document\\Newsletter\\SendingParamContainer' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Document/Newsletter/SendingParamContainer.php',
         'Pimcore\\ExtensionManager' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/ExtensionManager.php',
         'Pimcore\\File' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/File.php',
@@ -1373,10 +1382,6 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
         'Pimcore\\Model\\Tool\\Email\\Log\\Listing\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Tool/Email/Log/Listing/Dao.php',
         'Pimcore\\Model\\Tool\\Lock' => __DIR__ . '/../..' . '/pimcore/models/Tool/Lock.php',
         'Pimcore\\Model\\Tool\\Lock\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Tool/Lock/Dao.php',
-        'Pimcore\\Model\\Tool\\Newsletter\\Config' => __DIR__ . '/../..' . '/pimcore/models/Tool/Newsletter/Config.php',
-        'Pimcore\\Model\\Tool\\Newsletter\\Config\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Tool/Newsletter/Config/Dao.php',
-        'Pimcore\\Model\\Tool\\Newsletter\\Config\\Listing' => __DIR__ . '/../..' . '/pimcore/models/Tool/Newsletter/Config/Listing.php',
-        'Pimcore\\Model\\Tool\\Newsletter\\Config\\Listing\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Tool/Newsletter/Config/Listing/Dao.php',
         'Pimcore\\Model\\Tool\\Qrcode\\Config' => __DIR__ . '/../..' . '/pimcore/models/Tool/Qrcode/Config.php',
         'Pimcore\\Model\\Tool\\Qrcode\\Config\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Tool/Qrcode/Config/Dao.php',
         'Pimcore\\Model\\Tool\\Qrcode\\Config\\Listing' => __DIR__ . '/../..' . '/pimcore/models/Tool/Qrcode/Config/Listing.php',
@@ -4521,10 +4526,10 @@ class ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit07b989ff5e11dc5c4d9612400656b2a1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1a4d34242b73922a61a1d2fc67562279::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1a4d34242b73922a61a1d2fc67562279::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1a4d34242b73922a61a1d2fc67562279::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1a4d34242b73922a61a1d2fc67562279::$classMap;
 
         }, null, ClassLoader::class);
     }

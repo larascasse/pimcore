@@ -56,7 +56,7 @@ class Linfo
         $this->linfo_localdir = dirname(dirname(__DIR__)).'/';
 
         // Get our version from git setattribs
-        $scm = '2015-10-21 02:24:48 -0700';
+        $scm = '2016-08-24 20:19:33 -0700';
         list($this->version) = strpos($scm, '$') !== false ? array('git') : explode(' ', $scm);
 
         // Run through dependencies / sanity checking

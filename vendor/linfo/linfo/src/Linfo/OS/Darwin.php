@@ -405,8 +405,8 @@ class Darwin extends BSDcommon
         // Sort out swap
         if (preg_match('/total = ([\d\.]+)M\s+used = ([\d\.]+)M\s+free = ([\d\.]+)M/', $this->sysctl['vm.swapusage'], $swap_match)) {
             list(, $swap_total, $swap_used, $swap_free) = $swap_match;
-            $return['swapTotal'] = $swap_total * 1000000;
-            $return['swapFree'] = $swap_free * 1000000;
+            $return['swapTotal'] = $swap_total * 1048576;
+            $return['swapFree'] = $swap_free * 1048576;
         }
 
         // Return ram info
@@ -613,7 +613,7 @@ class Darwin extends BSDcommon
 
         $loads = $this->sysctl['vm.loadavg'];
 
-        if (preg_match('/([\d\.]+) ([\d\.]+) ([\d\.]+)/', $loads, $m)) {
+        if (preg_match('/([\d\.\,]+) ([\d\.\,]+) ([\d\.\,]+)/', $loads, $m)) {
             return array_combine(array('now', '5min', '15min'), array_slice($m, 1, 3));
         } else {
             return array();

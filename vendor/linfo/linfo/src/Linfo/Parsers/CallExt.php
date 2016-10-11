@@ -64,7 +64,10 @@ class CallExt
     {
 
         // Merge in possible custom paths
-        if (is_array(self::$settings['additional_paths']) && count(self::$settings['additional_paths']) > 0) {
+        if (array_key_exists('additional_paths', self::$settings) &&
+            is_array(self::$settings['additional_paths']) &&
+            count(self::$settings['additional_paths']) > 0) {
+
             $paths = array_merge(self::$settings['additional_paths'], $paths);
         }
 

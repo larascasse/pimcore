@@ -12,6 +12,7 @@ return array(
     'MaxMind' => array($vendorDir . '/maxmind-db/reader/src'),
     'Less' => array($vendorDir . '/oyejorge/less.php/lib'),
     'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
+    'ForceUTF8\\' => array($vendorDir . '/neitanod/forceutf8/src'),
     'Embera' => array($vendorDir . '/mpratt/embera/Lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
 );

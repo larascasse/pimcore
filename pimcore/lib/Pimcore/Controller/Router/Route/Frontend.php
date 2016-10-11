@@ -243,6 +243,7 @@ class Frontend extends \Zend_Controller_Router_Route_Abstract
                 if ($document instanceof Document) {
                     if (in_array($document->getType(), self::getDirectRouteDocumentTypes())) {
                         if (Tool::isFrontentRequestByAdmin() || $document->isPublished()) {
+                            $redirectTargetUrl = $originalPath;
 
                             // check for a pretty url, and if the document is called by that, otherwise redirect to pretty url
                             if ($document instanceof Document\Page
@@ -251,12 +252,7 @@ class Frontend extends \Zend_Controller_Router_Route_Abstract
                                 && !Tool::isFrontentRequestByAdmin()
                             ) {
                                 if (rtrim(strtolower($document->getPrettyUrl()), " /") != rtrim(strtolower($originalPath), "/")) {
-                                    $redirectUrl = $document->getPrettyUrl();
-                                    if ($_SERVER["QUERY_STRING"]) {
-                                        $redirectUrl .= "?" . $_SERVER["QUERY_STRING"];
-                                    }
-                                    header("Location: " . $redirectUrl, true, 301);
-                                    exit;
+                                    $redirectTargetUrl = $document->getPrettyUrl();
                                 }
                             }
 
@@ -279,29 +275,27 @@ class Frontend extends \Zend_Controller_Router_Route_Abstract
                             if (strtolower($_SERVER["REQUEST_METHOD"]) == "get") {
                                 if ($config->documents->allowtrailingslash) {
                                     if ($config->documents->allowtrailingslash == "no") {
-                                        if (substr($originalPath, strlen($originalPath)-1, 1) == "/" && $originalPath != "/") {
-                                            $redirectUrl = rtrim($originalPath, "/");
-                                            if ($_SERVER["QUERY_STRING"]) {
-                                                $redirectUrl .= "?" . $_SERVER["QUERY_STRING"];
-                                            }
-                                            header("Location: " . $redirectUrl, true, 301);
-                                            exit;
+                                        if (substr($redirectTargetUrl, strlen($redirectTargetUrl) - 1, 1) == "/" && $redirectTargetUrl != "/") {
+                                            $redirectTargetUrl = rtrim($redirectTargetUrl, "/");
                                         }
                                     }
                                 }
 
                                 if ($config->documents->allowcapitals) {
                                     if ($config->documents->allowcapitals == "no") {
-                                        if (strtolower($originalPath) != $originalPath) {
-                                            $redirectUrl = strtolower($originalPath);
-                                            if ($_SERVER["QUERY_STRING"]) {
-                                                $redirectUrl .= "?" . $_SERVER["QUERY_STRING"];
-                                            }
-                                            header("Location: " . $redirectUrl, true, 301);
-                                            exit;
+                                        if (strtolower($redirectTargetUrl) != $redirectTargetUrl) {
+                                            $redirectTargetUrl = strtolower($redirectTargetUrl);
                                         }
                                     }
                                 }
+                            }
+
+                            if ($redirectTargetUrl !== $originalPath) {
+                                if ($_SERVER["QUERY_STRING"]) {
+                                    $redirectTargetUrl .= "?" . $_SERVER["QUERY_STRING"];
+                                }
+                                header("Location: " . $redirectTargetUrl, true, 301);
+                                exit;
                             }
 
                             $matchFound = true;

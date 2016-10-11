@@ -80,24 +80,17 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
                 $imageInfo["dimensions"]["height"] = $asset->getHeight();
             }
 
-            if (function_exists("exif_read_data") && is_file($asset->getFileSystemPath())) {
-                $supportedTypes = [IMAGETYPE_JPEG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM];
-
-                if (in_array(@exif_imagetype($asset->getFileSystemPath()), $supportedTypes)) {
-                    $exif = @exif_read_data($asset->getFileSystemPath());
-                    if (is_array($exif)) {
-                        $imageInfo["exif"] = [];
-                        foreach ($exif as $name => $value) {
-                            if ((is_string($value) && strlen($value) < 50) || is_numeric($value)) {
-                                // this is to ensure that the data can be converted to json (must be utf8)
-                                if (mb_check_encoding($value, "UTF-8")) {
-                                    $imageInfo["exif"][$name] = $value;
-                                }
-                            }
-                        }
-                    }
-                }
+            $exifData = $asset->getEXIFData();
+            if (!empty($exifData)) {
+                $imageInfo["exif"] = $exifData;
             }
+
+            $iptcData = $asset->getIPTCData();
+            if (!empty($exifData)) {
+                $imageInfo["iptc"] = $iptcData;
+            }
+
+            $imageInfo["exiftoolAvailable"] = (bool) \Pimcore\Tool\Console::getExecutable("exiftool");
 
             $asset->imageInfo = $imageInfo;
         }
@@ -861,6 +854,96 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
         $this->removeViewRenderer();
     }
 
+    public function downloadImageThumbnailAction()
+    {
+        $image = Asset\Image::getById($this->getParam("id"));
+        $config = null;
+
+        if ($this->getParam("config")) {
+            $config = \Zend_Json::decode($this->getParam("config"));
+        } elseif ($this->getParam("type")) {
+            $predefined = [
+                "web" => [
+                    "resize_mode" => "scaleByWidth",
+                    "width" => 3500,
+                    "dpi" => 72,
+                    "format" => "JPEG",
+                    "quality" => 85
+                ],
+                "print" => [
+                    "resize_mode" => "scaleByWidth",
+                    "width" => 6000,
+                    "dpi" => 300,
+                    "format" => "JPEG",
+                    "quality" => 95
+                ],
+                "office" => [
+                    "resize_mode" => "scaleByWidth",
+                    "width" => 1190,
+                    "dpi" => 144,
+                    "format" => "JPEG",
+                    "quality" => 90
+                ],
+            ];
+
+            $config = $predefined[$this->getParam("type")];
+        }
+
+        if ($config) {
+            $thumbnailConfig = new Asset\Image\Thumbnail\Config();
+            $thumbnailConfig->setName("pimcore-download-" . $image->getId() . "-" . md5($this->getParam("config")));
+
+            if ($config["resize_mode"] == "scaleByWidth") {
+                $thumbnailConfig->addItem("scaleByWidth", [
+                    "width" => $config["width"]
+                ]);
+            } elseif ($config["resize_mode"] == "scaleByHeight") {
+                $thumbnailConfig->addItem("scaleByHeight", [
+                    "height" => $config["height"]
+                ]);
+            } else {
+                $thumbnailConfig->addItem("resize", [
+                    "width" => $config["width"],
+                    "height" => $config["height"]
+                ]);
+            }
+
+            $thumbnailConfig->setQuality($config["quality"]);
+            $thumbnailConfig->setFormat($config["format"]);
+
+
+            if ($thumbnailConfig->getFormat() == "JPEG") {
+                $thumbnailConfig->setPreserveMetaData(true);
+                $thumbnailConfig->setPreserveColor(true);
+            }
+
+            $thumbnail = $image->getThumbnail($thumbnailConfig);
+            $thumbnailFile = $thumbnail->getFileSystemPath();
+
+            $exiftool = \Pimcore\Tool\Console::getExecutable("exiftool");
+            if ($thumbnailConfig->getFormat() == "JPEG" && $exiftool && isset($config["dpi"]) && $config["dpi"]) {
+                \Pimcore\Tool\Console::exec($exiftool . " -overwrite_original -xresolution=" . $config["dpi"] . " -yresolution=" . $config["dpi"] . " -resolutionunit=inches " . $thumbnailFile);
+            }
+
+            $downloadFilename = str_replace("." . File::getFileExtension($image->getFilename()),
+                "." . $thumbnail->getFileExtension(), $image->getFilename());
+            $downloadFilename = strtolower($downloadFilename);
+            header('Content-Disposition: attachment; filename="' . $downloadFilename . '"');
+
+            header("Content-Type: " . $thumbnail->getMimeType(), true);
+            header("Content-Length: " . filesize($thumbnailFile), true);
+            $this->sendThumbnailCacheHeaders();
+            while (@ob_end_flush()) {
+                ;
+            }
+            flush();
+
+            readfile($thumbnailFile);
+            @unlink($thumbnailFile);
+            exit;
+        }
+    }
+
     public function getImageThumbnailAction()
     {
         $fileinfo = $this->getParam("fileinfo");
@@ -904,12 +987,6 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             $thumbnail->setName($thumbnail->getName() . "_auto_" . $hash);
         }
 
-        if ($this->getParam("download")) {
-            $downloadFilename = str_replace("." . File::getFileExtension($image->getFilename()), "." . $thumbnail->getFormat(), $image->getFilename());
-            $downloadFilename = strtolower($downloadFilename);
-            header('Content-Disposition: attachment; filename="' . $downloadFilename . '"');
-        }
-
         $thumbnail = $image->getThumbnail($thumbnail);
 
         if ($fileinfo) {
@@ -919,15 +996,8 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
         }
 
         $thumbnailFile = $thumbnail->getFileSystemPath();
-        $fileExtension = File::getFileExtension($thumbnailFile);
-        if (in_array($fileExtension, ["gif", "jpeg", "jpeg", "png", "pjpeg"])) {
-            header("Content-Type: image/".$fileExtension, true);
-        } else {
-            header("Content-Type: " . $image->getMimetype(), true);
-        }
-
+        header("Content-Type: " . $thumbnail->getMimeType(), true);
         header("Access-Control-Allow-Origin: *"); // for Aviary.Feather (Adobe Creative SDK)
-
         header("Content-Length: " . filesize($thumbnailFile), true);
         $this->sendThumbnailCacheHeaders(); while (@ob_end_flush());
         flush();

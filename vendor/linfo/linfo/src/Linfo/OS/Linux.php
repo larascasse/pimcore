@@ -643,7 +643,11 @@ class Linux extends Unixcommon
 
             // If it's a symlink, find out where it really goes.
             // (using realpath instead of readlink because the former gives absolute paths)
-            $symlink = is_link($mount[1]) ? realpath($mount[1]) : false;
+            if (isset($this->settings['hide']['dont_resolve_mountpoint_symlinks']) && $this->settings['hide']['dont_resolve_mountpoint_symlinks']) {
+                $symlink = false;
+            } else {
+                $symlink = is_link($mount[1]) ? realpath($mount[1]) : false;
+            }
 
             // Optionally get mount options
             if ($this->settings['show']['mounts_options'] && !in_array($mount[3], (array) $this->settings['hide']['fs_mount_options'])) {
@@ -1565,7 +1569,7 @@ class Linux extends Unixcommon
         if (Common::anyInArray(array('xenfs', 'xen_gntdev', 'xen_evtchn', 'xen_blkfront', 'xen_netfront'), $modules) || is_dir('/proc/xen')) {
 
             // Guest or host?
-            if (Common::anyInArray(array('xen-netback', 'xen_blkback'), $modules) || strpos('control_d', Common::getContents('/proc/xen/capabilities', '')) !== false) {
+            if (Common::anyInArray(array('xen-netback', 'xen_blkback'), $modules) || strpos(Common::getContents('/proc/xen/capabilities', ''), 'control_d') !== false) {
                 return array('type' => 'host', 'method' => 'Xen');
             } else {
                 return array('type' => 'guest', 'method' => 'Xen');
@@ -1580,6 +1584,11 @@ class Linux extends Unixcommon
         // VirtualBox Guest! Tested on wheezy under mac vbox
         if (in_array('vboxguest', $modules)) {
             return array('type' => 'guest', 'method' => 'VirtualBox');
+        }
+
+        // Hyper-V guest. Tested with Trusty under Client Hyper-V in Windows 10 Pro. Needs to be checked before KVM/QEMU!
+        if (Common::anyInArray(array('hid_hyperv', 'hv_vmbus', 'hv_utils'), $modules)) {
+            return array('type' => 'guest', 'method' => 'Hyper-V');
         }
 
         // Looks like it might be KVM HOST!
@@ -1643,7 +1652,12 @@ class Linux extends Unixcommon
 
          // Refer back to top.c for the reasoning here. I just copied the algorithm without
          // trying to understand why.
-         $scale = 100.0 / (float) array_sum($ret);
+         $retSum = (float) array_sum($ret);
+         if($retSum > 0) {
+             $scale = 100 / $retSum;
+         } else {
+             $scale = 100;
+         }
          $cpu_percent = $ret[0] * $scale;
 
          return round($cpu_percent, 2);

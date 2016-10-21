@@ -147,6 +147,11 @@ for($i=0; $i<$count; $i++) {
             $product = $this->href("cProduct".$i)->getElement();
             $image = $this->image("cImage_".$i)->getImage();
 
+            if(!$image) {
+                $image = $assetsArray[0];
+            }
+
+
             if($product ) {
                 $ean =  $product->getEan();
 
@@ -156,9 +161,7 @@ for($i=0; $i<$count; $i++) {
             //Si pas de produit défini, on prend le produit associé dans les metadata 
             // de la realisation
             else {
-                if(!$image) {
-                    $image = $assetsArray[0];
-                }
+                
                 
                 if($image) {
                     $product = $image->getProperty("product");
@@ -191,6 +194,28 @@ for($i=0; $i<$count; $i++) {
                  echo '<div class="realisationpush col-xs-16 col-md-10"></div>';
                 echo '<div class="realisationlink col-xs-16 col-md-6"></div>';
             
+            }
+
+            //ProdutRelated
+            if($image || $product) {
+                $products = array();
+                $teinte = $image->getProperty("realisation_teinte");
+                if((!$teinte || !($teinte instanceof Object_Teinte))  && $product) {
+                    $teinte = $product->getTeinteObject();
+                }
+                if($teinte && $teinte instanceof Object_Teinte) {
+                    $products = $teinte->getSimilarTeinteProducts();
+                }
+
+                if(count($products)>0) {
+                    echo '<ul class="similarproducts">';
+                    foreach($products as $similarProducs) {
+                        $ean=$similarProducs->getEan()?$similarProducs->getEan():$similarProducs->getCode();
+                        echo '<li>{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow pull-right"}}</li>';
+                    }
+                     echo "</ul>";
+                }
+
             }
 
             

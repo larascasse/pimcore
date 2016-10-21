@@ -837,15 +837,30 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_teinte() {
+		$teinte = $this->getTeinteObject();
+		return $teinte ? $teinte:"";
+
+	}
+
+	public function getTeinteObject() {
 		$objects = $this->getPimonly_teinte_rel();
 		if(is_array($objects)) {
 			foreach ($objects as $object) {
 				if($object instanceof Object_Teinte) {
-		   			return $object->getName();
+		   			return $object;
 		   		}
 		   	}
 		}
+		return null;
+	}
 
+	public function getSimilarTeinteProducts($excludeMe=false) {
+		$teinte = $this->getTeinteObject();
+		$products = array();
+		if($teinte) {
+			return $teinte->getSimilarTeinteProducts($this);
+		}
+		return $products;
 	}
 
 

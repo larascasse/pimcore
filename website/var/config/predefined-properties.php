@@ -80,6 +80,7 @@ return [
         "id" => 6
     ],
     7 => [
+        "id" => 7,
         "name" => "Réalisation Title",
         "description" => "Titre de la réalisation",
         "key" => "realisation_title",
@@ -87,9 +88,34 @@ return [
         "data" => NULL,
         "config" => NULL,
         "ctype" => "asset",
-        "inheritable" => 0,
+        "inheritable" => TRUE,
         "creationDate" => 1450196248,
-        "modificationDate" => 1450196338,
-        "id" => 7
+        "modificationDate" => 1477043511
+    ],
+    8 => [
+        "id" => 8,
+        "name" => "Réalisation description",
+        "description" => "Description de la réalisation",
+        "key" => "realisation_description",
+        "type" => "text",
+        "data" => "",
+        "config" => NULL,
+        "ctype" => "asset",
+        "inheritable" => TRUE,
+        "creationDate" => 1477043516,
+        "modificationDate" => 1477044502
+    ],
+    9 => [
+        "id" => 9,
+        "name" => "Réalisation teinte",
+        "description" => "Réalisation Teinte LPN",
+        "key" => "realisation_teinte",
+        "type" => "object",
+        "data" => "",
+        "config" => "",
+        "ctype" => "asset",
+        "inheritable" => TRUE,
+        "creationDate" => 1477043581,
+        "modificationDate" => 1477044466
     ]
 ];

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-28T12:39:01+02:00
+* Generated at: 2016-10-18T21:22:19+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 92.154.6.232
+* IP: 82.67.203.190
 
 
 Fields Summary: 
@@ -166,7 +166,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1475059137,
+   'modificationDate' => 1476818539,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -2350,6 +2350,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                     ),
                      'width' => '',
                      'height' => '',
+                     'maxItems' => '',
                      'queryColumnType' => 'text',
                      'columnType' => 'text',
                      'phpdocType' => 'array',
@@ -2444,9 +2445,15 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                         'key' => 'Flottante',
                         'value' => 'flottante',
                       ),
+                      5 => 
+                      array (
+                        'key' => 'Système Click',
+                        'value' => 'click',
+                      ),
                     ),
                      'width' => '',
                      'height' => '',
+                     'maxItems' => '',
                      'queryColumnType' => 'text',
                      'columnType' => 'text',
                      'phpdocType' => 'array',
@@ -4347,7 +4354,7 @@ Combien d\'unité dans 1 m2',
                  'mandatory' => false,
                  'noteditable' => true,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',

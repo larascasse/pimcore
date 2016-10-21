@@ -117,6 +117,7 @@ for($i=0; $i<$count; $i++) {
 
             if(strlen(trim($content))<=5) {
                 //on recherche le content de la description
+                $content = "test";
                 $image = $this->image("cImage_".$i)->getImage();
                 if(!$image) {
                     $image = $assetsArray[0];

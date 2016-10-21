@@ -107,7 +107,26 @@ for($i=0; $i<$count; $i++) {
     <?php if ($this->editmode) { echo $this->checkbox("cHidden_".$i,array('boxLabel'=>'Cacher le picto','width'=>200)); echo '<br/>'; } ?>
     <div class="<?= $this->checkbox("cHidden_".$i)->isChecked() ? "realisationpictohidden" : "realisationpicto" ?>">Réalisations</div>
     <div class="realisationtitle"><?php if($this->editmode) echo "Titre";?><?= $this->input("cTitle_".$i, ["width" => 900]); ?></div>
-    <div class="realisationcontent"><?php if($this->editmode) echo "Content";?><?= $this->input("cContent_".$i, ["width" => 900]); ?></div>
+    <div class="realisationcontent"><?php 
+        if($this->editmode) { 
+            echo "Content";
+            echo $this->input("cContent_".$i, ["width" => 900]);
+        }
+        else {
+            $content = $this->input("cContent_".$i);
+
+            if(strlen(trim($content))<=5) {
+                //on recherche le content de la description
+                $image = $this->image("cImage_".$i)->getImage();
+                if(!$image) {
+                    $image = $assetsArray[0];
+                }
+                $content = $image->getProperty("realisation_description");
+            }
+            echo $content;
+        }
+
+        ?></div>
     <div class="jspush">
     <?php if ($this->editmode) { 
         echo 'Product :'.$this->href("cProduct".$i,array(
@@ -133,6 +152,8 @@ for($i=0; $i<$count; $i++) {
                 if(!(strlen($ean)>4))
                     $ean =  $product->getCode();
             }
+            //Si pas de produit défini, on prend le produit associé dans les metadata 
+            // de la realisation
             else {
                 if(!$image) {
                     $image = $assetsArray[0];

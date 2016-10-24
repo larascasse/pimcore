@@ -22,6 +22,11 @@ $conditionFilters = array("
 
     ");
 
+$conditionFilters = array("
+       o_path LIKE '/catalogue/_product_base__/85vinylsol/lvt-accessoires%'
+
+");
+
 
 $list = new Pimcore\Model\Object\Listing();
 $list->setUnpublished(true);

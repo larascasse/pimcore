@@ -58,16 +58,20 @@ foreach ($list->getObjects() as $object) {
             if(strlen(trim($teinteKey))>0) {
                 $listTeintes = new Pimcore\Model\Object\Listing();
                 $listTeintes->setUnpublished(true);
-                $conditionFilters = array("o_path LIKE '/teintes/teintes/%/".$teinteKey."'");
+                $conditionFilters = array(
+                    "o_path LIKE '/teintes/teintes/%'",
+                    "o_key = '".$teinteKey."'"
+                );
+
 
                 echo "\nsearch ".implode($conditionFilters);
 
                 $listTeintes->setCondition(implode(" AND ", $conditionFilters));
                 $listTeintes->load();
-                echo "objects in list ".count($listTeintes->getObjects()).'\n';
+                echo "\nobjects in list ".count($listTeintes->getObjects()).'\n';
 
                 foreach ($listTeintes->getObjects() as $teinteObject) {
-                    echo "\teinteObject";
+                    //echo "\nteinteObject";
                     if($teinteObject instanceOf Object_Teinte) {
                          $teinte = $teinteObject->getName();
                         echo "\nget teinte from scienergie court : ".$teinte ." ".$teinteObject->getFullPath();
@@ -89,7 +93,7 @@ foreach ($list->getObjects() as $object) {
 
             $objectToSave->setPublished(true);
             //$objectToSave->save();
-            echo "\nSaved ".$objectToSave->getName();
+            echo "\nSaved :".$objectToSave->getName();
         }
     }
 

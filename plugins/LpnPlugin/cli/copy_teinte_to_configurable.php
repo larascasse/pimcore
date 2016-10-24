@@ -92,7 +92,7 @@ foreach ($list->getObjects() as $object) {
             $objectToSave->setValues($values);
 
             $objectToSave->setPublished(true);
-            //$objectToSave->save();
+            $objectToSave->save();
             echo "\nSaved :".$objectToSave->getName();
         }
     }

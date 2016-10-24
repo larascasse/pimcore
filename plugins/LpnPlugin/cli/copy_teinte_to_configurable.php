@@ -86,8 +86,8 @@ foreach ($list->getObjects() as $object) {
         if(strlen($teinte)>0) {
 
             $values = array();
-            $values['configurable_free_1'] = $value;
-            $values['pimonly_name_suffixe'] = $value;
+            $values['configurable_free_1'] = $teinte;
+            $values['pimonly_name_suffixe'] = $teinte;
 
             $objectToSave->setValues($values);
 

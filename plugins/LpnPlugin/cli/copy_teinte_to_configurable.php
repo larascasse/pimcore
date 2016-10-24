@@ -65,7 +65,7 @@ foreach ($list->getObjects() as $object) {
                 $listTeintes->setUnpublished(true);
                 $conditionFilters = array(
                     "o_path LIKE '/teintes/teintes/%'",
-                    "o_key = '".$teinteKey."'"
+                    "(o_key = '".$teinteKey."' OR o_key = 'chene-".$teinteKey."')"
                 );
 
 

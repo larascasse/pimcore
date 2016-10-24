@@ -838,7 +838,7 @@ class Website_Product extends Object_Product {
 
 	public function getMage_teinte() {
 		$teinte = $this->getTeinteObject();
-		return $teinte ? $teinte:"";
+		return $teinte ? $teinte->getName():"";
 
 	}
 

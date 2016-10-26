@@ -57,6 +57,7 @@ if(!$count) {
     $count = 1;
 }
 
+$dataValues = array();
 
 for($i=0; $i<$count; $i++) {
     if($this->image("cImage_".$i)->getThumbnail("magento_realisation"))
@@ -80,9 +81,24 @@ for($i=0; $i<$count; $i++) {
         $datazoom = implode("|",$arrayImages);
     else
         $datazoom = $urlImage;
+
+    $dataZoomId = "zoom_real_".$this->getId()."_".$i;
+    $dataValue = (object) array("id"=>$dataZoomId,"images"=>$arrayImages);
+
+    /*[
+        {
+         base => URL IMAGE
+         images =>
+         thumb =>
+         name =>
+         sku =>
+         }
+
+        ]
+    */
     ?>
 
-    <li data-zoom="<?= $datazoom ?>" class="<?= ($i==0?'norelazy':'') ?>">
+    <li data-zoom="<?= $datazoom ?>" data-zoom-rel="<?= $dataZoomId; ?>" class="<?= ($i==0?'norelazy':'') ?>">
     <div class="<?php echo !$is_type_bloc?'nsg_container col-md-16':'';?>">
     <div>
     <?php if ($this->editmode) { ?>
@@ -101,6 +117,9 @@ for($i=0; $i<$count; $i++) {
             $urlImage=$arrayImages[0];
         }
         echo '<img src="'.$urlImage.'" title="'.$this->image("cImage_".$i)->getText().'" alt="'.$this->image("cImage_".$i)->getAlt().'" class="'.($i==0?'norelazy':'').'" />';
+
+        //JSON
+        $dataValue->base = $urlImage;
     }
     ?></div>
     <div class="nsg_abs">
@@ -189,12 +208,19 @@ for($i=0; $i<$count; $i++) {
                 $description = str_replace("\n", "|", $description);
                  echo '<div class="realisationpush col-xs-16 col-md-10">'.$name.'<br />'.$description .' | EAN : '.$ean.'</div>';
                 echo '<div class="realisationlink col-xs-16 col-md-6">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow pull-right"}}</div>';
+
+                //JSON
+                $dataValue->name = $name;
+                $dataValue->sku = $ean;
             }
             else {
                  echo '<div class="realisationpush col-xs-16 col-md-10"></div>';
                 echo '<div class="realisationlink col-xs-16 col-md-6"></div>';
             
             }
+
+            //JSON
+            $dataValue->related = array();
 
             //ProdutRelated
             if($image || $product) {
@@ -208,13 +234,20 @@ for($i=0; $i<$count; $i++) {
                 }
 
                 if(count($products)>0) {
+
+                    
+
                     echo '<ul class="similarproducts">';
                     foreach($products as $similarProducs) {
                         $ean=$similarProducs->getEan()?$similarProducs->getEan():$similarProducs->getCode();
-                        echo '<li>{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow pull-right"}}</li>';
+                        echo '<li>'.$similarProducs->getName().'<span class="realisationlink">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'" class="btnarrow pull-right"}}</span></li>';
                     }
                      echo "</ul>";
+
+                     //JSON
+                     $dataValue->related[] = (object) array("name"=>$similarProducs->getName(),"sku"=>$ean);
                 }
+
 
             }
 
@@ -230,6 +263,13 @@ for($i=0; $i<$count; $i++) {
     </div>
     </div>
     </li>
+     <?php //JSON 
+    echo '<script type="application/json" id="'.$dataZoomId.'">';
+    echo  Zend_Json::encode($dataValue);
+    echo  '</script>';
+    ?>
+
+
 <?php } ?>
 </ul>
 <div class="clearfix">&nbsp;</div>

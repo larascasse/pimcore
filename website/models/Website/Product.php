@@ -174,7 +174,7 @@ class Website_Product extends Object_Product {
 		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
 		$attributes = $this->getClass()->getFieldDefinitions();
-		$includeFields = array("fiche_technique_orginale","fiche_technique_lpn");
+		$includeFields = array("fiche_technique_orginale","fiche_technique_lpn",'notice_pose_lpn');
 		$showEmptyAttribute = false;
 		$caracteristiques = array();
 
@@ -278,7 +278,8 @@ class Website_Product extends Object_Product {
 			'quantity_min','quantity_max','quantity_min_max_txt',
 			'extra_content1','extra_content2',
 			'actif_web',
-			'subtype_1'
+			'subtype_1',
+			'notice_pose_lpn'
 
 
 			);
@@ -511,6 +512,12 @@ class Website_Product extends Object_Product {
 	public function getMage_fichepdf() {
 		if($this->getFiche_technique_lpn())
 			return "http://".$_SERVER["HTTP_HOST"].$this->getFiche_technique_lpn()->getFullPath();
+		return null;
+	}
+
+	public function getMage_notice_pose_lpn() {
+		if($this->getNotice_pose_lpn())
+			return "http://".$_SERVER["HTTP_HOST"].$this->getNotice_pose_lpn()->getFullPath();
 		return null;
 	}
 

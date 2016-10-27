@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-28T10:35:09+02:00
+* Generated at: 2016-10-21T17:24:22+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 92.154.6.232
+* IP: 85.169.54.82
 
 
 Fields Summary: 
@@ -13,6 +13,7 @@ Fields Summary:
 - description [textarea]
 - image [image]
 - hexacolor [input]
+- products_relation [nonownerobjects]
 */ 
 
 namespace Pimcore\Model\Object;

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-09-28T10:35:09+02:00
+* Generated at: 2016-10-21T17:24:22+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 92.154.6.232
+* IP: 85.169.54.82
 
 
 Fields Summary: 
@@ -13,6 +13,7 @@ Fields Summary:
 - description [textarea]
 - image [image]
 - hexacolor [input]
+- products_relation [nonownerobjects]
 */ 
 
 
@@ -20,7 +21,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1475051708,
+   'modificationDate' => 1477063461,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -155,6 +156,35 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          4 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Nonownerobjects::__set_state(array(
+             'ownerClassName' => 'product',
+             'ownerClassId' => NULL,
+             'ownerFieldName' => 'pimonly_teinte_rel',
+             'lazyLoading' => true,
+             'fieldtype' => 'nonownerobjects',
+             'width' => '',
+             'height' => '',
+             'maxItems' => NULL,
+             'queryColumnType' => 'text',
+             'phpdocType' => 'array',
+             'relationType' => true,
+             'classes' => NULL,
+             'name' => 'products_relation',
+             'title' => 'products_relation',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => NULL,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'columnType' => NULL,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,

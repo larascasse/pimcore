@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-10-18T21:22:19+02:00
+* Generated at: 2016-10-27T15:39:07+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 82.67.203.190
+* IP: 92.154.6.232
 
 
 Fields Summary: 
@@ -13,6 +13,7 @@ Fields Summary:
 - obsolete [checkbox]
 - code [input]
 - ean [input]
+- configurable_free_1 [input]
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
@@ -79,7 +80,6 @@ Fields Summary:
 - fixation_not_configurable [checkbox]
 - choix [input]
 - choix_not_configurable [checkbox]
-- configurable_free_1 [input]
 - configurable_free_2 [input]
 - quantity_min [input]
 - quantity_max [input]
@@ -118,6 +118,7 @@ Fields Summary:
 - realisations [multihref]
 - fiche_technique_lpn [href]
 - fiche_technique_orginale [href]
+- notice_pose_lpn [href]
 - re_skus [objects]
 - cs_skus [objects]
 - pimonly_category_pose [href]
@@ -148,6 +149,7 @@ Fields Summary:
 - image_3_src [input]
 - mage_mediagallery [input]
 - mage_fichepdf [input]
+- mage_notice_pose_lpn [input]
 - mage_invoice_description [textarea]
 - mage_realisations [textarea]
 - mage_realisationsJson [textarea]
@@ -170,6 +172,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
@@ -236,7 +239,6 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
@@ -275,6 +277,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByRealisations ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByFiche_technique_lpn ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByNotice_pose_lpn ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByRe_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByCs_skus ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByPimonly_category_pose ($value, $limit = 0) 
@@ -304,6 +307,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByImage_3_src ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_mediagallery ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_fichepdf ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByMage_notice_pose_lpn ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_invoice_description ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_realisations ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_realisationsJson ($value, $limit = 0) 
@@ -325,6 +329,7 @@ public $actif_web;
 public $obsolete;
 public $code;
 public $ean;
+public $configurable_free_1;
 public $name_scienergie;
 public $name_scienergie_court;
 public $catalogue;
@@ -391,7 +396,6 @@ public $fixation;
 public $fixation_not_configurable;
 public $choix;
 public $choix_not_configurable;
-public $configurable_free_1;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -430,6 +434,7 @@ public $gallery;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
+public $notice_pose_lpn;
 public $re_skus;
 public $cs_skus;
 public $pimonly_category_pose;
@@ -459,6 +464,7 @@ public $image_2_src;
 public $image_3_src;
 public $mage_mediagallery;
 public $mage_fichepdf;
+public $mage_notice_pose_lpn;
 public $mage_invoice_description;
 public $mage_realisations;
 public $mage_realisationsJson;
@@ -583,6 +589,32 @@ public function getEan () {
 */
 public function setEan ($ean) {
 	$this->ean = $ean;
+	return $this;
+}
+
+/**
+* Get configurable_free_1 - Option configurable
+* @return string
+*/
+public function getConfigurable_free_1 () {
+	$preValue = $this->preGetValue("configurable_free_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_1");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_1 - Option configurable
+* @param string $configurable_free_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_1 ($configurable_free_1) {
+	$this->configurable_free_1 = $configurable_free_1;
 	return $this;
 }
 
@@ -2303,32 +2335,6 @@ public function setChoix_not_configurable ($choix_not_configurable) {
 }
 
 /**
-* Get configurable_free_1 - Option configurable
-* @return string
-*/
-public function getConfigurable_free_1 () {
-	$preValue = $this->preGetValue("configurable_free_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->configurable_free_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
-		return $this->getValueFromParent("configurable_free_1");
-	}
-	return $data;
-}
-
-/**
-* Set configurable_free_1 - Option configurable
-* @param string $configurable_free_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setConfigurable_free_1 ($configurable_free_1) {
-	$this->configurable_free_1 = $configurable_free_1;
-	return $this;
-}
-
-/**
 * Get configurable_free_2 - Configurable libre 2
 * @return string
 */
@@ -3317,6 +3323,32 @@ public function setFiche_technique_orginale ($fiche_technique_orginale) {
 }
 
 /**
+* Get notice_pose_lpn - Notice de pose
+* @return \Pimcore\Model\Asset
+*/
+public function getNotice_pose_lpn () {
+	$preValue = $this->preGetValue("notice_pose_lpn"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("notice_pose_lpn")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("notice_pose_lpn")->isEmpty($data)) {
+		return $this->getValueFromParent("notice_pose_lpn");
+	}
+	return $data;
+}
+
+/**
+* Set notice_pose_lpn - Notice de pose
+* @param \Pimcore\Model\Asset $notice_pose_lpn
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNotice_pose_lpn ($notice_pose_lpn) {
+	$this->notice_pose_lpn = $this->getClass()->getFieldDefinition("notice_pose_lpn")->preSetData($this, $notice_pose_lpn);
+	return $this;
+}
+
+/**
 * Get re_skus - Produits associés
 * @return \Pimcore\Model\Object\product[] | \Pimcore\Model\Object\category[]
 */
@@ -4071,6 +4103,32 @@ public function setMage_fichepdf ($mage_fichepdf) {
 }
 
 /**
+* Get mage_notice_pose_lpn - Notice de pose
+* @return string
+*/
+public function getMage_notice_pose_lpn () {
+	$preValue = $this->preGetValue("mage_notice_pose_lpn"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_notice_pose_lpn;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_notice_pose_lpn")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_notice_pose_lpn");
+	}
+	return $data;
+}
+
+/**
+* Set mage_notice_pose_lpn - Notice de pose
+* @param string $mage_notice_pose_lpn
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_notice_pose_lpn ($mage_notice_pose_lpn) {
+	$this->mage_notice_pose_lpn = $mage_notice_pose_lpn;
+	return $this;
+}
+
+/**
 * Get mage_invoice_description - Description pour facture
 * @return string
 */
@@ -4378,6 +4436,10 @@ protected static $_relationFields = array (
     'type' => 'href',
   ),
   'fiche_technique_orginale' => 
+  array (
+    'type' => 'href',
+  ),
+  'notice_pose_lpn' => 
   array (
     'type' => 'href',
   ),

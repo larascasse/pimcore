@@ -69,7 +69,7 @@ if(!function_exists ('toto')) {
         $productObject =(object) array (
                 "name"=>$name,
                 "sku" => $sku,
-                "magelink" => '{{block type=\'core/template\' template=\'lpn/lpn_product_link.phtml\' name=\'givemetheprice_'.$sku.'\' product_sku=\''.$sku.'\' class=\'btnarrow pull-right\'}}'
+                "magelink" => '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$sku.'" product_sku="'.$sku.'" class="btnarrow pull-right"}}'
                 );
 
 

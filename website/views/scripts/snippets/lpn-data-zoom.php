@@ -10,6 +10,8 @@ if(!function_exists ('toto')) {
         $sku = "";
         $product = null;
 
+
+
         if($image instanceof Asset_Image)
             $product = $image->getProperty("product");
     
@@ -69,6 +71,12 @@ if(!function_exists ('toto')) {
                 "sku" => $sku,
                 "magelink" => '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$sku.'" product_sku="'.$sku.'" class="btnarrow pull-right"}}'
                 );
+
+
+        if($realisation_title = $image->getProperty("realisation_title")) {
+            $productObject->name = $realisation_title;
+        }
+        
         return $productObject;
         
     }
@@ -177,10 +185,6 @@ if(!function_exists ('toto')) {
                                         $returnZoomRealisation->products[] = $productsFromFolder;
                                     }
 
-
-
-
-                                    
                                     
 
                                 }

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-10-27T15:39:07+02:00
+* Generated at: 2016-11-03T12:50:19+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -52,17 +52,20 @@ Fields Summary:
 - epaisseur_not_configurable [checkbox]
 - largeur [input]
 - largeur_txt [input]
+- largeur_colis [input]
 - largeur_not_configurable [checkbox]
 - longueur [input]
 - longueur_txt [input]
 - longueur_min [input]
 - longueur_max [input]
+- longueur_colis [input]
 - longueur_not_configurable [checkbox]
 - mage_longueur [input]
 - mage_section [input]
 - pimonly_section [input]
 - mage_use_section_as_configurable [checkbox]
 - hauteur [input]
+- hauteur_colis [input]
 - hauteur_not_configurable [checkbox]
 - color [select]
 - color_not_configurable [checkbox]
@@ -211,17 +214,20 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByEpaisseur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLargeur ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLargeur_txt ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByLargeur_colis ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLargeur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLongueur ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLongueur_txt ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLongueur_min ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLongueur_max ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_colis ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByLongueur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_longueur ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_section ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByPimonly_section ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByMage_use_section_as_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByHauteur ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByHauteur_colis ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByHauteur_not_configurable ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByColor ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByColor_not_configurable ($value, $limit = 0) 
@@ -368,17 +374,20 @@ public $epaisseur_type;
 public $epaisseur_not_configurable;
 public $largeur;
 public $largeur_txt;
+public $largeur_colis;
 public $largeur_not_configurable;
 public $longueur;
 public $longueur_txt;
 public $longueur_min;
 public $longueur_max;
+public $longueur_colis;
 public $longueur_not_configurable;
 public $mage_longueur;
 public $mage_section;
 public $pimonly_section;
 public $mage_use_section_as_configurable;
 public $hauteur;
+public $hauteur_colis;
 public $hauteur_not_configurable;
 public $color;
 public $color_not_configurable;
@@ -1607,6 +1616,32 @@ public function setLargeur_txt ($largeur_txt) {
 }
 
 /**
+* Get largeur_colis - Largeur du colis
+* @return string
+*/
+public function getLargeur_colis () {
+	$preValue = $this->preGetValue("largeur_colis"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->largeur_colis;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("largeur_colis")->isEmpty($data)) {
+		return $this->getValueFromParent("largeur_colis");
+	}
+	return $data;
+}
+
+/**
+* Set largeur_colis - Largeur du colis
+* @param string $largeur_colis
+* @return \Pimcore\Model\Object\Product
+*/
+public function setLargeur_colis ($largeur_colis) {
+	$this->largeur_colis = $largeur_colis;
+	return $this;
+}
+
+/**
 * Get largeur_not_configurable - Largeur non configurable
 * @return boolean
 */
@@ -1733,6 +1768,32 @@ public function getLongueur_max () {
 */
 public function setLongueur_max ($longueur_max) {
 	$this->longueur_max = $longueur_max;
+	return $this;
+}
+
+/**
+* Get longueur_colis - Longueur du colis
+* @return string
+*/
+public function getLongueur_colis () {
+	$preValue = $this->preGetValue("longueur_colis"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->longueur_colis;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("longueur_colis")->isEmpty($data)) {
+		return $this->getValueFromParent("longueur_colis");
+	}
+	return $data;
+}
+
+/**
+* Set longueur_colis - Longueur du colis
+* @param string $longueur_colis
+* @return \Pimcore\Model\Object\Product
+*/
+public function setLongueur_colis ($longueur_colis) {
+	$this->longueur_colis = $longueur_colis;
 	return $this;
 }
 
@@ -1889,6 +1950,32 @@ public function getHauteur () {
 */
 public function setHauteur ($hauteur) {
 	$this->hauteur = $hauteur;
+	return $this;
+}
+
+/**
+* Get hauteur_colis - Hauteur du colis
+* @return string
+*/
+public function getHauteur_colis () {
+	$preValue = $this->preGetValue("hauteur_colis"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->hauteur_colis;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("hauteur_colis")->isEmpty($data)) {
+		return $this->getValueFromParent("hauteur_colis");
+	}
+	return $data;
+}
+
+/**
+* Set hauteur_colis - Hauteur du colis
+* @param string $hauteur_colis
+* @return \Pimcore\Model\Object\Product
+*/
+public function setHauteur_colis ($hauteur_colis) {
+	$this->hauteur_colis = $hauteur_colis;
 	return $this;
 }
 

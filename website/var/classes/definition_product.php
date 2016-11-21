@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-10-27T15:39:07+02:00
+* Generated at: 2016-11-03T12:50:19+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -52,17 +52,20 @@ Fields Summary:
 - epaisseur_not_configurable [checkbox]
 - largeur [input]
 - largeur_txt [input]
+- largeur_colis [input]
 - largeur_not_configurable [checkbox]
 - longueur [input]
 - longueur_txt [input]
 - longueur_min [input]
 - longueur_max [input]
+- longueur_colis [input]
 - longueur_not_configurable [checkbox]
 - mage_longueur [input]
 - mage_section [input]
 - pimonly_section [input]
 - mage_use_section_as_configurable [checkbox]
 - hauteur [input]
+- hauteur_colis [input]
 - hauteur_not_configurable [checkbox]
 - color [select]
 - color_not_configurable [checkbox]
@@ -168,7 +171,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1477575544,
+   'modificationDate' => 1478173819,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -1432,6 +1435,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                   2 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => 400,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 255,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'largeur_colis',
+                     'title' => 'Largeur du colis',
+                     'tooltip' => 'Vide par default, utilise pour les rouleaux de sous-couche par exemple',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => false,
+                  )),
+                  3 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                      'fieldtype' => 'checkbox',
                      'defaultValue' => 0,
@@ -1570,6 +1597,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                   4 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => 400,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 255,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'longueur_colis',
+                     'title' => 'Longueur du colis',
+                     'tooltip' => 'Vide par default, utilise pour les rouleaux de sous-couche par exemple',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => false,
+                  )),
+                  5 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                      'fieldtype' => 'checkbox',
                      'defaultValue' => 0,
@@ -1591,7 +1642,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
-                  5 => 
+                  6 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
                      'width' => 300,
@@ -1730,6 +1781,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                   4 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => 400,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 255,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'hauteur_colis',
+                     'title' => 'Hauteur du colis',
+                     'tooltip' => 'Vide par default, utilise pour les rouleaux de sous-couche par exemple',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => true,
+                     'visibleSearch' => false,
+                  )),
+                  5 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                      'fieldtype' => 'checkbox',
                      'defaultValue' => 0,
@@ -3768,7 +3843,7 @@ Combien d\'unité dans 1 m2',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -4727,7 +4802,7 @@ Combien d\'unité dans 1 m2',
                  'mandatory' => false,
                  'noteditable' => true,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',

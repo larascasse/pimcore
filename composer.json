@@ -71,7 +71,7 @@
         "nesbot/carbon": "~1",
         "php-di/php-di": "~5",
         "egulias/email-validator": "*",
-        "pimcore/core-version": "4.4.0",
+        "pimcore/core-version": "4.4.1",
         "neitanod/forceutf8": "~2",
         "myclabs/deep-copy": "*"
     },

@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54
+class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
 {
     public static $files = array (
-        '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '383eaff206634a77a1be54e64e6459c7' => __DIR__ . '/..' . '/sabre/uri/lib/functions.php',
         '3569eecfeed3bcf0bad3c998a494ecb8' => __DIR__ . '/..' . '/sabre/xml/lib/Deserializer/functions.php',
         '93aa591bc4ca510c520999e34229ee79' => __DIR__ . '/..' . '/sabre/xml/lib/Serializer/functions.php',
         '2b9d0f43f9552984cfa82fee95491826' => __DIR__ . '/..' . '/sabre/event/lib/coroutine.php',
@@ -730,6 +730,7 @@ class ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php',
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php',
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorTrait' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php',
+        'Facebook\\PseudoRandomString\\RandomBytesPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/RandomBytesPseudoRandomStringGenerator.php',
         'Facebook\\PseudoRandomString\\UrandomPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php',
         'Facebook\\SignedRequest' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/SignedRequest.php',
         'Facebook\\Url\\FacebookUrlDetectionHandler' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Url/FacebookUrlDetectionHandler.php',
@@ -1029,7 +1030,10 @@ class ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54
         'OAuthSignatureMethod_RSA_SHA1' => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
         'OAuthToken' => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
         'OAuthUtil' => __DIR__ . '/..' . '/hybridauth/hybridauth/hybridauth/Hybrid/thirdparty/OAuth/OAuth.php',
+        'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
+        'PHPUnit\\Framework\\BaseTestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/BaseTestListener.php',
         'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
+        'PHPUnit\\Framework\\TestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestListener.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -2968,6 +2972,7 @@ class ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54
         'Symfony\\Component\\VarDumper\\Exception\\ThrowingCasterException' => __DIR__ . '/..' . '/symfony/var-dumper/Exception/ThrowingCasterException.php',
         'Symfony\\Component\\VarDumper\\Test\\VarDumperTestTrait' => __DIR__ . '/..' . '/symfony/var-dumper/Test/VarDumperTestTrait.php',
         'Symfony\\Component\\VarDumper\\VarDumper' => __DIR__ . '/..' . '/symfony/var-dumper/VarDumper.php',
+        'Symfony\\Component\\Yaml\\Command\\LintCommand' => __DIR__ . '/..' . '/symfony/yaml/Command/LintCommand.php',
         'Symfony\\Component\\Yaml\\Dumper' => __DIR__ . '/..' . '/symfony/yaml/Dumper.php',
         'Symfony\\Component\\Yaml\\Escaper' => __DIR__ . '/..' . '/symfony/yaml/Escaper.php',
         'Symfony\\Component\\Yaml\\Exception\\DumpException' => __DIR__ . '/..' . '/symfony/yaml/Exception/DumpException.php',
@@ -5329,10 +5334,10 @@ class ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit86a3bf90a4cbc33a29760262eaae3b54::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-11-03T12:50:19+01:00
+* Generated at: 2016-11-30T15:16:01+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -112,6 +112,7 @@ Fields Summary:
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
+- nf [checkbox]
 - norme_sanitaire [select]
 - support [select]
 - image_1 [image]
@@ -171,7 +172,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1478173819,
+   'modificationDate' => 1480515361,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -402,25 +403,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                 array (
                   0 => 
                   array (
+                    'key' => 'Accessoires',
+                    'value' => 'accessoires',
+                  ),
+                  1 => 
+                  array (
                     'key' => 'Matières',
                     'value' => 'matieres',
                   ),
-                  1 => 
+                  2 => 
                   array (
                     'key' => 'Terrasses',
                     'value' => 'terrasses',
                   ),
-                  2 => 
+                  3 => 
                   array (
                     'key' => 'Tables',
                     'value' => 'Tables',
                   ),
-                  3 => 
+                  4 => 
                   array (
                     'key' => 'Collections',
                     'value' => 'collections',
                   ),
-                  4 => 
+                  5 => 
                   array (
                     'key' => 'Stratifié/LVT',
                     'value' => 'stratifie-lvt',
@@ -567,6 +573,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                     'classes' => 'teinte',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'pimonly_teinte_rel',
                  'title' => 'Teinte',
                  'tooltip' => '',
@@ -3060,6 +3067,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'productExtra',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'extras',
                  'title' => 'Autre',
                  'tooltip' => '',
@@ -3399,6 +3407,28 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               24 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'fieldtype' => 'checkbox',
+                 'defaultValue' => 0,
+                 'queryColumnType' => 'tinyint(1)',
+                 'columnType' => 'tinyint(1)',
+                 'phpdocType' => 'boolean',
+                 'name' => 'nf',
+                 'title' => 'NF',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -3459,7 +3489,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -3625,6 +3655,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'gallery',
                  'title' => 'Autres Images pour la galerie',
                  'tooltip' => '',
@@ -3688,6 +3719,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'realisations',
                  'title' => 'Réalisations (Gallery)',
                  'tooltip' => '',
@@ -3757,6 +3789,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'fiche_technique_lpn',
                  'title' => 'Fiche technique LPN',
                  'tooltip' => '',
@@ -3797,6 +3830,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'fiche_technique_orginale',
                  'title' => 'Fiche technique originale',
                  'tooltip' => '',
@@ -3837,6 +3871,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'notice_pose_lpn',
                  'title' => 'Notice de pose',
                  'tooltip' => '',
@@ -3894,6 +3929,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 're_skus',
                  'title' => 'Produits associés',
                  'tooltip' => '',
@@ -3930,6 +3966,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'product',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'cs_skus',
                  'title' => 'Crossels (tarif)',
                  'tooltip' => '',
@@ -3974,6 +4011,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'pimonly_category_pose',
                  'title' => 'Catégorie Accessoire Pose',
                  'tooltip' => '',
@@ -4018,6 +4056,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'pimonly_category_finition',
                  'title' => 'Catégorie Accessoire Finition',
                  'tooltip' => '',
@@ -4062,6 +4101,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'pimonly_category_entretien',
                  'title' => 'Catégorie Accessoires Entretien',
                  'tooltip' => '',
@@ -4115,6 +4155,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'article',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'associatedArticles',
                  'title' => 'Articles associés',
                  'tooltip' => '',
@@ -4147,6 +4188,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'article',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'origineArticles',
                  'title' => 'Articles associés (Origine)',
                  'tooltip' => '',
@@ -4197,6 +4239,7 @@ Combien d\'unité dans 1 m2',
                  'phpdocType' => 'array',
                  'relationType' => true,
                  'classes' => NULL,
+                 'pathFormatterClass' => NULL,
                  'name' => 'Categories',
                  'title' => 'Catégories',
                  'tooltip' => '',
@@ -4347,6 +4390,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'accessoirepopin',
                  'title' => 'Checkout Products',
                  'tooltip' => '',

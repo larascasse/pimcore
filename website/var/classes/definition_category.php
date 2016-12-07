@@ -1,17 +1,35 @@
 <?php 
 
-/** Generated at 2016-08-30T17:26:16+02:00 */
+/** 
+* Generated at: 2016-11-28T17:18:55+01:00
+* Inheritance: yes
+* Variants: no
+* Changed by: florent (6)
+* IP: 92.154.6.232
+
+
+Fields Summary: 
+- name [input]
+- mage_category_id [input]
+- products [objects]
+- title [input]
+- description [textarea]
+- person [href]
+- Date [datetime]
+- test [objectsMetadata]
+- test2 [multihref]
+*/ 
 
 
 return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'category',
    'description' => '',
    'creationDate' => 1382360944,
-   'modificationDate' => 1469521341,
+   'modificationDate' => 1480349935,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
-   'useTraits' => NULL,
+   'useTraits' => '',
    'allowInherit' => true,
    'allowVariants' => false,
    'showVariants' => false,
@@ -134,6 +152,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                     'classes' => 'product',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'products',
                  'title' => 'Produits',
                  'tooltip' => '',
@@ -150,6 +169,53 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => false,
               )),
               3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 400,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 255,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'title',
+                 'title' => 'Titre',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => 600,
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'description',
+                 'title' => 'Description',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
                  'fieldtype' => 'href',
                  'width' => '',
@@ -178,6 +244,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                     'classes' => 'person',
                   ),
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'person',
                  'title' => 'Client',
                  'tooltip' => '',
@@ -193,7 +260,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              4 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Datetime::__set_state(array(
                  'fieldtype' => 'datetime',
                  'queryColumnType' => 'bigint(20)',
@@ -216,7 +283,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              5 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\ObjectsMetadata::__set_state(array(
                  'allowedClassId' => 5,
                  'visibleFields' => 'id,code,ean,name_scienergie',
@@ -234,6 +301,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'test',
                  'title' => 'test',
                  'tooltip' => '',
@@ -252,7 +320,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                 array (
                 ),
               )),
-              6 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Multihref::__set_state(array(
                  'fieldtype' => 'multihref',
                  'width' => '',
@@ -279,6 +347,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'classes' => 
                 array (
                 ),
+                 'pathFormatterClass' => NULL,
                  'name' => 'test2',
                  'title' => 'test2',
                  'tooltip' => '',

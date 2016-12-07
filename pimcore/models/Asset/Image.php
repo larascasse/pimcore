@@ -19,6 +19,9 @@ namespace Pimcore\Model\Asset;
 use Pimcore\Model;
 use Pimcore\Logger;
 
+/**
+ * @method \Pimcore\Model\Asset\Dao getDao()
+ */
 class Image extends Model\Asset
 {
 
@@ -30,7 +33,7 @@ class Image extends Model\Asset
     /**
      * @return void
      */
-    public function update()
+    protected function update()
     {
 
         // only do this if the file exists and contains data
@@ -373,13 +376,15 @@ class Image extends Model\Asset
 
                 if ($info && isset($info['APP13'])) {
                     $iptcRaw = iptcparse($info['APP13']);
-                    foreach ($iptcRaw as $key => $value) {
-                        if (is_array($value) && count($value) === 1) {
-                            $value = $value[0];
-                        }
+                    if (is_array($iptcRaw)) {
+                        foreach ($iptcRaw as $key => $value) {
+                            if (is_array($value) && count($value) === 1) {
+                                $value = $value[0];
+                            }
 
-                        if (isset($mapping[$key])) {
-                            $data[$mapping[$key]] = \ForceUTF8\Encoding::toUTF8($value);
+                            if (isset($mapping[$key])) {
+                                $data[$mapping[$key]] = \ForceUTF8\Encoding::toUTF8($value);
+                            }
                         }
                     }
                 }

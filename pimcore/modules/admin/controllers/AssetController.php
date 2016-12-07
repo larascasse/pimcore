@@ -254,7 +254,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             $this->setParam("parentId", 1);
         }
 
-        $filename = File::getValidFilename($filename);
+        $filename = Element\Service::getValidKey($filename, "asset");
         if (empty($filename)) {
             throw new \Exception("The filename of the asset is empty");
         }
@@ -465,12 +465,19 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             }
         }
 
+        // get the element key in case of just one
+        $elementKey = false;
+        if (count($ids) === 1) {
+            $elementKey = Asset::getById($id)->getKey();
+        }
+
         $deleteJobs = array_merge($recycleJobs, $deleteJobs);
         $this->_helper->json([
             "hasDependencies" => $hasDependency,
             "childs" => $totalChilds,
             "deletejobs" => $deleteJobs,
-            "batchDelete" => count($ids) > 1
+            "batchDelete" => count($ids) > 1,
+            "elementKey" => $elementKey
         ]);
     }
 
@@ -529,11 +536,11 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             $tmpAsset["expandable"] = false;
             $tmpAsset["expanded"] = false;
 
-            $tmpAsset["iconCls"] = "pimcore_icon_asset_unknown";
+            $tmpAsset["iconCls"] = "pimcore_icon_asset_default";
 
             $fileExt = File::getFileExtension($asset->getFilename());
             if ($fileExt) {
-                $tmpAsset["iconCls"] = "pimcore_icon_" . File::getFileExtension($asset->getFilename());
+                $tmpAsset["iconCls"] .= " pimcore_icon_" . File::getFileExtension($asset->getFilename());
             }
         }
 
@@ -922,7 +929,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
 
             $exiftool = \Pimcore\Tool\Console::getExecutable("exiftool");
             if ($thumbnailConfig->getFormat() == "JPEG" && $exiftool && isset($config["dpi"]) && $config["dpi"]) {
-                \Pimcore\Tool\Console::exec($exiftool . " -overwrite_original -xresolution=" . $config["dpi"] . " -yresolution=" . $config["dpi"] . " -resolutionunit=inches " . $thumbnailFile);
+                \Pimcore\Tool\Console::exec($exiftool . " -overwrite_original -xresolution=" . $config["dpi"] . " -yresolution=" . $config["dpi"] . " -resolutionunit=inches " . escapeshellarg($thumbnailFile));
             }
 
             $downloadFilename = str_replace("." . File::getFileExtension($image->getFilename()),
@@ -931,6 +938,10 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             header('Content-Disposition: attachment; filename="' . $downloadFilename . '"');
 
             header("Content-Type: " . $thumbnail->getMimeType(), true);
+
+            // we have to clear the stat cache here, otherwise filesize() would return the wrong value
+            // the reason is that exiftool modifies the file's size, but PHP doesn't know anything about that
+            clearstatcache();
             header("Content-Length: " . filesize($thumbnailFile), true);
             $this->sendThumbnailCacheHeaders();
             while (@ob_end_flush()) {
@@ -1184,10 +1195,16 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
             }
 
             if (!empty($thumbnailMethod)) {
+                $filenameDisplay = $asset->getFilename();
+                if (strlen($filenameDisplay) > 32) {
+                    $filenameDisplay = substr($filenameDisplay, 0, 25) . "..." . \Pimcore\File::getFileExtension($filenameDisplay);
+                }
+
                 $assets[] = [
                     "id" => $asset->getId(),
                     "type" => $asset->getType(),
                     "filename" => $asset->getFilename(),
+                    "filenameDisplay" => $filenameDisplay,
                     "url" => "/admin/asset/get-" . $asset->getType() . "-thumbnail/id/" . $asset->getId() . "/treepreview/true",
                     "idPath" => $data["idPath"] = Element\Service::getIdPath($asset)
                 ];
@@ -1492,7 +1509,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
                     if ($zip->extractTo($tmpDir . "/", $path)) {
                         $tmpFile = $tmpDir . "/" . preg_replace("@^/@", "", $path);
 
-                        $filename = File::getValidFilename(basename($path));
+                        $filename = Element\Service::getValidKey(basename($path), "asset");
 
                         $relativePath = "";
                         if (dirname($path) != ".") {
@@ -1584,7 +1601,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
                 $filename = basename($file);
 
                 // check for duplicate filename
-                $filename = File::getValidFilename($filename);
+                $filename = Element\Service::getValidKey($filename, "asset");
                 $filename = $this->getSafeFilename($folder->getRealFullPath(), $filename);
 
                 if ($assetFolder->isAllowed("create")) {
@@ -1614,7 +1631,7 @@ class Admin_AssetController extends \Pimcore\Controller\Action\Admin\Element
         $parentId = $this->getParam("id");
         $parentAsset = Asset::getById(intval($parentId));
 
-        $filename = File::getValidFilename($filename);
+        $filename = Element\Service::getValidKey($filename, "asset");
         $filename = $this->getSafeFilename($parentAsset->getRealFullPath(), $filename);
 
         if (empty($filename)) {

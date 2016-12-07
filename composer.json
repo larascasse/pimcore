@@ -30,7 +30,7 @@
         "optimize-autoloader": true
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.6.0",
         "ext-mcrypt": "*",
         "ext-iconv": "*",
         "ext-dom": "*",
@@ -71,8 +71,9 @@
         "nesbot/carbon": "~1",
         "php-di/php-di": "~5",
         "egulias/email-validator": "*",
-        "pimcore/core-version": "4.3.1",
-        "neitanod/forceutf8": "~2"
+        "pimcore/core-version": "4.4.0",
+        "neitanod/forceutf8": "~2",
+        "myclabs/deep-copy": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

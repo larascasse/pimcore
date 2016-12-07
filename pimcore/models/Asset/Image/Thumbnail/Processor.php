@@ -130,6 +130,12 @@ class Processor
             } elseif ($format == "svg") {
                 return self::returnPath($fileSystemPath, $returnAbsolutePath);
             }
+        } elseif ($format == "tiff") {
+            if (\Pimcore\Tool::isFrontentRequestByAdmin()) {
+                // return a webformat in admin -> tiff cannot be displayed in browser
+                $format = "png";
+                $deferred = false; // deferred is default, but it's not possible when using isFrontentRequestByAdmin()
+            }
         }
 
         $thumbDir = $asset->getImageThumbnailSavePath() . "/thumb__" . $config->getName();

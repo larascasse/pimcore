@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2016-11-03T12:50:19+01:00
+* Generated at: 2016-11-30T15:16:01+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -112,6 +112,7 @@ Fields Summary:
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
+- nf [checkbox]
 - norme_sanitaire [select]
 - support [select]
 - image_1 [image]
@@ -274,6 +275,7 @@ namespace Pimcore\Model\Object;
 * @method static \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
+* @method static \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
 * @method static \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
@@ -434,6 +436,7 @@ public $solRaffraichissant;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
+public $nf;
 public $norme_sanitaire;
 public $support;
 public $image_1;
@@ -3172,6 +3175,32 @@ public function getParquet_de_france () {
 */
 public function setParquet_de_france ($parquet_de_france) {
 	$this->parquet_de_france = $parquet_de_france;
+	return $this;
+}
+
+/**
+* Get nf - NF
+* @return boolean
+*/
+public function getNf () {
+	$preValue = $this->preGetValue("nf"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->nf;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nf")->isEmpty($data)) {
+		return $this->getValueFromParent("nf");
+	}
+	return $data;
+}
+
+/**
+* Set nf - NF
+* @param boolean $nf
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNf ($nf) {
+	$this->nf = $nf;
 	return $this;
 }
 

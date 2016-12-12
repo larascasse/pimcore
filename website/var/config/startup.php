@@ -16,7 +16,7 @@ if( !isset($_SERVER['PHP_AUTH_USER']) )
 
 $cloudFrontPrefix = "//media.laparqueterienouvelle.fr";
 
-if (!\Pimcore::inAdmin() /*&& !\Pimcore\Tool::isFrontentRequestByAdmin() */) {
+if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin() */) {
     \Pimcore::getEventManager()->attach([
         "frontend.path.asset.image.thumbnail",
         "frontend.path.asset.document.image-thumbnail",

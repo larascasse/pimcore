@@ -160,15 +160,15 @@ if(!function_exists ('toto')) {
 
                         if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
                         
-                            $urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+                            $urlImage = $assets[0]->getThumbnail("magento_realisation")->getFullPath();
                      
                             foreach ($assets as $asset) {
 
                                 if($asset instanceof Asset_Image) {
                                     
-                                    $arrayImages2[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+                                    $arrayImages2[] = $asset->getThumbnail("magento_realisation")->getFullPath();
 
-                                    $returnZoomRealisation->images[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+                                    $returnZoomRealisation->images[] = $asset->getThumbnail("magento_realisation")->getFullPath();
                                     
                                     //Prodits
                                     $productsFromImage = real_product_from_image($asset);
@@ -196,7 +196,7 @@ if(!function_exists ('toto')) {
                     //1 realisation = 1 image
                     else {
 
-                         $urlImage = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
+                         $urlImage = $element->getThumbnail("magento_realisation")->getFullPath();
                          $product = real_product_from_image($element);
                          $products[] = $product;
                          $return[] = (object) array("id"=>$dataZoomId,"base"=>$urlImage,"images"=>array($urlImage),"products"=>$products);

@@ -160,15 +160,15 @@ if(!function_exists ('toto')) {
 
                         if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
                         
-                            $urlImage = $assets[0]->getThumbnail("magento_realisation")->getFullPath();
+                            $urlImage = $assets[0]->getThumbnail("magento_realisation")->getPath();
                      
                             foreach ($assets as $asset) {
 
                                 if($asset instanceof Asset_Image) {
                                     
-                                    $arrayImages2[] = $asset->getThumbnail("magento_realisation")->getFullPath();
+                                    $arrayImages2[] = $asset->getThumbnail("magento_realisation")->getPath();
 
-                                    $returnZoomRealisation->images[] = $asset->getThumbnail("magento_realisation")->getFullPath();
+                                    $returnZoomRealisation->images[] = $asset->getThumbnail("magento_realisation")->getPath();
                                     
                                     //Prodits
                                     $productsFromImage = real_product_from_image($asset);
@@ -196,7 +196,7 @@ if(!function_exists ('toto')) {
                     //1 realisation = 1 image
                     else {
 
-                         $urlImage = $element->getThumbnail("magento_realisation")->getFullPath();
+                         $urlImage = $element->getThumbnail("magento_realisation")->getPath();
                          $product = real_product_from_image($element);
                          $products[] = $product;
                          $return[] = (object) array("id"=>$dataZoomId,"base"=>$urlImage,"images"=>array($urlImage),"products"=>$products);
@@ -221,7 +221,7 @@ if(!function_exists ('toto')) {
     Data ZOOM : 
     <textarea rows="20" cols="100"><?php echo implode('|',$arrayImages) ?></textarea>
 
-    <br />Data ZOOM2 ULL (avec légende: 
+    <br />Data ZOOM2 UL (avec légende (voir en FE pour FULL URL: 
     <textarea rows="20" cols="100"><?php
 
    

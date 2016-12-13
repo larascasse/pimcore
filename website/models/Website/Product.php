@@ -772,7 +772,7 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_1())
-    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_1()->getThumbnail("magento_small")->getPath();
+    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_1()->getThumbnail("magento_small")->getPath());
 
 	}
 
@@ -782,7 +782,7 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	//if($this->getImage_2())
     	if($this->getImage_2())
-    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_2()->getThumbnail("magento_small")->getPath();
+    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_2()->getThumbnail("magento_small")->getPath());
 
 	}
 
@@ -791,7 +791,7 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_3())
-    	return "http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getThumbnail("magento_small")->getPath();
+    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getThumbnail("magento_small")->getPath());
 
 	}
 

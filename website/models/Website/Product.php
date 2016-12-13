@@ -771,8 +771,13 @@ class Website_Product extends Object_Product {
 	public function getImage_1_src() {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
-    	if($this->getImage_1())
-    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_1()->getThumbnail("magento_small")->getPath());
+    	if($this->getImage_1()) {
+    		$fsPath = $this->getImage_1()->getThumbnail("magento_small")->getFileSystemPath(true);
+        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = urlencode_ignore_slash($path);
+        	return $path;
+    	}
+    	
 
 	}
 
@@ -781,8 +786,12 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	//if($this->getImage_2())
-    	if($this->getImage_2())
-    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_2()->getThumbnail("magento_small")->getPath());
+    	if($this->getImage_2()) {
+    		$fsPath = $this->getImage_2()->getThumbnail("magento_small")->getFileSystemPath(true);
+        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = urlencode_ignore_slash($path);
+        	return $path;
+    	}
 
 	}
 
@@ -790,8 +799,12 @@ class Website_Product extends Object_Product {
 	public function getImage_3_src() {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
-    	if($this->getImage_3())
-    	return str_replace(LPN_ASSET_PREFIX, "","http://".$_SERVER["HTTP_HOST"].$this->getImage_3()->getThumbnail("magento_small")->getPath());
+    	if($this->getImage_3()) {
+    		$fsPath = $this->getImage_3()->getThumbnail("magento_small")->getFileSystemPath(true);
+        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = urlencode_ignore_slash($path);
+        	return $path;
+    	}
 
 	}
 

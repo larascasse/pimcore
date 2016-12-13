@@ -13,7 +13,7 @@
         ?>
         <?php if($product->getImage_1()) { ?>
             <a class="pull-left" href="<?php echo $detailLink; ?>">
-                <img class="media-object" src="<?php echo $product->getImage_1()->getThumbnail("newsList"); ?>">
+                <img class="media-object" src="<?php echo $product->getImage_1()->getThumbnail("newsList")->getPath(); ?>">
             </a>
         <?php } ?>
 

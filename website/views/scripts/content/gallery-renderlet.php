@@ -11,7 +11,7 @@
 
                     <?php if($image instanceof Asset_Image) { ?>
                         <div class="col-md-3 col-xs-6">
-                            <a href="<?= $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
+                            <a href="<?= $image->getThumbnail("galleryLightbox")->getPath(); ?>" class="thumbnail">
                                 <?= $image->getThumbnail("galleryThumbnail")->getHTML(); ?>
                             </a>
                         </div>

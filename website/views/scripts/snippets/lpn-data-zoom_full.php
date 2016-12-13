@@ -20,13 +20,13 @@
 
 		    foreach ($assets as $asset) {
 		        $assetsArray[] = $asset;
-		        $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation");
+		        $arrayImages[] = $asset->getThumbnail("magento_realisation")->getPath();
                 $assetsArray[$i][$asset->getThumbnail("magento_realisation")->getPath()] = $asset;
 		    }
 		}
 		elseif($element instanceof Asset_Image) {
 
-		    $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation");
+		    $arrayImages[] = $element->getThumbnail("magento_realisation")->getPath();
             $assetsArray[$i][$element->getThumbnail("magento_realisation")->getPath()] = $element;
 		}
 
@@ -51,11 +51,11 @@
 
                         if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
                      
-                            $urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+                            $urlImage = $assets[0]->getThumbnail("magento_realisation")->getPath();
                      
                             foreach ($assets as $asset) {
                                 if($asset instanceof Asset_Image) {
-                                    $arrayImages2[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+                                    $arrayImages2[] = $asset->getThumbnail("magento_realisation")->getPath();
                                 }
                             }
                             $return[] = (object) array("base"=>$urlImage,"images"=>$arrayImages2);
@@ -63,7 +63,7 @@
                         }
                     }
                     else {
-                         $urlImage = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath();
+                         $urlImage = $element->getThumbnail("magento_realisation")->getPath();
                          $return[] = (object) array("base"=>$urlImage,"images"=>array($urlImage));
                     }
                 }

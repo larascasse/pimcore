@@ -200,7 +200,7 @@ if($count>0) {
 		foreach ($assetsArray as $asset) {
 
 			echo '<div class="item '.($index==0?'active':'').'">
-				<img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_small").'">
+				<img src="http://'.$asset->getThumbnail("magento_small")->getPath().'">
 	                	<div class="container">
 	                    <div class="carousel-caption">
 	                    <h1>'.$this->product->getName().'</h1>

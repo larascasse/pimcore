@@ -15,6 +15,10 @@ if( !isset($_SERVER['PHP_AUTH_USER']) )
 //$s3AssetUrlPrefix = "//media.laparqueterienouvelle.fr";
 
 $cloudFrontPrefix = "//media.laparqueterienouvelle.fr";
+if (!defined("LPN_ASSET_PREFIX")) {
+	define("LPN_ASSET_PREFIX", $cloudFrontPrefix);
+}
+
 
 if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()) {
     \Pimcore::getEventManager()->attach([

@@ -511,13 +511,13 @@ class Website_Product extends Object_Product {
 	}
 	public function getMage_fichepdf() {
 		if($this->getFiche_technique_lpn())
-			return "http://".$_SERVER["HTTP_HOST"].$this->getFiche_technique_lpn()->getFullPath();
+			return LPN_ASSET_PREFIX.$this->getFiche_technique_lpn()->getFullPath();
 		return null;
 	}
 
 	public function getMage_notice_pose_lpn() {
 		if($this->getNotice_pose_lpn())
-			return "http://".$_SERVER["HTTP_HOST"].$this->getNotice_pose_lpn()->getFullPath();
+			return LPN_ASSET_PREFIX.$this->getNotice_pose_lpn()->getFullPath();
 		return null;
 	}
 
@@ -604,7 +604,7 @@ class Website_Product extends Object_Product {
 				$url="";
 				foreach ($associatedDocuments as $document) {
 					if($document instanceof Asset_Image) 
-						$url = "http://".$_SERVER["HTTP_HOST"].$document->getThumbnail("magento_origine")->getPath();						
+						$url = LPN_ASSET_PREFIX.$document->getThumbnail("magento_origine")->getPath();						
 				}
 
 				$str.= '<div class="nsg_fullbkgimg col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-2" data-img="'.$url.'">
@@ -1340,12 +1340,12 @@ class Website_Product extends Object_Product {
 					$return[] = $product->getName();
 				}
 
-				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_1()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = LPN_ASSET_PREFIX.$this->getImage_1()->getThumbnail("magento_realisation")->getPath();
 
 				$returnArray  = (object) array("base"=>$urlImage,"images"=>array($urlImage));
 
 				if($includeProductThumb) {
-					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_1()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = LPN_ASSET_PREFIX.$this->getImage_1()->getThumbnail("galleryThumbnail")->getPath();
 					$returnArray->thumb = array($urlImage);
 				}
 
@@ -1364,22 +1364,22 @@ class Website_Product extends Object_Product {
 		if($includeProductImage) {
 			
 			if($this->getImage_2()) {
-				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_2()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = LPN_ASSET_PREFIX.$this->getImage_2()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
 				
 				if($includeProductThumb) {
-					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_2()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = LPN_ASSET_PREFIX.$this->getImage_2()->getThumbnail("galleryThumbnail")->getPath();
 					$return[count($return)-1]->thumb[] = $urlImage;
 				}
 			}
 		}
 		if($includeProductImage) {
 			if($this->getImage_3()) {
-				$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_3()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = LPN_ASSET_PREFIX.$this->getImage_3()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
 
 				if($includeProductThumb) {
-					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$this->getImage_3()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = LPN_ASSET_PREFIX.$this->getImage_3()->getThumbnail("galleryThumbnail")->getPath();
 					$return[count($return)-1]->thumb[] = $urlImage;
 				}
 
@@ -1415,14 +1415,14 @@ class Website_Product extends Object_Product {
 
 				 if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
 				 
-				 	$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$assets[0]->getThumbnail("magento_realisation")->getPath();
+				 	$urlImage = LPN_ASSET_PREFIX.$assets[0]->getThumbnail("magento_realisation")->getPath();
 				 
 				 	foreach ($assets as $asset) {
 				 		if($asset instanceof Asset_Image) {
-				    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+				    		$arrayImages[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
 				    		
 				    		if($includeProductThumb) {
-				    			$arrayThumbs[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("galleryThumbnail")->getPath();
+				    			$arrayThumbs[] = LPN_ASSET_PREFIX.$asset->getThumbnail("galleryThumbnail")->getPath();
 				    		}
 				    	}
 				    }
@@ -1472,12 +1472,12 @@ class Website_Product extends Object_Product {
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
 					if($asset instanceof Asset_Image) {
-						$return[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
+						$return[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
 					}
 				}
 			}
 			elseif($element instanceof Asset_Image) {
-				$return[] = 'http://'.$_SERVER['HTTP_HOST'].$element->getThumbnail("magento_realisation")->getPath()."::realisation";
+				$return[] = LPN_ASSET_PREFIX.$element->getThumbnail("magento_realisation")->getPath()."::realisation";
 			}
 		}
 
@@ -1538,11 +1538,11 @@ class Website_Product extends Object_Product {
 				   
 			    foreach ($assetsArray[$i] as $asset) {
 			    	if($asset instanceof Asset_Image) 
-			    		$arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+			    		$arrayImages[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
 			    }
 
 			    if($asset instanceof Asset_Image) 
-					$urlImage = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath();
+					$urlImage = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
 
 				if(count($arrayImages)>0) {
 					$zooms = array_merge(array($urlImage),$arrayImages);
@@ -1554,7 +1554,7 @@ class Website_Product extends Object_Product {
 				if($asset instanceof Asset_Image)  {
 					$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
 								<div class="nsg_container">
-									<div><img src="http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
+									<div><img src="'.LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
 			                		<div class="nsg_abs">';
 			        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
 										<div class="realisationtitle">'.$this->getMage_short_name().'</div>

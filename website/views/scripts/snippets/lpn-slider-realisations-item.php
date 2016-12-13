@@ -61,7 +61,7 @@ $dataValues = array();
 
 for($i=0; $i<$count; $i++) {
     if($this->image("cImage_".$i)->getThumbnail("magento_realisation"))
-        $urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("cImage_".$i)->getThumbnail("magento_realisation")->getPath();
+        $urlImage =  $this->image("cImage_".$i)->getThumbnail("magento_realisation")->getPath();
     else
       $urlImage ="";  
 
@@ -72,7 +72,7 @@ for($i=0; $i<$count; $i++) {
 
     $assetsArray = real_get_all_images_from_folder($realisationsFolder);
     foreach ($assetsArray as $asset) {
-         $arrayImages[] = 'http://'.$_SERVER['HTTP_HOST'].$asset->getThumbnail("magento_realisation");
+         $arrayImages[] = $asset->getThumbnail("magento_realisation")->getPath();
     }
 
 

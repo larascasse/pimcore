@@ -52,7 +52,7 @@
                     }
                     else {
                         if($this->image("image")->getThumbnail("magento_selection"))
-                            $urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("image")->getThumbnail("magento_selection")->getPath();
+                            $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
                         else
                           $urlImage =""; 
                         echo '<img lass="featurette-image img-responsive" src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'"  />';

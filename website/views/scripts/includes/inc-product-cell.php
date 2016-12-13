@@ -14,7 +14,7 @@ $index = $this->index>0?$this->index:0;
         <div class="thumbnail">
          <?php if($product->getImage_1()) { ?>
             <a class="pull-leftxx" href="<?php echo $detailLink; ?>">
-            <img class="media-object" src="<?php echo $product->getImage_1()->getThumbnail("productCategory"); ?>">
+            <img class="media-object" src="<?php echo $product->getImage_1()->getThumbnail("productCategory")->getPath(); ?>">
             </a>
         <?php } ?>
          <p><br /><?php echo $product->getName(); ?></p>

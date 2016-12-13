@@ -90,7 +90,7 @@
     );
 
     } else { 
-        $urlImage =  'http://'.$_SERVER['HTTP_HOST'].$this->image("image")->getThumbnail("magento_selection")->getPath();
+        $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
 
         echo '<img src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'" class="norelazy" />';
     }

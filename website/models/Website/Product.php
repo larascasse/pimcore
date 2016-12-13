@@ -604,7 +604,7 @@ class Website_Product extends Object_Product {
 				$url="";
 				foreach ($associatedDocuments as $document) {
 					if($document instanceof Asset_Image) 
-						$url = LPN_ASSET_PREFIX.$document->getThumbnail("magento_origine")->getPath();						
+						$url = $document->getThumbnail("magento_origine")->getPath();						
 				}
 
 				$str.= '<div class="nsg_fullbkgimg col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-2" data-img="'.$url.'">
@@ -773,7 +773,7 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_1()) {
     		$fsPath = $this->getImage_1()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
         	$path = urlencode_ignore_slash($path);
         	return $path;
     	}
@@ -788,7 +788,7 @@ class Website_Product extends Object_Product {
     	//if($this->getImage_2())
     	if($this->getImage_2()) {
     		$fsPath = $this->getImage_2()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
         	$path = urlencode_ignore_slash($path);
         	return $path;
     	}
@@ -801,7 +801,7 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_3()) {
     		$fsPath = $this->getImage_3()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
         	$path = urlencode_ignore_slash($path);
         	return $path;
     	}
@@ -1353,12 +1353,12 @@ class Website_Product extends Object_Product {
 					$return[] = $product->getName();
 				}
 
-				$urlImage = LPN_ASSET_PREFIX.$this->getImage_1()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = $this->getImage_1()->getThumbnail("magento_realisation")->getPath();
 
 				$returnArray  = (object) array("base"=>$urlImage,"images"=>array($urlImage));
 
 				if($includeProductThumb) {
-					$urlImage = LPN_ASSET_PREFIX.$this->getImage_1()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = $this->getImage_1()->getThumbnail("galleryThumbnail")->getPath();
 					$returnArray->thumb = array($urlImage);
 				}
 
@@ -1377,22 +1377,22 @@ class Website_Product extends Object_Product {
 		if($includeProductImage) {
 			
 			if($this->getImage_2()) {
-				$urlImage = LPN_ASSET_PREFIX.$this->getImage_2()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = $this->getImage_2()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
 				
 				if($includeProductThumb) {
-					$urlImage = LPN_ASSET_PREFIX.$this->getImage_2()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = $this->getImage_2()->getThumbnail("galleryThumbnail")->getPath();
 					$return[count($return)-1]->thumb[] = $urlImage;
 				}
 			}
 		}
 		if($includeProductImage) {
 			if($this->getImage_3()) {
-				$urlImage = LPN_ASSET_PREFIX.$this->getImage_3()->getThumbnail("magento_realisation")->getPath();
+				$urlImage = $this->getImage_3()->getThumbnail("magento_realisation")->getPath();
 				$return[count($return)-1]->images[] = $urlImage;
 
 				if($includeProductThumb) {
-					$urlImage = LPN_ASSET_PREFIX.$this->getImage_3()->getThumbnail("galleryThumbnail")->getPath();
+					$urlImage = $this->getImage_3()->getThumbnail("galleryThumbnail")->getPath();
 					$return[count($return)-1]->thumb[] = $urlImage;
 				}
 
@@ -1428,14 +1428,14 @@ class Website_Product extends Object_Product {
 
 				 if(count($assets)>0 && $assets[0] instanceof Asset_Image) {
 				 
-				 	$urlImage = LPN_ASSET_PREFIX.$assets[0]->getThumbnail("magento_realisation")->getPath();
+				 	$urlImage = $assets[0]->getThumbnail("magento_realisation")->getPath();
 				 
 				 	foreach ($assets as $asset) {
 				 		if($asset instanceof Asset_Image) {
-				    		$arrayImages[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
+				    		$arrayImages[] = $asset->getThumbnail("magento_realisation")->getPath();
 				    		
 				    		if($includeProductThumb) {
-				    			$arrayThumbs[] = LPN_ASSET_PREFIX.$asset->getThumbnail("galleryThumbnail")->getPath();
+				    			$arrayThumbs[] = $asset->getThumbnail("galleryThumbnail")->getPath();
 				    		}
 				    	}
 				    }
@@ -1485,12 +1485,12 @@ class Website_Product extends Object_Product {
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
 					if($asset instanceof Asset_Image) {
-						$return[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath()."::realisation";
+						$return[] = $asset->getThumbnail("magento_realisation")->getPath()."::realisation";
 					}
 				}
 			}
 			elseif($element instanceof Asset_Image) {
-				$return[] = LPN_ASSET_PREFIX.$element->getThumbnail("magento_realisation")->getPath()."::realisation";
+				$return[] = $element->getThumbnail("magento_realisation")->getPath()."::realisation";
 			}
 		}
 
@@ -1551,11 +1551,11 @@ class Website_Product extends Object_Product {
 				   
 			    foreach ($assetsArray[$i] as $asset) {
 			    	if($asset instanceof Asset_Image) 
-			    		$arrayImages[] = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
+			    		$arrayImages[] = $asset->getThumbnail("magento_realisation")->getPath();
 			    }
 
 			    if($asset instanceof Asset_Image) 
-					$urlImage = LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath();
+					$urlImage = $asset->getThumbnail("magento_realisation")->getPath();
 
 				if(count($arrayImages)>0) {
 					$zooms = array_merge(array($urlImage),$arrayImages);
@@ -1567,7 +1567,7 @@ class Website_Product extends Object_Product {
 				if($asset instanceof Asset_Image)  {
 					$str .= '<li data-zoom="'.$datazoom.'" class="'.($index==0?'norelazy':'').'">
 								<div class="nsg_container">
-									<div><img src="'.LPN_ASSET_PREFIX.$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
+									<div><img src="'.$asset->getThumbnail("magento_realisation")->getPath().'" class="'.($index==0?'norelazy':'').'"ain.></div>
 			                		<div class="nsg_abs">';
 			        /*$str .= '<!--<div class="realisationpicto">Nos r&eacute;alisations</div>
 										<div class="realisationtitle">'.$this->getMage_short_name().'</div>

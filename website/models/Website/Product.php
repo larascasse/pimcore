@@ -773,8 +773,7 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_1()) {
     		$fsPath = $this->getImage_1()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
-        	$path = urlencode_ignore_slash($path);
+        	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
         	return $path;
     	}
     	
@@ -788,7 +787,7 @@ class Website_Product extends Object_Product {
     	//if($this->getImage_2())
     	if($this->getImage_2()) {
     		$fsPath = $this->getImage_2()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
         	$path = urlencode_ignore_slash($path);
         	return $path;
     	}
@@ -801,7 +800,7 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_3()) {
     		$fsPath = $this->getImage_3()->getThumbnail("magento_small")->getFileSystemPath(true);
-        	$path = "http://".$_SERVER["HTTP_HOST"].str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath);
+        	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
         	$path = urlencode_ignore_slash($path);
         	return $path;
     	}

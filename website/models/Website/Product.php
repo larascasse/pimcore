@@ -772,8 +772,14 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_1()) {
+    		/*
     		$fsPath = $this->getImage_1()->getThumbnail("magento_small")->getFileSystemPath(true);
         	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+			*/
+			
+        	/* VERSION CLOUD */
+        	$path = 'http'.$this->getImage_1()->getThumbnail("magento_small")->getPath();
+
         	return $path;
     	}
     	
@@ -786,8 +792,15 @@ class Website_Product extends Object_Product {
     	//$asset = Asset::getById($this->getImage_1()->id);
     	//if($this->getImage_2())
     	if($this->getImage_2()) {
+    		/*
     		$fsPath = $this->getImage_2()->getThumbnail("magento_small")->getFileSystemPath(true);
         	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+			*/
+
+
+        	/* VERSION CLOUD */
+        	$path = 'http'.$this->getImage_2()->getThumbnail("magento_small")->getPath();
+
         	return $path;
     	}
 
@@ -798,8 +811,12 @@ class Website_Product extends Object_Product {
 		// get an asset
     	//$asset = Asset::getById($this->getImage_1()->id);
     	if($this->getImage_3()) {
-    		$fsPath = $this->getImage_3()->getThumbnail("magento_small")->getFileSystemPath(true);
+    		/*$fsPath = $this->getImage_3()->getThumbnail("magento_small")->getFileSystemPath(true);
         	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+			¨/
+        	/* VERSION CLOUD */
+        	$path = 'http'.$this->getImage_3()->getThumbnail("magento_small")->getPath();
+
         	return $path;
     	}
 
@@ -1482,16 +1499,25 @@ class Website_Product extends Object_Product {
 				$assetsArray[$i]=array();
 				foreach ($assets as $asset) {
 					if($asset instanceof Asset_Image) {
+						/* VERSION DRECT 
 						$fsPath = $asset->getThumbnail("magento_realisation")->getFileSystemPath(true);
         				$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+						*/
+        				/* VERSION CLOUD */
+        				$path = 'http'.$asset->getThumbnail("magento_realisation")->getPath();
+
 						$return[] = $path."::realisation";
 					}
 				}
 			}
 			elseif($element instanceof Asset_Image) {
-				$fsPath = $element->getThumbnail("magento_realisation")->getFileSystemPath(true);
+				//VERSION ABSOLUE
+				/*$fsPath = $element->getThumbnail("magento_realisation")->getFileSystemPath(true);
         		$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
 						$return[] = $path."::realisation";
+						*/
+				/* VERSION CLOUD */
+				$path = 'http'.$element->getThumbnail("magento_realisation")->getPath();
 				$return[] = $path."::realisation";
 			}
 		}

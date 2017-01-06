@@ -21,6 +21,7 @@ return [
         "lpn-slider-realisations-item" => "1",
         "lpn-slider-realisations" => "1",
         "lpn-selection" => "1",
+        "lpn-home-grid" => "1",
         "lpn-image-header" => "1",
         "lpn-snippet" => "1"
     ],

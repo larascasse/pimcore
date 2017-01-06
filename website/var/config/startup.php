@@ -15,12 +15,19 @@ if( !isset($_SERVER['PHP_AUTH_USER']) )
 //$s3AssetUrlPrefix = "//media.laparqueterienouvelle.fr";
 
 $cloudFrontPrefix = "//media.laparqueterienouvelle.fr";
+
+if (isset($_SERVER["HTTP_HOST"]) && $_SERVER["HTTP_HOST"]=="pimcore.florent.local") {
+    $cloudFrontPrefix = "//pimcore.florent.local";
+
+}
+
+
 if (!defined("LPN_ASSET_PREFIX")) {
 	define("LPN_ASSET_PREFIX", $cloudFrontPrefix);
 }
 
 
-if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()) {
+if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     \Pimcore::getEventManager()->attach([
         "frontend.path.asset.image.thumbnail",
         "frontend.path.asset.document.image-thumbnail",

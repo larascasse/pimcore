@@ -93,6 +93,8 @@ class Admin_MiscController extends \Pimcore\Controller\Action\Admin
         //$this->getResponse()->setHeader("Cache-Control", "max-age=" . $lifetime, true);
         //$this->getResponse()->setHeader("Pragma", "", true);
         $this->getResponse()->setHeader("Content-Type", $contentType, true);
+        $this->getResponse()->setHeader("Content-Encoding", "none", true);
+
         //$this->getResponse()->setHeader("Expires", gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT", true);
 
         echo $scriptsContent;

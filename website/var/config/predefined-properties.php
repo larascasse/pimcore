@@ -117,5 +117,18 @@ return [
         "inheritable" => TRUE,
         "creationDate" => 1477043581,
         "modificationDate" => 1477044466
+    ],
+    10 => [
+        "id" => 10,
+        "name" => "Copyright",
+        "description" => "",
+        "key" => "copyright",
+        "type" => "text",
+        "data" => "",
+        "config" => NULL,
+        "ctype" => "asset",
+        "inheritable" => TRUE,
+        "creationDate" => 1481729391,
+        "modificationDate" => 1481729469
     ]
 ];

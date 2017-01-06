@@ -584,21 +584,68 @@ return [
             [
                 "method" => "cover",
                 "arguments" => [
-                    "width" => "1400",
-                    "height" => "1000",
+                    "width" => 1400,
+                    "height" => 1000,
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => "1"
+                    "doNotScaleUp" => TRUE
                 ]
             ]
         ],
         "medias" => [
-
+            "320w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 350,
+                        "height" => 250,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "640w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 700,
+                        "height" => 500,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "1024w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 1050,
+                        "height" => 750,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "1920w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 2100,
+                        "height" => 1500,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ]
         ],
+        "name" => "magento_realisation",
         "description" => "",
         "format" => "JPEG",
         "quality" => 80,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1483528945,
+        "creationDate" => 1483528764,
         "id" => "magento_realisation"
     ],
     "magento_selection" => [
@@ -606,18 +653,29 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => "620"
+                    "width" => 620
                 ]
             ]
         ],
         "medias" => [
-
+            "320w" => [
+                [
+                    "method" => "scaleByWidth",
+                    "arguments" => [
+                        "width" => 320
+                    ]
+                ]
+            ]
         ],
+        "name" => "magento_selection",
         "description" => "",
         "format" => "JPEG",
-        "quality" => 90,
+        "quality" => 80,
         "highResolution" => 0,
-        "filenameSuffix" => "",
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1483528611,
+        "creationDate" => 1483526813,
         "id" => "magento_selection"
     ],
     "magento_small" => [

@@ -848,5 +848,99 @@ return [
         "highResolution" => 2,
         "filenameSuffix" => NULL,
         "id" => "standardTeaser"
+    ],
+    "magento_equigrid_h" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 1385,
+                    "height" => 828,
+                    "positioning" => "bottomcenter",
+                    "doNotScaleUp" => TRUE
+                ]
+            ]
+        ],
+        "medias" => [
+            "320w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 320,
+                        "height" => 395,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "640w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 640,
+                        "height" => 790,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => FALSE
+                    ]
+                ]
+            ]
+        ],
+        "name" => "magento_equigrid_h",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 75,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1483716053,
+        "creationDate" => 1483711729,
+        "id" => "magento_equigrid_h"
+    ],
+    "magento_equigrid_v" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 676,
+                    "height" => 828,
+                    "positioning" => "bottomcenter",
+                    "doNotScaleUp" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+            "320w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 320,
+                        "height" => 395,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => FALSE
+                    ]
+                ]
+            ],
+            "992w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 676,
+                        "height" => 828,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ]
+        ],
+        "name" => "magento_equigrid_v",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 75,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1483715979,
+        "creationDate" => 1483714111,
+        "id" => "magento_equigrid_v"
     ]
 ];

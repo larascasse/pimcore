@@ -89,11 +89,11 @@ class Admin_MiscController extends \Pimcore\Controller\Action\Admin
             $contentType = "text/css";
         }
 
-        $lifetime = 86400;
-        $this->getResponse()->setHeader("Cache-Control", "max-age=" . $lifetime, true);
-        $this->getResponse()->setHeader("Pragma", "", true);
+       // $lifetime = 86400;
+        //$this->getResponse()->setHeader("Cache-Control", "max-age=" . $lifetime, true);
+        //$this->getResponse()->setHeader("Pragma", "", true);
         $this->getResponse()->setHeader("Content-Type", $contentType, true);
-        $this->getResponse()->setHeader("Expires", gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT", true);
+        //$this->getResponse()->setHeader("Expires", gmdate("D, d M Y H:i:s", time() + $lifetime) . " GMT", true);
 
         echo $scriptsContent;
     }

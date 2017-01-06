@@ -70,3 +70,36 @@ sudo git submodule update
 MY.ncf
 innodb_file_per_table
 innodb_file_format = Barracuda
+
+
+//NEW RELIC 47943670c4799747a5f013413634df429b84aa73
+echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | sudo tee /etc/apt/sources.list.d/newrelic.list
+wget -O- https://download.newrelic.com/548C16BF.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install newrelic-php5
+
+
+
+
+sudo nano /opt/bitnami/php/etc/php.ini
+
+---> extension=newrelic.so
+
+//To manually edit your php.ini file:
+//Add the following line to your php.ini file:
+//newrelic.license="47943670c4799747a5f013413634df429b84aa73"
+newrelic.appname="La Parqueterie Nouvelle Prod"
+
+/// NEW RELIC SERVER //
+wget -O - http://download.newrelic.com/548C16BF.gpg | sudo apt-key add -
+sudo sh -c 'echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list'
+sudo apt-get update
+
+sudo apt-get install newrelic-sysmond
+//Add license key to config file: (See /etc/newrelic/nrsysmond.cfg for other config options)
+sudo nrsysmond-config --set license_key=47943670c4799747a5f013413634df429b84aa73
+sudo /etc/init.d/newrelic-sysmond start
+
+
+sudo /opt/bitnami/ctlscript.sh restart php-fpm
+sudo /opt/bitnami/ctlscript.sh restart apache

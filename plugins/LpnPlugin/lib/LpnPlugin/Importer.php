@@ -1113,10 +1113,10 @@
                             if(count($splitedName)>0)
                                  $object->setValue("subtype", $splitedName[1]);
                         }
-                        
-                        if($isUpdating) {
+                        //2017, pour les EAN, on ne met j'amais le name ... on prend du parent
+                        //if($isUpdating) {
                            continue;
-                        }
+                        //}
                         
                         //a l'insert
                         $value = $this->convertScienergieName($splitedName[0]);

@@ -1,11 +1,23 @@
+<?php 
+
+/* HEADLINE comme block de contenu */
+	if ($this->editmode) { 
+		echo "<h2>Area Headline (include/areaheadlines)</h2>";
+	}
+
+?>
+
 <?php if($this->editmode || !$this->input("headline")->isEmpty()) { ?>
 
 <?php 
-		 if ($this->editmode) { 
-		 	echo $this->image("image");
-		 	}
+	if ($this->editmode) { 
+		echo $this->image("image");
+	}
 }
 ?>
+
+
+
 <section class="area-lpn-image-header">
 <div id="category_header" class="row content_header_container" <?php if ($this->editmode): echo 'style="height:500px'; endif; ?>>
 	<div class="nsg_container">

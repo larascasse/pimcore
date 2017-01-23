@@ -25,7 +25,7 @@
             <?php if($this->editmode) { ?>
                 <div class="editmode-label">
                     <label>Orientation:</label>
-                    <?= $this->select("postition", ["store" => [["left","left"],["right","right"]]]); ?>
+                    <?= $this->select("postition", ["store" => [["left","Texte à gauche"],["right","Texte à droite"]]]); ?>
                 </div>
                 <div class="editmode-label">
                     <label>Type:</label>

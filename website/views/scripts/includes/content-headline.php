@@ -1,5 +1,14 @@
+<?php 
+	if ($this->editmode) { 
+		echo "<h2>Content Headline (include/content-headlines)</h2>";
+	}
+
+?>
 <?php
     // automatically use the headline as title
+	/* HEADLINE comme block automatique en haut de page */
+
+
     $this->headTitle($this->input("headline")->getData());
 ?><section class="area-lpn-image-header2">
 <div id="category_header" class="row content_header_container" <?php if ($this->editmode): echo 'style="height:500px'; endif; ?>>

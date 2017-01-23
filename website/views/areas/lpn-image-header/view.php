@@ -1,3 +1,9 @@
+<?php 
+if ($this->editmode) { 
+ 	echo '<h2>LPN Header Image</h2>';
+
+}
+?>
 <section class="area-lpn-image-header">
 <div id="category_header" class="row content_header_container" <?php if ($this->editmode): echo 'style="height:500px'; endif; ?>>
 	<div class="nsg_container">

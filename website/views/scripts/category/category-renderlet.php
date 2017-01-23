@@ -1,5 +1,5 @@
 
-<section>
+<section class="category-renderlet">
     <?php if($this->category) { ?>
         <div class="row">
             <?php

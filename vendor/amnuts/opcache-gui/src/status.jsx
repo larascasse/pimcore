@@ -1,82 +1,29 @@
-var MemoryUsage = React.createClass({
-    getInitialState: function() {
-        return {
-            memoryUsageGauge : null
-        };
-    },
-    componentDidMount: function() {
-        if (this.props.chart) {
-            this.state.memoryUsageGauge = new Gauge('#memoryUsageCanvas');
-            this.state.memoryUsageGauge.setValue(this.props.value);
-        }
-    },
-    componentDidUpdate: function() {
-        if (this.state.memoryUsageGauge != null) {
-            this.state.memoryUsageGauge.setValue(this.props.value);
-        }
-    },
-    render: function() {
-        if (this.props.chart == true) {
-            return(<canvas id="memoryUsageCanvas" width="250" height="250" data-value={this.props.value} />);
-        }
-        return(<p><span className="large">{this.props.value}</span><span>%</span></p>);
-    }
-});
-
-var HitRate = React.createClass({
-    getInitialState: function() {
-        return {
-            hitRateGauge : null
-        };
-    },
-    componentDidMount: function() {
-        if (this.props.chart) {
-            this.state.hitRateGauge = new Gauge('#hitRateCanvas');
-            this.state.hitRateGauge.setValue(this.props.value)
-        }
-    },
-    componentDidUpdate: function() {
-        if (this.state.hitRateGauge != null) {
-            this.state.hitRateGauge.setValue(this.props.value);
-        }
-    },
-    render: function() {
-        if (this.props.chart == true) {
-            return(<canvas id="hitRateCanvas" width="250" height="250" data-value={this.props.value} />);
-        }
-        return(<p><span className="large">{this.props.value}</span><span>%</span></p>);
-    }
-});
-
 var OverviewCounts = React.createClass({
     getInitialState: function() {
-        return {
-            data  : opstate.overview,
-            chart : useCharts
-        };
+        return { data : opstate.overview };
     },
     render: function() {
         return (
             <div>
                 <div>
                     <h3>memory usage</h3>
-                    <p><MemoryUsage chart={this.state.chart} value={this.state.data.used_memory_percentage} /></p>
+                    <p><span className="large">{this.state.data.used_memory_percentage}</span><span>%</span></p>
                 </div>
                 <div>
                     <h3>hit rate</h3>
-                    <p><HitRate chart={this.state.chart} value={this.state.data.hit_rate_percentage} /></p>
+                    <p><span className="large">{this.state.data.hit_rate_percentage}</span><span>%</span></p>
                 </div>
                 <div id="moreinfo">
-                    <p><b>total memory:</b> {this.state.data.readable.total_memory}</p>
-                    <p><b>used memory:</b> {this.state.data.readable.used_memory}</p>
-                    <p><b>free memory:</b> {this.state.data.readable.free_memory}</p>
-                    <p><b>wasted memory:</b> {this.state.data.readable.wasted_memory} ({this.state.data.wasted_percentage}%)</p>
-                    <p><b>number of cached files:</b> {this.state.data.readable.num_cached_scripts}</p>
-                    <p><b>number of hits:</b> {this.state.data.readable.hits}</p>
-                    <p><b>number of misses:</b> {this.state.data.readable.misses}</p>
-                    <p><b>blacklist misses:</b> {this.state.data.readable.blacklist_miss}</p>
-                    <p><b>number of cached keys:</b> {this.state.data.readable.num_cached_keys}</p>
-                    <p><b>max cached keys:</b> {this.state.data.readable.max_cached_keys}</p>
+                    <p><b>total memory:</b>{this.state.data.readable.total_memory}</p>
+                    <p><b>used memory:</b>{this.state.data.readable.used_memory}</p>
+                    <p><b>free memory:</b>{this.state.data.readable.free_memory}</p>
+                    <p><b>wasted memory:</b>{this.state.data.readable.wasted_memory} ({this.state.data.wasted_percentage}%)</p>
+                    <p><b>number of cached files:</b>{this.state.data.readable.num_cached_scripts}</p>
+                    <p><b>number of hits:</b>{this.state.data.readable.hits}</p>
+                    <p><b>number of misses:</b>{this.state.data.readable.misses}</p>
+                    <p><b>blacklist misses:</b>{this.state.data.readable.blacklist_miss}</p>
+                    <p><b>number of cached keys:</b>{this.state.data.readable.num_cached_keys}</p>
+                    <p><b>max cached keys:</b>{this.state.data.readable.max_cached_keys}</p>
                 </div>
             </div>
         );
@@ -123,15 +70,14 @@ var Directives = React.createClass({
             var vShow;
             if (directive.v === true || directive.v === false) {
                 vShow = React.createElement('i', {}, directive.v.toString());
-            } else if (directive.v === '') {
+            } else if (directive.v == '') {
                 vShow = React.createElement('i', {}, 'no value');
             } else {
                 vShow = directive.v;
             }
             return (
                 <tr key={directive.k}>
-                    <td title={'View ' + directive.k + ' manual entry'}><a href={'http://php.net/manual/en/opcache.configuration.php#ini.'
-                        + (directive.k).replace(/_/g,'-')} target="_blank">{dShow}</a></td>
+                    <td title={directive.k}>{dShow}</td>
                     <td>{vShow}</td>
                 </tr>
             );
@@ -151,8 +97,7 @@ var Files = React.createClass({
     getInitialState: function() {
         return {
             data : opstate.files,
-            showing: null,
-            allowFiles: allowFiles
+            showing: null
         };
     },
     handleInvalidate: function(e) {
@@ -166,45 +111,37 @@ var Files = React.createClass({
         }
     },
     render: function() {
-        if (this.state.allowFiles) {
-            var fileNodes = this.state.data.map(function(file, i) {
-                var invalidate, invalidated;
-                if (file.timestamp == 0) {
-                    invalidated = <span><i className="invalid metainfo"> - has been invalidated</i></span>;
-                }
-                if (canInvalidate) {
-                    invalidate = <span>,&nbsp;<a className="metainfo" href={'?invalidate='
-                        + file.full_path} data-file={file.full_path} onClick={this.handleInvalidate}>force file invalidation</a></span>;
-                }
-                return (
-                    <tr key={file.full_path} data-path={file.full_path.toLowerCase()} className={i%2?'alternate':''}>
-                        <td>
-                            <div>
-                                <span className="pathname">{file.full_path}</span><br/>
-                                <FilesMeta data={[file.readable.hits, file.readable.memory_consumption, file.last_used]} />
-                                {invalidate}
-                                {invalidated}
-                            </div>
-                        </td>
-                    </tr>
-                );
-            }.bind(this));
+        var fileNodes = this.state.data.map(function(file) {
+            var invalidate, invalidated;
+            if (file.timestamp == 0) {
+                invalidated = <span><i className="invalid metainfo">has been invalidated</i></span>;
+            }
+            if (canInvalidate) {
+                invalidate = <span>,&nbsp;<a className="metainfo" href={'?invalidate='
+                    + file.full_path} data-file={file.full_path} onClick={this.handleInvalidate}>force file invalidation</a></span>;
+            }
             return (
-                <div>
-                    <FilesListed showing={this.state.showing}/>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Script</th>
-                        </tr>
-                        </thead>
-                        <tbody>{fileNodes}</tbody>
-                    </table>
-                </div>
+                <tr key={file.full_path}>
+                    <td>
+                        <div>
+                            <span className="pathname">{file.full_path}</span><br/>
+                            <FilesMeta data={[file.readable.hits, file.readable.memory_consumption, file.last_used]} />
+                            {invalidate}
+                            {invalidated}
+                        </div>
+                    </td>
+                </tr>
             );
-        } else {
-            return <span></span>;
-        }
+        }.bind(this));
+        return (
+            <div>
+                <FilesListed showing={this.state.showing} />
+                <table>
+                    <thead><tr><th>Script</th></tr></thead>
+                    <tbody>{fileNodes}</tbody>
+                </table>
+            </div>
+        );
     }
 });
 
@@ -236,7 +173,7 @@ var FilesListed = React.createClass({
     }
 });
 
-var overviewCountsObj = ReactDOM.render(<OverviewCounts/>, document.getElementById('counts'));
-var generalInfoObj = ReactDOM.render(<GeneralInfo/>, document.getElementById('generalInfo'));
-var filesObj = ReactDOM.render(<Files/>, document.getElementById('filelist'));
-ReactDOM.render(<Directives/>, document.getElementById('directives'));
+var overviewCountsObj = React.render(<OverviewCounts/>, document.getElementById('counts'));
+var generalInfoObj = React.render(<GeneralInfo/>, document.getElementById('generalInfo'));
+var filesObj = React.render(<Files/>, document.getElementById('filelist'));
+React.render(<Directives/>, document.getElementById('directives'));

@@ -1,6 +1,13 @@
 <?php 
 
-class CategoryController extends Website_Controller_Action
+use Website\Controller\Action;
+use Pimcore\Model\Document;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+use Pimcore\Mail;
+use Pimcore\Tool;
+
+class CategoryController extends Action
 {
     public function indexAction() {
          $this->enableLayout();

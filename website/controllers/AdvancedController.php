@@ -1,6 +1,13 @@
 <?php
+use Website\Controller\Action;
+use Pimcore\Model\Document;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+use Pimcore\Mail;
+use Pimcore\Tool;
 
-class AdvancedController extends Website_Controller_Action
+
+class AdvancedController extends Action
 {
     public function init() {
         parent::init();

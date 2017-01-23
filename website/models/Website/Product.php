@@ -961,6 +961,7 @@ class Website_Product extends Object_Product {
 		$childrens = $this->getChilds();
 		$value = $this->$field;
 		$getter = "get" . ucfirst($field);
+		$varationString="";
 			
 
 		

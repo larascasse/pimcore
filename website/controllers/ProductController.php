@@ -1,4 +1,11 @@
 <?php
+use Website\Controller\Action;
+use Pimcore\Model\Document;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+use Pimcore\Mail;
+use Pimcore\Tool;
+
 
 ini_set('display_errors', 1);
         error_reporting(E_ALL);
@@ -8,7 +15,7 @@ ini_set('display_errors', 1);
         require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/functions.php';
 
 
-class ProductController extends Website_Controller_Action
+class ProductController extends Action
 {
     
     public $response;

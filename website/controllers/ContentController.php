@@ -1,6 +1,13 @@
 <?php
 
-class ContentController extends Website_Controller_Action
+use Website\Controller\Action;
+use Pimcore\Model\Document;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+use Pimcore\Mail;
+use Pimcore\Tool;
+
+class ContentController extends Action
 {
     public function defaultAction() {
         $this->enableLayout();

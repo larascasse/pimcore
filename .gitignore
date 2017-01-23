@@ -14,3 +14,4 @@ website/var/config/system.xml
 
 /pimcore/.htaccess
 /website/var/config/system.php
+/website/var/formbuilder/*

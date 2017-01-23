@@ -73,7 +73,8 @@
         "egulias/email-validator": "*",
         "pimcore/core-version": "4.4.1",
         "neitanod/forceutf8": "~2",
-        "myclabs/deep-copy": "*"
+        "myclabs/deep-copy": "*",
+        "dachcom-digital/pimcore-formbuilder" : "1.2.6"
     },
     "require-dev": {
         "phpunit/phpunit": "*"

@@ -939,7 +939,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1483715979,
+        "modificationDate" => 1483724176,
         "creationDate" => 1483714111,
         "id" => "magento_equigrid_v"
     ]

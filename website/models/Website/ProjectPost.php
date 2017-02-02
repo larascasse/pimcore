@@ -40,10 +40,13 @@ class ProjectPost extends Object\ProjectPost {
     }
 
     public function getMageUrl() {
-    	return $this->o_path.$this->o_key.".html";
+    	//return "projet/".$this->o_key;
+    	return ltrim($this->o_path.$this->o_key,"/");
     }
 
     public function getShortArray() {
+
+    
     	 $itemData= array();
          $itemData["id"] = $this->getId();
          $itemData["modificationDate"] = $this->o_modificationDate;
@@ -67,6 +70,7 @@ class ProjectPost extends Object\ProjectPost {
 		$view = new \Pimcore\View();
 		$view->addScriptPath(PIMCORE_WEBSITE_PATH . '/views/scripts');
 		$view->article = $this;
+
 		$html = $view->render('project-post/detail.php');
 		return $html;
 	}

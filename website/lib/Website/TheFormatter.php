@@ -8,6 +8,7 @@ use Pimcore\Model\Object\BlogArticle;
 use Pimcore\Model\Object\ClassDefinition\Data;
 use Pimcore\Model\Object\Concrete;
 use Pimcore\Model\Object\News;
+use Pimcore\Model\Object;
 
 class TheFormatter
 {
@@ -32,13 +33,15 @@ class TheFormatter
 
             if ($item["type"] == "object") {
                 $targetObject = Concrete::getById($item["id"]);
-                if ($targetObject instanceof News) {
+                if ($targetObject instanceof Object\News) {
                     $newPath = $targetObject->getTitle() . " - " . $targetObject->getShortText();
                 }
-                if ($targetObject instanceof Product) {
-                    $newPath = $targetObject->getName();
+                if ($targetObject instanceof Object\Product) {
+                    $newPath = $targetObject->getName() ." - ". $targetObject->getSku();
+                    $asset = $targetObject->getImage_1();
+                    //$newPath = '<img src="' . $asset . '" style="width: 25px; height: 18px;" />'.$newPath;
                 }
-                else if ($targetObject instanceof BlogPost) {
+                else if ($targetObject instanceof Object\BlogPost) {
                     $newPath = $targetObject->getTitle();
                 }
             } elseif ($item["type"] == "asset") {
@@ -48,7 +51,7 @@ class TheFormatter
 
 
                     if (!$title) {
-                        $title = "this guy does not have a title, use " . $newPath . " instead";
+                        $title = "[notitle] ".$newPath;
                     }
                     if ($fd instanceof Data\Multihref) {
                         $newPath = '<img src="' . $asset . '" style="width: 25px; height: 18px;" />' . $title;

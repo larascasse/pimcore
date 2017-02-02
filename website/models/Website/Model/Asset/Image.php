@@ -1,0 +1,92 @@
+<?php
+
+namespace Website\Model\Asset;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+
+class Image extends Asset\Image {
+	
+
+    /*public function __construct () {
+        echo "lmklmklmklmklklklmklmsmdsqmdqs=dnqsdnq";
+    }*/
+
+    public function toto () {
+        echo "TOTO";
+    }
+
+
+	//NOT WORKING, not extended
+	public function getRelatedProduct() {
+		$image  = $this;
+       
+        $ean="";
+        $name="";
+        $sku = "";
+
+        //$image->toto();
+  	
+  		 $product = $image->getProperty("product");
+
+
+    
+         if(!$product) {
+        
+           
+            $dependencies = $image->getDependencies();
+            
+            $requiredBy = $dependencies->requiredBy;
+            if (is_array($requiredBy)) {
+            
+                foreach ($requiredBy as $key => $value) {
+                    if($value['type']=="object") {
+
+                        $element = Object\AbstractObject::getById($value['id']);
+                        if($element && $element instanceof Object\Product) {
+                            $product = $element;
+                
+                        }
+                    }
+                    
+                }
+            }
+            
+             $ean = $image->getMetadata("product");
+             if($ean) {
+                 if(!$product) {
+                 $product = Object\Product::getByEan($ean)->objects[0];
+                }
+
+                if(!$product) {
+                   $product = Object\Product::getByCode($ean)->objects[0];
+                }
+             }
+           
+        }
+
+        //TOD
+        //s'il n'y a pas de dependance, on regarde dans le dossier supérieur
+        /*if(!$product) {
+            $folder = Asset\Folder::getById($image->getParentId());
+            
+            if($folder instanceof Asset\Folder) {
+
+                $productParentObject = real_product_from_image($folder);
+                if(strlen($productParentObject->sku)>0)
+                    return $productParentObject;
+            }
+        }
+        */
+
+        
+
+
+        if($realisation_title = $image->getProperty("realisation_title")) {
+           // $productObject->name = $realisation_title;
+        }
+
+        return $product;
+
+	}
+    
+}

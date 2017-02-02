@@ -135,5 +135,50 @@ return [
         "creationDate" => 1462356913,
         "modificationDate" => 1462357002,
         "id" => 9
+        ],
+    10 => [
+        "id" => 10,
+        "name" => "journal",
+        "pattern" => "/\\/journal\\/(.*)_n([\\d]+)/",
+        "reverse" => "/journal/%text_%id",
+        "module" => NULL,
+        "controller" => "blog-post",
+        "action" => "detail",
+        "variables" => "text,id",
+        "defaults" => "",
+        "siteId" => NULL,
+        "priority" => 1,
+        "creationDate" => 1485361673,
+        "modificationDate" => 1485362277
+    ],
+    11 => [
+        "id" => 11,
+        "name" => "projet",
+        "pattern" => "/\\/projet\\/(.*)_n([\\d]+)/",
+        "reverse" => "/projet/%text_%id",
+        "module" => "",
+        "controller" => "project-post",
+        "action" => "index",
+        "variables" => "text,id",
+        "defaults" => "",
+        "siteId" => NULL,
+        "priority" => 1,
+        "creationDate" => 1485941492,
+        "modificationDate" => 1486030934
+    ],
+    12 => [
+        "id" => 12,
+        "name" => "projects-all",
+        "pattern" => "/\\/projects\\/all/",
+        "reverse" => "/projects/all",
+        "module" => "",
+        "controller" => "project-post",
+        "action" => "get-all",
+        "variables" => "",
+        "defaults" => NULL,
+        "siteId" => NULL,
+        "priority" => 0,
+        "creationDate" => 1486034789,
+        "modificationDate" => 1486035132
     ]
 ];

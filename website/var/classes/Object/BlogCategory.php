@@ -1,57 +1,62 @@
 <?php 
 
-class Object_BlogCategory extends Object_Concrete {
+/** 
+* Generated at: 2017-02-02T14:48:10+01:00
+* Inheritance: no
+* Variants: no
+* Changed by: florent (6)
+* IP: 172.31.30.232
 
-public $o_classId = 6;
+
+Fields Summary: 
+- name [input]
+*/ 
+
+namespace Pimcore\Model\Object;
+
+
+
+/**
+* @method static \Pimcore\Model\Object\BlogCategory\Listing getByName ($value, $limit = 0) 
+*/
+
+class BlogCategory extends Concrete {
+
+public $o_classId = 15;
 public $o_className = "blogCategory";
-public $localizedfields;
+public $name;
 
 
 /**
 * @param array $values
-* @return Object_BlogCategory
+* @return \Pimcore\Model\Object\BlogCategory
 */
 public static function create($values = array()) {
-	$object = new self();
+	$object = new static();
 	$object->setValues($values);
 	return $object;
 }
 
 /**
-* @return array
-*/
-public function getLocalizedfields () {
-	$preValue = $this->preGetValue("localizedfields"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	$data = $this->getClass()->getFieldDefinition("localizedfields")->preGetData($this);
-	 return $data;
-}
-
-/**
+* Get name - name
 * @return string
 */
-public function getName ($language = null) {
-	$data = $this->getLocalizedfields()->getLocalizedValue("name", $language);
+public function getName () {
 	$preValue = $this->preGetValue("name"); 
-	if($preValue !== null && !Pimcore::inAdmin()) { return $preValue;}
-	 return $data;
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->name;
+	return $data;
 }
 
 /**
-* @param array $localizedfields
-* @return void
-*/
-public function setLocalizedfields ($localizedfields) {
-	$this->localizedfields = $localizedfields;
-	return $this;
-}
-
-/**
+* Set name - name
 * @param string $name
-* @return void
+* @return \Pimcore\Model\Object\BlogCategory
 */
-public function setName ($name, $language = null) {
-	$this->getLocalizedfields()->setLocalizedValue("name", $name, $language);
+public function setName ($name) {
+	$this->name = $name;
 	return $this;
 }
 

@@ -37,6 +37,7 @@ return array(
     'Pimcore\\' => array($baseDir . '/pimcore/lib/Pimcore'),
     'PhpDocReader\\' => array($vendorDir . '/php-di/phpdoc-reader/src/PhpDocReader'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
     'MaxMind\\' => array($vendorDir . '/maxmind/web-service-common/src'),
     'Linfo\\' => array($vendorDir . '/linfo/linfo/src/Linfo'),
     'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
@@ -49,5 +50,6 @@ return array(
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'DI\\' => array($vendorDir . '/php-di/php-di/src/DI'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
+    'Cgsmith\\' => array($vendorDir . '/cgsmith/zf1-recaptcha-2/src/Cgsmith'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
 );

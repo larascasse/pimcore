@@ -1,4 +1,4 @@
-<section>
+<section class="category-product-renderlet">
     <?php if($this->category) { ?>
        
             <?php 

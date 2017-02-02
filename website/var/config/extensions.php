@@ -31,6 +31,7 @@ return [
         "SearchPhp" => "",
         "Texttemplates" => "",
         "LpnPlugin" => "1",
-        "Magepim" => ""
+        "Magepim" => "",
+        "LpnMageSync" => TRUE
     ]
 ];

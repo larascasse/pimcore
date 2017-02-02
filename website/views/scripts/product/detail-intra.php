@@ -20,8 +20,6 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 ?>
 
 
-
-
 <?php $this->headLink(array(
     "rel" => "stylesheet",
     "href" => "/website/static/css/portal.css"));

@@ -33,19 +33,14 @@
         }
     ?>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="vspiOogrzIcUVBbVJByK4IT4qHpr_Ts089uOQW5ZoyA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
-    <link href="/website/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="http://magento.florent.local/_inte2/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="http://magento.florent.local/_inte2/css/nav.css" rel="stylesheet">
 
-    <link href="/website/static/css/global.css" rel="stylesheet">
+    <!--<link href="/website/static/css/global.css" rel="stylesheet">-->
 
-    <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
-
-
-    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css" />
-  <link rel="stylesheet" type="text/css" href="/website/static_lpn/algolia/main.css" />
+    
 
 
     <?php echo $this->headLink(); ?>
@@ -66,12 +61,12 @@
 
 
 <div id="content" class="container">
-        
+ <div class="row">       
         <div class="col-md-12">
             <?php echo $this->layout()->content; ?>
         </div>
     </div>
-
+</div>
 
 
 <?php

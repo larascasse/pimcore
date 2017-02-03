@@ -59,7 +59,7 @@ foreach ($imagesArray->assets as $asset) {
         <h1 class="text-center"><?= $this->article->getName(); ?></h1>
 
         <?php if($posterImage ) {
-            echo  $posterImage->getHTML(["class" => "img-responsive"]);
+            echo  $posterImage->getHTML(["class" => "img-responsive norelazy"]);
 
         }
     ?>

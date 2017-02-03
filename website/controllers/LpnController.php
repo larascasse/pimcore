@@ -33,6 +33,11 @@ class LpnController extends Action
         $this->enableLayout();
     }
 
+    public function magentov2Action() {
+        $this->view->layout()->setLayout("layout-lpnv2");
+        $this->enableLayout();
+    }
+
      public function algoliaAction() {
         $this->view->layout()->setLayout("layout-algolia");
         $this->enableLayout();

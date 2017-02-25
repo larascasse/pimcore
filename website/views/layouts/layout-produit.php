@@ -4,11 +4,7 @@
     <meta charset="utf-8">
 
     <?php
-        // portal detection => portal needs an adapted version of the layout
-        $isPortal = false;
-        if($this->getParam("controller") == "content" && $this->getParam("action") == "portal") {
-            $isPortal = true;
-        }
+
         try {
             // output the collected meta-data
             if(!$this->document) {
@@ -37,15 +33,15 @@
         }
     ?>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="vspiOogrzIcUVBbVJByK4IT4qHpr_Ts089uOQW5ZoyA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
-    <link href="/website/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="http://magento.florent.local/skin/frontend/lpn/default/css/main.css?q=201701041&amp;livereload=1487843980553" media="all">
 
-    <link href="/website/static/css/global.css" rel="stylesheet">
+    <!--<link href="/website/static/css/global.css" rel="stylesheet">-->
 
-    <link rel="stylesheet" href="/website/static/lib/projekktor/theme/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/website/static/lib/magnific/magnific.css" type="text/css" media="screen" />
+    
+
+
     <?php echo $this->headLink(); ?>
 
     <?php if($this->editmode) { ?>
@@ -56,86 +52,34 @@
     <script src="/website/static/bootstrap/assets/js/html5shiv.js"></script>
     <script src="/website/static/bootstrap/assets/js/respond.min.js"></script>
     <![endif]-->
-    <link href="/website/static_lpn/css/lpn.css" rel="stylesheet">
-    <style>
-    .item {
-    width: 200px;
-    float: left;
-}
-.item img {
-    display: block;
-    width: 100%;
-}
-</style>
+    <!--<link href="/website/static_lpn/css/lpn.css" rel="stylesheet">-->
 
 </head>
 
 <body>
+<script>
+function trackPageView() {};
+var window.fbq,fbq;
+var dataLayer=[];
+</script>
 
 
-
-<?php echo $this->layout()->content; ?>
-
-
+<div id="content" class="container-main">
+ <div class="row">       
+        <div class="col">
+            <?php echo $this->layout()->content; ?>
+        </div>
+    </div>
+</div>
 
 
 <?php
     // include a document-snippet - in this case the footer document
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
-
-<script src="/website/static/bootstrap/assets/js/jquery.js"></script>
-<script src="/website/static/bootstrap/dist/js/bootstrap.js"></script>
-<script src="http://www.laparqueterienouvelle.fr/wp-content/themes/parqueterie_nouvelle/js/gmaps.js"></script>
-
-
-
-
-<script src="/website/static/lib/projekktor/projekktor-1.2.25r232.min.js"></script>
-<script src="/website/static/lib/magnific/magnific.js"></script>
-<!--
-        <script src="http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js"></script>
-        <script src="/website/static_lpn/js/dymo.js"></script>
--->
- <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
-<script>
-    $(function () {
-
-    var $container = $('#container').masonry({
-        itemSelector: '.item',
-        columnWidth: 200
-    });
-
-    // reveal initial images
-    $container.masonryImagesReveal($('#images').find('.item'));
-});
-
-$.fn.masonryImagesReveal = function ($items) {
-    var msnry = this.data('masonry');
-    var itemSelector = msnry.options.itemSelector;
-    // hide by default
-    $items.hide();
-    // append to container
-    this.append($items);
-    $items.imagesLoaded().progress(function (imgLoad, image) {
-        // get item
-        // image is imagesLoaded class, not <img>, <img> is image.img
-        var $item = $(image.img).parents(itemSelector);
-        // un-hide item
-        $item.show();
-        // masonry does its thing
-        msnry.appended($item);
-    });
-
-    return this;
-};</script>
-
-
-
-<script src="/website/static_lpn/js/typeahead.bundle.js"></script>
-<script src="/website/static_lpn/js/lpn.js"></script>
-
+<script type="text/javascript" src="http://magento.florent.local/js/lpn/lpn-terrasses.min.js?q=201701041"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 </body>
 </html>

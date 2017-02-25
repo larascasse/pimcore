@@ -16,8 +16,8 @@ class BlogPostController extends Action
 
         // get a list of news objects and order them by date
         $blogList = new Object_BlogPost_List();
-        $blogList->setOrderKey("date");
-        $blogList->setOrder("DESC");
+        //$blogList->setOrderKey("date");
+        //$blogList->setOrder("DESC");
 
         $conditions = [];
 
@@ -44,9 +44,10 @@ class BlogPostController extends Action
         $this->view->categories = $categories;
 
         // archive information, we have to do this in pure SQL
-        $db = Pimcore_Resource::get();
+        /*$db = Pimcore_Resource::get();
         $ranges = $db->fetchCol("SELECT DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%c') as ranges FROM object_5 GROUP BY DATE_FORMAT(FROM_UNIXTIME(date), '%b-%Y') ORDER BY ranges ASC");
         $this->view->archiveRanges = $ranges;
+        */
     }
 
     public function detailAction() {

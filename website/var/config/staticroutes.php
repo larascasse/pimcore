@@ -140,7 +140,7 @@ return [
         "id" => 10,
         "name" => "journal",
         "pattern" => "/\\/journal\\/(.*)_n([\\d]+)/",
-        "reverse" => "/journal/%text_%id",
+        "reverse" => "/journal/%text_n%id",
         "module" => NULL,
         "controller" => "blog-post",
         "action" => "detail",
@@ -149,13 +149,13 @@ return [
         "siteId" => NULL,
         "priority" => 1,
         "creationDate" => 1485361673,
-        "modificationDate" => 1485362277
+        "modificationDate" => 1487860017
     ],
     11 => [
         "id" => 11,
-        "name" => "projet",
+        "name" => "projet_V1",
         "pattern" => "/\\/projet\\/(.*)_n([\\d]+)/",
-        "reverse" => "/projet/%text_%id",
+        "reverse" => "/projet/%text_n%id",
         "module" => "",
         "controller" => "project-post",
         "action" => "detail",
@@ -164,7 +164,7 @@ return [
         "siteId" => NULL,
         "priority" => 1,
         "creationDate" => 1485941492,
-        "modificationDate" => 1486048629
+        "modificationDate" => 1487944316
     ],
     12 => [
         "id" => 12,
@@ -179,6 +179,51 @@ return [
         "siteId" => NULL,
         "priority" => 1,
         "creationDate" => 1486034789,
-        "modificationDate" => 1486045944
+        "modificationDate" => 1487865515
+    ],
+    13 => [
+        "id" => 13,
+        "name" => "pages-all",
+        "pattern" => "/\\/pages\\/all/",
+        "reverse" => "/pages/all",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "get-all-pages",
+        "variables" => "",
+        "defaults" => "",
+        "siteId" => NULL,
+        "priority" => 1,
+        "creationDate" => 1486379635,
+        "modificationDate" => 1487848244
+    ],
+    14 => [
+        "id" => 14,
+        "name" => "blocks-all",
+        "pattern" => "/\\/blocks\\/all/",
+        "reverse" => "/blocks/all",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "get-all-cms-blocks",
+        "variables" => "",
+        "defaults" => NULL,
+        "siteId" => NULL,
+        "priority" => 1,
+        "creationDate" => 1487847903,
+        "modificationDate" => 1487848428
+    ],
+    15 => [
+        "id" => 15,
+        "name" => "projet",
+        "pattern" => "/\\/projet\\/(.*)/",
+        "reverse" => "/projet/%key",
+        "module" => NULL,
+        "controller" => "project-post",
+        "action" => "detail",
+        "variables" => "key",
+        "defaults" => NULL,
+        "siteId" => NULL,
+        "priority" => 1,
+        "creationDate" => 1487944315,
+        "modificationDate" => 1487952031
     ]
 ];

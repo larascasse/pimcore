@@ -2,6 +2,7 @@
 
 use Website\Controller\Action;
 use Pimcore\Model\Document;
+use Pimcore\Model\Document\Page;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
@@ -42,6 +43,99 @@ class LpnController extends Action
         $this->view->layout()->setLayout("layout-algolia");
         $this->enableLayout();
     }
+
+    public function getAllPagesAction() {
+        $this->view->layout()->setLayout("layout-empty");
+         $this->disableLayout();
+
+        $this->disableViewAutoRender();
+
+        $listing = new \Pimcore\Model\Document\Listing(); 
+        $listing->setCondition("parentId = 181");
+        $pages=array();
+        foreach($listing as $doc) {
+            //echo $doc->getContent();
+            try {
+                /*
+                [id] => 6559
+    [modificationDate] => 1485954241
+    [key] => parquet
+    [path] => /projets/
+    [meta] => 
+    [mage_identifier] => /projets/parquet.html
+    [name] => 
+    [content]
+    [posterImage]
+    [description]
+    */
+                if($doc instanceOf Document\Page) {
+                    $page = array (
+                        "content" => Document\Service::render($doc),
+                        "description" => $doc->getDescription(),
+                        "id"            => $doc->getId(),
+                        "name"            => $doc->getName(),
+                        "key"            => $doc->getKey(),
+                        "url"            => $doc->getPrettyUrl(),
+                    );
+                     $pages[] = $page;
+                }
+            }
+            catch (Exception $e){
+                echo $e->getMessage();
+            }
+            
+        }
+       $this->response = $pages;
+        $this->_helper->json->sendJson($this->response);
+    }
+
+
+    public function getAllCmsBlocksAction() {
+        $this->view->layout()->setLayout("layout-empty");
+         $this->disableLayout();
+
+        $this->disableViewAutoRender();
+
+        $listing = new \Pimcore\Model\Document\Listing(); 
+        $listing->setCondition("parentId = 230");
+        $pages=array();
+        foreach($listing as $doc) {
+            //echo $doc->getContent();
+            try {
+                /*
+                [id] => 6559
+    [modificationDate] => 1485954241
+    [key] => parquet
+    [path] => /projets/
+    [meta] => 
+    [mage_identifier] => /projets/parquet.html
+    [name] => 
+    [content]
+    [posterImage]
+    [description]
+    */
+                if($doc instanceOf Document\Page) {
+                    $page = array (
+                        "content" => Document\Service::render($doc),
+                        "description" => $doc->getDescription(),
+                        "id"            => $doc->getId(),
+                        "name"            => $doc->getName(),
+                        "key"            => $doc->getKey(),
+                        "url"            => $doc->getPrettyUrl(),
+                    );
+                     $pages[] = $page;
+                }
+            }
+            catch (Exception $e){
+                echo $e->getMessage();
+            }
+            
+        }
+       $this->response = $pages;
+        $this->_helper->json->sendJson($this->response);
+    }
+
+
 
 
     public function contactFormAction() {

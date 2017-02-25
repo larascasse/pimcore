@@ -35,8 +35,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
-    <link href="http://magento.florent.local/_inte2/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="http://magento.florent.local/_inte2/css/nav.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="http://magento.florent.local/skin/frontend/lpn/default/css/main.css?q=201701041&amp;livereload=1487843980553" media="all">
 
     <!--<link href="/website/static/css/global.css" rel="stylesheet">-->
 
@@ -58,9 +57,13 @@
 </head>
 
 <body>
+<script>
+function trackPageView() {};
+var window.fbq,fbq;
+var dataLayer=[];
+</script>
 
-
-<div id="content" class="container">
+<div id="content" class="container-main">
  <div class="row">       
         <div class="col-md-12">
             <?php echo $this->layout()->content; ?>
@@ -73,7 +76,9 @@
     // include a document-snippet - in this case the footer document
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
+<script type="text/javascript" src="http://magento.florent.local/js/lpn/lpn-terrasses.min.js?q=201701041"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-<!--<script src="/website/static_lpn/js/lpn.js"></script>-->
 </body>
 </html>

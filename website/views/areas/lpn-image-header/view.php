@@ -1,39 +1,54 @@
 <?php 
-if ($this->editmode) { 
- 	echo '<h2>LPN Header Image</h2>';
+if ($this->editmode) { ?>
+<div class="row">
+<div class="col">
+ 	<h2>LPN Header Image</h2>;
 
+<?php
 }
 ?>
 
-<div class="row image-header-container justify-content-center">
+<?php
+
+$cssClass= (!$this->image("image")->getSrc())?" noimg":"";
+
+?>
+<div class="image-header-container <?= $cssClass ?>">
 <?php
 echo $this->image("image", [
                             "class" => "img-fluid",
                             "thumbnail" => "magento_selection",
                             "placeholder" =>  "Image",
                              "width" => 200,
-    						 "height" => 200,
+                             "height" => 200,
                             ]
                         );
 ?>
-
-
-    <div class="col-sm-10 text-center">
-      <h1> <?= $this->textarea("title",[
+    <div>
+      <h1><?= $this->textarea("title",[
         "nl2br" => true,
         "width" => 600,
-        "height" => 100,
+        "height" => 50,
         "placeholder" => "Titre",
         "class" => "editmode" //Edit mode
     ]); ?></h1>
-			<div class="catLine">&nbsp;</div>
-			<p> <?= $this->textarea("description",[
+      <div class="catLine">&nbsp;</div>
+      <p><?= $this->textarea("description",[
         "nl2br" => true,
         "width" => 600,
-        "height" => 200,
+        "height" => 50,
         "placeholder" => "Sous-titre",
         "class" => "editmode" //Edit mode
     ]); ?></p>
     </div>
 
-  </div>
+</div>
+
+
+<?php 
+if ($this->editmode) { ?>
+</div>
+</div>
+<?php
+}
+?>

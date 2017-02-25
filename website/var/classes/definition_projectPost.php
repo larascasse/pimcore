@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-02-02T14:50:44+01:00
+* Generated at: 2017-02-24T15:02:03+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 127.0.0.1
 
 
 Fields Summary: 
@@ -22,7 +22,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1486043444,
+   'modificationDate' => 1487944922,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -264,7 +264,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
      'locked' => NULL,
   )),
    'icon' => '',
-   'previewUrl' => '/projet/name_n%o_id',
+   'previewUrl' => '/projet/%o_key',
    'group' => '',
    'propertyVisibility' => 
   array (

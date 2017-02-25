@@ -23,8 +23,7 @@ if(!$count) {
 
         
 <div class="row table-container">
-<div class="col-lg-1 hidden-md hidden-sm hidden-xs"></div>
-<div class=" col-lg-14 col-md-16 col-sm-16 col-xs-16">
+<div class="col">
 <?php
 if($count == 1) { ?>
     <!-- Table Horizontale -->
@@ -42,16 +41,13 @@ for($i=0; $i<$count; $i++) {
     if($count == 1) { 
         $pimcoreThimbClass = "magento_equigrid_h";
         ?>
-        <div class="col-md-16 rollbloc">
     <?php } else if($count == 2){ 
         $pimcoreThimbClass = "magento_equigrid_v";
-        ?>
-        <?php if($i == 0){ ?>
-            <div class="col-md-8 col-sm-16 rollbloc table-bloc-thumb">
-        <?php } else {  ?>  
-            <div class="col-md-8 col-sm-16 rollbloc table-bloc-thumb-right">
-        <?php } ?>   
+        ?>  
     <?php } ?> 
+    <!--  item -->
+    <div class="col-12 col-sm table-bloc-thumb">
+    <div class="rollbloc">
 
 
 <?php
@@ -99,12 +95,13 @@ for($i=0; $i<$count; $i++) {
 
          </div>
     </div>
+    </div>
+    <!-- fin item -->
     <?php } ?>
     <!-- Fin Table  -->
 </div>
 
 
 </div>
-<div class="col-lg-1 hidden-md hidden-sm hidden-xs"></div>
 </div>
 

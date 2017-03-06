@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<zend-config>
+    <id>imagecaption</id>
+    <name>Image-Caption</name>
+    <description>Bootstrap Image-Caption.</description>
+    <version>0.3.0</version>
+</zend-config>

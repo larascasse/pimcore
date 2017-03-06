@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<zend-config>
+    <id>image</id>
+    <name>Image</name>
+    <description>Bootstrap Image.</description>
+    <version>0.3.0</version>
+</zend-config>

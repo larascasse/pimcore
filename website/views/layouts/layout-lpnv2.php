@@ -59,7 +59,8 @@
 <body>
 <script>
 function trackPageView() {};
-var window.fbq,fbq;
+function trackLinkEvent() {};
+var fbq;
 var dataLayer=[];
 </script>
 

@@ -19,7 +19,7 @@ class ProjectPost extends Object\ProjectPost {
 	} 
 
 	public function test() {
-		echo "klmkmlklmkm";
+		echo "testtesttesttest";
 		
 	} 
 
@@ -28,12 +28,24 @@ class ProjectPost extends Object\ProjectPost {
 		$imagesArray = $this->getImagesAssets();
 
             if(is_array($imagesArray->assets) && count($imagesArray->assets)>0) {
-                 $posterImage = $imagesArray->assets[0]->getThumbnail("content");
-                 return $imagesArray->assets[0]->getThumbnail("content");
+                // $posterImage = $imagesArray->assets[0]->getThumbnail("content");
+                 return $imagesArray->assets[0];
 
             }
             return null;
     }
+
+  
+
+    public function getRelatedProduct() {
+        if ($this->getPosterImage()) {
+            $product = $this->getPosterImage()->getRelatedProduct();
+            if ($product instanceof Object\Product) {
+                return $product;
+            }
+        }
+    }
+
 
     public function getMeta() {
     	return \Website\Tool\Text::cutStringRespectingWhitespace($this->getDescription(), 160);
@@ -41,7 +53,7 @@ class ProjectPost extends Object\ProjectPost {
 
     public function getMageUrl() {
     	//return "projet/".$this->o_key;
-    	return ltrim($this->o_path.$this->o_key,"/");
+    	return ltrim("projet/".$this->o_key,"/");
     }
 
     public function getShortArray() {
@@ -59,7 +71,8 @@ class ProjectPost extends Object\ProjectPost {
          $itemData["name"] = $this->getName();
          $itemData["content"] = $this->getContent();
          $itemData["description"] = $this->getDescription();
-         $itemData["posterImage"] = $this->getPosterImage()?$this->getPosterImage()->getHTML():"";
+         $itemData["posterImage"] = $this->getPosterImage()?$this->getPosterImage()->getThumbnail("content")->getHTML():"";
+         $itemData["sku"] = ($product=$this->getRelatedProduct())?$product->getSku():"";
 
          return $itemData;
     }

@@ -412,12 +412,12 @@ class Website_Product extends Object_Product {
 
 		if($isHTML) {
 			//if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
-				$html ="<dl  class=\"dl-horizontal\">\n";
+				$html ="<dl  class=\"row\">\n";
 				foreach ($caracteristiques as $key => $value) {
-					$html.= '<dt>';
+					$html.= '<dt class=\"col-sm-4\">';
 					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
 					$html.= '</dt>';
-					$html.= '<dd>';
+					$html.= '<dd class=\"col-sm-8\">';
 					$html.= ucfirst(trim($value["content"]));
 					$html.= '</dd>';
 					//$html.="</li>\n";

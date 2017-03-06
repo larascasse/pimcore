@@ -63,10 +63,9 @@ var window.fbq,fbq;
 var dataLayer=[];
 </script>
 
-
 <div id="content" class="container-main">
  <div class="row">       
-        <div class="col">
+        <div class="col-md-12">
             <?php echo $this->layout()->content; ?>
         </div>
     </div>

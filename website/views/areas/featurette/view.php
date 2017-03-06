@@ -1,37 +1,50 @@
 
-<hr class="featurette-divider">
+<hr>
 
+
+ 
 <?php while($this->block("block")->loop()) { ?>
-    <div class="row featurette section">
 
-        <?php
-            $position = $this->select("postition")->getData();
-            if(!$position) {
-                $position = "right";
-            }
-        ?>
+<?php if($this->editmode) { ?>
+<div class="editmode-label">
+    <label>Orientation:</label>
+    <?= $this->select("postition", ["reload" => true,"store" => [["left","Texte à gauche"],["right","Texte à droite"]]]); ?>
+</div>
+<!--
+<div class="editmode-label">
+    <label>Type:</label>
+    <?= $this->select("type", ["reload" => true, "store" => [["video","video"], ["image","image"]]]); ?>
+</div>
+-->
+<?php } ?>
 
-        <div class="col-sm-8 col-sm-<?= ($position == "right") ? "push" : ""; ?>-8 ">
-            <h2 class="featurette-heading <?= ($position == "left") ? " homselectiontxtright__" : ""; ?>">
+<?php            
+$position = $this->select("postition")->getData();
+if(!$position) {
+    $position = "right";
+}
+?>
+
+
+
+    <div class="row">
+
+     
+
+        <div class="col-sm-6<?= ($position == "right") ? " push-sm-6" : ""; ?>">
+            <h2 class="<?= ($position == "left") ? "" : ""; ?>">
                 <?= $this->input("headline", ["width" => 400]); ?>
+                <!--
                 <span class="text-muted"><?= $this->input("subline", ["width" => 400]); ?></span>
+                -->
             </h2>
-            <div class="featurette-text <?= ($position == "left") ? " homselectiontxtright__" : ""; ?>">
+            <div class="<?= ($position == "left") ? "" : ""; ?>">
                 <?= $this->wysiwyg("content", ["width" => 350, "height" => 200]); ?>
             </div>
         </div>
 
-        <div class="col-sm-8 col-sm-<?= ($position == "right") ? "pull" : ""; ?>-8">
-            <?php if($this->editmode) { ?>
-                <div class="editmode-label">
-                    <label>Orientation:</label>
-                    <?= $this->select("postition", ["store" => [["left","Texte à gauche"],["right","Texte à droite"]]]); ?>
-                </div>
-                <div class="editmode-label">
-                    <label>Type:</label>
-                    <?= $this->select("type", ["reload" => true, "store" => [["video","video"], ["image","image"]]]); ?>
-                </div>
-            <?php } ?>
+        <div class="col-sm-6<?= ($position == "right") ? " pull-sm-6" : ""; ?>">
+           
 
             <?php
                 $type = $this->select("type")->getData();
@@ -41,27 +54,18 @@
                         "thumbnail" => "featurerette"
                     ]);
                 } else {
-                    $imgConfig = [
-                        "class" => "featurette-image img-responsive",
-                        "thumbnail" => "magento_selection"
-                    ];
 
-                    if($this->editmode) {
-                        $imgConfig["width"] = 300;
-                        echo $this->image("image", $imgConfig);
-                    }
-                    else {
-                        if($this->image("image")->getThumbnail("magento_selection"))
-                            $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
-                        else
-                          $urlImage =""; 
-                        echo '<img lass="featurette-image img-responsive" src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'"  />';
-                    }
+                    echo $this->image("image", [
+                        "class" => "img-fluid",
+                        "thumbnail" => "magento_selection"
+                        ]
+                    );
+                    
                     
                 }
             ?>
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr>
 <?php } ?>

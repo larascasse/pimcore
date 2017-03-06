@@ -12,12 +12,12 @@ class ProjectPostController extends Action
 {
     public function indexAction() {
         $this->enableLayout();
-
+        $this->setLayout("layout-produit");
 
         // get a list of news objects and order them by date
         $blogList = new Object_ProjectPost_List();
-        $blogList->setOrderKey("date");
-        $blogList->setOrder("DESC");
+        //$blogList->setOrderKey("date");
+        //$blogList->setOrder("DESC");
 
         $conditions = [];
 
@@ -26,7 +26,7 @@ class ProjectPostController extends Action
         }
 
         if($this->getParam("archive")) {
-            $conditions[] = "DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%c') = " . $blogList->quote($this->getParam("archive"));
+            //$conditions[] = "DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%c') = " . $blogList->quote($this->getParam("archive"));
         }
 
         if(!empty($conditions)) {
@@ -35,7 +35,7 @@ class ProjectPostController extends Action
 
         $paginator = Zend_Paginator::factory($blogList);
         $paginator->setCurrentPageNumber( $this->getParam('page') );
-        $paginator->setItemCountPerPage(5);
+        $paginator->setItemCountPerPage(100);
 
         $this->view->articles = $paginator;
 
@@ -44,16 +44,17 @@ class ProjectPostController extends Action
         $this->view->categories = $categories;
 
         // archive information, we have to do this in pure SQL
-        $db = Pimcore_Resource::get();
+       /* $db = Pimcore_Resource::get();
         $ranges = $db->fetchCol("SELECT DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%c') as ranges FROM object_5 GROUP BY DATE_FORMAT(FROM_UNIXTIME(date), '%b-%Y') ORDER BY ranges ASC");
-        $this->view->archiveRanges = $ranges;
+        $this->view->archiveRanges = $ranges;*/
     }
 
     public function detailAction() {
         $this->enableLayout();
         $this->setLayout("layout-produit");
         // "id" is the named parameters in "Static Routes"
-        $article = Object_ProjectPost::getById($this->getParam("id"));
+        //V1$article = Object_ProjectPost::getById($this->getParam("id"));
+        $article = Object_ProjectPost::getByPath("/projets/".$this->getParam("key"));
 
         if(!$article instanceof Object_ProjectPost || !$article->isPublished()) {
             // this will trigger a 404 error response
@@ -67,6 +68,7 @@ class ProjectPostController extends Action
 
 
     public function getAllAction() {
+
         $this->disableLayout();
 
         $this->disableViewAutoRender();
@@ -78,10 +80,13 @@ class ProjectPostController extends Action
         ]);
 
         $fields =   array();
+
         foreach ($list as $item) {
             $fields[] = $item->getShortArray();
         }
+        
        $this->response = $fields;
+
         $this->_helper->json->sendJson($this->response);
     }
 

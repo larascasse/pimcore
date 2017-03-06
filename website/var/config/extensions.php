@@ -32,6 +32,7 @@ return [
         "Texttemplates" => "",
         "LpnPlugin" => "1",
         "Magepim" => "",
-        "LpnMageSync" => TRUE
+        "LpnMageSync" => TRUE,
+        "Bootstrap" => TRUE
     ]
 ];

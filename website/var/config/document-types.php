@@ -2,13 +2,13 @@
 
 return [
     1 => [
-        "name" => "Content-Page",
+        "name" => "Pimcore Default Page",
         "module" => "",
         "controller" => "content",
         "action" => "default",
         "template" => "",
         "type" => "page",
-        "priority" => 0,
+        "priority" => 10,
         "creationDate" => 0,
         "modificationDate" => 0,
         "id" => 1
@@ -38,13 +38,13 @@ return [
         "id" => 3
     ],
     4 => [
-        "name" => "Lpn-Page",
+        "name" => "Lpn-Page V1",
         "module" => "",
         "controller" => "lpn",
         "action" => "default",
         "template" => "",
         "type" => "page",
-        "priority" => 0,
+        "priority" => 5,
         "creationDate" => 0,
         "modificationDate" => 0,
         "id" => 4
@@ -61,20 +61,9 @@ return [
         "modificationDate" => 1391528508,
         "id" => 5
     ],
+
     6 => [
-        "name" => "Only Content For Magento",
-        "module" => "",
-        "controller" => NULL,
-        "action" => NULL,
-        "template" => NULL,
-        "type" => "page",
-        "priority" => 0,
-        "creationDate" => 1391529354,
-        "modificationDate" => 1391529372,
-        "id" => 6
-    ],
-    7 => [
-        "name" => "LPN Snippet Realision",
+        "name" => "LPN Snippet Realisation",
         "module" => "",
         "controller" => "",
         "action" => "",
@@ -84,5 +73,17 @@ return [
         "creationDate" => 1399023670,
         "modificationDate" => 1399023775,
         "id" => 7
-    ]
+    ],
+    7 => [
+        "name" => "Lpn-Page-V2",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "magentov2",
+        "template" => "",
+        "type" => "page",
+        "priority" => 0,
+        "creationDate" => 0,
+        "modificationDate" => 0,
+        "id" => 7
+    ],
 ];

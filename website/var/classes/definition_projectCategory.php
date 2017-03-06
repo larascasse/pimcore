@@ -1,11 +1,15 @@
 <?php 
 
 /** 
+<<<<<<< HEAD
 * Generated at: 2017-02-23T15:18:58+01:00
+=======
+* Generated at: 2017-02-23T15:13:53+01:00
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 127.0.0.1
 
 
 Fields Summary: 
@@ -18,7 +22,11 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectCategory',
    'description' => '',
    'creationDate' => 0,
+<<<<<<< HEAD
    'modificationDate' => 1487859538,
+=======
+   'modificationDate' => 1487859233,
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -82,23 +90,38 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
+<<<<<<< HEAD
                  'index' => true,
+=======
+                 'index' => false,
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
                  'locked' => NULL,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
+<<<<<<< HEAD
                  'visibleGridView' => true,
                  'visibleSearch' => true,
+=======
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
               )),
             ),
              'name' => 'localizedfields',
              'region' => NULL,
              'layout' => NULL,
+<<<<<<< HEAD
              'title' => '',
              'width' => '',
              'height' => '',
+=======
+             'title' => NULL,
+             'width' => NULL,
+             'height' => NULL,
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
              'maxTabs' => NULL,
              'labelWidth' => NULL,
              'referencedFields' => 

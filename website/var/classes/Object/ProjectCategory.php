@@ -1,11 +1,15 @@
 <?php 
 
 /** 
+<<<<<<< HEAD
 * Generated at: 2017-02-23T15:18:58+01:00
+=======
+* Generated at: 2017-02-23T15:13:53+01:00
+>>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 127.0.0.1
 
 
 Fields Summary: 

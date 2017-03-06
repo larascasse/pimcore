@@ -28,7 +28,7 @@ class Image extends Asset\Image {
   	
   		 $product = $image->getProperty("product");
 
-
+         
     
          if(!$product) {
         

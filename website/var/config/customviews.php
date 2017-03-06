@@ -12,10 +12,28 @@ return [
             "classes" => "8"
         ],
         [
-            "name" => "Articles",
+            "name" => "Realisations",
             "condition" => "",
             "icon" => "",
             "id" => "3",
+            "rootfolder" => "/projets",
+            "showroot" => "1",
+            "classes" => "16"
+        ],
+        [
+            "name" => "Journal",
+            "condition" => "",
+            "icon" => "",
+            "id" => "4",
+            "rootfolder" => "/journal",
+            "showroot" => "1",
+            "classes" => "14"
+        ],
+        [
+            "name" => "En savoir plus",
+            "condition" => "",
+            "icon" => "",
+            "id" => "5",
             "rootfolder" => "/articles",
             "showroot" => "1",
             "classes" => "7"
@@ -24,7 +42,7 @@ return [
             "name" => "Teintes",
             "condition" => "",
             "icon" => "",
-            "id" => "5",
+            "id" => "6",
             "rootfolder" => "/teintes/teintes",
             "showroot" => "1",
             "classes" => ""
@@ -33,7 +51,7 @@ return [
             "name" => "Catalogue",
             "condition" => "",
             "icon" => "",
-            "id" => "6",
+            "id" => "7",
             "rootfolder" => "/catalogue/_product_base__",
             "showroot" => "1",
             "classes" => "5"

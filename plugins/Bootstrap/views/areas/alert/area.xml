@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<zend-config>
+    <id>alert</id>
+    <name>Alert</name>
+    <description>Bootstrap Alert.</description>
+    <version>0.3.0</version>
+</zend-config>

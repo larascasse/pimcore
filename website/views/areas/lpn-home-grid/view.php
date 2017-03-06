@@ -1,6 +1,9 @@
 
 <?php 
+
+$classNoRoll="";
 if($this->editmode) { 
+    $classNoRoll = "noroll";
 ?>
     <div class="container" style="padding-bottom: 40px">
         Nombre de colonnes: <?= $this->select("columns", [
@@ -23,15 +26,7 @@ if(!$count) {
 
         
 <div class="row table-container">
-<div class="col">
-<?php
-if($count == 1) { ?>
-    <!-- Table Horizontale -->
-    <div class="row_">
-<?php } else if($count == 2){ ?>
-    <!-- Table Verticale x2 -->
-    <div class="row">    
-<?php } ?> 
+
 
 
 
@@ -47,21 +42,21 @@ for($i=0; $i<$count; $i++) {
     <?php } ?> 
     <!--  item -->
     <div class="col-12 col-sm table-bloc-thumb">
-    <div class="rollbloc">
+    <div class="rollbloc<?=  $classNoRoll ?>">
 
 
 <?php
 
         echo $this->image("image".$i,array(
         "thumbnail" => $pimcoreThimbClass,
-        "class" => "lazyload"
+        "class" => "img-fluid".$classNoRoll
         
     )
     );
 
 ?>
 
-        <div class="table-bloc-thumb-text nsg_container">
+        <div class="table-bloc-thumb-text<?=  $classNoRoll ?> nsg_container">
             <div class="table-thumb-type"><span class="table-thumb-subtext"><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></span></div> 
             <div class="rollbloc_txt_over">
                 <div class="rollbloc_txt_over_cnt">
@@ -79,6 +74,7 @@ for($i=0; $i<$count; $i++) {
             "classes" => array("category"),
             "reload" => false,
             "width" =>200,
+            "placeholder" => "Faire glisser une catégorie"
         )); 
  
 
@@ -99,9 +95,5 @@ for($i=0; $i<$count; $i++) {
     <!-- fin item -->
     <?php } ?>
     <!-- Fin Table  -->
-</div>
-
-
-</div>
 </div>
 

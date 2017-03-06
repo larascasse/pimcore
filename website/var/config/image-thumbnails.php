@@ -599,7 +599,7 @@ return [
                         "width" => 350,
                         "height" => 250,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "doNotScaleUp" => FALSE
                     ]
                 ]
             ],
@@ -621,7 +621,7 @@ return [
                         "width" => 1050,
                         "height" => 750,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "doNotScaleUp" => FALSE
                     ]
                 ]
             ],
@@ -632,7 +632,7 @@ return [
                         "width" => 2100,
                         "height" => 1500,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "doNotScaleUp" => FALSE
                     ]
                 ]
             ]
@@ -641,10 +641,10 @@ return [
         "description" => "",
         "format" => "JPEG",
         "quality" => 80,
-        "highResolution" => 0,
+        "highResolution" => 0.0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1483528945,
+        "modificationDate" => 1488473110,
         "creationDate" => 1483528764,
         "id" => "magento_realisation"
     ],

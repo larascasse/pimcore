@@ -1,13 +1,18 @@
+<?php
+if($this->editmode) { ?>
+<hr />
+<h2>Sélection</h2>
+<?php } ?>
 
-<div class="col-md-16 col-sm-16">
+<?php
 
-    <h1><?= $this->input("titre", ["width" => 400]); ?></h1>
+$classNoRoll="";
+if($this->editmode) 
+    $classNoRoll = "noroll";
+?>
+<div class="home_selection">
 
-</div>
-
-<div class="home_selection row">
-
-    <div class="col-xs-16 col-sm-14 col-sm-offset-1 col-lg-offset-1 col-lg-14">
+    <div class="">
 
     <?php while($this->block("block")->loop()) {
         $ean="";
@@ -64,22 +69,23 @@
 
         ?>
         <!-- SLECTION ITEM -->
-        <div class="row featurette">
-
-            
-
-
-            <div class="col-sm-8 col-sm-<?= ($position == "right") ? "push-" : ""; ?>8">
-                <div class="nsg_container">
-                    <div class="fullimg"><?php 
+        <?php 
 
                     if($this->editmode) { ?>
+                    <hr />
                         <div class="editmode-label">
                             <label>Orientation:</label>
-                            <?= $this->select("postition", ["store" => [["left","left"],["right","right"]]]); ?>
+                            <?= $this->select("postition", ["store" => [["left","Image à gauche"],["right","Image à droite"]]]); ?>
                         </div>
 
                     <?php } ?>
+
+
+        <div class="row featurette <?= ($position == "right") ? "ftinverse" : ""; ?>">
+
+             <div class="ftimg">
+                <div class="nsg_container">
+                    <div class="fullimg">
 
                   <?php if ($this->editmode) { ?>
 
@@ -96,7 +102,7 @@
     }
     ?>
                     </div>
-                    <div class="roll_selection centeredcontent"><?php 
+                    <div class="roll_selection<?= $classNoRoll?> centeredcontent"><?php 
 
                     echo $name.'<br />';
                     echo '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'"}}';
@@ -107,7 +113,7 @@
             </div>
 
             <!-- TEXT -->
-            <div class="paddingleft20 col-sm-8  col-sm-<?= ($position == "right") ? "pull-" : ""; ?>8 <?= ($position == "right") ? " homselectiontxtright" : ""; ?>">
+             <div class="fttext">
                 <h2><span><?= $this->input("headline", ["width" => 400]); ?></span></h2>
                 <div class="selectioncontent"><?= $this->textarea("content1", ["width" => 350, "height" => 200]); ?></div>
                 <!--<div class="selectionlink">{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_1_<?= $ean ?>" product_sku="<?= $ean ?>"}}</div>-->
@@ -116,9 +122,6 @@
 
             </div>
 
-        </div>
-        <div class="col-md-16  col-sm-16">
-            <div class="clearfix">&nbsp;</div>
         </div>
     <!-- FIN SLECTION ITEM -->
 

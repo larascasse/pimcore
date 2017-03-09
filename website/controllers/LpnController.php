@@ -51,7 +51,7 @@ class LpnController extends Action
         $this->disableViewAutoRender();
 
         $listing = new \Pimcore\Model\Document\Listing(); 
-        $listing->setCondition("parentId = 181");
+        $listing->setCondition("parentId = 236");
         $pages=array();
         foreach($listing as $doc) {
             //echo $doc->getContent();

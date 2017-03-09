@@ -2,7 +2,7 @@
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <id>lpn-slider-realisations</id>
     <name>LPN Gris Realisations</name>
-    <description>Realisations en grille</description>
+    <description>Grilles de realisations</description>
     <author>pimcore.org</author>
     <version>1.0</version>
 </zend-config>

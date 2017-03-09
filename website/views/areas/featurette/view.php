@@ -32,12 +32,12 @@ if(!$position) {
      
 
         <div class="col-sm-6<?= ($position == "right") ? " push-sm-6" : ""; ?>">
-            <h2 class="<?= ($position == "left") ? "" : ""; ?>">
+            <h3 class="<?= ($position == "left") ? "" : ""; ?>">
                 <?= $this->input("headline", ["width" => 400]); ?>
                 <!--
                 <span class="text-muted"><?= $this->input("subline", ["width" => 400]); ?></span>
                 -->
-            </h2>
+            </h3>
             <div class="<?= ($position == "left") ? "" : ""; ?>">
                 <?= $this->wysiwyg("content", ["width" => 350, "height" => 200]); ?>
             </div>

@@ -7,7 +7,7 @@
         $block = $this->block("gallery");
 
         while ($block->loop()) { ?>
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-6">
                 <a href="<?= $this->image("image")->getThumbnail("galleryLightbox")->getPath(); ?>" class="thumbnail">
                     <?= $this->image("image", [
                         "thumbnail" => "galleryThumbnail"

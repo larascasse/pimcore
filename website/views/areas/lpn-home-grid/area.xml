@@ -2,7 +2,7 @@
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <id>lpn-home-grid</id>
     <name>LPN Home Grid</name>
-    <description></description>
+    <description>Grille 1 ou 2 colonnes</description>
     <author>pimcore.org</author>
     <version>1.0</version>
 </zend-config>

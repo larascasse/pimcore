@@ -6,7 +6,8 @@ if($this->editmode) {
 <?php } ?>
 <?= $this->textarea("html",
     [
-        "width" => 500
+        "width" => 500,
+        "height" => 500
 
 ]); ?>
 

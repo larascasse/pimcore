@@ -13,7 +13,11 @@ else if($category = $this->category) {
    	}
     else {
    
-    	echo ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/'. $catId.'" class="table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
+    	$widget =  ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/'. $catId.'" class="table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
+    	echo $widget;
+    	echo '<!-- '.$widget.'-->';
+
+
     }
     
 

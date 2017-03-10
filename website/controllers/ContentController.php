@@ -59,4 +59,39 @@ class ContentController extends Action
             $this->view->asset = Asset::getById($this->getParam("id"));
         }
     }
+
+     public function linkEshopRenderletAction() {
+         $this->view->editmode=$this->getParam("editmode");
+         $this->view->previewmode=$this->getParam("previewmode");
+         $this->view->btn_title=$this->getParam("btn_title");
+
+        if($this->getParam("id") && $this->getParam("type") == "object") {
+            $object= Object::getById($this->getParam("id"));
+            if($object instanceOf Object\Category) {
+                $this->view->category = Object\Category::getById($this->getParam("id"));
+            }
+            if($object instanceOf Object\Product) {
+                $this->view->product = Object\Product::getById($this->getParam("id"));
+            }
+            if($object instanceOf Object\projectPost) {
+                $this->view->projectPost = Object\projectPost::getById($this->getParam("id"));
+
+            }
+            if($object instanceOf Object\blogPost) {
+                $this->view->blogPost = Object\blogPost::getById($this->getParam("id"));
+            }
+            else {
+                $this->view->empty=true;
+            }
+
+            
+        }
+        else if($this->getParam("id") && $this->getParam('type') == 'document') {
+            $document = Document::getById($this->getParam('id'));
+            $this->view->document = $document;
+            
+        }
+    }
+
+
 }

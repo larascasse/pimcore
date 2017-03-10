@@ -86,23 +86,20 @@ for($i=0; $i<$count; $i++) {
               
                 echo $this->input("btn_title".$i, ["width" => 600, "placeholder"=>"Titre du bouton"]); 
 
-                echo $this->href("btn_catid".$i,array(
-            "types"=>array("object"),
-            "classes" => array("category"),
-            "reload" => false,
-            "width" =>200,
-            "placeholder" => "Faire glisser une catégorie"
-        )); 
- 
+            }
+            
+            echo $this->renderlet("link".$i, array(
+                        "types"=>array("object"),
+                        "controller" => "content",
+                        "action" => "link-eshop-renderlet",
+                        "title" => "Glisser un doc, un produit, une categorie",
+                        "editmode" => $this->editmode,
+                        "previewmode" => $this->previewmode,
+                        "btn_title" => $this->input("btn_title".$i)
+             ));
 
-            }
-            else {
-                //print_r($this->href("btn_catid".$i)->getElement()->getMage_category_id());
-                $category  = $this->href("btn_catid".$i)->getElement();
-                $catId = $category?$this->href("btn_catid".$i)->getElement()->getMage_category_id():-1;
-                echo '<a href="https://eshop.laparqueterienouvelle.fr/matieres/category/'. $catId.'" title="'. $this->input("btn_title".$i).'" class="table-selectionner-btn">'. $this->input("btn_title".$i).'</a>';
-                  echo '<!-- {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/"'. $catId.' class="table-selectionner-btn" anchor_text="'. $this->input("btn_title".$i).'" title="'. $this->input("btn_title".$i).'"}}-->';
-            }
+
+
             
             ?>
 

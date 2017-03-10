@@ -15,7 +15,6 @@ else if($category = $this->category) {
    
     	$widget =  ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/'. $catId.'" class="table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
     	echo $widget;
-    	echo '<!-- '.$widget.'-->';
 
 
     }
@@ -31,4 +30,16 @@ else if($projectPost = $this->projectPost) {
 }
 else if($document = $this->document) {
 	echo $document->getName()." ".$document->getId();
+
+	if($this->previewmode) {
+    	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
+   	}
+    else {
+   
+    	$widget =  '{{widget type="cms/widget_page_link" template="cms/widget/link/link_block.phtml" page_id="'.$document->getKey().'"}}';
+    	echo $widget;
+
+
+    }
+
 }

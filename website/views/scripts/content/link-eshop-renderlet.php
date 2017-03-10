@@ -12,7 +12,8 @@ else if($category = $this->category) {
     	echo '<a href="https://eshop.laparqueterienouvelle.fr/category/'. $catId.'" title="Voir '.$category->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
-    	echo '{{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/'. $catId.'" class="btn btn-text" anchor_text="'.$this->btn_title.'" title="Voir '.$category->getName().'"}}';
+   
+    	echo ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_inline.phtml" id_path="category/'. $catId.'" class="table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
     }
     
 

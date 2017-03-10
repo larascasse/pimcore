@@ -1,6 +1,17 @@
 <?php
 if($product = $this->product) {
-	echo $product->getName();
+	
+	if($this->previewmode) {
+    	echo '<a href="https://eshop.laparqueterienouvelle.fr/'.$product->getName().'" title="Voir '.$product->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
+   	}
+    else {
+   
+    	$widget =  '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$product->getSku().'" product_sku="'.$product->getSku().'" class="btn"}}';
+    	echo $widget;
+
+
+    }
+
 }
 
 else if($category = $this->category) {

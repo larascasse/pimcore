@@ -9,7 +9,7 @@ if($this->editmode) {
         Nombre de colonnes: <?= $this->select("columns", [
             "width" => 60,
             "reload" => true,
-            "store" => [[1,1],[2,2]]
+            "store" => [[1,1],[2,2],[3,3]]
         ]); ?>
     </div>
 
@@ -32,17 +32,34 @@ if(!$count) {
 
 <?php 
 for($i=0; $i<$count; $i++) { 
+    $smallClass="";
+    $cardClass="rollbloc";
 
-    if($count == 1) { 
-        $pimcoreThimbClass = "magento_equigrid_h";
-        ?>
-    <?php } else if($count == 2){ 
-        $pimcoreThimbClass = "magento_equigrid_v";
-        ?>  
-    <?php } ?> 
+    switch ($count) {
+        case 1:
+           $pimcoreThimbClass = "magento_equigrid_h";
+        
+        break;
+
+        case 2:
+           $pimcoreThimbClass = "magento_equigrid_v";
+            break;
+
+        case 3:
+           $pimcoreThimbClass = "magento_equigrid_h";
+           $smallClass="-sm-12 col-md";
+           $cardClass="card";
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+
+    ?> 
     <!--  item -->
-    <div class="col-12 col-sm table-bloc-thumb">
-    <div class="rollbloc<?=  $classNoRoll ?>">
+    <div class="col-12 col-sm<?php echo  $smallClass?> table-bloc-thumb">
+    <div class="<?= $cardClass?><?=  $classNoRoll ?>">
 
 
 <?php

@@ -6,7 +6,7 @@ if($product = $this->product) {
    	}
     else {
    
-    	$widget =  '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$product->getSku().'" product_sku="'.$product->getSku().'" class="btn"}}';
+    	$widget =  '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$product->getSku().'" product_sku="'.$product->getSku().'" class="btn" anchor_text="'.$this->btn_title.'"}}';
     	echo $widget;
 
 

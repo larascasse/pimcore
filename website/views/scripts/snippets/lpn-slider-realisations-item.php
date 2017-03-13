@@ -98,7 +98,7 @@ for($i=0; $i<$count; $i++) {
     */
     ?>
 
-    <li data-zoom="<?= $datazoom ?>" data-zoom-rel="<?= $dataZoomId; ?>" class="<?= ($i==0?'norelazy':'') ?>">
+    <li data-zoom="<?= $datazoom ?>" data-zoom-rel="<?= $dataZoomId; ?>">
     <div class="<?php echo !$is_type_bloc?'nsg_container col-md-16':'';?>">
     <div>
     <?php if ($this->editmode) { ?>
@@ -116,7 +116,7 @@ for($i=0; $i<$count; $i++) {
         if(strlen($urlImage)<3 && count($arrayImages)>0) {
             $urlImage=$arrayImages[0];
         }
-        echo '<img src="'.$urlImage.'" title="'.$this->image("cImage_".$i)->getText().'" alt="'.$this->image("cImage_".$i)->getAlt().'" class="'.($i==0?'norelazy':'').'" />';
+        echo '<img src="'.$urlImage.'" title="'.$this->image("cImage_".$i)->getText().'" alt="'.$this->image("cImage_".$i)->getAlt().'" class="'.($i==0?'norelazy__':'').'" />';
 
         //JSON
         $dataValue->base = $urlImage;

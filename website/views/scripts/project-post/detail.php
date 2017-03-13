@@ -57,7 +57,7 @@ foreach ($imagesArray->assets as $asset) {
      
      //$content .='<div class="col-12">';
      $item .='<figure class="card">';
-     $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid norelazy"]);
+     $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid"]);
      $item .='<figcaption class="card-block">';
      $item .='<p class="card-text">'.$imageProductName.'</p>';
      $item.='</figcaption>';
@@ -91,7 +91,7 @@ foreach ($imagesArray->assets as $asset) {
     <div class="row">
         <div class="col">
         <?php if($posterImage ) {
-            echo  $posterImage->getThumbnail("content")->getHTML(["class" => "img-responsive norelazy"]);
+            echo  $posterImage->getThumbnail("content")->getHTML(["class" => "img-responsive norelazy__"]);
 
         }?>
         </div>

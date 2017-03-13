@@ -98,7 +98,7 @@ if($this->editmode)
     } else { 
         $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
 
-        echo '<img src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'" class="norelazy" />';
+        echo '<img src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'" class="" />';
     }
     ?>
                     </div>

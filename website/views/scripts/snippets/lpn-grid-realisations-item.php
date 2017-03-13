@@ -13,7 +13,7 @@ $article = $this->article;
            
 
 <?php if($article->getPosterImage()) { ?>
-    <?= $article->getPosterImage()->getThumbnail("content")->getHTML(["class" => "card-img-top__ img-fluid norelazy"]) ?>
+    <?= $article->getPosterImage()->getThumbnail("content")->getHTML(["class" => "card-img-top__ img-fluid norelazy__"]) ?>
 <?php } ?>
 
 <div class="card-block">

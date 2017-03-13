@@ -6,7 +6,7 @@ $product = $asset->getRelatedProduct();
 ?>
            
 
-<?php echo $asset->getThumbnail("magento_realisation")->getHTML(["class" => "card-img-top__ img-fluid norelazy"]); ?>
+<?php echo $asset->getThumbnail("magento_realisation")->getHTML(["class" => "card-img-top__ img-fluid norelazy__"]); ?>
 
 
 <div class="caption">

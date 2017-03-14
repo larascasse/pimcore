@@ -6,7 +6,7 @@ return [
         "wysiwyg" => "1",
         "featurette" => "1",
         "video" => "1",
-        "pdf" => "1",
+        "pdf" => FALSE,
         "gallery-folder" => "1",
         "gallery-single-images" => "1",
         "image" => "1",
@@ -24,7 +24,12 @@ return [
         "lpn-home-grid" => "1",
         "lpn-image-header" => "1",
         "lpn-snippet" => "1",
-        "gallery" => FALSE
+        "gallery" => FALSE,
+        "carousel" => FALSE,
+        "button" => FALSE,
+        "accordion" => FALSE,
+        "image-caption" => FALSE,
+        "panel" => FALSE
     ],
     "plugin" => [
         "DynamicDropdown" => "",

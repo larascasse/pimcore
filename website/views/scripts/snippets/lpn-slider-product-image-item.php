@@ -3,10 +3,11 @@
 <?php
 $asset = $this->asset;
 $product = $asset->getRelatedProduct();
+$imageformat = isset($this->imageformat)?$this->imageformat:'magento_realisation';
 ?>
            
 
-<?php echo $asset->getThumbnail("magento_realisation")->getHTML(["class" => "card-img-top__ img-fluid norelazy__"]); ?>
+<?php echo $asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid norelazy__"]); ?>
 
 
 <div class="caption">

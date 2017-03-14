@@ -10,7 +10,7 @@ class Image extends Asset\Image {
     /*public function __construct () {
         echo "lmklmklmklmklklklmklmsmdsqmdqs=dnqsdnq";
     }*/
-    protected var $_product;
+    protected  $_product;
 
 
     public function toto () {

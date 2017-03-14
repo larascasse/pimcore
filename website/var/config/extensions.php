@@ -23,7 +23,8 @@ return [
         "lpn-selection" => "1",
         "lpn-home-grid" => "1",
         "lpn-image-header" => "1",
-        "lpn-snippet" => "1"
+        "lpn-snippet" => "1",
+        "gallery" => FALSE
     ],
     "plugin" => [
         "DynamicDropdown" => "",

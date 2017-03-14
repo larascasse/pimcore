@@ -6,385 +6,30 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => "870"
+                    "width" => 870
                 ]
             ]
         ],
         "medias" => [
-
+            "320w" => [
+                [
+                    "method" => "scaleByWidth",
+                    "arguments" => [
+                        "width" => 320
+                    ]
+                ]
+            ]
         ],
+        "name" => "content",
         "description" => "",
         "format" => "SOURCE",
-        "quality" => 95,
+        "quality" => 75,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1489482385,
+        "creationDate" => 1489482361,
         "id" => "content"
-    ],
-    "exampleCombined1" => [
-        "items" => [
-            [
-                "method" => "scaleByWidth",
-                "arguments" => [
-                    "width" => "275"
-                ]
-            ],
-            [
-                "method" => "roundCorners",
-                "arguments" => [
-                    "width" => "10",
-                    "height" => "10"
-                ]
-            ],
-            [
-                "method" => "rotate",
-                "arguments" => [
-                    "angle" => "10"
-                ]
-            ],
-            [
-                "method" => "addOverlay",
-                "arguments" => [
-                    "path" => "/website/static/img/logo-overlay.png",
-                    "x" => "10",
-                    "y" => "10",
-                    "origin" => "bottom-right",
-                    "alpha" => "100",
-                    "composite" => "COMPOSITE_DEFAULT"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleCombined1"
-    ],
-    "exampleCombined2" => [
-        "items" => [
-            [
-                "method" => "frame",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150"
-                ]
-            ],
-            [
-                "method" => "grayscale",
-                "arguments" => ""
-            ],
-            [
-                "method" => "setBackgroundColor",
-                "arguments" => [
-                    "color" => "#ff6600"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleCombined2"
-    ],
-    "exampleContain" => [
-        "items" => [
-            [
-                "method" => "contain",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleContain"
-    ],
-    "exampleCorners" => [
-        "items" => [
-            [
-                "method" => "cover",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150",
-                    "positioning" => "center",
-                    "doNotScaleUp" => "1"
-                ]
-            ],
-            [
-                "method" => "addOverlay",
-                "arguments" => [
-                    "path" => "/website/static/img/logo-overlay.png",
-                    "x" => "10",
-                    "y" => "10",
-                    "origin" => "top-left",
-                    "alpha" => "100",
-                    "composite" => "COMPOSITE_DEFAULT"
-                ]
-            ],
-            [
-                "method" => "roundCorners",
-                "arguments" => [
-                    "width" => "10",
-                    "height" => "10"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleCorners"
-    ],
-    "exampleCover" => [
-        "items" => [
-            [
-                "method" => "cover",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150",
-                    "positioning" => "center",
-                    "doNotScaleUp" => "1"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleCover"
-    ],
-    "exampleFrame" => [
-        "items" => [
-            [
-                "method" => "frame",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleFrame"
-    ],
-    "exampleGrayscale" => [
-        "items" => [
-            [
-                "method" => "frame",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150"
-                ]
-            ],
-            [
-                "method" => "grayscale",
-                "arguments" => ""
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleGrayscale"
-    ],
-    "exampleMask" => [
-        "items" => [
-            [
-                "method" => "cover",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150",
-                    "positioning" => "center",
-                    "doNotScaleUp" => "1"
-                ]
-            ],
-            [
-                "method" => "applyMask",
-                "arguments" => [
-                    "path" => "/website/static/img/mask-example.png"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleMask"
-    ],
-    "exampleOverlay" => [
-        "items" => [
-            [
-                "method" => "cover",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150",
-                    "positioning" => "centerleft",
-                    "doNotScaleUp" => "1"
-                ]
-            ],
-            [
-                "method" => "addOverlay",
-                "arguments" => [
-                    "path" => "/website/static/img/logo-overlay.png",
-                    "x" => "10",
-                    "y" => "10",
-                    "origin" => "top-left",
-                    "alpha" => "75",
-                    "composite" => "COMPOSITE_DEFAULT"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleOverlay"
-    ],
-    "exampleResize" => [
-        "items" => [
-            [
-                "method" => "resize",
-                "arguments" => [
-                    "width" => "275",
-                    "height" => "150"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleResize"
-    ],
-    "exampleRotate" => [
-        "items" => [
-            [
-                "method" => "scaleByWidth",
-                "arguments" => [
-                    "width" => "275"
-                ]
-            ],
-            [
-                "method" => "rotate",
-                "arguments" => [
-                    "angle" => "5"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleRotate"
-    ],
-    "exampleScaleHeight" => [
-        "items" => [
-            [
-                "method" => "scaleByHeight",
-                "arguments" => [
-                    "height" => "150"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleScaleHeight"
-    ],
-    "exampleScaleWidth" => [
-        "items" => [
-            [
-                "method" => "scaleByWidth",
-                "arguments" => [
-                    "width" => "275"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleScaleWidth"
-    ],
-    "exampleSepia" => [
-        "items" => [
-            [
-                "method" => "scaleByWidth",
-                "arguments" => [
-                    "width" => "275"
-                ]
-            ],
-            [
-                "method" => "sepia",
-                "arguments" => ""
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => NULL,
-        "id" => "exampleSepia"
     ],
     "featurerette" => [
         "items" => [
@@ -640,11 +285,11 @@ return [
         "name" => "magento_realisation",
         "description" => "",
         "format" => "JPEG",
-        "quality" => 80,
-        "highResolution" => 0.0,
+        "quality" => 75,
+        "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1488473110,
+        "modificationDate" => 1489482334,
         "creationDate" => 1483528764,
         "id" => "magento_realisation"
     ],
@@ -670,11 +315,11 @@ return [
         "name" => "magento_selection",
         "description" => "",
         "format" => "JPEG",
-        "quality" => 80,
+        "quality" => 75,
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1483528611,
+        "modificationDate" => 1489482346,
         "creationDate" => 1483526813,
         "id" => "magento_selection"
     ],
@@ -740,25 +385,6 @@ return [
         "highResolution" => 0,
         "filenameSuffix" => NULL,
         "id" => "newsList"
-    ],
-    "portalCarousel" => [
-        "items" => [
-            [
-                "method" => "scaleByWidth",
-                "arguments" => [
-                    "width" => "1500"
-                ]
-            ]
-        ],
-        "medias" => [
-
-        ],
-        "description" => "",
-        "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => 0,
-        "filenameSuffix" => "",
-        "id" => "portalCarousel"
     ],
     "productCarousel" => [
         "items" => [
@@ -867,9 +493,9 @@ return [
                     "method" => "cover",
                     "arguments" => [
                         "width" => 320,
-                        "height" => 395,
+                        "height" => 396,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "doNotScaleUp" => FALSE
                     ]
                 ]
             ],
@@ -883,6 +509,17 @@ return [
                         "doNotScaleUp" => FALSE
                     ]
                 ]
+            ],
+            "992w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 992,
+                        "height" => 804,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => FALSE
+                    ]
+                ]
             ]
         ],
         "name" => "magento_equigrid_h",
@@ -892,7 +529,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1483716053,
+        "modificationDate" => 1489480487,
         "creationDate" => 1483711729,
         "id" => "magento_equigrid_h"
     ],
@@ -914,7 +551,7 @@ return [
                     "method" => "cover",
                     "arguments" => [
                         "width" => 320,
-                        "height" => 395,
+                        "height" => 396,
                         "positioning" => "bottomcenter",
                         "doNotScaleUp" => FALSE
                     ]
@@ -924,8 +561,8 @@ return [
                 [
                     "method" => "cover",
                     "arguments" => [
-                        "width" => 676,
-                        "height" => 828,
+                        "width" => 496,
+                        "height" => 612,
                         "positioning" => "bottomcenter",
                         "doNotScaleUp" => TRUE
                     ]
@@ -939,8 +576,66 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1483724176,
+        "modificationDate" => 1489480323,
         "creationDate" => 1483714111,
         "id" => "magento_equigrid_v"
+    ],
+    "magento_equigrid_c" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 1200,
+                    "height" => 1200,
+                    "positioning" => "bottomcenter",
+                    "doNotScaleUp" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+            "320w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 320,
+                        "height" => 320,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "640w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 640,
+                        "height" => 640,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => TRUE
+                    ]
+                ]
+            ],
+            "992w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 920,
+                        "height" => 920,
+                        "positioning" => "bottomcenter",
+                        "doNotScaleUp" => FALSE
+                    ]
+                ]
+            ]
+        ],
+        "name" => "magento_equigrid_c",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 75,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1489482319,
+        "creationDate" => 1489482186,
+        "id" => "magento_equigrid_c"
     ]
 ];

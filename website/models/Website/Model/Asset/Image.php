@@ -86,7 +86,7 @@ class Image extends Asset\Image {
 
             
 
-
+        }
             
 
         return  $this->_product;

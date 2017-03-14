@@ -94,7 +94,7 @@ class Image extends Asset\Image {
 	}
 
     public function getRelatedTitle() {
-        if($realisation_title = $image->getProperty("realisation_title")) {
+        if($realisation_title = $this->getProperty("realisation_title")) {
                return $realisation_title;
         }
         else if($product = $this->getRelatedProduct()) {
@@ -106,7 +106,7 @@ class Image extends Asset\Image {
     }
 
      public function getRelatedDescription() {
-        if($realisation_description = $image->getProperty("realisation_description")) {
+        if($realisation_description = $this->getProperty("realisation_description")) {
                return $realisation_description;
         }
         else if($product = $this->getRelatedProduct()) {

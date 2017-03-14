@@ -12,8 +12,8 @@ $imageformat = isset($this->imageformat)?$this->imageformat:'magento_realisation
 
 <div class="caption">
 
-  <p class="legendtitle"><?php echo  $product?$product->getSubtype():""; ?> - <?php echo  $product?$product->getShort_name():""; ?></p>
-  <p class="legendimage"></p>
+  <p class="legendtitle"><?php echo  $asset->getRelatedTitle() ?></p>
+  <p class="legendimage"><?php echo $asset->getRelatedDescription()?></p>
 
 
 </div>

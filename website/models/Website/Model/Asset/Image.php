@@ -10,83 +10,113 @@ class Image extends Asset\Image {
     /*public function __construct () {
         echo "lmklmklmklmklklklmklmsmdsqmdqs=dnqsdnq";
     }*/
+    protected var $_product;
+
 
     public function toto () {
         echo "TOTO";
     }
 
 
-	//NOT WORKING, not extended
 	public function getRelatedProduct() {
-		$image  = $this;
-       
-        $ean="";
-        $name="";
-        $sku = "";
 
-        //$image->toto();
-  	
-  		 $product = $image->getProperty("product");
+        if(!isset($this->_product)) {
 
-         
-    
-         if(!$product) {
-        
+    		$image  = $this;
            
-            $dependencies = $image->getDependencies();
-            
-            $requiredBy = $dependencies->requiredBy;
-            if (is_array($requiredBy)) {
-            
-                foreach ($requiredBy as $key => $value) {
-                    if($value['type']=="object") {
+            $ean="";
+            $name="";
+            $sku = "";
 
-                        $element = Object\AbstractObject::getById($value['id']);
-                        if($element && $element instanceof Object\Product) {
-                            $product = $element;
+            //$image->toto();
+      	
+      		 $product = $image->getProperty("product");
+
+             
+        
+             if(!$product) {
+            
+               
+                $dependencies = $image->getDependencies();
                 
-                        }
-                    }
+                $requiredBy = $dependencies->requiredBy;
+                if (is_array($requiredBy)) {
+                
+                    foreach ($requiredBy as $key => $value) {
+                        if($value['type']=="object") {
+
+                            $element = Object\AbstractObject::getById($value['id']);
+                            if($element && $element instanceof Object\Product) {
+                                $product = $element;
                     
+                            }
+                        }
+                        
+                    }
+                }
+                
+                 $ean = $image->getMetadata("product");
+                 if($ean) {
+                     if(!$product) {
+                     $product = Object\Product::getByEan($ean)->objects[0];
+                    }
+
+                    if(!$product) {
+                       $product = Object\Product::getByCode($ean)->objects[0];
+                    }
+                 }
+               
+            }
+
+            $this->_product = $product;
+
+            //TOD
+            //s'il n'y a pas de dependance, on regarde dans le dossier supérieur
+            /*if(!$product) {
+                $folder = Asset\Folder::getById($image->getParentId());
+                
+                if($folder instanceof Asset\Folder) {
+
+                    $productParentObject = real_product_from_image($folder);
+                    if(strlen($productParentObject->sku)>0)
+                        return $productParentObject;
                 }
             }
+            */
+
             
-             $ean = $image->getMetadata("product");
-             if($ean) {
-                 if(!$product) {
-                 $product = Object\Product::getByEan($ean)->objects[0];
-                }
 
-                if(!$product) {
-                   $product = Object\Product::getByCode($ean)->objects[0];
-                }
-             }
-           
-        }
 
-        //TOD
-        //s'il n'y a pas de dependance, on regarde dans le dossier supérieur
-        /*if(!$product) {
-            $folder = Asset\Folder::getById($image->getParentId());
             
-            if($folder instanceof Asset\Folder) {
 
-                $productParentObject = real_product_from_image($folder);
-                if(strlen($productParentObject->sku)>0)
-                    return $productParentObject;
-            }
-        }
-        */
-
-        
-
-
-        if($realisation_title = $image->getProperty("realisation_title")) {
-           // $productObject->name = $realisation_title;
-        }
-
-        return $product;
+        return  $this->_product;
 
 	}
+
+    public function getRelatedTitle() {
+        if($realisation_title = $image->getProperty("realisation_title")) {
+               return $realisation_title;
+        }
+        else if($product = $this->getRelatedProduct()) {
+            return $product->getSubtype()." ".$product->getShort_name();
+        }
+        else {
+            return "";
+        }
+    }
+
+     public function getRelatedDescription() {
+        if($realisation_description = $image->getProperty("realisation_description")) {
+               return $realisation_description;
+        }
+        else if($product = $this->getRelatedProduct()) {
+            return $product->getSubtype()." ".$product->getShort_name();
+        }
+        else {
+            return "";
+        }
+    }
+    
+
     
 }

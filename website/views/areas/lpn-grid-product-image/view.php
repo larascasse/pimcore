@@ -45,7 +45,7 @@ if(!$imageformat) {
 ?>
 
 <!-- Grid -->
-<div class="container-main">
+<div class="container-main image-grid">
 <div class="row">
 <?php 
 

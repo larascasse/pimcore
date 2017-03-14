@@ -1,34 +1,11 @@
-<section class="area-lpn-slider-realisations-item">
-
-<?php 
-
-if(!function_exists ('toto')) {
-    function real_get_all_images_from_folder($asset) {
-        if(!($asset instanceof Asset_Folder)) {
-            return array();
-        }
-        $assets=Asset_Folder::getById($asset->id)->getChilds();
-        foreach ($assets as $assetChild) {
-            if($assetChild instanceof Asset_Folder) {
-                $assetsArray = real_get_all_images_from_folder($assetChild);
-            }
-            else if($assetChild instanceof Asset_Image) {
-                $assetsArray[] = $assetChild;
-
-            }
-        }
-        return $assetsArray;
-        
-    }
-}
-?>
 
 
 <?php if($this->editmode): ?>
     <?= $this->multihref("objectPaths",
     [
         "types" => ["object"],
-        "classes" => ["projectPost"]
+        "classes" => ["projectPost"],
+        "title" => "Faire glisser des réalisations"
 
     ]); ?>
 <?php else: ?>
@@ -48,7 +25,3 @@ if(!function_exists ('toto')) {
   
 
 <?php endif; ?>
-
-
-
-</section>

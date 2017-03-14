@@ -55,7 +55,7 @@ foreach($this->multihref("objectPaths") as $asset) {
 }
 foreach ($assets as $asset) {
     echo '<div class="col-'.(12/$count).'">';
-    $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$asset,'imageFormat'=> $this->select("imageformat")->getData()));
+    $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$asset,'imageformat'=> $imageformat));
     echo '</div>';
 } 
 ?>

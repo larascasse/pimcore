@@ -10,7 +10,7 @@
                 foreach ($children as $image) { ?>
 
                     <?php if($image instanceof Asset_Image) { ?>
-                        <div class="col-md-3 col-xs-6">
+                        <div class="col-6 col-md-3 ">
                             <a href="<?= $image->getThumbnail("galleryLightbox")->getPath(); ?>" class="thumbnail">
                                 <?= $image->getThumbnail("galleryThumbnail")->getHTML(); ?>
                             </a>

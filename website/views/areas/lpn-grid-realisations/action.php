@@ -7,7 +7,7 @@ use Pimcore\Model\Document;
  * Class Iframe
  * @package Pimcore\Model\Document\Tag\Area
  */
-class LpnGridProductImage extends Document\Tag\Area\AbstractArea
+class LpnGridRealisations extends Document\Tag\Area\AbstractArea
 {
     /**
      * reuired

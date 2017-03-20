@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <id>category-product</id>
-    <name>Produits d'une catégorie</name>
+    <name>LPN Produits d'une catégorie</name>
     <description></description>
     <author>pimcore.org</author>
     <version>1.0</version>

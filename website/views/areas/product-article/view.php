@@ -1,10 +1,10 @@
-<section class="area-gallery-folder">
-    <?php $this->template("/includes/area-headlines.php"); ?>
+
 
     <?php echo $this->renderlet("products", array(
         "controller" => "product",
+        "types"=>array("object"),
         "action" => "product-article-renderlet"
     )); ?>
 
-</section>
+
 

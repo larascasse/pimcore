@@ -3,23 +3,27 @@ $product = $this->product;
 $cols = $this->cols>0?$this->cols:3;
 $index = $this->index>0?$this->index:0;
 
- if($product instanceof Object_Product) { 
     $detailLink = $this->url(array(
                 "id" => $product->getId(),
                 "text" => $product->getName(),
                 "prefix" => ""
                     ), "produits");
 ?>
-    <div class="col-md-<?php echo $cols; ?> col-xs-6">
-        <div class="thumbnail">
+  
+        <li class="card clickable item">
          <?php if($product->getImage_1()) { ?>
-            <a class="pull-leftxx" href="<?php echo $detailLink; ?>">
-            <img class="media-object" src="<?php echo $product->getImage_1()->getThumbnail("productCategory")->getPath(); ?>">
-            </a>
+            
+            <img src="<?php echo $product->getImage_1()->getThumbnail("productCategory")->getPath(); ?>" class="img-responsive refreshcentered rollover">
+          
         <?php } ?>
-         <p><br /><?php echo $product->getName(); ?></p>
-         <p><?php echo $product->getPrice(); ?><span class="glyphicon glyphicon-euro"></span>
+       <div class="tabledesc">
+       <p class=""><?php echo $product->getCatalogue(); ?></p>
+        <p class=""><?php echo $product->getSubtype(); ?></p>
+         <h3 class="product-name"><?php echo $product->getShort_name(); ?></h3>
+                 <p class=""><?php echo $product->getShort_description(); ?></p>
+
          <!--<p><a href="<?php echo $detailLink; ?>" class="btn btn-primary" role="button">Voir</a></p>-->
-        </div>
-    </div>
- <?php } ?>
+         <a class="btn" href="<?php echo $detailLink; ?>">Voir</a>
+         </div>
+        </li>
+

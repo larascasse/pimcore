@@ -10,9 +10,9 @@ use Pimcore\Tool;
 ini_set('display_errors', 1);
         error_reporting(E_ALL);
 
-        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/urldef.php';
-        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/LPNEntities.php';
-        require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/functions.php';
+        //require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/urldef.php';
+        //require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/LPNEntities.php';
+        //require_once dirname(__FILE__).'/../../plugins/LpnPlugin/odata/lpnservices/functions.php';
 
 
 class ProductController extends Action

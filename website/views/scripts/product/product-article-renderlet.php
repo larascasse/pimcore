@@ -1,5 +1,5 @@
 
-<section>
+<h1>Renderlet</h1>
     <?php if($this->products) { ?>
         <div class="row">
             <?php
@@ -8,6 +8,7 @@
                 $totalCount = count($children);
                 foreach ($children as $product) { ?>
                     <?php 
+                             echo $product;
                              $this->template("includes/inc-product-cell.php", array(
     "product" => $product));
                     ?>

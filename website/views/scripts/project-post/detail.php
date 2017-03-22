@@ -5,6 +5,7 @@
     // set page meta-data
     $this->headTitle()->set($this->article->getName());
     $content = "";
+    $accroche  =  $this->article->getAccroche();
 
     $description  =  $this->article->getDescription();
    
@@ -81,8 +82,7 @@ foreach ($imagesArray->assets as $asset) {
 <div class="image-header-container noimg">
     <div>
       <h1><?= $this->article->getName(); ?></h1>
-      <div class="catLine">&nbsp;</div>
-      <p><?= $description ?></p>
+      <p><?=  $accroche ?></p>
     </div>
 
 </div>
@@ -101,7 +101,7 @@ foreach ($imagesArray->assets as $asset) {
     <?= $content ; ?>
     </div>
     <div class="col-sm-4 col-lg-3">
-    <p class="lead"><?= $this->article->getDescription(); ?></p>
+    <p class="lead"><?= $description ?></p>
     </div>
     </div>
 

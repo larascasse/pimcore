@@ -19,7 +19,7 @@ $article = $this->article;
 <div class="card-block">
  <a href="<?= $detailLink; ?>">
   <h4 class="card-title"><?= $article->getName() ?></h4>
-  <p class="card-text"><?= $article->getDescription(); ?></p>
+  <p class="card-text"><?= $article->getAccroche(); ?></p>
   
  </a>
 </div>

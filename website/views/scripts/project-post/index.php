@@ -3,7 +3,7 @@
 <hr />
 
 <div class="blog">
-    <div class="card-columns clickable">
+    <div class="card-columns">
         <?php foreach ($this->articles as $article) { ?>
         
             <?= $this->template("/snippets/lpn-grid-realisations-item.php",array('article'=>$article)); ?>

@@ -1,5 +1,5 @@
 
-<div class="card">
+<div class="card clickable">
 <?php
 $article = $this->article;
         $detailLink = $this->url([

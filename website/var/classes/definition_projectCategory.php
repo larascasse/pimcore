@@ -1,11 +1,7 @@
 <?php 
 
 /** 
-<<<<<<< HEAD
-* Generated at: 2017-02-23T15:18:58+01:00
-=======
-* Generated at: 2017-02-23T15:13:53+01:00
->>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
+* Generated at: 2017-03-27T14:47:56+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
@@ -22,6 +18,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectCategory',
    'description' => '',
    'creationDate' => 0,
+   'modificationDate' => 1490618875,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -58,7 +55,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
          'title' => NULL,
          'width' => NULL,
          'height' => NULL,
-         'collapsible' => NULL,
+         'collapsible' => false,
          'collapsed' => NULL,
          'bodyStyle' => NULL,
          'datatype' => 'layout',
@@ -86,33 +83,33 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => true,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => true
+                 'visibleSearch' => true,
               )),
             ),
              'name' => 'localizedfields',
              'region' => NULL,
              'layout' => NULL,
              'title' => NULL,
-             'width' => NULL,
-             'height' => NULL,
+             'width' => '',
+             'height' => '',
              'maxTabs' => NULL,
              'labelWidth' => NULL,
              'referencedFields' => 
             array (
             ),
-             'tooltip' => NULL,
-             'mandatory' => NULL,
-             'noteditable' => NULL,
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
              'index' => NULL,
-             'locked' => NULL,
-             'style' => NULL,
+             'locked' => false,
+             'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
              'columnType' => NULL,
@@ -123,13 +120,13 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleSearch' => true,
           )),
         ),
-         'locked' => NULL,
+         'locked' => false,
       )),
     ),
      'locked' => NULL,
   )),
    'icon' => '',
-   'previewUrl' => '',
+   'previewUrl' => '/projets/category/%o_key',
    'group' => '',
    'propertyVisibility' => 
   array (

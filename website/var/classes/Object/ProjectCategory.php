@@ -1,11 +1,7 @@
 <?php 
 
 /** 
-<<<<<<< HEAD
-* Generated at: 2017-02-23T15:18:58+01:00
-=======
-* Generated at: 2017-02-23T15:13:53+01:00
->>>>>>> 662512179337c23b9bc4fd52963b34353b10b54b
+* Generated at: 2017-03-27T14:47:56+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)

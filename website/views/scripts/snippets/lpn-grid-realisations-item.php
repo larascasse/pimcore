@@ -1,14 +1,24 @@
 
 <div class="card clickable">
 <?php
+
+
 $article = $this->article;
-        $detailLink = $this->url([
-            //"id" => $article->getId(),
-            //"text" => $article->getName(),
-            //"prefix" => $this->document->getFullPath()
-            "key" => $article->getKey()
-        ], "projet", true);
-        $product = $article->getRelatedProduct();
+      echo $article->getKey();
+    
+/*** MARCHE PAS DANS WEBSERCIVE project:category/all
+//TODO, FB TOTDO
+      $detailLink = $this->url([
+          //"id" => $article->getId(),
+          //"text" => $article->getName(),
+          //"prefix" => $this->document->getFullPath()
+          "key" => $article->getKey()
+      ], "projet", false);
+      */
+
+$detailLink = 'project/'.$article->getKey();
+$product = $article->getRelatedProduct();
+
     ?>
            
 

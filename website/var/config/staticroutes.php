@@ -225,5 +225,35 @@ return [
         "priority" => 1,
         "creationDate" => 1487944315,
         "modificationDate" => 1487952031
+    ],
+    16 => [
+        "id" => 16,
+        "name" => "project-category",
+        "pattern" => "/\\/projets\\/category\\/(.*)/",
+        "reverse" => "/projets/category/%key",
+        "module" => NULL,
+        "controller" => "project-category",
+        "action" => "detail",
+        "variables" => "key",
+        "defaults" => NULL,
+        "siteId" => NULL,
+        "priority" => 0,
+        "creationDate" => 1490618748,
+        "modificationDate" => 1490619605
+    ],
+    17 => [
+        "id" => 17,
+        "name" => "project-category-all",
+        "pattern" => "/\\/projects\\/category\\/all/",
+        "reverse" => "/projects/category/all",
+        "module" => "",
+        "controller" => "project-category",
+        "action" => "get-all",
+        "variables" => NULL,
+        "defaults" => NULL,
+        "siteId" => NULL,
+        "priority" => 0,
+        "creationDate" => 1490619582,
+        "modificationDate" => 1490619741
     ]
 ];

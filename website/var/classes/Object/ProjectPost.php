@@ -1,17 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2017-02-24T15:02:03+01:00
+* Generated at: 2017-03-22T16:43:02+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 127.0.0.1
+* IP: 172.31.30.232
 
 
 Fields Summary: 
 - category [objects]
 - localizedfields [localizedfields]
 -- name [input]
+-- accroche [textarea]
 -- description [textarea]
 - images [multihref]
 - content [textarea]
@@ -104,6 +105,19 @@ public function getName ($language = null) {
 }
 
 /**
+* Get accroche - Accroche
+* @return string
+*/
+public function getAccroche ($language = null) {
+	$data = $this->getLocalizedfields()->getLocalizedValue("accroche", $language);
+	$preValue = $this->preGetValue("accroche"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	 return $data;
+}
+
+/**
 * Get description - description
 * @return string
 */
@@ -133,6 +147,16 @@ public function setLocalizedfields ($localizedfields) {
 */
 public function setName ($name, $language = null) {
 	$this->getLocalizedfields()->setLocalizedValue("name", $name, $language);
+	return $this;
+}
+
+/**
+* Set accroche - Accroche
+* @param string $accroche
+* @return \Pimcore\Model\Object\ProjectPost
+*/
+public function setAccroche ($accroche, $language = null) {
+	$this->getLocalizedfields()->setLocalizedValue("accroche", $accroche, $language);
 	return $this;
 }
 

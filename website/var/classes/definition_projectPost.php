@@ -1,17 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2017-02-24T15:02:03+01:00
+* Generated at: 2017-03-22T16:43:02+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 127.0.0.1
+* IP: 172.31.30.232
 
 
 Fields Summary: 
 - category [objects]
 - localizedfields [localizedfields]
 -- name [input]
+-- accroche [textarea]
 -- description [textarea]
 - images [multihref]
 - content [textarea]
@@ -22,7 +23,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1487944922,
+   'modificationDate' => 1490197382,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -137,6 +138,29 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
+                 'name' => 'accroche',
+                 'title' => 'Accroche',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%;',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
                  'name' => 'description',
                  'title' => 'description',
                  'tooltip' => '',
@@ -156,7 +180,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'name' => 'localizedfields',
              'region' => NULL,
              'layout' => NULL,
-             'title' => NULL,
+             'title' => '',
              'width' => '',
              'height' => '',
              'maxTabs' => NULL,

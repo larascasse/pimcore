@@ -58,7 +58,7 @@ foreach ($imagesArray->assets as $asset) {
      
      //$content .='<div class="col-12">';
      $item .='<figure class="card">';
-     $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid"]);
+     $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid norelazy"]);
      $item .='<figcaption class="card-block">';
      $item .='<p class="card-text">'.$imageProductName.'</p>';
      $item.='</figcaption>';

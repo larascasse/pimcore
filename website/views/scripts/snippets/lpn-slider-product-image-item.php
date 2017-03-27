@@ -1,4 +1,8 @@
-
+<?php 
+/*
+Affiche un asset, et le produit associé en légende
+*/
+?>
 <div class="card">
 <?php
 $asset = $this->asset;

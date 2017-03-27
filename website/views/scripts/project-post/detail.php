@@ -91,17 +91,35 @@ foreach ($imagesArray->assets as $asset) {
     <div class="row">
         <div class="col">
         <?php if($posterImage ) {
-            echo  $posterImage->getThumbnail("content")->getHTML(["class" => "img-responsive norelazy__"]);
+            echo  $posterImage->getThumbnail("content")->getHTML(["class" => "img-responsive norelazy"]);
 
         }?>
         </div>
     </div>
+
+     <!-- Content -->
+    <div class="row table-product-detail">
+        <div class="col-12 col-md-6">
+            <p class="lead__"><?= $description ?></p>
+        </div>
+        
+        <div class="col">
+
+        <?php if ($product) { 
+                $this->template("/snippets/lpn-slider-product-item.php",array('product'=>$product,'cardformat'=>'card-horizontal clickable'));
+
+        }
+        ?>
+        </div>
+    </div>
+    <!-- / Content -->
+    
+    <!-- Images -->
     <div class="row">
-    <div class="col-sm-8 col-lg-9">
-    <?= $content ; ?>
+        <div class="col">
+        <?= $content ; ?>
+        </div>
     </div>
-    <div class="col-sm-4 col-lg-3">
-    <p class="lead"><?= $description ?></p>
-    </div>
-    </div>
+    <!-- / Images -->
+
 

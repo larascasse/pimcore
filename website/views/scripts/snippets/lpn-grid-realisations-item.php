@@ -15,7 +15,7 @@ $article = $this->article;
       ], "projet", false);
       */
 
-$detailLink = 'project/'.$article->getKey();
+$detailLink = 'projet/'.$article->getKey();
 $product = $article->getRelatedProduct();
 
     ?>

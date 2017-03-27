@@ -1,28 +1,17 @@
+<div class="image-header-container  noimg">
+    <div>
+      <h1>Projets</h1>
+      <?php  echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); ?>
+    </div>
+</div>
+
+
 <?php
 
 
+
 ?>
-<ul class="nav nav-tabs justify-content-center">
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $this->category->getName()?></a>
-    <div class="dropdown-menu">
-    <?php foreach ($this->categories as $allCategory) { 
-        // print_r($categories);
-        //die;
-     // echo '<hr>';
-//print_r($categories);
 
-    //  die;
-        ?>
-      <a class="dropdown-item <?php echo ($allCategory->getId()== $this->category->getId())?"active":"";?>" href="/projets/category/<?php echo $allCategory->getKey() ?>"><?php echo $allCategory->getName() ?></a>
-      <?php 
-       echo $allCategory->getKey();
-   
-
-      } ?>
-    </div>
-  </li>
-</ul>
 
 
 <div class="blog">
@@ -30,7 +19,7 @@
         <?php 
           
            foreach ($this->projects as $project) { 
-           
+
 
           echo $this->template("/snippets/lpn-grid-realisations-item.php",array('article'=>$project)); ?>
 

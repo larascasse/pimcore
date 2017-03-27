@@ -4,7 +4,6 @@
 
 
 $article = $this->article;
-      echo $article->getKey();
     
 /*** MARCHE PAS DANS WEBSERCIVE project:category/all
 //TODO, FB TOTDO

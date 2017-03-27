@@ -1,15 +1,17 @@
-<?= $this->areablock("content"); ?>
+<div class="image-header-container  noimg">
+    <div>
+      <h1>Projets</h1>
+            <?php  echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); ?>
 
-<ul class="nav nav-tabs justify-content-center">
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tous les projets</a>
-    <div class="dropdown-menu">
-    <?php foreach ($this->categories as $category) { ?>
-      <a class="dropdown-item" href="/projets/category/<?php echo $category->getKey() ?>"><?php echo $category->getName() ?></a>
-      <?php } ?>
     </div>
-  </li>
-</ul>
+</div>
+
+<?php
+
+ echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); 
+
+?>
+
 
 
 <div class="blog">

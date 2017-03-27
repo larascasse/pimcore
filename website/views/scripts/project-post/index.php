@@ -6,15 +6,8 @@
     </div>
 </div>
 
-<?php
 
- echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); 
-
-?>
-
-
-
-<div class="blog">
+<div class="projects">
     <div class="card-columns">
         <?php foreach ($this->articles as $article) { ?>
         

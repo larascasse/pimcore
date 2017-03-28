@@ -108,7 +108,7 @@ foreach ($imagesArray->assets as $asset) {
      <!-- Content -->
     <div class="row table-product-detail">
         <div class="col-12 col-md-6">
-            <p class="lead__"><?= $description ?></p>
+            <p class="realisation-description"><?= $description ?></p>
         </div>
         
         <div class="col">
@@ -117,6 +117,13 @@ foreach ($imagesArray->assets as $asset) {
                 $this->template("/snippets/lpn-slider-product-item.php",array('product'=>$product,'cardformat'=>'card-horizontal clickable'));
 
         }
+        else {?>
+                <div class="realisation-contact">
+                Les détails de ce produit n'est pas encore en ligne. Mais nous nous y efforçons.
+                Si vous souhaitez plus de renseignements, n'hésitez pas à nous contacter<br />
+                <a href="/contact?real=<?php echo $this->article->getKey()?>" class="btn btn-contact">Contactez-nous</a>
+                </div>
+        <?php }
         ?>
         </div>
     </div>

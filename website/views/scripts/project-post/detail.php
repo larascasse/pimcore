@@ -35,8 +35,8 @@
 
 
 //print_r($imagesArray);
- $content.='<div class="_row 
- card-columns" style="column-count: 2;">';
+ $content.='<div class="realisation-detail 
+ card-columns">';
  $oddList=array();
  $evenList= array();
  $ind=0;

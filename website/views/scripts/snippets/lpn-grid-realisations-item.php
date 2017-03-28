@@ -29,7 +29,7 @@ $product = $article->getRelatedProduct();
  <a href="<?= $detailLink; ?>">
   <h4 class="card-title"><?= $article->getName() ?></h4>
   <p class="card-text"><?= $article->getAccroche(); ?></p>
-  <p class="card-text"><?= $article->getKey(); ?></p>
+  <!--<p class="card-text"><?= $article->getKey(); ?></p>-->
   
  </a>
 </div>

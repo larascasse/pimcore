@@ -21,7 +21,7 @@ class ProjectCategory extends Object\ProjectCategory {
 
     public function getMageUrl() {
     	//return "projet/".$this->o_key;
-    	return ltrim("projet/category/".$this->o_key,"/");
+    	return ltrim("projets/category/".$this->o_key,"/");
     }
 
     public function getShortArray() {

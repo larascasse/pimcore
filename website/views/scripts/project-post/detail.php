@@ -52,12 +52,12 @@ foreach ($imagesArray->assets as $asset) {
     if($imageProduct) {
         $imageProductName = $imageProduct->getName();
     }
-
+    $cardclass=strlen($imageProductName>0)?" notext":"";
     $item = "";
    
      
      //$content .='<div class="col-12">';
-     $item .='<figure class="card">';
+     $item .='<figure class="card'.$cardclass.'">';
      $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid norelazy"]);
      $item .='<figcaption class="card-block">';
      $item .='<p class="card-text">'.$imageProductName.'</p>';

@@ -40,6 +40,7 @@
  $oddList=array();
  $evenList= array();
  $ind=0;
+ $lastProductName ="";
 foreach ($imagesArray->assets as $asset) {
     //On zappe la premire image, header ..
     if( $ind==0) {
@@ -50,9 +51,12 @@ foreach ($imagesArray->assets as $asset) {
     $imageProduct = $asset->getRelatedProduct();
 
     if($imageProduct) {
-        $imageProductName = $imageProduct->getName();
+        //on ne duplique pas les légende
+        if($lastProductName!=$imageProduct->getName()) {
+            $lastProductName = $imageProductName = $imageProduct->getName();
+        }
     }
-    $cardclass=strlen($imageProductName>0)?" notext":"";
+    $cardclass=strlen($imageProductName>0)?"":" notext";
     $item = "";
    
      

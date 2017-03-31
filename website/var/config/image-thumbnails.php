@@ -18,6 +18,22 @@ return [
                         "width" => 320
                     ]
                 ]
+            ],
+            "640w" => [
+                [
+                    "method" => "scaleByWidth",
+                    "arguments" => [
+                        "width" => 640
+                    ]
+                ]
+            ],
+            "1024w" => [
+                [
+                    "method" => "scaleByWidth",
+                    "arguments" => [
+                        "width" => 1024
+                    ]
+                ]
             ]
         ],
         "name" => "content",
@@ -27,7 +43,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1489482385,
+        "modificationDate" => 1490628888,
         "creationDate" => 1489482361,
         "id" => "content"
     ],

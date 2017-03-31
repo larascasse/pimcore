@@ -88,7 +88,7 @@ for($i=0; $i<$count; $i++) {
 
     ?> 
     <!--  item -->
-    <div class="col<?php echo  $smallClass?> table-bloc-thumb">
+    <div class="<?php echo  $smallClass?> table-bloc-thumb">
     
 
 

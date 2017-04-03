@@ -24,8 +24,8 @@
     <div>
     Prix : <?php  echo $this->select("hide_price",
         ["store" => [
-            "false"=>'Montrer le prix',
-             "true"=>'Cacher le prix'
+            "false",'Montrer le prix',
+             "true",'Cacher le prix'
              ]
         ]
         ); 
@@ -39,8 +39,8 @@
     <div>
     Titre : <?php  echo $this->select("hide_title",
         ["store" => [
-            "false"=>'Montrer le titre',
-             "true"=>'Cacher le titre'
+            "false",'Montrer le titre',
+             "true",'Cacher le titre'
              ]
         ]
         );

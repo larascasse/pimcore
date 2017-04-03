@@ -148,7 +148,7 @@ for($i=0; $i<$count; $i++) {
         <div class="<?= $cardClass?><?=  $classNoRoll ?> clickable">
          <div class="card-block">
             <div class="card-title"><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></div>
-            <div class="card-text"><?= $this->textarea("description".$i, ["width" => 600,'placeholder'=>'Description',"htmlspecialchars"=>false]); ?></div>
+            <div class="card-text"><?= $this->textarea("description".$i, ["width" => 600,'placeholder'=>'Description',"htmlspecialchars"=>false]); ?>
                     
             <?php 
             if ($this->editmode) { 
@@ -156,7 +156,8 @@ for($i=0; $i<$count; $i++) {
                 echo $this->input("btn_title".$i, ["width" => 600, "placeholder"=>"Titre du bouton"]); 
 
             }
-            
+            echo '<div class="actions">';
+
             echo $this->renderlet("link".$i, array(
                         "types"=>array("object"),
                         "controller" => "content",
@@ -166,12 +167,12 @@ for($i=0; $i<$count; $i++) {
                         "previewmode" => $this->previewmode,
                         "btn_title" => $this->input("btn_title".$i)
              ));
-
+             echo '</div>';
 
 
             
             ?>
-
+            </div>
         </div>
      </div>
 

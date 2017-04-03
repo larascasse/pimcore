@@ -6,7 +6,7 @@ if($this->editmode) {
     $classNoRoll = "noroll";
 ?>
     <div class="container" style="padding-bottom: 40px">
-        Nombre de colonnes: <?= $this->select("columns", [
+        Nombre d'image: <?= $this->select("columns", [
             "width" => 60,
             "reload" => true,
             "store" => [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]]
@@ -63,9 +63,15 @@ for($i=0; $i<$count; $i++) {
             break;
 
         case 4:
-            $pimcoreThimbClass = "magento_equigrid_h";
-            $smallClass="-sm-12 col-md-6";
-            $smallClass="col-12 col-sm-6 col-sm-3";
+            if ($defaultCardClass=="rollbloc") {
+                $pimcoreThimbClass = "magento_equigrid_v";
+                $smallClass="col-6";
+            }
+            else {
+                $pimcoreThimbClass = "magento_equigrid_h";
+                $smallClass="col-12 col-sm-6 col-sm-3";
+            }
+           
             break;
 
         case 3:

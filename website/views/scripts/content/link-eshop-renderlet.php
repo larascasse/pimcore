@@ -24,7 +24,7 @@ else if($category = $this->category) {
    	}
     else {
    
-    	$widget =  ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
+    	$widget =  ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
     	echo $widget;
 
 
@@ -43,7 +43,7 @@ else if($document = $this->document) {
 	echo $document->getName()." ".$document->getId();
 
 	if($this->previewmode) {
-    	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
+    	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
    

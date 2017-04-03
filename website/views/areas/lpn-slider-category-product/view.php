@@ -97,6 +97,7 @@ if($category) {
 ?>
    
             </div>
+            
   
 
 <?php endif; ?>

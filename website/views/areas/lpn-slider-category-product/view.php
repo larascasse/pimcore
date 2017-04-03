@@ -22,7 +22,32 @@
 
     </div>
     <div>
-    Cacher le prix : <?= $this->checkbox("hide_price"); ?>
+    Prix : <?php  echo $this->select("hide_price",
+        ["store" => [
+            "false"=>'Montrer le prix',
+             "true"=>'Cacher le prix'
+             ]
+        ]
+        ); 
+        if($this->select("hide_price")->isEmpty()):
+            $this->select("hide_price")->setDataFromResource("false");
+         endif;
+
+    ?>
+
+    </div>
+    <div>
+    Titre : <?php  echo $this->select("hide_title",
+        ["store" => [
+            "false"=>'Montrer le titre',
+             "true"=>'Cacher le titre'
+             ]
+        ]
+        );
+     if($this->select("hide_title")->isEmpty()):
+        $this->select("hide_title")->setDataFromResource("false");
+    endif;
+     ?>
 
     </div>
 
@@ -63,8 +88,9 @@ if($this->select("viewType")->getData() == 'products-grid') {
 
 $category = $this->href("objectPaths")->getElement();
 if($category) { 
-    $showPrice = $this->checkbox("hide_price")->isChecked()?0:1;
-    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'"}}';
+    $showPrice = $this->select("hide_price")->getData();
+    $showTitle = $this->select("hide_title")->getData();
+    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'" show_title"'.$showTitle.'"}}';
     echo  $str;
 }
 

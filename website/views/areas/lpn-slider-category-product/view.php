@@ -37,15 +37,15 @@
 
     </div>
     <div>
-    Titre : <?php  echo $this->select("show_title",
+    Titre : <?php  echo $this->select("hide_title",
         ["store" => [
-            ["1",'Montrer le titre'],
-             ["0",'Cacher le titre']
+            ["0",'Montrer le titre'],
+             ["1",'Cacher le titre']
              ]
         ]
         );
-     if($this->select("show_title")->isEmpty()):
-        $this->select("show_title")->setDataFromResource("1");
+     if($this->select("hide_title")->isEmpty()):
+        $this->select("hide_title")->setDataFromResource("0");
     endif;
      ?>
 
@@ -89,8 +89,8 @@ if($this->select("viewType")->getData() == 'products-grid') {
 $category = $this->href("objectPaths")->getElement();
 if($category) { 
     $showPrice = $this->select("show_price")->getData();
-    $showTitle = $this->select("show_title")->getData();
-    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'" show_title="'.$showTitle.'"}}';
+    $hideTitle = $this->select("hide_title")->getData();
+    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'" hide_title="'.$hideTitle.'"}}';
     echo  $str;
 }
 

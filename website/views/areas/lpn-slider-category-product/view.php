@@ -64,8 +64,7 @@ if($this->select("viewType")->getData() == 'products-grid') {
 $category = $this->href("objectPaths")->getElement();
 if($category) { 
     $showPrice = $this->checkbox("hide_price")->isChecked()?0:1;
-    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-"'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'"}}';
-    echo "klmklmkmlklklmklmkml";
+    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'"}}';
     echo  $str;
 }
 

@@ -1,6 +1,7 @@
 <?php
 $defaultBricks = array(
     'lpn-slider-product-image',
+    'lpn-slider-category-product'
     /*'alert',
     'button',
     'carousel',

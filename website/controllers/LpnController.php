@@ -97,7 +97,8 @@ class LpnController extends Action
         $this->disableViewAutoRender();
 
         $listing = new \Pimcore\Model\Document\Listing(); 
-        $listing->setCondition("parentId = 230");
+       // $listing->setCondition("parentId = 230");
+        $listing->setCondition('o_path LIKE \'/cms-block/%\'');
         $pages=array();
         foreach($listing as $doc) {
             //echo $doc->getContent();

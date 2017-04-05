@@ -15,7 +15,7 @@ $cssClass= (!$this->image("image")->getSrc())?" noimg":"";
 $bkg = null;
 
 if($this->image("image")->getSrc()) {
-  $bkg= "style=\"background-image:url('".$this->image("image")->getSrc()."')\"";
+  $bkg= "style=\"background-image:url('".$this->image("image")->getThumbnail('magento_header')."')\"";
   $cssClass .= " lpn-covered";
 }
 

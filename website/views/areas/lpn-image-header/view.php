@@ -21,7 +21,7 @@ if($this->image("image")->getSrc()) {
 
 
 ?>
-<div class="image-header-container <?= $cssClass ?>">
+<div class="image-header-container <?= $cssClass ?>" <?= $bkg ?>>
 <?php
 if($this->editmode || !isset($bkg))
 echo $this->image("image", [

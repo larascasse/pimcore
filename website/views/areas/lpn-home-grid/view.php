@@ -15,7 +15,7 @@ if($this->editmode) {
 
     <div class="container" style="padding-bottom: 40px">
         Type: <?= $this->select("cardClass", [
-            "width" => 100,
+            "width" => 300,
             "reload" => true,
             "store" => [['rollbloc',"Texte sur photo, roll"],['card','Text en dessous'],['hero','Text centré']]
         ]); ?>

@@ -178,6 +178,7 @@ for($i=0; $i<$count; $i++) {
         }
         ?>
         <div class="image-header-container lpn-hero lpn-covered" <?php echo $bkg?>>
+        <div>
         <h2><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></h2>
         <p><?= $this->textarea("description".$i, ["width" => 600,'placeholder'=>'Description',"htmlspecialchars"=>false]); ?></p>
                 
@@ -204,7 +205,7 @@ for($i=0; $i<$count; $i++) {
             
             ?>
          </div>
-    
+        </div>
 
 
     <?php else : ?>

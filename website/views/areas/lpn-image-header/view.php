@@ -17,7 +17,7 @@ $cssClass= (!$this->image("image")->getSrc())?" noimg":"";
 <?php
 echo $this->image("image", [
                             "class" => "img-fluid",
-                            "thumbnail" => "magento_selection",
+                            "thumbnail" => "magento_header",
                             "placeholder" =>  "Image",
                              "width" => 200,
                              "height" => 200,

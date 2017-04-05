@@ -51,6 +51,7 @@ echo $this->image("image", [
         if(strlen($textarea->getData())>0) :
             echo '<p>'.$textarea->getData().'</p>';
         endif;
+      endif;
       ?>
     </div>
 

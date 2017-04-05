@@ -17,7 +17,7 @@ if($this->editmode) {
         Type: <?= $this->select("cardClass", [
             "width" => 100,
             "reload" => true,
-            "store" => [['rollbloc',"Texte sur photo, roll"],['card','Text en dessous']]
+            "store" => [['rollbloc',"Texte sur photo, roll"],['card','Text en dessous'],['hero','Text centré']]
         ]); ?>
     </div>
 
@@ -92,6 +92,11 @@ for($i=0; $i<$count; $i++) {
         $smallClass="col col-sm col-md";
     }
 
+    //On remet le herp
+    if($this->select("cardClass")->getData()=="hero"){
+     $cardClass="hero";
+    }
+
     ?> 
     <!--  item -->
     <div class="<?php echo  $smallClass?> table-bloc-thumb">
@@ -101,19 +106,30 @@ for($i=0; $i<$count; $i++) {
 <?php
 
     if($this->editmode) {
-
+        echo $this->image("image".$i,array(
+            "thumbnail" => $pimcoreThimbClass,
+            "class" => "img-fluid".$classNoRoll
+            
+        )
+        );
     }
 
-    echo $this->image("image".$i,array(
-        "thumbnail" => $pimcoreThimbClass,
-        "class" => "img-fluid".$classNoRoll
-        
-    )
-    );
+    
 
 ?>
-    <?php if ($cardClass != "card") : ?>
+    <?php if ($cardClass == "rollbloc") : ?>
         <div class="<?= $cardClass?><?=  $classNoRoll ?>">
+
+        <?php 
+        if(!$this->editmode) {
+        echo $this->image("image".$i,array(
+            "thumbnail" => $pimcoreThimbClass,
+            "class" => "img-fluid".$classNoRoll
+            
+        )
+        );
+    }
+        ?>
         <div class="table-bloc-thumb-text<?=  $classNoRoll ?> nsg_container">
             <div class="table-thumb-type">
                 <span class="table-thumb-subtext"><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></span>
@@ -148,9 +164,60 @@ for($i=0; $i<$count; $i++) {
 
          </div>
          </div>
+
+
+
+      <?php elseif ($cardClass == "hero") : ?>
+        
+          <?php 
+        if(!$this->editmode) {
+            if($this->image("image")->getSrc()) {
+              $bkg= "style=\"background-image:url('".$this->image("image")->getThumbnail($pimcoreThimbClass)."')\"";
+            }
+
+        }
+        ?>
+        <div class="image-header-container lpn-hero lpn-covered" <?php echo $bkg?>>
+        <h2><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></h2>
+        <p><?= $this->textarea("description".$i, ["width" => 600,'placeholder'=>'Description',"htmlspecialchars"=>false]); ?></p>
+                
+  
+            <?php 
+            if ($this->editmode) { 
+              
+                echo $this->input("btn_title".$i, ["width" => 600, "placeholder"=>"Titre du bouton"]); 
+
+            }
+            
+            echo $this->renderlet("link".$i, array(
+                        "types"=>array("object"),
+                        "controller" => "content",
+                        "action" => "link-eshop-renderlet",
+                        "title" => "Glisser un doc, un produit, une categorie",
+                        "editmode" => $this->editmode,
+                        "previewmode" => $this->previewmode,
+                        "btn_title" => $this->input("btn_title".$i)
+             ));
+
+
+
+            
+            ?>
+         </div>
     
 
+
     <?php else : ?>
+          <?php 
+        if(!$this->editmode) {
+            echo $this->image("image".$i,array(
+                "thumbnail" => $pimcoreThimbClass,
+                "class" => "img-fluid".$classNoRoll
+                
+            )
+            );
+        }
+        ?>
         <div class="<?= $cardClass?><?=  $classNoRoll ?> clickable">
          <div class="card-block">
             <div class="card-title"><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></div>

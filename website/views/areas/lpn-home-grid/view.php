@@ -171,8 +171,8 @@ for($i=0; $i<$count; $i++) {
         
           <?php 
         if(!$this->editmode) {
-            if($this->image("image")->getSrc()) {
-              $bkg= "style=\"background-image:url('".$this->image("image")->getThumbnail($pimcoreThimbClass)."')\"";
+            if($this->image("image".$i)->getSrc()) {
+              $bkg= "style=\"background-image:url('".$this->image("image".$i)->getThumbnail($pimcoreThimbClass)."')\"";
             }
 
         }

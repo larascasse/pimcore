@@ -12,9 +12,18 @@ if ($this->editmode) { ?>
 
 $cssClass= (!$this->image("image")->getSrc())?" noimg":"";
 
+$bkg = null;
+
+if($this->image("image")->getSrc()) {
+  $bkg= "style=\"background-image:url(' + imageSource + ')'\"";
+  $cssClass .= " lpn-covered";
+}
+
+
 ?>
 <div class="image-header-container <?= $cssClass ?>">
 <?php
+if($this->editmode || !isset($bkg))
 echo $this->image("image", [
                             "class" => "img-fluid",
                             "thumbnail" => "magento_header",

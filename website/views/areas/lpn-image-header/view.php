@@ -32,14 +32,26 @@ echo $this->image("image", [
         "placeholder" => "Titre",
         "class" => "editmode" //Edit mode
     ]); ?></h1>
-      <div class="catLine">&nbsp;</div>
-      <p><?= $this->textarea("description",[
+      
+      <?php 
+
+      $textarea = $this->textarea("description",[
         "nl2br" => true,
         "width" => 600,
         "height" => 50,
         "placeholder" => "Sous-titre",
         "class" => "editmode" //Edit mode
-    ]); ?></p>
+    ]);
+      if ($this->editmode) :
+        ?>
+      <p><?= $textarea; ?></p>
+
+      <?php
+      else : 
+        if(strlen($textarea->getData())>0) :
+            echo '<p>'.$textarea->getData().'</p>';
+        endif;
+      ?>
     </div>
 
 </div>

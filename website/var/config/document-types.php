@@ -86,4 +86,16 @@ return [
         "modificationDate" => 0,
         "id" => 7
     ],
+    8 => [
+        "name" => "LPN Snippet Wisiwig",
+        "module" => "",
+        "controller" => "",
+        "action" => "",
+        "template" => "/snippets/lpn-snippet-wysiwyg.php",
+        "type" => "snippet",
+        "priority" => 0,
+        "creationDate" => 1391528439,
+        "modificationDate" => 1391528508,
+        "id" => 8
+    ],
 ];

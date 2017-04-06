@@ -1,4 +1,4 @@
-<div class="image-header-container  noimg">
+<div class="image-header-container noimg">
     <div>
       <h1>Projets</h1>
       <?php  echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); ?>

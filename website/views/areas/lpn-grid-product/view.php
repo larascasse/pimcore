@@ -50,7 +50,7 @@ if(!$imageformat) {
 <?php 
 
 $index=0;
-echo '<ul class="products-grid list-for-subcategory cols'.($count).'">';
+echo '<div class="products-grid list-for-subcategory cols'.($count).'">';
 foreach($this->multihref("objectPaths") as $product) { 
 
     
@@ -63,7 +63,7 @@ foreach($this->multihref("objectPaths") as $product) {
     $index++;
   
 } 
-echo '</ul>';
+echo '</div>';
 ?>
    
 </div>

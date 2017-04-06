@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <id>lpn-slider-category-product</id>
-    <name>LPN Slider Categorie Produit</name>
-    <description>Slider catégorie de produit</description>
+    <name>LPN Slider/Grid Categorie Produit (mage widget)</name>
+    <description>Slider ou grille catégorie de produit</description>
     <author>pimcore.org</author>
     <version>1.0</version>
 </zend-config>

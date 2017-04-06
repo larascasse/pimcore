@@ -55,18 +55,22 @@ return [
                     "width" => "512",
                     "height" => "260",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "featurerette",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 85,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "featurerette"
     ],
     "galleryCarousel" => [
@@ -77,7 +81,7 @@ return [
                     "width" => "1140",
                     "height" => "400",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
@@ -113,11 +117,15 @@ return [
                 ]
             ]
         ],
+        "name" => "galleryCarousel",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "galleryCarousel"
     ],
     "galleryCarouselPreview" => [
@@ -128,18 +136,22 @@ return [
                     "width" => "100",
                     "height" => "54",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "galleryCarouselPreview",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "galleryCarouselPreview"
     ],
     "galleryLightbox" => [
@@ -169,18 +181,22 @@ return [
                     "width" => "260",
                     "height" => "180",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "galleryThumbnail",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "galleryThumbnail"
     ],
     "magento_base" => [
@@ -207,18 +223,22 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => "1400"
+                    "width" => 800
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "magento_header",
         "description" => "",
         "format" => "SOURCE",
-        "quality" => 90,
+        "quality" => 75,
         "highResolution" => 0,
-        "filenameSuffix" => "",
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491402378,
+        "creationDate" => 1491397895,
         "id" => "magento_header"
     ],
     "magento_origine" => [
@@ -248,7 +268,7 @@ return [
                     "width" => 1400,
                     "height" => 1000,
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => TRUE
+                    "forceResize" => FALSE
                 ]
             ]
         ],
@@ -305,7 +325,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1489482334,
+        "modificationDate" => 1491520146,
         "creationDate" => 1483528764,
         "id" => "magento_realisation"
     ],
@@ -347,18 +367,22 @@ return [
                     "width" => "1400",
                     "height" => "1000",
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "magento_small",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 80,
         "highResolution" => 0,
-        "filenameSuffix" => "",
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "magento_small"
     ],
     "magento_thumbnail" => [
@@ -388,18 +412,22 @@ return [
                     "width" => "80",
                     "height" => "80",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "newsList",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 0,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "newsList"
     ],
     "productCarousel" => [
@@ -410,18 +438,22 @@ return [
                     "width" => "1400",
                     "height" => "1000",
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "productCarousel",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 0,
-        "filenameSuffix" => "",
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "productCarousel"
     ],
     "productCategory" => [
@@ -477,18 +509,22 @@ return [
                     "width" => "275",
                     "height" => "150",
                     "positioning" => "center",
-                    "doNotScaleUp" => "1"
+                    "forceResize" => FALSE
                 ]
             ]
         ],
         "medias" => [
 
         ],
+        "name" => "standardTeaser",
         "description" => "",
         "format" => "SOURCE",
         "quality" => 90,
         "highResolution" => 2,
-        "filenameSuffix" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491520146,
+        "creationDate" => 1491520146,
         "id" => "standardTeaser"
     ],
     "magento_equigrid_h" => [
@@ -499,7 +535,7 @@ return [
                     "width" => 1385,
                     "height" => 828,
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => TRUE
+                    "forceResize" => FALSE
                 ]
             ]
         ],
@@ -545,7 +581,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1489480487,
+        "modificationDate" => 1491520146,
         "creationDate" => 1483711729,
         "id" => "magento_equigrid_h"
     ],
@@ -557,7 +593,7 @@ return [
                     "width" => 676,
                     "height" => 828,
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => FALSE
+                    "forceResize" => TRUE
                 ]
             ]
         ],
@@ -592,7 +628,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1489480323,
+        "modificationDate" => 1491520146,
         "creationDate" => 1483714111,
         "id" => "magento_equigrid_v"
     ],
@@ -604,7 +640,7 @@ return [
                     "width" => 1200,
                     "height" => 1200,
                     "positioning" => "bottomcenter",
-                    "doNotScaleUp" => FALSE
+                    "forceResize" => TRUE
                 ]
             ]
         ],
@@ -650,8 +686,26 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1489482319,
+        "modificationDate" => 1491520146,
         "creationDate" => 1489482186,
         "id" => "magento_equigrid_c"
+    ],
+    "magento-header" => [
+        "items" => [
+
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento-header",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 90,
+        "highResolution" => NULL,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1491397187,
+        "creationDate" => 1491397187,
+        "id" => "magento-header"
     ]
 ];

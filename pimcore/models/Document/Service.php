@@ -104,10 +104,12 @@ class Service extends Model\Element\Service
 
         $params["document"] = $document;
 
+        $viewParamsBackup = [];
         foreach ($params as $key => $value) {
-            if (!$view->$key) {
-                $view->$key = $value;
+            if ($view->$key) {
+                $viewParamsBackup[$key] = $view->$key;
             }
+            $view->$key = $value;
         }
 
         $content = $view->action($document->getAction(), $document->getController(), $document->getModule(), $params);
@@ -160,6 +162,10 @@ class Service extends Model\Element\Service
 
         if (\Pimcore\Config::getSystemConfig()->outputfilters->less) {
             $content = \Pimcore\Tool\Less::processHtml($content);
+        }
+
+        foreach ($viewParamsBackup as $key => $value) {
+            $view->$key = $value;
         }
 
         return $content;
@@ -352,8 +358,8 @@ class Service extends Model\Element\Service
     }
 
     /**
-     * @param  Document $document
-     * @return void
+     * @param Document $document
+     * @return array
      */
     public static function gridDocumentData($document)
     {
@@ -394,6 +400,7 @@ class Service extends Model\Element\Service
     /**
      * @static
      * @param $path
+     * @param $type
      * @return bool
      */
     public static function pathExists($path, $type = null)
@@ -435,6 +442,7 @@ class Service extends Model\Element\Service
      * )
      * @param $document
      * @param $rewriteConfig
+     * @param array $params
      * @return Document
      */
     public static function rewriteIds($document, $rewriteConfig, $params = [])
@@ -517,10 +525,16 @@ class Service extends Model\Element\Service
                 }
             }
         }
-
+        //TODO: $document is not definied here, shouldn't be null returned here?
         return $document;
     }
 
+    /**
+     * @param $item
+     * @param int $nr
+     * @return mixed|string
+     * @throws \Exception
+     */
     public static function getUniqueKey($item, $nr = 0)
     {
         $list = new Listing();

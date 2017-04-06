@@ -30,9 +30,6 @@ class Image extends Model\Asset
      */
     public $type = "image";
 
-    /**
-     * @return void
-     */
     protected function update()
     {
 
@@ -80,7 +77,7 @@ class Image extends Model\Asset
     }
 
     /**
-     * @return void
+     * @param bool $force
      */
     public function clearThumbnails($force = false)
     {
@@ -170,7 +167,7 @@ class Image extends Model\Asset
     /**
      * @param null $path
      * @param bool $force
-     * @return array|void
+     * @return array
      * @throws \Exception
      */
     public function getDimensions($path = null, $force = false)
@@ -191,17 +188,49 @@ class Image extends Model\Asset
             $path = $this->getFileSystemPath();
         }
 
-        $image = self::getImageTransformInstance();
+        $dimensions = null;
 
-        $status = $image->load($path);
-        if ($status === false) {
-            return;
+        //try to get the dimensions with getimagesize because it is much faster than e.g. the Imagick-Adapter
+        if (is_readable($path)) {
+            $imageSize = getimagesize($path);
+            if ($imageSize[0] && $imageSize[1]) {
+                $dimensions = [
+                    "width" => $imageSize[0],
+                    "height" => $imageSize[1]
+                ];
+            }
         }
 
-        $dimensions = [
-            "width" => $image->getWidth(),
-            "height" => $image->getHeight()
-        ];
+        if (!$dimensions) {
+            $image = self::getImageTransformInstance();
+
+            $status = $image->load($path, ["preserveColor" => true]);
+            if ($status === false) {
+                return;
+            }
+
+            $dimensions = [
+                "width" => $image->getWidth(),
+                "height" => $image->getHeight()
+            ];
+        }
+
+        // EXIF orientation
+        if (function_exists("exif_read_data")) {
+            $exif = @exif_read_data($path);
+            if (is_array($exif)) {
+                if (array_key_exists("Orientation", $exif)) {
+                    $orientation = intval($exif["Orientation"]);
+                    if (in_array($orientation, [5, 6, 7, 8])) {
+                        // flip height & width
+                        $dimensions = [
+                            "width" => $dimensions["height"],
+                            "height" => $dimensions["width"]
+                        ];
+                    }
+                }
+            }
+        }
 
         return $dimensions;
     }

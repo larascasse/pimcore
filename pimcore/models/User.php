@@ -17,6 +17,7 @@
 namespace Pimcore\Model;
 
 use Pimcore\File;
+use Pimcore\Tool;
 
 /**
  * @method \Pimcore\Model\User\Dao getDao()
@@ -107,6 +108,16 @@ class User extends User\UserRole
      * @var null|array
      */
     protected $mergedPerspectives = null;
+
+    /**
+     * @var null|array
+     */
+    protected $mergedWebsiteTranslationLanguagesEdit = null;
+
+    /**
+     * @var null|array
+     */
+    protected $mergedWebsiteTranslationLanguagesView = null;
 
     /**
      * @return string
@@ -220,7 +231,7 @@ class User extends User\UserRole
 
     /**
      * @param string $language
-     * @return void
+     * @return $this
      */
     public function setLanguage($language)
     {
@@ -250,7 +261,7 @@ class User extends User\UserRole
 
     /**
      * @param boolean $admin
-     * @return void
+     * @return $this
      */
     public function setAdmin($admin)
     {
@@ -269,7 +280,7 @@ class User extends User\UserRole
 
     /**
      * @param boolean $active
-     * @return void
+     * @return $this
      */
     public function setActive($active)
     {
@@ -287,8 +298,9 @@ class User extends User\UserRole
     }
 
     /**
-     * @param String $key
-     * @return boolean
+     * @param string $key
+     * @param string $type
+     * @return bool
      */
     public function isAllowed($key, $type = "permission")
     {
@@ -502,6 +514,8 @@ class User extends User\UserRole
     }
 
     /**
+     * @param null $width
+     * @param null $height
      * @return string
      */
     public function getImage($width = null, $height = null)
@@ -531,7 +545,7 @@ class User extends User\UserRole
     }
 
     /**
-     * @return null|string
+     * @return array
      */
     public function getContentLanguages()
     {
@@ -608,6 +622,83 @@ class User extends User\UserRole
             $perspectives = \Pimcore\Config::getAvailablePerspectives($this);
 
             return $perspectives[0]["name"];
+        }
+    }
+
+    /**
+     * Returns array of website translation languages for editing related to user and all related roles
+     *
+     * @return array|null
+     */
+    public function getMergedWebsiteTranslationLanguagesEdit()
+    {
+        if (null === $this->mergedWebsiteTranslationLanguagesEdit) {
+            $this->mergedWebsiteTranslationLanguagesEdit = $this->getWebsiteTranslationLanguagesEdit();
+            foreach ($this->getRoles() as $role) {
+                /** @var User\UserRole $userRole */
+                $userRole = User\UserRole::getById($role);
+                $this->mergedWebsiteTranslationLanguagesEdit = array_merge($this->mergedWebsiteTranslationLanguagesEdit, $userRole->getWebsiteTranslationLanguagesEdit());
+            }
+            $this->mergedWebsiteTranslationLanguagesEdit = array_values($this->mergedWebsiteTranslationLanguagesEdit);
+        }
+
+        return $this->mergedWebsiteTranslationLanguagesEdit;
+    }
+
+    /**
+     * Returns array of languages allowed for editing. If edit and view languages are empty all languages are allowed.
+     * If only edit languages are empty (but view languages not) empty array is returned.
+     *
+     * @return array|null
+     */
+    public function getAllowedLanguagesForEditingWebsiteTranslations()
+    {
+        $mergedWebsiteTranslationLanguagesEdit = $this->getMergedWebsiteTranslationLanguagesEdit();
+        if (empty($mergedWebsiteTranslationLanguagesEdit)) {
+            $mergedWebsiteTranslationLanguagesView = $this->getMergedWebsiteTranslationLanguagesView();
+            if (empty($mergedWebsiteTranslationLanguagesView)) {
+                return Tool::getValidLanguages();
+            } else {
+                return $mergedWebsiteTranslationLanguagesEdit;
+            }
+        } else {
+            return $mergedWebsiteTranslationLanguagesEdit;
+        }
+    }
+
+    /**
+     * Returns array of website translation languages for viewing related to user and all related roles
+     *
+     * @return array|null
+     */
+    public function getMergedWebsiteTranslationLanguagesView()
+    {
+        if (null === $this->mergedWebsiteTranslationLanguagesView) {
+            $this->mergedWebsiteTranslationLanguagesView = $this->getWebsiteTranslationLanguagesView();
+            foreach ($this->getRoles() as $role) {
+                /** @var User\UserRole $userRole */
+                $userRole = User\UserRole::getById($role);
+                $this->mergedWebsiteTranslationLanguagesView = array_merge($this->mergedWebsiteTranslationLanguagesView, $userRole->getWebsiteTranslationLanguagesView());
+            }
+            $this->mergedWebsiteTranslationLanguagesView = array_values($this->mergedWebsiteTranslationLanguagesView);
+        }
+
+        return $this->mergedWebsiteTranslationLanguagesView;
+    }
+
+
+    /**
+     * Returns array of languages allowed for viewing. If view languages are empty all languages are allowed.
+     *
+     * @return array|null
+     */
+    public function getAllowedLanguagesForViewingWebsiteTranslations()
+    {
+        $mergedWebsiteTranslationLanguagesView = $this->getMergedWebsiteTranslationLanguagesView();
+        if (empty($mergedWebsiteTranslationLanguagesView)) {
+            return Tool::getValidLanguages();
+        } else {
+            return $mergedWebsiteTranslationLanguagesView;
         }
     }
 }

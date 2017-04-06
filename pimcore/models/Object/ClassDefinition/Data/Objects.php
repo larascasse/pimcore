@@ -385,6 +385,10 @@ class Objects extends Model\Object\ClassDefinition\Data\Relations\AbstractRelati
     {
         $tags = is_array($tags) ? $tags : [];
 
+        if ($this->getLazyLoading()) {
+            return $tags;
+        }
+
         if (is_array($data) && count($data) > 0) {
             foreach ($data as $object) {
                 if ($object instanceof Element\ElementInterface && !array_key_exists($object->getCacheTag(), $tags)) {
@@ -487,7 +491,11 @@ class Objects extends Model\Object\ClassDefinition\Data\Relations\AbstractRelati
         return $relatedObjects;
     }
 
-
+    /**
+     * @param $object
+     * @param array $params
+     * @return array|mixed|null
+     */
     public function preGetData($object, $params = [])
     {
         $data = null;
@@ -525,6 +533,12 @@ class Objects extends Model\Object\ClassDefinition\Data\Relations\AbstractRelati
         return is_array($data) ? $data : [];
     }
 
+    /**
+     * @param $object
+     * @param $data
+     * @param array $params
+     * @return array|null
+     */
     public function preSetData($object, $data, $params = [])
     {
         if ($data === null) {
@@ -542,7 +556,7 @@ class Objects extends Model\Object\ClassDefinition\Data\Relations\AbstractRelati
 
     /**
      * @param string $fieldtype
-     * @return $this|void
+     * @return $this
      */
     public function setFieldtype($fieldtype)
     {
@@ -672,10 +686,11 @@ class Objects extends Model\Object\ClassDefinition\Data\Relations\AbstractRelati
     }
 
 
-    /**
-     * Override point for Enriching the layout definition before the layout is returned to the admin interface.
+    /** Override point for Enriching the layout definition before the layout is returned to the admin interface.
+     * @param $object Object\Concrete
+     * @param array $context additional contextual data
      */
-    public function enrichLayoutDefinition($object)
+    public function enrichLayoutDefinition($object, $context = [])
     {
     }
 

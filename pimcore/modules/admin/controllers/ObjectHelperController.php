@@ -356,7 +356,14 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         $this->_helper->json(["success" => false, "message" => "missing_permission"]);
     }
 
-
+    /**
+     * @param $field
+     * @param $gridType
+     * @param $position
+     * @param bool $force
+     * @param null $keyPrefix
+     * @return array|null
+     */
     protected function getFieldGridConfig($field, $gridType, $position, $force = false, $keyPrefix = null)
     {
         $key = $keyPrefix . $field->getName();
@@ -685,6 +692,9 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         exit;
     }
 
+    /**
+     * @return mixed|string
+     */
     protected function extractLanguage()
     {
         $requestedLanguage = $this->getParam("language");
@@ -699,6 +709,9 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         return $requestedLanguage;
     }
 
+    /**
+     * @return array
+     */
     protected function extractFieldsAndBricks()
     {
         $fields = [];
@@ -719,6 +732,9 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         return [$fields, $bricks];
     }
 
+    /**
+     * @return array
+     */
     protected function prepareExportList()
     {
         $requestedLanguage = $this->extractLanguage();
@@ -751,13 +767,14 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
 
         /** @var Object\Listing\Concrete $list */
         $list = new $listClass();
+        $objectTableName = $list->getDao()->getTableName();
         $list->setCondition(implode(" AND ", $conditionFilters));
 
         //parameters specified in the objects grid
         $ids = $this->getParam('ids', []);
         if (! empty($ids)) {
             //add a condition if id numbers are specified
-            $list->addConditionParam('o_id IN (' . implode(',', $ids) . ')');
+            $list->addConditionParam("{$objectTableName}.o_id IN (" . implode(',', $ids) . ')');
         }
 
         $list->setOrder("ASC");
@@ -786,6 +803,10 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         return [$list, $fields, $requestedLanguage];
     }
 
+    /**
+     * @param $fileHandle
+     * @return string
+     */
     protected function getCsvFile($fileHandle)
     {
         return PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . $fileHandle . ".csv";
@@ -843,11 +864,14 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
 
             readfile($csvFile);
             unlink($csvFile);
-        } else {
-            exit();
         }
+        exit;
     }
 
+    /**
+     * @param $field
+     * @return string
+     */
     protected function mapFieldname($field)
     {
         if (substr($field, 0, 1) == "~") {
@@ -870,7 +894,12 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         return $field;
     }
 
-
+    /**
+     * @param $list
+     * @param $fields
+     * @param bool $addTitles
+     * @return string
+     */
     protected function getCsvData($list, $fields, $addTitles = true)
     {
         $requestedLanguage = $this->extractLanguage();
@@ -932,6 +961,12 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         return $csv;
     }
 
+    /**
+     * @param $field
+     * @param $object
+     * @param $requestedLanguage
+     * @return mixed
+     */
     protected function getCsvFieldData($field, $object, $requestedLanguage)
     {
 

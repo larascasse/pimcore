@@ -3873,6 +3873,14 @@
         "definition": "Rows"
     },
     {
+        "term": "rows_fixed",
+        "definition": "Rows fixed"
+    },
+    {
+        "term": "cols_fixed",
+        "definition": "Cols fixed"
+    },
+    {
         "term": "cols",
         "definition": "Columns"
     },
@@ -4522,7 +4530,7 @@
     },
     {
         "term": "grid_current_language",
-        "definition": "Current Language"
+        "definition": "Current language"
     },
     {
         "term": "grid_column_config",
@@ -4879,6 +4887,10 @@
     {
         "term": "maximum_tabs",
         "definition": "Maximum number of tabs"
+    },
+    {
+        "term": "hide_locale_labels_when_tabs_reached",
+        "definition": "Hide locale labels after number of tabs"
     },
     {
         "term": "deeplink",
@@ -5573,6 +5585,10 @@
         "definition": "Tags Search"
     },
     {
+        "term": "tags_configuration",
+        "definition": "Tags Configuration"
+    },
+    {
         "term": "apply_all",
         "definition": "Apply all"
     },
@@ -5891,6 +5907,10 @@
     {
         "term": "web2print_port",
         "definition": "Port"
+    },
+    {
+        "term": "web2print_protocol",
+        "definition": "Protocol"
     },
     {
         "term": "web2print_baseURL",
@@ -6235,7 +6255,41 @@
     {
         "term": "clear_filters",
         "definition": "Clear Filters"
+    },
+    {
+        "term": "website_translation_settings",
+        "definition": "Shared Translation Settings"
+    },
+    {
+        "term": "language_permissions",
+        "definition": "Language Permissions (no view permission means all)"
+    },
+    {
+        "term": "rendering_class",
+        "definition": "Custom Renderer class"
+    },
+    {
+        "term": "rendering_data",
+        "definition": "Data passed to renderer"
+    },
+    {
+        "term": "force_resize",
+        "definition": "Force resize"
+    },
+    {
+        "term": "site_id",
+        "definition": "Site ID"
+    },
+    {
+      "term": "site_ids",
+      "definition": "Site IDs"
+    },
+    {
+        "term": "site_ids_tooltip",
+        "definition": "Provide a comma-seperated list of site IDs"
+    },
+    {
+        "term": "predefined_hotspot_data_templates",
+        "definition": "Predefined data templates"
     }
-
-
 ]

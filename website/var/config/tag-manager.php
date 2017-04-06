@@ -37,5 +37,41 @@ return [
             ]
         ],
         "id" => "facebook-box"
+    ],
+    "testtag" => [
+        "items" => [
+
+        ],
+        "name" => "testtag",
+        "description" => "",
+        "siteId" => NULL,
+        "urlPattern" => "",
+        "textPattern" => "",
+        "httpMethod" => "",
+        "params" => [
+            [
+                "name" => "",
+                "value" => ""
+            ],
+            [
+                "name" => "",
+                "value" => ""
+            ],
+            [
+                "name" => "",
+                "value" => ""
+            ],
+            [
+                "name" => "",
+                "value" => ""
+            ],
+            [
+                "name" => "",
+                "value" => ""
+            ]
+        ],
+        "modificationDate" => 1491511454,
+        "creationDate" => 1491511454,
+        "id" => "testtag"
     ]
 ];

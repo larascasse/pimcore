@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
+class ComposerStaticInit9535196e588c77c6575e8f12edc857a9
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -66,6 +66,7 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
             'Pimcore\\Model\\Object\\' => 21,
             'Pimcore\\Model\\' => 14,
             'Pimcore\\' => 8,
@@ -220,6 +221,10 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'Pimcore\\Model\\Object\\' => 
         array (
             0 => __DIR__ . '/../..' . '/website/var/classes/Object',
@@ -372,17 +377,22 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'AdminerEditTextarea' => __DIR__ . '/..' . '/vrana/adminer/plugins/edit-textarea.php',
         'AdminerEmailTable' => __DIR__ . '/..' . '/vrana/adminer/plugins/email-table.php',
         'AdminerEnumOption' => __DIR__ . '/..' . '/vrana/adminer/plugins/enum-option.php',
+        'AdminerEnumTypes' => __DIR__ . '/..' . '/vrana/adminer/plugins/enum-types.php',
         'AdminerFileUpload' => __DIR__ . '/..' . '/vrana/adminer/plugins/file-upload.php',
         'AdminerForeignSystem' => __DIR__ . '/..' . '/vrana/adminer/plugins/foreign-system.php',
         'AdminerFrames' => __DIR__ . '/..' . '/vrana/adminer/plugins/frames.php',
         'AdminerJsonColumn' => __DIR__ . '/..' . '/vrana/adminer/plugins/json-column.php',
         'AdminerLinksDirect' => __DIR__ . '/..' . '/vrana/adminer/plugins/links-direct.php',
         'AdminerLoginServers' => __DIR__ . '/..' . '/vrana/adminer/plugins/login-servers.php',
+        'AdminerLoginSqlite' => __DIR__ . '/..' . '/vrana/adminer/plugins/login-sqlite.php',
         'AdminerLoginTable' => __DIR__ . '/..' . '/vrana/adminer/plugins/login-table.php',
         'AdminerMasterSlave' => __DIR__ . '/..' . '/vrana/adminer/plugins/master-slave.php',
         'AdminerPlugin' => __DIR__ . '/..' . '/vrana/adminer/plugins/plugin.php',
         'AdminerSlugify' => __DIR__ . '/..' . '/vrana/adminer/plugins/slugify.php',
         'AdminerSqlLog' => __DIR__ . '/..' . '/vrana/adminer/plugins/sql-log.php',
+        'AdminerStructComments' => __DIR__ . '/..' . '/vrana/adminer/plugins/struct-comments.php',
+        'AdminerTableIndexesStructure' => __DIR__ . '/..' . '/vrana/adminer/plugins/table-indexes-structure.php',
+        'AdminerTableStructure' => __DIR__ . '/..' . '/vrana/adminer/plugins/table-structure.php',
         'AdminerTablesFilter' => __DIR__ . '/..' . '/vrana/adminer/plugins/tables-filter.php',
         'AdminerTinymce' => __DIR__ . '/..' . '/vrana/adminer/plugins/tinymce.php',
         'AdminerTranslation' => __DIR__ . '/..' . '/vrana/adminer/plugins/translation.php',
@@ -463,10 +473,12 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Filter\\Doctrine\\DoctrineCollectionFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/Doctrine/DoctrineCollectionFilter.php',
         'DeepCopy\\Filter\\Doctrine\\DoctrineEmptyCollectionFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/Doctrine/DoctrineEmptyCollectionFilter.php',
+        'DeepCopy\\Filter\\Doctrine\\DoctrineProxyFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/Doctrine/DoctrineProxyFilter.php',
         'DeepCopy\\Filter\\Filter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/Filter.php',
         'DeepCopy\\Filter\\KeepFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/KeepFilter.php',
         'DeepCopy\\Filter\\ReplaceFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/ReplaceFilter.php',
         'DeepCopy\\Filter\\SetNullFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Filter/SetNullFilter.php',
+        'DeepCopy\\Matcher\\Doctrine\\DoctrineProxyMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Matcher/Doctrine/DoctrineProxyMatcher.php',
         'DeepCopy\\Matcher\\Matcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Matcher/Matcher.php',
         'DeepCopy\\Matcher\\PropertyMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Matcher/PropertyMatcher.php',
         'DeepCopy\\Matcher\\PropertyNameMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Matcher/PropertyNameMatcher.php',
@@ -1358,6 +1370,7 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'PHP_Token_NEW' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_NS_C' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_NS_SEPARATOR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PHP_Token_NULLSAFE_OBJECT_OPERATOR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_NUM_STRING' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_OBJECT_CAST' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_OBJECT_OPERATOR' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
@@ -1714,6 +1727,7 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Pimcore\\Model\\Metadata\\Predefined\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Metadata/Predefined/Dao.php',
         'Pimcore\\Model\\Metadata\\Predefined\\Listing' => __DIR__ . '/../..' . '/pimcore/models/Metadata/Predefined/Listing.php',
         'Pimcore\\Model\\Metadata\\Predefined\\Listing\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Metadata/Predefined/Listing/Dao.php',
+        'Pimcore\\Model\\Object' => __DIR__ . '/../..' . '/pimcore/models/Object.php',
         'Pimcore\\Model\\Object\\AbstractObject' => __DIR__ . '/../..' . '/pimcore/models/Object/AbstractObject.php',
         'Pimcore\\Model\\Object\\AbstractObject\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Object/AbstractObject/Dao.php',
         'Pimcore\\Model\\Object\\Article' => __DIR__ . '/../..' . '/website/var/classes/Object/Article.php',
@@ -2103,6 +2117,10 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Pimcore\\Model\\WebsiteSetting\\Dao' => __DIR__ . '/../..' . '/pimcore/models/WebsiteSetting/Dao.php',
         'Pimcore\\Model\\WebsiteSetting\\Listing' => __DIR__ . '/../..' . '/pimcore/models/WebsiteSetting/Listing.php',
         'Pimcore\\Model\\WebsiteSetting\\Listing\\Dao' => __DIR__ . '/../..' . '/pimcore/models/WebsiteSetting/Listing/Dao.php',
+        'Pimcore\\Model\\Workflow' => __DIR__ . '/../..' . '/pimcore/models/Workflow.php',
+        'Pimcore\\Model\\Workflow\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Workflow/Dao.php',
+        'Pimcore\\Model\\Workflow\\Listing' => __DIR__ . '/../..' . '/pimcore/models/Workflow/Listing.php',
+        'Pimcore\\Model\\Workflow\\Listing\\Dao' => __DIR__ . '/../..' . '/pimcore/models/Workflow/Listing/Dao.php',
         'Pimcore\\Navigation\\Page\\Uri' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Navigation/Page/Uri.php',
         'Pimcore\\Placeholder' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Placeholder.php',
         'Pimcore\\Placeholder\\AbstractPlaceholder' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Placeholder/AbstractPlaceholder.php',
@@ -2118,6 +2136,7 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Pimcore\\Tool\\Console' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/Console.php',
         'Pimcore\\Tool\\DeviceDetector' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/DeviceDetector.php',
         'Pimcore\\Tool\\Frontend' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/Frontend.php',
+        'Pimcore\\Tool\\Housekeeping' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/Housekeeping.php',
         'Pimcore\\Tool\\HybridAuth' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/HybridAuth.php',
         'Pimcore\\Tool\\Less' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/Less.php',
         'Pimcore\\Tool\\Mime' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Tool/Mime.php',
@@ -2162,7 +2181,6 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Pimcore\\Web2Print\\Processor\\WkHtmlToPdf' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/Web2Print/Processor/WkHtmlToPdf.php',
         'Pimcore\\WorkflowManagement\\EventHandler' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/EventHandler.php',
         'Pimcore\\WorkflowManagement\\WorkFlow\\Decorator' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/Workflow/Decorator.php',
-        'Pimcore\\WorkflowManagement\\Workflow' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/Workflow.php',
         'Pimcore\\WorkflowManagement\\Workflow\\Config' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/Workflow/Config.php',
         'Pimcore\\WorkflowManagement\\Workflow\\Factory' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/Workflow/Factory.php',
         'Pimcore\\WorkflowManagement\\Workflow\\Manager' => __DIR__ . '/../..' . '/pimcore/lib/Pimcore/WorkflowManagement/Workflow/Manager.php',
@@ -2255,6 +2273,9 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Prophecy\\Prophet' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Prophet.php',
         'Prophecy\\Util\\ExportUtil' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Util/ExportUtil.php',
         'Prophecy\\Util\\StringUtil' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Util/StringUtil.php',
+        'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
+        'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
+        'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
@@ -2283,6 +2304,7 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
         'Ramsey\\Uuid\\Converter\\Time\\DegradedTimeConverter' => __DIR__ . '/..' . '/ramsey/uuid/src/Converter/Time/DegradedTimeConverter.php',
         'Ramsey\\Uuid\\Converter\\Time\\PhpTimeConverter' => __DIR__ . '/..' . '/ramsey/uuid/src/Converter/Time/PhpTimeConverter.php',
         'Ramsey\\Uuid\\DegradedUuid' => __DIR__ . '/..' . '/ramsey/uuid/src/DegradedUuid.php',
+        'Ramsey\\Uuid\\Exception\\InvalidUuidStringException' => __DIR__ . '/..' . '/ramsey/uuid/src/Exception/InvalidUuidStringException.php',
         'Ramsey\\Uuid\\Exception\\UnsatisfiedDependencyException' => __DIR__ . '/..' . '/ramsey/uuid/src/Exception/UnsatisfiedDependencyException.php',
         'Ramsey\\Uuid\\Exception\\UnsupportedOperationException' => __DIR__ . '/..' . '/ramsey/uuid/src/Exception/UnsupportedOperationException.php',
         'Ramsey\\Uuid\\FeatureSet' => __DIR__ . '/..' . '/ramsey/uuid/src/FeatureSet.php',
@@ -5378,10 +5400,10 @@ class ComposerStaticInit6a9e08ea50df5f359a78df85cf044334
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6a9e08ea50df5f359a78df85cf044334::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9535196e588c77c6575e8f12edc857a9::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9535196e588c77c6575e8f12edc857a9::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9535196e588c77c6575e8f12edc857a9::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9535196e588c77c6575e8f12edc857a9::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -32,6 +32,7 @@ return array(
     'Sabre\\CalDAV\\' => array($vendorDir . '/sabre/dav/lib/CalDAV'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Pimcore\\Model\\Object\\' => array($baseDir . '/website/var/classes/Object'),
     'Pimcore\\Model\\' => array($baseDir . '/pimcore/models'),
     'Pimcore\\' => array($baseDir . '/pimcore/lib/Pimcore'),

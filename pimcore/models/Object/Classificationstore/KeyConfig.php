@@ -130,8 +130,9 @@ class KeyConfig extends Model\AbstractModel
 
     /**
      * @param $name
-     * @param null $groupId
+     * @param int $storeId
      * @return KeyConfig
+     * @internal param null $groupId
      */
     public static function getByName($name, $storeId = 1)
     {
@@ -224,12 +225,12 @@ class KeyConfig extends Model\AbstractModel
     {
         DefinitionCache::clear($this);
 
-        \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.preDelete", $this);
+        \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.preDelete", $this);
         if ($this->getId()) {
             unset(self::$cache[$this->getId()]);
         }
         parent::delete();
-        \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.postDelete", $this);
+        \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.postDelete", $this);
     }
 
     /**
@@ -251,17 +252,17 @@ class KeyConfig extends Model\AbstractModel
         if ($this->getId()) {
             unset(self::$cache[$this->getId()]);
             $isUpdate = true;
-            \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.preUpdate", $this);
+            \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.preUpdate", $this);
         } else {
-            \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.preAdd", $this);
+            \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.preAdd", $this);
         }
 
         $model = parent::save();
 
         if ($isUpdate) {
-            \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.postUpdate", $this);
+            \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.postUpdate", $this);
         } else {
-            \Pimcore::getEventManager()->trigger("object.Classificationstore.keyConfig.postAdd", $this);
+            \Pimcore::getEventManager()->trigger("object.classificationstore.keyConfig.postAdd", $this);
         }
 
         return $model;

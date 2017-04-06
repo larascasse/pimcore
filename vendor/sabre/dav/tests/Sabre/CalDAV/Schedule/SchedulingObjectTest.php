@@ -115,7 +115,7 @@ ICS;
         $obj = $children[0];
         $obj->delete();
 
-        $children2 =  $this->inbox->getChildren();
+        $children2 = $this->inbox->getChildren();
         $this->assertEquals(count($children) - 1, count($children2));
 
     }
@@ -201,7 +201,7 @@ ICS;
     function testDefaultACL() {
 
         $backend = new Backend\MockScheduling([], []);
-        $calendarObject = new SchedulingObject($backend, ['calendarid' => 1, 'uri' => 'foo', 'principaluri' => 'principals/user1' ]);
+        $calendarObject = new SchedulingObject($backend, ['calendarid' => 1, 'uri' => 'foo', 'principaluri' => 'principals/user1']);
         $expected = [
             [
                 'privilege' => '{DAV:}all',

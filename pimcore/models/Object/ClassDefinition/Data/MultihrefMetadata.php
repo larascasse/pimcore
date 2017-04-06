@@ -44,7 +44,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
      *
      * @var string
      */
-    public $phpdocType = "\\Pimcore\\Model\\Object\\Data\\ElemenentMetadata[]";
+    public $phpdocType = "\\Pimcore\\Model\\Object\\Data\\ElementMetadata[]";
 
 
     /**
@@ -264,6 +264,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
     /**
      * @param $data
      * @param null $object
+     * @param array $params
      * @return array
      */
     public function getDataForGrid($data, $object = null, $params = [])
@@ -408,6 +409,10 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
     {
         $tags = is_array($tags) ? $tags : [];
 
+        if ($this->getLazyLoading()) {
+            return $tags;
+        }
+
         if (is_array($data) && count($data) > 0) {
             foreach ($data as $metaObject) {
                 $element = $metaObject->getElement();
@@ -511,7 +516,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
 
     /**
      * @param Object\Concrete $object
-     * @return void
+     * @param array $params
      */
     public function save($object, $params = [])
     {
@@ -579,6 +584,11 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
         parent::save($object, $params);
     }
 
+    /**
+     * @param $object
+     * @param array $params
+     * @return array|mixed|null
+     */
     public function preGetData($object, $params = [])
     {
         $data = null;
@@ -618,7 +628,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
 
     /**
      * @param Object\Concrete $object
-     * @return void
+     * @param array $params
      */
     public function delete($object, $params = [])
     {
@@ -697,7 +707,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
     }
 
     /**
-     * @return void
+     * @param $class
      */
     public function classSaved($class)
     {
@@ -753,10 +763,11 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
         $this->columns = $masterDefinition->columns;
     }
 
-    /**
-     *
+    /** Override point for Enriching the layout definition before the layout is returned to the admin interface.
+     * @param $object Object\Concrete
+     * @param array $context additional contextual data
      */
-    public function enrichLayoutDefinition($object)
+    public function enrichLayoutDefinition($object, $context = [])
     {
         // nothing to do
     }
@@ -838,7 +849,7 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
                     $fieldname = $elementMetadata["fieldname"];
                     $data = $elementMetadata["data"];
 
-                    $item = new Object\Data\ElementMetadata($fieldname, $columns, $object);
+                    $item = new Object\Data\ElementMetadata($fieldname, $columns, $element);
                     $item->data = $data;
                     $result[] = $item;
                 }
@@ -846,5 +857,13 @@ class MultihrefMetadata extends Model\Object\ClassDefinition\Data\Multihref
 
             return $result;
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhpdocType()
+    {
+        return $this->phpdocType;
     }
 }

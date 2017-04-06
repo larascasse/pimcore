@@ -44,7 +44,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     public $defaultUnit;
 
     /**
-     * @var array()
+     * @var array
      */
     public $validUnits;
 
@@ -85,7 +85,6 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
 
     /**
      * @param integer $width
-     * @return void
      */
     public function setWidth($width)
     {
@@ -104,7 +103,6 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
 
     /**
      * @param integer $defaultValue
-     * @return void
      */
     public function setDefaultValue($defaultValue)
     {
@@ -114,8 +112,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     }
 
     /**
-     * @param  array() $validUnits
-     * @return void
+     * @param  array $validUnits
      */
     public function setValidUnits($validUnits)
     {
@@ -123,7 +120,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     }
 
     /**
-     * @return array()
+     * @return array
      */
     public function getValidUnits()
     {
@@ -228,7 +225,15 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     public function getDataFromEditmode($data, $object = null, $params = [])
     {
         if ($data["value"] || $data["unit"]) {
-            return new \Pimcore\Model\Object\Data\QuantityValue($data["value"], $data["unit"]);
+            if (is_numeric($data["unit"])) {
+                if ($data["unit"] == -1 || $data['unit'] == null || empty($data['unit'])) {
+                    return new \Pimcore\Model\Object\Data\QuantityValue($data["value"], null);
+                } else {
+                    return new \Pimcore\Model\Object\Data\QuantityValue($data["value"], $data["unit"]);
+                }
+            }
+
+            return;
         }
 
         return;
@@ -263,19 +268,24 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      *
      * @param mixed $data
      * @param boolean $omitMandatoryCheck
-     * @throws Exception
+     * @throws \Exception
      */
     public function checkValidity($data, $omitMandatoryCheck = false)
     {
-        if (!$omitMandatoryCheck && $this->getMandatory() &&
-           ($data === null || $data->getValue() === null || $data->getUnitId() === null)) {
+        if (!$omitMandatoryCheck && $this->getMandatory() && ($data === null || $data->getValue() === null)) {
             throw new Model\Element\ValidationException("Empty mandatory field [ ".$this->getName()." ]");
         }
 
         if (!empty($data)) {
             $value = $data->getValue();
-            if ((!empty($value) && !is_numeric($data->getValue())) || !($data->getUnitId())) {
+            if ((!empty($value) && !is_numeric($data->getValue()))) {
                 throw new Model\Element\ValidationException("Invalid dimension unit data " . $this->getName());
+            }
+
+            if (!empty($data->getUnitId())) {
+                if (!is_numeric($data->getUnitId())) {
+                    throw new Model\Element\ValidationException("Unit id has to be empty or numeric " . $data->getUnitId());
+                }
             }
         }
     }
@@ -320,6 +330,32 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     }
 
     /**
+     * display the quantity value field data in the grid
+     * @param $data
+     * @param null $object
+     * @param array $params
+     * @return array
+     */
+    public function getDataForGrid($data, $object = null, $params = [])
+    {
+        if ($data instanceof  \Pimcore\Model\Object\Data\QuantityValue) {
+            $unit = $data->getUnit();
+            $unitAbbreviation = "";
+
+            if ($unit instanceof Model\Object\QuantityValue\Unit) {
+                $unitAbbreviation = $unit->getAbbreviation();
+            }
+
+            return [
+                "value" => $data->getValue(),
+                "unit" => $unitAbbreviation
+            ];
+        }
+
+        return;
+    }
+
+    /**
      * converts data to be exposed via webservices
      * @param string $object
      * @param mixed $params
@@ -333,7 +369,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
             return [
                 "value" => $data->getValue(),
                 "unit" => $data->getUnitId(),
-                "unitAbbreviation" => is_object($data->getUnit()) ? $data->getUnit() : ""
+                "unitAbbreviation" => is_object($data->getUnit()) ? $data->getUnit()->getAbbreviation() : ""
             ];
         } else {
             return null;
@@ -345,6 +381,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      * @param mixed $value
      * @param null|Model\Object\AbstractObject $object
      * @param mixed $params
+     * @param $idMapper
      * @return mixed
      */
     public function getFromWebserviceImport($value, $object = null, $params = [], $idMapper = null)

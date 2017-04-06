@@ -2,8 +2,8 @@
 
 namespace Sabre\DAV;
 
-use PDOException;
 use PDO;
+use PDOException;
 
 class DbCache {
 
@@ -87,6 +87,9 @@ trait DbTestHelperTrait {
 
     /**
      * Uses .sql files from the examples directory to initialize the database.
+     *
+     * @param string $schemaName
+     * @return void
      */
     function createSchema($schemaName) {
 

@@ -26,6 +26,7 @@ use Pimcore\Logger;
 
 /**
  * @method \Pimcore\Model\Asset\Dao getDao()
+ * @method bool __isBasedOnLatestData()
  */
 class Asset extends Element\AbstractElement
 {
@@ -239,9 +240,10 @@ class Asset extends Element\AbstractElement
     /**
      * Static helper to get an asset by the passed ID
      * @param integer $id
+     * @param bool $force
      * @return Asset|Asset\Archive|Asset\Audio|Asset\Document|Asset\Folder|Asset\Image|Asset\Text|Asset\Unknown|Asset\Video
      */
-    public static function getById($id)
+    public static function getById($id, $force = false)
     {
         $id = intval($id);
 
@@ -251,33 +253,35 @@ class Asset extends Element\AbstractElement
 
         $cacheKey = "asset_" . $id;
 
-        try {
+        if (!$force && \Zend_Registry::isRegistered($cacheKey)) {
             $asset = \Zend_Registry::get($cacheKey);
-            if (!$asset) {
-                throw new \Exception("Asset in registry is null");
-            }
-        } catch (\Exception $e) {
-            try {
-                if (!$asset = \Pimcore\Cache::load($cacheKey)) {
-                    $asset = new Asset();
-                    $asset->getDao()->getById($id);
-
-                    $className = "Pimcore\\Model\\Asset\\" . ucfirst($asset->getType());
-
-                    $asset = \Pimcore::getDiContainer()->make($className);
-                    \Zend_Registry::set($cacheKey, $asset);
-                    $asset->getDao()->getById($id);
-
-                    \Pimcore\Cache::save($asset, $cacheKey);
-                } else {
-                    \Zend_Registry::set($cacheKey, $asset);
-                }
-            } catch (\Exception $e) {
-                Logger::warning($e->getMessage());
-
-                return null;
+            if ($asset) {
+                return $asset;
             }
         }
+
+        try {
+            if ($force || !($asset = \Pimcore\Cache::load($cacheKey))) {
+                $asset = new Asset();
+                $asset->getDao()->getById($id);
+
+                $className = "Pimcore\\Model\\Asset\\" . ucfirst($asset->getType());
+
+                $asset = \Pimcore::getDiContainer()->make($className);
+                \Zend_Registry::set($cacheKey, $asset);
+                $asset->getDao()->getById($id);
+                $asset->__setDataVersionTimestamp($asset->getModificationDate());
+
+                \Pimcore\Cache::save($asset, $cacheKey);
+            } else {
+                \Zend_Registry::set($cacheKey, $asset);
+            }
+        } catch (\Exception $e) {
+            Logger::warning($e->getMessage());
+
+            return null;
+        }
+
 
         if (!$asset) {
             return null;
@@ -291,46 +295,25 @@ class Asset extends Element\AbstractElement
      *
      * @param integer $parentId
      * @param array $data
+     * @param boolean $save
      * @return Asset
      */
     public static function create($parentId, $data = [], $save = true)
     {
-
         // create already the real class for the asset type, this is especially for images, because a system-thumbnail
         // (tree) is generated immediately after creating an image
         $class = "Asset";
-        if (array_key_exists("filename", $data) && (array_key_exists("data", $data) || array_key_exists("sourcePath", $data) || array_key_exists("stream", $data))) {
-            if (array_key_exists("data", $data) || array_key_exists("stream", $data)) {
-                $tmpFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/asset-create-tmp-file-" . uniqid() . "." . File::getFileExtension($data["filename"]);
-                if (array_key_exists("data", $data)) {
-                    File::put($tmpFile, $data["data"]);
-                } else {
-                    $streamMeta = stream_get_meta_data($data["stream"]);
-                    if (file_exists($streamMeta["uri"])) {
-                        // stream is a local file, so we don't have to write a tmp file
-                        $tmpFile = $streamMeta["uri"];
-                    } else {
-                        // write a tmp file because the stream isn't a pointer to the local filesystem
-                        rewind($data["stream"]);
-                        $dest = fopen($tmpFile, "w+", false, File::getContext());
-                        stream_copy_to_stream($data["stream"], $dest);
-                        fclose($dest);
-                    }
-                }
-                $mimeType = Mime::detect($tmpFile);
-                unlink($tmpFile);
-            } else {
-                $mimeType = Mime::detect($data["sourcePath"], $data["filename"]);
-                if (is_file($data["sourcePath"])) {
-                    $data["stream"] = fopen($data["sourcePath"], "r+", false, File::getContext());
-                }
-
-                unset($data["sourcePath"]);
+        if (isset($data["filename"]) && isset($data["sourcePath"])) {
+            $mimeType = Mime::detect($data["sourcePath"], $data["filename"]);
+            if (is_file($data["sourcePath"])) {
+                $data["stream"] = fopen($data["sourcePath"], "r+", false, File::getContext());
             }
+
+            unset($data["sourcePath"]);
 
             $type = self::getTypeFromMimeMapping($mimeType, $data["filename"]);
             $class = "\\Pimcore\\Model\\Asset\\" . ucfirst($type);
-            if (array_key_exists("type", $data)) {
+            if (isset($data["type"])) {
                 unset($data["type"]);
             }
         }
@@ -576,6 +559,7 @@ class Asset extends Element\AbstractElement
         if (preg_match("@\.ph(p[345]?|t|tml|ps)$@i", $this->getFilename()) || $this->getFilename() == ".htaccess") {
             $this->setFilename($this->getFilename() . ".txt");
         }
+
 
         if (Asset\Service::pathExists($this->getRealFullPath())) {
             $duplicate = Asset::getByPath($this->getRealFullPath());
@@ -1198,11 +1182,11 @@ class Asset extends Element\AbstractElement
     public function getStream()
     {
         if ($this->stream) {
-            if (!@rewind($this->stream)) {
+            $streamMeta = stream_get_meta_data($this->stream);
+            if (!@rewind($this->stream) && $streamMeta['stream_type'] === 'STDIO') {
                 $this->stream = null;
             }
         }
-
         if (!$this->stream && $this->getType() != "folder") {
             if (file_exists($this->getFileSystemPath())) {
                 $this->stream = fopen($this->getFileSystemPath(), "r", false, File::getContext());
@@ -1573,6 +1557,8 @@ class Asset extends Element\AbstractElement
     }
 
     /**
+     * @param null $name
+     * @param null $language
      * @return array
      */
     public function getMetadata($name = null, $language = null)
@@ -1671,6 +1657,7 @@ class Asset extends Element\AbstractElement
      * Get filesize
      *
      * @param string $format ('GB','MB','KB','B')
+     * @param int $precision
      * @return string
      */
     public function getFileSize($format = 'noformatting', $precision = 2)

@@ -13,7 +13,7 @@ With the help of [PHPStorm](https://www.jetbrains.com/phpstorm/)
 Run the command below to install via Composer
 
 ```shell
-composer require egulias/email-validator "~2.0"
+composer require egulias/email-validator "~2.1"
 ```
 
 ##Getting Started##
@@ -24,16 +24,17 @@ A basic example with the RFC validation
 <?php
 
 use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
 
 $validator = new EmailValidator();
-$validator->isValid("example@example.com", new RFCValidation()) //true
+$validator->isValid("example@example.com", new RFCValidation()); //true
 ```
 
 
 ###Available validations###
 
 1. [RFCValidation](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/RFCValidation.php)
-2. [NoWarningsRFCValidation](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/NoRFCWarningsValidation.php)
+2. [NoRFCWarningsValidation](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/NoRFCWarningsValidation.php)
 3. [DNSCheckValidation](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/DNSCheckValidation.php)
 4. [SpoofCheckValidation](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/SpoofCheckValidation.php)
 5. [MultipleValidationWithAnd](https://github.com/egulias/EmailValidator/blob/master/EmailValidator/Validation/MultipleValidationWithAnd.php)

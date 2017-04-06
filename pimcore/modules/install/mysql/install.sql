@@ -51,7 +51,8 @@ CREATE TABLE `assets_metadata` (
   `language` varchar(190) DEFAULT NULL,
   `type` ENUM('input','textarea','asset','document','object','date','select','checkbox') DEFAULT NULL,
   `data` text,
-  KEY `cid` (`cid`)
+  KEY `cid` (`cid`),
+	INDEX `name` (`name`)
 ) DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `cache`;
@@ -317,6 +318,8 @@ CREATE TABLE `http_error_log` (
   KEY `count` (`count`)
 ) DEFAULT CHARSET=utf8mb4;
 
+
+DROP TABLE IF EXISTS `keyvalue_keys`;
 DROP TABLE IF EXISTS `keyvalue_groups`;
 CREATE TABLE `keyvalue_groups` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -327,7 +330,6 @@ CREATE TABLE `keyvalue_groups` (
     PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `keyvalue_keys`;
 CREATE TABLE `keyvalue_keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -502,8 +504,6 @@ CREATE TABLE `search_backend_data` (
   KEY `type` (`type`),
   KEY `subtype` (`subtype`),
   KEY `published` (`published`),
-  FULLTEXT KEY `data` (`data`),
-  FULLTEXT KEY `properties` (`properties`),
   FULLTEXT KEY `fulltext` (`data`,`properties`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /* Engine is changed to InnoDB (if available) in Pimcore\Model\Tool\Setup\Resource::database() - not here because all comments are removed */
@@ -567,6 +567,7 @@ CREATE TABLE `targeting_rules` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `tmp_store`;
 CREATE TABLE `tmp_store` (
   `id` varchar(190) NOT NULL DEFAULT '',
   `tag` varchar(190) DEFAULT NULL,
@@ -674,6 +675,8 @@ CREATE TABLE `users` (
   `apiKey` varchar(255) DEFAULT NULL,
 	`activePerspective` VARCHAR(255) NULL DEFAULT NULL,
 	`perspectives` LONGTEXT NULL DEFAULT NULL,
+	`websiteTranslationLanguagesEdit` LONGTEXT NULL DEFAULT NULL,
+  `websiteTranslationLanguagesView` LONGTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `type_name` (`type`,`name`),
   KEY `parentId` (`parentId`),
@@ -767,12 +770,14 @@ CREATE TABLE `versions` (
   `ctype` enum('document','asset','object') default NULL,
   `userId` int(11) unsigned default NULL,
   `note` text,
+  `stackTrace` text,
   `date` bigint(1) unsigned default NULL,
   `public` tinyint(1) unsigned NOT NULL default '0',
   `serialized` tinyint(1) unsigned default '0',
   PRIMARY KEY  (`id`),
   KEY `cid` (`cid`),
-  KEY `ctype` (`ctype`)
+  KEY `ctype` (`ctype`),
+  KEY `date` (`date`)
 ) DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `website_settings`;
@@ -788,6 +793,10 @@ CREATE TABLE `website_settings` (
 	INDEX `name` (`name`),
 	INDEX `siteId` (`siteId`)
 ) DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `classificationstore_relations`;
+DROP TABLE IF EXISTS `classificationstore_collectionrelations`;
 
 DROP TABLE IF EXISTS `classificationstore_stores`;
 CREATE TABLE `classificationstore_stores` (
@@ -831,7 +840,6 @@ CREATE TABLE `classificationstore_keys` (
 	INDEX `storeId` (`storeId`)
 ) DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `classificationstore_relations`;
 CREATE TABLE `classificationstore_relations` (
 	`groupId` BIGINT(20) NOT NULL,
 	`keyId` BIGINT(20) NOT NULL,
@@ -858,7 +866,6 @@ CREATE TABLE `classificationstore_collections` (
 ) DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `classificationstore_collectionrelations`;
 CREATE TABLE `classificationstore_collectionrelations` (
 	`colId` BIGINT(20) NOT NULL,
 	`groupId` BIGINT(20) NOT NULL,

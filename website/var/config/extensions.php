@@ -2,17 +2,17 @@
 
 return [
     "brick" => [
-        "standard-teaser-row" => "1",
-        "wysiwyg" => "1",
+        "standard-teaser-row" => FALSE,
+        "wysiwyg" => FALSE,
         "featurette" => "1",
         "video" => "1",
         "pdf" => FALSE,
         "gallery-folder" => "1",
         "gallery-single-images" => "1",
-        "image" => "1",
-        "blockquote" => "1",
+        "image" => FALSE,
+        "blockquote" => FALSE,
         "image-hotspot" => "1",
-        "image-hotspot-marker" => "1",
+        "image-hotspot-marker" => FALSE,
         "product-article" => "1",
         "category-product" => "1",
         "lpn-slider-item" => "1",
@@ -29,7 +29,12 @@ return [
         "button" => FALSE,
         "accordion" => FALSE,
         "image-caption" => FALSE,
-        "panel" => FALSE
+        "panel" => FALSE,
+        "headlines" => FALSE,
+        "icon-teaser-row" => TRUE,
+        "snippet" => FALSE,
+        "text-accordion" => FALSE,
+        "tabbed-slider-text" => FALSE
     ],
     "plugin" => [
         "DynamicDropdown" => "",

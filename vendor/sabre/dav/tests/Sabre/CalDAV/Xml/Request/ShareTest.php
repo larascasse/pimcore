@@ -2,8 +2,8 @@
 
 namespace Sabre\CalDAV\Xml\Request;
 
-use Sabre\DAV\Xml\XmlTest;
 use Sabre\DAV\Xml\Element\Sharee;
+use Sabre\DAV\Xml\XmlTest;
 
 class ShareTest extends XmlTest {
 
@@ -52,7 +52,7 @@ XML;
 
     }
 
-    function testDeserializeMininal() {
+    function testDeserializeMinimal() {
 
         $xml = <<<XML
 <?xml version="1.0" encoding="utf-8" ?>

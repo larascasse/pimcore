@@ -451,7 +451,7 @@
 }
 
 .pimcore_icon_variant {
-    background: url(/pimcore/static6/img/flat-color-icons/data_protection.svg) center center no-repeat !important;
+    background: url(/pimcore/static6/img/flat-color-icons/variant.svg) center center no-repeat !important;
 }
 
 .pimcore_icon_seemode {
@@ -1044,4 +1044,8 @@
 
 .pimcore_icon_print {
     background: url(/pimcore/static6/img/flat-color-icons/print.svg) center center no-repeat !important;
+}
+
+.pimcore_icon_hotspotmarker_template {
+    background: url(/pimcore/static6/img/flat-color-icons/data_configuration.svg) center center no-repeat !important;
 }

@@ -28,6 +28,7 @@ class PdfReactor8 extends Processor
         $params = [];
         $params['printermarks'] = $config->printermarks == "true";
         $params['screenResolutionImages'] = $config->screenResolutionImages == "true";
+        $params['colorspace'] = $config->colorspace;
 
         $this->updateStatus($document->getId(), 10, "start_html_rendering");
         $html = $document->renderDocument($params);
@@ -47,8 +48,9 @@ class PdfReactor8 extends Processor
 
 
         $port = ((string) $web2PrintConfig->pdfreactorServerPort) ? (string) $web2PrintConfig->pdfreactorServerPort : "9423";
+        $protocol = ((string) $web2PrintConfig->pdfreactorProtocol) ? (string) $web2PrintConfig->pdfreactorProtocol : "http";
 
-        $pdfreactor = new \PDFreactor("http://" . $web2PrintConfig->pdfreactorServer . ":" . $port . "/service/rest");
+        $pdfreactor = new \PDFreactor($protocol . "://" . $web2PrintConfig->pdfreactorServer . ":" . $port . "/service/rest");
 
         $filePath = str_replace(PIMCORE_DOCUMENT_ROOT, "", $filePath);
 

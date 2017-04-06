@@ -71,13 +71,15 @@
         "nesbot/carbon": "~1",
         "php-di/php-di": "~5",
         "egulias/email-validator": "*",
-        "pimcore/core-version": "4.4.1",
+        "pimcore/core-version": "4.5.0",
         "neitanod/forceutf8": "~2",
         "myclabs/deep-copy": "*",
-        "dachcom-digital/pimcore-formbuilder" : "1.2.6"
+        "dachcom-digital/pimcore-formbuilder": "1.2.6",
+        "ext-pdo_mysql": "*",
+        "ext-mysqli": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^5.0"
     },
     "suggest": {
         "ext-curl": "*",

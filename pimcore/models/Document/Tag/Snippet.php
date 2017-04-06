@@ -20,6 +20,7 @@ use Pimcore\Model;
 use Pimcore\Cache;
 use Pimcore\Model\Document;
 use Pimcore\Logger;
+use Pimcore\Tool\DeviceDetector;
 
 /**
  * @method \Pimcore\Model\Document\Tag\Dao getDao()
@@ -128,7 +129,7 @@ class Snippet extends Model\Document\Tag
                         $content = $this->getView()->action($this->snippet->getAction(), $this->snippet->getController(), $this->snippet->getModule(), $params);
 
                         // write contents to the cache, if output-cache is enabled
-                        if ($cacheConfig) {
+                        if ($cacheConfig && !DeviceDetector::getInstance()->wasUsed()) {
                             Cache::save($content, $cacheKey, ["output", "output_inline"], $cacheConfig["lifetime"]);
                         }
 
@@ -166,7 +167,7 @@ class Snippet extends Model\Document\Tag
     /**
      * @see Document\Tag\TagInterface::setDataFromEditmode
      * @param mixed $data
-     * @return void
+     * @return $this
      */
     public function setDataFromEditmode($data)
     {
@@ -213,6 +214,7 @@ class Snippet extends Model\Document\Tag
 
     /**
      * @param Model\Webservice\Data\Document\Element $wsElement
+     * @param $document
      * @param mixed $params
      * @param null $idMapper
      * @throws \Exception
@@ -253,8 +255,6 @@ class Snippet extends Model\Document\Tag
 
     /**
      * this method is called by Document\Service::loadAllDocumentFields() to load all lazy loading fields
-     *
-     * @return void
      */
     public function load()
     {
@@ -274,7 +274,6 @@ class Snippet extends Model\Document\Tag
      *  "asset" => array(...)
      * )
      * @param array $idMapping
-     * @return void
      */
     public function rewriteIds($idMapping)
     {

@@ -10,6 +10,8 @@
 
 /**
  * A generalized Credis_Client interface for a cluster of Redis servers
+ *
+ * @deprecated
  */
 class Credis_Cluster
 {
@@ -50,6 +52,12 @@ class Credis_Cluster
   protected $dont_hash;
 
   /**
+   * Currently working cluster-wide database number.
+   * @var int
+   */
+  protected $selectedDb = 0;
+
+  /**
    * Creates an interface to a cluster of Redis servers
    * Each server should be in the format:
    *  array(
@@ -67,6 +75,7 @@ class Credis_Cluster
    * @param array $servers The Redis servers in the cluster.
    * @param int $replicas
    * @param bool $standAlone
+   * @throws CredisException
    */
   public function __construct($servers, $replicas = 128, $standAlone = false)
   {
@@ -208,6 +217,15 @@ class Credis_Cluster
   }
 
   /**
+   * @param int $index
+   * @return void
+   */
+  public function select($index)
+  {
+      $this->selectedDb = (int) $index;
+  }
+
+  /**
    * Execute a Redis command on the cluster with automatic consistent hashing and read/write splitting
    *
    * @param string $name
@@ -223,6 +241,10 @@ class Credis_Cluster
     }
     else {
       $client = $this->byHash($args[0]);
+    }
+    // Ensure that current client is working on the same database as expected.
+    if ($client->getSelectedDb() != $this->selectedDb) {
+      $client->select($this->selectedDb);
     }
     return call_user_func_array([$client, $name], $args);
   }

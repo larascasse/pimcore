@@ -120,7 +120,7 @@ $runtimePerspective = \Pimcore\Config::getRuntimePerspective();
     <div id="pimcore_status_update" data-menu-tooltip="<?= $this->translate("update_available") ?>" style="display: none;"></div>
 </div>
 
-<div id="pimcore_menu_tooltip" style="display: none;"></div>
+<div id="pimcore_tooltip" style="display: none;"></div>
 
 <script type="text/javascript">
     var pimcore = {}; // namespace
@@ -193,9 +193,6 @@ $scripts = array(
     // fixes for browsers
     "pimcore/browserfixes.js",
 
-    // fixes for libraries
-    //    "pimcore/libfixes.js",
-
     // runtime
     "pimcore/namespace.js",
     "pimcore/functions.js",
@@ -221,6 +218,7 @@ $scripts = array(
 
     "pimcore/settings/user/usertab.js",
     "pimcore/settings/user/editorSettings.js",
+    "pimcore/settings/user/websiteTranslationSettings.js",
     "pimcore/settings/user/role/panel.js",
     "pimcore/settings/user/role/tab.js",
     "pimcore/settings/user/user/objectrelations.js",
@@ -345,6 +343,7 @@ $scripts = array(
 
     // object
     "pimcore/object/helpers/edit.js",
+    "pimcore/object/helpers/layout.js",
     "pimcore/object/classes/class.js",
     "pimcore/object/class.js",
     "pimcore/object/bulk-export.js",
@@ -626,14 +625,19 @@ $googleMapsApiKey = $this->config->services->google->browserapikey;
 <?php } ?>
 <?php } else { ?>
 <?php
-$scriptContents = "";
-foreach ($scripts as $scriptUrl) {
-    if(is_file(PIMCORE_PATH."/static6/js/".$scriptUrl)) {
-        $scriptContents .= file_get_contents(PIMCORE_PATH."/static6/js/".$scriptUrl) . "\n\n\n";
+$minimizedScriptPath = \Pimcore\Cache::load('minimized_script_path');
+if (!$minimizedScriptPath) {
+    $scriptContents = "";
+    foreach ($scripts as $scriptUrl) {
+        if (is_file(PIMCORE_PATH . "/static6/js/" . $scriptUrl)) {
+            $scriptContents .= file_get_contents(PIMCORE_PATH . "/static6/js/" . $scriptUrl) . "\n\n\n";
+        }
     }
+    $minimizedScriptPath = \Pimcore\Tool\Admin::getMinimizedScriptPath($scriptContents);
+    \Pimcore\Cache::save($minimizedScriptPath, 'minimized_script_path');
 }
 ?>
-    <script type="text/javascript" src="<?= \Pimcore\Tool\Admin::getMinimizedScriptPath($scriptContents) ?>"></script>
+    <script type="text/javascript" src="<?= $minimizedScriptPath ?>"></script>
 <?php } ?>
 
 

@@ -120,7 +120,7 @@ class Site extends AbstractModel
                 $site = "failed";
             }
 
-            \Pimcore\Cache::save($site, $cacheKey, ["system", "site"]);
+            \Pimcore\Cache::save($site, $cacheKey, ["system", "site"], null, 999);
         }
 
         if ($site == "failed" || !$site) {
@@ -250,7 +250,7 @@ class Site extends AbstractModel
 
     /**
      * @param integer $rootId
-     * @return void
+     * @return $this
      */
     public function setRootId($rootId)
     {
@@ -264,7 +264,7 @@ class Site extends AbstractModel
 
     /**
      * @param Document\Page $rootDocument
-     * @return void
+     * @return $this
      */
     public function setRootDocument($rootDocument)
     {
@@ -344,9 +344,6 @@ class Site extends AbstractModel
         return $this->redirectToMainDomain;
     }
 
-    /**
-     * @return void
-     */
     public function clearDependentCache()
     {
 

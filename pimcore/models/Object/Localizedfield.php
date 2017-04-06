@@ -28,6 +28,9 @@ class Localizedfield extends Model\AbstractModel
 
     const STRICT_ENABLED = 1;
 
+    /**
+     * @var bool
+     */
     private static $getFallbackValues = false;
 
     /**
@@ -106,7 +109,6 @@ class Localizedfield extends Model\AbstractModel
 
     /**
      * @param  $item
-     * @return void
      */
     public function addItem($item)
     {
@@ -134,7 +136,7 @@ class Localizedfield extends Model\AbstractModel
 
     /**
      * @param Concrete $object
-     * @return void
+     * @return $this
      */
     public function setObject($object)
     {
@@ -156,7 +158,7 @@ class Localizedfield extends Model\AbstractModel
 
     /**
      * @param Model\Object\ClassDefinition $class
-     * @return void
+     * @return $this
      */
     public function setClass(ClassDefinition $class)
     {
@@ -212,7 +214,8 @@ class Localizedfield extends Model\AbstractModel
     /**
      * @param $name
      * @param null $language
-     * @return
+     * @param bool $ignoreFallbackLanguage
+     * @return mixed
      */
     public function getLocalizedValue($name, $language = null, $ignoreFallbackLanguage = false)
     {
@@ -224,7 +227,8 @@ class Localizedfield extends Model\AbstractModel
             $containerKey = $context["containerKey"];
             $container = Model\Object\Fieldcollection\Definition::getByKey($containerKey);
         } else {
-            $container = $this->getObject()->getClass();
+            $object = $this->getObject();
+            $container = $object->getClass();
         }
         $fieldDefinition = $container->getFieldDefinition("localizedfields")->getFieldDefinition($name);
 
@@ -302,7 +306,7 @@ class Localizedfield extends Model\AbstractModel
      * @param $name
      * @param $value
      * @param null $language
-     * @return void
+     * @return $this
      */
     public function setLocalizedValue($name, $value, $language = null)
     {
@@ -356,7 +360,7 @@ class Localizedfield extends Model\AbstractModel
      */
     public function __sleep()
     {
-        return ["items"];
+        return ["items", "context"];
     }
 
         /**

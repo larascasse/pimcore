@@ -74,7 +74,7 @@ SQL
         $calendars = $backend->getCalendarsForUser('principals/user2');
 
         $elementCheck = [
-            'uri'                                                     => 'somerandomid',
+            'uri' => 'somerandomid',
         ];
 
         $this->assertInternalType('array', $calendars);
@@ -142,7 +142,7 @@ SQL
 
         $result = $this->pdo->query('SELECT calendardata FROM simple_calendarobjects WHERE uri = "random-id"');
         $this->assertEquals([
-            'calendardata'   => $object,
+            'calendardata' => $object,
         ], $result->fetch(\PDO::FETCH_ASSOC));
 
     }
@@ -173,7 +173,7 @@ SQL
             ],
         ];
 
-        $result = $backend->getMultipleCalendarObjects($returnedId, [ 'id-1', 'id-2' ]);
+        $result = $backend->getMultipleCalendarObjects($returnedId, ['id-1', 'id-2']);
 
         foreach ($check as $index => $props) {
 

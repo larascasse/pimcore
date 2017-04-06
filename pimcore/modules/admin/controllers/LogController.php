@@ -42,7 +42,7 @@ class Admin_LogController extends \Pimcore\Controller\Action\Admin
             $levels = [];
             foreach (["emergency", "alert", "critical", "error", "warning", "notice", "info", "debug"] as $level) {
                 $levels[] = "priority = '" . $level . "'";
-                
+
                 if ($this->getParam("priority") == $level) {
                     break;
                 }
@@ -66,11 +66,11 @@ class Admin_LogController extends \Pimcore\Controller\Action\Admin
             }
             $queryString .= " AND timestamp <= '" . $datetime . "'";
         }
-        
+
         if ($this->getParam("component")) {
-            $queryString .= " AND component =  '" . $this->getParam("component") . "'";
+            $queryString .= " AND component =  '" . addslashes($this->getParam("component")) . "'";
         }
-         
+
         if ($this->getParam("relatedobject")) {
             $queryString .= " AND relatedobject = " . $this->getParam("relatedobject");
         }
@@ -112,13 +112,17 @@ class Admin_LogController extends \Pimcore\Controller\Action\Admin
         $this->_helper->json($results);
     }
 
+    /**
+     * @param $priority
+     * @return mixed
+     */
     private function getPriorityName($priority)
     {
         $p = ApplicationLoggerDb::getPriorities();
 
         return $p[$priority];
     }
-    
+
     public function priorityJsonAction()
     {
         $priorities[] = ["key" => "-1", "value" => "-"];
@@ -131,11 +135,28 @@ class Admin_LogController extends \Pimcore\Controller\Action\Admin
 
     public function componentJsonAction()
     {
-        $components[] = ["key" => "-", "value" => ""];
+        $components[] = ["key" => "", "value" => "-"];
         foreach (ApplicationLoggerDb::getComponents() as $p) {
             $components[] = ["key" => $p, "value" => $p];
         }
 
         $this->_helper->json(["components" => $components]);
+    }
+
+    public function showFileObjectAction()
+    {
+        $filePath = $this->getParam("filePath");
+        $filePath = PIMCORE_DOCUMENT_ROOT . "/" . $filePath;
+
+
+        header("Content-Type: text/plain");
+
+        if (file_exists($filePath)) {
+            echo file_get_contents($filePath);
+        } else {
+            echo "Path `" . $filePath . "` not found.";
+        }
+
+        exit;
     }
 }

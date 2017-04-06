@@ -88,6 +88,11 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
     public $labelWidth;
 
     /**
+     * @var
+     */
+    public $hideLabelsWhenTabsReached;
+
+    /**
      * contains further localized field definitions if there are more than one localized fields in on class
      * @var array
      */
@@ -494,7 +499,6 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
 
     /**
      * @param mixed $child
-     * @return void
      */
     public function addChild($child)
     {
@@ -529,7 +533,7 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
     /**
      * @param mixed $data
      * @param array $blockedKeys
-     * @return void
+     * @return $this
      */
     public function setValues($data = [], $blockedKeys = [])
     {
@@ -585,6 +589,7 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
 
     /**
      * @param $object
+     * @param array $params
      */
     public function delete($object, $params = [])
     {
@@ -600,7 +605,8 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
 
     /**
      * This method is called in Object|Class::save() and is used to create the database table for the localized data
-     * @return void
+     * @param $class
+     * @param array $params
      */
     public function classSaved($class, $params = [])
     {
@@ -618,7 +624,7 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
     }
 
     /**
-     * @param $object
+     * @param $container
      * @param array $params
      * @return Object\Localizedfield
      * @throws \Exception
@@ -934,7 +940,11 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
         if (!$omitMandatoryCheck) {
             foreach ($languages as $language) {
                 foreach ($this->getFieldDefinitions() as $fd) {
-                    $fd->checkValidity($data[$language][$fd->getName()]);
+                    if (isset($data[$language]) && isset($data[$language][$fd->getName()])) {
+                        $fd->checkValidity($data[$language][$fd->getName()]);
+                    } else {
+                        $fd->checkValidity(null);
+                    }
                 }
             }
         }
@@ -1125,6 +1135,25 @@ class Localizedfields extends Model\Object\ClassDefinition\Data
         }
 
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHideLabelsWhenTabsReached()
+    {
+        return $this->hideLabelsWhenTabsReached;
+    }
+
+    /**
+     * @param mixed $hideLabelsWhenTabsReached
+     * @return $this
+     */
+    public function setHideLabelsWhenTabsReached($hideLabelsWhenTabsReached)
+    {
+        $this->hideLabelsWhenTabsReached = $hideLabelsWhenTabsReached;
+
+        return $this;
     }
 
     /**

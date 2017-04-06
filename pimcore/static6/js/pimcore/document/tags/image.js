@@ -253,7 +253,10 @@ pimcore.document.tags.image = Class.create(pimcore.document.tag, {
             subtype: {
                 asset: ["image"]
             }
-        });
+        }, {
+                context: this.getContext()
+            }
+        );
     },
 
     addDataFromSelector: function (item) {

@@ -169,7 +169,7 @@ class Cache
         }
 
         self::$instance->setLifetime(self::$defaultLifetime);
-        self::$instance->setOption("automatic_serialization", true);
+        self::$instance->setOption("automatic_serialization", false);
         self::$instance->setOption("automatic_cleaning_factor", 0);
 
         // init the write lock once (from other processes etc.)
@@ -224,7 +224,7 @@ class Cache
             "frontendType" => "Core",
             "frontendConfig" => [
                 "lifetime" => self::$defaultLifetime,
-                "automatic_serialization" => true,
+                "automatic_serialization" => false,
                 "automatic_cleaning_factor" => 0
             ],
             "customFrontendNaming" => true,
@@ -273,6 +273,7 @@ class Cache
     /**
      * Returns the content of the requested cache entry
      * @param string $key
+     * @param boolean $doNotTestCacheValidity
      * @return mixed
      */
     public static function load($key, $doNotTestCacheValidity = false)
@@ -341,85 +342,142 @@ class Cache
      * @param null $lifetime
      * @param int $priority
      * @param bool $force
-     * @return bool|void
+     * @return bool
      */
     public static function save($data, $key, $tags = [], $lifetime = null, $priority = 0, $force = false)
     {
         if (!$force && php_sapi_name() == "cli") {
-            return;
+            return false;
         }
 
         if (self::getForceImmediateWrite() || $force) {
             if (self::hasWriteLock()) {
-                return;
+                return false;
             }
 
-            $data = serialize($data);
-            return self::storeToCache($data, $key, $tags, $lifetime, $force);
+            $serializedData = static::prepareCacheData($data);
+            if ($serializedData) {
+                return self::storeToCache($serializedData, $data, $key, $tags, $lifetime, $force);
+            }
         } else {
-            if(count(self::$saveStack) < self::$maxWriteToCacheItems) {
-                $data = serialize($data);
-                self::$saveStack[] = [$data, $key, $tags, $lifetime, $force];
+            self::$saveStack[$key] = [null, $data, $key, $tags, $lifetime, $force, $priority];
+
+            // order by priority
+            uasort(self::$saveStack, function ($a, $b) {
+                // 6 => priority
+                // 0 => serialized data
+                if ($a[6] == $b[6]) {
+                    // records with serialized data have priority, to save cpu cycles
+                    return ($a[0]) ? -1 : 1;
+                }
+
+                return ($a[6] < $b[6]) ? 1 : -1;
+            });
+
+            // remove overrun
+            array_splice(self::$saveStack, self::$maxWriteToCacheItems);
+
+            if (isset(self::$saveStack[$key])) {
+                $serializedData = static::prepareCacheData($data);
+                if (!$serializedData) {
+                    unset(self::$saveStack[$key]);
+
+                    return false;
+                } else {
+                    self::$saveStack[$key][0] = $serializedData;
+
+                    return true;
+                }
             }
         }
+
+        return false;
+    }
+
+    /**
+     * @param $data
+     * @return array|bool
+     */
+    protected static function prepareCacheData($data)
+    {
+        // do not cache hardlink-wrappers
+        if ($data instanceof Document\Hardlink\Wrapper\WrapperInterface) {
+            return false;
+        }
+
+        if ($data instanceof Element\ElementInterface) {
+            // check for currupt data
+            if (!$data->getId()) {
+                return false;
+            }
+
+            if (isset($data->_fulldump)) {
+                unset($data->_fulldump);
+            }
+        }
+
+        if (is_object($data) && isset($data->____pimcore_cache_item__)) {
+            unset($data->____pimcore_cache_item__);
+        }
+
+        return serialize($data);
+    }
+
+    /**
+     * @param mixed $data
+     * @param array $tags
+     * @return array|bool
+     */
+    protected static function prepareCacheTags($data, $tags)
+    {
+        if ($data instanceof Element\ElementInterface) {
+            $tags = $data->getCacheTags($tags);
+        }
+
+        if (!is_array($tags)) {
+            if ($tags) {
+                $tags = [$tags];
+            } else {
+                $tags = [];
+            }
+        }
+
+        $tags = array_values($tags);
+        $tags = array_unique($tags);
+
+        return $tags;
     }
 
     /**
      * Write's an item to the cache // don't use the logger inside here
-     * @param $data
-     * @param $key
+     * @param string $dataSerialized
+     * @param mixed $data
+     * @param string $key
      * @param array $tags
-     * @param null $lifetime
+     * @param null|int $lifetime
      * @param bool $force
-     * @return bool|void
+     * @return bool
      */
-    protected static function storeToCache($data, $key, $tags = [], $lifetime = null, $force = false)
+    protected static function storeToCache($dataSerialized, $data, $key, $tags = [], $lifetime = null, $force = false)
     {
         if (!self::$enabled) {
-            return;
+            return false;
         }
 
         // don't put anything into the cache, when cache is cleared
         if (in_array("__CLEAR_ALL__", self::$clearedTagsStack) && !$force) {
-            return;
-        }
-
-        // do not cache hardlink-wrappers
-        if ($data instanceof Document\Hardlink\Wrapper\WrapperInterface) {
-            return;
+            return false;
         }
 
         // get cache instance
         if ($cache = self::getInstance()) {
-
-            //if ($lifetime !== null) {
-            //    $cache->setLifetime($lifetime);
-            //}
-
-            if ($data instanceof Element\ElementInterface) {
-                // check for currupt data
-                if ($data->getId() < 1) {
-                    return;
-                }
-
-                if (isset($data->_fulldump)) {
-                    unset($data->_fulldump);
-                }
-
-                // get dependencies for this element
-                $tags = $data->getCacheTags($tags);
-                $type = get_class($data);
-
-                Logger::debug("prepared " . $type . " " . $data->getId() . " for data cache with tags: " . implode(",", $tags));
-            }
-
             // check for cleared tags, only item which are not cleared within the same session are stored to the cache
             if (is_array($tags)) {
                 foreach ($tags as $t) {
                     if (in_array($t, self::$clearedTagsStack)) {
                         Logger::debug("Aborted caching for key: " . $key . " because it is in the clear stack");
 
-                        return;
+                        return false;
                     }
                 }
             } else {
@@ -429,12 +487,7 @@ class Cache
             // always add the key as tag
             $tags[] = $key;
 
-            // array_values() because the tags from \Element_Interface and some others are associative eg. array("object_123" => "object_123")
-            $tags = array_values($tags);
-
-            if (is_object($data) && isset($data->____pimcore_cache_item__)) {
-                unset($data->____pimcore_cache_item__);
-            }
+            $tags = self::prepareCacheTags($data, $tags);
 
             $key = self::$cachePrefix . $key;
 
@@ -442,15 +495,25 @@ class Cache
                 $lifetime = false; // set to false otherwise the lifetime stays at null (\Zend_Cache_Backend::getLifetime())
             }
 
-            $success = $cache->save($data, $key, $tags, $lifetime);
+            if ($data instanceof Element\ElementInterface) {
+                if (!$data->__isBasedOnLatestData()) {
+                    //@TODO: this check needs to be done recursive, especially for Objects (like cache tags)
+                    // all other entities shouldn't have references at all in the cache so it shouldn't matter
+                    return false;
+                }
+            }
+
+            $success = $cache->save($dataSerialized, $key, $tags, $lifetime);
             if ($success !== true) {
-                Logger::error("Failed to add entry $key to the cache, item-size was " . formatBytes(strlen(serialize($data))));
+                Logger::error("Failed to add entry $key to the cache, item-size was " . formatBytes(strlen(serialize($dataSerialized))));
             }
 
             Logger::debug("Added " . $key . " to cache");
 
             return $success;
         }
+
+        return false;
     }
 
     /**
@@ -472,20 +535,13 @@ class Cache
             return;
         }
 
-        $processedKeys = [];
         foreach (self::$saveStack as $conf) {
-            if (in_array($conf[1], $processedKeys)) {
-                continue;
-            }
-
             try {
                 forward_static_call_array([__CLASS__, "storeToCache"], $conf);
             } catch (\Exception $e) {
-                Logger::error("Unable to put element " . $conf[1] . " to cache because of the following reason: ");
+                Logger::error("Unable to put element " . $conf[2] . " to cache because of the following reason: ");
                 Logger::error($e);
             }
-
-            $processedKeys[] = $conf[1]; // index 1 is the key for the cache item
         }
 
         // reset
@@ -757,13 +813,20 @@ class Cache
 
 
     /**
-     * @param null $cache
+     * @param \Zend_Cache_Core|null $cache
      */
     public static function setZendFrameworkCaches($cache = null)
     {
-        \Zend_Locale::setCache($cache);
-        \Zend_Locale_Data::setCache($cache);
-        \Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+        $zendCache = null;
+        if ($cache) {
+            $zendCache = clone $cache;
+            $zendCache->setOption('automatic_serialization', true);
+        }
+
+        \Zend_Locale::setCache($zendCache);
+        \Zend_Locale_Data::setCache($zendCache);
+        \Zend_Db_Table_Abstract::setDefaultMetadataCache($zendCache);
+        \Zend_Paginator::setCache($zendCache);
     }
 
     /**

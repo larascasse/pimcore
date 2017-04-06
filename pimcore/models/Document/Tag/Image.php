@@ -343,25 +343,33 @@ class Image extends Model\Document\Tag
         return $this;
     }
 
-    /*
-      * @return string
-      */
+    /**
+     * @return string
+     */
     public function getText()
     {
         return $this->alt;
     }
 
-    /*
-      * @return string
-      */
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->alt = $text;
+    }
+
+    /**
+     * @return string
+     */
     public function getAlt()
     {
         return $this->getText();
     }
 
-    /*
-      * @return string
-      */
+    /**
+     * @return string
+     */
     public function getSrc()
     {
         $image = $this->getImage();
@@ -737,7 +745,6 @@ class Image extends Model\Document\Tag
      *  "asset" => array(...)
      * )
      * @param array $idMapping
-     * @return void
      */
     public function rewriteIds($idMapping)
     {

@@ -37,7 +37,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         if ($admin) {
             $delta = Translation\Admin::importTranslationsFromFile($tmpFile, $overwrite, Tool\Admin::getLanguages());
         } else {
-            $delta = Translation\Website::importTranslationsFromFile($tmpFile, $overwrite);
+            $delta = Translation\Website::importTranslationsFromFile($tmpFile, $overwrite, $this->getUser()->getAllowedLanguagesForEditingWebsiteTranslations());
         }
 
         $result =[
@@ -116,7 +116,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                 $languages = Tool\Admin::getLanguages();
             } else {
                 $t = new Translation\Website();
-                $languages = Tool::getValidLanguages();
+                $languages = $this->getUser()->getAllowedLanguagesForViewingWebsiteTranslations();
             }
 
             foreach ($languages as $language) {
@@ -140,7 +140,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         if ($admin) {
             $languages = Tool\Admin::getLanguages();
         } else {
-            $languages = Tool::getValidLanguages();
+            $languages = $this->getUser()->getAllowedLanguagesForViewingWebsiteTranslations();
         }
 
         //add language columns which have no translations yet
@@ -311,7 +311,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                 $list = new Translation\Website\Listing();
             }
 
-            $validLanguages = Tool::getValidLanguages();
+            $validLanguages = $admin ? Tool\Admin::getLanguages() : $this->getUser()->getAllowedLanguagesForViewingWebsiteTranslations();
 
             $list->setOrder("asc");
             $list->setOrderKey($tableName . ".key", false);
@@ -362,6 +362,12 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         }
     }
 
+    /**
+     * @param $joins
+     * @param $list
+     * @param $tableName
+     * @param $filters
+     */
     protected function extendTranslationQuery($joins, $list, $tableName, $filters)
     {
         if ($joins) {
@@ -400,12 +406,17 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         }
     }
 
-
+    /**
+     * @param $tableName
+     * @param bool $languageMode
+     * @return array|null|string
+     */
     protected function getGridFilterCondition($tableName, $languageMode = false)
     {
         $joins = [];
         $conditions = [];
-        $validLanguages = Tool::getValidLanguages();
+        $validLanguages = $this->getUser()->getAllowedLanguagesForViewingWebsiteTranslations();
+        ;
 
         $db = \Pimcore\Db::get();
         $conditionFilters = [];
@@ -443,13 +454,14 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                     $field = $fieldname;
                     $value = "%" . $filter["value"] . "%";
                 } elseif ($filter["type"] == "date" ||
-                    ($isExtJs6 && in_array($fieldname, ["modificationDate", "creationdate"]))) {
+                    ($isExtJs6 && in_array($fieldname, ["modificationDate", "creationDate"]))) {
                     if ($filter[$operatorField] == "lt") {
                         $operator = "<";
                     } elseif ($filter[$operatorField] == "gt") {
                         $operator = ">";
                     } elseif ($filter[$operatorField] == "eq") {
                         $operator = "=";
+                        $fieldname = "UNIX_TIMESTAMP(DATE(FROM_UNIXTIME({$fieldname})))";
                     }
                     $filter["value"] = strtotime($filter["value"]);
                     $field = $fieldname;
@@ -656,8 +668,8 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                 }
 
                 foreach ($elements as $tag) {
-                    if (in_array($tag->getType(), ["wysiwyg", "input", "textarea", "image"])) {
-                        if ($tag->getType() == "image") {
+                    if (in_array($tag->getType(), ["wysiwyg", "input", "textarea", "image", "link"])) {
+                        if (in_array($tag->getType(), ["image", "link"])) {
                             $content = $tag->getText();
                         } else {
                             $content = $tag->getData();
@@ -843,7 +855,12 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                     if ($fieldType == "tag" && method_exists($element, "getElement")) {
                         $tag = $element->getElement($name);
                         if ($tag) {
-                            $tag->setDataFromEditmode($content);
+                            if (in_array($tag->getType(), ["image", "link"])) {
+                                $tag->setText($content);
+                            } else {
+                                $tag->setDataFromEditmode($content);
+                            }
+
                             $tag->setInherited(false);
                             $element->setElement($tag->getName(), $tag);
                         }
@@ -893,6 +910,12 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         ]);
     }
 
+    /**
+     * @param $xml
+     * @param $name
+     * @param $content
+     * @param $source
+     */
     protected function addTransUnitNode($xml, $name, $content, $source)
     {
         $transUnit = $xml->addChild('trans-unit');
@@ -908,6 +931,10 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         @$node->appendChild($f);
     }
 
+    /**
+     * @param $content
+     * @return mixed|string
+     */
     protected function unescapeXliff($content)
     {
         $content = preg_replace("/<\/?(target|mrk)([^>.]+)?>/i", "", $content);
@@ -929,6 +956,10 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         return $content;
     }
 
+    /**
+     * @param $content
+     * @return mixed|string
+     */
     protected function escapeXliff($content)
     {
         $count = 1;
@@ -1257,6 +1288,18 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
 
         $this->_helper->json([
             "success" => true
+        ]);
+    }
+
+
+    public function getWebsiteTranslationLanguagesAction()
+    {
+        $this->_helper->json([
+            'view' => $this->getUser()->getAllowedLanguagesForViewingWebsiteTranslations(),
+
+            //when no view language is defined, all languages are editable. if one view language is defined, it
+            //may be possible that no edit language is set intentionally
+            'edit' => $this->getUser()->getAllowedLanguagesForEditingWebsiteTranslations()
         ]);
     }
 }

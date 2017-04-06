@@ -45,8 +45,8 @@ if(!$imageformat) {
 ?>
 
 <!-- Grid -->
-<div class="container-main image-grid">
-<div class="row">
+
+<div class="row image-grid">
 <?php 
 
 $assets = array();
@@ -61,7 +61,7 @@ foreach ($assets as $asset) {
 ?>
    
 </div>
-</div>
+
 <!-- FIN Grid -->
 
 <?php endif; ?>

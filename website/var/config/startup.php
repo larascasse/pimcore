@@ -66,5 +66,14 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     });
 }
 
+//Pas de caracteres speciaux, V4.0
+\Pimcore::getEventManager()->attach("system.service.preGetValidKey", function (\Zend_EventManager_Event $event) {
+    $key = $event->getParam("key");
+    $key = \Pimcore\File::getValidFilename($key);
+    return $key;
+});
+
+
+
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Website');

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <id>iframe</id>
+    <name>LPN Iframe</name>
+    <description>Embed contents from other URL (websites) via iframe</description>
+    
+    <!-- the following infos are optional -->
+    <icon>/pimcore/static/img/icon/html.png</icon>
+    <version>1.0</version>
+
+</zend-config>

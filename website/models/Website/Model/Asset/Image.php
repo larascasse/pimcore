@@ -110,7 +110,7 @@ class Image extends Asset\Image {
                return $realisation_description;
         }
         else if($product = $this->getRelatedProduct()) {
-            return $product->getSubtype()." ".$product->getShort_name();
+            return $product->getShort_description();
         }
         else {
             return "";

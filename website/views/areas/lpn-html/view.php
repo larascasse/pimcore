@@ -7,7 +7,9 @@ if($this->editmode) {
 <?= $this->textarea("html",
     [
         "width" => '100%',
-        "height" => 500
+        "height" => 500,
+        "htmlspecialchars" => false,
+        "placeholder" => "Source HTML brut"
 
 ]); ?>
 

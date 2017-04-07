@@ -10,7 +10,7 @@ $index = $this->index>0?$this->index:0;
                     ), "produits");
 ?>
   
-        <div class="col-<?php echo cols; ?>">
+        <div class="col-<?php echo $cols; ?>">
         <div class="card clickable item">
          <?php if($product->getImage_1()) { ?>
             

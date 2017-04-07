@@ -18,17 +18,19 @@ $index = $this->index>0?$this->index:0;
           
         <?php } ?>
        <div class="tabledesc">
-            <p class="subtype "><?php echo $product->getCatalogue(); ?></p>
-             <p class="subtype "><?php echo $product->getSubtype(); ?></p>
+            <p class="subtype "><?php echo ucfirst($product->getSubtype()); ?></p>
             <h3 class="product-name"><?php echo $product->getShort_name(); ?></h3>
             <p class="subtype "><?php echo $product->getShort_description(); ?></p>
 
          <!--<p><a href="<?php echo $detailLink; ?>" class="btn btn-primary" role="button">Voir</a></p>-->
+             <div class="actions">
+             <?php  echo $this->template("/content/link-eshop-renderlet.php",array('product'=>$product,
+                'btn_title'=>"" //ne rien mettre pour avoir le prix
+             )); ?>
+             </div>
             
          </div>
-         <div class="actions">
-            <a class="btn" href="<?php echo $detailLink; ?>">Voir</a>
-         </div>
+        
         </div>
         </div>
 

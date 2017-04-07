@@ -10,7 +10,8 @@
 
     ]); ?>
 <?php else: ?>
-
+<div class="row section-content">
+<div class="col">
        <!-- Carousel Item -->
             <div class="sliderimage" data-ride="carousel">
                 <div class="owl-carousel image-list">
@@ -28,6 +29,7 @@ foreach ($assets as $asset) {
                 </div>
             </div>
   
-
+</div>
+</div>
 <?php endif; ?>
 

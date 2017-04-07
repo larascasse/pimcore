@@ -67,7 +67,7 @@ class ProjectPost extends Object\ProjectPost {
          $itemData["meta"] = $this->getMeta();
 
          $itemData["mage_identifier"] = $this->getMageUrl();
-
+         $itemData["title"] = $this->getName();
          $itemData["name"] = $this->getName();
          $itemData["content"] = $this->getContent();
          $itemData["description"] = $this->getDescription();

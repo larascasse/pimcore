@@ -76,6 +76,7 @@ class LpnController extends Action
                         "name"            => $doc->getName(),
                         "key"            => $doc->getKey(),
                         "url"            => $doc->getPrettyUrl(),
+                        "title"            => $doc->getTitle(),
                     );
                      $pages[] = $page;
                 }
@@ -123,6 +124,7 @@ class LpnController extends Action
                         "name"            => $doc->getName(),
                         "key"            => $doc->getKey(),
                         "url"            => $doc->getPrettyUrl(),
+                        "title"            => $doc->getTitle(),
                     );
                      $pages[] = $page;
                 }

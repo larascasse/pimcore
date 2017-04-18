@@ -26,11 +26,15 @@ class TheFormatter
         $context = $params["context"];
 
         foreach ($targets as $key => $item) {
-            $newPath = $item["path"] .  " - " . time();
+            
+            $newPath = $item["path"];// .  " - " . time();
+            
             if ($context["language"]) {
                 $newPath .= " " . $context["language"];
             }
 
+
+            /* OBJECT */
             if ($item["type"] == "object") {
                 $targetObject = Concrete::getById($item["id"]);
                 if ($targetObject instanceof Object\News) {
@@ -44,17 +48,47 @@ class TheFormatter
                 else if ($targetObject instanceof Object\BlogPost) {
                     $newPath = $targetObject->getTitle();
                 }
-            } elseif ($item["type"] == "asset") {
+            } 
+
+            /* ASSET */
+            elseif ($item["type"] == "asset") {
                 $asset = Asset::getById($item["id"]);
                 if ($asset) {
                     $title = $asset->getMetadata("title");
 
 
                     if (!$title) {
-                        $title = "[notitle] ".$newPath;
+                        $title = $newPath;
                     }
                     if ($fd instanceof Data\Multihref) {
-                        $newPath = '<img src="' . $asset . '" style="width: 25px; height: 18px;" />' . $title;
+
+                        $thumbnail = TheFormatter::getThumbnailOfAsset($asset);
+
+                        if($thumbnail) {
+                            $newPath = '<img src="' . $thumbnail->getPath() . '" style="width: 30px; height: 20px;" />' . $title; 
+                        }
+                        
+                        /*if ($asset instanceof Asset\Folder) {
+                            $children=$asset->getChildren();
+                            if(is_array($children) && count($children)) {
+
+                                foreach ($children as $child) {
+                                    # code...
+                                         if ($child instanceof Asset\Image) {
+                                        $newPath = '<img src="' . $child->getThumbnail('galleryThumbnail')->getPath() . '" style="width: 35px; height: 28px;" />' . $title;
+                                        break;
+                                    }
+                                }
+                               
+                            }
+                      
+
+                            
+                        }
+                        else {
+                           $newPath = '<img src="' . $asset->getThumbnail('galleryThumbnail')->getPath() . '" style="width: 35px; height: 28px;" />' . $title; 
+                        }*/
+                        
                     } else {
                         $newPath = $title;
                     }
@@ -65,5 +99,37 @@ class TheFormatter
             $result[$key]= $newPath;
         }
         return $result;
+    }
+
+    public static function getThumbnailOfAsset($asset) {
+
+        if ($asset instanceof Asset\Folder) {
+
+            $children=$asset->getChildren();
+            if(is_array($children)) {
+
+                foreach ($children as $child) {
+                    # code...
+                    if ($child instanceof Asset\Image) {
+
+                        return $child->getThumbnail('galleryThumbnail');
+                        break;
+                    }
+                    else {
+                       
+                        return TheFormatter::getThumbnailOfAsset($child);
+                        break;
+                    }
+                }
+               
+            }
+      
+
+            
+        }
+        elseif($asset) {
+
+           return $asset->getThumbnail('galleryThumbnail');
+        }
     }
 }

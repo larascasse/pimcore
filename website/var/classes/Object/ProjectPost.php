@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-03-22T16:43:02+01:00
+* Generated at: 2017-04-18T15:00:58+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -9,7 +9,7 @@
 
 
 Fields Summary: 
-- category [objects]
+- category [multihref]
 - localizedfields [localizedfields]
 -- name [input]
 -- accroche [textarea]
@@ -23,10 +23,10 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\ProjectPost\Listing getByCategory ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\ProjectPost\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
-* @method static \Pimcore\Model\Object\ProjectPost\Listing getByImages ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\ProjectPost\Listing getByContent ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\ProjectPost\Listing getByCategory ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\ProjectPost\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
+* @method \Pimcore\Model\Object\ProjectPost\Listing getByImages ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\ProjectPost\Listing getByContent ($value, $limit = 0) 
 */
 
 class ProjectPost extends Concrete {
@@ -51,7 +51,7 @@ public static function create($values = array()) {
 
 /**
 * Get category - category
-* @return \Pimcore\Model\Object\projectCategory[]
+* @return 
 */
 public function getCategory () {
 	$preValue = $this->preGetValue("category"); 
@@ -67,7 +67,7 @@ public function getCategory () {
 
 /**
 * Set category - category
-* @param \Pimcore\Model\Object\projectCategory[] $category
+* @param  $category
 * @return \Pimcore\Model\Object\ProjectPost
 */
 public function setCategory ($category) {
@@ -225,7 +225,7 @@ public function setContent ($content) {
 protected static $_relationFields = array (
   'category' => 
   array (
-    'type' => 'objects',
+    'type' => 'multihref',
   ),
   'images' => 
   array (

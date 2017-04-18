@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-03-22T16:43:02+01:00
+* Generated at: 2017-04-18T15:00:58+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -9,7 +9,7 @@
 
 
 Fields Summary: 
-- category [objects]
+- category [multihref]
 - localizedfields [localizedfields]
 -- name [input]
 -- accroche [textarea]
@@ -23,7 +23,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1490197382,
+   'modificationDate' => 1492520458,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -68,14 +68,32 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
          'childs' => 
         array (
           0 => 
-          Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
-             'fieldtype' => 'objects',
+          Pimcore\Model\Object\ClassDefinition\Data\Multihref::__set_state(array(
+             'fieldtype' => 'multihref',
              'width' => '',
              'height' => '',
              'maxItems' => '',
+             'assetUploadPath' => '',
              'queryColumnType' => 'text',
              'phpdocType' => 'array',
              'relationType' => true,
+             'objectsAllowed' => false,
+             'assetsAllowed' => false,
+             'assetTypes' => 
+            array (
+              0 => 
+              array (
+                'assetTypes' => '',
+              ),
+            ),
+             'documentsAllowed' => false,
+             'documentTypes' => 
+            array (
+              0 => 
+              array (
+                'documentTypes' => '',
+              ),
+            ),
              'lazyLoading' => true,
              'classes' => 
             array (
@@ -84,14 +102,14 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                 'classes' => 'projectCategory',
               ),
             ),
-             'pathFormatterClass' => '\\Website\\TheFormatter',
+             'pathFormatterClass' => '',
              'name' => 'category',
              'title' => 'category',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => false,
+             'locked' => NULL,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -185,6 +203,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'height' => '',
              'maxTabs' => NULL,
              'labelWidth' => NULL,
+             'hideLabelsWhenTabsReached' => NULL,
              'referencedFields' => 
             array (
             ),

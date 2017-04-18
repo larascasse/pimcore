@@ -1,7 +1,12 @@
+<div class="back-content">
+    <a href="btn btn-back">< Retour</a>
+</div>
+
 <div class="image-header-container  noimg">
     <div>
       <h1>Projets</h1>
-            <?php  echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); ?>
+            <?php  
+            echo $this->template("/project-category/dropdown.php",array('category'=>$this->category,'categories'=>$this->categories)); ?>
 
     </div>
 </div>

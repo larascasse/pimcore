@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-04-18T15:00:58+02:00
+* Generated at: 2017-04-18T15:25:55+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -50,7 +50,7 @@ public static function create($values = array()) {
 }
 
 /**
-* Get category - category
+* Get category - Categorie
 * @return 
 */
 public function getCategory () {
@@ -66,7 +66,7 @@ public function getCategory () {
 }
 
 /**
-* Set category - category
+* Set category - Categorie
 * @param  $category
 * @return \Pimcore\Model\Object\ProjectPost
 */
@@ -118,7 +118,7 @@ public function getAccroche ($language = null) {
 }
 
 /**
-* Get description - description
+* Get description - Description
 * @return string
 */
 public function getDescription ($language = null) {
@@ -161,7 +161,7 @@ public function setAccroche ($accroche, $language = null) {
 }
 
 /**
-* Set description - description
+* Set description - Description
 * @param string $description
 * @return \Pimcore\Model\Object\ProjectPost
 */
@@ -171,7 +171,7 @@ public function setDescription ($description, $language = null) {
 }
 
 /**
-* Get images - images
+* Get images - Images
 * @return \Pimcore\Model\Asset\video[] | \Pimcore\Model\Asset\image[] | \Pimcore\Model\Asset\folder[] | \Pimcore\Model\Asset\unknown[]
 */
 public function getImages () {
@@ -187,7 +187,7 @@ public function getImages () {
 }
 
 /**
-* Set images - images
+* Set images - Images
 * @param \Pimcore\Model\Asset\video[] | \Pimcore\Model\Asset\image[] | \Pimcore\Model\Asset\folder[] | \Pimcore\Model\Asset\unknown[] $images
 * @return \Pimcore\Model\Object\ProjectPost
 */

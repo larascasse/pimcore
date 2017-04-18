@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-02-02T14:48:27+01:00
+* Generated at: 2017-04-18T15:27:04+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
@@ -13,10 +13,10 @@ Fields Summary:
 -- title [input]
 -- accroche [textarea]
 -- excerpt [textarea]
+- posterImage [image]
 - content [fieldcollections]
 - relatedProducts [objects]
 - date [date]
-- posterImage [image]
 - categories [objects]
 */ 
 
@@ -25,12 +25,12 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByContent ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByRelatedProducts ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByDate ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByPosterImage ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\BlogPost\Listing getByCategories ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByPosterImage ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByContent ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByRelatedProducts ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByDate ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\BlogPost\Listing getByCategories ($value, $limit = 0) 
 */
 
 class BlogPost extends Concrete {
@@ -38,10 +38,10 @@ class BlogPost extends Concrete {
 public $o_classId = 14;
 public $o_className = "blogPost";
 public $localizedfields;
+public $posterImage;
 public $content;
 public $relatedProducts;
 public $date;
-public $posterImage;
 public $categories;
 
 
@@ -148,6 +148,29 @@ public function setExcerpt ($excerpt, $language = null) {
 }
 
 /**
+* Get posterImage - Image d'intro
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getPosterImage () {
+	$preValue = $this->preGetValue("posterImage"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->posterImage;
+	return $data;
+}
+
+/**
+* Set posterImage - Image d'intro
+* @param \Pimcore\Model\Asset\Image $posterImage
+* @return \Pimcore\Model\Object\BlogPost
+*/
+public function setPosterImage ($posterImage) {
+	$this->posterImage = $posterImage;
+	return $this;
+}
+
+/**
 * @return \Pimcore\Model\Object\Fieldcollection
 */
 public function getContent () {
@@ -210,29 +233,6 @@ public function getDate () {
 */
 public function setDate ($date) {
 	$this->date = $date;
-	return $this;
-}
-
-/**
-* Get posterImage - posterImage
-* @return \Pimcore\Model\Asset\Image
-*/
-public function getPosterImage () {
-	$preValue = $this->preGetValue("posterImage"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->posterImage;
-	return $data;
-}
-
-/**
-* Set posterImage - posterImage
-* @param \Pimcore\Model\Asset\Image $posterImage
-* @return \Pimcore\Model\Object\BlogPost
-*/
-public function setPosterImage ($posterImage) {
-	$this->posterImage = $posterImage;
 	return $this;
 }
 

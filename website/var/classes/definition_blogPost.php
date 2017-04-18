@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-02-02T14:48:27+01:00
+* Generated at: 2017-04-18T15:27:04+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
@@ -13,10 +13,10 @@ Fields Summary:
 -- title [input]
 -- accroche [textarea]
 -- excerpt [textarea]
+- posterImage [image]
 - content [fieldcollections]
 - relatedProducts [objects]
 - date [date]
-- posterImage [image]
 - categories [objects]
 */ 
 
@@ -25,7 +25,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'blogPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1486043307,
+   'modificationDate' => 1492522023,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -91,7 +91,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => true,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -114,7 +114,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -137,7 +137,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%; height: 300px;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -154,6 +154,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'height' => '',
              'maxTabs' => NULL,
              'labelWidth' => NULL,
+             'hideLabelsWhenTabsReached' => NULL,
              'referencedFields' => 
             array (
             ),
@@ -173,6 +174,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleSearch' => true,
           )),
           1 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+             'fieldtype' => 'image',
+             'width' => '',
+             'height' => '',
+             'uploadPath' => '',
+             'queryColumnType' => 'int(11)',
+             'columnType' => 'int(11)',
+             'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+             'name' => 'posterImage',
+             'title' => 'Image d\'intro',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          2 => 
           Pimcore\Model\Object\ClassDefinition\Data\Fieldcollections::__set_state(array(
              'fieldtype' => 'fieldcollections',
              'phpdocType' => '\\Pimcore\\Model\\Object\\Fieldcollection',
@@ -205,7 +230,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          2 => 
+          3 => 
           Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
              'fieldtype' => 'objects',
              'width' => '',
@@ -238,7 +263,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          3 => 
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Data\Date::__set_state(array(
              'fieldtype' => 'date',
              'queryColumnType' => 'bigint(20)',
@@ -248,30 +273,6 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'useCurrentDate' => true,
              'name' => 'date',
              'title' => 'Date',
-             'tooltip' => '',
-             'mandatory' => false,
-             'noteditable' => false,
-             'index' => false,
-             'locked' => false,
-             'style' => '',
-             'permissions' => NULL,
-             'datatype' => 'data',
-             'relationType' => false,
-             'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
-          )),
-          4 => 
-          Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
-             'fieldtype' => 'image',
-             'width' => '',
-             'height' => '',
-             'uploadPath' => '',
-             'queryColumnType' => 'int(11)',
-             'columnType' => 'int(11)',
-             'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
-             'name' => 'posterImage',
-             'title' => 'posterImage',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,

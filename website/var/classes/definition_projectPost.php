@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-04-18T15:00:58+02:00
+* Generated at: 2017-04-18T15:25:55+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -23,7 +23,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1492520458,
+   'modificationDate' => 1492521955,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -104,12 +104,12 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
             ),
              'pathFormatterClass' => '',
              'name' => 'category',
-             'title' => 'category',
+             'title' => 'Categorie',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -140,7 +140,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => true,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -151,8 +151,8 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
               1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
-                 'width' => '',
-                 'height' => '',
+                 'width' => 0,
+                 'height' => 5,
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
@@ -175,18 +175,18 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => '',
-                 'height' => '',
+                 'height' => 36,
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
                  'name' => 'description',
-                 'title' => 'description',
+                 'title' => 'Description',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%;height:300px;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -256,15 +256,23 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'documentsAllowed' => false,
              'documentTypes' => 
             array (
+              0 => 
+              array (
+                'documentTypes' => '',
+              ),
             ),
              'lazyLoading' => true,
              'classes' => 
             array (
+              0 => 
+              array (
+                'classes' => '',
+              ),
             ),
              'pathFormatterClass' => '\\Website\\TheFormatter',
              'name' => 'images',
-             'title' => 'images',
-             'tooltip' => '',
+             'title' => 'Images',
+             'tooltip' => 'Faire glisser des Images ou dossier d\'image',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
@@ -296,7 +304,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,
-             'invisible' => false,
+             'invisible' => true,
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),

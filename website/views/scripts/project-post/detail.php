@@ -87,6 +87,10 @@ foreach ($imagesArray->assets as $asset) {
 
 ?>
 
+<div class="back-content">
+    <a href="btn btn-back">< Retour</a>
+</div>
+
 <div class="image-header-container noimg">
     <div>
       <h1><?= $this->article->getName(); ?></h1>

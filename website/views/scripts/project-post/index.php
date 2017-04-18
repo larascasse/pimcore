@@ -1,7 +1,3 @@
-<div class="back-content">
-    <a href="btn btn-back">< Retour</a>
-</div>
-
 <div class="image-header-container  noimg">
     <div>
       <h1>Projets</h1>

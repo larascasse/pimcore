@@ -88,7 +88,7 @@ foreach ($imagesArray->assets as $asset) {
 ?>
 
 <div class="back-content">
-    <a href="#" class="btn btn-back">< Retour</a>
+    <a href="#" class="btn btn-back">Retour</a>
 </div>
 
 <div class="image-header-container noimg">

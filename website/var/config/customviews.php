@@ -18,7 +18,7 @@ return [
             "id" => "3",
             "rootfolder" => "/projets",
             "showroot" => "1",
-            "classes" => "16"
+            "classes" => "16,17"
         ],
         [
             "name" => "Journal",
@@ -27,7 +27,7 @@ return [
             "id" => "4",
             "rootfolder" => "/journal",
             "showroot" => "1",
-            "classes" => "14"
+            "classes" => "14,15"
         ],
         [
             "name" => "En savoir plus",

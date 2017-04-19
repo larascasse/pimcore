@@ -1109,10 +1109,11 @@
 
                         $object->setValue("name_scienergie_converti",$this->convertScienergieName($value));
 
-                        if(!$isUpdating) {
+                        //Mis dans l'article
+                        /*if(!$isUpdating) {
                             if(count($splitedName)>0)
                                  $object->setValue("subtype", $splitedName[1]);
-                        }
+                        }*/
                         //2017, pour les EAN, on ne met j'amais le name ... on prend du parent
                         //if($isUpdating) {
                            continue;

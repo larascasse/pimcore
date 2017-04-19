@@ -1002,7 +1002,7 @@
                  return;
              }
              else
-                 echo $product["ean"]." n'existe pas  et sera crée\n";
+                 echo "\n\n*********  ".$product["ean"]." n'existe pas  et sera crée ****** \n";
         }
 
 

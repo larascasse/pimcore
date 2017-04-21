@@ -8,7 +8,7 @@
 
  	private $parentId = 1514;
 
- 	function LpnPlugin_Importer($importerConfig=null,$overwrite=false) {
+ 	function __construct($importerConfig=null,$overwrite=false) {
  		echo "ok\n";
  		$this->config = $importerConfig;
  		$this->overwrite = $overwrite;

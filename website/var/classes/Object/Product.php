@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-01-19T12:19:02+01:00
+* Generated at: 2017-04-21T12:59:23+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -76,6 +76,8 @@ Fields Summary:
 - nbrpp [input]
 - finition [select]
 - finition_not_configurable [checkbox]
+- traitement_surface [select]
+- traitement_surface_not_configurable [checkbox]
 - profil [multiselect]
 - profil_not_configurable [checkbox]
 - pimonly_profil_label [input]
@@ -103,7 +105,9 @@ Fields Summary:
 - origine_bois [input]
 - country_of_manufacture [input]
 - colisage [input]
+- surface [input]
 - typeLame [select]
+- motif [select]
 - pieceHumide [checkbox]
 - sousCoucheIntegree [checkbox]
 - chauffantBasseTemperature [checkbox]
@@ -172,161 +176,165 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByShort_name ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByWeight ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByShort_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_sub_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByShort_description_title ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByDescription ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByExtra_content1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLesplus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByRemarque ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByNo_stock_delay ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLeadtime ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEpaisseur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEpaisseur_txt ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEpaisseur_type ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEpaisseur_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLargeur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLargeur_txt ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLargeur_colis ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLargeur_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_txt ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_min ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_max ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_colis ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByLongueur_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_longueur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_section ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_section ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_use_section_as_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByHauteur ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByHauteur_colis ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByHauteur_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByColor ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByColor_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByVolume ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByVolume_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByConditionnement ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByConditionnement_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByProfil ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByProfil_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_profil_label ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt_not_configurable ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCharacteristics_others ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByUnite ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMode_calcul ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByClasse_service ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByOrigine_bois ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCountry_of_manufacture ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByColisage ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByTypeLame ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_3 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByGallery ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByRealisations ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFiche_technique_lpn ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByNotice_pose_lpn ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByRe_skus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCs_skus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_category_pose ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_category_finition ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByPimonly_category_entretien ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByAssociatedArticles ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByOrigineArticles ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_short_name ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_title ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level0 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level1 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_teinte_level2 ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_meta_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_lesplus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByCharacteristics ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_guideline ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_1_src ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_2_src ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByImage_3_src ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_mediagallery ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_fichepdf ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_notice_pose_lpn ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_invoice_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_realisations ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_realisationsJson ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_config_description ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_re_skus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_produitspose ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_produitsfinition ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_produitsentretien ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_cs_skus ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Product\Listing getByMage_origine_arbre ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByShort_name ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByWeight ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByShort_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_sub_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByShort_description_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByDescription ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByExtra_content1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLesplus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByRemarque ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNo_stock_delay ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLeadtime ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseur ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_txt ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_type ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeur ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeur_txt ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeur_colis ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeur_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur_txt ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur_min ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur_max ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur_colis ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueur_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_longueur ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_section ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_section ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_use_section_as_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByHauteur ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByHauteur_colis ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByHauteur_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByColor ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByColor_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByVolume ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByVolume_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConditionnement ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConditionnement_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByProfil ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByProfil_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_profil_label ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByUnite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMode_calcul ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_service ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByOrigine_bois ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCountry_of_manufacture ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByColisage ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySurface ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTypeLame ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMotif ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_3 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByGallery ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByRealisations ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNotice_pose_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByRe_skus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCs_skus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_pose ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_finition ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_entretien ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByAssociatedArticles ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByOrigineArticles ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_short_name ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_meta_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_teinte ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_teinte_level0 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_teinte_level1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_teinte_level2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_meta_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_lesplus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCharacteristics ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_guideline ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_1_src ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_2_src ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_3_src ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_mediagallery ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_fichepdf ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_notice_pose_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_invoice_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_realisations ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_realisationsJson ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_config_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_re_skus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_produitspose ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_produitsfinition ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_produitsentretien ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_cs_skus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_origine_arbre ($value, $limit = 0) 
 */
 
 class Product extends Concrete {
@@ -400,6 +408,8 @@ public $conditionnement_not_configurable;
 public $nbrpp;
 public $finition;
 public $finition_not_configurable;
+public $traitement_surface;
+public $traitement_surface_not_configurable;
 public $profil;
 public $profil_not_configurable;
 public $pimonly_profil_label;
@@ -427,7 +437,9 @@ public $chanfreins;
 public $origine_bois;
 public $country_of_manufacture;
 public $colisage;
+public $surface;
 public $typeLame;
+public $motif;
 public $pieceHumide;
 public $sousCoucheIntegree;
 public $chauffantBasseTemperature;
@@ -2243,6 +2255,58 @@ public function setFinition_not_configurable ($finition_not_configurable) {
 }
 
 /**
+* Get traitement_surface - Traitement de surface
+* @return string
+*/
+public function getTraitement_surface () {
+	$preValue = $this->preGetValue("traitement_surface"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->traitement_surface;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface")->isEmpty($data)) {
+		return $this->getValueFromParent("traitement_surface");
+	}
+	return $data;
+}
+
+/**
+* Set traitement_surface - Traitement de surface
+* @param string $traitement_surface
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTraitement_surface ($traitement_surface) {
+	$this->traitement_surface = $traitement_surface;
+	return $this;
+}
+
+/**
+* Get traitement_surface_not_configurable - Traitement de surface non configurable
+* @return boolean
+*/
+public function getTraitement_surface_not_configurable () {
+	$preValue = $this->preGetValue("traitement_surface_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->traitement_surface_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("traitement_surface_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set traitement_surface_not_configurable - Traitement de surface non configurable
+* @param boolean $traitement_surface_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTraitement_surface_not_configurable ($traitement_surface_not_configurable) {
+	$this->traitement_surface_not_configurable = $traitement_surface_not_configurable;
+	return $this;
+}
+
+/**
 * Get profil - Profil
 * @return array
 */
@@ -2945,6 +3009,32 @@ public function setColisage ($colisage) {
 }
 
 /**
+* Get surface - Surface du lot
+* @return string
+*/
+public function getSurface () {
+	$preValue = $this->preGetValue("surface"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->surface;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("surface")->isEmpty($data)) {
+		return $this->getValueFromParent("surface");
+	}
+	return $data;
+}
+
+/**
+* Set surface - Surface du lot
+* @param string $surface
+* @return \Pimcore\Model\Object\Product
+*/
+public function setSurface ($surface) {
+	$this->surface = $surface;
+	return $this;
+}
+
+/**
 * Get typeLame - Type de lame
 * @return string
 */
@@ -2967,6 +3057,32 @@ public function getTypeLame () {
 */
 public function setTypeLame ($typeLame) {
 	$this->typeLame = $typeLame;
+	return $this;
+}
+
+/**
+* Get motif - Motif
+* @return string
+*/
+public function getMotif () {
+	$preValue = $this->preGetValue("motif"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->motif;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("motif")->isEmpty($data)) {
+		return $this->getValueFromParent("motif");
+	}
+	return $data;
+}
+
+/**
+* Set motif - Motif
+* @param string $motif
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMotif ($motif) {
+	$this->motif = $motif;
 	return $this;
 }
 

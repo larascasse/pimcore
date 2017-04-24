@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-04-18T15:25:55+02:00
+* Generated at: 2017-04-24T16:41:51+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
@@ -51,7 +51,7 @@ public static function create($values = array()) {
 
 /**
 * Get category - Categorie
-* @return 
+* @return \Pimcore\Model\Object\projectCategory[]
 */
 public function getCategory () {
 	$preValue = $this->preGetValue("category"); 
@@ -67,7 +67,7 @@ public function getCategory () {
 
 /**
 * Set category - Categorie
-* @param  $category
+* @param \Pimcore\Model\Object\projectCategory[] $category
 * @return \Pimcore\Model\Object\ProjectPost
 */
 public function setCategory ($category) {

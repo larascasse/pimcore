@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-04-18T15:25:55+02:00
+* Generated at: 2017-04-24T16:41:51+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
@@ -23,7 +23,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'projectPost',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1492521955,
+   'modificationDate' => 1493044911,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -77,7 +77,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'queryColumnType' => 'text',
              'phpdocType' => 'array',
              'relationType' => true,
-             'objectsAllowed' => false,
+             'objectsAllowed' => true,
              'assetsAllowed' => false,
              'assetTypes' => 
             array (
@@ -256,18 +256,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'documentsAllowed' => false,
              'documentTypes' => 
             array (
-              0 => 
-              array (
-                'documentTypes' => '',
-              ),
             ),
              'lazyLoading' => true,
              'classes' => 
             array (
-              0 => 
-              array (
-                'classes' => '',
-              ),
             ),
              'pathFormatterClass' => '\\Website\\TheFormatter',
              'name' => 'images',

@@ -26,7 +26,7 @@ $cardformat = isset($this->cardformat)?' '.$this->cardformat:'';
 <div class="caption">
 
   <p class="legendtitle"><?php echo  $product->getSubtype()."<br />".$product->getShort_name() ?></p>
-  <p class="legendimage"><?php echo $product->getDescription()?></p>
+  <p class="legendimage"><?php echo $product->getShort_description()?></p>
 
 
 </div>

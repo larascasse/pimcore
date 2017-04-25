@@ -1,6 +1,9 @@
+
 <?php
 
-
+/**
+Realisation DETAIL 
+**/
 
     // set page meta-data
     $this->headTitle()->set($this->article->getName());
@@ -35,12 +38,13 @@
 
 
 //print_r($imagesArray);
- $content.='<div class="realisation-detail 
- card-columns">';
+ $content.='<div class="realisation-detail card-columns">';
  $oddList=array();
  $evenList= array();
  $ind=0;
  $lastProductName ="";
+
+
 foreach ($imagesArray->assets as $asset) {
     //On zappe la premire image, header ..
     if( $ind==0) {
@@ -115,7 +119,7 @@ foreach ($imagesArray->assets as $asset) {
             <p class="realisation-description"><?= $description ?></p>
         </div>
         
-        <div class="col">
+        <div class="col realisation-related">
 
         <?php if ($product) { 
                 $this->template("/snippets/lpn-slider-product-item.php",array('product'=>$product,'cardformat'=>'card-horizontal clickable'));

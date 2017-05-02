@@ -22,7 +22,7 @@ $product = $article->getRelatedProduct();
            
 
 <?php if($article->getPosterImage()) { ?>
-    <?= $article->getPosterImage()->getThumbnail("magento-real-grid")->getHTML(["class" => "card-img-top__ img-fluid norelazy__"]) ?>
+    <?= $article->getPosterImage()->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid"]) ?>
 <?php } ?>
 
 <div class="card-block">

@@ -66,7 +66,7 @@ foreach ($imagesArray->assets as $asset) {
      
      //$content .='<div class="col-12">';
      $item .='<figure class="card'.$cardclass.'">';
-     $item.= $asset->getThumbnail("content")->getHTML(["class" => "img-fluid norelazy"]);
+     $item.= $asset->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid norelazy"]);
 
      if(strlen($imageProductName>0)) {
         $item .='<figcaption class="card-block">';

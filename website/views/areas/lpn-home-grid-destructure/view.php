@@ -4,7 +4,7 @@
    
 
 ?>
-    <div class="table-container card-columns <?php echo 'grid-destructuree-'.$count?>" style="columns-count:2">
+    <div class="table-container card-columns grid-destructuree <?php echo 'grid-destructuree-'.$count?>" style="columns-count:2">
 <?php } 
 else {
     echo "<div>";
@@ -127,7 +127,7 @@ while($this->block("contentblock")->loop()) {
     else {
     ?> 
     <!--  item -->
-    <div class="table-bloc-thumb <?php if ($count<=1) echo "col-first"?>">
+    <div class="table-bloc-thumb <?php if ($i<=1) echo "col-first"?>">
         <div class="rollbloc">
 
         <?php 

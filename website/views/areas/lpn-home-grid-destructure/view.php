@@ -1,13 +1,21 @@
 <?php
  $count = $this->block("contentblock")->getCount();
  if(!$this->editmode) {
-   
+    $defaultGridMode = $this->select("grid-mode")->getData();
+    if(!$defaultGridMode) {
+        $defaultGridMode = 'grid-destructuree';
+}
 
 ?>
-    <div class="table-container card-columns grid-destructuree <?php echo 'grid-destructuree-'.$count?>" style="columns-count:2">
+    <div class="table-container card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
 else {
     echo "<div>";
+    echo $this->select("grid-mode", [
+            "width" => 300,
+            "reload" => true,
+            "store" => [['grid-destructuree',"Normal"],['grid-destructuree grid-inverse','Inverse']]
+        ]);
 }
 ?>
 
@@ -54,7 +62,7 @@ while($this->block("contentblock")->loop()) {
                 break;
 
             case 2:
-                $pimcoreThimbClass = "magento_equigrid_v";
+                $pimcoreThimbClass = "magento_equigrid_h";
                 break;
 
             case 3:
@@ -157,5 +165,6 @@ while($this->block("contentblock")->loop()) {
     <?php } ?>
 <?php } ?>
 <!-- Fin Loop  -->
+<div class="grid-bkg"></div>
 </div>
 

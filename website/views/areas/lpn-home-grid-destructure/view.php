@@ -1,6 +1,9 @@
 <? if(!$this->editmode) {?>
 <div class="table-container card-columns">
-<?php } else echo "<div>";
+<?php } 
+else {
+    echo "<div>";
+}
 ?>
 
 <?php 
@@ -45,7 +48,7 @@ while($this->block("contentblock")->loop()) {
             );
 
     $titre = $this->input("titre", ["width" => "100%",'placeholder'=>'Titre']);
-    $description = $this->textarea("description", ["width" => 800,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+    $description = $this->textarea("description", ["width" => 800,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
 
     $btn_title = $this->input("btn_title", ["width" => 800, "placeholder"=>"Titre du bouton"]);
 
@@ -62,16 +65,17 @@ while($this->block("contentblock")->loop()) {
 
 
     if($this->editmode) {
-        
+        echo '<div class="row"><div class="col-md-6">';
         echo '<div class="container" style="width:300px">'.$image.'</div>';
+         echo '</div><div class="col-md-6">';
+        echo '<div class="container">'.$titre.'</div>';
 
-        echo '<div class="container" style="padding-bottom: 40px">'.$titre.'</div><br />';
+        echo '<div class="container">'.$description.'</div>';
 
-        echo '<div class="container" style="padding-bottom: 40px">'.$description.'</div><br />';
+        echo '<div class="container">'.$btn_title.'</div>'; 
 
-        echo '<div class="container" style="padding-bottom: 40px">'.$btn_title.'</div><br />'; 
-
-        echo '<div class="container" style="padding-bottom: 40px">'.$link.'</div><br /><hr />';
+        echo '<div class="container">'.$link.'</div>';
+         echo '</div></div><hr />';
     }
     else {
     ?> 

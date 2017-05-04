@@ -1,4 +1,4 @@
-<? 
+<?php
  $count = $this->block("contentblock")->getCount();
  if(!$this->editmode) {
    

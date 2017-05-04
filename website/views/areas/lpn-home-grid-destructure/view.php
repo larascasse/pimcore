@@ -47,10 +47,10 @@ while($this->block("contentblock")->loop()) {
             )
             );
 
-    $titre = $this->input("titre", ["width" => "100%",'placeholder'=>'Titre']);
-    $description = $this->textarea("description", ["width" => 800,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+    $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
+    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
 
-    $btn_title = $this->input("btn_title", ["width" => 800, "placeholder"=>"Titre du bouton"]);
+    $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
 
     $link = $this->renderlet("link", array(
                                 "types"=>array("object"),
@@ -68,7 +68,7 @@ while($this->block("contentblock")->loop()) {
         echo '<div class="row"><div class="col-md-6">';
         echo '<div class="container" style="width:300px">'.$image.'</div>';
          echo '</div><div class="col-md-6">';
-        echo '<div class="container">'.$titre.'</div>';
+        echo '<div class="container"><h3>'.$titre.'</h3></div>';
 
         echo '<div class="container">'.$description.'</div>';
 

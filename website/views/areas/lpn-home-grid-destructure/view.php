@@ -1,5 +1,10 @@
-<? if(!$this->editmode) {?>
-<div class="table-container card-columns">
+<? 
+ $count = $this->block("contentblock")->getCount();
+ if(!$this->editmode) {
+   
+
+?>
+    <div class="table-container card-columns <?php echo 'grid-destructuree-'.$count?>" style="columns-count:2">
 <?php } 
 else {
     echo "<div>";
@@ -7,12 +12,14 @@ else {
 ?>
 
 <?php 
- $sameSizeCount=1;
+$sameSizeCount=1;
 $isDoubleSize=true;
+
+$simple=false;
 
 while($this->block("contentblock")->loop()) { 
     
-    $count = $this->block("contentblock")->getCount();
+    
     $i = $this->block("contentblock")->getCurrent();
 
      //Algo pour avoir 2 fois de suite la meme taille
@@ -20,22 +27,62 @@ while($this->block("contentblock")->loop()) {
 
     $pimcoreThimbClass = "magento_equigrid_h";
 
-    if($isDoubleSize) {
-        $pimcoreThimbClass = "magento_equigrid_v";
-    }
+    //Type avec A vertival, 2 H, 2V...
+    if($simple) {
+        if($isDoubleSize) {
+            $pimcoreThimbClass = "magento_equigrid_v";
+        }
 
-    //Pourle prochain
-    if($sameSizeCount==1 && $isDoubleSize) {
-        $sameSizeCount = 0;
-        $isDoubleSize = false;
-    }
-    else if($sameSizeCount==1 && !$isDoubleSize) {
-        $sameSizeCount = 0;
-        $isDoubleSize = true;
+        //Pourle prochain
+        if($sameSizeCount==1 && $isDoubleSize) {
+            $sameSizeCount = 0;
+            $isDoubleSize = false;
+        }
+        else if($sameSizeCount==1 && !$isDoubleSize) {
+            $sameSizeCount = 0;
+            $isDoubleSize = true;
+        }
+        else {
+            $sameSizeCount++;
+        }
     }
     else {
-        $sameSizeCount++;
+        $colClass="";
+        switch ($count) {
+            case 1:
+                $pimcoreThimbClass = "magento_equigrid_h";
+                break;
+
+            case 2:
+                $pimcoreThimbClass = "magento_equigrid_v";
+                break;
+
+            case 3:
+                switch ($i) {
+                    case 0:
+                        $pimcoreThimbClass = "magento_equigrid_v";
+                        break;
+                    case 1:
+                        $pimcoreThimbClass = "magento_equigrid_h";
+                        break;
+                    case 2:
+                        $pimcoreThimbClass = "magento_equigrid_h";
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+
+            case 4:
+                $pimcoreThimbClass = "magento_equigrid_h";
+            
+            default:
+                # code...
+                break;
+        }
     }
+    
 
 
 

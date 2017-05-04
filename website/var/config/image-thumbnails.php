@@ -707,5 +707,29 @@ return [
         "modificationDate" => 1491397187,
         "creationDate" => 1491397187,
         "id" => "magento-header"
+    ],
+    "magento-real-grid" => [
+        "items" => [
+            [
+                "method" => "scaleByWidth",
+                "arguments" => [
+                    "width" => 400,
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento-real-grid",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 75,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1493739143,
+        "creationDate" => 1493739102,
+        "id" => "magento-real-grid"
     ]
 ];

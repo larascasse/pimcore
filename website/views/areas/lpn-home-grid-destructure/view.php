@@ -5,7 +5,7 @@
     if(!$defaultGridMode) {
         $defaultGridMode = 'grid-destructuree';
 }
-
+$isInverse = ($defaultGridMode == "grid-destructuree grid-inverse");
 ?>
     <div class="table-container card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
@@ -56,6 +56,7 @@ while($this->block("contentblock")->loop()) {
     }
     else {
         $colClass="";
+
         switch ($count) {
             case 1:
                 $pimcoreThimbClass = "magento_equigrid_h";
@@ -68,22 +69,25 @@ while($this->block("contentblock")->loop()) {
             case 3:
                 switch ($i) {
                     case 0:
-                        $pimcoreThimbClass = $defaultGridMode == "grid-destructuree grid-inverse"?"magento_equigrid_h":"magento_equigrid_v";
+                        $pimcoreThimbClass = $isInverse?"magento_equigrid_h":"magento_equigrid_v";
                         break;
                     case 1:
                         $pimcoreThimbClass = "magento_equigrid_h";
                         break;
                     case 2:
-                        $pimcoreThimbClass = $defaultGridMode == "grid-destructuree grid-inverse"?"magento_equigrid_v":"magento_equigrid_h";
+
+                        $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     
                     default:
                         # code...
                         break;
                 }
+                break;
 
             case 4:
                 $pimcoreThimbClass = "magento_equigrid_h";
+                 break;
             
             default:
                 # code...
@@ -135,7 +139,7 @@ while($this->block("contentblock")->loop()) {
     else {
     ?> 
     <!--  item -->
-    <div class="table-bloc-thumb <?php if ($i<=1) echo "col-first"?>">
+    <div class="table-bloc-thumb <?php if ( (!$isInverse && $i<=1) || ($isInverse && ($i==0 || $i==2))) echo "col-first"?>">
         <div class="rollbloc">
 
         <?php 

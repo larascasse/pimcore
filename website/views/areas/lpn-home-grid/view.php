@@ -17,7 +17,7 @@ if($this->editmode) {
         Type: <?= $this->select("cardClass", [
             "width" => 300,
             "reload" => true,
-            "store" => [['rollbloc',"Texte sur photo, roll"],['card','Text en dessous'],['hero','Text centré']]
+            "store" => [['rollbloc',"Texte sur photo, roll"],['rollbloc-destructure',"Texte sur photo, déstructuré, roll"],['card','Text en dessous'],['hero','Text centré']]
         ]); ?>
     </div>
 
@@ -34,11 +34,24 @@ if(!$defaultCardClass) {
     $defaultCardClass = 'rollbloc';
 }
 
+//Aligné
+$gridClass="row table-container";
+
+
+//New
+$gridClass="table-container card-columns";
+$smallClass="";
+$defaultCardClass="rollbloc";
+
+//Algo pour avoir 2 fois de suite la meme taille
+$sameSizeCount=1;
+$isDoubleSize=true;
+
 ?>
 
 
         
-<div class="row table-container">
+<div class="<?php echo $gridClass ?>">
 
 
 
@@ -92,7 +105,7 @@ for($i=0; $i<$count; $i++) {
         $smallClass="col col-sm col-md";
     }
 
-    //On remet le herp
+    //On remet le hero
     if($this->select("cardClass")->getData()=="hero"){
      $cardClass="hero";
     }
@@ -117,18 +130,19 @@ for($i=0; $i<$count; $i++) {
     
 
 ?>
-    <?php if ($cardClass == "rollbloc") : ?>
+    <?php if ($cardClass == "rollbloc" || $cardClass == "rollbloc-destructure" ) : ?>
+        
         <div class="<?= $cardClass?><?=  $classNoRoll ?>">
 
         <?php 
         if(!$this->editmode) {
-        echo $this->image("image".$i,array(
-            "thumbnail" => $pimcoreThimbClass,
-            "class" => "img-fluid".$classNoRoll
-            
-        )
-        );
-    }
+            echo $this->image("image".$i,array(
+                "thumbnail" => $pimcoreThimbClass,
+                "class" => "img-fluid".$classNoRoll
+                
+            )
+            );
+        }
         ?>
         <div class="table-bloc-thumb-text<?=  $classNoRoll ?> nsg_container">
             <div class="table-thumb-type">

@@ -68,13 +68,13 @@ while($this->block("contentblock")->loop()) {
             case 3:
                 switch ($i) {
                     case 0:
-                        $pimcoreThimbClass = "magento_equigrid_v";
+                        $pimcoreThimbClass = $defaultGridMode == "grid-destructuree grid-inverse"?"magento_equigrid_h":"magento_equigrid_v";
                         break;
                     case 1:
                         $pimcoreThimbClass = "magento_equigrid_h";
                         break;
                     case 2:
-                        $pimcoreThimbClass = "magento_equigrid_h";
+                        $pimcoreThimbClass = $defaultGridMode == "grid-destructuree grid-inverse"?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     
                     default:

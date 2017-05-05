@@ -36,9 +36,9 @@ $marginSelect = $this->select("margin-bkg", [
             "store" => [
                 ['','default'],
                 ['below','Décalé vers le bas'],
-                ['below','Décalé vers le bas un peu'],
+                ['below-small','Décalé vers le bas un peu'],
                 ['above','Décalé vers le haut'],
-                ['above','Décalé vers le haut un peu']
+                ['above-small','Décalé vers le haut un peu']
             ]
         ]);
 

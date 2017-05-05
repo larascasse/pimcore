@@ -12,6 +12,7 @@ $hauteurSelect = $this->select("hauteur-bkg", [
             "reload" => false,
             "store" => [
                             ['','defaut'],
+                            ['samll','petit'],
                             ['big','Grand'],
                         ]
         ]);

@@ -16,7 +16,7 @@ else {
     echo $this->select("grid-mode", [
             "width" => 300,
             "reload" => false,
-            "store" => [['grid-destructuree',"Normal"],['grid-destructuree grid-inverse','Inverse']]
+            "store" => [['grid-destructuree',"Normal (grand à gauche)"],['grid-destructuree grid-inverse','Inverse']]
         ]);
 
     

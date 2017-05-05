@@ -132,7 +132,7 @@ for($i=0; $i<$count; $i++) {
         ?>
         <div class="table-bloc-thumb-text<?=  $classNoRoll ?> nsg_container">
       
-            <p><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></p>
+            <p><?= $this->input("surtitre".$i, ["width" => 400,'placeholder'=>'surtitre']); ?></p>
             <h3><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></h3>
     
             <div class="rollbloc_txt_over">

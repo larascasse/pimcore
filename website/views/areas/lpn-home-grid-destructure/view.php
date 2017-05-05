@@ -154,10 +154,10 @@ while($this->block("contentblock")->loop()) {
         
         ?>
         <div class="table-bloc-thumb-text">
-            <div class="table-thumb-type">
+            
                 <p><?= $surtitre; ?></p>
-                <span class="table-thumb-subtext"><?= $titre; ?></span>
-            </div> 
+                <h2><?= $titre; ?></h2>
+            
             <div class="rollbloc_txt_over">
                 <div class="rollbloc_txt_over_cnt">
                     <div class="rollbloc_txt"><?= $description; ?></div>

@@ -131,9 +131,10 @@ for($i=0; $i<$count; $i++) {
     }
         ?>
         <div class="table-bloc-thumb-text<?=  $classNoRoll ?> nsg_container">
-            <div class="table-thumb-type">
-                <span class="table-thumb-subtext"><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></span>
-            </div> 
+      
+            <p><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></p>
+            <h3><?= $this->input("titre".$i, ["width" => 400,'placeholder'=>'titre']); ?></h3>
+    
             <div class="rollbloc_txt_over">
                 <div class="rollbloc_txt_over_cnt">
                     <div class="rollbloc_txt"><?= $this->textarea("description".$i, ["width" => 600,'placeholder'=>'Description',"htmlspecialchars"=>false]); ?></div>

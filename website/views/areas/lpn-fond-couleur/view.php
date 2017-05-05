@@ -12,7 +12,7 @@ $hauteurSelect = $this->select("hauteur-bkg", [
             "reload" => false,
             "store" => [
                             ['','defaut'],
-                            ['big','haut'],
+                            ['big','Grand'],
                         ]
         ]);
 
@@ -36,7 +36,9 @@ $marginSelect = $this->select("margin-bkg", [
             "store" => [
                 ['','default'],
                 ['below','Décalé vers le bas'],
-                ['above','Décalé vers le haut']
+                ['below','Décalé vers le bas un peu'],
+                ['above','Décalé vers le haut'],
+                ['above','Décalé vers le haut un peu']
             ]
         ]);
 

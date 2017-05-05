@@ -11,11 +11,15 @@ $isInverse = ($defaultGridMode == "grid-destructuree grid-inverse");
 <?php } 
 else {
     echo "<div>";
+
+
     echo $this->select("grid-mode", [
             "width" => 300,
-            "reload" => true,
+            "reload" => false,
             "store" => [['grid-destructuree',"Normal"],['grid-destructuree grid-inverse','Inverse']]
         ]);
+
+    
 }
 ?>
 
@@ -106,6 +110,8 @@ while($this->block("contentblock")->loop()) {
             )
             );
 
+    $surtitre = $this->input("surtitre", ["width" => 400,'placeholder'=>'Surtitre']);
+
     $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
     $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
 
@@ -127,6 +133,7 @@ while($this->block("contentblock")->loop()) {
         echo '<div class="row"><div class="col-md-6">';
         echo '<div class="container" style="width:300px">'.$image.'</div>';
          echo '</div><div class="col-md-6">';
+        echo '<div class="container">'.$surtitre.'</div>';
         echo '<div class="container"><h3>'.$titre.'</h3></div>';
 
         echo '<div class="container">'.$description.'</div>';
@@ -148,6 +155,7 @@ while($this->block("contentblock")->loop()) {
         ?>
         <div class="table-bloc-thumb-text">
             <div class="table-thumb-type">
+                <p><?= $surtitre; ?></p>
                 <span class="table-thumb-subtext"><?= $titre; ?></span>
             </div> 
             <div class="rollbloc_txt_over">
@@ -169,6 +177,6 @@ while($this->block("contentblock")->loop()) {
     <?php } ?>
 <?php } ?>
 <!-- Fin Loop  -->
-<div class="grid-bkg"></div>
+<!--<div class="grid-bkg"></div>-->
 </div>
 

@@ -3,7 +3,7 @@
 $colorSelect = $this->select("color-bkg", [
             "width" => 300,
             "reload" => false,
-            "store" => [['jaune','jaune'],['vert','vert'],['bleu','bleu']]
+            "store" => [['jaune','jaune'],['vert','vert'],['bleu','bleu'],['rose','rose'],['color-a','color-a'],['color-b','color-b']]
         ]);
 
 

@@ -16,7 +16,7 @@
         Format Image: <?= $this->select("imageformat", [
             "width" => 60,
             "reload" => false,
-            "store" => [['magento_equigrid_h','horizontal'],['magento_equigrid_v','vertical'],['magento_equigrid_c','carré']]
+            "store" => [['magento_equigrid_h','horizontal'],['magento_equigrid_v','vertical'],['magento_equigrid_c','carré'],['destructure','destructure']]
         ]); ?>
     </div>
 

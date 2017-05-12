@@ -116,7 +116,7 @@
 
 	    ?>
 
-	    <div class="table-container card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
+	    <div class="table-container realisations card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 
 	    <?php
 
@@ -141,7 +141,7 @@
 		        <div class="table-bloc-thumb-text">
 		            
 		                <p>Projet</p>
-		                <h2><?= $article->getName() ?></h2>
+		                <h3><?= $article->getName() ?></h3>
 		            
 		            <div class="rollbloc_txt_over">
 		                <div class="rollbloc_txt_over_cnt">

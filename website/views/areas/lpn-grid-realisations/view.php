@@ -114,6 +114,8 @@
 	        }
 	    }
 
+	    
+
 	    ?>
 
 	    <div class="table-container realisations card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
@@ -123,6 +125,18 @@
 
 		foreach($this->multihref("objectPaths") as $article) { 
 				$image="";
+
+				$subtitle = "Inspiration";
+
+
+
+			    if($article->getCategory()) {
+			    	
+
+			    	$subtitle = $article->getCategory()[0]->getName();
+			    }
+
+
 				if($article->getPosterImage()) { 
     				$image = $article->getPosterImage()->getThumbnail($pimcoreThimbClass)->getHTML(["class" => "img-fluid"]);
 				} 
@@ -140,7 +154,7 @@
 		        ?>
 		        <div class="table-bloc-thumb-text">
 		            
-		                <p>Projet</p>
+		                <p><?= $subtitle ?></p>
 		                <h3><?= $article->getName() ?></h3>
 		            
 		            <div class="rollbloc_txt_over">

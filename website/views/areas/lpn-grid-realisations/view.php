@@ -124,7 +124,7 @@
 		foreach($this->multihref("objectPaths") as $article) { 
 				$image="";
 				if($article->getPosterImage()) { 
-    				$article->getPosterImage()->getThumbnail($pimcoreThimbClass)->getHTML(["class" => "img-fluid"]);
+    				$image = $article->getPosterImage()->getThumbnail($pimcoreThimbClass)->getHTML(["class" => "img-fluid"]);
 				} 
 				$link = '/projet/'.$article->getKey();
 

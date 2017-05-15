@@ -94,16 +94,16 @@ while($this->block("contentblock")->loop()) {
             case 4:
                 switch ($i) {
                     case 0:
-                         $pimcoreThimbClass = $isVertical && !$isInverse ?"magento_equigrid_v":"magento_equigrid_h";
+                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     case 1:
-                        $pimcoreThimbClass = $isVertical && $isInverse?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     case 2:
-                        $pimcoreThimbClass = $isVertical && $isInverse ?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     case 4:
-                        $pimcoreThimbClass = $isVertical && !$isInverse?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         
                         break;
                     

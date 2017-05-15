@@ -102,7 +102,7 @@ while($this->block("contentblock")->loop()) {
                     case 2:
                         $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         break;
-                    case 4:
+                    case 3:
                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
                         
                         break;

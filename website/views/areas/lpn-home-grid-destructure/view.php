@@ -5,7 +5,9 @@
     if(!$defaultGridMode) {
         $defaultGridMode = 'grid-destructuree';
 }
-$isInverse = ($defaultGridMode == "grid-destructuree grid-inverse");
+$isInverse = ($defaultGridMode == "grid-destructuree grid-inverse") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
+
+$isVertical = ($defaultGridMode == "grid-destructuree grid-vertical") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
 ?>
     <div class="table-container card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
@@ -16,7 +18,7 @@ else {
     echo $this->select("grid-mode", [
             "width" => 300,
             "reload" => false,
-            "store" => [['grid-destructuree',"Normal (grand à gauche)"],['grid-destructuree grid-inverse','Inverse']]
+            "store" => [['grid-destructuree',"Normal (grand à gauche)"],['grid-destructuree grid-inverse','Inverse'],['grid-destructuree grid-vertical','Vertical'],['grid-destructuree grid-vertical grid-inverse','Vertical Inverse']]
         ]);
 
     
@@ -73,7 +75,7 @@ while($this->block("contentblock")->loop()) {
             case 3:
                 switch ($i) {
                     case 0:
-                        $pimcoreThimbClass = $isInverse?"magento_equigrid_h":"magento_equigrid_v";
+                        $pimcoreThimbClass = $isInverse ?"magento_equigrid_h":"magento_equigrid_v";
                         break;
                     case 1:
                         $pimcoreThimbClass = "magento_equigrid_h";
@@ -90,9 +92,29 @@ while($this->block("contentblock")->loop()) {
                 break;
 
             case 4:
-                $pimcoreThimbClass = "magento_equigrid_h";
-                 break;
+                switch ($i) {
+                    case 0:
+                         $pimcoreThimbClass = $isVertical && !$isInverse ?"magento_equigrid_v":"magento_equigrid_h";
+                        break;
+                    case 1:
+                        $pimcoreThimbClass = $isVertical && $isInverse?"magento_equigrid_v":"magento_equigrid_h";
+                        break;
+                    case 2:
+                         $pimcoreThimbClass = $isVertical && !$isInverse?"magento_equigrid_v":"magento_equigrid_h";
+                        break;
+                    case 4:
+                        $pimcoreThimbClass = $isVertical && $isInverse ?"magento_equigrid_v":"magento_equigrid_h";
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+                break;
+
+                
             
+
             default:
                 # code...
                 break;

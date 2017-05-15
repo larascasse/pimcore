@@ -3,7 +3,7 @@
 	<?=  $this->select("grid-mode", [
             "width" => 300,
             "reload" => false,
-            "store" => [['grid-simple',"Grille simple"],['grid-destructuree',"Destructuré (grand à gauche)"],['grid-destructuree grid-inverse','Déstructuré Inverse']]
+            "store" => [['grid-destructuree',"Normal (grand à gauche)"],['grid-destructuree grid-inverse','Inverse'],['grid-destructuree grid-vertical','Vertical'],['grid-destructuree grid-vertical grid-inverse','Vertical Inverse']]
         ]);
      ?>
     <?= $this->multihref("objectPaths",
@@ -21,7 +21,11 @@
     if(!$defaultGridMode) {
         $defaultGridMode = 'grid-simple';
      }
-    $isInverse = ($defaultGridMode == "grid-destructuree grid-inverse");
+    
+    $isInverse = ($defaultGridMode == "grid-destructuree grid-inverse") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
+
+	$isVertical = ($defaultGridMode == "grid-destructuree grid-vertical") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
+
 
     if($defaultGridMode == 'grid-simple') {
      ?>
@@ -104,9 +108,27 @@
 	                }
 	                break;
 
-	            case 4:
-	                $pimcoreThimbClass = "magento_equigrid_h";
-	                 break;
+	             case 4:
+	                switch ($i) {
+	                    case 0:
+	                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        break;
+	                    case 1:
+	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        break;
+	                    case 2:
+	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        break;
+	                    case 3:
+	                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        
+	                        break;
+	                    
+	                    default:
+	                        # code...
+	                        break;
+	                }
+	                break;
 	            
 	            default:
 	                # code...

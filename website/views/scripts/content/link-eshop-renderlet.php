@@ -37,7 +37,8 @@ else if($blogPost = $this->blogPost) {
 	echo $blogPost->getTitle();
 }
 else if($projectPost = $this->projectPost) {
-	echo $projectPost->getName();
+	$link = "/".$projectPost->getMageUrl();
+    echo '<a href="'.$link.'" title="Voir '.$projectPost->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
 }
 else if($document = $this->document) {
 	echo $document->getName()." ".$document->getId();
@@ -46,7 +47,7 @@ else if($document = $this->document) {
     	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
-   
+        
     	$widget =  '{{widget type="cms/widget_page_link" template="cms/widget/link/link_block.phtml" page_id="'.$document->getKey().'"}}';
     	echo $widget;
 

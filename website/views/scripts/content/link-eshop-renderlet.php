@@ -41,7 +41,7 @@ else if($projectPost = $this->projectPost) {
     echo '<a href="'.$link.'" title="Voir '.$projectPost->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
 }
 else if($document = $this->document) {
-	echo $document->getName()." ".$document->getId();
+	//echo $document->getName()." ".$document->getId();
 
 	if($this->previewmode) {
     	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';

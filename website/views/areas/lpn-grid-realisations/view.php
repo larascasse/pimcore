@@ -24,7 +24,7 @@
     
 
     $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
-    $isInverse = strpos($defaultGridMode,'grid-vertical')>0;
+    $isVertical = strpos($defaultGridMode,'grid-vertical')>0;
 
 	
 

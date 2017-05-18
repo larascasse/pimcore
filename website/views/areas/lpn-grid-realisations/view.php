@@ -145,6 +145,7 @@
 	    	echo '<div class="grid-col">';
 	    }
 	    ?>
+	    
 	    <div class="table-container realisations <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 
 	    <?php

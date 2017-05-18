@@ -181,13 +181,6 @@ while($this->block("contentblock")->loop()) {
         )
     $colFirst = " col-first";
     ?>
-
-    <?php
-        if($i==0) {
-            echo '<div class="grid-col">';
-        }
-        ?>
-        
     <div class="table-bloc-thumb<?php echo $colFirst ?>">
         <div class="rollbloc">
 
@@ -216,26 +209,7 @@ while($this->block("contentblock")->loop()) {
 
     </div>
     <!-- fin item -->
-    <?php 
-
-            if($i== ($count-1)) {
-                echo "</div>";
-                
-            }
-            else if (
-                //A près le 1er
-                ($i==0 && $count<=2)
-                || ($i==0 && $count==3 && $isVertical && !$isInverse)
-                //A près le 12e
-                || ($i==1 && $count==3 && $isVertical && $isInverse)
-                || ($i==1 && $count==3 && !$isVertical)
-            ) {
-                echo "</div>";
-                echo '<div class="grid-col">';
-            }
-       
-            $i++;
-        } ?>
+    <?php } ?>
 <?php } ?>
 <!-- Fin Loop  -->
 <!--<div class="grid-bkg"></div>-->

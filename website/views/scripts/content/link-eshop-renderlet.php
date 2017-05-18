@@ -24,7 +24,7 @@ else if($category = $this->category) {
    	}
     else {
    
-    	$widget =  ' {{widget type="catalog/product_widget_link" template="catalog/product/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
+    	$widget =  ' {{widget type="catalog/catalog_widget_link" template="catalog/catalog/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
     	echo $widget;
 
 

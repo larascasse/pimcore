@@ -140,12 +140,7 @@
 
 	    ?>
 
-	    <?php
-	    if($i==0) {
-	    	echo '<div class="grid-col">';
-	    }
-	    ?>
-	    <div class="table-container realisations <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
+	    <div class="table-container realisations card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 
 	    <?php
 
@@ -213,23 +208,6 @@
 		    </div>
 		    <!-- fin item -->
 	    <?php 
-
-		    if($i== ($count-1)) {
-		    	echo "</div>";
-		    	
-		    }
-		    else if (
-		    	//A près le 1er
-		    	$i==0 && $count<=2)
-		    	|| ($i==0 && $count==3 && $isVertical && !$isInverse)
-		    	//A près le 12e
-		    	|| ($i==1 && $count==3 && $isVertical && $isInverse)
-		    	|| ($i==1 && $count==3 && !$isVertical)
-		    ) {
-		    	echo "</div>";
-		    	echo '<div class="grid-col">';
-		    }
-	   
 	    	$i++;
 	    } ?>
 	    </div>

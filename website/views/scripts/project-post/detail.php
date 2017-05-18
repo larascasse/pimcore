@@ -116,7 +116,7 @@ foreach ($imagesArray->assets as $asset) {
      <!-- Content -->
     <div class="row table-product-detail">
         <div class="col-12 col-md-6">
-            <p class="realisation-description"><?= $description ?></p>
+            <p class="realisation-description"><?= nl2br($description) ?></p>
         </div>
         
         <div class="col realisation-related">

@@ -140,12 +140,8 @@
 
 	    ?>
 
-	    <?php
-	    if($i==0) {
-	    	echo '<div class="grid-col">';
-	    }
-	    ?>
 	    
+
 	    <div class="table-container realisations <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 
 	    <?php
@@ -184,6 +180,13 @@
 		        )
 		    $colFirst = " col-first";
 		    ?>
+
+		    <?php
+		    if($i==0) {
+		    	echo '<div class="grid-col">';
+		    }
+		    ?>
+
 		    <div class="table-bloc-thumb<?php echo $colFirst ?>">
 		        <div class="rollbloc">
 
@@ -226,6 +229,7 @@
 		    	//A près le 12e
 		    	|| ($i==1 && $count==3 && $isVertical && $isInverse)
 		    	|| ($i==1 && $count==3 && !$isVertical)
+		    	|| ($i==1 && $count==4)
 		    ) {
 		    	echo "</div>";
 		    	echo '<div class="grid-col">';

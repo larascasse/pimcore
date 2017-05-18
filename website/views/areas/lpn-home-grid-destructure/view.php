@@ -229,6 +229,7 @@ while($this->block("contentblock")->loop()) {
                 //A près le 12e
                 || ($i==1 && $count==3 && $isVertical && $isInverse)
                 || ($i==1 && $count==3 && !$isVertical)
+                || ($i==1 && $count==4)
             ) {
                 echo "</div>";
                 echo '<div class="grid-col">';

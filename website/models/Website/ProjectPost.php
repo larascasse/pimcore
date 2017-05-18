@@ -70,7 +70,7 @@ class ProjectPost extends Object\ProjectPost {
          $itemData["title"] = $this->getName();
          $itemData["name"] = $this->getName();
          $itemData["content"] = $this->getContent();
-         $itemData["description"] = $this->getDescription();
+         $itemData["description"] = nl2br($this->getDescription());
          $itemData["posterImage"] = $this->getPosterImage()?$this->getPosterImage()->getThumbnail("content")->getHTML():"";
          $itemData["sku"] = ($product=$this->getRelatedProduct())?$product->getSku():"";
 

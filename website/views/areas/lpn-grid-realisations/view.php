@@ -22,9 +22,11 @@
         $defaultGridMode = 'grid-simple';
      }
     
-    $isInverse = ($defaultGridMode == "grid-destructuree grid-inverse") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
 
-	$isVertical = ($defaultGridMode == "grid-destructuree grid-vertical") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
+    $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
+    $isInverse = strpos($defaultGridMode,'grid-vertical')>0;
+
+	
 
 
     if($defaultGridMode == 'grid-simple') {

@@ -11,7 +11,7 @@ $imageformat = isset($this->imageformat)?$this->imageformat:'magento_realisation
 ?>
            
 
-<?php echo $asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid norelazy__"]); ?>
+<?php echo $asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid","data-zoom"=>$asset->getThumbnail('magento_realisation')]); ?>
 
 
 <div class="card-block">

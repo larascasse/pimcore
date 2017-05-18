@@ -167,7 +167,18 @@
 
 ?>
 			<!--  item -->
-		    <div class="table-bloc-thumb <?php if ( (!$isInverse && $i<=1) || ($isInverse && ($i==0 || $i==2))) echo "col-first"?>">
+		    <?php
+		    $colFirst = "";
+		    if(
+		        $i==0
+		        || ($i==1 && !$isInverse && $isVertical)
+		        || ($i==2 && $count==3 && $isInverse && $isVertical)
+		        || ($i==2 && $count==4)
+
+		        )
+		    $colFirst = " col-first";
+		    ?>
+		    <div class="table-bloc-thumb<?php echo $colFirst ?>">
 		        <div class="rollbloc">
 
 		        <?php 

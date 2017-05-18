@@ -55,96 +55,7 @@
 		$isDoubleSize=true;
 		$simple=false;
 
-		//Algo pour avoir 2 fois de suite la meme taille
-   
-
-	    $pimcoreThimbClass = "magento_equigrid_h";
-
-	    //Type avec A vertival, 2 H, 2V...
-	    if($simple) {
-	        if($isDoubleSize) {
-	            $pimcoreThimbClass = "magento_equigrid_v";
-	        }
-
-	        //Pourle prochain
-	        if($sameSizeCount==1 && $isDoubleSize) {
-	            $sameSizeCount = 0;
-	            $isDoubleSize = false;
-	        }
-	        else if($sameSizeCount==1 && !$isDoubleSize) {
-	            $sameSizeCount = 0;
-	            $isDoubleSize = true;
-	        }
-	        else {
-	            $sameSizeCount++;
-	        }
-	    }
-	    else {
-	        $colClass="";
-
-	        switch ($count) {
-	            case 1:
-	                $pimcoreThimbClass = "magento_equigrid_h";
-	                break;
-
-	            case 2:
-	                $pimcoreThimbClass = "magento_equigrid_h";
-	                break;
-
-	            case 3:
-	                switch ($i) {
-	                    case 0:
-	                        $pimcoreThimbClass = $isInverse?"magento_equigrid_h":"magento_equigrid_v";
-	                        break;
-	                    case 1:
-	                        $pimcoreThimbClass = "magento_equigrid_h";
-	                        break;
-	                    case 2:
-
-	                        $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_equigrid_h";
-	                        break;
-	                    
-	                    default:
-	                        # code...
-	                        break;
-	                }
-	                break;
-
-	             case 4:
-	                switch ($i) {
-	                    case 0:
-	                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
-	                         $pimcoreThimbClass." ".$i;
-	                        break;
-	                    case 1:
-	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
-	                        $pimcoreThimbClass." ".$i;
-	                        break;
-	                    case 2:
-	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
-	                        $pimcoreThimbClass." ".$i;
-	                        break;
-	                    case 3:
-	                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
-	                        $pimcoreThimbClass." ".$i;
-	                        
-	                        break;
-	                    
-	                    default:
-	                        # code...
-	                        break;
-	                }
-	                break;
-	            
-	            default:
-	                # code...
-	                break;
-	        }
-	    }
-
-	    
-
-	    ?>
+		?>
 
 	    
 
@@ -154,6 +65,95 @@
 
 
 		foreach($this->multihref("objectPaths") as $article) { 
+
+			//Algo pour avoir 2 fois de suite la meme taille
+  
+		    $pimcoreThimbClass = "magento_equigrid_h";
+
+		    //Type avec A vertival, 2 H, 2V...
+		    if($simple) {
+		        if($isDoubleSize) {
+		            $pimcoreThimbClass = "magento_equigrid_v";
+		        }
+
+		        //Pourle prochain
+		        if($sameSizeCount==1 && $isDoubleSize) {
+		            $sameSizeCount = 0;
+		            $isDoubleSize = false;
+		        }
+		        else if($sameSizeCount==1 && !$isDoubleSize) {
+		            $sameSizeCount = 0;
+		            $isDoubleSize = true;
+		        }
+		        else {
+		            $sameSizeCount++;
+		        }
+		    }
+		    else {
+		        $colClass="";
+
+		        switch ($count) {
+		            case 1:
+		                $pimcoreThimbClass = "magento_equigrid_h";
+		                break;
+
+		            case 2:
+		                $pimcoreThimbClass = "magento_equigrid_h";
+		                break;
+
+		            case 3:
+		                switch ($i) {
+		                    case 0:
+		                        $pimcoreThimbClass = $isInverse?"magento_equigrid_h":"magento_equigrid_v";
+		                        break;
+		                    case 1:
+		                        $pimcoreThimbClass = "magento_equigrid_h";
+		                        break;
+		                    case 2:
+
+		                        $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_equigrid_h";
+		                        break;
+		                    
+		                    default:
+		                        # code...
+		                        break;
+		                }
+		                break;
+
+		             case 4:
+		                switch ($i) {
+		                    case 0:
+		                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+		                         $pimcoreThimbClass." ".$i;
+		                        break;
+		                    case 1:
+		                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+		                        $pimcoreThimbClass." ".$i;
+		                        break;
+		                    case 2:
+		                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+		                        $pimcoreThimbClass." ".$i;
+		                        break;
+		                    case 3:
+		                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+		                        $pimcoreThimbClass." ".$i;
+		                        
+		                        break;
+		                    
+		                    default:
+		                        # code...
+		                        break;
+		                }
+		                break;
+		            
+		            default:
+		                # code...
+		                break;
+		        }
+		    }
+
+		   
+
 				$image="";
 
 				$subtitle = "Inspiration";

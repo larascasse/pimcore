@@ -12,7 +12,7 @@ $hauteurSelect = $this->select("hauteur-bkg", [
             "reload" => false,
             "store" => [
                             ['','defaut'],
-                            ['samll','petit'],
+                            ['small','petit'],
                             ['big','Grand'],
                         ]
         ]);
@@ -22,9 +22,11 @@ $largeurSelect = $this->select("largeur-bkg", [
             "reload" => false,
             "store" => [
                             ['','100%'],
+                            ['left-66','66% à gauche'],
                             ['left-50','50% à gauche'],
                             ['left-33','33% à gauche'],
                             ['left-25','25% à gauche'],
+                            ['right-66','50% à droite'],
                             ['right-50','50% à droite'],
                             ['right-33','33% à droite'],
                             ['right-25','25% à droite'],
@@ -43,6 +45,7 @@ $marginSelect = $this->select("margin-bkg", [
             ]
         ]);
 
+
 //Margin-top
 //largeur
 //position left / right
@@ -59,7 +62,7 @@ $hauteur = $hauteurSelect->getData();
 $largeur = $largeurSelect->getData();
 $margin = $marginSelect->getData();
 ?>
-
+<div class="grid-offset"></div>
 <div class="grid-bkg <?php echo $color?' grid-bkg-'.$color:''?><?php echo $hauteur?' grid-height-'.$hauteur:''?><?php echo $largeur?' grid-width-'.$largeur:''?><?php echo $margin?' grid-margin-'.$margin:''?>">
 <div></div>
 </div>

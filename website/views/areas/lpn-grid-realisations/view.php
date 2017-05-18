@@ -220,7 +220,7 @@
 		    }
 		    else if (
 		    	//A près le 1er
-		    	$i==0 && $count<=2)
+		    	($i==0 && $count<=2)
 		    	|| ($i==0 && $count==3 && $isVertical && !$isInverse)
 		    	//A près le 12e
 		    	|| ($i==1 && $count==3 && $isVertical && $isInverse)

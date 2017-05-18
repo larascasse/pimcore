@@ -114,15 +114,19 @@
 	                switch ($i) {
 	                    case 0:
 	                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                         $pimcoreThimbClass." ".$i;
 	                        break;
 	                    case 1:
 	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        $pimcoreThimbClass." ".$i;
 	                        break;
 	                    case 2:
 	                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        $pimcoreThimbClass." ".$i;
 	                        break;
 	                    case 3:
 	                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+	                        $pimcoreThimbClass." ".$i;
 	                        
 	                        break;
 	                    

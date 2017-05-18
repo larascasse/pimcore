@@ -9,7 +9,7 @@ $isInverse = ($defaultGridMode == "grid-destructuree grid-inverse") || ($default
 
 $isVertical = ($defaultGridMode == "grid-destructuree grid-vertical") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
 ?>
-    <div class="table-container card-columns  <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
+    <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
 else {
     echo "<div>";
@@ -187,7 +187,7 @@ while($this->block("contentblock")->loop()) {
             echo '<div class="grid-col">';
         }
         ?>
-        
+
     <div class="table-bloc-thumb<?php echo $colFirst ?>">
         <div class="rollbloc">
 

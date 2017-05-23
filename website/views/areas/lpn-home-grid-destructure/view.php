@@ -5,9 +5,9 @@
     if(!$defaultGridMode) {
         $defaultGridMode = 'grid-destructuree';
 }
-$isInverse = ($defaultGridMode == "grid-destructuree grid-inverse") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
 
-$isVertical = ($defaultGridMode == "grid-destructuree grid-vertical") || ($defaultGridMode == "grid-destructuree grid-vertical grid-inverse");
+
+
 ?>
     <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
@@ -18,11 +18,20 @@ else {
     echo $this->select("grid-mode", [
             "width" => 300,
             "reload" => false,
-            "store" => [['grid-destructuree',"Normal (grand à gauche)"],['grid-destructuree grid-inverse','Inverse'],['grid-destructuree grid-vertical','Vertical'],['grid-destructuree grid-vertical grid-inverse','Vertical Inverse']]
+            "store" => [
+                ['grid-destructuree',"Normal (grand à gauche)"],
+                ['grid-destructuree grid-inverse','Inverse'],
+                ['grid-destructuree grid-vertical','Vertical'],
+                ['grid-destructuree grid-vertical grid-inverse','Vertical Inverse']
+                ]
         ]);
 
     
 }
+
+ $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
+ $isVertical = strpos($defaultGridMode,'grid-vertical')>0;
+ 
 ?>
 
 <?php 
@@ -81,7 +90,6 @@ while($this->block("contentblock")->loop()) {
                         $pimcoreThimbClass = "magento_equigrid_h";
                         break;
                     case 2:
-
                         $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_equigrid_h";
                         break;
                     
@@ -224,7 +232,7 @@ while($this->block("contentblock")->loop()) {
             }
             else if (
                 //A près le 1er
-                ($i==0 && $count<=2)
+                ($i==0 && $count==2)
                 || ($i==0 && $count==3 && $isVertical && !$isInverse)
                 //A près le 12e
                 || ($i==1 && $count==3 && $isVertical && $isInverse)

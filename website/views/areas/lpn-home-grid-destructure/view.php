@@ -31,7 +31,7 @@ else {
 
  $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
  $isVertical = strpos($defaultGridMode,'grid-vertical')>0;
- 
+
 ?>
 
 <?php 
@@ -159,6 +159,9 @@ while($this->block("contentblock")->loop()) {
                     )
     );
 
+    $html = $this->textarea("html", ["width" => 400,"height" => 100,'placeholder'=>'BLock HTML',"htmlspecialchars"=>false]);
+
+
 
     if($this->editmode) {
         echo '<div class="row"><div class="col-md-6">';
@@ -172,6 +175,9 @@ while($this->block("contentblock")->loop()) {
         echo '<div class="container">'.$btn_title.'</div>'; 
 
         echo '<div class="container">'.$link.'</div>';
+
+        echo '<div class="container">'.$html.'</div>';
+
          echo '</div></div><hr />';
     }
     else {
@@ -203,21 +209,35 @@ while($this->block("contentblock")->loop()) {
             echo $image;
         
         ?>
-        <div class="table-bloc-thumb-text">
+
+        <?php
+        $htmlStr = trim($html->getData());
+        if(strlen($htmlStr)>10) {
+            echo $htmlStr;
+        }
+        else {
+            ?>
+
+            <div class="table-bloc-thumb-text">
             
-                <p><?= $surtitre; ?></p>
-                <h2><?= $titre; ?></h2>
+            <p><?= $surtitre; ?></p>
+            <h2><?= $titre; ?></h2>
             
             <div class="rollbloc_txt_over">
                 <div class="rollbloc_txt_over_cnt">
-                    <div class="rollbloc_txt"><?= $description; ?></div>
-                    
+                    <div class="rollbloc_txt"><?= $description; ?></div>    
                 </div>
             </div>
             <?php  echo $link; ?>
-
-         </div>
-         </div>
+        </div>
+        
+        <?php
+        }
+        ?>
+        
+         
+        
+        </div>
 
 
 

@@ -26,28 +26,7 @@ $colors=[
     "#DD5639",
 
 ];
-?>
 
-<div class="row">
-<?php
-$i==0;
-foreach ($colors as $color2) {
-    ?>
-    <div class="col" style="height: 50px; display: block; background-color: <?php echo $color2?>">
-    <?php echo $color2 ?>
-    </div>
-   
-   <?php
-   if($i==(count($colors)-1))
-        echo "</div>";
-   else if(($i%7)==6) {
-         echo "</div>";
-         echo '<div class="row">';
-   }
-   
-
-   $i++;
-}
 
 $color = $this->input("color",["placeholder"=>"Couleur de fond"]);
 
@@ -103,6 +82,29 @@ $marginSelect = $this->select("margin-bkg", [
 
 if($this->editmode) {
     //echo $colorSelect;
+    ?>
+
+<div class="row">
+<?php
+$i==0;
+foreach ($colors as $color2) {
+    ?>
+    <div class="col" style="height: 50px; display: block; background-color: <?php echo $color2?>">
+    <?php echo $color2 ?>
+    </div>
+   
+   <?php
+   if($i==(count($colors)-1))
+        echo "</div>";
+   else if(($i%7)==6) {
+         echo "</div>";
+         echo '<div class="row">';
+   }
+   
+
+   $i++;
+}
+
     echo $color."<br />";
     echo $hauteurSelect."<br />";
     echo $largeurSelect."<br />";

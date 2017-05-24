@@ -117,6 +117,6 @@ $largeur = $largeurSelect->getData();
 $margin = $marginSelect->getData();
 ?>
 <div class="grid-offset"></div>
-<div class="grid-bkg <?php echo $hauteur?' grid-height-'.$hauteur:''?><?php echo $largeur?' grid-width-'.$largeur:''?><?php echo $margin?' grid-margin-'.$margin:''?>" style="background-color: <?php echo $color->getData()?>">
-<div></div>
+<div class="grid-bkg <?php echo $hauteur?' grid-height-'.$hauteur:''?><?php echo $largeur?' grid-width-'.$largeur:''?><?php echo $margin?' grid-margin-'.$margin:''?>">
+<div style="background-color: <?php echo $color->getData()?>"></div>
 </div>

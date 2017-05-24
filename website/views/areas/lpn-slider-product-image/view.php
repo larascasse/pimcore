@@ -3,15 +3,18 @@
 ?>
 
 <?php if($this->editmode): ?>
+    <?= $this->input("cssClass",
+    [
+        "placeholder"=>"classe CSS"
+    ]); ?><br />
+
     <?= $this->multihref("objectPaths",
     [
         "types" => ["asset"],
         "subtypes" => ["image","folder"]
 
     ]); ?>
-    <?= $this->input("cssClass",
-    [
-    ]); ?>
+    
 <?php else: ?>
 <div class="row section-content <?php echo $this->input("cssClass") ?>">
 <div class="col">

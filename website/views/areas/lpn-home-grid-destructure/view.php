@@ -30,7 +30,7 @@ else {
 }
 
  $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
- $isVertical = strpos($defaultGridMode,'grid-vertical')>0;
+ $isVertical = strpos($defaultGridMode,'grid-vertical')>0 || $count==3;
 
 ?>
 

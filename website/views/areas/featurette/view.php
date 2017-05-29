@@ -27,7 +27,7 @@ if(!$position) {
 
 
 
-    <div class="row">
+    <div class="row section-content">
 
      
 
@@ -67,5 +67,5 @@ if(!$position) {
         </div>
     </div>
 
-    <hr>
+    
 <?php } ?>

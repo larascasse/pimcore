@@ -33,7 +33,7 @@
      ?>
    
 		<div class="blog">
-			<div class="card-columns clickable grid-count-<?php echo count($this->multihref("objectPaths")->getElements())">
+			<div class="card-columns clickable grid-count-<?php echo count($this->multihref("objectPaths")->getElements())?>">
 			<?php foreach($this->multihref("objectPaths") as $article) {
 
 				$this->template("/snippets/lpn-grid-realisations-item.php",array('article'=>$article)); ?>

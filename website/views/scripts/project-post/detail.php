@@ -127,8 +127,7 @@ foreach ($imagesArray->assets as $asset) {
         }
         else {?>
                 <div class="realisation-contact">
-                Aîe, le détail du produit n'est pas encore en ligne. Mais nous nous y efforçons et c'est pour bientôt!<br />
-                Vous souhaitez en savoir plus ?<br />
+                Si vous souhaitez en savoir plus,<br />
                 <a href="/contact?real=<?php echo $this->article->getKey()?>" class="btn btn-contact">Contactez-nous</a>
                 </div>
         <?php }

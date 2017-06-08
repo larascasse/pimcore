@@ -9,7 +9,7 @@
 
 
 <div class="projects">
-    <div class="card-columns grid-count-<?php echo $this->projectsCount; ?>">
+    <div class="card-columns xx grid-count-<?php echo $this->projectsCount; ?>">
         <?php foreach ($this->articles as $article) { ?>
         
             <?= $this->template("/snippets/lpn-grid-realisations-item.php",array('article'=>$article)); ?>

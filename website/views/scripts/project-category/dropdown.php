@@ -3,8 +3,8 @@ $defaultName= isset($this->category)?$this->category->getName():"Tous les projet
 ?>
 
 <ul class="nav justify-content-center">
-  <li class="nav-item dropdown-category">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown-category" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $defaultName ?></a>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $defaultName ?></a>
     <div class="dropdown-menu">
     <?php if (isset($this->category)) { ?>
       <a class="dropdown-item" href="/realisations-parquet-design">Tous les projets</a>

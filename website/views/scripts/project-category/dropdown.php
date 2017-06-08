@@ -2,8 +2,8 @@
 $defaultName= isset($this->category)?$this->category->getName():"Tous les projets";
 ?>
 
-<ul class="nav justify-content-center">
-  <li class="nav-item dropdown">
+<div class="nav justify-content-center">
+  <div class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $defaultName ?></a>
     <div class="dropdown-menu">
     <?php if (isset($this->category)) { ?>
@@ -17,5 +17,5 @@ $defaultName= isset($this->category)?$this->category->getName():"Tous les projet
 
       } ?>
     </div>
-  </li>
-</ul>
+  </div>
+</div>

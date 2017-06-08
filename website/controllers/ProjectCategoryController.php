@@ -28,7 +28,7 @@ class ProjectCategoryController extends Action
         $conditions = [];
 
         if($this->getParam("key")) {
-            $conditions[] = "category LIKE " . $projectList->quote("%," . (int)  $category -> getId() . ",%");
+            $conditions[] = "category LIKE " . $projectList->quote("%,object|" . (int)  $category -> getId() . ",%");
         }
         if(!empty($conditions)) {
             $projectList->setCondition(implode(" AND ", $conditions));
@@ -40,6 +40,7 @@ class ProjectCategoryController extends Action
         $paginator->setItemCountPerPage(100);
 
         $this->view->projects = $paginator;
+        $this->view->projectsCount = $paginator;
 
 
         $categories = Object_ProjectCategory::getList(); // this is an alternative way to get an object list
@@ -51,7 +52,7 @@ class ProjectCategoryController extends Action
 
         if(!$category instanceof Object_ProjectCategory || !$category->isPublished()) {
             // this will trigger a 404 error response
-            throw new \Zend_Controller_Router_Exception("invalid request UNPUBLISHED!!");
+            //throw new \Zend_Controller_Router_Exception("invalid request UNPUBLISHED!!");
         }
 
         $this->view->category = $category;

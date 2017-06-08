@@ -34,13 +34,14 @@ class ProjectCategoryController extends Action
             $projectList->setCondition(implode(" AND ", $conditions));
         }
 
-
+        $this->view->projectsCount = $projectList->count();
+        
         $paginator = Zend_Paginator::factory($projectList);
         $paginator->setCurrentPageNumber(0);
         $paginator->setItemCountPerPage(100);
 
         $this->view->projects = $paginator;
-        $this->view->projectsCount = $projectList->count();
+
 
 
         $categories = Object_ProjectCategory::getList(); // this is an alternative way to get an object list

@@ -22,7 +22,7 @@ class ProjectPostController extends Action
         $conditions = [];
 
         if($this->getParam("category")) {
-            $conditions[] = "categories LIKE " . $blogList->quote("%," . (int) $this->getParam("category") . ",%");
+            $conditions[] = "categories LIKE " . $blogList->quote("%,object|" . (int) $this->getParam("category") . ",%");
         }
 
         if($this->getParam("archive")) {
@@ -38,6 +38,7 @@ class ProjectPostController extends Action
         $paginator->setItemCountPerPage(100);
 
         $this->view->articles = $paginator;
+        $this->view->projectsCount = $blogList->count();
 
         // get all categories
         $categories = Object_ProjectCategory::getList(); // this is an alternative way to get an object list

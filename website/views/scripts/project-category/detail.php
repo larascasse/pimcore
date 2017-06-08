@@ -15,7 +15,7 @@
 
 
 <div class="blog">
-    <div class="card-columns">
+    <div class="card-columns grid-count-<?php echo count($this->projects)?>">
         <?php 
           
            foreach ($this->projects as $project) { 

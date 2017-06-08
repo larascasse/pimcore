@@ -38,7 +38,7 @@ Realisation DETAIL
 
 
 //print_r($imagesArray);
- $content.='<div class="realisation-detail card-columns">';
+ $content.='<div class="realisation-detail card-columns grid-count-<?php echo count($imagesArray)?>">';
  $oddList=array();
  $evenList= array();
  $ind=0;

@@ -62,7 +62,7 @@ class ProjectCategory extends Object\ProjectCategory {
           $conditions = [];
 
  
-          $conditions[] = "category LIKE " . $projectList->quote("%," . (int)  $this -> getId() . ",%");
+          $conditions[] = "category LIKE " . $projectList->quote("%,object|" . (int)  $this -> getId() . ",%");
         
         if(!empty($conditions)) {
             $projectList->setCondition(implode(" AND ", $conditions));
@@ -74,6 +74,7 @@ class ProjectCategory extends Object\ProjectCategory {
         //$paginator->setItemCountPerPage(100);
 
         $view->projects = $projectList->load();
+        $view->projectsCount = $projectList->count();
 
 
 

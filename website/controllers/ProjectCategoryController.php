@@ -40,7 +40,7 @@ class ProjectCategoryController extends Action
         $paginator->setItemCountPerPage(100);
 
         $this->view->projects = $paginator;
-        $this->view->projectsCount = $paginator;
+        $this->view->projectsCount = $paginator->getCurrentItemCount();
 
 
         $categories = Object_ProjectCategory::getList(); // this is an alternative way to get an object list

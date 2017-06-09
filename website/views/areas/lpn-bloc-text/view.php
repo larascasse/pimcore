@@ -25,6 +25,8 @@ if(!$htmlClass) {
     $htmlClass = "bloctext";
 }
 
+$countCars = strlen($this->textarea("description")->getData());
+
 ?>
 
 
@@ -37,7 +39,7 @@ if(!$htmlClass) {
         "placeholder" => "Titre",
         "class" => "editmode" //Edit mode
     ]); ?></h2>
-<p><?= $this->textarea("description",[
+<p <?php echo $countCars>200?'class="longtext"':''?>><?= $this->textarea("description",[
         "nl2br" => true,
         "width" => 600,
         "height" => 70,

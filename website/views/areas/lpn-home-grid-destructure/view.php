@@ -74,7 +74,7 @@ while($this->block("contentblock")->loop()) {
 
         switch ($count) {
             case 1:
-                $pimcoreThimbClass = "magento_equigrid_h";
+                $pimcoreThimbClass = "magento_h_half";
                 break;
 
             case 2:
@@ -84,13 +84,13 @@ while($this->block("contentblock")->loop()) {
             case 3:
                 switch ($i) {
                     case 0:
-                        $pimcoreThimbClass = $isInverse ?"magento_equigrid_h":"magento_equigrid_v";
+                        $pimcoreThimbClass = $isInverse ?"magento_h_half":"magento_equigrid_v";
                         break;
                     case 1:
-                        $pimcoreThimbClass = "magento_equigrid_h";
+                        $pimcoreThimbClass = "magento_h_half";
                         break;
                     case 2:
-                        $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
                         break;
                     
                     default:
@@ -102,16 +102,16 @@ while($this->block("contentblock")->loop()) {
             case 4:
                 switch ($i) {
                     case 0:
-                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+                         $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_h_half";
                         break;
                     case 1:
-                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_h_half";
                         break;
                     case 2:
-                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_h_half";
                         break;
                     case 3:
-                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_equigrid_h";
+                        $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_h_half";
                         
                         break;
                     

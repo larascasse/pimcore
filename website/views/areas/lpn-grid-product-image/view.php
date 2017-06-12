@@ -37,10 +37,14 @@ if(!$count) {
 }
 
 $imageformat = $this->select("imageformat")->getData();
+
 if(!$imageformat) {
     $imageformat = 'magento_equigrid_h';
 }
 
+if($count>1 && $imageformat=="magento_equigrid_h") {
+    $imageformat = "magento_h_half";
+}
 
 ?>
 

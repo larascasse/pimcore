@@ -46,7 +46,8 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
             } elseif (file_exists($fileSystemPath)) {
                 $fileModTime = filemtime($fileSystemPath);
             }
- 
+            //Newcache 
+            $fileModTime .="v2";
             $path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fileSystemPath);
             if($fileModTime) {
                 $path = "/cache-buster-" . $fileModTime . $path; // add a cache-buster

@@ -38,6 +38,8 @@ class ProjectCategory extends Object\ProjectCategory {
          $itemData["mage_identifier"] = $this->getMageUrl();
 
          $itemData["name"] = "Réalisations - ".$this->getName();
+         $itemData["title"] = "Projets - ".$this->getName();
+         $itemData["description"] = "Découvrez nos projets - ".$this->getName();
          $itemData["content"] = $this->getContent();
          //$itemData["description"] = $this->getDescription();
          //$itemData["posterImage"] = $this->getPosterImage()?$this->getPosterImage()->getThumbnail("content")->getHTML():"";

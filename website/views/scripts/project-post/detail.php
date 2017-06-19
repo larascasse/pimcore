@@ -68,7 +68,11 @@ foreach ($imagesArray->assets as $asset) {
      $item .='<div class="card'.$cardclass.' imgcnt">';
      $item .='<figure>';
      
-     $item.= $asset->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid norelazy","data-zoom"=>$asset->getThumbnail("magento_equigrid_h")->getPath(),"data-zoom-m"=>$asset->getThumbnail("magento_equigrid_v")->getPath()]);
+     /*
+     //On cree les zoom maintenant, on le derfer pas on request
+     https://www.pimcore.org/docs/latest/Assets/Working_with_Thumbnails/Image_Thumbnails.html
+     */
+     $item.= $asset->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid norelazy","data-zoom"=>$asset->getThumbnail("magento_equigrid_h",false)->getPath(),"data-zoom-m"=>$asset->getThumbnail("magento_equigrid_v",false)->getPath()]);
 
      if(strlen($imageProductName>0)) {
         $item .='<figcaption class="card-block">';

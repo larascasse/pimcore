@@ -65,7 +65,9 @@ foreach ($imagesArray->assets as $asset) {
    
      
      //$content .='<div class="col-12">';
-     $item .='<figure class="card'.$cardclass.'">';
+     $item .='<div class="card'.$cardclass.' imgcnt">';
+     $item .='<figure>';
+     
      $item.= $asset->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid norelazy","data-zoom"=>$asset->getThumbnail("magento_equigrid_h")->getPath(),"data-zoom-m"=>$asset->getThumbnail("magento_equigrid_v")->getPath()]);
 
      if(strlen($imageProductName>0)) {
@@ -76,6 +78,8 @@ foreach ($imagesArray->assets as $asset) {
     
      $item.='</figure>';
      $item.='<div class="nsg_real_zoom"></div>';
+     $item.='</div>';
+     
      //$content.='</div>';
      //2 colonnes, flexbos, on met dans 2 colums
      if ($ind & 1) {

@@ -22,7 +22,7 @@ if($this->editmode) {
 
 $htmlClass = $this->select("htmlClass")->getData();
 if(!$htmlClass) {
-    $htmlClass = "bloctext";
+    $htmlClass = "table-intersticiel";
 }
 
 $countCars = strlen($this->textarea("description")->getData());

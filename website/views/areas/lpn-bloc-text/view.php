@@ -10,6 +10,7 @@ if($this->editmode) {
             "reload" => true,
             "store" => [['bloctext','Aligné à gauche'],
             			['table-intersticiel','Centré Fond blanc'],
+                        ['table-intersticiel first','Centré Fond blanc, premeir bloc'],
             			['introcategory','Centré Fond noir'],
             			['subcategory','Sous-catégorie']
             		 ]

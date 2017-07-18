@@ -50,7 +50,8 @@
 
 		//TODO A METTRE DANS UN TEMPLATE
 		$i=0;
-		$count = count($this->multihref("objectPaths")->getElements());
+		$elements = $this->multihref("objectPaths")->getElements();
+		$count = count($elements);
 		$sameSizeCount=1;
 		$isDoubleSize=true;
 		$simple=false;
@@ -64,7 +65,7 @@
 	    <?php
 
 
-		foreach($this->multihref("objectPaths") as $article) { 
+		foreach($elements as $article) { 
 
 			//Algo pour avoir 2 fois de suite la meme taille
   

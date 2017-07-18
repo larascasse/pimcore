@@ -47,18 +47,8 @@
 		<?php 
 
 		//TODO A METTRE DANS UN TEMPLATE
-		$activeElements=[];
-		$hrefElements = $this->multihref("objectPaths")->getElements();
-		if(is_array($hrefElements)) {
-			foreach ($hrefElements as $element) {
-				if($element->isPublished()) {
-					$activeElements[] = $element;
-				}
-			}
-		}
-		$count = count($activeElements);
 		$i=0;
-		//$count = count($this->multihref("objectPaths")->getElements());
+		$count = count($this->multihref("objectPaths")->getElements());
 		$sameSizeCount=1;
 		$isDoubleSize=true;
 		$simple=false;
@@ -155,7 +145,7 @@
 	    <?php
 
 
-		foreach($activeElements as $article) { 
+		foreach($this->multihref("objectPaths") as $article) { 
 				$image="";
 
 				$subtitle = "Inspiration";

@@ -994,7 +994,7 @@
         else {
            
             if(!$canCreate) {
-                 echo $product["ean"]." n'existe pas et ne sera pas crée : SKIP\n";
+                 echo $product["ean"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n";
                  /*if($product["ean"]=='0001162502000') {
                     print_r($product);
                     die;

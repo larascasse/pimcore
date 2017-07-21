@@ -1,5 +1,5 @@
-<!-- real #<?php echo $this->getId(); ?> -->
-<div class="realisation-page" id="realisation-page-<?php echo $this->getId(); ?>">
+<!-- real #<?php echo $this->article->getId(); ?> -->
+<div class="realisation-page" id="realisation-page-<?php echo $this->article->getId(); ?>">
 <?php
 
 /**
@@ -164,4 +164,4 @@ foreach ($imagesArray->assets as $asset) {
     </div>
     <!-- / Images -->
 </div>
-<!-- FIN real #<?php echo $this->getId(); ?> -->
+<!-- FIN real #<?php echo $this->article->getId(); ?> -->

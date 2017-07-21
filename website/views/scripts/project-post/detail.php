@@ -1,38 +1,40 @@
-
+<!-- real #<?php echo $this->getId(); ?> -->
+<div class="realisation-page" id="realisation-page-<?php echo $this->getId(); ?>">
 <?php
 
 /**
 Realisation DETAIL 
 **/
 
-    // set page meta-data
-    $this->headTitle()->set($this->article->getName());
-    $content = "";
-    $accroche  =  $this->article->getAccroche();
+// set page meta-data
+$this->headTitle()->set($this->article->getName());
+$content = "";
+$imgForJson= array();
+$accroche  =  $this->article->getAccroche();
 
-    $description  =  $this->article->getDescription();
-   
-    
-    /*** META */
-    $metaDescription = strip_tags($description);
-    $metaDescription = \Website\Tool\Text::getStringAsOneLine($metaDescription);
-    $metaDescription = \Website\Tool\Text::cutStringRespectingWhitespace($metaDescription, 160);
-    $this->headMeta($metaDescription, "description");
-    
+$description  =  $this->article->getDescription();
 
 
-    $imagesArray = $this->article->getImagesAssets();
-    $posterImage = $this->article->getPosterImage();
+/*** META */
+$metaDescription = strip_tags($description);
+$metaDescription = \Website\Tool\Text::getStringAsOneLine($metaDescription);
+$metaDescription = \Website\Tool\Text::cutStringRespectingWhitespace($metaDescription, 160);
+$this->headMeta($metaDescription, "description");
 
-    $productName="";
-    if($posterImage) {
-         $this->headMeta($posterImage->getThumbnail("content")->getPath(), "og:image");
-        if(($product = $this->article->getRelatedProduct()) instanceof Object_Product) {
-            $productName=$product->getName();
-        }
-        
 
+
+$imagesArray = $this->article->getImagesAssets();
+$posterImage = $this->article->getPosterImage();
+
+$productName="";
+if($posterImage) {
+     $this->headMeta($posterImage->getThumbnail("content")->getPath(), "og:image");
+    if(($product = $this->article->getRelatedProduct()) instanceof Object_Product) {
+        $productName=$product->getName();
     }
+    
+
+}
    
   
 
@@ -43,6 +45,7 @@ Realisation DETAIL
  $evenList= array();
  $ind=0;
  $lastProductName ="";
+
 
 
 foreach ($imagesArray->assets as $asset) {
@@ -73,10 +76,18 @@ foreach ($imagesArray->assets as $asset) {
      https://www.pimcore.org/docs/latest/Assets/Working_with_Thumbnails/Image_Thumbnails.html
      ANNULE2
      */
-     $item.= $asset->getThumbnail("magento-real-grid")->getHTML(["class" => "img-fluid norelazy","data-zoom"=>$asset->getThumbnail("magento_equigrid_h")->getPath(),"data-zoom-m"=>$asset->getThumbnail("magento_equigrid_v")->getPath()]);
+   
+     $item.= $asset->getThumbnail("magento-real-grid")->getHTML([
+        //Attributes
+        "class" => "img-fluid norelazy",
+        "data-zoom"=>$asset->getThumbnail("magento_equigrid_h")->getPath(),
+        "data-zoom-m"=>$asset->getThumbnail("magento_equigrid_v")->getPath()
+        ]
+
+        );
 
      if(strlen($imageProductName>0)) {
-        $item .='<figcaption class="card-block">';
+        $item .='<figcaptdevion class="card-block">';
         $item .='<p class="card-text">'.$imageProductName.'</p>';
         $item.='</figcaption>';
      }
@@ -101,17 +112,16 @@ foreach ($imagesArray->assets as $asset) {
 
 ?>
 
-<div class="back-content">
-    <a href="#" class="btn btn-back">Retour</a>
-</div>
-
-<div class="image-header-container noimg">
-    <div>
-      <h1><?= $this->article->getName(); ?></h1>
-      <p><?=  $accroche ?></p>
+    <div class="back-content">
+        <a href="#" class="btn btn-back">Retour</a>
     </div>
 
-</div>
+    <div class="image-header-container noimg">
+        <div>
+          <h1><?= $this->article->getName(); ?></h1>
+          <p><?=  $accroche ?></p>
+        </div>
+    </div>
 
 
     <div class="row">
@@ -153,5 +163,5 @@ foreach ($imagesArray->assets as $asset) {
         </div>
     </div>
     <!-- / Images -->
-
-
+</div>
+<!-- FIN real #<?php echo $this->getId(); ?> -->

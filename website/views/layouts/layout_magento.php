@@ -9,11 +9,11 @@
 if (isset($_SERVER["HTTP_HOST"]) && $_SERVER["HTTP_HOST"]=="pimcore.florent.local") { ?>
 <link rel="stylesheet" type="text/css" href="http://magento.florent.local/skin/frontend/lpn/matieres/css/matieres-min.css" media="all" />
 
-<script type="text/javascript" src="http://magento.florent.local/js/lpn/lpn-terrasses.min.js?q=20170105"></script>
+<script type="text/javascript" src="https://www.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js?q=20170105"></script>
 <?php } else { ?>
-<link rel="stylesheet" type="text/css" href="https://eshop.laparqueterienouvelle.fr/skin/frontend/lpn/matieres/css/matieres-min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="https://www.laparqueterienouvelle.fr/skin/frontend/lpn/matieres/css/matieres-min.css" media="all" />
 
-<script type="text/javascript" src="https://eshop.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js?q=20170105"></script>
+<script type="text/javascript" src="https://www.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js?q=20170105"></script>
 
 <?php } ?>
 <script type="text/javascript" src="https://raw.githubusercontent.com/aFarkas/lazysizes/gh-pages/lazysizes.min.js"></script>

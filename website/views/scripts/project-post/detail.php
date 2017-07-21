@@ -40,7 +40,7 @@ if($posterImage) {
 
 
 //print_r($imagesArray);
- $content.='<div class="realisation-detail card-columns grid-count-<?php echo count($imagesArray)?>">';
+ $content.='<div class="realisation-detail card-columns grid-count-'. count($imagesArray).'">';
  $oddList=array();
  $evenList= array();
  $ind=0;

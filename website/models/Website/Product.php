@@ -642,6 +642,8 @@ class Website_Product extends Object_Product {
 		 	 $meta = $this->getMage_short_name();
 		 	 if(strlen($meta)<45)
 		 	 	$meta = $this->getSubtype()." ".$meta;
+		 	 if(strlen($meta)<45)
+		 	 	$meta = $this->getSubtype2()." ".$meta;
 		 	 if(strlen($meta)<29)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }

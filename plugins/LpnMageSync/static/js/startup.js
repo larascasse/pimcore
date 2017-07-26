@@ -13,7 +13,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         // alert("LpnMageSync Plugin Ready!");
     },
     postOpenDocument : function(doc,type){
-    	var ref=this;
+        var ref=this;
 
         doc.toolbar.insert(5, {
             text: 'Sync avec Magento',
@@ -23,39 +23,48 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         })
 
     },
+
+   /* postOpenObject : function(object,type){
+    	var ref=this;
+
+        doc.toolbar.insert(5, {
+            text: 'Sync avec Magento',
+            itemId: 'synccmagento',
+            scale: "medium",
+            handler: this.sync.bind(object)
+        })
+
+    },*/
     
     sync : function () {
-
-       alert('/plugin/LpnMageSync/index/download/id/' +this.id);
-       return;
+    console.log("this",this)
+       var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key;
+       //return;
          // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
 
         Ext.Ajax.request({
-            url: '/plugin/LpnMageSync/index/download/id/' +this.id,
+            //url: '/plugin/LpnMageSync/index/download/id/' +this.id,
+            url: url,
             method: "post",
             success: function (response) {
                 try{
+                    pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+
                     var rdata = Ext.decode(response.responseText);
                     if (rdata && rdata.success) {
-                        pimcore.helpers.showNotification(t("save"), t("successful_saved_asset"), "success");
-                        this.resetChanges();
-                        pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
+                        pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+                       // this.resetChanges();
+                        //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
                     }
                     else {
-                        pimcore.helpers.showPrettyError(rdata.type, t("error"), t("error_saving_asset"),
+                        pimcore.helpers.showPrettyError(rdata.type, t("error"), t("error_sync"),
                             rdata.message, rdata.stack, rdata.code);
                     }
                 } catch(e){
-                    pimcore.helpers.showNotification(t("error"), t("error_saving_asset"), "error");
+                    pimcore.helpers.showNotification(t("error"), t("error_sync"), "error");
                 }
-                // reload versions
-                if (this.isAllowed("versions")) {
-                    if (this["versions"] && typeof this.versions.reload == "function") {
-                        this.versions.reload();
-                    }
-                }
+                
 
-                this.tab.unmask();
 
                 if(typeof callback == "function") {
                     callback();
@@ -64,7 +73,6 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
             failure: function () {
                 this.tab.unmask();
             },
-            params: this.getSaveData(only)
         });
 
      

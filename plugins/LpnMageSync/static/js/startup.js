@@ -38,7 +38,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     
     sync : function () {
     console.log("this",this)
-       var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key;
+       var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
        //return;
          // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
 

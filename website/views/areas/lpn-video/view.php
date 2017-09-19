@@ -29,7 +29,7 @@
                                 "btn_title" => $btn_title
                     )
     );
-    
+
 
     if($this->editmode) {
     	echo '<div class="table-container">';
@@ -58,13 +58,14 @@
         echo '<h3>'.$titre.'</h3>';
 
         echo '<p>'.$description.'</p>';
+        echo $link; 
 
         //echo '<div class="container">'.$btn_title.'</div>'; 
 
         //echo '<div class="container">'.$link.'</div>';
          echo '</div>';
          echo '</div>';
-         echo $link; 
+         
          echo '</div>';
     }
 

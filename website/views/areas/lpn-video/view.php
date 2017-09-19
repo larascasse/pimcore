@@ -11,7 +11,10 @@
                         "loop" => "true", 
                         "fluid"=>"true",
                         "muted"=>"muted",
-                        "controls" => "false"]
+                    ],
+        "removeAttributes" => [
+                    "controls"
+                    ]
 
     ]); 
 

@@ -1,15 +1,67 @@
 
-<section class="area-video">
 
-    <?php $this->template("/includes/area-headlines.php"); ?>
 
-    <?= $this->video("video", [
+    <?php $video = $this->video("video", [
         "html5" => true,
         "thumbnail" => "content",
         "height" => "auto",
         "width" =>	"100%",
-        "attributes" => ["class" => "video-js custom-class", "preload" => "auto", "controls" => "", "data-custom-attr" => "my-test","autoplay" => "true" ,"loop" => "true"]
+        "attributes" => ["class" => "video-js custom-class", "preload" => "auto", "controls" => "false", "data-custom-attr" => "my-test","autoplay" => "true" ,"loop" => "true","vjs-fluid"=>"true"]
 
-    ]); ?>
+    ]); 
 
+    $link = $this->renderlet("link", array(
+                                "types"=>array("object"),
+                                "controller" => "content",
+                                "action" => "link-eshop-renderlet",
+                                "title" => "Glisser un doc, un produit, une categorie",
+                                "editmode" => $this->editmode,
+                                "previewmode" => $this->previewmode,
+                                "btn_title" => $btn_title
+                    )
+    );
+
+    $surtitre = $this->input("surtitre", ["width" => 400,'placeholder'=>'Surtitre']);
+
+    $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
+    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+
+    $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
+
+    if($this->editmode) {
+    	echo '<div class="table-container">';
+        echo '<div class="row"><div class="col-md-6">';
+        echo $video;
+         echo '</div><div class="col-md-6">';
+        echo '<div class="container">'.$surtitre.'</div>';
+        echo '<div class="container"><h3>'.$titre.'</h3></div>';
+
+        echo '<div class="container">'.$description.'</div>';
+
+        echo '<div class="container">'.$btn_title.'</div>'; 
+
+        echo '<div class="container">'.$link.'</div>';
+         echo '</div></div>';
+         echo '</div>';
+
+    }
+    else {
+    	echo '<div class="image-header-container">';
+        echo $video;
+     
+        //echo '<div class="container">'.$surtitre.'</div>';
+        echo '<div>';
+        echo '<h3>'.$titre.'</h3>';
+
+        echo '<p>'.$description.'</p>';
+
+        //echo '<div class="container">'.$btn_title.'</div>'; 
+
+        //echo '<div class="container">'.$link.'</div>';
+         echo '</div>';
+         echo '</div>';
+    }
+
+
+    ?>
 </section>

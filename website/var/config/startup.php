@@ -31,8 +31,8 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     \Pimcore::getEventManager()->attach([
         "frontend.path.asset.image.thumbnail",
         "frontend.path.asset.document.image-thumbnail",
-        "frontend.path.asset.video.image-thumbnail",
-        "frontend.path.asset.video.thumbnail",
+        //"frontend.path.asset.video.image-thumbnail",
+        //"frontend.path.asset.video.thumbnail",
     ],
         function ($event) use ($cloudFrontPrefix) {
             // rewrite the path for the frontend

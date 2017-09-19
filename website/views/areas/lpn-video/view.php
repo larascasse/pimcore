@@ -46,11 +46,12 @@
 
     }
     else {
-    	echo '<div class="video-header-container">';
+    	echo '<div class="video-container">';
+    	echo '<class="video-container">';
         echo $video;
-     
+     	echo '</div>';
         //echo '<div class="container">'.$surtitre.'</div>';
-        echo '<div>';
+        echo '<div class="container-overlay"><div class="overlay-content">';
         echo '<h3>'.$titre.'</h3>';
 
         echo '<p>'.$description.'</p>';
@@ -58,6 +59,7 @@
         //echo '<div class="container">'.$btn_title.'</div>'; 
 
         //echo '<div class="container">'.$link.'</div>';
+         echo '</div>';
          echo '</div>';
          echo '</div>';
     }

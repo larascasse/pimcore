@@ -6,7 +6,7 @@
         "thumbnail" => "content",
         "height" => "auto",
         "width" =>	"100%",
-        "attributes" => ["class" => "video-js custom-class", "preload" => "auto", "controls" => "false", "data-custom-attr" => "my-test","autoplay" => "true" ,"loop" => "true","vjs-fluid"=>"true","fluid"=>"true"]
+        "attributes" => ["preload" => "auto" ,"autoplay" => "true" ,"loop" => "true", "fluid"=>"true"]
 
     ]); 
 
@@ -24,7 +24,7 @@
     $surtitre = $this->input("surtitre", ["width" => 400,'placeholder'=>'Surtitre']);
 
     $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
-    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'"Description"',"htmlspecialchars"=>false]);
 
     $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
 
@@ -46,8 +46,8 @@
 
     }
     else {
+    	echo '<div class="video-header-container">';
     	echo '<div class="video-container">';
-    	echo '<class="video-container">';
         echo $video;
      	echo '</div>';
         //echo '<div class="container">'.$surtitre.'</div>';

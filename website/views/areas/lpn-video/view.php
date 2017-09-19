@@ -46,7 +46,7 @@
 
     }
     else {
-    	echo '<div class="video-header-container">';
+    	echo '<div class="video-header-container clickable">';
     	echo '<div class="video-container">';
         echo $video;
      	echo '</div>';
@@ -61,6 +61,7 @@
         //echo '<div class="container">'.$link.'</div>';
          echo '</div>';
          echo '</div>';
+         echo $link; 
          echo '</div>';
     }
 

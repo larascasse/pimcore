@@ -61,7 +61,8 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     \Pimcore::getEventManager()->attach("frontend.path.asset", function ($event) use ($cloudFrontPrefix) {
         $asset = $event->getTarget();
         $path = $asset->getRealFullPath();
-        $path = "/cache-buster-" . $asset->getModificationDate()."v2" . $path; // add a cache-buster
+        //$path = "/cache-buster-" . $asset->getModificationDate()."v2" . $path; // add a cache-buster
+        $path = "/cache-buster-" ."v2" . $path; // add a cache-buster
         $path = $cloudFrontPrefix . $path;
  
         return $path;

@@ -6,7 +6,7 @@
         "thumbnail" => "content",
         "height" => "auto",
         "width" =>	"100%",
-        "attributes" => ["preload" => "auto" ,"autoplay" => "true" ,"loop" => "true", "fluid"=>"true"]
+        "attributes" => ["preload" => "auto" ,"autoplay" => "true" ,"loop" => "true", "fluid"=>"true","muted"]
 
     ]); 
 

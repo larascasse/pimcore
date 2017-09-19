@@ -46,7 +46,7 @@
 
     }
     else {
-    	echo '<div class="image-header-container">';
+    	echo '<div class="video-header-container">';
         echo $video;
      
         //echo '<div class="container">'.$surtitre.'</div>';

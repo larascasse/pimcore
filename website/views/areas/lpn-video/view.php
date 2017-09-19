@@ -6,7 +6,7 @@
         "thumbnail" => "content",
         "height" => "auto",
         "width" =>	"100%",
-        "attributes" => ["class" => "video-js custom-class", "preload" => "auto", "controls" => "false", "data-custom-attr" => "my-test","autoplay" => "true" ,"loop" => "true","vjs-fluid"=>"true"]
+        "attributes" => ["class" => "video-js custom-class", "preload" => "auto", "controls" => "false", "data-custom-attr" => "my-test","autoplay" => "true" ,"loop" => "true","vjs-fluid"=>"true","fluid"=>"true"]
 
     ]); 
 

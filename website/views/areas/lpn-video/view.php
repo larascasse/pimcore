@@ -10,6 +10,15 @@
 
     ]); 
 
+    
+
+    $surtitre = $this->input("surtitre", ["width" => 400,'placeholder'=>'Surtitre']);
+
+    $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
+    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'"Description"',"htmlspecialchars"=>false]);
+
+    $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
+
     $link = $this->renderlet("link", array(
                                 "types"=>array("object"),
                                 "controller" => "content",
@@ -20,13 +29,7 @@
                                 "btn_title" => $btn_title
                     )
     );
-
-    $surtitre = $this->input("surtitre", ["width" => 400,'placeholder'=>'Surtitre']);
-
-    $titre = $this->input("titre", ["width" => 400,'placeholder'=>'Titre']);
-    $description = $this->textarea("description", ["width" => 400,"height" => 100,'placeholder'=>'"Description"',"htmlspecialchars"=>false]);
-
-    $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
+    
 
     if($this->editmode) {
     	echo '<div class="table-container">';

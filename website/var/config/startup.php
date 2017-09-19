@@ -31,8 +31,8 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     \Pimcore::getEventManager()->attach([
         "frontend.path.asset.image.thumbnail",
         "frontend.path.asset.document.image-thumbnail",
-        "frontend.path.asset.video.image-thumbnail",
-        "frontend.path.asset.video.thumbnail",
+        //"frontend.path.asset.video.image-thumbnail",
+        //"frontend.path.asset.video.thumbnail",
     ],
         function ($event) use ($cloudFrontPrefix) {
             // rewrite the path for the frontend
@@ -57,6 +57,38 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
  
             return $path;
         });
+
+    \Pimcore::getEventManager()->attach([
+        //"frontend.path.asset.image.thumbnail",
+        //"frontend.path.asset.document.image-thumbnail",
+        "frontend.path.asset.video.image-thumbnail",
+        "frontend.path.asset.video.thumbnail",
+    ],
+        function ($event) use ($cloudFrontPrefix) {
+            // rewrite the path for the frontend
+            $fileSystemPath = $event->getParam("filesystemPath");
+            $target = $event->getTarget();
+            $fileModTime = null;
+            if($target instanceof \Pimcore\Model\Asset) {
+                $fileModTime = $target->getModificationDate();
+            } elseif (method_exists($target, "getAsset") && $target->getAsset()) {
+                $fileModTime = $target->getAsset()->getModificationDate();
+            } elseif (file_exists($fileSystemPath)) {
+                $fileModTime = filemtime($fileSystemPath);
+            }
+            //Newcache 
+
+            $path = str_replace(PIMCORE_DOCUMENT_ROOT, "", $fileSystemPath);
+            /*if($fileModTime) {
+                //$fileModTime .="v2";
+                $path = "/cache-buster-" . $fileModTime . $path; // add a cache-buster
+            }*/
+            $path = $cloudFrontPrefix . $path;
+ 
+            return $path;
+        });
+
+
  
     \Pimcore::getEventManager()->attach("frontend.path.asset", function ($event) use ($cloudFrontPrefix) {
         $asset = $event->getTarget();

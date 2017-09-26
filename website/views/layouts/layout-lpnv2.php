@@ -35,7 +35,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
- <link rel="stylesheet" type="text/css" href="https://www.laparqueterienouvelle.fr/skin/frontend/lpn/default/css/main.css" media="all">
+ <link rel="stylesheet" type="text/css" href="https://www.laparqueterienouvelle.fr/skin/frontend/lpn/default/css/main-min.css?d=<?php echo time() ?>" media="all">
  <!--<link href="http://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet">-->
 
     <!--<link href="/website/static/css/global.css" rel="stylesheet">-->
@@ -78,7 +78,7 @@ var dataLayer=[];
     // include a document-snippet - in this case the footer document
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
-<script type="text/javascript" src="https://www.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js"></script>
+<script type="text/javascript" src="https://www.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js?d=<?php echo time() ?>"></script>
 
  <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/00specials/mfdglg-douglas%'
+       o_path LIKE '/catalogue/_product_base__/00specials/%'
 
     ");
 
@@ -45,7 +45,7 @@ foreach ($list->getObjects() as $object) {
     Object_Abstract::setGetInheritedValues(false); 
     $value = $object->getValueForFieldName('meta_title');
     $parentValue = $object->getParent()->getValueForFieldName('meta_title');
-    if(($value == $parentValue || $value=="AA") && strlen($value)>0 ) {
+    if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
         echo "--> nullify ".$object->getName()."  -----    $value <-> $parentValue\n\n";
         $objectToSave = Object::getById($object->getId());
         $values = array();

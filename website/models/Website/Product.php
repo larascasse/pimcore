@@ -545,10 +545,23 @@ class Website_Product extends Object_Product {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
+   		 //Ajout shortanme parent et parentparent
+   		 $parentMageShortName = "";
+   		 $parentParentMageShortName = "";
+   		 try {
+   		 	$parentMageShortName = $object->getParent()->getMage_short_name()." ";
+			$parentParentMageShortName = $object->getParent()->getParent()->getMage_short_name()." ";
+
+   		 } catch (\Exception $e) {
+            //
+         }
+
+   		
 		//Shortname
     	if(strlen($this->getShort_name())>0) {
     		
-    		$str = $this->getShort_name();
+
+    		$str = $parentParentMageShortName.$parentParentMageShortName .$this->getShort_name();
     		$str =trim($str);
 
     		if(strlen($this->getPimonly_name_suffixe())>0) {

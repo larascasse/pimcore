@@ -528,15 +528,16 @@ class Website_Product extends Object_Product {
 
 
    		  //Ajout shortanme parent et parentparent
+   		 //Pas beoin pour le titre...
    		 $parentMageSuffixe = "";
    		 $parentParentSuffixe = "";
-   		 try {
+   		 /*try {
    		 	$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
 			$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
 
    		 } catch (\Exception $e) {
             //
-         }
+         }*/
 
 
 		//Shortname

@@ -549,8 +549,8 @@ class Website_Product extends Object_Product {
    		 $parentMageShortName = "";
    		 $parentParentMageShortName = "";
    		 try {
-   		 	$parentMageShortName = $object->getParent()->getMage_short_name()." ";
-			$parentParentMageShortName = $object->getParent()->getParent()->getMage_short_name()." ";
+   		 	$parentMageShortName = $this->getParent()->getMage_short_name()." ";
+			$parentParentMageShortName = $this->getParent()->getParent()->getMage_short_name()." ";
 
    		 } catch (\Exception $e) {
             //

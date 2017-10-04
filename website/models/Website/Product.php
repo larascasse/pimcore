@@ -8,7 +8,7 @@ class Website_Product extends Object_Product {
      * Dummy which can be overwritten by a parent class, this is a hook executed in every getter of the properties in the object
      * @param string $key
      */
-    public function preGetValue ($key) {
+    public function _____preGetValue ($key) {
 
    		
     	if(!Pimcore::inAdmin()) {

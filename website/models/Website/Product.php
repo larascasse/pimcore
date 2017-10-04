@@ -529,9 +529,9 @@ class Website_Product extends Object_Product {
 
    		  //Ajout shortanme parent et parentparent
    		 //Pas beoin pour le titre...
-   		 $parentMageSuffixe = "";
+   		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
-   		 /*try {
+   		/* try {
    		 	$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
 			$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
 
@@ -544,7 +544,7 @@ class Website_Product extends Object_Product {
 		$str = $this->getName();
 		$str =trim($str);
 		if(strlen($this->getPimonly_name_suffixe())>0) {
-			$str .=$this->getParent()->getPimonly_name_suffixe()." ".$this->getPimonly_name_suffixe();
+			$str .= $parentParentSuffixe.$parentSuffixe." ".$this->getPimonly_name_suffixe();
 		}
 		$str =trim($str);
 		Object_Abstract::setGetInheritedValues($inheritance); 
@@ -560,7 +560,7 @@ class Website_Product extends Object_Product {
    		 Object_Abstract::setGetInheritedValues(true); 
 
    		 //Ajout shortanme parent et parentparent
-   		 $parentMageSuffixe = "";
+   		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
    		 try {
    		 	$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";

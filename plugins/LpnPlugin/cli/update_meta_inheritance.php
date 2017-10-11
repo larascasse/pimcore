@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/00specials/%'
+       o_path LIKE '/catalogue/_product_base__/00specials/mfdglg-douglas/01massif/%'
 
     ");
 
@@ -43,26 +43,38 @@ foreach ($list->getObjects() as $object) {
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
-    $value = $object->getValueForFieldName('meta_title');
-    $parentValue = $object->getParent()->getValueForFieldName('meta_title');
-    if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
-        echo "--> nullify ".$object->getName()."  -----    $value <-> $parentValue\n\n";
-        $objectToSave = Object::getById($object->getId());
-        $values = array();
-        $values['meta_title']=null;
-        $objectToSave->setValues($values);
+
+    $fieldsToClean = ["famille","meta_title","meta_description"];
+
+    $values = array();
+    $objectToSave = Object::getById($object->getId());
+    foreach ($fieldsToClean as $key => $fieldName) {
+        # code...
+        $value = $object->getValueForFieldName($fieldName);
+        $parentValue = $object->getParent()->getValueForFieldName($fieldName);
+
+        if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
+            echo "--> nullify $fieldName : ".$object->getSku()."  -----    $value <-> $parentValue\n";
+            
+            
+            $values[$fieldName]=null;
+            
 
 
-        //$objectToSave->setPublished(true);
-        $objectToSave->save();
+            //$objectToSave->setPublished(true);
+            
+        }
+   
     }
 
-    
+    if(count( $values)>0) {
+        $objectToSave->setValues($values);
+        //print_r($values);
 
+        echo "\n";
+        $objectToSave->save();
+    }
     
-    
-  
-
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

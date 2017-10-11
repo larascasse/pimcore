@@ -3,7 +3,7 @@
 
 
 $this->document->setProperty("leftNavHide","bool",true);
-$this->layout()->setLayout("layout-lpn"); 
+$this->layout()->setLayout("layout-ft"); 
 
 
 $relatedProducts = $this->product->getRelated("relatedProducts");
@@ -20,10 +20,6 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 ?>
 
 
-<?php $this->headLink(array(
-    "rel" => "stylesheet",
-    "href" => "/website/static/css/portal.css"));
-?>
  <?php 
 	$count=0;
 	for($i=1; $i<=3; $i++) { 
@@ -33,127 +29,218 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
     	}
     }
   ?>
-<section class="area-wysiwyg product-detail">
+<section class="product-detail">
+
+
 <div class="row">
 
 
 
  <!-- Product Carousel -->
-<div class="col-md-12">
+<div class="col-12">
 
  <div class="page-header">
+
         <h3><?php echo $this->product->getSubtype(); ?></h3>
-        <h1><?php echo $this->product->getMage_short_name(); ?></h1>
+        <h2 style="text-align: left"><?php echo $this->product->getMage_short_name(); ?></h2>
  </div>
-
-
- <?php if ($count>0) { ?>
-
-
-<div id="myCarousel" class="carousel slide">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <?php for($i=1; $i<$count; $i++) { ?>
-        <li data-target="#myCarousel" data-slide-to="<?php echo $i; ?>"></li>
-        <?php } ?>
-    </ol>
-    <div class="carousel-inner">
-        <?php 
-        	$count=0;
-        	for($i=1; $i<=3; $i++) { 
-                $image = $this->product->{"getImage_" . $i}();
-            	if($image) { 
-            		$count++;
-            	}
-            }
-            for($i=1; $i<=$count; $i++) { 
-            	$image = $this->product->{"getImage_" . $i}();
-            	?>
-            	 <div class="item<?php if($i==1) { ?> active<?php } ?>">
-	                <img src="<?php echo $image->getThumbnail("productCarousel"); ?>">
-	                <div class="container">
-	                    <div class="carousel-caption">
-	      				 	<!--<h1><?php echo $this->product->getName(); ?></h1>
-	                      	<div class="caption"></div>
-	                        <div class="margin-bottom-10"></div>-->
-	                    </div>
-	                </div>
-            	</div>
-            <?php } ?>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
-  <?php } ?>
 </div>
- <!-- Fin product Caroussel -->  
 
+<hr />
+<div class="row">
+
+	<div class="col">
+	
+	     <?php $caracteristiques =  $this->product->getCharacteristicsArray();
+	     $html='';
+	     foreach ($caracteristiques as $key => $value) {
+	     		
+					$content = trim($value["content"]);
+
+
+					if(!isset($value["label"]) || strlen($content)==0)
+						continue;
+
+					
+
+					$html .= '<dl class="row">';	
+					$html.= '<dt class="col-2">';
+					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$html.= '</dt>';
+					$html.= '<dd class="col">';
+					
+					
+
+					if(isset($value["description"])) {
+						//$html.= '<br />';
+						$html.= ucfirst(trim($value["description"]));
+	
+					}
+					else {
+						$html.= ucfirst($content);
+					}
+
+					$html.= '</dd>';
+					$html .='</dl>';
+					//$html.="</li>\n";
+		}
+		
+		echo $html;
+		?>
+	</div>
+
+	
+</div>
+
+<?php 
+//detail taxo
+$taxonomies = $this->product->getSelfAndChildrenTaxonomyObjects('support');
+if(count($taxonomies) > 0) { ?>
+<div class="row">
+
+	<div class="col">
+	<<h3>Aide</h3>
+<?php
+foreach ($taxonomies as $label => $taxonomie) {
+	echo "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
+	echo "<p>".$taxonomie->getHelp().'</p>';
+}
+?>
+</div>
+</div>
+<?php } ?>
+
+
+
+
+<div class="row">
 <!-- Product Header -->
-<div class="col-md-6">
+	<div class="col-6">
 
-    <div class="page-header">
-        <div class="lead">
-        	<p><?php echo nl2br($this->product->getShort_description()); ?></p>
-        	<p><?php echo nl2br($this->product->getMage_sub_description()); ?></p>
-   		</div>
+	    <div class="page-header">
+	        <div class="lead">
+	        	<p><?php echo nl2br($this->product->getShort_description()); ?></p>
+	        	<p><?php echo nl2br($this->product->getMage_sub_description()); ?></p>
+	   		</div>
 
-    </div>
+	    </div>
+	</div>
 </div>
+<div class="row">
+	<div class="col">
+	    <div class="page-header">
+	       
 
-<div class="col-md-6">
+	   		 <?php
+	   		 if(count($childrens)>0) {
+			echo   '<table class="table table-striped">
+  <thead>
+    <tr>
+      <!--<th>Nom</th>-->
+      <th>Choix</th>
+      <th>Surface</th>
+       <th>Finition</th>
+        <th>Support</th>
+        <th>Colisage</th>
+      <th>Dimensions</th>
+      <th>Utilisation</th>
+      <th>EAN</th>
+      <th>Prix Public HT<br /> au '.date('d/m/Y').'</th>
+    </tr>
+  </thead>';
+  			$index = 1;
+  			$productsToDisplay =array();
+			foreach ($childrens as $subProduct) {
 
-    <div class="page-header">
-       
-
-   		 <?php
-   		 if(count($childrens)>0) {
-		echo   "<p>";
-		foreach ($childrens as $subProduct) {
-			if($subProduct->getEan()=="") {
-				$subProductChildrens = $subProduct->getChilds();
-				echo "<h3>".$subProduct->getMage_short_name()."</h3>";
-				foreach ($subProductChildrens as $subsubProduct) {
-
-					echo   "<b>Existe en : </b>".$subsubProduct->getDimensionsString()." - ".$subsubProduct->getEan()." - ".$subsubProduct->getPrice_4()."€ HT<br />";
+				//Configurables
+				if($subProduct->getEan()=="") {
+					$subProductChildrens = $subProduct->getChilds();
+		
+					
+					foreach ($subProductChildrens as $subsubProduct) {
+						$productsToDisplay[] = $subsubProduct;
+					?>
+						 <!--<tr>
+					     
+					       <th scope="row"><?php echo $subsubProduct->getMage_short_name() ?></th>
+					      <td><?php echo $subsubProduct->getChoixString() ?></td>
+					      <td><?php echo $subsubProduct->getDimensionsString() ?></td>
+					      <td><?php echo $subsubProduct->getEan() ?></td>
+					      <td><?php echo $subsubProduct->getPrice_4() ?> €</td>
+					    
+					    </tr>-->
+    				<?php 
+					}
 
 				}
+				else { 
+					$productsToDisplay[] = $subProduct;
+					?>
+						<!--<tr>
+					       <th scope="row"><?php echo $subProduct->getMage_short_name() ?></th>
+					      <td><?php echo $subProduct->getDimensionsString() ?></td>
+					      <td><?php echo $subProduct->getEan() ?></td>
+					      <td><?php echo $subProduct->getPrice_4() ?> €</td>
+					    
+					    </tr>-->
+
+				<?php 
+				}
+			}
+			foreach ($productsToDisplay as $subproduct) {
+				?>
+					-<tr>
+					     
+					      <!-- <th scope="row"><?php echo $subsubProduct->getMage_short_name(100) ?></th>-->
+					      <td><?php echo $subproduct->getChoix() ?></td>
+					      <td><?php echo $subproduct->getTraitement_surface() ?></td>
+					      <td><?php echo $subproduct->getFinition() ?></td>
+					      <td><?php echo $subproduct->getSupport() ?></td>
+					      <td><?php echo $subproduct->getColisage() ?></td>
+					      <td><?php echo $subproduct->getPimonly_dimensions() ?></td>
+					      <td><?php echo $subproduct->getClasseUtilisation() ?></td>
+					      <td><?php echo $subproduct->getEan() ?></td>
+					      <td><?php echo $subproduct->getPrice_4() ?> €</td>
+					    
+					    </tr>
+
+
+				<?php
 
 			}
-			else {
-					echo   "<b>- Existe en : </b>".$subProduct->getDimensionsString()." - ".$subProduct->getEan()." - ".$subProduct->getPrice_4()."€ HT<br />";
-
-			}
+			echo   "</table>";
 		}
-		echo   "</p>";
-	}
-	?>
+		?>
 
-    </div>
-</div>
+	    </div>
+	</div>
 
  <!-- Fin product header -->  
 
 
 </div> <!-- row -->
-
+<hr />
 <div class="row">
-<div class="col-md-12">
-		<hr />
-    	<h3>Images Produits</h3>
+	<div class="col-12">
+		<h3>Images</h3>
+	</div>
+
+    	
+		
         <?php for($i=1; $i<=3; $i++) { ?>
             <?php
                 $image = $this->product->{"getImage_" . $i}();
             ?>
             <?php if($image) { ?>
-                <div class="col-lg-3">
+                <div class="col">
                     <a href="<?php echo $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
                         <img src="<?php echo $image->getThumbnail("galleryThumbnail"); ?>">
                     </a>
                 </div>
             <?php } ?>
         <?php } ?>
-    </div>
+
 </div>
 
 
@@ -162,71 +249,17 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 
 
- <?php 
-$realisations =$this->product->getRealisations();
+ 
 
-//print_r( $realisations);
-$count=count($realisations);
-$assetsArray=array();
-for ($i=0; $i < $count; $i++) { 
-		$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
-		foreach ($assets as $asset) {
-			$assetsArray[] = $asset;
-		}
-}
 
-$count=count($assetsArray);
-if($count>0) {
-	echo '
-<!-- Product Carousel -->
+
+<hr />
 <div class="row">
-<div class="col-md-12"><hr /><h3>Réalisation</h3><br /></div>
-</div>
-<div class="row">
-<div class="col-md-12">';
-
-	echo '<div id="myCarousel2" class="carousel slide">';
-	echo '<ol class="carousel-indicators">
-        <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>';
-        for($i=1; $i<=$count; $i++) {
-        	echo '<li data-target="#myCarousel2" data-slide-to="'.$i.'"></li>';
-        }
-    echo '</ol>';
-
-	echo  '<div class="carousel-inner">';
-	$index=0;
-		foreach ($assetsArray as $asset) {
-
-			echo '<div class="item '.($index==0?'active':'').'">
-				<img src="http://'.$asset->getThumbnail("magento_small")->getPath().'">
-	                	<div class="container">
-	                    <div class="carousel-caption">
-	                    <h1>'.$this->product->getName().'</h1>
-	                      	<div class="caption"></div>
-	                        <div class="margin-bottom-10"></div>
-	                    </div>
-	                </div>
-            	</div>';
-            $index++;
-		}
-	
-	echo '</div>';
-	echo '<a class="left carousel-control" href="#myCarousel2" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#myCarousel2" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>';
-	echo '</div></div>
-</div>';
-}
- ?>
-
-
-
-
-<div class="row">
-
-	<div class="caracteristiques col-md-8">
-	<?php echo nl2br($this->product->getMage_description()); ?>
+	<h3 class="col-12">Description</h3>
+	<div class="caracteristiques col-8">
+	<?php echo nl2br($this->product->getDescription()); ?>
 	</div>
-	<div class="caracteristiques col-md-4">
+	<div class="caracteristiques col-4">
 	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
 	<?php echo nl2br($this->product->getMage_lesplus()); ?>
 	</div>
@@ -234,25 +267,6 @@ if($count>0) {
 </div>
 
 
-<div class="row">
-
-	<div class="caracteristiques col-md-12">
-		<hr />
-	     <h3>Caractéristiques</h3>
-	     <?php echo $this->product->getCharacteristics()?>
-	     <?php
-		echo "<p>";
-		foreach ($caracteristiques as $caracteristique) { 
-				$string =  $caracteristique["label"]!="Divers"?$caracteristique["label"]." : ":"";       
-				$string .= ($caracteristique["label"]!="Divers"?$caracteristique["content"]:nl2br($caracteristique["content"]))."<br />";
-				echo $string;
-			}
-		echo "</p>";
-		?>
-	</div>
-
-	
-</div>
 
 
 
@@ -260,9 +274,10 @@ if($count>0) {
 
 
 <div  class="row">
+
      <?php
     if(count($extras)>0) {
-    	echo "<div class='col-md-4'><hr />";
+    	echo "<div class='col-4'>";
 		foreach ($extras as $extra) {
 			echo "<p><strong>".$extra->getName()." : </strong>".$extra->getContent()."</p>";
 		}
@@ -309,15 +324,15 @@ if($count>0) {
 
 
 
-	<div class="row">
+	
 
 	<?php 
 	if(count($associatedArticles)>0) {
-		echo '<div>';
+		echo '<div class="row">';
 		//echo "<h3>Articles associés</h3>";
 		
 		foreach ($associatedArticles as $article) {
-			echo "<div class='col-md-4'><hr /><h2>".$article->getName()."</h2>";
+			echo "<div class='col-md-4'><hr /><h3>".$article->getName()."</h3>";
 			echo $article->getContent();
 			$associatedDocuments = $article->getDocuments();
 			foreach ($associatedDocuments as $document) {
@@ -330,7 +345,7 @@ if($count>0) {
 		echo "</div>";
 	}
 	?>
-	</div>
+
 
 
 </section>

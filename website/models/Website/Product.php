@@ -30,6 +30,158 @@ class Website_Product extends Object_Product {
 
 
 
+    private function getTaxonomyObject($field,$value=null,$path=null) {
+
+    	$getter = "get" . ucfirst($field);
+    	
+    	//Si pas de value en paramlettre, on prend la value de l'objet
+    	if(!isset($value)) {
+    		if(empty($this) || !method_exists($this, $getter)) {
+	    		return null;
+	    	}
+	    	$value  = $this->$getter();
+    	}
+    	
+    	
+
+    	if(!$path) {
+    		$path = '/'.$field.'/'.strtolower($value);
+    	}
+    	$data = Object_Abstract::getByPath($path);
+
+		if(!($data instanceof Object_Taxonomy)) {
+			$datas = Object_Taxonomy::getByCode($value);
+			foreach ($datas as $datatmp) {
+			    // do something with the cities
+			    $data = $datatmp;
+			    break;
+			}
+		}
+
+		if(!($data instanceof Object_Taxonomy)) {
+			$data = new Object\Taxonomy();
+			$data->setLabel($value);
+			$data->setDescription('');
+
+		}
+
+		return $data;
+
+    }
+
+    public function getSelfAndChildrenTaxonomyObjects($field) {
+    	$excludefiled = $field."_not_configurable";
+		//if(isset($this->$excludefiled) && $this->$excludefiled)
+		//	return;
+		
+		$value = $this->$field;
+		$getter = "get" . ucfirst($field);
+		$taxonomies = array();
+			
+
+		
+		if(strlen($value)>0) {
+			//if($field="volume")
+				//self::getFormatedDimension($value,$prefix,$suffix,$rounded);
+			$taxonomies[$this->getTaxonomyObject($field)->getLabel()]=$this->getTaxonomyObject($field);
+
+
+			//if($field=="volume")
+			//	echo self::getFormatedDimension($value,$prefix,$suffix,$rounded);;
+		}
+		else if(!empty($this) && method_exists($this, $getter) && strlen($value = $this->getValueFromParent($field))>0) {
+
+			$taxonomies[$this->getTaxonomyObject($field)->getLabel()]=$this->getTaxonomyObject($field);
+
+		
+		}
+		//else {
+			$childrens = $this->getChilds();
+			$childsDimension = array();
+
+			foreach ($childrens as $subProduct) {
+				if(!$subProduct->getPublished())
+					continue;
+
+				if($subProduct->getEan()=="") {
+					$subProductChildrens = $subProduct->getChilds();
+					foreach ($subProductChildrens as $subsubProduct) {
+						$taxoObj = $subsubProduct->getTaxonomyObject($field);
+						$label = $taxoObj->getLabel();
+
+						if(strlen($label)>0) {
+							$taxonomies[$label]=$taxoObj;
+						}
+					}
+
+				}
+				else {
+						$taxoObj = $subProduct->getTaxonomyObject($field);
+						$label = $taxoObj->getLabel();
+
+						if(strlen($label)>0) {
+							$taxonomies[$label]=$taxoObj;
+							
+						}
+				}
+			}
+
+			
+		//}
+		/*if($field=="volume") {
+			print_r($childsDimension);
+			echo $varationString;
+		}*/
+		return $taxonomies;
+    }
+
+    private function getSingleTaxonomyString($field) {
+
+    	$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
+		$varationString = "";
+		$childsTaxonomie = array();
+		foreach ($taxonomies as $label => $taxonomie) {
+			$childsTaxonomie[] = $label;
+		}
+    	if(count($childsTaxonomie)==2) {
+			$varationString= implode(" ou ",$childsTaxonomie);
+		}
+		else if(count($childsTaxonomie)>0) {
+			$varationString= implode(" ou ",$childsTaxonomie);
+
+		}
+
+		return $varationString;
+
+	}
+
+
+	 private function getTaxonomyDescription($field) {
+
+    	//detail taxo
+		$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
+		if(count($taxonomies) > 0) {
+			//$html='<div class="row"><div class="col">';
+			$html='';
+			if(count($taxonomies)>1) {
+				//$html.= "<p><strong>Existe en</strong><br />";
+			}
+			foreach ($taxonomies as $label => $taxonomie) {
+				$html.= "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong> : ';
+				$html.= "".$taxonomie->getDescription().'</p>';
+			}
+			//$html='</div></div>';
+
+			return$html;
+		}
+
+	}
+
+
+
+
+
+
 	/**
 	* @return string
 	*/
@@ -64,21 +216,15 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getChoixString () {
-		$preValue = $this->getChoix(); 
 
-		$data = Object_Abstract::getByPath('/choix/'.strtolower($preValue));
-
-		if($data instanceof Object_Taxonomy)
-		return ucwords(strtolower($data->getLabel()));
+		return $this->getSingleTaxonomyString('choix');
+	}
 
 
 
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    // do something with the cities
-		    return ucwords(strtolower($data->getLabel()));
-		}
-
+	public function getChoixDescription () {
+		return $this->getTaxonomyDescription('choix');
+		
 	}
 
 
@@ -112,19 +258,18 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getEssenceString () {
-		$preValue = $this->getEssence(); 
-		//return strtolower('/essence/'.strtolower($preValue));
-		$data = Object_Abstract::getByPath('/essence/'.strtolower($preValue));
-
-		if($data instanceof Object_Taxonomy)
-			return ucwords(strtolower($data->getLabel()));
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    // do something with the cities
-		    return ucwords(strtolower($data->getLabel()));
-		}
+		return $this->getSingleTaxonomyString('essence');
 
 	}
+
+	/**
+	* @return string
+	*/
+	public function getEssenceDescription () {
+		return $this->getTaxonomyDescription('essence');
+
+	}
+
 
 
 	public function getQualite() {
@@ -156,18 +301,17 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getQualiteString () {
-		$preValue = $this->getQualite(); 
-		$data = Object_Abstract::getByPath('/qualite/'.strtolower($preValue));
-		if($data instanceof Object_Taxonomy)
-			return ucwords(strtolower($data->getLabel()));
-
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    // do something with the cities
-		    return ucwords(strtolower($data->getLabel()));
-		}
+		return $this->getSingleTaxonomyString('qualite');
 
 	}
+
+
+	public function getSupportDescription () {
+		return $this->getTaxonomyDescription('support');
+
+	}
+
+
 	
 
 	public function getCharacteristicsFo() {
@@ -254,7 +398,58 @@ class Website_Product extends Object_Product {
 
 	public function getCharacteristics($isHTML=true) {
 
-		 $inheritance = Object_Abstract::doGetInheritedValues(); 
+		 
+		$caracteristiques = $this->getCharacteristicsArray();
+
+		if($isHTML) {
+			//if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
+				$html ="<dl>\n";
+				foreach ($caracteristiques as $key => $value) {
+					if(!isset($value["label"]))
+						continue;
+					$html.= '<dt>';
+					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$html.= '</dt>';
+					$html.= '<dd>';
+
+					$html.= ucfirst(trim($value["content"]));
+					$html.= '</dd>';
+					//$html.="</li>\n";
+				}
+				
+				$html .="</dl>\n";
+			/*}
+			else {
+				$html ="<ul>\n";
+				foreach ($caracteristiques as $key => $value) {
+					$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
+					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$html.= '</div></div>';
+					$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
+					$html.= ucfirst(trim($value["content"]));
+					$html.= '</div>';
+					$html.="</li>\n";
+				}
+				$html .="</ul>\n";
+			}*/
+			
+			return $html;
+
+		}
+		else {
+			$html ="";
+			foreach ($caracteristiques as $key => $value) {
+				$html.="- ".$value["label"]." : ".$value["content"]."\n";
+			}
+			$html .="";
+			return $html;
+		}
+		  
+		
+	}
+
+	public function getCharacteristicsArray() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    
   
@@ -283,6 +478,11 @@ class Website_Product extends Object_Product {
 
 
 			);
+
+		//Ordre des champs
+		$order = array('Dimensions', 'Essence', 'Choix', 'Qualité', 'Traitement de surface','Finition');
+
+
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0) {
@@ -294,7 +494,7 @@ class Website_Product extends Object_Product {
 
 		$dimentionsStringExtended = $this->getDimensionsStringExtended();
 		if(strlen($dimentionsStringExtended)>0)
-			$caracteristiques[] = array("label"=>"Dimensions","content"=>$dimentionsStringExtended);
+			$caracteristiques["Dimensions"] = array("label"=>"Dimensions","content"=>$dimentionsStringExtended);
 
 		
 
@@ -312,13 +512,16 @@ class Website_Product extends Object_Product {
 			//print_r( $value->fieldtype);
 			$getter = "get" . ucfirst($attribute);
 			$getterString = $getter."String";
+			$getterDescription = $getter."Description";
 			
 			
 			if(!empty($this)) {
 				if(method_exists($this, $getter) || method_exists($this, $getterString)) {
 					unset($attributeValue);
+
+
 					if(method_exists($this, $getterString)) {
-						$attributeValue = $this->$getterString();
+						$attributeValue = "<!-- ".$this->$getter()." -->".$this->$getterString();
 					}
 
 					if(empty($attributeValue))
@@ -379,11 +582,11 @@ class Website_Product extends Object_Product {
 							}
 
 							$attributeValue = implode(", ",$display);
-							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						else {
 							$attributeValue = implode(", ",$attributeValue);
-							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						
 
@@ -391,7 +594,14 @@ class Website_Product extends Object_Product {
 					}
 					else if($value->fieldtype=="select") {
 							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
-							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							if(method_exists($this, $getterDescription)) {
+								$caracteristiques[$attributeLabel]['description'] = $this->$getterDescription();
+							}
+					}
+
+					else if($value->fieldtype=="objectbricks") {
+							//TODO
 					}
 					
 					else {
@@ -399,7 +609,12 @@ class Website_Product extends Object_Product {
 						if($value->fieldtype=="href"){
 							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
 						}
-						$caracteristiques[] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+						$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+
+						if(method_exists($this, $getterDescription)) {
+							$caracteristiques[$attributeLabel]['description'] = $this->$getterDescription();
+						}
+
 					}
 
 				} 
@@ -410,47 +625,11 @@ class Website_Product extends Object_Product {
 		Object_Abstract::setGetInheritedValues($inheritance); 
 
 
-		if($isHTML) {
-			//if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
-				$html ="<dl>\n";
-				foreach ($caracteristiques as $key => $value) {
-					$html.= '<dt>';
-					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$html.= '</dt>';
-					$html.= '<dd>';
-					$html.= ucfirst(trim($value["content"]));
-					$html.= '</dd>';
-					//$html.="</li>\n";
-				}
-				$html .="</dl>\n";
-			/*}
-			else {
-				$html ="<ul>\n";
-				foreach ($caracteristiques as $key => $value) {
-					$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
-					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$html.= '</div></div>';
-					$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
-					$html.= ucfirst(trim($value["content"]));
-					$html.= '</div>';
-					$html.="</li>\n";
-				}
-				$html .="</ul>\n";
-			}*/
-			
-			return $html;
-
-		}
-		else {
-			$html ="";
-			foreach ($caracteristiques as $key => $value) {
-				$html.="- ".$value["label"]." : ".$value["content"]."\n";
-			}
-			$html .="";
-			return $html;
-		}
-		  
+		//classement des caracxteriqyes
 		
+		$sortedCaracteristiques = array_replace(array_flip($order), $caracteristiques);
+
+		return $sortedCaracteristiques;
 	}
 
 	public function getMage_produitspose() {
@@ -554,7 +733,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getMage_short_name() {
+	public function getMage_short_name($stringlength = 50) {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
@@ -589,12 +768,13 @@ class Website_Product extends Object_Product {
     	else if($this->getName()) {
     		$str = $this->getName();
     		$str = str_replace($this->getSubtype(), "", $str);
+    		$str = str_replace("monolame ", "", $str);
     		$str =trim($str);
     		if(strlen($this->getPimonly_name_suffixe())>0) {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->getPimonly_name_suffixe();
     		}
     		$str =trim($str);
-    		$str = substr($str,0,50);
+    		$str = substr($str,0,$stringlength);
     		Object_Abstract::setGetInheritedValues($inheritance); 
     		return $str;
     	}
@@ -965,19 +1145,19 @@ class Website_Product extends Object_Product {
         	//echo $value.floatval($value)."\n";
         	$value = $rounded ? round($value):$value;
         	if(strlen($suffix)>0) {
-	        	$value.=$suffix;
+	        	$value.=" ".$suffix;
 	        }
         }
 
         if(strpos($value,"/")>0 && strlen($suffix)>0) {
-        	$value.=$suffix;
+        	$value.=" ".$suffix;
         }
         if(strpos($value," ou ")>0 && strlen($suffix)>0) {
-        	$value.=$suffix;
+        	$value.=" ".$suffix;
         }
         //echo "<br /> /--".$value."--/------";
         if(strlen($prefix)>0) {
-        	$value= $prefix.": ".$value;
+        	$value= $prefix." : ".$value;
         }
        //echo "/--".$value."--/------";
         if(strlen($value)>0) {
@@ -1135,6 +1315,10 @@ class Website_Product extends Object_Product {
 	}
 
 
+
+	
+
+
 	public function getDimensionsStringEtiquette() {
 		$varationString =array();
 		
@@ -1202,7 +1386,7 @@ class Website_Product extends Object_Product {
 		if(round($this->getLargeur())>0)
 			$varationString[]="".round($this->getLargeur())."";
 		
-		return count($varationString)>0?implode($varationString,"x").'mm':"";
+		return count($varationString)>0?implode($varationString,"x").' mm':"";
 	}
 
 	public function getMage_section() {
@@ -1761,6 +1945,199 @@ class Website_Product extends Object_Product {
 		return implode(",",$skus);
 	}
 
+
+	//Generator
+/*
+        http://www.pointp.fr/les-normes-et-classements-du-parquet-sol-stratifie-ou-pvc-XA933
+        Les classes d’utilisation qui concernent le parquet sont à prendre en compte pour placer votre parquet dans la pièce adéquate. La norme européenne EN 685 définit des classes d’utilisation pour les revêtements de sol en fonction des zones de pose du revêtement et de l’intensité de l’usage.
+    
+        Dureté
+        Classe A : Aulne, Epicéa, Pin sylvestre, Sapin.
+        Classe B : Bouleau, Bossé, Châtaigner, Mélèze, Merisier, Noyer, Pin maritime, Sipo, Teck.
+        Classe C : Acacia, Afrormosia, Charme, Chêne, Erable, Eucalyptus, Frêne, Hêtre Iroko, Makoré, Mansonia, Moabi, Movingui, Mutenye, Orme, Padouk, Zébrano.
+        Classe D : Amarante, Angélique, Cabreuva, Doussié, Ebène, Ipé, Jatoba, Merbau, Wengé, Palissandre,
+*/
+	public function getDurete() {
+		switch ($this->getEssence()) {
+
+			case 'AUL':
+			case 'EPI':
+			case 'PIN':
+			case 'SAP':
+			case 'DGL':
+				return "A";
+				break;
+
+
+			case 'BOU':
+			case 'BOS':
+			case 'CHA':
+			case 'MEL':
+			case 'MER':
+			case 'NOY':
+			case 'PIN':
+			case 'SIP':
+			case 'TEC':
+				return "B";
+				break;
+
+
+
+			case 'CHE':
+			case 'ACA':
+			case 'AFR':
+			case 'CHA':
+			case 'ERA':
+			case 'EUC':
+			case 'FRE':
+			case 'HET':
+			case 'IRO':
+			case 'MAK':
+			case 'MAN':
+			case 'MOA':
+			case 'MOV':
+			case 'MUT':
+			case 'ORM':
+			case 'PAD':
+			case 'ZEB':
+				return "C";
+				break;
+
+
+			case 'AMA':
+			case 'ANG':
+			case 'CAB':
+			case 'DOU':
+			case 'EPE':
+			case 'IPE':
+			case 'JAT':
+			case 'MER':
+			case 'WEN':
+			case 'PAL':
+				return "B";
+				break;
+			
+			default:
+				"";
+				break;
+		}
+	}
+
+  /*
+        http://www.pointp.fr/les-normes-et-classements-du-parquet-sol-stratifie-ou-pvc-XA933
+        Les classes d’utilisation qui concernent le parquet sont à prendre en compte pour placer votre parquet dans la pièce adéquate. La norme européenne EN 685 définit des classes d’utilisation pour les revêtements de sol en fonction des zones de pose du revêtement et de l’intensité de l’usage.
+    
+        Dureté
+        Classe A : Aulne, Epicéa, Pin sylvestre, Sapin.
+        Classe B : Bouleau, Bossé, Châtaigner, Mélèze, Merisier, Noyer, Pin maritime, Sipo, Teck.
+        Classe C : Acacia, Afrormosia, Charme, Chêne, Erable, Eucalyptus, Frêne, Hêtre Iroko, Makoré, Mansonia, Moabi, Movingui, Mutenye, Orme, Padouk, Zébrano.
+        Classe D : Amarante, Angélique, Cabreuva, Doussié, Ebène, Ipé, Jatoba, Merbau, Wengé, Palissandre,
+
+
+Classe de dureté des essences   Epaisseur de la couche d’usure
+    2,5 mm – 3,2 mm         3,2 mm – 4,5 mm         4,5 mm – 7mm        > 7 mm
+A   21                      21                      22                  22
+B   21                      22                      23                  31
+C   23                      31                      33                  34
+D   31                      33                      34                  41
+
+21 : Usage domestique modéré. Zones de passage faible ou intermittent. 
+Ex : Chambres et couloirs d’habitation sans accès sur l’extérieur.
+
+22 : Usage domestique général. Zones de passage moyen.
+ Ex : Séjours et hall d’entrée d’appartement sans accès vers l’extérieur.
+
+23 : Usage domestique élevé. Zones de passage intense.
+ Ex : Pièces avec accès vers l’extérieur ou avec usage professionnel.
+
+31 : Usage commercial modéré. Zones de passage faible ou intermittent.
+ Ex : Bureaux individuels, chambres d’hôtels.
+
+32 : Usage commercial général. Zones de passage moyen. 
+Ex : Bibliothèque, lieux de culte, boutique à l'étage ou sans accès vers l’extérieur, salles de conférences.
+
+33 : Usage commercial élevé. Zones de passage intense. 
+Ex : Salles d'attente d'aéroport, boutiques avec accès direct sur l'extérieur, discothèque hors piste de danse, amphithéâtre, escaliers.
+
+34 : Usage commercial très élevé. Zones de passage très intense. 
+Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe avec accès direct vers l’extérieur.
+
+41 : Usage industriel modéré. Zones où le travail est essentiellement sédentaire avec utilisation occasionnelle de véhicules légers.  Ex : ateliers d’usine.
+*/
+	public function getClasseUtilisation() {
+		 
+        $classes = [
+            "A" => ["21","21","22","22"],
+            "B" => ["21","22","23","31"],
+            "C" => ["23","31","33","34"],
+            "D" => ["31","33","34","41"],
+        ];
+      
+
+            $durete = $this->getDurete();
+   
+            //Si contrecollé
+            if($this->isParquetContrecolle())
+           	 	$coucheUsure = (int)$this->getEpaisseurUsure();
+            //si massif
+           	else 
+           	 $coucheUsure = (int)$this->getEpaisseur();
+
+           	if($coucheUsure>0) {
+           		 if($coucheUsure<3.2)
+	                $index = 0;
+	            else if($coucheUsure<4.5)
+	                $index = 1;
+	            else if($coucheUsure<7)
+	                $index = 2;
+	            else if($coucheUsure>=7)
+	                $index = 3;
+
+	            if(isset($classes[$durete]) && isset($classes[$durete][$index]))
+	                return $classes[$durete][$index];
+	            
+	           	}
+           	return "";
+           
+                
+
+        
+	}
+
+/*
+RESISTANCE THERMIQUE
+https://www.tropical-woods.fr/catalogue/content/coefficient-de-resistance-thermique-d-un-parquet.html
+La résistance thermique dépend de la conductivité thermique (X) de l’essence utilisée et de l’épaisseur du parquet ou
+de chaque couche du parquet dans le cas d’un parquet contrecollé. Elle s’exprime par la formule suivante
+
+R =
+avec
+R (en m . °K / W) : résistance thermique du parquet
+e (en m) : épaisseur de chaque couche du parquet
+X (en W / m °K) : coefficient de conductivité thermique de l’essence utilisée
+Le coefficient X a les valeurs suivantes
+— X = 0,29 pour les feuillus de densité supérieure à 0,8
+— X = 0,23 pour les feuillus de densité comprise entre 0,6 et 0,8
+— X 0,1 5 pour les feuillus et les résineux de densité comprise entre 0,45 et 0,60
+— X = 0,12 pour les feuillus et les résineux de densité comprise entre 0,3 et 0,45.
+• Calcul pour un parquet mosaique en chêne de 8 mm d’épaisseur:
+R = 0,008/0,23 = 0,035 m . °K / W
+o Calcul pour un parquet contrecollé avec un parement en chêne de 3 mm et une sous-couche en résineux léger de 8 mm:
+R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
+*/
+	public function getResistanceThermique() {
+
+	}
+
+	public function isParquetMassif() {
+		return $this->famille == "01MASSIF";
+	}
+	public function isParquetContrecolle() {
+		return $this->famille == "05CONTRECO";
+	}
+	public function isParquet() {
+		return $this->isParquetMassif() || $this->isParquetContrecolle();
+	}
 
 }
 

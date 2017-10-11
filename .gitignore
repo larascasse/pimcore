@@ -16,3 +16,4 @@ website/var/config/system.xml
 /website/var/config/system.php
 /website/var/formbuilder/*
 vendor/*
+/website/var/composer

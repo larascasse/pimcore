@@ -63,8 +63,19 @@
         $name=str_ireplace(" DECOFRAGE ", " décoffrage ", $name);
         $name=str_ireplace(" DECOR ", " décor ", $name);
         
+        $name=str_ireplace(" MATIERE ", " matière ", $name);
+        $name=str_ireplace(" SATINE ", " satiné ", $name);
+        
 
 
+        $name=str_ireplace("g2", "G2", $name);
+        $name=str_ireplace("g4", "G4", $name);
+        $name=str_ireplace(" click ", " Click ", $name);
+        $name=str_ireplace(" huile ", " huilé ", $name);
+
+
+        $name=str_ireplace(" geneve  ", " Genève  ", $name);
+        $name=str_ireplace(" neuchatel  ", " Neuchatel  ", $name);
 
 
         
@@ -919,7 +930,7 @@
 
     }
 
-    public function importProduct($product) {
+    public function importProduct($product,$importNonActifWeb=false) {
 
 
         $inheritedValues = Object_Abstract::doGetInheritedValues();
@@ -954,7 +965,7 @@
         $isUpdating = false;
 
         //on ne cree pas des produits non actif et obsolete
-        $canCreate = !$product["obsolete"] && $product["actif_web"];
+        $canCreate = !$product["obsolete"] && ($product["actif_web"] || $importNonActifWeb);
 
 
 

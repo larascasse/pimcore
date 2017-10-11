@@ -127,6 +127,11 @@ class Mail extends \Zend_Mail
     protected $hostUrl = null;
 
     /**
+     * @var Model\Tool\Email\Log
+     */
+    protected $lastLogEntry;
+
+    /**
      * @param $url
      * @return $this
      */
@@ -693,7 +698,7 @@ class Mail extends \Zend_Mail
 
         if ($this->loggingIsEnabled()) {
             try {
-                MailHelper::logEmail($this);
+                $this->lastLogEntry = MailHelper::logEmail($this);
             } catch (\Exception $e) {
                 Logger::emerg("Couldn't log Email");
             }
@@ -825,7 +830,7 @@ class Mail extends \Zend_Mail
         } else {
             //creating text version from html email if html2text is installed
             try {
-                include_once("simple_html_dom.php");
+                include_once(PIMCORE_PATH . "/lib/simple_html_dom.php");
 
                 $htmlContent = $this->getBodyHtmlRendered();
                 $html = str_get_html($htmlContent);
@@ -974,5 +979,13 @@ class Mail extends \Zend_Mail
         $this->_storeHeader('Sender', $this->_formatAddress($email, null), true);
 
         return $this;
+    }
+
+    /**
+     * @return Model\Tool\Email\Log|null
+     */
+    public function getLastLogEntry()
+    {
+        return $this->lastLogEntry;
     }
 }

@@ -50,7 +50,8 @@ pimcore.object.tags.objectbricks = Class.create(pimcore.object.tags.abstract, {
                 extraParams: {
                     class_id: this.object.data.general.o_classId,
                     object_id: this.object.id,
-                    field_name: this.getName()
+                    field_name: this.getName(),
+                    layoutId: this.object.data.currentLayoutId
                 }
             },
             autoDestroy: false,
@@ -201,6 +202,19 @@ pimcore.object.tags.objectbricks = Class.create(pimcore.object.tags.abstract, {
         }.bind(this, blockElement), this);
     },
 
+    getCurrentElementsCount: function() {
+        var i = 0;
+        var types = Object.keys(this.currentElements);
+        for(var t=0; t < types.length; t++) {
+            if (this.currentElements[types[t]]) {
+                var element = this.currentElements[types[t]];
+                if (element.action != "deleted") {
+                    i++;
+                }
+            }
+        }
+        return i;
+    },
 
     addBlockElement: function (index, type, blockData, ignoreChange) {
         if(!type){
@@ -209,7 +223,7 @@ pimcore.object.tags.objectbricks = Class.create(pimcore.object.tags.abstract, {
         if(!this.layoutDefinitions[type]) {
             return;
         }
-        if (this.fieldConfig.maxItems && Object.keys(this.currentElements).length >= this.fieldConfig.maxItems) {
+        if (this.fieldConfig.maxItems && this.getCurrentElementsCount() >= this.fieldConfig.maxItems) {
             Ext.Msg.alert(t("error"),t("limit_reached"));
             return;
         }

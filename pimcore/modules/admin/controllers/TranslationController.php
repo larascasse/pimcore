@@ -23,6 +23,8 @@ use Pimcore\Logger;
 
 class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
 {
+    const SELFCLOSING_TAGS = ['area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+
     public function importAction()
     {
         $this->checkPermission("translations");
@@ -657,7 +659,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                 // get also content of inherited document elements
                 while ($doc) {
                     if (method_exists($doc, "getElements")) {
-                        $elements = array_merge($elements, $doc->getElements());
+                        $elements = array_merge($doc->getElements(), $elements);
                     }
 
                     if (method_exists($doc, "getContentMasterDocument")) {
@@ -819,7 +821,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
 
     public function xliffImportElementAction()
     {
-        include_once("simple_html_dom.php");
+        include_once(PIMCORE_PATH . "/lib/simple_html_dom.php");
 
         $id = $this->getParam("id");
         $step = $this->getParam("step");
@@ -944,7 +946,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         if (preg_match("/<\/?(bpt|ept)/", $content)) {
             $xml = str_get_html($content);
             if ($xml) {
-                $els = $xml->find("bpt,ept");
+                $els = $xml->find("bpt,ept,ph");
                 foreach ($els as $el) {
                     $content = html_entity_decode($el->innertext, null, "UTF-8");
                     $el->outertext = $content;
@@ -978,6 +980,10 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
             return '<![CDATA[' . $content . ']]>';
         }
 
+        // Handle text before the first HTML tag
+        $firstTagPosition = strpos($content, '<');
+        $preText = ($firstTagPosition > 0) ? '<![CDATA[' . substr($content, 0, $firstTagPosition) . ']]>' : '';
+
         foreach ($matches[0] as $match) {
             $parts = explode(">", $match);
             $parts[0] .= ">";
@@ -986,7 +992,11 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                 if (!empty($part)) {
                     if (preg_match("/<([a-z0-9\/]+)/", $part, $tag)) {
                         $tagName = str_replace("/", "", $tag[1]);
-                        if (strpos($tag[1], "/") === false) {
+                        if (in_array($tagName, self::SELFCLOSING_TAGS)) {
+                            $part = '<ph id="' . $count . '"><![CDATA[' . $part . ']]></ph>';
+
+                            $count++;
+                        } elseif (strpos($tag[1], "/") === false) {
                             $openTags[$count] = ["tag" => $tagName, "id" => $count];
                             $part = '<bpt id="' . $count . '"><![CDATA[' . $part . ']]></bpt>';
 
@@ -1007,7 +1017,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
             }
         }
 
-        $content = implode("", $final);
+        $content = $preText . implode("", $final);
 
         return $content;
     }
@@ -1015,9 +1025,8 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
 
     public function wordExportAction()
     {
-
-        //error_reporting(E_ERROR);
-        //ini_set("display_errors", "off");
+        error_reporting(0);
+        ini_set("display_errors", "off");
 
         $id = $this->getParam("id");
         $data = \Zend_Json::decode($this->getParam("data"));
@@ -1025,7 +1034,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
 
         $exportFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . $id . ".html";
         if (!is_file($exportFile)) {
-            File::put($exportFile, '<style type="text/css">' . file_get_contents(PIMCORE_PATH . "/static6/css/word-export.css") . '</style>');
+            File::put($exportFile, '');
         }
 
         foreach ($data as $el) {
@@ -1095,7 +1104,7 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
                     $html = preg_replace("@</?(img|meta|div|section|aside|article|body|bdi|bdo|canvas|embed|footer|head|header|html)([^>]+)?>@", "", $html);
                     $html = preg_replace('/<!--(.*)-->/Uis', '', $html);
 
-                    include_once("simple_html_dom.php");
+                    include_once(PIMCORE_PATH . "/lib/simple_html_dom.php");
                     $dom = str_get_html($html);
                     if ($dom) {
 
@@ -1235,39 +1244,33 @@ class Admin_TranslationController extends \Pimcore\Controller\Action\Admin
         $id = $this->getParam("id");
         $exportFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . $id . ".html";
 
-        // add closing body/html
-        //$f = fopen($exportFile, "a+");
-        //fwrite($f, "</body></html>");
-        //fclose($f);
+        $content = file_get_contents($exportFile);
+        @unlink($exportFile);
 
-        // should be done via Pimcore_Document(_Adapter_LibreOffice) in the future
-        if (\Pimcore\Document::isFileTypeSupported("docx")) {
-            $lockKey = "soffice";
-            Model\Tool\Lock::acquire($lockKey); // avoid parallel conversions of the same document
+        // replace <script> and <link>
+        $content = preg_replace("/<link[^>]+>/im", "$1", $content);
+        $content = preg_replace("/<script[^>]+>(.*)?<\/script>/im", "$1", $content);
 
-            $out = Tool\Console::exec(\Pimcore\Document\Adapter\LibreOffice::getLibreOfficeCli() . ' --headless --convert-to docx:"Office Open XML Text" --outdir ' . PIMCORE_SYSTEM_TEMP_DIRECTORY . " " . $exportFile);
+        $content =
+            "<html>\n" .
+            "<head>\n" .
+                '<style type="text/css">' . "\n" .
+                    file_get_contents(PIMCORE_PATH . "/static6/css/word-export.css") .
+                "</style>\n" .
+            "</head>\n\n" .
+            "<body>\n" .
+                $content .
+            "\n\n</body>\n" .
+            "</html>\n"
+        ;
 
-            Logger::debug("LibreOffice Output was: " . $out);
-
-            $tmpName = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . preg_replace("/\." . File::getFileExtension($exportFile) . "$/", ".docx", basename($exportFile));
-
-            Model\Tool\Lock::release($lockKey);
-            // end what should be done in Pimcore_Document
-
-            header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            header('Content-Disposition: attachment; filename="' . basename($tmpName) . '"');
-        } else {
-            // no conversion, output html file
-            $tmpName = $exportFile;
-            header("Content-Type: text/html");
-            header('Content-Disposition: attachment; filename="' . basename($tmpName) . '"');
-        } while (@ob_end_flush());
+        // no conversion, output html file, works fine with MS Word and LibreOffice
+        header("Content-Type: text/html");
+        header('Content-Disposition: attachment; filename="word-export-' . date("Ymd") . '_' . uniqid() . '.htm"'); while (@ob_end_flush());
         flush();
 
-        readfile($tmpName);
+        echo $content;
 
-        @unlink($exportFile);
-        @unlink($tmpName);
         exit;
     }
 

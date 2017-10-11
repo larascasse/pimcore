@@ -53,6 +53,21 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
 
         $trustForwarded = isset($this->config['trustForwarded']) ? (bool)$this->config['trustForwarded'] : false;
 
+        // Check if there is Graph SDK in thirdparty/Facebook.
+        if (file_exists(Hybrid_Auth::$config["path_libraries"] . "Facebook/autoload.php")) {
+            require_once Hybrid_Auth::$config["path_libraries"] . "Facebook/autoload.php";
+        }
+        else {
+            // If Composer install was executed, try to find autoload.php.
+            $vendorDir = dirname(Hybrid_Auth::$config['path_base']);
+            do {
+                if (file_exists($vendorDir . "/vendor/autoload.php")) {
+                    require_once $vendorDir . "/vendor/autoload.php";
+                    break;
+                }
+            } while (($vendorDir = dirname($vendorDir)) !== '/');
+        }
+
         $this->api = new FacebookSDK([
             'app_id' => $this->config["keys"]["id"],
             'app_secret' => $this->config["keys"]["secret"],
@@ -125,6 +140,82 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
     }
 
     /**
+    * Update user status
+    *
+    * @param mixed  $status An array describing the status, or string
+    * @param string $pageid (optional) User page id
+    * @return array
+    * @throw Exception
+    */
+    function setUserStatus($status, $pageid = null) {
+
+      if (!is_array($status)) {
+          $status = array('message' => $status);
+      }
+
+      $access_token = null;
+
+      if (is_null($pageid)) {
+          $pageid = 'me';
+          $access_token = $this->token('access_token');
+
+          // if post on page, get access_token page
+      } else {
+
+          foreach ($this->getUserPages(true) as $p) {
+              if (isset($p['id']) && intval($p['id']) == intval($pageid)) {
+                  $access_token = $p['access_token'];
+                  break;
+              }
+          }
+
+          if (is_null($access_token)) {
+              throw new Exception("Update user page failed, page not found or not writable!");
+          }
+      }
+
+      try {
+          $response = $this->api->post('/' . $pageid . '/feed', $status, $access_token);
+      } catch (FacebookSDKException $e) {
+          throw new Exception("Update user status failed! {$this->providerId} returned an error {$e->getMessage()}", 0, $e);
+      }
+
+      return $response;
+    }
+
+    /**
+    * {@inheridoc}
+    */
+   function getUserPages($writableonly = false) {
+       if (( isset($this->config['scope']) && strpos($this->config['scope'], 'manage_pages') === false ) || (!isset($this->config['scope']) && strpos($this->scope, 'manage_pages') === false ))
+           throw new Exception("User status requires manage_page permission!");
+
+       try {
+           $pages = $this->api->get("/me/accounts", $this->token('access_token'));
+           $pages = $pages->getDecodedBody();
+       } catch (FacebookApiException $e) {
+           throw new Exception("Cannot retrieve user pages! {$this->providerId} returned an error: {$e->getMessage()}", 0, $e);
+       }
+
+       if (!isset($pages['data'])) {
+           return array();
+       }
+
+       if (!$writableonly) {
+           return $pages['data'];
+       }
+
+       $wrpages = array();
+       foreach ($pages['data'] as $p) {
+           if (isset($p['perms']) && in_array('CREATE_CONTENT', $p['perms'])) {
+               $wrpages[] = $p;
+           }
+       }
+
+       return $wrpages;
+    }
+
+    /**
      * {@inheritdoc}
      */
     function getUserProfile() {
@@ -155,7 +246,7 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
         $this->user->profile->displayName = (array_key_exists('name', $data)) ? $data['name'] : "";
         $this->user->profile->firstName = (array_key_exists('first_name', $data)) ? $data['first_name'] : "";
         $this->user->profile->lastName = (array_key_exists('last_name', $data)) ? $data['last_name'] : "";
-        $this->user->profile->photoURL = !empty($this->user->profile->identifier) ? "https://graph.facebook.com/" . $this->user->profile->identifier . "/picture?width=150&height=150" : '';
+        $this->user->profile->photoURL = $this->getUserPhoto($this->user->profile->identifier);
         $this->user->profile->profileURL = (array_key_exists('link', $data)) ? $data['link'] : "";
         $this->user->profile->webSiteURL = (array_key_exists('website', $data)) ? $data['website'] : "";
         $this->user->profile->gender = (array_key_exists('gender', $data)) ? $data['gender'] : "";
@@ -222,14 +313,13 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
         }
 
         $contacts = [];
-
         foreach ($returnedContacts as $item) {
 
             $uc = new Hybrid_User_Contact();
             $uc->identifier = (array_key_exists("id", $item)) ? $item["id"] : "";
             $uc->displayName = (array_key_exists("name", $item)) ? $item["name"] : "";
             $uc->profileURL = (array_key_exists("link", $item)) ? $item["link"] : "https://www.facebook.com/profile.php?id=" . $uc->identifier;
-            $uc->photoURL = "https://graph.facebook.com/" . $uc->identifier . "/picture?width=150&height=150";
+            $uc->photoURL = $this->getUserPhoto($uc->identifier);
 
             $contacts[] = $uc;
         }
@@ -252,6 +342,7 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
             } else {
                 $response = $this->api->get('/me/home', $this->token('access_token'));
             }
+            $response = $response->getDecodedBody();
         } catch (FacebookSDKException $e) {
             throw new Hybrid_Exception("User activity stream request failed! {$this->providerId} returned an error: {$e->getMessage()}", 0, $e);
         }
@@ -261,7 +352,6 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
         }
 
         $activities = [];
-
         foreach ($response['data'] as $item) {
 
             $ua = new Hybrid_User_Activity();
@@ -289,13 +379,28 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
                 $ua->user->identifier = (array_key_exists("id", $item["from"])) ? $item["from"]["id"] : "";
                 $ua->user->displayName = (array_key_exists("name", $item["from"])) ? $item["from"]["name"] : "";
                 $ua->user->profileURL = "https://www.facebook.com/profile.php?id=" . $ua->user->identifier;
-                $ua->user->photoURL = "https://graph.facebook.com/" . $ua->user->identifier . "/picture?type=square";
+                $ua->user->photoURL = $this->getUserPhoto($ua->user->identifier);
 
                 $activities[] = $ua;
             }
         }
 
         return $activities;
+    }
+
+    /**
+     * Returns a photo URL for give user.
+     *
+     * @param string $id
+     *   The User ID.
+     *
+     * @return string
+     *   A photo URL.
+     */
+    function getUserPhoto($id) {
+        $photo_size = isset($this->config['photo_size']) ? $this->config['photo_size'] : 150;
+
+        return "https://graph.facebook.com/{$id}/picture?width={$photo_size}&height={$photo_size}";
     }
 
 }

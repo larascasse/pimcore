@@ -255,11 +255,10 @@ class AbstractObject extends Model\Element\AbstractElement
 
         if (!$force && \Zend_Registry::isRegistered($cacheKey)) {
             $object = \Zend_Registry::get($cacheKey);
-            if ($object) {
+            if ($object && static::typeMatch($object)) {
                 return $object;
             }
         }
-
 
         try {
             if ($force || !($object = Cache::load($cacheKey))) {
@@ -292,15 +291,7 @@ class AbstractObject extends Model\Element\AbstractElement
         }
 
 
-        // check for type
-        $staticType = get_called_class();
-        if ($staticType != 'Pimcore\Model\Object\Concrete' && $staticType != 'Pimcore\Model\Object\AbstractObject') {
-            if (!$object instanceof $staticType) {
-                return null;
-            }
-        }
-
-        if (!$object) {
+        if (!$object || !static::typeMatch($object)) {
             return null;
         }
 
@@ -353,7 +344,6 @@ class AbstractObject extends Model\Element\AbstractElement
                 $listClass = $className . "\\Listing";
                 $list = \Pimcore::getDiContainer()->make($listClass);
                 $list->setValues($config);
-                $list->load();
 
                 return $list;
             }
@@ -391,6 +381,22 @@ class AbstractObject extends Model\Element\AbstractElement
 
             return $count;
         }
+    }
+
+    /**
+     * @param AbstractObject $object
+     * @return bool
+     */
+    protected static function typeMatch(AbstractObject $object)
+    {
+        $staticType = get_called_class();
+        if ($staticType != 'Pimcore\Model\Object\Concrete' && $staticType != 'Pimcore\Model\Object\AbstractObject') {
+            if (!$object instanceof $staticType) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

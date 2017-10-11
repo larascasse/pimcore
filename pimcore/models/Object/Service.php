@@ -90,9 +90,9 @@ class Service extends Model\Element\Service
             $list = new $listName();
             $conditionParts = [];
             foreach ($fields as $field) {
-                $conditionParts[] = $field . "='" . $userId . "'";
+                $conditionParts[] = $field . " = ?";
             }
-            $list->setCondition(implode(" AND ", $conditionParts));
+            $list->setCondition(implode(" AND ", $conditionParts), array_fill(0, count($conditionParts), $userId));
             $objects = $list->load();
             $userObjects = array_merge($userObjects, $objects);
         }
@@ -818,33 +818,38 @@ class Service extends Model\Element\Service
 
     /**
      * @static
+     *
      * @param $object
-     * @param $fieldname
+     * @param string|ClassDefinition\Data\Select|ClassDefinition\Data\Multiselect $definition
+     *
      * @return array
      */
-    public static function getOptionsForSelectField($object, $fieldname)
+    public static function getOptionsForSelectField($object, $definition)
     {
         $class = null;
         $options = [];
 
-        if (is_object($object) && method_exists($object, "getClass")) {
+        if (is_object($object) && method_exists($object, 'getClass')) {
             $class = $object->getClass();
         } elseif (is_string($object)) {
-            $object = "\\" . ltrim($object, "\\");
+            $object = '\\' . ltrim($object, '\\');
             $object = new $object();
             $class = $object->getClass();
         }
 
         if ($class) {
-            /**
-             * @var ClassDefinition\Data\Select $definition
-             */
-            $definition = $class->getFielddefinition($fieldname);
+            if (is_string($definition)) {
+                /**
+                 * @var ClassDefinition\Data\Select $definition
+                 */
+                $definition = $class->getFielddefinition($definition);
+            }
+
             if ($definition instanceof ClassDefinition\Data\Select || $definition instanceof ClassDefinition\Data\Multiselect) {
                 $_options = $definition->getOptions();
 
                 foreach ($_options as $option) {
-                    $options[$option["value"]] = $option["key"];
+                    $options[$option['value']] = $option['key'];
                 }
             }
         }
@@ -963,7 +968,7 @@ class Service extends Model\Element\Service
         $list = new ClassDefinition\CustomLayout\Listing();
         $list->setOrderKey("name");
         $condition = "classId = " . $list->quote($classId);
-        if (count($layoutPermissions) && !$isMasterAllowed) {
+        if (count($layoutPermissions)) {
             $layoutIds = array_values($layoutPermissions);
             $condition .= " AND id IN (" . implode(",", $layoutIds) . ")";
         }
@@ -982,23 +987,26 @@ class Service extends Model\Element\Service
     }
 
     /**
+     * Returns the fields of a datatype container (e.g. block or localized fields)
+     *
      * @param $layout
+     * @param $targetClass
      * @param $targetList
-     * @param $insideLocalizedField
+     * @param $insideDataType
      * @return mixed
      */
-    public static function extractLocalizedFieldDefinitions($layout, $targetList, $insideLocalizedField)
+    public static function extractFieldDefinitions($layout, $targetClass, $targetList, $insideDataType)
     {
-        if ($insideLocalizedField && $layout instanceof ClassDefinition\Data and !$layout instanceof ClassDefinition\Data\Localizedfields) {
+        if ($insideDataType && $layout instanceof ClassDefinition\Data and !is_a($layout, $targetClass)) {
             $targetList[$layout->getName()] = $layout;
         }
 
-        if (method_exists($layout, "getChilds")) {
-            $children = $layout->getChilds();
-            $insideLocalizedField |= ($layout instanceof ClassDefinition\Data\Localizedfields);
+        if (method_exists($layout, "getChildren")) {
+            $children = $layout->getChildren();
+            $insideDataType |= is_a($layout, $targetClass);
             if (is_array($children)) {
                 foreach ($children as $child) {
-                    $targetList = self::extractLocalizedFieldDefinitions($child, $targetList, $insideLocalizedField);
+                    $targetList = self::extractFieldDefinitions($child, $targetClass, $targetList, $insideDataType);
                 }
             }
         }
@@ -1097,8 +1105,11 @@ class Service extends Model\Element\Service
         if ($class && ($class->getModificationDate() > $customLayout->getModificationDate())) {
             $masterDefinition = $class->getFieldDefinitions();
             $customLayoutDefinition = $customLayout->getLayoutDefinitions();
-            $targetList = self::extractLocalizedFieldDefinitions($class->getLayoutDefinitions(), [], false);
-            $masterDefinition = array_merge($masterDefinition, $targetList);
+
+            foreach (['Localizedfields', 'Block'] as $dataType) {
+                $targetList = self::extractFieldDefinitions($class->getLayoutDefinitions(), '\Pimcore\Model\Object\ClassDefinition\Data\\' . $dataType, [], false);
+                $masterDefinition = array_merge($masterDefinition, $targetList);
+            }
 
             self::synchronizeCustomLayoutFieldWithMaster($masterDefinition, $customLayoutDefinition);
             $customLayout->save();

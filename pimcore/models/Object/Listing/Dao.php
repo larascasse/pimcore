@@ -29,6 +29,14 @@ class Dao extends Model\Listing\Dao\AbstractDao
     protected $onCreateQueryCallback;
 
     /**
+     * @return string
+     */
+    public function getTableName()
+    {
+        return "objects";
+    }
+
+    /**
      * get select query
      *
      * @return \Zend_Db_Select
@@ -40,7 +48,7 @@ class Dao extends Model\Listing\Dao\AbstractDao
         $select = $this->db->select();
 
         // create base
-        $select->from([ 'objects' ]);
+        $select->from([ $this->getTableName() ]);
 
         // add joins
         $this->addJoins($select);
@@ -97,13 +105,44 @@ class Dao extends Model\Listing\Dao\AbstractDao
     public function getTotalCount()
     {
         $query = $this->getQuery();
-        $query->reset(\Zend_Db_Select::COLUMNS);
         $query->reset(\Zend_Db_Select::LIMIT_COUNT);
         $query->reset(\Zend_Db_Select::LIMIT_OFFSET);
-        $query->columns(['totalCount' => new \Zend_Db_Expr('COUNT(*)')]);
+        $query->reset(\Zend_Db_Select::ORDER);
+
+        if ($this->isQueryPartinUse($query, \Zend_Db_Select::GROUP) || $this->isQueryPartinUse($query, \Zend_Db_Select::HAVING)) {
+            $query = 'SELECT COUNT(*) FROM (' . $query . ') as XYZ';
+        } else {
+            $query->reset(\Zend_Db_Select::COLUMNS);
+
+            $countIdentifier = '*';
+            if ($this->isQueryPartinUse($query, \Zend_Db_Select::DISTINCT)) {
+                $countIdentifier = 'DISTINCT ' . $this->getTableName() . '.o_id';
+            }
+
+            $query->columns(['totalCount' => new \Zend_Db_Expr('COUNT(' . $countIdentifier . ')')]);
+        }
+
         $totalCount = $this->db->fetchOne($query, $this->model->getConditionVariables());
 
         return (int) $totalCount;
+    }
+
+    /**
+     * @param \Zend_Db_Select $query
+     * @param string $part
+     * @return bool
+     */
+    private function isQueryPartinUse($query, $part)
+    {
+        try {
+            if ($query->getPart($part)) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            // do nothing
+        }
+
+        return false;
     }
 
     /**
@@ -153,7 +192,7 @@ class Dao extends Model\Listing\Dao\AbstractDao
         $condition = $this->model->getCondition();
         $objectTypes = $this->model->getObjectTypes();
 
-        $tableName = method_exists($this, "getTableName") ? $this->getTableName() : "objects";
+        $tableName = $this->getTableName();
 
         if (!empty($objectTypes)) {
             if (!empty($condition)) {

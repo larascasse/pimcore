@@ -136,11 +136,10 @@ pimcore.object.quantityValue.unitsettings = Class.create({
                     update  : this.dataUrl + "xaction=update",
                     destroy : this.dataUrl + "xaction=destroy"
                 },
-                extraParams: {
-                    limit: itemsPerPage
-                }
+                pageSize: itemsPerPage
             },
             remoteSort: true,
+            remoteFilter: true,
             autoSync: true,
             listeners: {
                 update: function() {
@@ -164,7 +163,7 @@ pimcore.object.quantityValue.unitsettings = Class.create({
             frame: false,
             autoScroll: true,
             store: this.store,
-            plugins: ['gridfilters', this.cellEditing],
+            plugins: ['pimcore.gridfilters', this.cellEditing],
             columnLines: true,
             stripeRows: true,
             columns : typesColumns,

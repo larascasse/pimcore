@@ -566,7 +566,9 @@ pimcore.helpers.showPrettyError = function (type, title, text, errorText, stack,
     });
     errWin.show();
 
-}
+};
+
+
 pimcore.helpers.showNotification = function (title, text, type, errorText, hideDelay) {
     // icon types: info,error,success
     if(type == "error"){
@@ -752,7 +754,7 @@ pimcore.helpers.closeAllUnmodified = function () {
     };
 
     pimcore.helpers.closeAllElements(unmodifiedElements);
-}
+};
 
 pimcore.helpers.closeAllElements = function (except, tabPanel) {
 
@@ -891,7 +893,7 @@ pimcore.helpers.forceOpenMemorizedTabsOnce = function() {
         return true;
     }
     return false;
-}
+};
 
 pimcore.helpers.openMemorizedTabs = function () {
     var openTabs = pimcore.helpers.getOpenTab();
@@ -1090,7 +1092,7 @@ pimcore.helpers.sanitizeAllowedTypes = function(data, name) {
         }
         data[name] = newList;
     }
-}
+};
 
 
 
@@ -1102,6 +1104,7 @@ pimcore.helpers.generatePagePreview = function (id, path, callback) {
     if(pimcore.settings.htmltoimage) {
         Ext.Ajax.request({
             url: '/admin/page/generate-screenshot',
+            ignoreErrors: true,
             params: {
                 id: id
             },
@@ -2879,6 +2882,8 @@ pimcore.helpers.requestNicePathData = function(source, targets, config, fieldCon
 
                     var responseData = rdata.data;
                     responseHandler(responseData);
+
+                    pimcore.layout.refresh();
                 }
             } catch (e) {
                 console.log(e);
@@ -2895,6 +2900,7 @@ pimcore.helpers.getNicePathHandlerStore = function(store, config, gridView, resp
         pathProperty: "path"
     });
 
+    store.ignoreDataChanged = true;
     store.each(function (record, id) {
         var recordId = record.data[config.idProperty];
         if (typeof responseData[recordId] != "undefined") {
@@ -2907,7 +2913,9 @@ pimcore.helpers.getNicePathHandlerStore = function(store, config, gridView, resp
             }
         }
     }, this);
+    store.ignoreDataChanged = false;
 
+    gridView.updateLayout();
 };
 
 pimcore.helpers.isValidPassword = function (pass) {

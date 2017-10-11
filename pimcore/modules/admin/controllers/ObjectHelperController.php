@@ -291,7 +291,7 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         $object = Object::getById($this->getParam("id"));
 
 
-        if ($object->isAllowed("publish")) {
+        if ($object->isAllowed("list")) {
             try {
                 $classId = $this->getParam("class_id");
 
@@ -326,7 +326,7 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         $object = Object::getById($this->getParam("id"));
 
 
-        if ($object->isAllowed("publish")) {
+        if ($object->isAllowed("list")) {
             try {
                 $classId = $this->getParam("class_id");
 
@@ -428,13 +428,14 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
         $importFileOriginal = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/import_" . $this->getParam("id") . "_original";
         File::put($importFileOriginal, $data);
 
-        $this->_helper->json([
-            "success" => true
-        ], false);
-
         // set content-type to text/html, otherwise (when application/json is sent) chrome will complain in
         // Ext.form.Action.Submit and mark the submission as failed
-        $this->getResponse()->setHeader("Content-Type", "text/html");
+        header("Content-Type: text/html", true);
+        $result = json_encode([
+            "success" => true
+        ]);
+        echo($result);
+        die();
     }
 
     public function importGetFileInfoAction()
@@ -631,7 +632,7 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
                     $intendedPath = $parent->getRealFullPath() . "/" . $objectKey;
                     $counter++;
                 }
-                $object = new $className();
+                $object = \Pimcore::getDiContainer()->make($className);
             }
             $object->setClassId($this->getParam("classId"));
             $object->setClassName($this->getParam("className"));
@@ -1139,18 +1140,45 @@ class Admin_ObjectHelperController extends \Pimcore\Controller\Action\Admin
                     $field = $parts[2];
                     $keyid = $parts[3];
 
-                    $getter = "get" . ucfirst($field);
-                    $setter = "set" . ucfirst($field);
-                    $keyValuePairs = $object->$getter();
+                    if ($type == "classificationstore") {
+                        $requestedLanguage = $this->getParam("language");
+                        if ($requestedLanguage) {
+                            if ($requestedLanguage != "default") {
+                                $this->setLanguage($requestedLanguage, true);
+                            }
+                        } else {
+                            $requestedLanguage = $this->getLanguage();
+                        }
 
-                    if (!$keyValuePairs) {
-                        $keyValuePairs = new Object\Data\KeyValue();
-                        $keyValuePairs->setObjectId($object->getId());
-                        $keyValuePairs->setClass($object->getClass());
+                        $groupKeyId = explode("-", $keyid);
+                        $groupId = $groupKeyId[0];
+                        $keyid = $groupKeyId[1];
+
+                        $getter = "get".ucfirst($field);
+                        if (method_exists($object, $getter)) {
+                            /** @var  $classificationStoreData Object\Classificationstore */
+                            $classificationStoreData = $object->$getter();
+                            $classificationStoreData->setLocalizedKeyValue(
+                                $groupId,
+                                $keyid,
+                                $value,
+                                $requestedLanguage
+                            );
+                        }
+                    } else {
+                        $getter = "get".ucfirst($field);
+                        $setter = "set".ucfirst($field);
+                        $keyValuePairs = $object->$getter();
+
+                        if (!$keyValuePairs) {
+                            $keyValuePairs = new Object\Data\KeyValue();
+                            $keyValuePairs->setObjectId($object->getId());
+                            $keyValuePairs->setClass($object->getClass());
+                        }
+
+                        $keyValuePairs->setPropertyWithId($keyid, $value, true);
+                        $object->$setter($keyValuePairs);
                     }
-
-                    $keyValuePairs->setPropertyWithId($keyid, $value, true);
-                    $object->$setter($keyValuePairs);
                 } elseif (count($parts) > 1) {
                     // check for bricks
                     $brickType = $parts[0];

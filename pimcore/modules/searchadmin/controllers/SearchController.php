@@ -46,6 +46,7 @@ class Searchadmin_SearchController extends \Pimcore\Controller\Action\Admin
         }
 
         $query = str_replace("%", "*", $query);
+        $query = str_replace("@", "#", $query);
         $query = preg_replace("@([^ ])\-@", "$1 ", $query);
 
         $types = explode(",", $allParams["type"]);
@@ -284,7 +285,8 @@ class Searchadmin_SearchController extends \Pimcore\Controller\Action\Admin
         $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer($searcherList);
 
         \Pimcore::getEventManager()->trigger("admin.search.list.beforeListLoad", $this, [
-            "list" => $returnValueContainer
+            "list" => $returnValueContainer,
+            "context" => $allParams['context']
         ]);
 
         $searcherList = $returnValueContainer->getData();
@@ -322,7 +324,8 @@ class Searchadmin_SearchController extends \Pimcore\Controller\Action\Admin
         $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer($result);
 
         \Pimcore::getEventManager()->trigger("admin.search.list.afterListLoad", $this, [
-            "list" => $returnValueContainer
+            "list" => $returnValueContainer,
+            "context" => $allParams['context']
         ]);
 
         $result = $returnValueContainer->getData();

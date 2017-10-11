@@ -66,13 +66,20 @@ class PdfReactor8 extends Processor
             "defaultColorSpace" => $config->colorspace,
             "encryption" => $config->encryption,
             "addTags" => $config->tags == "true",
-            "logLevel" => $config->loglevel
+            "logLevel" => $config->loglevel,
+            "addOverprint" => $config->addOverprint == "true"
 
         ];
 
         if (trim($web2PrintConfig->pdfreactorLicence)) {
             $reactorConfig["licenseKey"] = trim($web2PrintConfig->pdfreactorLicence);
         }
+
+        $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer($reactorConfig);
+        \Pimcore::getEventManager()->trigger("document.print.processor.modifyConfig", $this, [
+            "returnValueContainer" => $returnValueContainer,
+            "document" => $document
+        ]);
 
         try {
             $progress = new \stdClass();
@@ -111,6 +118,7 @@ class PdfReactor8 extends Processor
         $options[] = ["name" => "author", "type" => "text", "default" => ""];
         $options[] = ["name" => "title", "type" => "text", "default" => ""];
         $options[] = ["name" => "printermarks", "type" => "bool", "default" => ""];
+        $options[] = ["name" => "addOverprint", "type" => "bool", "default" => ""];
         $options[] = ["name" => "links", "type" => "bool", "default" => true];
         $options[] = ["name" => "bookmarks", "type" => "bool", "default" => true];
         $options[] = ["name" => "tags", "type" => "bool", "default" => true];
@@ -149,6 +157,12 @@ class PdfReactor8 extends Processor
             "default" => \LogLevel::FATAL
         ];
 
-        return $options;
+        $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer($options);
+
+        \Pimcore::getEventManager()->trigger("document.print.processor.modifyProcessingOptions", $this, [
+            "returnValueContainer" => $returnValueContainer
+        ]);
+
+        return $returnValueContainer->getData();
     }
 }

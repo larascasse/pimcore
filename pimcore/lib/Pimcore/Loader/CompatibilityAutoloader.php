@@ -8,7 +8,7 @@
  * Full copyright and license information is available in
  * LICENSE.md which is distributed with this source code.
  *
- * @copyright  Copyright (c) 2009-2016 pimcore GmbH (http://www.pimcore.org)
+ * @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
 
@@ -16,16 +16,28 @@ namespace Pimcore\Loader;
 
 use Pimcore\Tool;
 
-class ClassMapAutoloader extends \Zend_Loader_ClassMapAutoloader
+class CompatibilityAutoloader
 {
     /**
-     * Autoload Pimcore Classes
-     *
-     * @param string $class
+     * @var null|\Composer\Autoload\ClassLoader
      */
-    public function autoload($class)
-    {
+    protected $composerAutoloader = null;
 
+    /**
+     * CompatibilityAutoloader constructor.
+     * @param $composerAutoloader
+     */
+    public function __construct($composerAutoloader)
+    {
+        $this->composerAutoloader = $composerAutoloader;
+    }
+
+    /**
+     * @param $class
+     * @return bool
+     */
+    public function loadClass($class)
+    {
         // manual aliasing
         $classAliases = [
             "Pimcore\\Resource" => "Pimcore\\Db",
@@ -41,10 +53,8 @@ class ClassMapAutoloader extends \Zend_Loader_ClassMapAutoloader
         if (array_key_exists($class, $classAliases)) {
             class_alias($classAliases[$class], $class);
 
-            return;
+            return true;
         }
-
-        parent::autoload($class);
 
         // compatibility from Resource => Dao
         if (strpos($class, "Resource") && !class_exists($class, false) && !interface_exists($class, false)) {
@@ -61,10 +71,7 @@ class ClassMapAutoloader extends \Zend_Loader_ClassMapAutoloader
 
             // first check for a model, if it doesnt't work fall back to the default autoloader
             if (!class_exists($class, false) && !interface_exists($class, false)) {
-                if (!$this->loadModel($class)) {
-                    $loader = \Zend_Loader_Autoloader::getInstance();
-                    $loader->autoload($class);
-                }
+                $this->composerAutoloader->loadClass($class);
             }
 
             if (class_exists($class, false) || interface_exists($class, false)) {
@@ -85,7 +92,7 @@ class ClassMapAutoloader extends \Zend_Loader_ClassMapAutoloader
                 if (!class_exists($alias, false) && !interface_exists($alias, false)) {
                     class_alias($class, $alias);
 
-                    return; // skip here, nothing more to do ...
+                    return true; // skip here, nothing more to do ...
                 }
             }
         }
@@ -122,38 +129,35 @@ class ClassMapAutoloader extends \Zend_Loader_ClassMapAutoloader
             }
 
             // check if the class is a model, if so, load it
-            $this->loadModel($namespacedClass);
+            if (!class_exists($namespacedClass, false) && !interface_exists($namespacedClass, false)) {
+                $this->composerAutoloader->loadClass($namespacedClass);
+            }
 
             if (Tool::classExists($namespacedClass) || Tool::interfaceExists($namespacedClass)) {
                 if (!class_exists($class, false) && !interface_exists($class, false)) {
                     class_alias($namespacedClass, $class);
+
+                    return true;
                 }
             }
         }
     }
 
     /**
-     * @param $class
-     * @return bool
+     * Registers this instance as an autoloader.
+     *
+     * @param bool $prepend
      */
-    protected function loadModel($class)
+    public function register($prepend = false)
     {
-        if (strpos($class, "Pimcore\\Model\\") === 0) {
-            $modelFile = PIMCORE_PATH . "/models/" . str_replace(["Pimcore\\Model\\", "\\"], ["", "/"], $class) . ".php";
-            if (file_exists($modelFile)) {
-                include_once $modelFile;
+        spl_autoload_register([$this, 'loadClass'], true, $prepend);
+    }
 
-                return true;
-            }
-
-            if (strpos($class, "Pimcore\\Model\\Object\\") === 0) {
-                $modelFile = PIMCORE_CLASS_DIRECTORY . "/" . str_replace(["Pimcore\\Model\\", "\\"], ["", "/"], $class) . ".php";
-                if (file_exists($modelFile)) {
-                    include_once $modelFile;
-
-                    return true;
-                }
-            }
-        }
+    /**
+     * Removes this instance from the registered autoloaders.
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister([$this, 'loadClass']);
     }
 }

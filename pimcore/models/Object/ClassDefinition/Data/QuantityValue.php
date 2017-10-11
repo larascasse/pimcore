@@ -240,6 +240,18 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
     }
 
     /**
+     * @param float $data
+     * @param Model\Object\Concrete $object
+     * @param mixed $params
+     *
+     * @return float
+     */
+    public function getDataFromGridEditor($data, $object = null, $params = [])
+    {
+        return $this->getDataFromEditmode($data, $object, $params);
+    }
+
+    /**
      * @see Object_Class_Data::getVersionPreview
      * @param float $data
      * @param null|Model\Object\AbstractObject $object
@@ -272,7 +284,12 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      */
     public function checkValidity($data, $omitMandatoryCheck = false)
     {
-        if (!$omitMandatoryCheck && $this->getMandatory() && ($data === null || $data->getValue() === null)) {
+        if ($omitMandatoryCheck) {
+            return;
+        }
+
+        if ($this->getMandatory() &&
+            ($data === null || $data->getValue() === null || $data->getUnitId() === null)) {
             throw new Model\Element\ValidationException("Empty mandatory field [ ".$this->getName()." ]");
         }
 
@@ -347,8 +364,9 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
             }
 
             return [
-                "value" => $data->getValue(),
-                "unit" => $unitAbbreviation
+                'value' => $data->getValue(),
+                'unit' => $unit ? $unit->getId() : null,
+                'unitAbbr' => $unitAbbreviation
             ];
         }
 
@@ -383,6 +401,7 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      * @param mixed $params
      * @param $idMapper
      * @return mixed
+     * @throws \Exception
      */
     public function getFromWebserviceImport($value, $object = null, $params = [], $idMapper = null)
     {
@@ -390,9 +409,8 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
             return null;
         } else {
             $value = (array) $value;
-            if ($value["value"] !== null && $value["unit"] !== null && $value["unitAbbreviation"] !== null) {
+            if (array_key_exists("value", $value) && array_key_exists("unit", $value) && array_key_exists("unitAbbreviation", $value)) {
                 $unitId = $value["unit"];
-
                 if ($idMapper) {
                     $unitId = $idMapper->getMappedId("unit", $unitId);
                 }
@@ -400,6 +418,8 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
                 $unit = Model\Object\QuantityValue\Unit::getById($unitId);
                 if ($unit && $unit->getAbbreviation() == $value["unitAbbreviation"]) {
                     return new \Pimcore\Model\Object\Data\QuantityValue($value["value"], $unitId);
+                } elseif (!$unit && is_null($value['unit'])) {
+                    return new \Pimcore\Model\Object\Data\QuantityValue($value["value"]);
                 } else {
                     throw new \Exception(get_class($this).": cannot get values from web service import - unit id and unit abbreviation do not match with local database");
                 }
@@ -418,7 +438,12 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      */
     public function marshal($value, $object = null, $params = [])
     {
-        if ($params["simple"]) {
+        if ($params["blockmode"] && $value instanceof Model\Object\Data\QuantityValue) {
+            return [
+                "value" => $value->getValue(),
+                "value2" => $value->getUnitId()
+            ];
+        } elseif ($params["simple"]) {
             if (is_array($value)) {
                 return [$value[$this->getName() . "__value"], $value[$this->getName() . "__unit"]];
             } else {
@@ -447,10 +472,11 @@ class QuantityValue extends Model\Object\ClassDefinition\Data
      */
     public function unmarshal($value, $object = null, $params = [])
     {
-        if ($params["simple"]) {
+        if ($params["blockmode"] && is_array($value)) {
+            return new Model\Object\Data\QuantityValue($value["value"], $value["value2"]);
+        } elseif ($params["simple"]) {
             return $value;
-        }
-        if (is_array($value)) {
+        } elseif (is_array($value)) {
             return [
                 $this->getName() . "__value" => $value["value"],
                 $this->getName() . "__unit" => $value["value2"],

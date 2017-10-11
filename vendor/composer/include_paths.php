@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     $vendorDir . '/zendframework/zendframework1/library',
+    $vendorDir . '/pear/net_url2',
 );

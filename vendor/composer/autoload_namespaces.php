@@ -7,8 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Zend_' => array($vendorDir . '/zendframework/zendframework1/library'),
-    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
-    'Pimcore\\Composer\\' => array($vendorDir . '/pimcore/installer-plugin/src'),
+    'Website_' => array($baseDir . '/website/lib/Website', $baseDir . '/website/models/Website'),
     'Less' => array($vendorDir . '/oyejorge/less.php/lib'),
     'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
     'ForceUTF8\\' => array($vendorDir . '/neitanod/forceutf8/src'),

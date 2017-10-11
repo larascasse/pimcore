@@ -41,7 +41,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
  <div class="page-header">
 
-        <h3><?php echo $this->product->getSubtype(); ?></h3>
+       <!-- <h3><?php echo $this->product->getSubtype(); ?></h3>-->
         <h2 style="text-align: left"><?php echo $this->product->getMage_short_name(); ?></h2>
  </div>
 </div>

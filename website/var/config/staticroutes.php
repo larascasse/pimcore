@@ -255,5 +255,22 @@ return [
         "priority" => 0,
         "creationDate" => 1490619582,
         "modificationDate" => 1490619741
+    ],
+    18 => [
+        "id" => 18,
+        "name" => "mauchamp",
+        "pattern" => "/\\/mauchamp/",
+        "reverse" => "/mauchamp",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "mauchamp",
+        "variables" => NULL,
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1507736693,
+        "modificationDate" => 1507736745
     ]
 ];

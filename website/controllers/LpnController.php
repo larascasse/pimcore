@@ -536,6 +536,278 @@ echo $content;
         }*/
     }
 
+    public function mauchampAction() {
+
+        $this->view->layout()->setLayout("layout-lpnv2");
+
+         //$svc = $svc = new LPNEntities(LPN_SERVICE_URL);
+        //$query = getQuery($svc,"order",$this->getParam("code_commande"));
+        //$response = $query->Execute();
+
+
+        $data = <<<EOT
+<?xml version="1.0" encoding="UTF-8"?>
+<Scienergie_PieceCommerciale xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <Type_Piece>Commande</Type_Piece>
+   <Code_Commande />
+   <Code_Commande_Web>200000905</Code_Commande_Web>
+   <Code_Client>DIVERS15</Code_Client>
+   <Email_Client>florent@lesmecaniques.net</Email_Client>
+   <Reference_Client>WEB/2/florent@lesmecaniques.net</Reference_Client>
+   <Date>2015-01-22 13:34:46</Date>
+   <DateLivraison>2015-01-22 13:34:46</DateLivraison>
+    <DateConfirmation>2015-01-22 13:34:46</DateConfirmation>
+
+   <DateExpedition>2015-01-10 13:34:46</DateExpedition>
+   <Remise>0,00</Remise>
+   <TypeRemise>FORFAIT</TypeRemise>
+   <TotalHT>916,31</TotalHT>
+   <TotalTTC>1099,57</TotalTTC>
+   <Site>78420</Site>
+   <Remarque />
+   <Etat>0</Etat>
+   <Mode_livraison>pickupatstore_1</Mode_livraison>
+   <Moyen_Paiement>checkmo</Moyen_Paiement>
+   <Code_Depot>LPN78420</Code_Depot>
+   <Adresse_Facturation_Raison_Sociale />
+   <Adresse_Facturation_Nom>Bérenger</Adresse_Facturation_Nom>
+   <Adresse_Facturation_Prenom>Florent</Adresse_Facturation_Prenom>
+   <Adresse_Facturation_Email>florent@lesmecaniques.net</Adresse_Facturation_Email>
+   <Adresse_Facturation_Ville>909090</Adresse_Facturation_Ville>
+   <Adresse_Facturation_CP>90909</Adresse_Facturation_CP>
+   <Adresse_Facturation_Code_Pays>FR</Adresse_Facturation_Code_Pays>
+   <Adresse_Facturation_Adr1>2323</Adresse_Facturation_Adr1>
+   <Adresse_Facturation_Telephone>9090</Adresse_Facturation_Telephone>
+   <Adresse_Facturation_Fax />
+   <Adresse_Livraison_Raison_Sociale />
+   <Adresse_Livraison_Nom>Bérenger</Adresse_Livraison_Nom>
+   <Adresse_Livraison_Prenom>Florent</Adresse_Livraison_Prenom>
+   <Adresse_Livraison_Email>florent@lesmecaniques.net</Adresse_Livraison_Email>
+   <Adresse_Livraison_Ville>909090</Adresse_Livraison_Ville>
+   <Adresse_Livraison_CP>90909</Adresse_Livraison_CP>
+   <Adresse_Livraison_Code_Pays>FR</Adresse_Livraison_Code_Pays>
+   <Adresse_Livraison_Adr1>2323</Adresse_Livraison_Adr1>
+   <Adresse_Livraison_Telephone>9090</Adresse_Livraison_Telephone>
+   <Adresse_Livraison_Fax />
+   <Lignes>
+      <Ligne>
+         <Ordre>1</Ordre>
+         <Code_EAN_Article>6101501940708</Code_EAN_Article>
+         <Nombre>1.0000</Nombre>
+         <Quantite_Unite>1.0000</Quantite_Unite>
+         <Prix_HT>408.87</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation>Largeur: laTES, Longeur: LTEST</Observation>
+         <Designation>XXXPlateau De Table Ostende à Partir De Vieux Fond De Wagon Chêne Rabote 2mm Brut - (longueur Max 2700mm )</Designation>
+      </Ligne>
+      <Ligne>
+         <Ordre>2</Ordre>
+         <Code_EAN_Article>7612894751772</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>195,20</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Sika</Designation>
+      </Ligne>
+      <Ligne>
+         <Ordre>3</Ordre>
+         <Code_EAN_Article>0000000000823</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>50,05</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Plus Value Peinture Noir Ou Blanc Pour Pied De Table</Designation>
+      </Ligne>
+      <Ligne>
+         <Ordre>4</Ordre>
+         <Code_EAN_Article>0000000000817</Code_EAN_Article>
+         <Nombre>1.0000</Nombre>
+         <Quantite_Unite>1.0000</Quantite_Unite>
+         <Prix_HT>16,94</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Plus Value Finition Huile Invisible Ecologique Ou Savon De Marseille Pour Plateau De Table</Designation>
+      </Ligne>
+      <Ligne>
+         <Ordre>5</Ordre>
+         <Code_EAN_Article />
+         <Code_Article>TRANSPORT</Code_Article>
+         <Nombre>1</Nombre>
+         <Quantite_Unite>1.0000</Quantite_Unite>
+         <Prix_HT>0.0000</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation>Retrait en dépôt - LPN Paris  [ 141 rue de Bagnolet, 3 rue Pelleport, Paris ]</Observation>
+         <Designation>Retrait en dépôt - LPN Paris  [ 141 rue de Bagnolet, 3 rue Pelleport, Paris ]</Designation>
+      </Ligne>
+      <Ligne>
+         <Ordre>6</Ordre>
+         <Code_EAN_Article />
+         <Code_Article></Code_Article>
+         <Nombre></Nombre>
+         <Quantite_Unite></Quantite_Unite>
+         <Prix_HT>0.0000</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Designation>TEST OBSERVATION</Designation>
+      </Ligne>
+
+
+   </Lignes>
+   <To_Magento>array (
+  'entity_id' =&gt; '70',
+  'parent_id' =&gt; '70',
+  'base_shipping_amount' =&gt; '0.0000',
+  'shipping_amount' =&gt; '0.0000',
+  'base_amount_ordered' =&gt; '1099.5700',
+  'amount_ordered' =&gt; '1099.5700',
+  'additional_data' =&gt; 'a:2:{s:10:"payable_to";s:23:"La Parqueterie Nouvelle";s:15:"mailing_address";s:94:"La Parqueterie Nouvelle &#xD;
+33 rue des Entrepreneurs&#xD;
+ZI des Amandiers&#xD;
+78420 Carrières / Seine";}',
+  'cc_exp_month' =&gt; '0',
+  'cc_ss_start_year' =&gt; '0',
+  'method' =&gt; 'checkmo',
+  'cc_ss_start_month' =&gt; '0',
+  'cc_exp_year' =&gt; '0',
+  'additional_information' =&gt; 
+  array (
+  ),
+  'method_instance (Mage_Payment_Model_Method_Checkmo)' =&gt; 
+  array (
+    'info_instance (Mage_Sales_Model_Order_Payment)' =&gt; '*** RECURSION ***',
+  ),
+)</To_Magento>
+   <Acompte />
+</Scienergie_PieceCommerciale>
+
+EOT;
+        $xml = simplexml_load_string($data);
+        $lines = $xml->Lignes[0]->Ligne;
+
+        if($lines->count()<1){
+            
+           //TODO ERROR
+        }
+
+
+        $transportRows = array();
+        $rowTotal = 0;
+        $products = array();
+        $missingProducts = array();
+
+        $lines = $xml->Lignes[0]->Ligne;
+
+            $itemsCount = 0;
+            
+            for($i=0; $i<$lines->count(); $i++){
+                
+                $p = $lines[$i];
+
+                $tauxTVA = floatval($this->convertFloat($p->Taux_TVA));
+                $tauxTVA = $tauxTVA<1?$tauxTVA*100:$tauxTVA;
+                $ratioTVA = 1+($tauxTVA/100);
+                
+                if(strpos($p->Code_Article, 'TR')===0) {
+                
+                    $price = floatval($this->convertFloat($p->Prix_HT));
+                    $shippingAmountHT += $price;
+                    if($price>0) {
+                        $transport = $p;
+                    }
+                    $transportRows[] = $p;
+                    
+                }
+                else {      
+                    $itemsCount++;      
+                    //Quand revient de Azure, prendre Qté unité !! et pas NNombre
+                    $qty = floatval($this->convertFloat($p->Quantite_Unite));
+
+                    $price = floatval($this->convertFloat($p->Prix_HT));
+                    $rowTotal = $price*$qty;
+                    
+                    $productTypeId  = 'simple';
+                    $productName    = $p->Code_EAN_Article;
+                    $productSku     = $p->Code_EAN_Article;
+                    
+                    if(strlen($p->Designation)>1 && strlen($p->Code_EAN_Article)<1){
+                        
+                        $productName = $p->Designation;
+                    }
+                
+                    
+                    
+
+                    //Ligne avec article    
+                    else if(strlen($p->Code_EAN_Article)>1) {
+
+                        $qty = floatval($this->convertFloat($p->Quantite_Unite));
+
+                        $price = floatval($this->convertFloat($p->Prix_HT));
+                        $rowTotal = $price*$qty;
+
+
+                        try {
+                        
+                            $sku = trim($p->Code_EAN_Article);             
+                            $existingProductList = Object_Product::getByEan($sku);
+                            //print_r($parent);
+                            if($existingProductList->count()==1) {
+                                $_product = $existingProductList->current();
+                                 //echo "EAN existe ".$_product->getFullPath()."\n";
+                                 
+                            }
+                            else {
+                                //echo "n'existe pas\n";
+                                $missingProducts[] = ["name"=>$productName,"sku"=>$sku]; 
+                            }           
+                            
+                            //Si produit existe
+                            if(isset($_product)){
+                                 $products[] = $_product;                       
+                            }
+
+                            //Sinon
+                            else {
+
+                                $productName    = strlen($p->Designation)>1?$p->Designation:$productName;  
+                                $missingProducts[] = ["name"=>$productName,"sku"=>$sku];                  
+
+                            }           
+                        }
+                        catch (Exception $ex) {
+                                
+                            //TODO LOG
+                        }
+
+                        
+                        
+
+                    }
+                    
+                }
+            }
+            $this->view->products = $products;
+            $this->view->missingProducts = $missingProducts;
+            $this->view->transport = $transportRows;
+    }
+
+
+    public function convertFloat($price) {
+    //$this->_formatStr('%.2F'
+    if($price>0) {
+      $price = str_replace(",", ".", $price);
+      $price = floatval($price);
+    }
+    return $price;
+  }
+
     
 
 

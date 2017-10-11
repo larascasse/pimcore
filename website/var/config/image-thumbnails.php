@@ -223,7 +223,17 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => 800
+                    "width" => 1200,
+                    "forceResize" => FALSE
+                ]
+            ],
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 1200,
+                    "height" => 600,
+                    "positioning" => "bottomcenter",
+                    "forceResize" => FALSE
                 ]
             ]
         ],
@@ -233,11 +243,11 @@ return [
         "name" => "magento_header",
         "description" => "",
         "format" => "SOURCE",
-        "quality" => 75,
+        "quality" => 80,
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491402378,
+        "modificationDate" => 1495127452,
         "creationDate" => 1491397895,
         "id" => "magento_header"
     ],
@@ -532,8 +542,8 @@ return [
             [
                 "method" => "cover",
                 "arguments" => [
-                    "width" => 1385,
-                    "height" => 828,
+                    "width" => 1204,
+                    "height" => 860,
                     "positioning" => "bottomcenter",
                     "forceResize" => FALSE
                 ]
@@ -545,9 +555,9 @@ return [
                     "method" => "cover",
                     "arguments" => [
                         "width" => 320,
-                        "height" => 396,
+                        "height" => 448,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => FALSE
+                        "forceResize" => FALSE
                     ]
                 ]
             ],
@@ -556,9 +566,9 @@ return [
                     "method" => "cover",
                     "arguments" => [
                         "width" => 640,
-                        "height" => 790,
+                        "height" => 896,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => FALSE
+                        "forceResize" => FALSE
                     ]
                 ]
             ],
@@ -567,9 +577,9 @@ return [
                     "method" => "cover",
                     "arguments" => [
                         "width" => 992,
-                        "height" => 804,
+                        "height" => 708,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => FALSE
+                        "forceResize" => FALSE
                     ]
                 ]
             ]
@@ -581,7 +591,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491520146,
+        "modificationDate" => 1494421462,
         "creationDate" => 1483711729,
         "id" => "magento_equigrid_h"
     ],
@@ -590,33 +600,33 @@ return [
             [
                 "method" => "cover",
                 "arguments" => [
-                    "width" => 676,
-                    "height" => 828,
+                    "width" => 860,
+                    "height" => 1204,
                     "positioning" => "bottomcenter",
                     "forceResize" => TRUE
                 ]
             ]
         ],
         "medias" => [
-            "320w" => [
+            "640w" => [
                 [
                     "method" => "cover",
                     "arguments" => [
-                        "width" => 320,
-                        "height" => 396,
+                        "width" => 301,
+                        "height" => 430,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => FALSE
+                        "forceResize" => FALSE
                     ]
                 ]
             ],
-            "992w" => [
+            "1200w" => [
                 [
                     "method" => "cover",
                     "arguments" => [
-                        "width" => 496,
-                        "height" => 612,
+                        "width" => 602,
+                        "height" => 860,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "forceResize" => FALSE
                     ]
                 ]
             ]
@@ -628,7 +638,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491520146,
+        "modificationDate" => 1497257832,
         "creationDate" => 1483714111,
         "id" => "magento_equigrid_v"
     ],
@@ -637,8 +647,8 @@ return [
             [
                 "method" => "cover",
                 "arguments" => [
-                    "width" => 1200,
-                    "height" => 1200,
+                    "width" => 1204,
+                    "height" => 1204,
                     "positioning" => "bottomcenter",
                     "forceResize" => TRUE
                 ]
@@ -652,7 +662,7 @@ return [
                         "width" => 320,
                         "height" => 320,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "forceResize" => FALSE
                     ]
                 ]
             ],
@@ -663,7 +673,7 @@ return [
                         "width" => 640,
                         "height" => 640,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => TRUE
+                        "forceResize" => FALSE
                     ]
                 ]
             ],
@@ -671,10 +681,10 @@ return [
                 [
                     "method" => "cover",
                     "arguments" => [
-                        "width" => 920,
-                        "height" => 920,
+                        "width" => 410,
+                        "height" => 410,
                         "positioning" => "bottomcenter",
-                        "doNotScaleUp" => FALSE
+                        "forceResize" => FALSE
                     ]
                 ]
             ]
@@ -686,25 +696,43 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491520146,
+        "modificationDate" => 1497257900,
         "creationDate" => 1489482186,
         "id" => "magento_equigrid_c"
     ],
     "magento-header" => [
         "items" => [
-
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 1200,
+                    "height" => 800,
+                    "positioning" => "bottomcenter",
+                    "forceResize" => FALSE
+                ]
+            ]
         ],
         "medias" => [
-
+            "320w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 300,
+                        "height" => 200,
+                        "positioning" => "bottomcenter",
+                        "forceResize" => FALSE
+                    ]
+                ]
+            ]
         ],
         "name" => "magento-header",
         "description" => "",
         "format" => "SOURCE",
-        "quality" => 90,
-        "highResolution" => NULL,
+        "quality" => 85,
+        "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491397187,
+        "modificationDate" => 1499519080,
         "creationDate" => 1491397187,
         "id" => "magento-header"
     ],
@@ -731,5 +759,41 @@ return [
         "modificationDate" => 1493739143,
         "creationDate" => 1493739102,
         "id" => "magento-real-grid"
+    ],
+    "magento_h_half" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 602,
+                    "height" => 430,
+                    "positioning" => "bottomcenter",
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+            "640w" => [
+                [
+                    "method" => "cover",
+                    "arguments" => [
+                        "width" => 640,
+                        "height" => 896,
+                        "positioning" => "bottomcenter",
+                        "forceResize" => FALSE
+                    ]
+                ]
+            ]
+        ],
+        "name" => "magento_h_half",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 75,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1497255730,
+        "creationDate" => 1497255561,
+        "id" => "magento_h_half"
     ]
 ];

@@ -6,13 +6,16 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => "870"
+                    "width" => 800
                 ]
             ]
         ],
+        "name" => "content",
         "description" => "",
-        "videoBitrate" => 450,
+        "videoBitrate" => 2000,
         "audioBitrate" => 128,
+        "modificationDate" => 1505828110,
+        "creationDate" => 1505827507,
         "id" => "content"
     ],
     "featurerette" => [
@@ -20,13 +23,16 @@ return [
             [
                 "method" => "scaleByWidth",
                 "arguments" => [
-                    "width" => "512"
+                    "width" => 512
                 ]
             ]
         ],
+        "name" => "featurerette",
         "description" => "",
-        "videoBitrate" => 450,
+        "videoBitrate" => 1000,
         "audioBitrate" => 128,
+        "modificationDate" => 1505827560,
+        "creationDate" => 1505827560,
         "id" => "featurerette"
     ]
 ];

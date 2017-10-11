@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-04-21T12:59:23+02:00
+* Generated at: 2017-10-11T15:07:54+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -9,6 +9,7 @@
 
 
 Fields Summary: 
+- meta_title2 [input]
 - actif_web [checkbox]
 - obsolete [checkbox]
 - code [input]
@@ -42,10 +43,17 @@ Fields Summary:
 - shipping_type [select]
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
+- classe_utilisation [calculatedValue]
+- meta_title [input]
+- meta_description [input]
+- meta_keywords [input]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
 - price_4 [input]
+- fixation [multiselect]
+- pose [multiselect]
+- fixation_not_configurable [checkbox]
 - epaisseur [input]
 - epaisseur_txt [input]
 - epaisseur_type [select]
@@ -81,8 +89,6 @@ Fields Summary:
 - profil [multiselect]
 - profil_not_configurable [checkbox]
 - pimonly_profil_label [input]
-- fixation [multiselect]
-- fixation_not_configurable [checkbox]
 - choix [input]
 - choix_not_configurable [checkbox]
 - configurable_free_2 [input]
@@ -135,9 +141,6 @@ Fields Summary:
 - associatedArticles [objects]
 - origineArticles [objects]
 - Categories [nonownerobjects]
-- meta_title [input]
-- meta_description [input]
-- meta_keywords [input]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
 - mage_name [textarea]
@@ -176,6 +179,7 @@ namespace Pimcore\Model\Object;
 
 
 /**
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
@@ -209,10 +213,17 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_utilisation ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPose ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_txt ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_type ($value, $limit = 0) 
@@ -248,8 +259,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByProfil ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProfil_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_profil_label ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
@@ -301,9 +310,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_entretien ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAssociatedArticles ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByOrigineArticles ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
@@ -341,6 +347,7 @@ class Product extends Concrete {
 
 public $o_classId = 5;
 public $o_className = "product";
+public $meta_title2;
 public $actif_web;
 public $obsolete;
 public $code;
@@ -374,10 +381,16 @@ public $leadtime;
 public $shipping_type;
 public $mage_qty_description;
 public $mage_custom_option;
+public $meta_title;
+public $meta_description;
+public $meta_keywords;
 public $price_1;
 public $price_2;
 public $price_3;
 public $price_4;
+public $fixation;
+public $pose;
+public $fixation_not_configurable;
 public $epaisseur;
 public $epaisseur_txt;
 public $epaisseur_type;
@@ -413,8 +426,6 @@ public $traitement_surface_not_configurable;
 public $profil;
 public $profil_not_configurable;
 public $pimonly_profil_label;
-public $fixation;
-public $fixation_not_configurable;
 public $choix;
 public $choix_not_configurable;
 public $configurable_free_2;
@@ -466,9 +477,6 @@ public $pimonly_category_finition;
 public $pimonly_category_entretien;
 public $associatedArticles;
 public $origineArticles;
-public $meta_title;
-public $meta_description;
-public $meta_keywords;
 public $accessoirepopin;
 public $mage_accessoirepopin;
 public $mage_name;
@@ -510,6 +518,32 @@ public static function create($values = array()) {
 	$object = new static();
 	$object->setValues($values);
 	return $object;
+}
+
+/**
+* Get meta_title2 - meta_title2
+* @return string
+*/
+public function getMeta_title2 () {
+	$preValue = $this->preGetValue("meta_title2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_title2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title2")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_title2");
+	}
+	return $data;
+}
+
+/**
+* Set meta_title2 - meta_title2
+* @param string $meta_title2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_title2 ($meta_title2) {
+	$this->meta_title2 = $meta_title2;
+	return $this;
 }
 
 /**
@@ -1371,6 +1405,104 @@ public function setMage_custom_option ($mage_custom_option) {
 }
 
 /**
+* Get classe_utilisation - Classe d'utilisation
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getClasse_utilisation () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_utilisation');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set classe_utilisation - Classe d'utilisation
+* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_utilisation
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_utilisation ($classe_utilisation) {
+	return $this;
+}
+
+/**
+* Get meta_title - Métas Title
+* @return string
+*/
+public function getMeta_title () {
+	$preValue = $this->preGetValue("meta_title"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_title;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_title");
+	}
+	return $data;
+}
+
+/**
+* Set meta_title - Métas Title
+* @param string $meta_title
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_title ($meta_title) {
+	$this->meta_title = $meta_title;
+	return $this;
+}
+
+/**
+* Get meta_description - Meta Descriptions
+* @return string
+*/
+public function getMeta_description () {
+	$preValue = $this->preGetValue("meta_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_description")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_description");
+	}
+	return $data;
+}
+
+/**
+* Set meta_description - Meta Descriptions
+* @param string $meta_description
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_description ($meta_description) {
+	$this->meta_description = $meta_description;
+	return $this;
+}
+
+/**
+* Get meta_keywords - Meta Keywords
+* @return string
+*/
+public function getMeta_keywords () {
+	$preValue = $this->preGetValue("meta_keywords"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_keywords;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_keywords")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_keywords");
+	}
+	return $data;
+}
+
+/**
+* Set meta_keywords - Meta Keywords
+* @param string $meta_keywords
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_keywords ($meta_keywords) {
+	$this->meta_keywords = $meta_keywords;
+	return $this;
+}
+
+/**
 * Get price_1 - Négoce (1)
 * @return string
 */
@@ -1471,6 +1603,84 @@ public function getPrice_4 () {
 */
 public function setPrice_4 ($price_4) {
 	$this->price_4 = $price_4;
+	return $this;
+}
+
+/**
+* Get fixation - Type de pose / Fixation
+* @return array
+*/
+public function getFixation () {
+	$preValue = $this->preGetValue("fixation"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->fixation;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation")->isEmpty($data)) {
+		return $this->getValueFromParent("fixation");
+	}
+	return $data;
+}
+
+/**
+* Set fixation - Type de pose / Fixation
+* @param array $fixation
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFixation ($fixation) {
+	$this->fixation = $fixation;
+	return $this;
+}
+
+/**
+* Get pose - Pose
+* @return array
+*/
+public function getPose () {
+	$preValue = $this->preGetValue("pose"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pose;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pose")->isEmpty($data)) {
+		return $this->getValueFromParent("pose");
+	}
+	return $data;
+}
+
+/**
+* Set pose - Pose
+* @param array $pose
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPose ($pose) {
+	$this->pose = $pose;
+	return $this;
+}
+
+/**
+* Get fixation_not_configurable - Fixation non configurable
+* @return boolean
+*/
+public function getFixation_not_configurable () {
+	$preValue = $this->preGetValue("fixation_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->fixation_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("fixation_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set fixation_not_configurable - Fixation non configurable
+* @param boolean $fixation_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFixation_not_configurable ($fixation_not_configurable) {
+	$this->fixation_not_configurable = $fixation_not_configurable;
 	return $this;
 }
 
@@ -2381,58 +2591,6 @@ public function getPimonly_profil_label () {
 */
 public function setPimonly_profil_label ($pimonly_profil_label) {
 	$this->pimonly_profil_label = $pimonly_profil_label;
-	return $this;
-}
-
-/**
-* Get fixation - Type de pose / Fixation
-* @return array
-*/
-public function getFixation () {
-	$preValue = $this->preGetValue("fixation"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->fixation;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation")->isEmpty($data)) {
-		return $this->getValueFromParent("fixation");
-	}
-	return $data;
-}
-
-/**
-* Set fixation - Type de pose / Fixation
-* @param array $fixation
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFixation ($fixation) {
-	$this->fixation = $fixation;
-	return $this;
-}
-
-/**
-* Get fixation_not_configurable - Fixation non configurable
-* @return boolean
-*/
-public function getFixation_not_configurable () {
-	$preValue = $this->preGetValue("fixation_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->fixation_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("fixation_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set fixation_not_configurable - Fixation non configurable
-* @param boolean $fixation_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFixation_not_configurable ($fixation_not_configurable) {
-	$this->fixation_not_configurable = $fixation_not_configurable;
 	return $this;
 }
 
@@ -3759,84 +3917,6 @@ public function getOrigineArticles () {
 */
 public function setOrigineArticles ($origineArticles) {
 	$this->origineArticles = $this->getClass()->getFieldDefinition("origineArticles")->preSetData($this, $origineArticles);
-	return $this;
-}
-
-/**
-* Get meta_title - Métas Title
-* @return string
-*/
-public function getMeta_title () {
-	$preValue = $this->preGetValue("meta_title"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_title;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_title");
-	}
-	return $data;
-}
-
-/**
-* Set meta_title - Métas Title
-* @param string $meta_title
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_title ($meta_title) {
-	$this->meta_title = $meta_title;
-	return $this;
-}
-
-/**
-* Get meta_description - Meta Descriptions
-* @return string
-*/
-public function getMeta_description () {
-	$preValue = $this->preGetValue("meta_description"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_description;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_description")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_description");
-	}
-	return $data;
-}
-
-/**
-* Set meta_description - Meta Descriptions
-* @param string $meta_description
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_description ($meta_description) {
-	$this->meta_description = $meta_description;
-	return $this;
-}
-
-/**
-* Get meta_keywords - Meta Keywords
-* @return string
-*/
-public function getMeta_keywords () {
-	$preValue = $this->preGetValue("meta_keywords"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_keywords;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_keywords")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_keywords");
-	}
-	return $data;
-}
-
-/**
-* Set meta_keywords - Meta Keywords
-* @param string $meta_keywords
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_keywords ($meta_keywords) {
-	$this->meta_keywords = $meta_keywords;
 	return $this;
 }
 

@@ -44,6 +44,7 @@ return [
         "LpnPlugin" => "1",
         "Magepim" => "",
         "LpnMageSync" => TRUE,
-        "Bootstrap" => TRUE
+        "Bootstrap" => TRUE,
+        "ImportExport" => TRUE
     ]
 ];

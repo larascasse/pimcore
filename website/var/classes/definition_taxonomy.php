@@ -1,17 +1,31 @@
 <?php 
 
-/** Generated at 2016-08-30T17:26:16+02:00 */
+/** 
+* Generated at: 2017-10-11T15:09:35+02:00
+* Inheritance: no
+* Variants: no
+* Changed by: florent (6)
+* IP: 172.31.30.232
+
+
+Fields Summary: 
+- code [input]
+- label [input]
+- localizedfields [localizedfields]
+-- description [textarea]
+-- help [textarea]
+*/ 
 
 
 return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'taxonomy',
    'description' => '',
    'creationDate' => 1380723573,
-   'modificationDate' => 1469521348,
+   'modificationDate' => 1507727375,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
-   'useTraits' => NULL,
+   'useTraits' => '',
    'allowInherit' => false,
    'allowVariants' => false,
    'showVariants' => false,
@@ -94,6 +108,86 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+          )),
+          2 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Localizedfields::__set_state(array(
+             'fieldtype' => 'localizedfields',
+             'phpdocType' => '\\Pimcore\\Model\\Object\\Localizedfield',
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'description',
+                 'title' => 'Description',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'help',
+                 'title' => 'Aide',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'name' => 'localizedfields',
+             'region' => NULL,
+             'layout' => NULL,
+             'title' => NULL,
+             'width' => NULL,
+             'height' => NULL,
+             'maxTabs' => NULL,
+             'labelWidth' => NULL,
+             'hideLabelsWhenTabsReached' => NULL,
+             'referencedFields' => 
+            array (
+            ),
+             'tooltip' => NULL,
+             'mandatory' => NULL,
+             'noteditable' => NULL,
+             'index' => NULL,
+             'locked' => NULL,
+             'style' => NULL,
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'columnType' => NULL,
+             'queryColumnType' => NULL,
              'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,

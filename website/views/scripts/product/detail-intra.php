@@ -100,11 +100,14 @@ if(count($taxonomies) > 0) { ?>
 <div class="row">
 
 	<div class="col">
-	<<h3>Les supports</h3>
+	<h3>Support</h3>
+	</div>
 <?php
 foreach ($taxonomies as $label => $taxonomie) {
-	echo "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
+	echo '<div class="col-4">';
+	echo '<p><strong>'.ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
 	echo "<p>".$taxonomie->getHelp().'</p>';
+	echo '</col>';
 }
 ?>
 </div>
@@ -119,18 +122,21 @@ if(count($taxonomies) > 0) { ?>
 <div class="row">
 
 	<div class="col">
-	<<h3>les choix</h3>
+	<<h3>Choix</h3>
+	</div>
 <?php
 foreach ($taxonomies as $label => $taxonomie) {
-	echo "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
+	echo '<div class="col-4">';
+	echo '<p><strong>'.ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
 	echo "<p>".$taxonomie->getHelp().'</p>';
+	echo '</col>';
 }
 ?>
 </div>
 </div>
 <?php } ?>
 
-
+<hr />
 
 
 <div class="row">

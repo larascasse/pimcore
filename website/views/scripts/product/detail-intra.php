@@ -92,7 +92,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 	
 </div>
-
+<hr />
 <?php 
 //detail taxo
 $taxonomies = $this->product->getSelfAndChildrenTaxonomyObjects('support');
@@ -100,7 +100,26 @@ if(count($taxonomies) > 0) { ?>
 <div class="row">
 
 	<div class="col">
-	<<h3>Aide</h3>
+	<<h3>Les supports</h3>
+<?php
+foreach ($taxonomies as $label => $taxonomie) {
+	echo "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
+	echo "<p>".$taxonomie->getHelp().'</p>';
+}
+?>
+</div>
+</div>
+<?php } ?>
+<hr />
+
+<?php 
+//detail taxo
+$taxonomies = $this->product->getSelfAndChildrenTaxonomyObjects('choix');
+if(count($taxonomies) > 0) { ?>
+<div class="row">
+
+	<div class="col">
+	<<h3>les choix</h3>
 <?php
 foreach ($taxonomies as $label => $taxonomie) {
 	echo "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';

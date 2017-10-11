@@ -99,7 +99,7 @@ $taxonomies = $this->product->getSelfAndChildrenTaxonomyObjects('support');
 if(count($taxonomies) > 0) { ?>
 <div class="row">
 
-	<div class="col">
+	<div class="col-12">
 	<h3>Support</h3>
 	</div>
 <?php
@@ -107,7 +107,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 	echo '<div class="col-4">';
 	echo '<p><strong>'.ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
 	echo "<p>".$taxonomie->getHelp().'</p>';
-	echo '</col>';
+	echo '</div>';
 }
 ?>
 </div>
@@ -121,15 +121,15 @@ $taxonomies = $this->product->getSelfAndChildrenTaxonomyObjects('choix');
 if(count($taxonomies) > 0) { ?>
 <div class="row">
 
-	<div class="col">
-	<<h3>Choix</h3>
+	<div class="col-12">
+	<h3>Choix</h3>
 	</div>
 <?php
 foreach ($taxonomies as $label => $taxonomie) {
 	echo '<div class="col-4">';
 	echo '<p><strong>'.ucfirst(strtolower($taxonomie->getLabel())).'</strong></p>';
 	echo "<p>".$taxonomie->getHelp().'</p>';
-	echo '</col>';
+	echo '</div>';
 }
 ?>
 </div>

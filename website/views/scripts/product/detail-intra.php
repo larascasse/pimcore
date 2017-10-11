@@ -110,7 +110,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 	echo '</div>';
 }
 ?>
-</div>
+
 </div>
 <?php } ?>
 <hr />
@@ -132,7 +132,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 	echo '</div>';
 }
 ?>
-</div>
+
 </div>
 <?php } ?>
 

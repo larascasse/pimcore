@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-12T17:18:14+02:00
+* Generated at: 2017-10-13T10:18:47+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-12T17:18:14+02:00
+* Generated at: 2017-10-13T10:18:47+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -180,7 +180,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1507821494,
+   'modificationDate' => 1507882727,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -1286,6 +1286,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 'techMarquageCE',
                   1 => 'techDopParquetFinition',
                   2 => 'techDopParquet',
+                  3 => 'techAttributeSol',
                 ),
                  'maxItems' => '',
                  'name' => 'normes',

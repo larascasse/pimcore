@@ -1,5 +1,12 @@
 <?php
 
+ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+require_once PIMCORE_DOCUMENT_ROOT.'/plugins/LpnPlugin/odata/lpnservices/urldef.php';
+require_once PIMCORE_DOCUMENT_ROOT.'/plugins/LpnPlugin/odata/lpnservices/LPNEntities.php';
+require_once PIMCORE_DOCUMENT_ROOT.'/plugins/LpnPlugin/odata/lpnservices/functions.php';
+
+
 use Website\Controller\Action;
 use Pimcore\Model\Document;
 use Pimcore\Model\Document\Page;
@@ -538,7 +545,7 @@ echo $content;
 
     public function mauchampAction() {
 
-        $this->view->layout()->setLayout("layout-lpnv2");
+        $this->view->layout()->setLayout("layout-mauchamp");
 
          //$svc = $svc = new LPNEntities(LPN_SERVICE_URL);
         //$query = getQuery($svc,"order",$this->getParam("code_commande"));
@@ -688,6 +695,12 @@ ZI des Amandiers&#xD;
 </Scienergie_PieceCommerciale>
 
 EOT;
+        $xml = $this->getParam('xml');
+        if(isset($xml))
+            $data = $xml;
+        
+        
+        
         $xml = simplexml_load_string($data);
         $lines = $xml->Lignes[0]->Ligne;
 
@@ -796,6 +809,186 @@ EOT;
             $this->view->products = $products;
             $this->view->missingProducts = $missingProducts;
             $this->view->transport = $transportRows;
+    }
+
+
+    public function mauchampTestAction() {
+        //"CCA172694"
+        $this->view->layout()->setLayout("layout-mauchamp");
+        $codecommande = $this->getParam('codecommande');
+        if(!isset($codecommande)) {
+            $this->view->codecommande="";
+            return;
+        }
+
+        $this->view->codecommande=$codecommande;
+        $svc = $svc = new LPNEntities(LPN_SERVICE_URL);
+        $query = getQuery($svc,"order",$codecommande);//$this->getParam("code_commande"));
+        $response = $query->Execute();
+        $orders = array();
+        
+        try {
+          do {
+              if(isset($nextProductToken) && $nextProductToken != null) {            
+                  $response = $svc->Execute($nextProductToken);
+
+
+              }
+
+              $index=0;
+              foreach($response->Result as $orderAzure) {
+                $debugData = false;
+                $arrForXml = array(
+                          "Type_Piece"          => "Commande",  //METTRE Dvis si cheque ou autre / Mettre Commande qu si retour de payment CB authorisé
+                          "Code_Commande"       => $orderAzure->Code_Commande.($debugData?date('hms'):""),
+                          "Code_Commande_Web"   => $orderAzure->Code_Commande_Web,
+                          "Code_Client"         => $orderAzure->getCodeClient(),
+                          "Email_Client"        => $orderAzure->CLIENT[0]->Email_Contact,
+                          "Reference_Client"    => $orderAzure->Reference_Client,
+                          "Date"                => $debugData?'2016-05-18T01:00:00':$orderAzure->Date,
+
+                          "DateLivraison"       => $orderAzure->Date_Livraison,
+                          "DateConfirmation"      => $orderAzure->Date_Confirmation,
+                          "DateExpedition"      => $orderAzure->Date_Expedition,
+
+                          "Acompte"             => $orderAzure->Acompte,
+                          "Remise"              => $this->convertFloat($orderAzure->Remise),
+                          "TypeRemise"          => $orderAzure->Type_Remise,   //toujours montant de remise, pas de %
+
+                          "TotalHT"             => $this->convertFloat($orderAzure->TotalHT),
+                          "TotalTTC"            => $this->convertFloat($orderAzure->TotalTTC),
+
+                          "Site"                => $orderAzure->Code_SITE,
+                          "Code_Depot"          => $debugData?'LPN75':$orderAzure->Code_Depot,
+
+                          "Remarque"            => $orderAzure->Remarque,
+                          "Etat"                => $orderAzure->Etat,   //EtatCommande 0=> En cours, 1=> BLoquée, 2=> complete
+                          "Mode_livraison"      => $orderAzure->Mode_livraison,
+                          "Moyen_Paiement"      =>  $orderAzure->Moyen_Paiement,
+
+                            
+                          "Adresse_Facturation_Raison_Sociale"  =>  $orderAzure->Adresse_Facturation_Raison_Sociale, //,"TEST",//$orderAzure->XXXX, 
+                          "Adresse_Facturation_Nom"         =>  $orderAzure->Adresse_Facturation_Nom, //,"TEST222",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Prenom"      =>  $orderAzure->Adresse_Facturation_Prenom, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Email"       =>  $debugData?'florent.berenger+testnotification@gmail.com':$orderAzure->Adresse_Facturation_Email, //,"TEST",//$orderAzure->XXXX,             
+                          "Adresse_Facturation_Ville"       =>  $orderAzure->Adresse_Facturation_Ville, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_CP"        =>  $orderAzure->Adresse_Facturation_CP, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Code_Pays"     =>  $orderAzure->Adresse_Facturation_Code_Pays, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Adr1"        =>  $orderAzure->Adresse_Facturation_Adr1, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Telephone"     =>  $orderAzure->Adresse_Facturation_Telephone, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Portable"     =>  $orderAzure->Adresse_Facturation_Portable, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Facturation_Fax"         =>  $orderAzure->Adresse_Facturation_Fax, //,"TEST",//$orderAzure->XXXX,
+                            
+                          "Adresse_Livraison_Raison_Sociale"  =>  $orderAzure->Adresse_Livraison_Raison_Sociale, //,"TEST",//$orderAzure->XXXX, 
+                          "Adresse_Livraison_Nom"         =>  $orderAzure->Adresse_Livraison_Nom, //,"TEST3333",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Prenom"      =>  $orderAzure->Adresse_Livraison_Prenom, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Email"       =>  $orderAzure->Adresse_Livraison_Email, //,"TEST",//$orderAzure->XXXX,             
+                          "Adresse_Livraison_Ville"       =>  $orderAzure->Adresse_Livraison_Ville, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_CP"        =>  $orderAzure->Adresse_Livraison_CP, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Code_Pays"     =>  $orderAzure->Adresse_Livraison_Code_Pays, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Adr1"        =>  $orderAzure->Adresse_Livraison_Adr1, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Telephone"     =>  $orderAzure->Adresse_Livraison_Telephone, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Portable"     =>  $orderAzure->Adresse_Livraison_Portable, //,"TEST",//$orderAzure->XXXX,
+                          "Adresse_Livraison_Fax"         =>  $orderAzure->Adresse_Livraison_Fax, //,"TEST",//$orderAzure->XXXX,
+                          "Reglement"         =>  $orderAzure->Reglement, //,"TEST",//$orderAzure->XXXX,
+                          "Devis_Lies"         =>  $orderAzure->Devis_Lies //,"TEST",//$orderAzure->XXXX,
+                            
+                              );    
+
+
+                $xml = new SimpleXMLElement('<Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>');
+
+                
+  
+                $callback =  function ($v, $k) use (&$xml, &$callback) {
+
+                        if (is_array($v)) {
+                            array_walk_recursive($v, $callback);
+                        }
+                        
+                        $xml->addChild($k);
+                        $xml->$k = $v;
+                    };
+                    
+                  array_walk_recursive($arrForXml, $callback);
+
+
+                $lignes = $xml->addChild('Lignes');
+                
+                $inc = 1;
+                $ordersUpdated = 0;
+                foreach ($orderAzure->COMMANDE_DETAIL as $orderItemAzure) {
+                 
+                  $arr = array(
+                              "Ordre"       => $orderItemAzure->Ordre,
+                              "Code_Article"   => $orderItemAzure->Code_Article,
+                              "Code_EAN_Article"  => $orderItemAzure->Code_EAN_Article,
+                              "Nombre"      => $orderItemAzure->Nombre,
+                              "Quantite_Unite"      => $orderItemAzure->QuantiteUnite,
+
+                              "Prix_HT"     => number_format($orderItemAzure->Prix, 2,",",""),
+                              "Pourc_Remise"    => $orderItemAzure->Discount,
+                              "Taux_TVA"      => 20,//$orderItemAzure->Taux_TVA,
+                              "Observation"     => $orderItemAzure->Observation,
+                              "Designation"   => $orderItemAzure->Designation
+                                );
+
+                  $ligne = $lignes->addChild('Ligne');
+                  
+                  foreach ($arr as $k => $v){
+                      $ligne->addChild($k);
+                      $ligne->$k=$v;
+                  }
+                      
+                  $inc++;
+                }
+
+
+                
+                 $client = $xml->addChild('Client');
+
+                 
+                $arrClient = array(
+                          "Type_Piece"            => "Client",  //METTRE Dvis si cheque ou autre / Mettre Commande qu si retour de payment CB authorisé
+                          "Code_Client_Web"       => $orderAzure->CLIENT[0]->Code_Client_Web,
+                          "Code_Client"           => $orderAzure->CLIENT[0]->Code_Client,
+                          "Nom"                   => $orderAzure->CLIENT[0]->Nom,
+                          "Nom_Contact"           => $orderAzure->CLIENT[0]->Nom_Contact,
+                          "Prenom_Contact"        => $orderAzure->CLIENT[0]->Prenom_Contact,
+                          "Email_Contact"         => $debugData?'florent.berenger+testnotification@gmail.com':$orderAzure->CLIENT[0]->Email_Contact,
+                          "Indice_Code_Prix"      => $orderAzure->CLIENT[0]->Indice_Code_Prix,
+                          "Suivi_Int"             => $orderAzure->CLIENT[0]->Suivi_Int,
+                        
+                ); 
+             
+
+                foreach ($arrClient as $k => $v){
+                    $client->addChild($k);
+                    $client->$k=$v;
+                }
+               
+              
+                
+             }
+           }
+          while(($nextProductToken = $response->GetContinuation()) != null);
+
+      }
+      catch (Exception $e)
+        {
+  
+             echo  "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getMessage(); 
+        }
+      
+        if(isset($xml)) {
+            $this->view->xml =  $xml;
+        }
+
+
+    }
+
+    public function log($error,$error_type='') {
+        echo $message;
     }
 
 

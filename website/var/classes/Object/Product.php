@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-11T15:07:54+02:00
+* Generated at: 2017-10-12T17:18:14+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.30.232
 
 
 Fields Summary: 
@@ -47,6 +47,7 @@ Fields Summary:
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
+- normes [objectbricks]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
@@ -217,6 +218,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNormes ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
@@ -384,6 +386,7 @@ public $mage_custom_option;
 public $meta_title;
 public $meta_description;
 public $meta_keywords;
+public $normes;
 public $price_1;
 public $price_2;
 public $price_3;
@@ -1499,6 +1502,34 @@ public function getMeta_keywords () {
 */
 public function setMeta_keywords ($meta_keywords) {
 	$this->meta_keywords = $meta_keywords;
+	return $this;
+}
+
+/**
+* @return \Pimcore\Model\Object\Objectbrick
+*/
+public function getNormes () {
+	$data = $this->normes;
+	if(!$data) { 
+		if(\Pimcore\Tool::classExists("\\Pimcore\\Model\\Object\\Product\\Normes")) { 
+			$data = new \Pimcore\Model\Object\Product\Normes($this, "normes");
+			$this->normes = $data;
+		} else {
+			return null;
+		}
+	}
+	$preValue = $this->preGetValue("normes"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { return $preValue;}
+	 return $data;
+}
+
+/**
+* Set normes - normes
+* @param \Pimcore\Model\Object\Objectbrick $normes
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNormes ($normes) {
+	$this->normes = $this->getClass()->getFieldDefinition("normes")->preSetData($this, $normes);
 	return $this;
 }
 

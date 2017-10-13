@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-11T15:07:54+02:00
+* Generated at: 2017-10-12T17:18:14+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.30.232
 
 
 Fields Summary: 
@@ -47,6 +47,7 @@ Fields Summary:
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
+- normes [objectbricks]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
@@ -179,7 +180,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1507727271,
+   'modificationDate' => 1507821494,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -198,7 +199,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
      'title' => NULL,
      'width' => NULL,
      'height' => NULL,
-     'collapsible' => NULL,
+     'collapsible' => false,
      'collapsed' => NULL,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
@@ -1152,7 +1153,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -1259,6 +1260,55 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'locked' => false,
           )),
           2 => 
+          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+             'fieldtype' => 'panel',
+             'labelWidth' => 100,
+             'layout' => NULL,
+             'name' => 'tech',
+             'type' => NULL,
+             'region' => NULL,
+             'title' => 'Fiche Tech',
+             'width' => NULL,
+             'height' => NULL,
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'permissions' => NULL,
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Objectbricks::__set_state(array(
+                 'fieldtype' => 'objectbricks',
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Objectbrick',
+                 'allowedTypes' => 
+                array (
+                  0 => 'techMarquageCE',
+                  1 => 'techDopParquetFinition',
+                  2 => 'techDopParquet',
+                ),
+                 'maxItems' => '',
+                 'name' => 'normes',
+                 'title' => 'normes',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'queryColumnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'locked' => false,
+          )),
+          3 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -1375,7 +1425,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          3 => 
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 150,
@@ -3070,7 +3120,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          4 => 
+          5 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -3891,7 +3941,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          5 => 
+          6 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4027,7 +4077,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          6 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4091,7 +4141,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          7 => 
+          8 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4243,7 +4293,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          8 => 
+          9 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4473,7 +4523,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          9 => 
+          10 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4560,7 +4610,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          10 => 
+          11 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4611,7 +4661,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          11 => 
+          12 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5403,7 +5453,7 @@ Combien d\'unité dans 1 m2',
          'locked' => false,
       )),
     ),
-     'locked' => NULL,
+     'locked' => false,
   )),
    'icon' => '',
    'previewUrl' => '/id/%o_id',

@@ -4,6 +4,7 @@
 class Website_Product extends Object_Product {
 
 	private $_teintePath;
+	private $_choixString;
 	/**
      * Dummy which can be overwritten by a parent class, this is a hook executed in every getter of the properties in the object
      * @param string $key
@@ -222,8 +223,11 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getChoixString () {
+		if(!$this->_choixString) {
+			$this->_choixString = $this->getSingleTaxonomyString('choix');
 
-		return $this->getSingleTaxonomyString('choix');
+		}
+		return $this->_choixString;
 	}
 
 

@@ -1204,7 +1204,8 @@
                 }
 
             } catch (Exception $e) {
-                echo "Error ".$e->getMessage();
+                echo($e);
+                echo "Error save ".$e->getMessage()." ".$objectKey." ".$object->getFullPath()."\n\n";
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
              Object_Abstract::setGetInheritedValues($inheritedValues);

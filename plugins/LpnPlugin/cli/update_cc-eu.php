@@ -35,7 +35,9 @@ $list->load();
 $objects = array();
  echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
+
 foreach ($list->getObjects() as $object) {
+
 
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
@@ -45,8 +47,69 @@ foreach ($list->getObjects() as $object) {
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
-    $fieldsToClean = ["famille","meta_title","meta_description"];
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->name_scienergie;
 
+    //echo $scienergieCourt." ".$object->getEan()."\n";
+
+    $save=false;
+
+    if(stristr($scienergieCourt, "hd")) {
+        $object->setSupport('HDF');
+         $save=true;
+    }
+    else if(stristr($scienergieCourt, "cp")) {
+        $object->setSupport('cp');
+        $save=true;
+    }
+
+    if(stristr($scienergieCourt, "rl")) {
+        $object->setFixation(array('rainurelanguette'));
+        $save=true;
+    }
+    if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
+        $object->setFixation(array('click'));
+        $save=true;
+    }
+
+    if($object->getEpaisseur()==19) {
+        $object->setEpaisseurUsure('5.5 mm');
+        $save=true;
+    }
+    else if($object->getEpaisseur()==14) {
+        $object->setEpaisseurUsure('3.2 mm');
+        $save=true;
+    }
+    if($object->getEpaisseur()==10) {
+        $object->setEpaisseurUsure('2 mm');
+        $save=true;
+    }
+
+    if(strlen($object->getEan())>0) {
+        $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+        $save=true;
+
+        $parent = $object->getParent();
+        if(strlen($parent->name)>0) {
+            $parent->setValue('name',null);
+            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
+            $parent->save();
+        }   
+
+        echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+        
+    }
+    else {
+        echo "\nArticle:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    }
+    continue;
+
+   
+    if($save)
+        $object->save();
+
+
+    continue;
     $values = array();
     $objectToSave = Object::getById($object->getId());
     foreach ($fieldsToClean as $key => $fieldName) {

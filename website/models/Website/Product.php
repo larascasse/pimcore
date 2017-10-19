@@ -100,12 +100,15 @@ class Website_Product extends Object_Product {
 			$childsDimension = array();
 
 			foreach ($childrens as $subProduct) {
-				if(!$subProduct->getPublished())
+				if($subProduct instanceof Object_Folder || !$subProduct->getPublished())
 					continue;
 
 				if($subProduct->getEan()=="") {
 					$subProductChildrens = $subProduct->getChilds();
 					foreach ($subProductChildrens as $subsubProduct) {
+						if(!($subsubProduct instanceof Object_Product)) {
+							continue;
+						}
 						$taxoObj = $subsubProduct->getTaxonomyObject($field);
 						$label = $taxoObj->getLabel();
 
@@ -116,6 +119,9 @@ class Website_Product extends Object_Product {
 
 				}
 				else {
+						if(!($subProduct instanceof Object_Product)) {
+							continue;
+						}
 						$taxoObj = $subProduct->getTaxonomyObject($field);
 						$label = $taxoObj->getLabel();
 
@@ -479,6 +485,10 @@ class Website_Product extends Object_Product {
 
 			);
 
+		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre");
+
+
+
 		//Ordre des champs
 		$order = array('Dimensions', 'Support', 'Essence', 'Choix', 'Qualité', 'Traitement de surface','Finition');
 
@@ -549,10 +559,10 @@ class Website_Product extends Object_Product {
 								if(count($explode)>1) {
 									if(count($caracteristiquesOthers)>0)
 										$currentRowTitle++;	
-									$caracteristiquesOthers[$currentRowTitle] = array("label"=>trim($explode[0]),"content"=>trim($explode[1]));
+									$caracteristiquesOthers[$currentRowTitle] = array("key"=>$currentRowTitle,"label"=>trim($explode[0]),"content"=>trim($explode[1]));
 								}
 								elseif ($currentRowTitle==0) {
-									$caracteristiquesOthers[$currentRowTitle] = array("label"=>"","content"=>trim($item));
+									$caracteristiquesOthers[$currentRowTitle] = array("key"=>$currentRowTitle,"label"=>"","content"=>trim($item));
 									
 
 								}
@@ -566,7 +576,8 @@ class Website_Product extends Object_Product {
 						}
 						if(count($caracteristiquesOthers)>0) {
 							foreach ($caracteristiquesOthers as $keyOthers => $valueOther) {
-								$caracteristiques[] = $valueOther;
+								$caracteristiques[$attributeLabel] = $valueOther;
+
 							}
 						}
 						
@@ -582,11 +593,11 @@ class Website_Product extends Object_Product {
 							}
 
 							$attributeValue = implode(", ",$display);
-							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						else {
 							$attributeValue = implode(", ",$attributeValue);
-							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						
 
@@ -594,7 +605,7 @@ class Website_Product extends Object_Product {
 					}
 					else if($value->fieldtype=="select") {
 							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
-							$caracteristiques[$attributeLabel] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 							if(method_exists($this, $getterDescription)) {
 								$caracteristiques[$attributeLabel]['description'] = $this->$getterDescription();
 							}
@@ -602,6 +613,7 @@ class Website_Product extends Object_Product {
 
 					else if($value->fieldtype=="objectbricks") {
 							//TODO
+						continue;
 					}
 					
 					else {
@@ -616,6 +628,10 @@ class Website_Product extends Object_Product {
 						}
 
 					}
+					//pour l'affichage Spécifique
+					$caracteristiques[$attributeLabel]["isMarquageCe"] = in_array($attribute, $performanceFields);
+
+					
 
 				} 
 			}
@@ -742,8 +758,17 @@ class Website_Product extends Object_Product {
    		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
    		 try {
-   		 	$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
-			$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
+
+   		 	if($this->getParent() instanceof Object_Product) {
+
+
+   		 		$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
+   		 		if($this->getParent()->getParent() instanceof Object_Product) {
+					$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
+				}
+
+   		 	}
+   		 	
 
    		 } catch (\Exception $e) {
             //
@@ -770,6 +795,7 @@ class Website_Product extends Object_Product {
     		$str = str_replace($this->getSubtype(), "", $str);
     		$str = str_replace("monolame ", "", $str);
     		$str =trim($str);
+
     		if(strlen($this->getPimonly_name_suffixe())>0) {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->getPimonly_name_suffixe();
     		}
@@ -1194,14 +1220,18 @@ class Website_Product extends Object_Product {
 			$childsDimension = array();
 
 			foreach ($childrens as $subProduct) {
-				if(!$subProduct->getPublished())
+				if($subProduct instanceof Object_Folder || !$subProduct->getPublished())
 					continue;
 
 				if($subProduct->getEan()=="") {
 					$subProductChildrens = $subProduct->getChilds();
 					foreach ($subProductChildrens as $subsubProduct) {
 						if($subsubProduct->$field) {
+
+							
 							$childsDimension[$subsubProduct->$field] = self::getFormatedDimension($subsubProduct->$field,"","",$rounded);
+
+
 						}
 					}
 
@@ -1211,7 +1241,9 @@ class Website_Product extends Object_Product {
 						if($subProduct->$field) {
 							//if($field="volume")
 							//	self::getFormatedDimension($subProduct->$field,"","",$rounded);
+
 							$childsDimension[$subProduct->$field] = self::getFormatedDimension($subProduct->$field,"","",$rounded);
+
 							
 						}
 				}
@@ -2064,34 +2096,47 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
 41 : Usage industriel modéré. Zones où le travail est essentiellement sédentaire avec utilisation occasionnelle de véhicules légers.  Ex : ateliers d’usine.
 */
-	public function getClasseUtilisation() {
+	
+	public function getCoucheUsure() {
+		return  (float)$this->getEpaisseurUsure();
+	}
+
+	public function getCalculatedClasseUtilisation() {
 		 
         $classes = [
-            "A" => ["21","21","22","22"],
-            "B" => ["21","22","23","31"],
-            "C" => ["23","31","33","34"],
-            "D" => ["31","33","34","41"],
+            "A" => ["21","21","21","22","22"],
+            "B" => ["21","21","22","23","31"],
+            "C" => ["21","23","31","33","34"],
+            "D" => ["31","31","33","34","41"],
         ];
       
 
             $durete = $this->getDurete();
+
    
             //Si contrecollé
             if($this->isParquetContrecolle())
-           	 	$coucheUsure = (int)$this->getEpaisseurUsure();
+           	 	$coucheUsure = (float)$this->getEpaisseurUsure();
             //si massif
            	else 
-           	 $coucheUsure = (int)$this->getEpaisseur();
+           	 	$coucheUsure = (int)$this->getEpaisseur();
+
+
+
 
            	if($coucheUsure>0) {
-           		 if($coucheUsure<3.2)
+           		 if($coucheUsure<=2.5)
 	                $index = 0;
-	            else if($coucheUsure<4.5)
+           		else if($coucheUsure<3.2)
 	                $index = 1;
-	            else if($coucheUsure<7)
+	            else if($coucheUsure<4.5)
 	                $index = 2;
-	            else if($coucheUsure>=7)
+	            else if($coucheUsure<7)
 	                $index = 3;
+	            else if($coucheUsure>=7)
+	                $index = 4;
+	             
+	             //return "KKK".$index." ".$coucheUsure;
 
 	            if(isset($classes[$durete]) && isset($classes[$durete][$index]))
 	                return $classes[$durete][$index];
@@ -2102,6 +2147,65 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
                 
 
         
+	}
+
+
+/* UPEC 
+         Classe d'usage         Classement UPEC
+21  U₂P₂
+22  U₂sP₂
+23  U2sP₃
+31  U₃P₂
+32  U₃P₃
+33  U₃₅P₃
+*/
+	
+	public function getClasseUpec() {
+		$cu = $this->getCalculatedClasseUtilisation();
+
+		
+
+		$UP = "";
+		switch ($cu) {
+			case '21':
+				# code...
+				$UP =  "U₂P₂";
+				break;
+			case '22':
+				# code...
+				$UP =  "U₂sP₂";
+				break;
+			case '23':
+				# code...
+				$UP =  "U₂sP₃";
+				break;
+			case '31':
+				# code...
+				$UP =  "U₃P₂";
+				break;
+			case '32':
+				# code...
+				$UP =  "U₃P₃";
+				break;
+			case '33':
+				# code...
+				$UP =  "U₃sP₃";
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+
+		if(strlen($UP)>0) {
+			$pieceHumide = $this->getPieceHumide();
+			if($pieceHumide)
+				$UP .="E₂C₁";
+			else
+				$UP .="E₁C₁";
+		}
+		return $UP;
+
 	}
 
 /*
@@ -2125,15 +2229,311 @@ R = 0,008/0,23 = 0,035 m . °K / W
 o Calcul pour un parquet contrecollé avec un parement en chêne de 3 mm et une sous-couche en résineux léger de 8 mm:
 R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 */
-	public function getResistanceThermique() {
 
+	public static function getConductiviteThermiqueByEssence($essence) {
+
+/*
+. Cette correspondance entre masse volumique et capacités isolantes a été établie en termes normatifs, dans le texte NF EN 14342, comme suit :
+Conductivité thermique du bois (λ en w / m. K)
+ρ = 300 kg/m3 => λ = 0,09
+ρ = 500 kg/m3 => λ = 0,13
+ρ = 700 kg/m3 => λ = 0,17
+ρ = 1000 kg/m3 => λ = 0,24
+*/
+		$coeffCt = -1;
+		switch ($essence) {
+			case 'CHE':
+				$coeffCt = 0.16;
+				break;
+
+			//HDF 0,7<>0,18
+			case 'HDF':
+				$coeffCt = 0.15;
+				break;
+			//pin : 0.36
+			//Aglo : 0.15
+			//
+		}
+		return $coeffCt;
+	}
+
+	public function getResistanceThermique() {
+		$coeffCt = self::getConductiviteThermiqueByEssence($this->getEssence());
+
+		//conductivie thermqie : ) W/mK ;
+		
+
+		$epaisseur = $this->getEpaisseur();
+		if($epaisseur>0 && $coeffCt>0) {
+			if($this->isParquetMassif()) {
+			//Dans les deux cas, la résistance thermique du parquet est inférieure à la valeur maximale de 0,1 5 m °K / W exigée par les DTU.
+				return ((int)$epaisseur/1000)/$coeffCt;
+			}
+			else {
+				
+				$coeffCtSupport = self::getConductiviteThermiqueByEssence('HDF');
+
+				$ctSupport = (($epaisseur -(float)$this->getEpaisseurUsure()) / 1000)/$coeffCtSupport;
+				$coeffTotal = ((float)$this->getEpaisseurUsure()/1000)/$coeffCt + $ctSupport;
+				return $coeffTotal;
+			}
+			
+		}
+		return "Non applicable";
+	}
+
+	public function getConductiviteThermiqueTotal() {
+		$rT = $this->getResistanceThermique();
+
+		if($rT>0) {
+			return  ((int)$this->getEpaisseur()/1000)/$rT;
+		}
+		return $this->getResistanceThermique();
+	}
+
+/*
+Les masses volumiques moyennes des contreplaqués sont :
+
+450 kg/m3 pour un 100% Peuplier
+500 kg/m3 pour un 100% Okoumé
+600 kg/m3 pour un 100% Pin Maritime
+
+*/
+
+
+	public function getMasseVolumique() {
+		if($this->getMasse_volumique_moyenne()>0) {
+			return $this->getMasse_volumique_moyenne();
+		}
+		if($this->isParquetContrecolle()) {
+			$support = $this->getSupport();
+			$essence = $this->getEssence();
+			$coucheUsure = (float)$this->getEpaisseurUsure();
+			if($essence == "CHE") {
+				switch ($support) {
+					case 'HDF':
+						return 850;
+						break;
+
+					case 'cp':
+						return 780;
+						break;
+					
+					default:
+						return $support;
+						break;
+				}
+			}
+		}
+		else if($this->isParquetMassif()) {
+			$essence = $this->getEssence();
+			/* http://biomee.canalblog.com/archives/2008/01/25/7698209.html */
+			switch ($essence) {
+				case 'CHE':
+				case 'FRE':
+					return 680;
+					break;
+
+				case 'HET':
+					return 680;
+					break;
+				case 'EPI':
+				case 'SAP':
+					return 460;
+					break;
+				case 'PIN':
+					return 450;
+					break;
+				case 'AUL':
+					return 530;
+					break;
+				case 'CHA':
+					return 620;
+					break;
+				case 'ACA':
+					return 660;
+					break;
+				case 'PEU':
+				case 'BOU':
+					return 660;
+					break;
+				case 'MEL':
+					return 580;
+				
+					break;
+				case 'BAM':
+					return 680;
+					break;
+
+				case 'MER':
+					return 830;
+					break;
+
+				default:
+					# code...
+					break;
+			}
+
+		}
+		return "todo masse vol";
+	}
+
+
+	public function getClasseReactionFeuEu() {
+		/*
+		C  s1 / M3 pour 19 mm
+D  s1 / M4 pour 10 & 14 mm.
+
+//
+OU
+http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation/classement-conventionnel-des-parquets-et-planchers-massifs/
+
+
+*/
+		$massif = $this->isParquetMassif();
+		$contreciolle = $this->isParquetContrecolle();
+		$masseVolumique = $this->getMasseVolumique();
+		$epaisseur = $this->getEpaisseur();
+		$coucheUsure = (float)$this->getEpaisseurUsure();
+
+		$lameDAir = $this->poseCloueeEnabled() || $this->poseFlottanteEnabled();
+		$sansLameDAir = $this->poseColleeEnabled() || $this->poseColleeAuCordonEnabled();
+
+		//TODO
+		$result=array();
+
+		//POSE CLOUE OU FLOTTANTE
+		if($lameDAir) {
+			$m = "";
+			
+			if($massif && $masseVolumique >= 650 && $epaisseur>=14) 
+				$m = "M3";
+			else if($massif && $masseVolumique >= 450 && $epaisseur>=20) 
+				$m = "M3";
+			else if($contreciolle && $masseVolumique >= 650 && $epaisseur>=14 && $coucheUsure>=5) 
+				$m = "M3";
+			else
+				$m = "M4";
+
+			if(strlen($m)>0)
+				$result["Avec lame d'air"] = $m;
+
+		}
+
+		//POSE COLLEE
+		if($sansLameDAir) {
+			$m = "";
+			if($massif && $masseVolumique >= 650 && $epaisseur>=8) 
+				$m = "M3";
+			else if($contreciolle && $masseVolumique >= 650 && $epaisseur>=10 && $coucheUsure>=5) 
+				$m = "M3";
+			else if($contreciolle && $masseVolumique >= 500 && $epaisseur>=8) 
+				$m = "M4";
+			else
+				$m = "M5";
+
+			if(strlen($m)>0)
+				$result["Sans lame d'air"] = $m;
+		}
+
+		$str = "";
+		if(isset($result["Sans lame d'air"])) {
+			$str .= $result["Sans lame d'air"]." en pose collée";
+		}
+
+		if(isset($result["Avec lame d'air"]) && $this->poseCloueeEnabled()) {
+			$str .= strlen($str)>0?" et ":"";
+			
+			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || isset($result["Avec lame d'air"]))
+				$str .= $result["Avec lame d'air"]." en pose clouée";
+			else
+				$str .= "ou clouée";
+		}
+		if(isset($result["Avec lame d'air"]) && $this->poseFlottanteEnabled()) {
+			$str .= strlen($str)>0?" et ":"";
+			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || isset($result["Avec lame d'air"]))
+				$str .= $result["Avec lame d'air"]." en pose flottante";
+			else
+				$str .= "ou flottante";
+		}
+
+		
+
+
+		return $str;
+	}
+
+
+
+	public function getClasseReactionFeuFr() {
+		/* 
+NB : les classements actuels, définis par la norme NF EN 13501-1 indiquent que les classes A2 fl s2, B fl s1 & s2 et C fl s2 satisfont aux exigences M3. Les classes D fl s1 et s2 satisfont aux exigences M4.
+Autrement dit, hors des cas particuliers cités, tous les parquets conviennent quel que soit le mode de pose. */
+		return str_replace(array("M3","M4"), array("Cfl","Dfl"), $this->getClasseReactionFeuEu());
+	}
+
+
+
+	public function getConditionMiseEnOeuvre() {
+		///avaec ou sans lame d'aire
+		$lameDAir = $this->poseCloueeEnabled() || $this->poseFlottanteEnabled();
+		$sansLameDAir = $this->poseColleeEnabled() || $this->poseColleeAuCordonEnabled();
+
+		if($lameDAir && $sansLameDAir) 
+			return "Avec ou sans lame d'air";
+		else if($sansLameDAir) 
+			return "Sans lame d'air";
+		else if($lameDAir && $sansLameDAir) 
+			return "Avec lame d'air";
+		return "";
+	}
+
+
+	/* LES POSES */
+	/*
+	http://boisphile.over-blog.com/tag/le%20parquet/
+
+	*/
+	public function poseCloueeEnabled() {
+		//SI
+		return $this->isParquet() && $this->getEpaisseur()>=20;
+
+	}
+	public function poseColleeEnabled() {
+		return $this->isParquet() && $this->getEpaisseur()>=8;
+		
+	}
+	public function poseColleeEnPleinEnabled() {
+		return $this->isParquet() && $this->getEpaisseur()>=8;
+		
+	}
+	public function poseColleeAuCordonEnabled() {
+		// pas de planchete 10mm
+		return $this->isParquet() && $this->getEpaisseur()>=8;
+		
+	}
+	public function poseFlottanteEnabled() {
+		return ($this->isParquetContrecolle());
+	}
+
+
+	public function getPreviewUrl() {
+		return "/id/".$this->getId();
+	}
+	public function getPreviewLink() {
+		return "<a href=\"/id/".$this->getId()."\">Voir</a>";
+	}
+
+
+	public function getDegagementFormaldehyde() {
+		return str_replace(array("A+","A"), array("E1","XXXX"), $this->getNorme_sanitaire());
 	}
 
 	public function isParquetMassif() {
-		return $this->famille == "01MASSIF";
+		return $this->getFamille() == "01MASSIF";
 	}
 	public function isParquetContrecolle() {
-		return $this->famille == "05CONTRECO";
+		return $this->getFamille() == "05CONTRECO";
 	}
 	public function isParquet() {
 		return $this->isParquetMassif() || $this->isParquetContrecolle();

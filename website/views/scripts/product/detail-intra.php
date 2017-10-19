@@ -42,7 +42,8 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
  <div class="page-header">
 
        <!-- <h3><?php echo $this->product->getSubtype(); ?></h3>-->
-        <h2 style="text-align: left"><?php echo $this->product->getMage_short_name(); ?></h2>
+        <h2 style="text-align: left"><?php echo $this->product->getMage_short_name(3000); ?></h2>
+        <p><?php echo $this->product->getSku(); ?> - <?php echo $this->product->name_scienergie_court?></p>
  </div>
 </div>
 </div>
@@ -52,42 +53,61 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 
 	<div class="col">
 	
-	     <?php $caracteristiques =  $this->product->getCharacteristicsArray();
-	     $html='';
+	     <?php 
+	     $hasMarquageCe = false;
+	     $caracteristiques =  $this->product->getCharacteristicsArray();
+	     $htmlStd='';
+	     $htmlStd .= '<dl class="row">';
+	     $htmlCe = $htmlStd;
 	     foreach ($caracteristiques as $key => $value) {
 	     		
 					$content = trim($value["content"]);
-
+					$htmlSingle = "";
 
 					if(!isset($value["label"]) || strlen($content)==0)
 						continue;
 
+					$htmlSingle.= '<dt class="col-4">';
+					$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+					$htmlSingle.= '</dt>';
+					$htmlSingle.= '<dd class="col-8">';
 					
-
-					$html .= '<dl class="row">';	
-					$html.= '<dt class="col-2">';
-					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$html.= '</dt>';
-					$html.= '<dd class="col">';
-					
-					
-
+	
 					if(isset($value["description"])) {
 						//$html.= '<br />';
-						$html.= ucfirst(trim($value["description"]));
+						$htmlSingle.= ucfirst(trim($value["description"]));
 	
 					}
 					else {
-						$html.= ucfirst($content);
+						$htmlSingle.= ucfirst($content);
 					}
 
-					$html.= '</dd>';
-					$html .='</dl>';
+					$htmlSingle.= '</dd>';
+
+					if(isset($value["isMarquageCe"]) && $value["isMarquageCe"]) {
+						$hasMarquageCe = true;
+
+						$htmlCe .=$htmlSingle;
+					}
+					else
+						$htmlStd .=$htmlSingle;
+
+					
 					//$html.="</li>\n";
 		}
+		$htmlStd .='</dl>';
+		$htmlCe .='</dl>';
+
+echo $htmlStd;
+
+
+if ($hasMarquageCe) {
+	echo "<h3>Déclaration de performance</h3>";
+	echo $htmlCe;
+	echo '<p class="small">Il n’existe pas de PV pour le classement au feu des parquets massifs et contrecollés. Les classements feu que nous indiquons sur nos fiches techniques et autres documents sont des classements dits « conventionnels », stipulés dans les DTU 51.11 (Pose flottante des parquets contrecollés) et 51.2 (Pose collée des parquets massifs) et selon la norme NF 14341+A1.</p>';
+}
+?>
 		
-		echo $html;
-		?>
 	</div>
 
 	
@@ -159,21 +179,29 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 	   		 <?php
 	   		 if(count($childrens)>0) {
-			echo   '<table class="table table-striped">
-  <thead>
-    <tr>
-      <!--<th>Nom</th>-->
-      <th>Choix</th>
-      <th>Surface</th>
-       <th>Finition</th>
-        <th>Support</th>
-        <th>Colisage</th>
-      <th>Dimensions</th>
-      <th>Utilisation</th>
-      <th>EAN</th>
-      <th>Prix Public HT<br /> au '.date('d/m/Y').'</th>
-    </tr>
-  </thead>';
+
+	   		 	$fields["Choix"] = "getChoix";
+	   		 	$fields["Surface"] = "getTraitement_surface";
+	   		 	$fields["Finition"] = "getFinition";
+	   		 	$fields["Support"] = "getSupport";
+	   		 	if($this->product->isParquetContrecolle()) {
+	   		 		$fields["CU"] = "getCoucheUsure";
+	   		 	}
+	   		 	$fields["Colisage"] = "getColisage";
+	   		 	$fields["Dimensions"] = "getPimonly_dimensions";
+	   		 	$fields["Utilisation"] = "getCalculatedClasseUtilisation";
+	   		 	$fields["EAN"] = "getEan";
+	   		 	$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";
+	   		 	$fields["FT"] = "getPreviewLink";
+
+
+
+			echo   '<table class="table table-striped">  <thead><tr>';
+			foreach ($fields as $key => $value) {
+				echo '<th>'.$key.'</th>';
+			}
+			echo '</tr></thead>';
+
   			$index = 1;
   			$productsToDisplay =array();
 			foreach ($childrens as $subProduct) {
@@ -185,48 +213,27 @@ foreach ($taxonomies as $label => $taxonomie) {
 					
 					foreach ($subProductChildrens as $subsubProduct) {
 						$productsToDisplay[] = $subsubProduct;
-					?>
-						 <!--<tr>
-					     
-					       <th scope="row"><?php echo $subsubProduct->getMage_short_name() ?></th>
-					      <td><?php echo $subsubProduct->getChoixString() ?></td>
-					      <td><?php echo $subsubProduct->getDimensionsString() ?></td>
-					      <td><?php echo $subsubProduct->getEan() ?></td>
-					      <td><?php echo $subsubProduct->getPrice_4() ?> €</td>
-					    
-					    </tr>-->
-    				<?php 
+					
 					}
 
 				}
 				else { 
 					$productsToDisplay[] = $subProduct;
-					?>
-						<!--<tr>
-					       <th scope="row"><?php echo $subProduct->getMage_short_name() ?></th>
-					      <td><?php echo $subProduct->getDimensionsString() ?></td>
-					      <td><?php echo $subProduct->getEan() ?></td>
-					      <td><?php echo $subProduct->getPrice_4() ?> €</td>
-					    
-					    </tr>-->
-
-				<?php 
+					
 				}
 			}
+
 			foreach ($productsToDisplay as $subproduct) {
 				?>
-					-<tr>
+					<tr>
+						<?php
+						foreach ($fields as $key => $value) {
+							$v = $subproduct->$value();
+							echo '<td>'.$v.'</td>';
+						}
+						?>
 					     
-					      <!-- <th scope="row"><?php echo $subsubProduct->getMage_short_name(100) ?></th>-->
-					      <td><?php echo $subproduct->getChoix() ?></td>
-					      <td><?php echo $subproduct->getTraitement_surface() ?></td>
-					      <td><?php echo $subproduct->getFinition() ?></td>
-					      <td><?php echo $subproduct->getSupport() ?></td>
-					      <td><?php echo $subproduct->getColisage() ?></td>
-					      <td><?php echo $subproduct->getPimonly_dimensions() ?></td>
-					      <td><?php echo $subproduct->getClasseUtilisation() ?></td>
-					      <td><?php echo $subproduct->getEan() ?></td>
-					      <td><?php echo $subproduct->getPrice_4() ?> €</td>
+					   
 					    
 					    </tr>
 

@@ -64,17 +64,40 @@ function trackLinkEvent() {};
 var fbq;
 var dataLayer=[];
 </script>
+<style>
+.pim-centered {
+    
+    margin-left:auto;margin-right: auto; 
+    max-width: 1000px; 
+   
+}
+.pim-ft-bkg {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px; 
+    background-color: #FFFFFF; 
+     padding:0 50px 50px 50px;
+
+}
+</style>
 
 <div id="content" class="container-main"  style="background-color: #EEEEEE;padding:30px;">
     
-    <div class=""><h2 style="padding: 20px 20px 20px 50px; float: left;">Fiche technique</h2> <img src="/website/static_lpn/img/logo_lpn_1ligne_300_fondblanc.gif" style="float: right"></div>
- <div class="row"> 
+    <div class="row"> 
+        <div class="col-12 pim-centered"">
+        <h2 style="padding: 20px 20px 20px 25px; float: left;">Fiche technique</h2>
+        <img src="/website/static_lpn/img/logo_lpn_1ligne_300_fondblanc.gif" style="padding: 20px 30px 20px 20px; float: right">
+        </div>
 
-        <div class="col-12" style="background-color: #FFFFFF; max-width: 1000px; margin-left:auto;margin-right: auto; -webkit-border-radius: 50px;-moz-border-radius: 50px;border-radius: 50px; padding:50px;">
-            <?php echo $this->layout()->content; ?>
+    </div>
+
+    <div class="row"> 
+
+            <div class="col-12 pim-centered pim-ft-bkg">
+                <?php echo $this->layout()->content; ?>
+            </div>
         </div>
     </div>
-</div>
 
 
 <?php

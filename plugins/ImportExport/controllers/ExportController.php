@@ -17,7 +17,9 @@ class ImportExport_ExportController extends \Pimcore\Controller\Action\Admin
 
     public function exportAction()
     {
-        $folder = $this->getParam("folder");
+               //FLO BIBI
+         define("LPN_IMPORT", true);
+         $folder = $this->getParam("folder");
         $classes = $this->getParam("allowedClasses", array());
         $types = $this->getParam("allowedTypes", array());
         $unpublished = $this->getParam("unpublished");

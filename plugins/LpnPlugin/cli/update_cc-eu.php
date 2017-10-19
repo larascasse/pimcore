@@ -86,15 +86,28 @@ foreach ($list->getObjects() as $object) {
     }
 
     if(strlen($object->getEan())>0) {
-        $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
+         $parent = $object->getParent();
+        //On force le titre si plusiqueurs matieres
+        if(stristr($parent->getChoixString()," ou ")) {
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
+            $parent->setValue('pimonly_name_suffixe',null);
+
+        }  
+        else {
+            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
+            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
+        }
+
+        
         $save=true;
 
-        $parent = $object->getParent();
-        if(strlen($parent->name)>0 || $parent->pimonly_name_suffixe != $parent->getChoixString()) {
+       
+        if(strlen($parent->name)>0) {
             $parent->setValue('name',null);
-            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
-            $parent->save();
-        }   
+            
+        } 
+        $parent->save();
+        
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         

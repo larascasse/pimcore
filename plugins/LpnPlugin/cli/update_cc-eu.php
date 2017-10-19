@@ -90,7 +90,7 @@ foreach ($list->getObjects() as $object) {
         $save=true;
 
         $parent = $object->getParent();
-        if(strlen($parent->name)>0) {
+        if(strlen($parent->name)>0 || $parent->pimonly_name_suffixe != $parent->getChoixString()) {
             $parent->setValue('name',null);
             $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
             $parent->save();

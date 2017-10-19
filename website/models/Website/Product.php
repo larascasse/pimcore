@@ -2302,8 +2302,8 @@ Les masses volumiques moyennes des contreplaqués sont :
 
 
 	public function getMasseVolumique() {
-		if($this->getMasse_volumique_moyenne()>0) {
-			return $this->getMasse_volumique_moyenne();
+		if($this->getPimonly_masse_volumique_moyenne()>0) {
+			return $this->getPimonly_masse_volumique_moyenne();
 		}
 		if($this->isParquetContrecolle()) {
 			$support = $this->getSupport();

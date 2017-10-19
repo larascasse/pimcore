@@ -86,7 +86,7 @@ foreach ($list->getObjects() as $object) {
     }
 
     if(strlen($object->getEan())>0) {
-        $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+        $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
         $save=true;
 
         $parent = $object->getParent();
@@ -102,7 +102,7 @@ foreach ($list->getObjects() as $object) {
     else {
         echo "\nArticle:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
     }
-    continue;
+   // continue;
 
    
     if($save)

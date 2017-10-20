@@ -754,7 +754,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getMage_short_name($stringlength = 50) {
+	public function getMage_short_name($stringlength = 500) {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
@@ -877,7 +877,7 @@ class Website_Product extends Object_Product {
    		 }
 		 else {
 
-		 	 $meta = $this->getMage_short_name();
+		 	 $meta = $this->getMage_short_name(50);
 		 	 
 		 	 if(strlen($meta)<45 && strlen(trim($this->getSubtype2()))>0)
 		 	 	$meta .= " - ". ucfirst(trim($this->getSubtype2()));

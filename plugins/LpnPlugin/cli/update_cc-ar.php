@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/05contreco/tmp%'
+       o_path LIKE '/catalogue/_product_base__/05contreco/tmpar%'
 
     ");
 
@@ -38,58 +38,107 @@ $objects = array();
 
 foreach ($list->getObjects() as $object) {
 
-    if(!($object instanceof Object_Product))
-        continue;
-
 
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
     //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
 
+    if(!($object instanceof Object_Product))
+        continue;
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
+
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
+    $article = $object->code_article;
+    $parent = $object->getParent();
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
-    $save=false;
+    $save=true;
 
-    if(stristr($scienergieCourt, "hd")) {
+    /*if(stristr($scienergieCourt, "hd")) {
         $object->setSupport('HDF');
          $save=true;
     }
-    else if(stristr($scienergieCourt, "cp")) {
+    else if(stristr($scienergieCourt, "cp")) {*/
         $object->setSupport('cp');
         $save=true;
+    //}
+
+   
+
+    //Usée brosssé
+    /*
+    Brossé,brosse
+Brossé accentué, brosse accentue
+Brut,brut
+Brut de sciage, brut de sciage
+Vieilli rives abimées, vieilli rives abimees
+Usé,use
+*/
+    if(stristr($article, "fmcheub")) {
+         $object->setTraitement_surface(("vieilli use rives abimees"));
+
+         if(strlen($object->getEan())>0) {
+            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+
+         }
+         else if(stristr($object->getCode(), "fmche") ) {
+            $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
+         }
+         
+         $save=true;
+    }
+    else {
+          $object->setTraitement_surface(("vieilli rives abimees"));
+
+
+         if(strlen($object->getEan())>0) {
+            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+
+         }
+         else if(stristr($object->getCode(), "fmche") ) {
+            $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
+         }
+
+
+        
     }
 
-    if(stristr($scienergieCourt, "rl")) {
-        $object->setFixation(array('rainurelanguette'));
-        $save=true;
+    if(stristr($scienergie, "HUILE AQUA")) {
+        $object->setValue('finition',"huile-aqua");
     }
-    if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
-        $object->setFixation(array('click'));
-        $save=true;
+    else if(stristr($scienergie, "HUILE CIRE")) {
+        $object->setValue('finition',"huile-cire");
     }
 
-    if($object->getEpaisseur()==19) {
-        $object->setEpaisseurUsure('5.5 mm');
+    //$object->setValue('origine_bois','France');
+   // $object->setValue('country_of_manufacture','Belgique');
+
+    if($object->getEpaisseur()==15) {
+        $object->setEpaisseurUsure('4 mm');
         $save=true;
     }
-    else if($object->getEpaisseur()==14) {
-        $object->setEpaisseurUsure('3.2 mm');
+    else if($object->getEpaisseur()==20) {
+        $object->setEpaisseurUsure('6 mm');
         $save=true;
     }
-    if($object->getEpaisseur()==10) {
-        $object->setEpaisseurUsure('2 mm');
-        $save=true;
-    }
+   
 
     if(strlen($object->getEan())>0) {
-         $parent = $object->getParent();
+
+         if(stristr($scienergieCourt, "xl")) {
+            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+        }
+        else {
+            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+        }
+
+
+        /* $parent = $object->getParent();
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
@@ -99,7 +148,7 @@ foreach ($list->getObjects() as $object) {
         else {
             $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
-        }
+        }*/
 
         
         $save=true;

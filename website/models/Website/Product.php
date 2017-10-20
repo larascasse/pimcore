@@ -107,7 +107,8 @@ class Website_Product extends Object_Product {
 				if($subProduct->getEan()=="") {
 					$subProductChildrens = $subProduct->getChilds();
 					foreach ($subProductChildrens as $subsubProduct) {
-						if(!($subsubProduct instanceof Object_Product)) {
+						//echo get_class($subsubProduct);
+						if(!($subsubProduct instanceof Website_Product)) {
 							continue;
 						}
 						$taxoObj = $subsubProduct->getTaxonomyObject($field);
@@ -120,7 +121,7 @@ class Website_Product extends Object_Product {
 
 				}
 				else {
-						if(!($subProduct instanceof Object_Product)) {
+						if(!($subProduct instanceof Website_Product)) {
 							continue;
 						}
 						$taxoObj = $subProduct->getTaxonomyObject($field);

@@ -29,6 +29,13 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
     	}
     }
   ?>
+
+
+<style type="text/css">
+	sectionXX h2 {
+		text-align: justify;
+	}
+</style>
 <section class="product-detail">
 
 
@@ -42,7 +49,7 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
  <div class="page-header">
 
        <!-- <h3><?php echo $this->product->getSubtype(); ?></h3>-->
-        <h2 style="text-align: left"><?php echo $this->product->getMage_short_name(3000); ?></h2>
+        <h2 style="" class="balance-text"><?php echo $this->product->getMage_short_name(3000); ?></h2>
         <p><?php echo $this->product->getSku(); ?> - <?php echo $this->product->name_scienergie_court?></p>
  </div>
 </div>

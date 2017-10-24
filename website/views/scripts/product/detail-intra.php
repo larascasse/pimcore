@@ -58,26 +58,27 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 <hr />
 <div class="row">
 
-	<div class="col">
+	<div class="col-12">
 	
 	     <?php 
 	     $hasMarquageCe = false;
 	     $caracteristiques =  $this->product->getCharacteristicsArray();
 	     $htmlStd='';
-	     $htmlStd .= '<dl class="row">';
+	     $htmlStd .= '';
 	     $htmlCe = $htmlStd;
 	     foreach ($caracteristiques as $key => $value) {
 	     		
 					$content = trim($value["content"]);
-					$htmlSingle = "";
+					
 
 					if(!isset($value["label"]) || strlen($content)==0)
 						continue;
 
-					$htmlSingle.= '<dt class="col-4">';
+					$htmlSingle = '<div class="row">';
+					$htmlSingle.= '<div class="col-4">';
 					$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$htmlSingle.= '</dt>';
-					$htmlSingle.= '<dd class="col-8">';
+					$htmlSingle.= '</div>';
+					$htmlSingle.= '<div class="col-8">';
 					
 	
 					if(isset($value["description"])) {
@@ -89,7 +90,8 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 						$htmlSingle.= ucfirst($content);
 					}
 
-					$htmlSingle.= '</dd>';
+					$htmlSingle.= '</div>';
+					$htmlSingle.= '</div>';
 
 					if(isset($value["isMarquageCe"]) && $value["isMarquageCe"]) {
 						$hasMarquageCe = true;
@@ -102,8 +104,8 @@ $relatedProducts = $this->product->getRelated("relatedProducts");
 					
 					//$html.="</li>\n";
 		}
-		$htmlStd .='</dl>';
-		$htmlCe .='</dl>';
+
+
 
 echo $htmlStd;
 
@@ -115,9 +117,7 @@ if ($hasMarquageCe) {
 }
 ?>
 		
-	</div>
-
-	
+</div>
 </div>
 <hr />
 <?php 

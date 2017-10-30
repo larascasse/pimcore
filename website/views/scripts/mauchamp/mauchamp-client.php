@@ -108,7 +108,7 @@ if(is_array($result) && count($result)>0)  {
         </div>
         
         <div class="form-group">
-          <input type="button" class="btn btn-primary" name="button" onclick="sendEmail(this)" value="Créer un compte web" /><br />
+          <input type="button" class="btn btn-primary btn-lg" name="button" onclick="sendEmail(this)" value="Créer un compte web" /><br />
           <div style="display: none;">
             <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
           </div>

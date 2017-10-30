@@ -120,6 +120,10 @@ if(is_array($result) && count($result)>0)  {
 
       <?php 
       else : 
+        ?>
+
+        <h4>Debug XML</h4>
+        <?php
         foreach ($customer as $key => $value) {
             echo $key." : ".$value."<br />";
         }

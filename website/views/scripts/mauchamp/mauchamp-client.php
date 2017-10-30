@@ -96,7 +96,7 @@ if(is_array($result) && count($result)>0)  {
   <div class="row">
     <div class="col-xs-12">
       <?php if (!$customer) : ?>
-      <h3>Client WEB inexistant pour l'email <?php echo $email?></h3>
+      <h3>Client WEB inexistant pour l'email <?php echo $email; ?></h3>
       <form id="mailform" class="form-horizontal">
       <div class="text-center">
         <div class="checkbox">

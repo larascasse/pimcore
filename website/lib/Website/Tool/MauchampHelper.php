@@ -174,8 +174,8 @@ EOT;
       $data = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <ClientXML_Azure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   <Code_Client>EVLINAMA</Code_Client>
-   <Nom>EVLINAMA</Nom>
+   <Code_Client>TEST_LPN</Code_Client>
+   <Nom>NOM TEST_LPN</Nom>
    <Indice_Code_Prix>4</Indice_Code_Prix>
    <Code_Client_Web />
    <ADRESSES_Livraisons>

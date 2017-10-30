@@ -720,9 +720,16 @@ class Website_Product extends Object_Product {
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 	}
+
+	function getCalculatedTechnicalSheetPdfUrl() {
+		return LPN_ASSET_PREFIX."/pdf/".$this->getId();
+	}
+
 	public function getMage_fichepdf() {
 		if($this->getFiche_technique_lpn())
-			return LPN_ASSET_PREFIX.$this->getFiche_technique_lpn()->getFullPath();
+			return (\Pimcore\Tool::isFrontend()?"":LPN_ASSET_PREFIX).$this->getFiche_technique_lpn()->getFullPath();
+		else
+			return $this->getCalculatedTechnicalSheetPdfUrl();
 		return null;
 	}
 

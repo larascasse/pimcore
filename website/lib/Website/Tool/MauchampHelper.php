@@ -170,8 +170,55 @@ EOT;
     }
 
 
+    public static function getDebugClient() {
+      $data = <<<EOT
+<?xml version="1.0" encoding="UTF-8"?>
+<ClientXML_Azure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <Code_Client>EVLINAMA</Code_Client>
+   <Nom>EVLINAMA</Nom>
+   <Indice_Code_Prix>4</Indice_Code_Prix>
+   <Code_Client_Web />
+   <ADRESSES_Livraisons>
+      <ADRESSE_Azure>
+         <Nom>EVLINAMA</Nom>
+         <Adr1>RUE CARNOT</Adr1>
+         <Cp>13210</Cp>
+         <Ville>SAINT-REMY DE PROVENCE</Ville>
+         <Pays>FR</Pays>
+      </ADRESSE_Azure>
+   </ADRESSES_Livraisons>
+   <ADRESSES_CLients>
+      <ADRESSE_Azure>
+         <Nom>EVLINAMA</Nom>
+         <Adr1>RUE CARNOT</Adr1>
+         <Cp>13210</Cp>
+         <Ville>SAINT-REMY DE PROVENCE</Ville>
+         <Pays>FR</Pays>
+      </ADRESSE_Azure>
+   </ADRESSES_CLients>
+</ClientXML_Azure>
+
+EOT;
+    return $data;
+    }
+
+    public static function isClientRequest($data) {
+      return strstr($data, "ClientXML_Azure");
+    }
+
+    public static function parseClient($data) {
+      $xml = simplexml_load_string($data);
+      $client = json_decode(json_encode($xml), TRUE)['item'];
+
+
+      return $xml;
+
+    }
+
+
     public static function parseOrder($data) {
     	$xml = simplexml_load_string($data);
+     
         $lines = $xml->Lignes[0]->Ligne;
 
         if($lines->count()<1){
@@ -438,6 +485,97 @@ EOT;
                     $client->addChild($k);
                     $client->$k=$v;
                 }
+               
+              
+                
+             }
+           }
+          while(($nextProductToken = $response->GetContinuation()) != null);
+
+      }
+      catch (Exception $e)
+        {
+  
+             echo  "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getMessage(); 
+        }
+
+       return $xml;
+  }
+
+
+
+
+  public static function loadAzureClient($codeclient) {
+    $svc = $svc = new \LPNEntities(LPN_SERVICE_URL);
+        $query = getQuery($svc,"client",$codeclient);//self::getParam("code_commande"));
+        $response = $query->Execute();
+        $orders = array();
+        
+        try {
+          do {
+              if(isset($nextProductToken) && $nextProductToken != null) {            
+                  $response = $svc->Execute($nextProductToken);
+
+
+              }
+
+              $index=0;
+              foreach($response->Result as $orderAzure) {
+                $debugData = false;
+
+                 $arrForXml = array(
+                            "Type_Piece"            => "Client",  //METTRE Dvis si cheque ou autre / Mettre Commande qu si retour de payment CB authorisé
+                            "Code_Client_Web"       => $Customer->Code_Client_Web,
+                            "Code_Client"           => $Customer->Code_Client,
+                            "Nom"                   => $Customer->Nom,
+                            "Nom_Contact"           => $Customer->Nom_Contact,
+                            "Prenom_Contact"        => $Customer->Prenom_Contact,
+                            "Email_Contact"         => $Customer->Email_Contact,
+                            "Indice_Code_Prix"      => $Customer->Indice_Code_Prix,
+                            "Suivi_Int"             => $Customer->Suivi_Int,
+                          
+                  );  
+              
+                $arrAdresseForXml = array(
+                            "Adresse_Facturation_Raison_Sociale"  =>  $Customer->Nom, //,"TEST",//$orderAzure->XXXX, 
+                            "Adresse_Facturation_Nom"         =>  $Customer->Nom->Adresse_Facturation_Nom, //,"TEST222",//$orderAzure->XXXX,
+                            "Adresse_Facturation_Prenom"      =>  $Customer->Prenom_Contact, //,"TEST",//$orderAzure->XXXX,
+                            "Adresse_Facturation_Email"       =>  $Adresse->Email, //,"TEST",//$orderAzure->XXXX,             
+                            "Adresse_Facturation_Ville"       =>  $Adresse->Ville, //,"TEST",//$orderAzure->XXXX,
+                            "Adresse_Facturation_CP"        =>  $Adresse->CP, //,"TEST",//$orderAzure->XXXX,
+                            "Adresse_Facturation_Code_Pays"     =>  $Adresse->Pays, //,"TEST",//$orderAzure->XXXX,
+                            "Adresse_Facturation_Adr1"        =>  $Adresse->Adr1, //,"TEST",//$orderAzure->XXXX,
+                            "Adresse_Facturation_Telephone"     =>  $Adresse->Telephone, //,"TEST",//$orderAzure->XXXX,
+
+                            "Adresse_Facturation_Portable"     =>  $Adresse->Portable, //,"TEST",//$orderAzure->XXXX,
+
+                            "Adresse_Facturation_Fax"         =>  $Adresse->Fax //,"TEST",//$orderAzure->XXXX,
+                  );
+
+                   $arrForXml = array_merge($arrForXml,$arrAdresseForXml);
+
+
+                 if(strlen($arrForXml["Adresse_Facturation_Email"]) > 4 && strlen($arrForXml['Email_Contact'])<4)
+                  $arrForXml['Email_Contact'] = $arrForXml["Adresse_Facturation_Email"];
+
+                if(strlen($arrForXml["Adresse_Facturation_Email"]) > 4 && strlen($arrForXml['Email_Contact'])<4)
+                  $arrForXml['Email_Contact'] = $arrForXml["Adresse_Facturation_Email"];
+
+
+
+                  $xml = new SimpleXMLElement('<Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>');
+    
+                  $callback =  function ($v, $k) use (&$xml, &$callback) {
+
+                          if (is_array($v)) {
+                              array_walk_recursive($v, $callback);
+                          }
+                          $xml->addChild($k);
+                          $xml->$k = $v;
+                      };
+                      
+                  array_walk_recursive($arrForXml, $callback);
+
                
               
                 

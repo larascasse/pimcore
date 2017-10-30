@@ -73,15 +73,23 @@ function sendEmail() {
 <div style="padding-top: 80px;">
 	<table class="table table-bordered table-striped">
 		<thead class="thead-inverse__">
+<?php
+$hasOnePose = false;
+foreach ($this->products as $product) {
+  if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
+    $hasOnePose = true;
+    break;
+  }
+}
+?>
 			<tr>
       <th>EAN</th>
       <th>Nom</th>
-      <th><input type="checkbox" id="selectAllFt" /></th>
-      <th></th>
-      <th><input type="checkbox" id="selectAllPose" /></th>
-      <th></th>
-      <th><input type="checkbox" id="selectAllPhoto" /></th>
-      <th></th>
+      <th colspan="2"><input type="checkbox" id="selectAllFt" /></th>
+      <?php if ($hasOnePose) : ?>
+      <th colspan="2"><input type="checkbox" id="selectAllPose" /></th>
+    <?php endif ?>
+      <th colspan="2"><input type="checkbox" id="selectAllPhoto" /></th>
     </tr>
 		</thead>
 		<tbody>
@@ -90,8 +98,10 @@ function sendEmail() {
 
 //print_r($this->products);
 
+
 foreach ($this->products as $product) {
 	$sku = $product->getSku();
+  $hasPose = strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0;
 	?>
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>
@@ -99,15 +109,27 @@ foreach ($this->products as $product) {
 	
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
 	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
-	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
+	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
 
 
+<?php if($hasPose) : ?>
 	<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
+    <?php else : ?>
+    <!--
+    <td></td>
+      <td></td>
+    -->
+<?php endif; ?>
 
 
-	<td class="col__"><input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/></td>
-	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a></td>
+    <td class="col__">
+      <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>
+    </td>
+    <td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a></td>
+
+
+
 	</tr>
 	<?php
 }

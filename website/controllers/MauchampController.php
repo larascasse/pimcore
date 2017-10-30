@@ -36,13 +36,30 @@ class MauchampController extends Action
         if(isset($xml))
             $data = $xml;
         else
-            $data = \Website\Tool\MauchampHelper::getDebugOrder();
+             $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+            //$data = \Website\Tool\MauchampHelper::getDebugOrder();
         
+        if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
+            $client = \Website\Tool\MauchampHelper::parseClient($data);
+            //print_r($client);
+            try {
+                $this->view->client = $client;
+                $this->view->xmlClient = $xml;
+                $this->renderScript('mauchamp/mauchamp-client.php');
+                
+            }
+            catch (Exception $e) {
+                //echo "klmklmklkm".$e->getMessage();
+            }
+            //die;
+        }
+        else {
+            $order = \Website\Tool\MauchampHelper::parseOrder($data);
+            $this->view->products = $order["products"];
+            $this->view->missingProducts = $order["missingProducts"];
+            $this->view->transport = $order["transport"];
+        }
         
-        $order = \Website\Tool\MauchampHelper::parseOrder($data);
-        $this->view->products = $order["products"];
-        $this->view->missingProducts = $order["missingProducts"];
-        $this->view->transport = $order["transport"];
     }
 
     public function mauchampSendmailAction() {
@@ -180,6 +197,25 @@ echo $content;
         $this->view->codecommande=$codecommande;
         
         $xml = $order = \Website\Tool\MauchampHelper::loadAzureOrder($codecommande);
+        if(isset($xml)) {
+            $this->view->xml =  $xml;
+        }
+
+
+    }
+
+    public function mauchampClientTestAction() {
+        //"CCA172694"
+        $this->view->layout()->setLayout("layout-mauchamp");
+        $codeclient = $this->getParam('codeclient');
+        if(!isset($codeclient)) {
+            $this->view->codeclient="";
+            return;
+        }
+
+        $this->view->codeclient=$codeclient;
+        
+        $xml = $order = \Website\Tool\MauchampHelper::loadAzureClient($codeclient);
         if(isset($xml)) {
             $this->view->xml =  $xml;
         }

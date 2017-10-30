@@ -103,7 +103,7 @@ if(is_array($result) && count($result)>0)  {
         
         <div class="checkbox">
           <label>
-          <input type="checkbox" class="btn btn-primary" name="newsletter" value="1" /> Inscription Newsletter
+            <input type="checkbox" class="btn btn-primary" name="newsletter" value="1" /> Inscription Newsletter
           </label>
         </div>
         
@@ -115,7 +115,7 @@ if(is_array($result) && count($result)>0)  {
         </div>
 
 
-        </div>
+
       </div>
 
       <?php 

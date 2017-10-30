@@ -85,7 +85,6 @@ $customer = false;
 $result = $client->customerCustomerList($session, $complexFilter);
 if(is_array($result) && count($result)>0)  {
 
-
     $customer = $result[0];
     //var_dump ($customer);
 }
@@ -95,19 +94,24 @@ if(is_array($result) && count($result)>0)  {
   <div class="container" style="padding-top: 40px;">
   <div class="row">
     <div class="col-xs-12">
+      
+
       <?php if (!$customer) : ?>
       <h3>Client WEB inexistant pour l'email <?php echo $email; ?></h3>
       <form id="mailform" class="form-horizontal">
       <div class="text-center">
+        
         <div class="checkbox">
           <label>
           <input type="checkbox" class="btn btn-primary" name="newsletter" value="1" /> Inscription Newsletter
           </label>
         </div>
+        
         <div class="form-group">
           <input type="button" class="btn btn-primary" name="button" onclick="sendEmail(this)" value="Créer un compte web" /><br />
           <div style="display: none;">
-          <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
+            <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
+          </div>
         </div>
 
 
@@ -115,9 +119,7 @@ if(is_array($result) && count($result)>0)  {
       </div>
 
       <?php 
-      else : ?>
-
-      <?
+      else : 
         foreach ($customer as $key => $value) {
             echo $key." : ".$value."<br />";
         }

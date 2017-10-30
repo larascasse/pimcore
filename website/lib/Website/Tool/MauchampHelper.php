@@ -178,7 +178,7 @@ EOT;
    <Nom>NOM TEST_LPN</Nom>
    <Indice_Code_Prix>4</Indice_Code_Prix>
    <Code_Client_Web />
-   <Email_Contact>florent@lesmecaniques.net</Email_Contact>
+   <Email_Contact>florenttest@lesmecaniques.net</Email_Contact>
    <ADRESSES_Livraisons>
       <ADRESSE_Azure>
          <Nom>EVLINAMA</Nom>

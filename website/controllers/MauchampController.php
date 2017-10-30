@@ -28,6 +28,9 @@ class MauchampController extends Action
    
     public function mauchampAction() {
 
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
         $this->view->layout()->setLayout("layout-mauchamp");
 
         //POST from sceinergie
@@ -63,6 +66,8 @@ class MauchampController extends Action
     }
 
     public function mauchampSendmailAction() {
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
       
          header('Content-Type: application/json');
 
@@ -186,6 +191,11 @@ echo $content;
 
 
     public function mauchampTestAction() {
+
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+
         //"CCA172694"
         $this->view->layout()->setLayout("layout-mauchamp");
         $codecommande = $this->getParam('codecommande');
@@ -205,6 +215,11 @@ echo $content;
     }
 
     public function mauchampClientTestAction() {
+
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+        
         //"CCA172694"
         $this->view->layout()->setLayout("layout-mauchamp");
         $codeclient = $this->getParam('codeclient');

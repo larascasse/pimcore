@@ -122,7 +122,7 @@ if(is_array($result) && count($result)>0)  {
       else : 
         ?>
 
-        <h4>Debug XML</h4>
+       
         <?php
         foreach ($customer as $key => $value) {
             echo $key." : ".$value."<br />";
@@ -131,7 +131,7 @@ if(is_array($result) && count($result)>0)  {
 
     endif; ?>
 <hr />
-
+ <h4>Debug XML</h4>
 <?php foreach ($this->client as $key => $value) {
   echo '<div class="form-group"><label>'.$key.' : </label> <input disabled value="'.$value.'" /></div>';
 }

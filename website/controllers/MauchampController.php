@@ -137,56 +137,9 @@ class MauchampController extends Action
                 }
 
          echo json_encode(array($httpsource,$ftUrls));
-         die;
+      
 
-          try {
-                 $mail = new Pimcore_Mail();
-                 $mail->setIgnoreDebugMode(true);
-                 //$this-addParam("message","Merci pour votre visite !");
-
-                 $this->params["message"] = "Merci pour votre visite !";
-                 // To is used from the email document, but can also be set manually here (same for subject, CC, BCC, ...)
-                 //$mail->addTo("bernhard.rusch@pimcore.org");
-
-                //$emailDocument = $this->document->getProperty("email");
-                //if(!$emailDocument) {
-                    $emailDocument = Document::getById(38);
-                //}
-
-                    /*
-                    $optionalParams = array('foo' => 'bar', 'hum'=>'bug');
-$useLayout = true;
-$content = Document_Service::render(Document::getById(2), $optionalParams, $useLayout);
-echo $content;
-*/
-
-                $mail->setDocument($document);
-                $mail->setParams($this->getAllParams());
-
-                $mail->clearRecipients();
-
-                $mail->addTo($this->getParam("email"),$this->getParam("firstname").' '.$this->getParam("lastname"));
-                $mail->setSubject("Votre sélection La Parqueterie Nouvelle");
-
-                $mail->clearFrom();
-                $mail->setFrom("florent@lesmecaniques.net");
-
-               
-                $mail->send();
-
-           
-
-                }
-               catch (Exception $e) {
-                // something went wrong: eg. limit exceeded, wrong configuration, ...
-                Logger::err($e);
-                echo $e->getMessage();exit;
-                }
-
-
-
-        echo json_encode($response);
-        die;
+         
     }
 
 
@@ -219,7 +172,7 @@ echo $content;
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
 
-        
+
         //"CCA172694"
         $this->view->layout()->setLayout("layout-mauchamp");
         $codeclient = $this->getParam('codeclient');

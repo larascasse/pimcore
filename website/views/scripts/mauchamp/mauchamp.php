@@ -1,5 +1,5 @@
 <script>
-	console.log("klklmklkml");
+
 $(document).ready(function() {
 	console.log("INIT");
   $('#selectAllFt').on('click', function () {
@@ -33,9 +33,43 @@ $(document).ready(function() {
   $('#selectAllFt').click();
   $('#selectAllPose').click();
   $('#selectAllPhoto').click();
+
+
 });
 
+
+
+function showPleaseWait () {
+            $('#pleasewaitmodal').modal();
+        };
+
+function hidePleaseWait () {
+            $('#pleasewaitmodal').modal('hide');
+        };
+
+
+
+
+function sendEmail() {
+  console.log("KK",$("#mailform"),$("#mailform").serialize());
+  showPleaseWait();
+  $.ajax({
+     url : '/?controller=mauchamp&action=mauchamp-sendmail',
+     data: $("#mailform").serialize()+'&sendmail=true',
+     method : "POST",
+     success: function (data) {
+
+       
+
+            hidePleaseWait();
+            alert(data);
+
+      }
+  });
+}
+
 </script>
+<form id="mailform">
 <div style="padding-top: 80px;">
 	<table class="table table-bordered table-striped">
 		<thead class="thead-inverse__">
@@ -64,15 +98,15 @@ foreach ($this->products as $product) {
 	<td class="col__"><?php echo $product->getName()?></td>
 	
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
-	<td class="col__"><input type="checkbox" class="check-ft"/></td>
+	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
 
 
-	<td class="col__"><input type="checkbox"  class="check-pose"/></td>
+	<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
 
 
-	<td class="col__"><input type="checkbox"  class="check-photo" value="<?php echo $sku ?>"/></td>
+	<td class="col__"><input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/></td>
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a></td>
 	</tr>
 	<?php
@@ -93,7 +127,7 @@ foreach ($this->products as $product) {
 <div class="collapse" id="formEmail">
 	<div class="row justify-content-center">
   <div class="card card-inverse card-info card-block" style="max-width: 800px;margin-top:80px;margin-bottom:80px;">
-  	<form>
+  
     <div class="form-group has-success__">
   <label class="form-control-label" for="inputSuccess1">Sujet</label>
   <input type="text" class="form-control form-control-success" id="inputSuccess1" value="Votre visite à La Parqueterie Nouvelle">
@@ -113,16 +147,12 @@ Si vous avez besoin de plus amples information, je me tiens à votre disposition
 
 Thierry & Michel</textarea>
 </div>
- <input type="submit" value="Envoyer" />
- </form>
+ <input type="button" value="Envoyer" id="sendmail" onclick="sendEmail();return false;" />
+
 </div>
 
 </div>
   </div>
 </div>
-
-<?php
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
-?>
+ </form>
+<div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>

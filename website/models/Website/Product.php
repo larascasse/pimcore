@@ -490,7 +490,16 @@ class Website_Product extends Object_Product {
 
 			);
 
-		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre");
+
+		//CE
+		$descriptionFields = array('dimensions', 'essence','origine_bois', 'support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose');
+
+
+		//CE
+		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre","durabilite_biologique");
+
+		//données tech générales
+		$donnesTechGeneralesFields = array("taux_humidite","coefficient_retractabilite","classe_upec","classe_utilisation");
 
 
 
@@ -635,6 +644,8 @@ class Website_Product extends Object_Product {
 					}
 					//pour l'affichage Spécifique
 					$caracteristiques[$attributeLabel]["isMarquageCe"] = in_array($attribute, $performanceFields);
+					$caracteristiques[$attributeLabel]["isDescription"] = in_array($attribute, $descriptionFields);
+					$caracteristiques[$attributeLabel]["isDonneeTechnique"] = in_array($attribute, $donnesTechGeneralesFields);
 
 					
 

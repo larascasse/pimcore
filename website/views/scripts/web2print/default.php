@@ -105,7 +105,7 @@
 <body>
 
 
-
+<h1><?php echo $this->title; ?>XXX</h1>
 <div id="site">
     <div class="page">
         <div id="logo">

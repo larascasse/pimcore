@@ -139,6 +139,30 @@ class ProductController extends Action
 
     }
 
+     public function detailFtAction() {
+
+        $this->enableLayout();
+        $this->setLayout("layout-produit");
+
+        $definition = Object_Class::getByName("Product")->getFieldDefinitions();
+        
+        
+
+        // "id" is the named parameters in "Static Routes"
+        $product = Object_Product::getById($this->getParam("id"));
+        
+
+
+        if(!$product instanceof Object_Product) {
+            // this will trigger a 404 error response
+            throw new \Zend_Controller_Router_Exception("invalid request");
+        }
+
+        $this->view->product = $product;
+        //$this->view->attributes = $definition;
+
+    }
+
 
     public function detailByChoixAction() {
         $this->enableLayout();

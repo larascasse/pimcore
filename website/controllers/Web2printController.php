@@ -1,7 +1,12 @@
 <?php
 
 use Website\Controller\Action;
-use Config;
+use Pimcore\Model\Document;
+use Pimcore\Model\Document\Page;
+use Pimcore\Model\Asset;
+use Pimcore\Model\Object;
+use Pimcore\Mail;
+use Pimcore\Tool;
 
 class Web2printController extends Action
 {
@@ -22,6 +27,7 @@ class Web2printController extends Action
     public function getProductPreviewPdfAction() {
     	$id = $this->getParam("id");
     	//$id=8706;
+
     	if($id>0) {
 
     		 $product = Object_Product::getById($this->getParam("id"));
@@ -29,91 +35,33 @@ class Web2printController extends Action
 	        if(!$product instanceof Object_Product || !$product->isPublished()) {
 	            
 	           
-	            throw new \Zend_Controller_Router_Exception("invalid request");
+	            //throw new \Zend_Controller_Router_Exception("invalid request");
+	            echo "wrong id";
+	            die;
 	        }
 	        //$httpSource = $product->getDefinition()->getPreviewUrl();
 
-	        $httpSource = "http://pimcore.florent.local/id/".$id;
+	        $httpSource = Pimcore\Tool::getHostUrl()."/id/".$id;
 
-	         $front = Zend_Controller_Front::getInstance();
+	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
-	         $web2printConfig = \Pimcore\Config::getWeb2PrintConfig();
-
-	         if (empty($wkhtmltopdfBin)) {
-	            $this->wkhtmltopdfBin = $web2printConfig->wkhtmltopdfBin;
-	        } else {
-	            $this->wkhtmltopdfBin = $wkhtmltopdfBin;
-	        }
-
-	        if (empty($options)) {
-	            if ($web2printConfig->wkhtml2pdfOptions) {
-	                $options = $web2printConfig->wkhtml2pdfOptions->toArray();
-	            }
-	        }
-
-	        
-
-	       // print_r($options);
-
-
-
-
-	         $tmpPdfFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
-
-	        $localOptions= [
-	        	"--debug-javascript" => 1,
-	        	"--load-error-handling" => "ignore"
-	        ];
-	       
-	        $optionConfig = array();
-	        
- 			$options=" ";
-	        if(is_array($localOptions)) {
-	            foreach ($localOptions as $argument => $value) {
-	                // there is no value only the option
-	                if(is_numeric($argument)) {
-	                    $optionConfig[] = $value;
-	                } else {
-	                    $optionConfig[] = $argument . " " . $value;
-	                }
-	            }
-	 
-	            $options .= implode(" ", $optionConfig);
-	        }
- 	
-
-	        if($web2printConfig->wkhtmltopdfBin) {
-	            $wkhtmltopdfBinary = $web2printConfig->wkhtmltopdfBin;
-	        }
-
- 
-        	system($wkhtmltopdfBinary.$options." " . $httpSource . " " . $tmpPdfFile);
-
-        	echo $wkhtmltopdfBinary.$options." " . escapeshellarg($httpSource) . " " . escapeshellarg($tmpPdfFile);
-
-
+        	$filename = "product_".$id.".pdf";
 	    
- 
-        	$pdfContent = file_get_contents($tmpPdfFile);
- 
-       			 // remove temps
-       		 //@unlink($tmpPdfFile);
+
 
        		$headers = [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=" . ' . $this->filename . '";"',
+                'Content-Disposition' => 'inline; filename=" . ' . $filename . '";"',
                 'Cache-Control' => 'private'
             ];
 
-        
-            die;
+            foreach ($headers as $key => $value) {
+            	 $this->getResponse()->setHeader($key,$value);
+            	 Header($key.":".$value);
+            }
+           
 
-       
-
- 
-       		// return $pdfContent;
-
-       		 return new Response($pdfContent, 200, $headers);
+       		 echo $pdfContent;
        		 exit;
 
 

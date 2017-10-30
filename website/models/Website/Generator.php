@@ -148,6 +148,16 @@ Tous les autres parquets.
 */
             return $product->getClasseReactionFeuFr();
         } 
+         elseif ($context->getFieldname() == "coefficient_retractabilite") {
+
+            return "todo coefficient_retractabilite";
+        } 
+        elseif ($context->getFieldname() == "durabilite_biologique") {
+
+            return "todo durabilite_biologique";
+        } 
+
+
         else {
             \Logger::error("unknown field : ".$context->getFieldname());
         }

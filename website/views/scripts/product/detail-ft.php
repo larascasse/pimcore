@@ -1,4 +1,3 @@
-
 <?php 
 
 
@@ -18,57 +17,55 @@ $lesplus = $this->product->getLesPlusArray();
 
 ?>
 
-<script>
-	
-
-</script>
-
-
- <?php 
-	$count=0;
-	for($i=1; $i<=3; $i++) { 
-        $image = $this->product->{"getImage_" . $i}();
-    	if($image) { 
-    		$count++;
-    	}
-    }
-  ?>
-
 
 <style type="text/css">
-	sectionXX h2 {
-		text-align: justify;
+
+
+	hr {
+		border-bottom: 10px solid #CCCCCC;
 	}
 </style>
 
-
+<!-- MAIN LAYOUT -->
 <div class="row">
 
+<!-- First col -->
+<div class="col-xs-4">
 
 
- <!-- Product Carousel -->
-<div class="col-12">
+<div class="row">
+	
+	<div class="col-xs-12">
+		 <div class="page-header">
 
- <div class="page-header">
-
-       <!-- <h3><?php echo $this->product->getSubtype(); ?></h3>-->
-        <h2 style="" class="balance-text"><?php echo $this->product->getMage_short_name(3000); ?></h2>
-        <p><?php echo $this->product->getSku(); ?> - <?php echo $this->product->name_scienergie_court?></p>
- </div>
+		       <!-- <h4><?php echo $this->product->getSubtype(); ?></h4>-->
+		        <h2 style="" class="balance-text"><?php echo $this->product->getMage_short_name(3000); ?></h2>
+		        <p><?php echo $this->product->getSku(); ?> - <?php echo $this->product->name_scienergie_court?></p>
+		        <hr />
+		        <h4>Fiche technique</h4>
+		 </div>
+	</div>
 </div>
-</div>
 
-<hr />
+
+</div>
+<!-- First col / -->
+<!-- Second col -->
+<div class="col-xs-4">
+
+
 <div class="row">
 
 	<div class="col">
 	
 	     <?php 
 	     $hasMarquageCe = false;
+	     $hasDonneesTech = false;
+	     $hasDescription= false;
 	     $caracteristiques =  $this->product->getCharacteristicsArray();
 	     $htmlStd='';
 	     $htmlStd .= '<dl class="row dl-horizontal">';
-	     $htmlCe = $htmlStd;
+	     $htmlCe = $htmlDonneeTech = $htmlDescription = $htmlStd;
 	     foreach ($caracteristiques as $key => $value) {
 	     		
 					$content = trim($value["content"]);
@@ -77,10 +74,10 @@ $lesplus = $this->product->getLesPlusArray();
 					if(!isset($value["label"]) || strlen($content)==0)
 						continue;
 
-					$htmlSingle.= '<dt class="col-xs-5">';
+					$htmlSingle.= '<dt class="">';
 					$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
 					$htmlSingle.= '</dt>';
-					$htmlSingle.= '<dd class="col-xs-7">';
+					$htmlSingle.= '<dd class="">';
 					
 	
 					if(isset($value["description"])) {
@@ -99,6 +96,17 @@ $lesplus = $this->product->getLesPlusArray();
 
 						$htmlCe .=$htmlSingle;
 					}
+					else if(isset($value["isDonneeTechnique"]) && $value["isDonneeTechnique"]) {
+						$hasDonneesTech = true;
+
+						$htmlDonneeTech.=$htmlSingle;
+					}
+					else if(isset($value["isDescription"]) && $value["isDescription"]) {
+						$hasDescription = true;
+
+						$htmlDescription .=$htmlSingle;
+					}
+
 					else
 						$htmlStd .=$htmlSingle;
 
@@ -107,6 +115,18 @@ $lesplus = $this->product->getLesPlusArray();
 		}
 		$htmlStd .='</dl>';
 		$htmlCe .='</dl>';
+		$htmlDescription .='</dl>';
+		$htmlDonneeTech .='</dl>';
+
+if ($hasDescription) {
+	echo "<h3>Description</h3>";
+	echo $htmlDescription;
+}
+
+if ($hasDonneesTech) {
+	echo "<h3>Données techniques</h3>";
+	echo $htmlDonneeTech;
+}
 
 echo $htmlStd;
 
@@ -388,7 +408,10 @@ foreach ($taxonomies as $label => $taxonomie) {
 	}
 	?>
 
-
+<!-- Second col / -->
+</div>
+</div>
+<!-- FIN MAIN LAYOUT / -->
 
 <script>
 
@@ -450,3 +473,5 @@ var productChars="<?php echo $strChildren; ?>";
 
 </script>
 <img src="" id="labelImage" />
+
+

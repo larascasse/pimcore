@@ -2507,7 +2507,7 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 			else if($contreciolle && $masseVolumique >= 500 && $epaisseur>=8) 
 				$m = "M4";
 			else
-				$m = "M5";
+				$m = "";
 
 			if(strlen($m)>0)
 				$result["Sans lame d'air"] = $m;
@@ -2546,7 +2546,7 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 		/* 
 NB : les classements actuels, définis par la norme NF EN 13501-1 indiquent que les classes A2 fl s2, B fl s1 & s2 et C fl s2 satisfont aux exigences M3. Les classes D fl s1 et s2 satisfont aux exigences M4.
 Autrement dit, hors des cas particuliers cités, tous les parquets conviennent quel que soit le mode de pose. */
-		return str_replace(array("M3","M4"), array("Cfl","Dfl"), $this->getClasseReactionFeuEu());
+		return str_replace(array("M5","M3","M4"), array("Efls1","Cfls1","Dfls1"), $this->getClasseReactionFeuEu());
 	}
 
 

@@ -76,7 +76,7 @@ h2{
 	margin-bottom: 17px;
 	line-height : 3;
 	display: inline-block;
-	width: 200px;
+	min-width: 200px;
 }
 
 
@@ -90,7 +90,7 @@ h4 {
 .container-pdf {
 	width : 1440px;
 	margin: 0 auto 0 auto;
-	background-color:#EEEEEE;
+	//background-color:#EEEEEE;
 }
 .page-header {
 	padding: 45px 15px 0 60px;

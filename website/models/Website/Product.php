@@ -500,7 +500,7 @@ class Website_Product extends Object_Product {
 
 
 		//CE
-		$descriptionFields = array('Dimensions', 'essence','origine_bois', 'support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose','ean','characteristics_others');
+		$descriptionFields = array('Dimensions', 'essence','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf');
 
 
 		//CE

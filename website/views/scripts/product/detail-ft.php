@@ -78,6 +78,34 @@ $lesplus = $this->product->getLesPlusArray();
 		        ?>
 		        <hr />
 		        <h4>Fiche technique</h4>
+		        <br />
+		        <br />
+		        <div class="row">
+					
+
+				    	
+						
+				        <?php for($i=1; $i<=3; $i++) { ?>
+				            <?php
+				            	try {
+				                	$image = $this->product->{"getImage_" . $i}();
+				            	}
+				            	catch (\Exception $e) {
+						            $image=null;
+						        }	
+				            ?>
+				            <?php if($image instanceof Asset_Image) { ?>
+				                <div class="col-xs-12">
+				                    <a href="<?php echo $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
+				                        <img class="img-responsive" src="<?php echo $image->getThumbnail("galleryThumbnail"); ?>">
+				                    </a>
+				                </div>
+				            <?php } ?>
+				        <?php } ?>
+
+				</div>
+
+
 		 </div>
 	</div>
 </div>
@@ -308,28 +336,8 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 
 </div> <!-- row -->
-<hr />
-<div class="row">
-	<div class="col-xs-12">
-		<h3>Images</h3>
-	</div>
 
-    	
-		
-        <?php for($i=1; $i<=3; $i++) { ?>
-            <?php
-                $image = $this->product->{"getImage_" . $i}();
-            ?>
-            <?php if($image) { ?>
-                <div class="col">
-                    <a href="<?php echo $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
-                        <img src="<?php echo $image->getThumbnail("galleryThumbnail"); ?>">
-                    </a>
-                </div>
-            <?php } ?>
-        <?php } ?>
 
-</div>
 
 
 

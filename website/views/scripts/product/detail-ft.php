@@ -229,19 +229,6 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 
 <div class="row">
-<!-- Product Header -->
-	<div class="col-xs-6">
-
-	    <div class="page-header">
-	        <div class="lead">
-	        	<p><?php echo nl2br($this->product->getShort_description()); ?></p>
-	        	<p><?php echo nl2br($this->product->getMage_sub_description()); ?></p>
-	   		</div>
-
-	    </div>
-	</div>
-</div>
-<div class="row">
 	<div class="col">
 	    <div class="page-header">
 	       
@@ -347,14 +334,9 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 
 
-
-
-
- 
-
-
-
 <hr />
+
+<?php if (strlen($this->product->getDescription())>0) : ?>
 <div class="row">
 	<h3 class="col-xs-12">Description</h3>
 	<div class="caracteristiques col-8">
@@ -366,8 +348,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 	</div>
 
 </div>
-
-
+<?php endif; ?>
 
 
 
@@ -451,66 +432,5 @@ foreach ($taxonomies as $label => $taxonomie) {
 </div>
 </div>
 <!-- FIN MAIN LAYOUT / -->
-
-<script>
-
-<?php
-
-
-
-$strChars = $this->product->getCharacteristics(false);
-$strChars=wordwrap($strChars,70,'\n');
-$strChars=str_replace("\n", "\\n", $strChars);
-
-$strChildren="";
- if(count($childrens)>0) {
-		$strChildren.="";
-		foreach ($childrens as $subProduct) {
-			if($subProduct->getEan()=="") {
-				$subProductChildrens = $subProduct->getChilds();
-				$strChildren.="\n".$subProduct->getMage_short_name()."\n";
-				foreach ($subProductChildrens as $subsubProduct) {
-
-					$strChildren.=$subsubProduct->getEan()." : ".$subsubProduct->getDimensionsStringEtiquette()."\n";
-
-				}
-
-			}
-			else {
-					$strChildren.=$subProduct->getEan()." : ".$subProduct->getDimensionsStringEtiquette()."\n";
-
-			}
-		}
-	}
-	$strChildren = trim($strChildren);
-
-//$strChildren=wordwrap($strChildren,80,'\n');
-//$strChildren=str_replace("\n", "\\n", $strChildren);
-$width=65;
-
-$str=  wordwrap($this->product->getShort_description(),$width);
-$str.= "\n".wordwrap(strip_tags($this->product->getDescription()),$width);
-
-//$str.= "\n".$this->product->getMage_sub_description();
-
-//$str.="\n\n".$strChildren;
-
-$str=wordwrap($str,800,'\n');
-$str=str_replace("\n", "\\n", $str);
-
-
-$strChildren=wordwrap($strChildren,$width);
-$strChildren=str_replace("\n", "\\n", $strChildren);
-
-
-
-?>
-
-var productName="<?php echo wordwrap($this->product->getName(),60,'\\n'); ?>";
-var productDescription="<?php echo $str; ?>";
-var productChars="<?php echo $strChildren; ?>";
-
-</script>
-<img src="" id="labelImage" />
 
 

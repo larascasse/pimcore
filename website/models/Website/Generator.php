@@ -150,7 +150,7 @@ Tous les autres parquets.
         } 
          elseif ($context->getFieldname() == "coefficient_retractabilite") {
 
-            return "todo coefficient_retractabilite";
+            return $product->getCoefficientRetractabilite();
         } 
         elseif ($context->getFieldname() == "durabilite_biologique") {
 

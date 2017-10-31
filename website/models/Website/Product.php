@@ -175,8 +175,14 @@ class Website_Product extends Object_Product {
 				//$html.= "<p><strong>Existe en</strong><br />";
 			}
 			foreach ($taxonomies as $label => $taxonomie) {
-				$html.= "<p><strong>".ucfirst(strtolower($taxonomie->getLabel())).'</strong> : ';
-				$html.= "".$taxonomie->getDescription().'</p>';
+				if(strlen(trim($taxonomie->getDescription()))>0) {
+					$html.= '<span class"desc-title">'.ucfirst(strtolower($taxonomie->getLabel())).'</span> : ';
+					$html.= "".$taxonomie->getDescription();
+				}
+				else {
+					$html.='<span class"desc-title">'.ucfirst(strtolower($taxonomie->getLabel())).'</span>';
+				}
+				
 			}
 			//$html='</div></div>';
 
@@ -450,6 +456,8 @@ class Website_Product extends Object_Product {
 		else {
 			$html ="";
 			foreach ($caracteristiques as $key => $value) {
+				if(!isset($value["label"]))
+						continue;
 				$html.="- ".$value["label"]." : ".$value["content"]."\n";
 			}
 			$html .="";
@@ -492,14 +500,14 @@ class Website_Product extends Object_Product {
 
 
 		//CE
-		$descriptionFields = array('dimensions', 'essence','origine_bois', 'support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose');
+		$descriptionFields = array('Dimensions', 'essence','origine_bois', 'support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose','ean','characteristics_others');
 
 
 		//CE
 		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre","durabilite_biologique");
 
 		//données tech générales
-		$donnesTechGeneralesFields = array("taux_humidite","coefficient_retractabilite","classe_upec","classe_utilisation");
+		$donnesTechGeneralesFields = array("taux_humidite","coefficient_retractabilite","classe_upec","classe_utilisation","characteristics_others_tech","characteristics_others_perf");
 
 
 
@@ -518,7 +526,7 @@ class Website_Product extends Object_Product {
 
 		$dimentionsStringExtended = $this->getDimensionsStringExtended();
 		if(strlen($dimentionsStringExtended)>0)
-			$caracteristiques["Dimensions"] = array("label"=>"Dimensions","content"=>$dimentionsStringExtended);
+			$caracteristiques["Dimensions"] = array("label"=>"Dimensions","key"=>"dimensions","content"=>$dimentionsStringExtended,"isDescription" => true);
 
 		
 
@@ -527,6 +535,8 @@ class Website_Product extends Object_Product {
 
 			$attribute  =  $value->getName();
 			$attributeLabel = $value->getTitle();
+
+			$attributeKey = $attributeLabel;
 			
 			if(in_array($attribute,$ignoreFields)) {
 				unset($attributeValue);
@@ -560,7 +570,7 @@ class Website_Product extends Object_Product {
 					}
 
 
-					if($attribute=="characteristics_others") {
+					if($attribute=="characteristics_others" || $attribute=="characteristics_others_tech" || $attribute=="characteristics_others_perf") {
 
 						$others = explode("\n",trim($attributeValue));
 						$caracteristiquesOthers=array();
@@ -568,20 +578,45 @@ class Website_Product extends Object_Product {
 							$row = 0;
 							$currentRowTitle = 0; // pour les ligne sans titre, on ajoute a précedement
 							$contentWithoutTitle = array();
+
+							//Pour chaque ligne du champ
 							foreach ($others as $item) {
+
+
 								$explode = explode(":",$item);
+
+								////si label et valeur, on ajoute à la ligne précédement
 								if(count($explode)>1) {
 									if(count($caracteristiquesOthers)>0)
 										$currentRowTitle++;	
-									$caracteristiquesOthers[$currentRowTitle] = array("key"=>$currentRowTitle,"label"=>trim($explode[0]),"content"=>trim($explode[1]));
+									$caracteristiquesOthers[$currentRowTitle] = array("key"=>trim($explode[0]),"label"=>trim($explode[0]),"content"=>trim($explode[1]));
 								}
+								// si pas de label, et début, on met un label vierge
 								elseif ($currentRowTitle==0) {
-									$caracteristiquesOthers[$currentRowTitle] = array("key"=>$currentRowTitle,"label"=>"","content"=>trim($item));
+									if(!isset($caracteristiquesOthers[$currentRowTitle])) {
+										$caracteristiquesOthers[$currentRowTitle] = array("key"=>"row".$currentRowTitle,"label"=>"","content"=>trim($item));
+									}
+									else {
+										$caracteristiquesOthers[$currentRowTitle]["content"] .="<br />".trim($item);
+									}
 									
 
 								}
+								//Sinon, on ajoute à la ligne précédente
 								else {
 									$caracteristiquesOthers[$currentRowTitle]["content"] .="<br />".trim($item);
+								}
+
+								if($attribute=="characteristics_others") {
+									$caracteristiquesOthers[$currentRowTitle]["isDescription"] = true;
+
+								}
+								else if($attribute=="characteristics_others_tech") {
+									$caracteristiquesOthers[$currentRowTitle]["isDonneeTechnique"] = true;
+
+								}
+								else if($attribute=="characteristics_others_perf") {
+									 $caracteristiquesOthers[$currentRowTitle]["isMarquageCe"] = true;
 								}
 								
 									
@@ -589,11 +624,14 @@ class Website_Product extends Object_Product {
 							
 						}
 						if(count($caracteristiquesOthers)>0) {
-							foreach ($caracteristiquesOthers as $keyOthers => $valueOther) {
-								$caracteristiques[$attributeLabel] = $valueOther;
+							foreach ($caracteristiquesOthers as $valueOther) {
+								$caracteristiques[$valueOther["label"]] = $valueOther;
+									//print_r($valueOther);
 
 							}
 						}
+
+
 						
 
 					}
@@ -607,11 +645,11 @@ class Website_Product extends Object_Product {
 							}
 
 							$attributeValue = implode(", ",$display);
-							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						else {
 							$attributeValue = implode(", ",$attributeValue);
-							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 						}
 						
 
@@ -619,9 +657,9 @@ class Website_Product extends Object_Product {
 					}
 					else if($value->fieldtype=="select") {
 							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
-							$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+							$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 							if(method_exists($this, $getterDescription)) {
-								$caracteristiques[$attributeLabel]['description'] = $this->$getterDescription();
+								$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
 							}
 					}
 
@@ -635,17 +673,33 @@ class Website_Product extends Object_Product {
 						if($value->fieldtype=="href"){
 							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
 						}
-						$caracteristiques[$attributeLabel] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+						$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeKey,"content"=>$attributeValue);
 
 						if(method_exists($this, $getterDescription)) {
-							$caracteristiques[$attributeLabel]['description'] = $this->$getterDescription();
+							$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
 						}
 
 					}
 					//pour l'affichage Spécifique
-					$caracteristiques[$attributeLabel]["isMarquageCe"] = in_array($attribute, $performanceFields);
-					$caracteristiques[$attributeLabel]["isDescription"] = in_array($attribute, $descriptionFields);
-					$caracteristiques[$attributeLabel]["isDonneeTechnique"] = in_array($attribute, $donnesTechGeneralesFields);
+					$caracteristiques[$attributeKey]["isMarquageCe"] = in_array($attribute, $performanceFields);
+					$caracteristiques[$attributeKey]["isDescription"] = in_array($attribute, $descriptionFields);
+					$caracteristiques[$attributeKey]["isDonneeTechnique"] = in_array($attribute, $donnesTechGeneralesFields);
+
+					
+					if(isset($caracteristiques[$attributeKey]["content"])) {
+						if(in_array($caracteristiques[$attributeKey]["key"],array("weight"))) {
+							$caracteristiques[$attributeKey]["content"] = number_format($caracteristiques[$attributeKey]["content"],2);
+							continue;
+						}
+					}
+					
+					
+
+					//On arrondi les chiffres à virgule
+					if(isset($caracteristiques[$attributeKey]["content"]) && is_float($caracteristiques[$attributeKey]["content"])) {
+						//echo $attributeKey."/".$caracteristiques[$attributeKey]["content"]."/".gettype($caracteristiques[$attributeKey]["content"])."/".round($caracteristiques[$attributeKey]["content"],2)."<br />";
+						$caracteristiques[$attributeKey]["content"] = number_format($caracteristiques[$attributeKey]["content"],2);
+					}
 
 					
 
@@ -2415,7 +2469,7 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 */
 		$massif = $this->isParquetMassif();
 		$contreciolle = $this->isParquetContrecolle();
-		$masseVolumique = $this->getMasseVolumique();
+		$masseVolumique = (int)$this->getMasseVolumique();
 		$epaisseur = $this->getEpaisseur();
 		$coucheUsure = (float)$this->getEpaisseurUsure();
 
@@ -2509,6 +2563,19 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		else if($lameDAir && $sansLameDAir) 
 			return "Avec lame d'air";
 		return "";
+	}
+
+	public function getCoefficientRetractabilite() {
+		$essence = $this->getEssence();
+		switch ($essence) {
+			case 'CHE':
+				return "Chêne : radial=0,16 et tangentiel=0,32";
+				break;
+			
+			default:
+				return "";
+				break;
+		}
 	}
 
 

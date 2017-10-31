@@ -86,6 +86,7 @@ class Wkhtmltopdf {
                 "--margin-top" => 0,
                 "--margin-left" => 0,
                 "--margin-right" => 0,
+                //"--javascript-delay" =>2000
             ];
            
             $optionConfig = array();

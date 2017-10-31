@@ -25,6 +25,11 @@ class Web2printController extends Action
 
 
     public function getProductPreviewPdfAction() {
+
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+        
     	$id = $this->getParam("id");
     	//$id=8706;
 
@@ -41,7 +46,7 @@ class Web2printController extends Action
 	        }
 	        //$httpSource = $product->getDefinition()->getPreviewUrl();
 
-	        $httpSource = Pimcore\Tool::getHostUrl()."/id/".$id;
+	        $httpSource = Pimcore\Tool::getHostUrl()."/id/".$id;//."?t=".$time();
 
 	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 

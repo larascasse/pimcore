@@ -44,6 +44,8 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<link rel="stylesheet" href="/website/static_lpn/scss/build/css/ft.css">
+
 
 
 
@@ -87,7 +89,8 @@ var dataLayer=[];
 }
 </style>
 
-<div id="content" class="container-fluid">
+<div id="content" class="container-pdf">
+
     <?php echo $this->layout()->content; ?>
    <!-- <div class="row"> 
         <div class="col-xs-12 pim-centered"">

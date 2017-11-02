@@ -623,7 +623,7 @@ class Website_Product extends Object_Product {
 
 
 					if(method_exists($this, $getterString)) {
-						$attributeValue = "<!-- ".$this->$getter()." -->".$this->$getterString();
+						$attributeValue = $this->$getterString();
 					}
 
 					if(empty($attributeValue))

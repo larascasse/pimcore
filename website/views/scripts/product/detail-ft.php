@@ -28,15 +28,29 @@ $lesplus = $this->product->getLesPlusArray();
  $logoAssets = array();
  foreach ($caracteristiques as $key => $value) {
 
- 			if(!is_array($value) || !isset($value["content"]) || strlen(trim($value["content"]))==0) {
+ 			if(!is_array($value)) {
  				continue;
  			}
- 		
-			$content = trim($value["content"]);
-			$htmlSingle = "";
 
-			if(!isset($value["label"]) || strlen($content)==0)
+ 			if(!isset($value["label"]))
+ 				continue;
+ 			
+ 			$content = $description = null;
+
+ 			if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
+
+				$content = trim($value["content"]);
+ 			}
+
+			if(isset($value["description"]) && strlen(trim($value["description"]))>0) {
+				$description = trim($value["description"]);
+			}
+
+
+			if(!isset($description) && !isset($content))
 				continue;
+			
+			$htmlSingle = "";
 
 			$isHidden = isset($value["is_hidden"]) && $value["is_hidden"];
 
@@ -46,9 +60,9 @@ $lesplus = $this->product->getLesPlusArray();
 			$htmlSingle.= '<dd class=""'.($isHidden?' style="display:none"':'').'>';
 			
 
-			if(isset($value["description"])) {
+			if(isset($description)) {
 				//$html.= '<br />';
-				$htmlSingle.= ucfirst(trim($value["description"]));
+				$htmlSingle.= ucfirst(trim($description));
 
 			}
 			else {

@@ -329,7 +329,7 @@ class Website_Product extends Object_Product {
 	}
 	public function getParquet_de_franceLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
-		if($this->getPefc()) {
+		if($this->getParquet_de_france()) {
 
 			$taxonomie =  Object::getByPath("/labels/parquet_de_france");
 
@@ -358,7 +358,7 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getNfString() {
-		if($this->getFsc())
+		if($this->getNf())
 			return "Oui";
 		else
 			return "Non";
@@ -366,7 +366,7 @@ class Website_Product extends Object_Product {
 	}
 	public function getNfLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
-		if($this->getFsc()) {
+		if($this->getNf()) {
 			$taxonomie =  Object::getByPath("/labels/nf");
 			if($taxonomie)
 				return $taxonomie ->getLogo();

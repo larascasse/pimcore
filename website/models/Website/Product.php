@@ -75,23 +75,41 @@ class Website_Product extends Object_Product {
 		//if(isset($this->$excludefiled) && $this->$excludefiled)
 		//	return;
 		
-		$value = $this->$field;
 		$getter = "get" . ucfirst($field);
+
+
+		if(property_exists('Website_Product',$field)) {
+			$value = $this->$field;
+		}
+		else {
+			  $def = $this->getClass()->getFieldDefinition($field);
+			
+			 
+			  if($def->fieldtype == 'calculatedValue') {
+			 	 
+					if(!empty($this) && method_exists($this, $getter)) {
+						$value = $this->$getter();
+					}
+			  }
+			  
+
+			
+		}
+
+		
 		$taxonomies = array();
 			
 
-		
-		if(strlen($value)>0) {
+		//On prend la valeur
+		if(isset($value) && strlen($value)>0) {
 			//if($field="volume")
 				//self::getFormatedDimension($value,$prefix,$suffix,$rounded);
 			$taxonomies[$this->getTaxonomyObject($field)->getLabel()]=$this->getTaxonomyObject($field);
-
 
 			//if($field=="volume")
 			//	echo self::getFormatedDimension($value,$prefix,$suffix,$rounded);;
 		}
 		else if(!empty($this) && method_exists($this, $getter) && strlen($value = $this->getValueFromParent($field))>0) {
-
 			$taxonomies[$this->getTaxonomyObject($field)->getLabel()]=$this->getTaxonomyObject($field);
 
 		
@@ -164,7 +182,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	 private function getTaxonomyDescription($field) {
+	private function getTaxonomyDescription($field) {
 
     	//detail taxo
 		$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
@@ -185,46 +203,37 @@ class Website_Product extends Object_Product {
 				
 			}
 			//$html='</div></div>';
-
 			return$html;
 		}
 
 	}
 
 
+	private function getTaxonomyLogoAsset($field) {
 
+    	//detail taxo
+		$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
+		if(count($taxonomies) > 0) {
+			//$html='<div class="row"><div class="col">';
+			$html='';
+			if(count($taxonomies)>1) {
+				//$html.= "<p><strong>Existe en</strong><br />";
+			}
+			foreach ($taxonomies as $label => $taxonomie) {
+				
+				return 	$taxonomie->getLogo();
 
-
-
-	/**
-	* @return string
-	*/
-	public function getChoix () {
-		//return "klmklmklmklkklmklmklm";
-		return parent::getChoix();
-
-		//Deprecated, we use the default beahaviour
-		if(Pimcore::inAdmin())
-			return parent::getChoix();
-
-		$preValue = $this->choix; 
-		if($preValue !== null && !Pimcore::inAdmin() && $preValue !="") { 
-
-
+				
+			}
+			//$html='</div></div>';
+			
 		}
-		else if((!$preValue ||  $preValue =="")) { 
-			$preValue =  $this->getValueFromParent("choix");
-
-		}
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    // do something with the cities
-		    return $data->getLabel();
-		  
-		}
-		return $preValue;
+		return null;
 
 	}
+
+
+
 
 	/**
 	* @return string
@@ -238,39 +247,12 @@ class Website_Product extends Object_Product {
 	}
 
 
-
 	public function getChoixDescription () {
 		return $this->getTaxonomyDescription('choix');
 		
 	}
 
-
-	public function getEssence() {
-
-		return parent::getEssence();
-
-		//Deprecated, we use the default beahaviour
-
-		if(Pimcore::inAdmin())
-			return parent::getEssence();
-
-		$preValue = $this->essence; 
-		if($preValue !== null && !Pimcore::inAdmin() && $preValue !="") { 
-
-		}
-		else if((!$preValue ||  $preValue =="")) { 
-
-			$preValue =  $this->getValueFromParent("essence");
-		
-		}
-
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    return $data->getLabel();
-		  
-		}
-		return $preValue;
-	}
+	
 	/**
 	* @return string
 	*/
@@ -287,33 +269,6 @@ class Website_Product extends Object_Product {
 
 	}
 
-
-
-	public function getQualite() {
-
-		return parent::getQualite();
-
-		//Deprecated, we use the default beahaviour
-
-		if(Pimcore::inAdmin())
-			return parent::getQualite();
-
-		$preValue = $this->qualite; 
-		if($preValue !== null && !Pimcore::inAdmin() && $preValue !="") { 
-
-		}
-		else if((!$preValue ||  $preValue =="")) { 
-			$preValue =  $this->getValueFromParent("qualite");
-		
-		}
-		$datas = Object_Taxonomy::getByCode($preValue);
-		foreach ($datas as $data) {
-		    return $data->getLabel();
-		  
-		}
-		return $preValue;
-	}
-
 	/**
 	* @return string
 	*/
@@ -328,7 +283,114 @@ class Website_Product extends Object_Product {
 
 	}
 
+	/**
+	* @return string
+	*/
+	public function getClasse_utilisationString () {
+		return $this->getSingleTaxonomyString('classe_utilisation');
 
+	}
+	/**
+	* @return string
+	*/
+	public function getClasse_utilisationDescription () {
+		return $this->getTaxonomyDescription('classe_utilisation');
+
+	}
+	public function getClasse_utilisationLogo () {
+		return $this->getTaxonomyLogoAsset('classe_utilisation');
+
+	}
+
+
+	/* LOGO */
+	public function getPefcString() {
+		if($this->getPefc())
+			return "Oui - Pefc - 10-31_3055";
+		else
+			return "Non";
+
+	}
+	public function getPefcLogo() {
+		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
+		if($this->getPefc()) {
+			$taxonomie =  Object::getByPath("/labels/pefc");
+			return $taxonomie ->getLogo();
+		}
+	}
+
+
+	public function getParquet_de_franceString() {
+		if($this->getParquet_de_france())
+			return "Oui";
+		else
+			return "Non";
+
+	}
+	public function getParquet_de_franceLogo() {
+		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
+		if($this->getPefc()) {
+
+			$taxonomie =  Object::getByPath("/labels/parquet_de_france");
+
+			if($taxonomie)
+				return $taxonomie ->getLogo();
+		}
+	}
+
+
+
+	public function getFscString() {
+		if($this->getFsc())
+			return "Oui";
+		else
+			return "Non";
+
+	}
+	public function getFscLogo() {
+		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
+		if($this->getFsc()) {
+			$taxonomie =  Object::getByPath("/labels/fsc");
+
+			if($taxonomie)
+				return $taxonomie ->getLogo();
+		}
+	}
+
+	public function getNfString() {
+		if($this->getFsc())
+			return "Oui";
+		else
+			return "Non";
+
+	}
+	public function getNfLogo() {
+		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
+		if($this->getFsc()) {
+			$taxonomie =  Object::getByPath("/labels/nf");
+			if($taxonomie)
+				return $taxonomie ->getLogo();
+		}
+	}
+
+
+
+	public function getPoseDescription($pose) {
+		
+		$taxonomie =  Object::getByPath("/pose/pose_".$pose);
+		if($taxonomie)
+			return $taxonomie ->getDescription();
+		
+	}
+
+
+	public function getPoseLogo($pose) {
+		
+		$taxonomie =  Object::getByPath("/pose/pose_".$pose);
+		if($taxonomie)
+			return $taxonomie ->getLogo();
+		
+	}
 	
 
 	public function getCharacteristicsFo() {
@@ -499,6 +561,10 @@ class Website_Product extends Object_Product {
 			);
 
 
+		//Liste des champs qui ne s'affichent pas, mais font on garde les logos
+		//$hiddenFields = array("pose_aclouer","pose_avisser","pose_aclouer","pose_avisser");
+
+
 		//CE
 		$descriptionFields = array('Dimensions', 'essence','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','fixation','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf');
 
@@ -547,6 +613,7 @@ class Website_Product extends Object_Product {
 			$getter = "get" . ucfirst($attribute);
 			$getterString = $getter."String";
 			$getterDescription = $getter."Description";
+			$getterLogo = $getter."Logo";
 			
 			
 			if(!empty($this)) {
@@ -639,8 +706,23 @@ class Website_Product extends Object_Product {
 					else if(is_array($attributeValue)) {
 						if($value->fieldtype=="multiselect") {
 							$display = array();
-							foreach ($attributeValue as $optionSelect => $valueSelect) {
-								$display[]=Object_Service::getOptionsForSelectField($this,$attribute)[$valueSelect];
+							foreach ($attributeValue as $optionSelect => $keySelect) {
+								//echo($optionSelect." ".$keySelect);
+								$option = Object_Service::getOptionsForSelectField($this,$attribute);
+								$selectedValue = $option[$keySelect]; 
+								$display[] = $selectedValue;
+
+								//On va créer une ligne par valeur, pour avoir les logos
+								//Maiqs on ne va pas les afficher !!
+								$caracteristiques[$attributeKey."_".$keySelect] = array("key"=>$attribute."_".$keySelect,"label"=>$attributeLabel." - ".$selectedValue." ".$keySelect,"content"=>"Oui","is_hidden"=>false);
+
+								if(method_exists($this, $getterLogo)) {
+									$caracteristiques[$attributeKey."_".$keySelect]['logo'] = $this->$getterLogo($keySelect);
+								}
+								if(method_exists($this, $getterDescription)) {
+									$caracteristiques[$attributeKey."_".$keySelect]['description'] = $this->$getterDescription($keySelect);
+								}
+
 
 							}
 
@@ -661,6 +743,9 @@ class Website_Product extends Object_Product {
 							if(method_exists($this, $getterDescription)) {
 								$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
 							}
+							if(method_exists($this, $getterLogo)) {
+								$caracteristiques[$attributeKey]['logo'] = $this->$getterLogo();
+							}
 					}
 
 					else if($value->fieldtype=="objectbricks") {
@@ -677,6 +762,9 @@ class Website_Product extends Object_Product {
 
 						if(method_exists($this, $getterDescription)) {
 							$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
+						}
+						if(method_exists($this, $getterLogo)) {
+							$caracteristiques[$attributeKey]['logo'] = $this->$getterLogo();
 						}
 
 					}

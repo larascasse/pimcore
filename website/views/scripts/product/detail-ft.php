@@ -15,16 +15,84 @@ $extras = $this->product->getRelated("extras");
 $childrens = $this->product->getChilds();
 $lesplus = $this->product->getLesPlusArray();
 
+
+/**** CARACTERISTIQUES ***/
+
+ $hasMarquageCe = false;
+ $hasDonneesTech = false;
+ $hasDescription= false;
+ $caracteristiques =  $this->product->getCharacteristicsArray();
+ $htmlStd='';
+ $htmlStd .= '<dl class="dl-horizontal">';
+ $htmlCe = $htmlDonneeTech = $htmlDescription = $htmlStd;
+ $logoAssets = array();
+ foreach ($caracteristiques as $key => $value) {
+
+ 			if(!is_array($value) || !isset($value["content"]) || strlen(trim($value["content"]))==0) {
+ 				continue;
+ 			}
+ 		
+			$content = trim($value["content"]);
+			$htmlSingle = "";
+
+			if(!isset($value["label"]) || strlen($content)==0)
+				continue;
+
+			$isHidden = isset($value["is_hidden"]) && $value["is_hidden"];
+
+			$htmlSingle.= '<dt class=""'.($isHidden?' style="display:none"':'').'>';
+			$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
+			$htmlSingle.= '</dt>';
+			$htmlSingle.= '<dd class=""'.($isHidden?' style="display:none"':'').'>';
+			
+
+			if(isset($value["description"])) {
+				//$html.= '<br />';
+				$htmlSingle.= ucfirst(trim($value["description"]));
+
+			}
+			else {
+				$htmlSingle.= ucfirst($content);
+			}
+
+			$htmlSingle.= '</dd>';
+
+
+			if(isset($value["logo"])) {
+				$logoAssets[] = $value["logo"];
+			}
+
+			if(isset($value["isMarquageCe"]) && $value["isMarquageCe"]) {
+				$hasMarquageCe = true;
+
+				$htmlCe .=$htmlSingle;
+			}
+			else if(isset($value["isDonneeTechnique"]) && $value["isDonneeTechnique"]) {
+				$hasDonneesTech = true;
+
+				$htmlDonneeTech.=$htmlSingle;
+			}
+			else if(isset($value["isDescription"]) && $value["isDescription"]) {
+				$hasDescription = true;
+
+				$htmlDescription .=$htmlSingle;
+			}
+
+			else
+				$htmlStd .=$htmlSingle;
+
+			
+			//$html.="</li>\n";
+}
+$htmlStd .='</dl>';
+$htmlCe .='</dl>';
+$htmlDescription .='</dl>';
+$htmlDonneeTech .='</dl>';
+
+
 ?>
 
 
-<style type="text/css">
-
-
-	hr {
-		border-bottom: 10px solid #CCCCCC;
-	}
-</style>
 
 <!-- MAIN LAYOUT -->
 <div class="row">
@@ -79,7 +147,23 @@ $lesplus = $this->product->getLesPlusArray();
 		        <hr />
 		        <h4>Fiche technique</h4>
 		        <br />
-		        <br />
+		        <hr />
+
+		        <?php
+		        if(is_array($logoAssets) && count($logoAssets)>0) { ?>
+		        	<?php
+		        	foreach ($logoAssets as  $asset) {
+		        		//echo '<div class="col-xs-2__">';
+			        	echo  $asset->getThumbnail("magento_logo")->getHTML(array("class"=>'ft-logo')); 
+			        	//echo '</div>';
+			        }
+			        ?>
+			   	 
+			      <?php 
+		        }
+		        
+		        ?>
+		        <hr />
 		        <div class="row">
 					
 
@@ -94,10 +178,15 @@ $lesplus = $this->product->getLesPlusArray();
 						            $image=null;
 						        }	
 				            ?>
-				            <?php if($image instanceof Asset_Image) { ?>
+				            <?php if($image instanceof Asset_Image) { 
+				            	$src = "".$image->getThumbnail("galleryThumbnail");
+				            	
+				            	if(strstr($src,"pantone.gif"))
+				            		continue;
+				            	?>
 				                <div class="col-xs-12">
 				                    <a href="<?php echo $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
-				                        <img class="img-responsive" src="<?php echo $image->getThumbnail("galleryThumbnail"); ?>">
+				                        <img class="img-responsive" src="<?php echo $src; ?>">
 				                    </a>
 				                </div>
 				            <?php } ?>
@@ -121,70 +210,11 @@ $lesplus = $this->product->getLesPlusArray();
 
 	<div class="col-xs-12">
 	
-	     <?php 
-	     $hasMarquageCe = false;
-	     $hasDonneesTech = false;
-	     $hasDescription= false;
-	     $caracteristiques =  $this->product->getCharacteristicsArray();
-	     $htmlStd='';
-	     $htmlStd .= '<dl class="dl-horizontal">';
-	     $htmlCe = $htmlDonneeTech = $htmlDescription = $htmlStd;
-	     foreach ($caracteristiques as $key => $value) {
+	     
 
-	     			if(!is_array($value) || !isset($value["content"]) || strlen(trim($value["content"]))==0) {
-	     				continue;
-	     			}
-	     		
-					$content = trim($value["content"]);
-					$htmlSingle = "";
 
-					if(!isset($value["label"]) || strlen($content)==0)
-						continue;
 
-					$htmlSingle.= '<dt class="">';
-					$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$htmlSingle.= '</dt>';
-					$htmlSingle.= '<dd class="">';
-					
-	
-					if(isset($value["description"])) {
-						//$html.= '<br />';
-						$htmlSingle.= ucfirst(trim($value["description"]));
-	
-					}
-					else {
-						$htmlSingle.= ucfirst($content);
-					}
-
-					$htmlSingle.= '</dd>';
-
-					if(isset($value["isMarquageCe"]) && $value["isMarquageCe"]) {
-						$hasMarquageCe = true;
-
-						$htmlCe .=$htmlSingle;
-					}
-					else if(isset($value["isDonneeTechnique"]) && $value["isDonneeTechnique"]) {
-						$hasDonneesTech = true;
-
-						$htmlDonneeTech.=$htmlSingle;
-					}
-					else if(isset($value["isDescription"]) && $value["isDescription"]) {
-						$hasDescription = true;
-
-						$htmlDescription .=$htmlSingle;
-					}
-
-					else
-						$htmlStd .=$htmlSingle;
-
-					
-					//$html.="</li>\n";
-		}
-		$htmlStd .='</dl>';
-		$htmlCe .='</dl>';
-		$htmlDescription .='</dl>';
-		$htmlDonneeTech .='</dl>';
-
+<?php
 if ($hasDescription) {
 	echo "<h2>Description</h2>";
 	echo $htmlDescription;

@@ -99,3 +99,8 @@ h4 {
 .dl-horizontal dd {
   padding-top: 10px;
   margin-left: 220px; }
+
+.ft-logo {
+  height: 50px;
+  width: auto;
+  padding: 5px 10px; }

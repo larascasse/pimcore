@@ -308,7 +308,7 @@ class Website_Product extends Object_Product {
 		if($this->getPefc())
 			return "Oui - Pefc - 10-31_3055";
 		else
-			return "Non";
+			return "";
 
 	}
 	public function getPefcLogo() {
@@ -324,10 +324,10 @@ class Website_Product extends Object_Product {
 		if($this->getParquet_de_france())
 			return "Oui";
 		else
-			return "Non";
+			return "";
 
 	}
-	
+
 	public function getParquet_de_franceLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getParquet_de_france()) {
@@ -345,7 +345,7 @@ class Website_Product extends Object_Product {
 		if($this->getFsc())
 			return "Oui";
 		else
-			return "Non";
+			return "";
 
 	}
 	public function getFscLogo() {
@@ -362,7 +362,7 @@ class Website_Product extends Object_Product {
 		if($this->getNf())
 			return "Oui";
 		else
-			return "Non";
+			return "";
 
 	}
 	public function getNfLogo() {

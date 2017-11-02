@@ -327,6 +327,7 @@ class Website_Product extends Object_Product {
 			return "Non";
 
 	}
+	
 	public function getParquet_de_franceLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getParquet_de_france()) {

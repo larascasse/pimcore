@@ -324,7 +324,7 @@ class Website_Product extends Object_Product {
 		if($this->getParquet_de_france())
 			return "Oui";
 		else
-			return "";
+			return false;
 
 	}
 
@@ -345,7 +345,7 @@ class Website_Product extends Object_Product {
 		if($this->getFsc())
 			return "Oui";
 		else
-			return "";
+			return false;
 
 	}
 	public function getFscLogo() {
@@ -362,7 +362,7 @@ class Website_Product extends Object_Product {
 		if($this->getNf())
 			return "Oui";
 		else
-			return "";
+			return false;
 
 	}
 	public function getNfLogo() {

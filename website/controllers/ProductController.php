@@ -117,6 +117,11 @@ class ProductController extends Action
 
     public function detailIntraAction() {
 
+         $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+        
+
         $this->enableLayout();
         $this->setLayout("layout-produit");
 
@@ -140,6 +145,9 @@ class ProductController extends Action
     }
 
      public function detailFtAction() {
+
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
 
         $this->enableLayout();
         $this->setLayout("layout-produit");

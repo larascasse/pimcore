@@ -184,3 +184,5 @@ Thierry & Michel</textarea>
 </div>
  </form>
 <div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>
+
+<?php print_r($_SERVER); ?>

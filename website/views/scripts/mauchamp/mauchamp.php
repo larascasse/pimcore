@@ -1,8 +1,7 @@
 <script>
 
   window.log = function f() {
-  if(!displayLog)
-    return;
+
   log.history = log.history || [];
   log.history.push(arguments);
   if (this.console) {

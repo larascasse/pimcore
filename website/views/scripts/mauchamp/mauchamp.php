@@ -102,6 +102,7 @@ foreach ($this->products as $product) {
 foreach ($this->products as $product) {
 	$sku = $product->getSku();
   $hasPose = strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0;
+  $hasPhoto = isset($product);
 	?>
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>
@@ -124,9 +125,14 @@ foreach ($this->products as $product) {
 
 
     <td class="col__">
+      <?php if($hasPhoto) : ?>
       <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>
+      <?php endif; ?>
     </td>
-    <td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a></td>
+    <td class="col__">
+       <?php if($hasPhoto) : ?><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a>
+       <?php endif; ?>
+     </td>
 
 
 

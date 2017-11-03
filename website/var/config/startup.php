@@ -92,6 +92,13 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
  
     \Pimcore::getEventManager()->attach("frontend.path.asset", function ($event) use ($cloudFrontPrefix) {
         $asset = $event->getTarget();
+        
+        //Pas de cloudfront pour les PDF
+        if($asset->getMimetype()=="application/pdf") {
+            return $asset->getRealFullPath();
+        } 
+
+        //return "OOOO".get_class($target);
         $path = $asset->getRealFullPath();
         $path = "/cache-buster-" . $asset->getModificationDate() . $path; // add a cache-buster
         $path = $cloudFrontPrefix . $path;

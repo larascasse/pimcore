@@ -1,7 +1,24 @@
 <script>
 
+  window.log = function f() {
+  if(!displayLog)
+    return;
+  log.history = log.history || [];
+  log.history.push(arguments);
+  if (this.console) {
+    var args = arguments,
+      newarr;
+    args.callee = args.callee.caller;
+    newarr = [].slice.call(args);
+    if (typeof console.log === 'object') log.apply.call(console.log, console, newarr);
+    else console.log.apply(console, newarr);
+  }
+};
+
+
+
 $(document).ready(function() {
-	console.log("INIT");
+	window.log("INIT");
   $('#selectAllFt').on('click', function () {
   	//console.log('KKKKKKKKK',$('input[type="checkbox"]', '.check-ft'))
     if ($(this).hasClass('allChecked')) {

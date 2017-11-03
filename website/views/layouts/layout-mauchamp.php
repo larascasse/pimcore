@@ -50,9 +50,6 @@
 
     <?php echo $this->headLink(); ?>
 
-    <?php if($this->editmode) { ?>
-        <link href="/website/static/css/editmode.css?_dc=<?php echo time(); ?>" rel="stylesheet">
-    <?php } ?>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="/website/static/bootstrap/assets/js/html5shiv.js"></script>

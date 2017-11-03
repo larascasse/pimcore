@@ -14,7 +14,7 @@ if( !isset($_SERVER['PHP_AUTH_USER']) )
 
 //$s3AssetUrlPrefix = "//media.laparqueterienouvelle.fr";
 
-$cloudFrontPrefix = "//media.laparqueterienouvelle.fr";
+$cloudFrontPrefix = "https://media.laparqueterienouvelle.fr";
 
 if (isset($_SERVER["HTTP_HOST"]) && $_SERVER["HTTP_HOST"]=="pimcore.florent.local") {
     $cloudFrontPrefix = "//pimcore.florent.local";

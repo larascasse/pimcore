@@ -64,6 +64,8 @@ class MauchampController extends Action
             $this->view->missingProducts = $order["missingProducts"];
             $this->view->transport = $order["transport"];
             $this->view->orderDetail = $order["orderDetail"];
+            $this->view->xmlOrder = $xml;
+
         }
         
     }

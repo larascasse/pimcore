@@ -199,6 +199,10 @@ foreach ($this->orderDetail as $key => $value) {
   echo $key." : ".$value."<br />";
   # code...
 }
+
 ?>
+<div style="display: none;">
+            <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlOrder ?></textarea>
+</div>
 </p>
 <?php print_r($_SERVER); ?>

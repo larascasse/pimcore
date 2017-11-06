@@ -178,16 +178,29 @@ EOT;
    <Nom>NOM TEST_LPN</Nom>
    <Indice_Code_Prix>4</Indice_Code_Prix>
    <Code_Client_Web />
-   <Email_Contact>florenttest@lesmecaniques.net</Email_Contact>
+   <Email_Contact>florentContact@lesmecaniques.net</Email_Contact>
    <ADRESSES_Livraisons>
       <ADRESSE_Azure>
          <Nom>EVLINAMA</Nom>
          <Adr1>RUE CARNOT</Adr1>
+         <Email>florentAzure1@lesmecaniques.net</Email>
          <Cp>13210</Cp>
          <Ville>SAINT-REMY DE PROVENCE</Ville>
          <Pays>FR</Pays>
       </ADRESSE_Azure>
+
+       <ADRESSE_Azure>
+         <Nom>BIBI 2</Nom>
+         <Adr1>RUE CARNOT 2</Adr1>
+         <Email>florentAzure@lesmecaniques.net</Email>
+         <Cp>13210  2</Cp>
+         <Ville>SAINT-REMY DE PROVENCE  2</Ville>
+         <Pays>FR</Pays>
+      </ADRESSE_Azure>
+
+
    </ADRESSES_Livraisons>
+
    <ADRESSES_CLients>
       <ADRESSE_Azure>
          <Nom>EVLINAMA</Nom>
@@ -195,6 +208,8 @@ EOT;
          <Cp>13210</Cp>
          <Ville>SAINT-REMY DE PROVENCE</Ville>
          <Pays>FR</Pays>
+        <Email>florentCLlient@lesmecaniques.net</Email>
+
       </ADRESSE_Azure>
    </ADRESSES_CLients>
 </ClientXML_Azure>
@@ -209,10 +224,74 @@ EOT;
 
     public static function parseClient($data) {
       $xml = simplexml_load_string($data);
-      $client = json_decode(json_encode($xml), TRUE)['item'];
+      
+      $client = json_decode(json_encode($xml, TRUE));
+
+      unset ($client->ADRESSES_Livraisons);
+      unset ($client->ADRESSES_CLients);
+      
+      
+      $emails = array($xml->Email_Contact);
+      $adresses = array();
+      $noms = array();
+      
+     //On met toutes les adresses dans una array, et on stock le nom et l'email ai cas ou il ,n'y a pas de contgact
+        $adressesClient = $xml->ADRESSES_CLients->ADRESSE_Azure;
+       if(isset($adressesClient) && $adressesClient->count()>0) {
+
+        for($i=0; $i<$adressesClient->count(); $i++){
+           $adresse = json_decode(json_encode($adressesClient[$i]), TRUE);
+           $adresse["Type"] = "billing";
+           $adresses[] = $adresse;
+           $emails[] = $adresse["Email"];
+           $noms[] = $adresse["Nom"];
+
+        }
+      }
+
+      $adressesLivraison = $xml->ADRESSES_Livraisons->ADRESSE_Azure;
+      if(isset($adressesLivraison) && $adressesLivraison->count()>0) {
+
+        for($i=0; $i<$adressesLivraison->count(); $i++){
+           $adresse = json_decode(json_encode($adressesLivraison[$i]), TRUE);
+            $adresse["Type"] = "shipping";
+           $adresses[] = $adresse;
+           $emails[] = $adresse["Email"];
+           //PAS DE NIOM POUR LES LIVRAISON
+            $noms[] = $adresse["Nom"];
+
+        }
+      }
+
+      $client->Adresses = $adresses;
 
 
-      return $xml;
+
+      if(!isset($client->Email_Contact)) {
+          foreach ($emails as $key => $email) {
+            if(\Pimcore\Mail::isValidEmailAddress($email)) {
+              $client->Email_Contact = $email;
+              break;
+            }
+        }
+      }
+
+      if(!isset($client->Nom_Contact)) {
+          foreach ($noms as $key => $noms) {
+            if(strlen(trim($nom))>0) {
+              $client->Nom_Contact = $nom;
+              break;
+            }
+        }
+      }
+      
+
+  
+
+
+
+
+      return $client;
 
     }
 

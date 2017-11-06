@@ -65,6 +65,20 @@ function trackPageView() {};
 function trackLinkEvent() {};
 var fbq;
 var dataLayer=[];
+  window.log = function f() {
+
+  log.history = log.history || [];
+  log.history.push(arguments);
+  if (this.console) {
+    var args = arguments,
+      newarr;
+    args.callee = args.callee.caller;
+    newarr = [].slice.call(args);
+    if (typeof console.log === 'object') log.apply.call(console.log, console, newarr);
+    else console.log.apply(console, newarr);
+  }
+};
+
 </script>
 
 <div id="content" class="container">
@@ -83,7 +97,7 @@ var dataLayer=[];
  <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
 <script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 

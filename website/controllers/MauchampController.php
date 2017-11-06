@@ -30,7 +30,7 @@ class MauchampController extends Action
 
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
-        
+
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
         $this->view->layout()->setLayout("layout-mauchamp");
@@ -41,8 +41,8 @@ class MauchampController extends Action
         if(isset($xml))
             $data = $xml;
         else
-            // $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-            $data = \Website\Tool\MauchampHelper::getDebugOrder();
+             $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+            //$data = \Website\Tool\MauchampHelper::getDebugOrder();
         
         if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
             $client = \Website\Tool\MauchampHelper::parseClient($data);

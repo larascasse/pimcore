@@ -115,8 +115,21 @@ class MauchampHelper
          <Observation />
          <Designation>Plus Value Finition Huile Invisible Ecologique Ou Savon De Marseille Pour Plateau De Table</Designation>
       </Ligne>
-      <Ligne>
+       <Ligne>
          <Ordre>5</Ordre>
+         <Code_EAN_Article>KKKKKK</Code_EAN_Article>
+         <Nombre>1.0000</Nombre>
+         <Quantite_Unite>1.0000</Quantite_Unite>
+         <Prix_HT>16,94</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Test Produit manquant</Designation>
+      </Ligne>
+
+
+      <Ligne>
+         <Ordre>6</Ordre>
          <Code_EAN_Article />
          <Code_Article>TRANSPORT</Code_Article>
          <Nombre>1</Nombre>
@@ -128,7 +141,7 @@ class MauchampHelper
          <Designation>Retrait en dépôt - LPN Paris  [ 141 rue de Bagnolet, 3 rue Pelleport, Paris ]</Designation>
       </Ligne>
       <Ligne>
-         <Ordre>6</Ordre>
+         <Ordre>7</Ordre>
          <Code_EAN_Article />
          <Code_Article></Code_Article>
          <Nombre></Nombre>
@@ -417,20 +430,21 @@ EOT;
 
 
                         try {
-                        
+                            $_product = null;
+
                             $sku = trim($p->Code_EAN_Article);             
                             $existingProductList = Object\Product::getByEan($sku);
                             //print_r($parent);
                             if($existingProductList->count()==1) {
                                 $_product = $existingProductList->current();
-                                 //echo "EAN existe ".$_product->getFullPath()."\n";
+                                 echo "EAN existe ".$_product->getFullPath()."<br />\n";
                                  
                             }
+                              
                             else {
-                                //echo "n'existe pas\n";
-                                $missingProducts[] = ["name"=>$productName,"sku"=>$sku]; 
-                            }           
-                            
+                              echo "EAN existe PAS ".$sku."<br />\n";
+                            }
+                              
                             //Si produit existe
                             if(isset($_product)){
                                  $products[] = $_product;                       
@@ -439,8 +453,23 @@ EOT;
                             //Sinon
                             else {
 
-                                $productName    = strlen($p->Designation)>1?$p->Designation:$productName;  
-                                $missingProducts[] = ["name"=>$productName,"sku"=>$sku];                  
+                                $productName    = strlen($p->Designation)>1?$p->Designation:$productName; 
+                                $missingProduct = new Object\Product(); 
+                                $missingProduct->name = $productName;
+                                $missingProduct->ean = $sku;
+                               /* $missingProduct = Object\Product::create(array(
+                                   // "o_parentId" => $parentId,
+                                    "o_creationDate" => time(),
+                                   // "o_userOwner" => $userId,
+                                   // "o_userModification" => $userId,
+                                   // "o_key" => strtolower($data[$mapping["famille"]]),
+                                    "name" => $productName,
+                                    "ean" => $sku
+                                    
+                                ));*/
+                                $missingProducts[] =  $missingProduct;  
+                               // print_r( $missingProduct);
+                                              
 
                             }           
                         }
@@ -453,11 +482,12 @@ EOT;
                         
 
                     }
+
                     
                 }
             }
        
-  
+           
          return array(
           "orderDetail" => $orderDetail,
          	"products"=> $products,

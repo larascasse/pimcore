@@ -143,6 +143,24 @@ foreach ($this->products as $product) {
 }
 
 ?>
+
+
+<?php
+foreach ($this->missingProducts as $product) {
+ 
+  ?>
+  <tr class="row__">
+  <td class="col__"><?php echo $product->ean ?></td>
+  <td class="col__"><?php echo $product->name?></td>
+  <td colspan="4">Absent du PIM</td>  
+
+  </tr>
+  <?php
+}
+
+?>
+
+
 </tbody>
 </table>
 <div class="row">
@@ -188,10 +206,9 @@ Thierry & Michel</textarea>
 <div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>
 
 
-<p class="small">
+
+<p class="small" style="color:#cccccc">
 <?php 
-
-
 
 foreach ($this->orderDetail as $key => $value) {
   echo $key." : ".$value."<br />";
@@ -200,7 +217,8 @@ foreach ($this->orderDetail as $key => $value) {
 
 ?>
 <div>
-            <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlOrder ?></textarea>
+<textarea  cols="100" rows="20" name="xml"><?php echo $this->xmlOrder ?></textarea>
 </div>
+
+<?php var_dump($_SERVER); ?>
 </p>
-<?php print_r($_SERVER); ?>

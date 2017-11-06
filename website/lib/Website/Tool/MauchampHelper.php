@@ -270,7 +270,7 @@ EOT;
       if(!isset($client->Email_Contact)) {
           foreach ($emails as $key => $email) {
             if(\Pimcore\Mail::isValidEmailAddress($email)) {
-              $client->Email_Contact = $email;
+              $xml->Email_Contact = $client->Email_Contact = $email;
               break;
             }
         }
@@ -279,7 +279,7 @@ EOT;
       if(!isset($client->Nom_Contact)) {
           foreach ($noms as $key => $noms) {
             if(strlen(trim($nom))>0) {
-              $client->Nom_Contact = $nom;
+              $xml->Nom_Contact = $client->Nom_Contact = $nom;
               break;
             }
         }

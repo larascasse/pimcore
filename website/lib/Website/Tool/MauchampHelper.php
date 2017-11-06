@@ -174,46 +174,38 @@ EOT;
       $data = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
 <ClientXML_Azure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   <Code_Client>TEST_LPN</Code_Client>
-   <Nom>NOM TEST_LPN</Nom>
-   <Indice_Code_Prix>4</Indice_Code_Prix>
+   <Code_Client>PIRES</Code_Client>
+   <Nom>PIRES MANUEL</Nom>
+   <Nom_Contact>mme PIRES AU BOULOT</Nom_Contact>
+   <Prenom_Contact />
+   <Email_Contact />
+   <Indice_Code_Prix>3</Indice_Code_Prix>
    <Code_Client_Web />
-   <Email_Contact>florentContact@lesmecaniques.net</Email_Contact>
    <ADRESSES_Livraisons>
       <ADRESSE_Azure>
-         <Nom>EVLINAMA</Nom>
-         <Adr1>RUE CARNOT</Adr1>
-         <Email>florentAzure1@lesmecaniques.net</Email>
-         <Cp>13210</Cp>
-         <Ville>SAINT-REMY DE PROVENCE</Ville>
+         <Nom>PIRES SAS</Nom>
+         <Adr2>21 RUE DES MOULINS</Adr2>
+         <Cp>78290</Cp>
+         <Ville>CROISSY SUR SEINE</Ville>
+         <Telephone>01 39 18 21 46</Telephone>
+         <Portable>06.08.73.03.73</Portable>
          <Pays>FR</Pays>
+         <Email>ets.pires@club-internet.fr</Email>
       </ADRESSE_Azure>
-
-       <ADRESSE_Azure>
-         <Nom>BIBI 2</Nom>
-         <Adr1>RUE CARNOT 2</Adr1>
-         <Email>florentAzure@lesmecaniques.net</Email>
-         <Cp>13210  2</Cp>
-         <Ville>SAINT-REMY DE PROVENCE  2</Ville>
-         <Pays>FR</Pays>
-      </ADRESSE_Azure>
-
-
    </ADRESSES_Livraisons>
-
    <ADRESSES_CLients>
       <ADRESSE_Azure>
-         <Nom>EVLINAMA</Nom>
-         <Adr1>RUE CARNOT</Adr1>
-         <Cp>13210</Cp>
-         <Ville>SAINT-REMY DE PROVENCE</Ville>
+         <Nom>PIRES SAS</Nom>
+         <Adr2>21 RUE DES MOULINS</Adr2>
+         <Cp>78290</Cp>
+         <Ville>CROISSY SUR SEINE</Ville>
+         <Telephone>01 39 18 21 46</Telephone>
+         <Portable>06.08.73.03.73</Portable>
          <Pays>FR</Pays>
-        <Email>florentCLlient@lesmecaniques.net</Email>
-
+         <Email>ets.pires@club-internet.fr</Email>
       </ADRESSE_Azure>
    </ADRESSES_CLients>
 </ClientXML_Azure>
-
 EOT;
     return $data;
     }
@@ -267,7 +259,7 @@ EOT;
 
 
 
-      if(!isset($client->Email_Contact)) {
+      if(!isset($client->Email_Contact) || !is_string($client->Email_Contact) || !\Pimcore\Mail::isValidEmailAddress($client->Email_Contact)) {
           foreach ($emails as $key => $email) {
             if(\Pimcore\Mail::isValidEmailAddress($email)) {
               $xml->Email_Contact = $client->Email_Contact = $email;

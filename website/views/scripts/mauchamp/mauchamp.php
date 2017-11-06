@@ -1,5 +1,3 @@
-qsdqdqsd
-<?php echo $this->orderDetail; ?>
 
 
 <script>
@@ -201,7 +199,7 @@ foreach ($this->orderDetail as $key => $value) {
 }
 
 ?>
-<div style="display: none;">
+<div>
             <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlOrder ?></textarea>
 </div>
 </p>

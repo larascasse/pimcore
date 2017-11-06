@@ -39,6 +39,7 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
             $fileSystemPath = $event->getParam("filesystemPath");
             $target = $event->getTarget();
             $fileModTime = null;
+
             if($target instanceof \Pimcore\Model\Asset) {
                 $fileModTime = $target->getModificationDate();
             } elseif (method_exists($target, "getAsset") && $target->getAsset()) {
@@ -114,7 +115,19 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     return $key;
 });
 
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/framework/'. PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/lpnservices/');
+require_once 'urldef.php';
+require_once 'functions.php';
 
+
+Zend_Loader_AutoloaderFactory::factory([
+    'Zend_Loader_StandardAutoloader' => [
+        'autoregister_zf' => true,
+        'namespaces' => [
+            'Odata' => dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/framework',
+        ]
+    ]
+]);
 
 $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('Website');

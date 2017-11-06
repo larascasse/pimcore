@@ -1,8 +1,8 @@
+qsdqdqsd
+<?php echo $this->orderDetail; ?>
+
+
 <script>
-
-
-
-
 
 $(document).ready(function() {
 	window.log("INIT");
@@ -189,4 +189,16 @@ Thierry & Michel</textarea>
  </form>
 <div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>
 
+
+<p class="small">
+<?php 
+
+
+
+foreach ($this->orderDetail as $key => $value) {
+  echo $key." : ".$value."<br />";
+  # code...
+}
+?>
+</p>
 <?php print_r($_SERVER); ?>

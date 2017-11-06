@@ -67,6 +67,9 @@ class MauchampHelper
    <Adresse_Livraison_Adr1>2323</Adresse_Livraison_Adr1>
    <Adresse_Livraison_Telephone>9090</Adresse_Livraison_Telephone>
    <Adresse_Livraison_Fax />
+   <Representant>CT</Representant>
+   <Representant_Email>cedrictavernon@obd.fr</Representant_Email>
+
    <Lignes>
       <Ligne>
          <Ordre>1</Ordre>
@@ -214,6 +217,10 @@ EOT;
       return strstr($data, "ClientXML_Azure");
     }
 
+
+
+
+
     public static function parseClient($data) {
       $xml = simplexml_load_string($data);
       
@@ -289,6 +296,8 @@ EOT;
 
 
     public static function parseOrder($data) {
+
+
     	$xml = simplexml_load_string($data);
      
         $lines = $xml->Lignes[0]->Ligne;
@@ -298,6 +307,58 @@ EOT;
            //TODO ERROR
         }
 
+        /*
+        <Representant>CT</Representant><Representant_Email>cedrictavernon@obd.fr</Representant_Email>
+        */
+
+        $orderDetail = [
+          'Type_Piece' => (string)$xml->Type_Piece,
+          'Code_Commande' => (string)$xml->Code_Commande,
+          'Code_Commande_Web' => (string)$xml->Code_Commande_Web,
+          'Date_Livraison' => (string)$xml->Date_Livraison,
+          'Date_Confirmation' => (string)$xml->Date_Confirmation,
+          'Date_Expedition' => (string)$xml->Date_Expedition,
+          'Acompte' => (string)$xml->Acompte,
+          'Remise' => (string)$xml->Remise,
+          'Type_Remise' => (string)$xml->Type_Remise,
+          'TotalHT' => (string)$xml->TotalHT,
+          'TotalTTC' => (string)$xml->TotalTTC,
+          'Site' => (string)$xml->Site,
+          'Remarque' => (string)$xml->Remarque,
+          'Mode_livraison' => (string)$xml->Mode_livraison,
+          'Moyen_Paiement' => (string)$xml->Moyen_Paiement,
+          'Reference_Client' => (string)$xml->Reference_Client,
+          'Etat' => (string)$xml->Etat,
+          'Reglement' => (string)$xml->Reglement,
+          'Representant' => (string)$xml->Representant,
+          'Representant_Email' => $xml->Representant_Email,
+          "Adresse_Facturation_Raison_Sociale"  =>  (string)$xml->Adresse_Facturation_Raison_Sociale,  
+          "Adresse_Facturation_Nom"         =>  (string)$xml->Adresse_Facturation_Nom, //
+          "Adresse_Facturation_Prenom"      =>  (string)$xml->Adresse_Facturation_Prenom, 
+          "Adresse_Facturation_Email"       =>  (string)$xml->Adresse_Facturation_Email,              
+          "Adresse_Facturation_Ville"       =>  (string)$xml->Adresse_Facturation_Ville, 
+          "Adresse_Facturation_CP"        =>  (string)$xml->Adresse_Facturation_CP, 
+          "Adresse_Facturation_Code_Pays"     =>  (string)$xml->Adresse_Facturation_Code_Pays, 
+          "Adresse_Facturation_Adr1"        =>  (string)$xml->Adresse_Facturation_Adr1, 
+          "Adresse_Facturation_Telephone"     =>  (string)$xml->Adresse_Facturation_Telephone, 
+
+          "Adresse_Facturation_Portable"     =>  (string)$xml->Adresse_Facturation_Portable, 
+
+          "Adresse_Facturation_Fax"         =>  (string)$xml->Adresse_Facturation_Fax, 
+            
+          "Adresse_Livraison_Raison_Sociale"  =>  (string)$xml->Adresse_Livraison_Raison_Sociale,  
+          "Adresse_Livraison_Nom"         =>  (string)$xml->Adresse_Livraison_Nom, //,"TEST3333",//$xml->XXXX,
+          "Adresse_Livraison_Prenom"      =>  (string)$xml->Adresse_Livraison_Prenom, 
+          "Adresse_Livraison_Email"       =>  (string)$xml->Adresse_Livraison_Email,              
+          "Adresse_Livraison_Ville"       =>  (string)$xml->Adresse_Livraison_Ville, 
+          "Adresse_Livraison_CP"        =>  (string)$xml->Adresse_Livraison_CP, 
+          "Adresse_Livraison_Code_Pays"     =>  (string)$xml->Adresse_Livraison_Code_Pays, 
+          "Adresse_Livraison_Adr1"        =>  (string)$xml->Adresse_Livraison_Adr1, 
+          "Adresse_Livraison_Telephone"     =>  (string)$xml->Adresse_Livraison_Telephone, 
+          "Adresse_Livraison_Portable"     =>  (string)$xml->Adresse_Livraison_Portable, 
+          "Adresse_Livraison_Fax"         =>  (string)$xml->Adresse_Livraison_Fax, 
+
+        ];
 
         $transportRows = array();
         $rowTotal = 0;
@@ -395,7 +456,10 @@ EOT;
                     
                 }
             }
+       
+  
          return array(
+          "orderDetail" => $orderDetail,
          	"products"=> $products,
          	"missingProducts"=> $missingProducts,
          	"transport"=> $transportRows,

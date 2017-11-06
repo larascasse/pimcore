@@ -412,7 +412,7 @@ EOT;
                     $productName    = $p->Code_EAN_Article;
                     $productSku     = $p->Code_EAN_Article;
                     
-                    if(strlen($p->Designation)>1 && strlen($p->Code_EAN_Article)<1){
+                    if(strlen($p->Designation)>1){
                         
                         $productName = $p->Designation;
                     }
@@ -437,12 +437,12 @@ EOT;
                             //print_r($parent);
                             if($existingProductList->count()==1) {
                                 $_product = $existingProductList->current();
-                                 echo "EAN existe ".$_product->getFullPath()."<br />\n";
+                                 //echo "EAN existe ".$_product->getFullPath()."<br />\n";
                                  
                             }
                               
                             else {
-                              echo "EAN existe PAS ".$sku."<br />\n";
+                             // echo "EAN existe PAS ".$sku."<br />\n";
                             }
                               
                             //Si produit existe

@@ -82,12 +82,17 @@ Usé,use
     if(stristr($article, "fmcheub")) {
          $object->setTraitement_surface(("vieilli use rives abimees"));
 
+         //EAN
          if(strlen($object->getEan())>0) {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
+
          }
+         //Article
          else if(stristr($object->getCode(), "fmche") ) {
-            $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
+            $object->setValue("pimonly_name_suffixe","vieilli usé rives abîmées");
+            $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
+            $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
          }
          
          $save=true;
@@ -98,6 +103,16 @@ Usé,use
 
          if(strlen($object->getEan())>0) {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+
+            if(stristr($scienergieCourt, "xl")) {
+                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+                $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
+
+            }
+            else {
+                $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+                $object->setValue('longueur_txt','Longueurs panachées 1800 à 2700 mm');
+            }
 
          }
          else if(stristr($object->getCode(), "fmche") ) {
@@ -129,14 +144,7 @@ Usé,use
    
 
     if(strlen($object->getEan())>0) {
-
-         if(stristr($scienergieCourt, "xl")) {
-            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-        }
-        else {
-            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-        }
-
+       
 
         /* $parent = $object->getParent();
         //On force le titre si plusiqueurs matieres

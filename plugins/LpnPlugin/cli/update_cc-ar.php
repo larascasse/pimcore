@@ -79,7 +79,7 @@ Brut de sciage, brut de sciage
 Vieilli rives abimées, vieilli rives abimees
 Usé,use
 */
-    echo "$article ?";
+    echo "\n$article ?";
 
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";

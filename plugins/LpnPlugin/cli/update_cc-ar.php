@@ -79,7 +79,7 @@ Brut de sciage, brut de sciage
 Vieilli rives abimées, vieilli rives abimees
 Usé,use
 */
-    if(stristr($article, "fmcheub")) {
+    if(stristr($article, "FMCHEUB")) {
          $object->setTraitement_surface(("vieilli use rives abimees"));
 
          //EAN
@@ -89,7 +89,7 @@ Usé,use
 
          }
          //Article
-         else if(stristr($object->getCode(), "fmche") ) {
+         else  {
             $object->setValue("pimonly_name_suffixe","vieilli usé rives abîmées");
             $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
             $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
@@ -97,7 +97,7 @@ Usé,use
          
          $save=true;
     }
-    else {
+    else if(stristr($article, "fmcher")) {
           $object->setTraitement_surface(("vieilli rives abimees"));
 
 

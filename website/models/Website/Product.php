@@ -2144,81 +2144,10 @@ class Website_Product extends Object_Product {
 	}
 
 
-	//Generator
-/*
-        http://www.pointp.fr/les-normes-et-classements-du-parquet-sol-stratifie-ou-pvc-XA933
-        Les classes d’utilisation qui concernent le parquet sont à prendre en compte pour placer votre parquet dans la pièce adéquate. La norme européenne EN 685 définit des classes d’utilisation pour les revêtements de sol en fonction des zones de pose du revêtement et de l’intensité de l’usage.
-    
-        Dureté
-        Classe A : Aulne, Epicéa, Pin sylvestre, Sapin.
-        Classe B : Bouleau, Bossé, Châtaigner, Mélèze, Merisier, Noyer, Pin maritime, Sipo, Teck.
-        Classe C : Acacia, Afrormosia, Charme, Chêne, Erable, Eucalyptus, Frêne, Hêtre Iroko, Makoré, Mansonia, Moabi, Movingui, Mutenye, Orme, Padouk, Zébrano.
-        Classe D : Amarante, Angélique, Cabreuva, Doussié, Ebène, Ipé, Jatoba, Merbau, Wengé, Palissandre,
-*/
+
+
 	public function getDurete() {
-		switch ($this->getEssence()) {
-
-			case 'AUL':
-			case 'EPI':
-			case 'PIN':
-			case 'SAP':
-			case 'DGL':
-				return "A";
-				break;
-
-
-			case 'BOU':
-			case 'BOS':
-			case 'CHA':
-			case 'MEL':
-			case 'MER':
-			case 'NOY':
-			case 'PIN':
-			case 'SIP':
-			case 'TEC':
-				return "B";
-				break;
-
-
-
-			case 'CHE':
-			case 'ACA':
-			case 'AFR':
-			case 'CHA':
-			case 'ERA':
-			case 'EUC':
-			case 'FRE':
-			case 'HET':
-			case 'IRO':
-			case 'MAK':
-			case 'MAN':
-			case 'MOA':
-			case 'MOV':
-			case 'MUT':
-			case 'ORM':
-			case 'PAD':
-			case 'ZEB':
-				return "C";
-				break;
-
-
-			case 'AMA':
-			case 'ANG':
-			case 'CAB':
-			case 'DOU':
-			case 'EPE':
-			case 'IPE':
-			case 'JAT':
-			case 'MER':
-			case 'WEN':
-			case 'PAL':
-				return "B";
-				break;
-			
-			default:
-				"";
-				break;
-		}
+		return \Website\Tool\ParquetData::getDureteByEssence($this->getEssence());
 	}
 
   /*
@@ -2277,41 +2206,38 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
         ];
       
 
-            $durete = $this->getDurete();
-
-   
-            //Si contrecollé
-            if($this->isParquetContrecolle())
-           	 	$coucheUsure = (float)$this->getEpaisseurUsure();
-            //si massif
-           	else 
-           	 	$coucheUsure = (int)$this->getEpaisseur();
+        $durete = $this->getDurete();
 
 
+        //Si contrecollé
+        if($this->isParquetContrecolle())
+       	 	$coucheUsure = (float)$this->getEpaisseurUsure();
+        //si massif
+       	else 
+       	 	$coucheUsure = (int)$this->getEpaisseur();
 
 
-           	if($coucheUsure>0) {
-           		 if($coucheUsure<=2.5)
-	                $index = 0;
-           		else if($coucheUsure<3.2)
-	                $index = 1;
-	            else if($coucheUsure<4.5)
-	                $index = 2;
-	            else if($coucheUsure<7)
-	                $index = 3;
-	            else if($coucheUsure>=7)
-	                $index = 4;
-	             
-	             //return "KKK".$index." ".$coucheUsure;
 
-	            if(isset($classes[$durete]) && isset($classes[$durete][$index]))
-	                return $classes[$durete][$index];
-	            
-	           	}
-           	return "";
-           
-                
 
+       	if($coucheUsure>0) {
+       		 if($coucheUsure<=2.5)
+                $index = 0;
+       		else if($coucheUsure<3.2)
+                $index = 1;
+            else if($coucheUsure<4.5)
+                $index = 2;
+            else if($coucheUsure<7)
+                $index = 3;
+            else if($coucheUsure>=7)
+                $index = 4;
+             
+             //return "KKK".$index." ".$coucheUsure;
+
+            if(isset($classes[$durete]) && isset($classes[$durete][$index]))
+                return $classes[$durete][$index];
+            
+           	}
+       	return "";
         
 	}
 
@@ -2328,49 +2254,8 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 	
 	public function getClasseUpec() {
 		$cu = $this->getCalculatedClasseUtilisation();
-
-		
-
-		$UP = "";
-		switch ($cu) {
-			case '21':
-				# code...
-				$UP =  "U₂P₂";
-				break;
-			case '22':
-				# code...
-				$UP =  "U₂sP₂";
-				break;
-			case '23':
-				# code...
-				$UP =  "U₂sP₃";
-				break;
-			case '31':
-				# code...
-				$UP =  "U₃P₂";
-				break;
-			case '32':
-				# code...
-				$UP =  "U₃P₃";
-				break;
-			case '33':
-				# code...
-				$UP =  "U₃sP₃";
-				break;
-			
-			default:
-				# code...
-				break;
-		}
-
-		if(strlen($UP)>0) {
-			$pieceHumide = $this->getPieceHumide();
-			if($pieceHumide)
-				$UP .="E₂C₁";
-			else
-				$UP .="E₁C₁";
-		}
-		return $UP;
+		$pieceHumide = $this->getPieceHumide();
+		return \Website\Tool\ParquetData::getUpecByClasseUtilisation($cu,$pieceHumide);
 
 	}
 
@@ -2396,35 +2281,10 @@ o Calcul pour un parquet contrecollé avec un parement en chêne de 3 mm et une 
 R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 */
 
-	public static function getConductiviteThermiqueByEssence($essence) {
-
-/*
-. Cette correspondance entre masse volumique et capacités isolantes a été établie en termes normatifs, dans le texte NF EN 14342, comme suit :
-Conductivité thermique du bois (λ en w / m. K)
-ρ = 300 kg/m3 => λ = 0,09
-ρ = 500 kg/m3 => λ = 0,13
-ρ = 700 kg/m3 => λ = 0,17
-ρ = 1000 kg/m3 => λ = 0,24
-*/
-		$coeffCt = -1;
-		switch ($essence) {
-			case 'CHE':
-				$coeffCt = 0.16;
-				break;
-
-			//HDF 0,7<>0,18
-			case 'HDF':
-				$coeffCt = 0.15;
-				break;
-			//pin : 0.36
-			//Aglo : 0.15
-			//
-		}
-		return $coeffCt;
-	}
+	
 
 	public function getResistanceThermique() {
-		$coeffCt = self::getConductiviteThermiqueByEssence($this->getEssence());
+		$coeffCt = \Website\Tool\ParquetData::getConductiviteThermiqueByEssence($this->getEssence());
 
 		//conductivie thermqie : ) W/mK ;
 		
@@ -2436,8 +2296,8 @@ Conductivité thermique du bois (λ en w / m. K)
 				return ((int)$epaisseur/1000)/$coeffCt;
 			}
 			else {
-				
-				$coeffCtSupport = self::getConductiviteThermiqueByEssence('HDF');
+				//TODO
+				$coeffCtSupport = \Website\Tool\ParquetData::getConductiviteThermiqueBySupport('HDF');
 
 				$ctSupport = (($epaisseur -(float)$this->getEpaisseurUsure()) / 1000)/$coeffCtSupport;
 				$coeffTotal = ((float)$this->getEpaisseurUsure()/1000)/$coeffCt + $ctSupport;
@@ -2475,6 +2335,10 @@ Les masses volumiques moyennes des contreplaqués sont :
 			$support = $this->getSupport();
 			$essence = $this->getEssence();
 			$coucheUsure = (float)$this->getEpaisseurUsure();
+
+			// \Website\Tool\ParquetData::getMasseVolumiqueBySupport($essence);
+
+
 			if($essence == "CHE") {
 				switch ($support) {
 					case 'HDF':
@@ -2483,6 +2347,9 @@ Les masses volumiques moyennes des contreplaqués sont :
 
 					case 'cp':
 						return 780;
+						break;
+					case 'latte': //Epicea
+						return 500;
 						break;
 					
 					default:
@@ -2493,56 +2360,15 @@ Les masses volumiques moyennes des contreplaqués sont :
 		}
 		else if($this->isParquetMassif()) {
 			$essence = $this->getEssence();
-			/* http://biomee.canalblog.com/archives/2008/01/25/7698209.html */
-			switch ($essence) {
-				case 'CHE':
-				case 'FRE':
-					return 680;
-					break;
-
-				case 'HET':
-					return 680;
-					break;
-				case 'EPI':
-				case 'SAP':
-					return 460;
-					break;
-				case 'PIN':
-					return 450;
-					break;
-				case 'AUL':
-					return 530;
-					break;
-				case 'CHA':
-					return 620;
-					break;
-				case 'ACA':
-					return 660;
-					break;
-				case 'PEU':
-				case 'BOU':
-					return 660;
-					break;
-				case 'MEL':
-					return 580;
-				
-					break;
-				case 'BAM':
-					return 680;
-					break;
-
-				case 'MER':
-					return 830;
-					break;
-
-				default:
-					# code...
-					break;
-			}
+			
+			return GgetMasseVolumiqueByEssence($essence);
 
 		}
-		return "todo masse vol";
+		return "";
 	}
+
+
+	
 
 
 	public function getClasseReactionFeuEu() {
@@ -2608,19 +2434,23 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 		}
 
 		if(isset($result["Avec lame d'air"]) && $this->poseCloueeEnabled()) {
-			$str .= strlen($str)>0?" et ":"";
 			
-			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || isset($result["Avec lame d'air"]))
+			
+			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || !isset($result["Sans lame d'air"])) {
+				$str .= strlen($str)>0?" et ":"";
 				$str .= $result["Avec lame d'air"]." en pose clouée";
+			}
 			else
-				$str .= "ou clouée";
+				$str .= " ou clouée";
 		}
 		if(isset($result["Avec lame d'air"]) && $this->poseFlottanteEnabled()) {
-			$str .= strlen($str)>0?" et ":"";
-			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || isset($result["Avec lame d'air"]))
+			
+			if((isset($result["Sans lame d'air"]) && $result["Avec lame d'air"] != $result["Sans lame d'air"]) || !isset($result["Sans lame d'air"])) {
+				$str .= strlen($str)>0?" et ":"";
 				$str .= $result["Avec lame d'air"]." en pose flottante";
+			}
 			else
-				$str .= "ou flottante";
+				$str .= " ou flottante";
 		}
 
 		
@@ -2695,6 +2525,34 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		return ($this->isParquetContrecolle());
 	}
 
+	/* SOLS CHAUFFAUT */
+	/*
+	Resiatnce themrique < 0,15M2/K.w
+	Si chene & massif et epaisseur <= 14 et largeur<130
+	Si chene & massif et largeur<90mm
+
+	//Rayonnant electrique
+	//Seuelment les planchettes
+
+	//Bois de bout
+	// interdit
+
+	//SI sol chauffant Haute tempereature (60°!!) (avant 1970 ??),(sol chaudffant à tiube mettaliquez
+	//Si sol chauffant a tube en metérieau de synthe. T° du sol < 50° : que pose colé et resistanve thermique parquet et sous souche < 0,15
+	//Si chauffage rayonnant electrique
+	//Si sol chauffant electrique à acumulation, tempereature doit rester <28°
+
+	
+	*/
+	public function isCompatibleSolChauffantBasseTemperature() {
+		return true;
+	}
+	public function isCompatibleSolChauffantRayonnant() {
+		return true;
+	}
+	public function isCompatibleSolRafraichissant() {
+		return true;
+	}
 
 	public function getPreviewUrl() {
 		return "/id/".$this->getId();
@@ -2708,6 +2566,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		return str_replace(array("A+","A"), array("E1","XXXX"), $this->getNorme_sanitaire());
 	}
 
+
+
+
+
+
 	public function isParquetMassif() {
 		return $this->getFamille() == "01MASSIF";
 	}
@@ -2719,6 +2582,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 }
+
+
 
 // and optionally a related list
 

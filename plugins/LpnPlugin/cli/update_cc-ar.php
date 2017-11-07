@@ -52,7 +52,7 @@ foreach ($list->getObjects() as $object) {
 
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
-    $article = $object->code_article;
+    $article = $object->code;
     $parent = $object->getParent();
 
     //echo $scienergieCourt." ".$object->getEan()."\n";

@@ -865,7 +865,7 @@ class Website_Product extends Object_Product {
 	}
 
 	function getCalculatedTechnicalSheetPdfUrl() {
-		return LPN_ASSET_PREFIX."/pdf/".$this->getId();
+		return \Pimcore\Tool::getHostUrl()."/pdf/".$this->getId();
 	}
 
 	public function getMage_fichepdf() {

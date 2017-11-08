@@ -317,9 +317,10 @@ EOT;
 
         if($lines->count()<1){
             
-           //TODO ERROR
-        }
 
+        }
+ //TODO ERROR
+          
         /*
         <Representant>CT</Representant><Representant_Email>cedrictavernon@obd.fr</Representant_Email>
         */
@@ -411,17 +412,19 @@ EOT;
                     $productTypeId  = 'simple';
                     $productName    = $p->Code_EAN_Article;
                     $productSku     = $p->Code_EAN_Article;
+
+
                     
                     if(strlen($p->Designation)>1){
                         
                         $productName = $p->Designation;
                     }
                 
-                    
+                  
                     
 
                     //Ligne avec article    
-                    else if(strlen($p->Code_EAN_Article)>1) {
+                    if(strlen($p->Code_EAN_Article)>1) {
 
                         $qty = floatval(self::convertFloat($p->Quantite_Unite));
 
@@ -434,6 +437,7 @@ EOT;
 
                             $sku = trim($p->Code_EAN_Article);             
                             $existingProductList = Object\Product::getByEan($sku);
+
                             //print_r($parent);
                             if($existingProductList->count()==1) {
                                 $_product = $existingProductList->current();
@@ -447,7 +451,8 @@ EOT;
                               
                             //Si produit existe
                             if(isset($_product)){
-                                 $products[] = $_product;                       
+                                 $products[] = $_product; 
+
                             }
 
                             //Sinon

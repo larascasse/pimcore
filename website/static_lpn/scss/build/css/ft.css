@@ -59,8 +59,7 @@ h4 {
   text-transform: uppercase; }
 
 .container-pdf {
-  width: 1440px;
-  margin: 0 auto 0 auto; }
+  width: 1440px; }
 
 .page-header {
   padding: 45px 15px 0 60px;
@@ -79,26 +78,25 @@ h4 {
 
 .ft-col-2 {
   padding-top: 12px;
-  margin-left: 521px; }
+  margin-left: 521px;
+  width: 900px;
+  overflow: hidden; }
   .ft-col-2:before {
     display: table;
     content: " "; }
   .ft-col-2:after {
     clear: both; }
 
-.dl-horizontal dt, .dl-horizontal dd {
+.dl-horizontal th, .dl-horizontal td {
   font-family: "DIN-Regular";
-  font-weight: 400; }
+  font-weight: 400;
+  padding: 20px 5px;
+  vertical-align: top; }
 
-.dl-horizontal dt {
+.dl-horizontal th {
   text-align: left;
   border-bottom: 5px solid #CCCCCC;
-  line-height: 2.5;
   width: 200px; }
-
-.dl-horizontal dd {
-  padding-top: 10px;
-  margin-left: 220px; }
 
 .ft-logo {
   height: 50px;

@@ -23,7 +23,7 @@ $lesplus = $this->product->getLesPlusArray();
  $hasDescription= false;
  $caracteristiques =  $this->product->getCharacteristicsArray();
  $htmlStd='';
- $htmlStd .= '<dl class="dl-horizontal">';
+ $htmlStd .= '<table class="dl-horizontal">';
  $htmlCe = $htmlDonneeTech = $htmlDescription = $htmlStd;
  $logoAssets = array();
  foreach ($caracteristiques as $key => $value) {
@@ -50,14 +50,14 @@ $lesplus = $this->product->getLesPlusArray();
 			if(!isset($description) && !isset($content))
 				continue;
 			
-			$htmlSingle = "";
+			$htmlSingle = "<tr>";
 
 			$isHidden = isset($value["is_hidden"]) && $value["is_hidden"];
 
-			$htmlSingle.= '<dt class=""'.($isHidden?' style="display:none"':'').'>';
+			$htmlSingle.= '<th class=""'.($isHidden?' style="display:none"':'').'>';
 			$htmlSingle.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-			$htmlSingle.= '</dt>';
-			$htmlSingle.= '<dd class=""'.($isHidden?' style="display:none"':'').'>';
+			$htmlSingle.= '</th>';
+			$htmlSingle.= '<td class=""'.($isHidden?' style="display:none"':'').'>';
 			
 
 			if(isset($description)) {
@@ -69,7 +69,7 @@ $lesplus = $this->product->getLesPlusArray();
 				$htmlSingle.= ucfirst($content);
 			}
 
-			$htmlSingle.= '</dd>';
+			$htmlSingle.= '</td>';
 
 
 			if(isset($value["logo"])) {
@@ -98,10 +98,10 @@ $lesplus = $this->product->getLesPlusArray();
 			
 			//$html.="</li>\n";
 }
-$htmlStd .='</dl>';
-$htmlCe .='</dl>';
-$htmlDescription .='</dl>';
-$htmlDonneeTech .='</dl>';
+$htmlStd .='</table>';
+$htmlCe .='</table>';
+$htmlDescription .='</table>';
+$htmlDonneeTech .='</table>';
 
 
 ?>

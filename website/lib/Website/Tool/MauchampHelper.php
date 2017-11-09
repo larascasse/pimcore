@@ -27,7 +27,7 @@ class MauchampHelper
 <?xml version="1.0" encoding="UTF-8"?>
 <Scienergie_PieceCommerciale xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <Type_Piece>Commande</Type_Piece>
-   <Code_Commande />
+   <Code_Commande>CCAKLMLMLM</Code_Commande>
    <Code_Commande_Web>200000905</Code_Commande_Web>
    <Code_Client>DIVERS15</Code_Client>
    <Email_Client>florent@lesmecaniques.net</Email_Client>
@@ -154,30 +154,7 @@ class MauchampHelper
 
 
    </Lignes>
-   <To_Magento>array (
-  'entity_id' =&gt; '70',
-  'parent_id' =&gt; '70',
-  'base_shipping_amount' =&gt; '0.0000',
-  'shipping_amount' =&gt; '0.0000',
-  'base_amount_ordered' =&gt; '1099.5700',
-  'amount_ordered' =&gt; '1099.5700',
-  'additional_data' =&gt; 'a:2:{s:10:"payable_to";s:23:"La Parqueterie Nouvelle";s:15:"mailing_address";s:94:"La Parqueterie Nouvelle &#xD;
-33 rue des Entrepreneurs&#xD;
-ZI des Amandiers&#xD;
-78420 Carrières / Seine";}',
-  'cc_exp_month' =&gt; '0',
-  'cc_ss_start_year' =&gt; '0',
-  'method' =&gt; 'checkmo',
-  'cc_ss_start_month' =&gt; '0',
-  'cc_exp_year' =&gt; '0',
-  'additional_information' =&gt; 
-  array (
-  ),
-  'method_instance (Mage_Payment_Model_Method_Checkmo)' =&gt; 
-  array (
-    'info_instance (Mage_Sales_Model_Order_Payment)' =&gt; '*** RECURSION ***',
-  ),
-)</To_Magento>
+   
    <Acompte />
 </Scienergie_PieceCommerciale>
 
@@ -329,6 +306,7 @@ EOT;
           'Type_Piece' => (string)$xml->Type_Piece,
           'Code_Commande' => (string)$xml->Code_Commande,
           'Code_Commande_Web' => (string)$xml->Code_Commande_Web,
+          'Date' => (string)$xml->Date,
           'Date_Livraison' => (string)$xml->Date_Livraison,
           'Date_Confirmation' => (string)$xml->Date_Confirmation,
           'Date_Expedition' => (string)$xml->Date_Expedition,

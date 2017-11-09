@@ -1171,6 +1171,24 @@ class Website_Product extends Object_Product {
 		return $html;
 	}
 
+	public function getCheminDeFer() {
+		$str="";
+
+		if(strlen($this->getSubtype())>0) {
+			$str.=trim($this->getSubtype());
+		}
+
+		if(strlen($this->getSubtype2())>0) {
+			if(strlen($str)>0)
+				$str .= " > ";
+
+			$str.=trim($this->getSubtype2());
+		}
+
+		return $str;
+		
+	}
+
 	
 	public function getImage_1_src() {
 		// get an asset

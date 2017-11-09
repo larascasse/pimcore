@@ -27,6 +27,20 @@
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: 'HelveticaNeueLight';
+  src: url("fonts/helveticaneue-light-webfont.eot");
+  src: url("fonts/helveticaneue-light-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/helveticaneue-light-webfont.woff") format("woff"), url("fonts/helveticaneue-light-webfont.ttf") format("truetype"), url("fonts/helveticaneue-light-webfont.svg#helveticaneue-light-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'HelveticaNeueMedium';
+  src: url("fonts/helveticaneue-medium-webfont.eot");
+  src: url("fonts/helveticaneue-medium-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/helveticaneue-medium-webfont.woff") format("woff"), url("fonts/helveticaneue-medium-webfont.ttf") format("truetype"), url("fonts/helveticaneue-medium-webfont.svg#helveticaneue-medium-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 body {
   font-size: 16px;
   font-color: #575757;
@@ -43,20 +57,22 @@ h1 {
   font-size: 32px;
   line-height: 1.1;
   margin-top: 40px; }
+  h1.display-1 {
+    font-size: 64px; }
 
 h2 {
-  font-family: "DIN-Medium";
+  font-family: "HelveticaNeueLight";
   font-size: 16px;
   border-bottom: 10px solid #CCCCCC;
   margin-bottom: 17px;
   line-height: 3;
   display: inline-block;
-  min-width: 200px; }
+  min-width: 240px;
+  margin-bottom: 30px; }
 
 h4 {
-  font-family: "DIN-Medium";
-  font-size: 16px;
-  text-transform: uppercase; }
+  font-family: "HelveticaNeueLight";
+  font-size: 30px; }
 
 .container-pdf {
   width: 1440px; }
@@ -67,9 +83,30 @@ h4 {
   border-bottom: none;
   width: 100%; }
 
+.ft-header {
+  height: 250px;
+  overflow: hidden;
+  display: block; }
+  .ft-header .ft-col-2 {
+    position: relative;
+    height: 100%; }
+    .ft-header .ft-col-2 > div {
+      position: absolute;
+      bottom: 0; }
+  .ft-header p {
+    font-size: 15px; }
+
+.ft-content {
+  border: 10px solid #f0f0f0;
+  position: absolute;
+  top: 251px;
+  left: 0; }
+  .ft-content .ft-col-1 {
+    margin-left: 20px; }
+
 .ft-col-1 {
   float: left;
-  width: 491px;
+  width: 900px;
   overflow: hidden;
   clear: left; }
   .ft-col-1:before {
@@ -78,8 +115,8 @@ h4 {
 
 .ft-col-2 {
   padding-top: 12px;
-  margin-left: 521px;
-  width: 900px;
+  margin-left: 920px;
+  width: 491px;
   overflow: hidden; }
   .ft-col-2:before {
     display: table;
@@ -88,15 +125,23 @@ h4 {
     clear: both; }
 
 .dl-horizontal th, .dl-horizontal td {
-  font-family: "DIN-Regular";
   font-weight: 400;
-  padding: 20px 5px;
-  vertical-align: top; }
+  padding: 10px 0;
+  vertical-align: top;
+  color: #1c1c1b; }
 
 .dl-horizontal th {
+  margin-bottom: 15px;
+  font-family: "HelveticaNeueLight";
   text-align: left;
-  border-bottom: 5px solid #CCCCCC;
-  width: 200px; }
+  border-bottom: 5px solid #C6c6c6;
+  padding-right: 20px;
+  width: 240px; }
+
+.dl-horizontal td {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 13px; }
 
 .ft-logo {
   height: 50px;

@@ -68,7 +68,9 @@ class MauchampHelper
    <Adresse_Livraison_Telephone>9090</Adresse_Livraison_Telephone>
    <Adresse_Livraison_Fax />
    <Representant>CT</Representant>
-   <Representant_Email>cedrictavernon@obd.fr</Representant_Email>
+   <Representant_Email>cedrictavernon@obd.fr</Representant_Email> 
+   <Representant2>CT</Representant>
+   <Representant2_Email>cedrictavernon@obd.fr</Representant_Email>
 
    <Lignes>
       <Ligne>
@@ -324,6 +326,8 @@ EOT;
           'Reglement' => (string)$xml->Reglement,
           'Representant' => (string)$xml->Representant,
           'Representant_Email' => $xml->Representant_Email,
+          'Representant2' => (string)$xml->Representant,
+          'Representant2_Email' => $xml->Representant_Email,
           "Adresse_Facturation_Raison_Sociale"  =>  (string)$xml->Adresse_Facturation_Raison_Sociale,  
           "Adresse_Facturation_Nom"         =>  (string)$xml->Adresse_Facturation_Nom, //
           "Adresse_Facturation_Prenom"      =>  (string)$xml->Adresse_Facturation_Prenom, 

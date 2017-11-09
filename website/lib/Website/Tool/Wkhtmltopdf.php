@@ -3,11 +3,11 @@
 namespace Website\Tool;
 class Wkhtmltopdf {
  
-    public function fromUrl ($url, $config = array()) {
+    public static function fromUrl ($url, $config = array()) {
         return self::convert($url, $config);
     }
  
-    public function fromString ($string, $config = array()) {
+    public static function fromString ($string, $config = array()) {
  
         $tmpHtmlFile = PIMCORE_TEMPORARY_DIRECTORY . "/" . uniqid() . ".htm";
         file_put_contents($tmpHtmlFile, $string);
@@ -54,7 +54,7 @@ class Wkhtmltopdf {
         return $pdfContent;
     }*/
 
-    public static function convert($httpSource,$pdfFile=null) {
+    public static function convert($httpSource,$pdfFile=null,$postArray=null) {
         
            
 
@@ -88,6 +88,16 @@ class Wkhtmltopdf {
                 "--margin-right" => 0,
                 //"--javascript-delay" =>2000
             ];
+
+            if(is_array($postArray)) {
+                $b = array();
+                foreach ($postArray as $key => $value) {
+                    $b[] = '--post '.$key." '".str_replace(array("\n","\t"),array("",""),$value)."'";
+                    # code...
+                }
+                //print_r($postArray);
+                $localOptions[implode(" ", $b)] = "";
+            }
            
             $optionConfig = array();
             
@@ -111,10 +121,11 @@ class Wkhtmltopdf {
             }
 
             $cmd = $wkhtmltopdfBinary.$options." " . $httpSource . " " . $tmpPdfFile;
+           // echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {
-                    echo "wkhtmltopdf reported error (" . $retVal . ")";
+                    echo "Lpn wkhtmltopdf reported error (" . $retVal . ")";
                     die;
                     throw new \Exception("wkhtmltopdf reported error (" . $retVal . "): \n" . $output . "\ncommand was:" . $cmd);
                 }

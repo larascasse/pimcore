@@ -2,6 +2,7 @@
 <html lang="<?php echo $this->language; ?>">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
     <?php
 
@@ -44,7 +45,7 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<link rel="stylesheet" href="/website/static_lpn/scss/build/css/ft.css">
+<link rel="stylesheet" href="/website/static_lpn/scss/build/css/ft.css?t=<?php echo time()?>">
 
 
 
@@ -119,13 +120,10 @@ var dataLayer=[];
  <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 
- <script src="/website/static_lpn/js/typeahead.bundle.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
 
 
 
-<link rel="stylesheet" href="/website/static_lpn/blueimp/css/blueimp-gallery.min.css">
-<script src="/website/static_lpn/blueimp/js/blueimp-gallery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
@@ -136,7 +134,6 @@ Latest compiled and minified JavaScript -->
 
 <script src="//cdn.jsdelivr.net/npm/balance-text@3.2.0/balancetext.min.js" crossorigin="anonymous"></script>
 <script>
-    console.log("UU",jQuery,$);
     $(document).ready(function() {
 
         balanceText(); 

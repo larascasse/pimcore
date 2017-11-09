@@ -2,7 +2,7 @@
 if($product = $this->product) {
 	
 	if($this->previewmode) {
-    	echo '<a href="https://eshop.laparqueterienouvelle.fr/'.$product->getName().'" title="Voir '.$product->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
+    	echo '<a href="https://eshop.laparqueterienouvelle.fr/'.$product->getName().'" title="Voir '.$product->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
    

@@ -326,8 +326,8 @@ EOT;
           'Reglement' => (string)$xml->Reglement,
           'Representant' => (string)$xml->Representant,
           'Representant_Email' => $xml->Representant_Email,
-          'Representant2' => (string)$xml->Representant,
-          'Representant2_Email' => $xml->Representant_Email,
+          'Representant2' => (string)$xml->Representant2,
+          'Representant2_Email' => $xml->Representant2_Email,
           "Adresse_Facturation_Raison_Sociale"  =>  (string)$xml->Adresse_Facturation_Raison_Sociale,  
           "Adresse_Facturation_Nom"         =>  (string)$xml->Adresse_Facturation_Nom, //
           "Adresse_Facturation_Prenom"      =>  (string)$xml->Adresse_Facturation_Prenom, 

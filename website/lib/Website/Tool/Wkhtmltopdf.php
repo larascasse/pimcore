@@ -78,14 +78,16 @@ class Wkhtmltopdf {
             $localOptions= [
                 //"--debug-javascript" => 1,
                 "--load-error-handling" => "ignore",
+                "--dpi" => 300,
+               // "--disable-smart-shrinking" => "",
                 //"-s" => "",
-                "--page-width" => 60,
+                //"--page-width" => 60,
                 //"--page-height" => 50,
-                "--page-height" => 100,
-                "--margin-bottom" => 0,
-                "--margin-top" => 0,
-                "--margin-left" => 0,
-                "--margin-right" => 0,
+                //"--page-height" => 100,
+                "--margin-bottom" => 15,
+                "--margin-top" => 15,
+                "--margin-left" => 15,
+                "--margin-right" => 15,
                 //"--javascript-delay" =>2000
             ];
 

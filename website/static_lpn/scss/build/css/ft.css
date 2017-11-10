@@ -28,7 +28,7 @@
   font-style: normal; }
 
 @font-face {
-  font-family: 'HelveticaNeueLight';
+  font-family: 'Helveticaneue-light-webfont';
   src: url("fonts/helveticaneue-light-webfont.eot");
   src: url("fonts/helveticaneue-light-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/helveticaneue-light-webfont.woff") format("woff"), url("fonts/helveticaneue-light-webfont.ttf") format("truetype"), url("fonts/helveticaneue-light-webfont.svg#helveticaneue-light-webfont") format("svg");
   font-weight: normal;
@@ -42,8 +42,7 @@
   font-style: normal; }
 
 body {
-  font-size: 16px;
-  font-color: #575757;
+  font-size: 20px;
   line-height: 1.2; }
 
 #logo {
@@ -54,16 +53,16 @@ body {
 
 h1 {
   font-family: "DINPro-Bold", Georgia, "Times New Roman", Times, serif;
-  font-size: 32px;
+  font-size: 38px;
   line-height: 1.1;
   margin-top: 40px; }
   h1.display-1 {
     font-size: 64px; }
 
 h2 {
-  font-family: "HelveticaNeueLight";
-  font-size: 16px;
-  border-bottom: 10px solid #CCCCCC;
+  font-family: "Helveticaneue-light-webfont";
+  font-size: 20px;
+  border-bottom: 10px solid #c6c6c6;
   margin-bottom: 17px;
   line-height: 3;
   display: inline-block;
@@ -71,42 +70,22 @@ h2 {
   margin-bottom: 30px; }
 
 h4 {
-  font-family: "HelveticaNeueLight";
+  font-family: "Helveticaneue-light-webfont";
   font-size: 30px; }
 
-.container-pdf {
-  width: 1440px; }
-
-.page-header {
-  padding: 45px 15px 0 60px;
-  margin: 0;
-  border-bottom: none;
-  width: 100%; }
-
-.ft-header {
-  height: 250px;
-  overflow: hidden;
-  display: block; }
-  .ft-header .ft-col-2 {
-    position: relative;
-    height: 100%; }
-    .ft-header .ft-col-2 > div {
-      position: absolute;
-      bottom: 0; }
-  .ft-header p {
-    font-size: 15px; }
-
-.ft-content {
-  border: 10px solid #f0f0f0;
-  position: absolute;
-  top: 251px;
-  left: 0; }
-  .ft-content .ft-col-1 {
-    margin-left: 20px; }
+/*.page-header {
+	padding: 45px 15px 0 60px;
+	margin: 0;
+	border-bottom: none;
+	width: 100%;
+}*/
+hr {
+  height: 20px;
+  background-color: #c6c6c6; }
 
 .ft-col-1 {
   float: left;
-  width: 900px;
+  width: 890px;
   overflow: hidden;
   clear: left; }
   .ft-col-1:before {
@@ -115,14 +94,48 @@ h4 {
 
 .ft-col-2 {
   padding-top: 12px;
-  margin-left: 920px;
-  width: 491px;
+  margin-left: 890px;
+  width: 470px;
   overflow: hidden; }
   .ft-col-2:before {
     display: table;
     content: " "; }
   .ft-col-2:after {
     clear: both; }
+
+.ft-header {
+  height: 250px;
+  overflow: hidden;
+  display: block;
+  width: 1440px; }
+  .ft-header .ft-col-2 {
+    position: relative;
+    height: 100%;
+    width: 460px; }
+    .ft-header .ft-col-2 > div {
+      position: absolute;
+      bottom: 0; }
+  .ft-header p {
+    font-size: 15px; }
+
+.ft-content {
+  position: absolute;
+  top: 251px;
+  width: 1440px;
+  left: 0; }
+  .ft-content .ft-col-1 {
+    padding-left: 20px;
+    border-left: 20px solid #f0f0f0;
+    border-top: 20px solid #f0f0f0;
+    border-bottom: 20px solid #f0f0f0;
+    height: 1700px; }
+  .ft-content .ft-col-2 {
+    padding-top: 0;
+    border-right: 20px solid #f0f0f0;
+    border-bottom: 20px solid #f0f0f0;
+    height: 1700px; }
+    .ft-content .ft-col-2 > div:first-child {
+      border-top: 20px solid #c6c6c6; }
 
 .dl-horizontal th, .dl-horizontal td {
   font-weight: 400;
@@ -132,7 +145,7 @@ h4 {
 
 .dl-horizontal th {
   margin-bottom: 15px;
-  font-family: "HelveticaNeueLight";
+  font-family: "Helveticaneue-light-webfont";
   text-align: left;
   border-bottom: 5px solid #C6c6c6;
   padding-right: 20px;
@@ -143,7 +156,12 @@ h4 {
   padding-right: 20px;
   padding-top: 13px; }
 
+.ft-col-2 th {
+  max-width: 240px;
+  width: 240px;
+  text-overflow: ellipsis; }
+
 .ft-logo {
-  height: 50px;
+  height: 100px;
   width: auto;
-  padding: 5px 10px; }
+  padding: 10px 20px 20px 0px; }

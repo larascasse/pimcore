@@ -44,7 +44,7 @@
 }
 
 @font-face {
-	font-family: 'HelveticaNeueLight';
+	font-family: 'Helveticaneue-light-webfont';
 	src: url('fonts/helveticaneue-light-webfont.eot');
 	src: url('fonts/helveticaneue-light-webfont.eot?#iefix') format('embedded-opentype'),
 		url('fonts/helveticaneue-light-webfont.woff') format('woff'),
@@ -71,11 +71,14 @@ $font-family-serif:      "DINPro-Bold", Georgia, "Times New Roman", Times, serif
 $font-family-sans-serif:  "Helvetica Neue", "HelveticaNeueRegular", Arial, sans-serif, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI";
 $font-family-base:       $font-family-sans-serif;
 
-$font-size-std : 16px;
+$font-size-std : 20px;
+
+$grisclair : #f0f0f0;
+$grisfonce : #c6c6c6;
 
 body {
 	font-size: $font-size-std;
-	font-color: #575757;
+	//color: #575757;
 	line-height : 1.2;
 }
 #logo {
@@ -88,7 +91,7 @@ body {
 
 h1 {
 	font-family: $font-family-serif; 
-	font-size: 32px;
+	font-size: 38px;
 	line-height: 1.1;
 	margin-top: 40px;
 
@@ -98,9 +101,9 @@ h1 {
 }
 
 h2{
-	font-family: "HelveticaNeueLight"; 
+	font-family: "Helveticaneue-light-webfont"; 
 	font-size: $font-size-std;
-	border-bottom : 10px solid #CCCCCC;
+	border-bottom : 10px solid $grisfonce;
 	margin-bottom: 17px;
 	line-height : 3;
 	display: inline-block;
@@ -111,38 +114,84 @@ h2{
 
 
 h4 {
-	font-family: "HelveticaNeueLight"; 
+	font-family: "Helveticaneue-light-webfont"; 
 	font-size: 30px;
 	//text-transform: uppercase;
 }
 
 .container-pdf {
-	width : 1440px;
+	//width : 1440px;
 	//margin: 0 auto 0 auto;
 	//border: 1px solid #990000;
 	//background-color:#FF0000;
 }
-.page-header {
+/*.page-header {
 	padding: 45px 15px 0 60px;
 	margin: 0;
 	border-bottom: none;
 	width: 100%;
-}
+}*/
 
 
 $headerHeight : 250px;
+$col1Width : 890px;
+$col2Width : 470px;
+$colHeight : 1700px;
+
+hr {
+	height:20px;
+	background-color:$grisfonce;
+}
+
+.ft-col-1 {
+	&:before {
+		display: table;
+		content: " "
+	}
+	float: left;
+	width: $col1Width;
+	overflow: hidden;
+	clear: left;
+	//background-color:#00FFF0;
+
+}
+
+
+.ft-col-2 {
+	padding-top: 12px;
+	//background-color:#0000FF;
+	&:before {
+		display: table;
+		content: " "
+	}
+	margin-left: $col1Width;
+	width: $col2Width;
+	overflow: hidden;
+	//background-color:#888888;
+	&:after {
+		clear: both;
+	}
+}
+
+
 
 .ft-header {
 	height: $headerHeight;
 	overflow: hidden;
 	display: block;
+	//background-color: #FF0000;
+	width: 1440px;
 	.ft-col-2 {
 		position: relative;
 		height: 100%;
+		//padding-right: 35px;
+		width: 460px;
 		& > div  {
 			position: absolute;
 			bottom: 0;
+			
 			//border: 10px solid #FFF000;
+			//background-color:#FF0000;
 
 		}
 	}
@@ -152,46 +201,38 @@ $headerHeight : 250px;
 }
 
 .ft-content {
-	border: 10px solid #f0f0f0;
+	//border: 10px solid $grisclair;
 	position: absolute;
+	//background-color: #00FF00;
 	top: ($headerHeight+1);
+	width: 1440px;
 	left :0;
 
+
 	.ft-col-1 {
-		margin-left: 20px;
+		padding-left: 20px;
+		border-left: 20px solid $grisclair;
+		border-top: 20px solid $grisclair;
+		border-bottom: 20px solid $grisclair;
+		height: $colHeight;
 	}
+
+	.ft-col-2 {
+		padding-top: 0;
+		border-right: 20px solid $grisclair;
+		//border-top: 20px solid $grisfonce;
+		border-bottom: 20px solid $grisclair;
+		> div:first-child {
+			border-top: 20px solid $grisfonce;
+		}
+		height: $colHeight;
+	}
+
 }
 
 
 
-.ft-col-1 {
-	&:before {
-		display: table;
-		content: " "
-	}
-	float: left;
-	width: 900px;
-	overflow: hidden;
-	clear: left;
-	//background-color:#00FF00;
 
-}
-
-
-.ft-col-2 {
-	padding-top: 12px;
-	&:before {
-		display: table;
-		content: " "
-	}
-	margin-left: 920px;
-	width: 491px;
-	overflow: hidden;
-	//background-color:#888888;
-	&:after {
-		clear: both;
-	}
-}
 
 .dl-horizontal {
 	th,td {
@@ -206,7 +247,7 @@ $headerHeight : 250px;
 	}
 	th {
 		margin-bottom: 15px;
-		font-family: "HelveticaNeueLight"; 
+		font-family: "Helveticaneue-light-webfont"; 
 		text-align: left;
 		border-bottom : 5px solid #C6c6c6;
 		padding-right : 20px;
@@ -224,8 +265,17 @@ $headerHeight : 250px;
 
 }
 
+.ft-col-2 {
+	th {
+		max-width: 240px;
+		width: 240px;
+		text-overflow: ellipsis;
+		//background-color:#FF0000;
+	}
+}
+
 .ft-logo {
-	height: 50px;
+	height: 100px;
 	width: auto;
-	padding: 5px 10px;
+	padding: 10px 20px 20px 0px;
 }

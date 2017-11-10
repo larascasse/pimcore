@@ -135,7 +135,8 @@ hr {
     border-bottom: 20px solid #f0f0f0;
     height: 1700px; }
     .ft-content .ft-col-2 > div:first-child {
-      border-top: 20px solid #c6c6c6; }
+      border-top: 20px solid #c6c6c6;
+      padding-right: 20px; }
 
 .dl-horizontal th, .dl-horizontal td {
   font-weight: 400;

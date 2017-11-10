@@ -166,9 +166,9 @@ echo $htmlStd;
 <div class="ft-col-2">
 
 
-<div class="row">
+<div class="">
 
-	<div class="col-xs-12">
+
 	
 	     
 
@@ -186,22 +186,20 @@ if ($hasMarquageCe) {
 ?>
 <hr />
 <?php
-		        if(is_array($logoAssets) && count($logoAssets)>0) { ?>
-		        	<?php
-		        	foreach ($logoAssets as  $asset) {
-		        		//echo '<div class="col-xs-2__">';
-			        	echo  $asset->getThumbnail("magento_logo")->getHTML(array("class"=>'ft-logo')); 
-			        	//echo '</div>';
-			        }
-			        ?>
-			   	 
-			      <?php 
-		        }
-		        
-		        ?>
+if(is_array($logoAssets) && count($logoAssets)>0) { ?>
+	<?php
+	foreach ($logoAssets as  $asset) {
+		//echo '<div class="col-xs-2__">';
+    	echo  $asset->getThumbnail("magento_logo")->getHTML(array("class"=>'ft-logo')); 
+    	//echo '</div>';
+    }
+    ?>
+	 
+  <?php 
+}
 
-		
-	</div>
+?>
+
 
 	
 </div>

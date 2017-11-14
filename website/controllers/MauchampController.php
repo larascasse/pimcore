@@ -139,7 +139,8 @@ class MauchampController extends Action
 
                     
                     //Creation de la cover : 
-                    $coverPath = \Pimcore\Tool::getHttpData("http://pimcore.florent.local/?controller=mauchamp&action=cover-for-piece-commerciale-pdf",null,["xml"=>$this->getParam('xml'),'createfile'=>true]);
+                    $coverPath = \Pimcore\Tool::getHttpData(
+                        Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale-pdf",null,["xml"=>$this->getParam('xml'),'createfile'=>true]);
 
                     /*
                     $pdf2show = new Zend_Pdf();
@@ -333,7 +334,7 @@ $pdf2show->render());
 
 
 
-         $fileContent = \Pimcore\Tool::getHttpData("http://pimcore.florent.local/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$data]);
+         $fileContent = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$data]);
 
 
          //$filepath = $tmpPdfFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";

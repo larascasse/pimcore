@@ -233,7 +233,7 @@ $pdf2show->render());
                 exit;
          }
 
-         echo json_encode(array("message"=> "mail envoyé"));
+         echo json_encode(array("message"=> "Mail envoyé, chouette !"));
          die;
       
 

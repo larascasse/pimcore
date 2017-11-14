@@ -73,6 +73,8 @@ class MauchampController extends Action
     public function mauchampSendmailAction() {
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
       
          header('Content-Type: application/json');
 
@@ -116,10 +118,19 @@ class MauchampController extends Action
 
            
             try {
+               // echo "try generate";
                  //Generate PDF
+                /* V1 
                 $httpsource = implode(" ", $ftUrls);
                 $contentPdfPath = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
                 $pdfContent = $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpsource,$contentPdfPath);
+                */
+                /* V2 */
+                $coverHtmlData = \Pimcore\Tool::getHttpData(
+                        Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$this->getParam('xml')]);
+                $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($coverHtmlData);
+
+
             }
             catch (Exception $e) {
                 //echo $e->getMessage().$httpsource;exit;
@@ -133,7 +144,7 @@ class MauchampController extends Action
                 $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
             }
 
-            $addCover = true;
+            $addCover = false;
             if($addCOver) {
                 try {
 

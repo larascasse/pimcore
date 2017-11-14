@@ -11,11 +11,12 @@ class Wkhtmltopdf {
  
         $tmpHtmlFile = PIMCORE_TEMPORARY_DIRECTORY . "/" . uniqid() . ".htm";
         file_put_contents($tmpHtmlFile, $string);
-        $httpSource = $_SERVER["HTTP_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . str_replace($_SERVER["DOCUMENT_ROOT"],"",$tmpHtmlFile);
- 
+        $httpSource = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$tmpHtmlFile);
+        //echo $httpSource."||||||".$string."//////////////";
+       // die;
         $pdfContent = self::convert($httpSource, $config);
  
-        @unlink($tmpHtmlFile);
+        //@unlink($tmpHtmlFile);
  
         return $pdfContent;
     }

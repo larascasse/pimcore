@@ -58,13 +58,15 @@ class MauchampController extends Action
             }
             //die;
         }
+
+        //ORDER
         else {
             $order = \Website\Tool\MauchampHelper::parseOrder($data);
             $this->view->products = $order["products"];
             $this->view->missingProducts = $order["missingProducts"];
             $this->view->transport = $order["transport"];
             $this->view->orderDetail = $order["orderDetail"];
-            $this->view->xmlOrder = $xml;
+            $this->view->xmlOrder = $data;
 
         }
         
@@ -133,7 +135,8 @@ class MauchampController extends Action
 
             }
             catch (Exception $e) {
-                //echo $e->getMessage().$httpsource;exit;
+                 echo json_encode(array("message"=> $e->getMessage()));
+                 die;
             }
 
 
@@ -223,10 +226,13 @@ $pdf2show->render());
           catch (Exception $e) {
                 // something went wrong: eg. limit exceeded, wrong configuration, ...
                 Logger::err($e);
-                echo $e->getMessage();exit;
-                }
+                //echo $e->getMessage();
+                echo json_encode(array("message"=> $e->getMessage()));
+                exit;
+         }
 
-         echo json_encode(array($httpsource,$ftUrls));
+         echo json_encode(array("message"=> "mail envoyé"));
+         die;
       
 
          

@@ -1,4 +1,8 @@
+<?php
 
+$orderDetail = $this->orderDetail;
+
+?>
 
 <script>
 
@@ -176,6 +180,16 @@ foreach ($this->missingProducts as $product) {
 	<div class="row justify-content-center">
   <div class="card card-inverse card-info card-block" style="max-width: 800px;margin-top:80px;margin-bottom:80px;">
   
+
+  <div class="form-group has-success__">
+  <label class="form-control-label" for="inputSuccess1">Email</label>
+  <input type="text" class="form-control form-control-success" id="inputSuccess1" name="from-email" value="<?php echo $orderDetail["Representant2_Email"]?>">
+  <!--<div class="form-control-feedback">Success! You've done it.</div>
+  <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
+  </div>
+
+
+
     <div class="form-group has-success__">
   <label class="form-control-label" for="inputSuccess1">Sujet</label>
   <input type="text" class="form-control form-control-success" id="inputSuccess1" value="Votre visite à La Parqueterie Nouvelle">
@@ -185,15 +199,17 @@ foreach ($this->missingProducts as $product) {
 
 	<div class="form-group">
   <label class="form-control-label" for="inputWarning1">Message</label>
-  <textarea class="form-control" rows="10" id="inputWarning1">Bonjour,
+  <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 
-Merci pour votre commande CCA12343.
+Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n°<?php echo $orderDetail["Code_Commande"]?>.
 
-Vous trouverez, en pièce jointe, toutes les informations concernant celle-ci.
 
-Si vous avez besoin de plus amples information, je me tiens à votre dispositions :).
 
-Thierry & Michel</textarea>
+Si vous avez besoin de plus amples informations, je me tiens à votre disposition :).
+
+<?php echo $orderDetail["Representant2"]?></textarea>
+
+
 </div>
  <input type="button" value="Envoyer" id="sendmail" onclick="sendEmail();return false;" />
 
@@ -202,6 +218,7 @@ Thierry & Michel</textarea>
 </div>
   </div>
 </div>
+<textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
  </form>
 <div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>
 
@@ -211,14 +228,17 @@ Thierry & Michel</textarea>
 <?php 
 
 foreach ($this->orderDetail as $key => $value) {
-  echo $key." : ".$value."<br />";
+  //echo $key." : ".$value."<br />";
   # code...
 }
 
 ?>
 <div>
-<textarea  cols="100" rows="20" name="xml"><?php echo $this->xmlOrder ?></textarea>
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<textarea  cols="100" rows="20" name="xml" style="font-size:10px; color:#CCCCCC"><?php echo $this->xmlOrder ?></textarea>
 </div>
 
-<?php var_dump($_SERVER); ?>
+<?php 
+//var_dump($_SERVER); 
+?>
 </p>

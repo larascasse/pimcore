@@ -296,6 +296,7 @@ $pdf2show->render());
         $this->view->transport = $order["transport"];
         $this->view->orderDetail = $order["orderDetail"];
         $this->view->xmlOrder = $xml;
+        $this->renderScript('mauchamp/book-commande.php');
 
     }
 

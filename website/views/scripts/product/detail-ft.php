@@ -1,8 +1,6 @@
 <?php 
 
 
-$this->document->setProperty("leftNavHide","bool",true);
-$this->layout()->setLayout("layout-ft"); 
 
 $product = $this->product;
 $relatedProducts = $product->getRelated("relatedProducts");
@@ -105,7 +103,7 @@ $htmlDonneeTech .='</table>';
 
 
 ?>
-
+<div class="ft">
 <div class="ft-header">
 <div class="ft-col-1">
 	<div id="logo2" style='width:338px;height:30px'>
@@ -368,6 +366,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 </div>
 </div>
 <!-- FIN MAIN LAYOUT / -->
+</div>
 </div>
 
 

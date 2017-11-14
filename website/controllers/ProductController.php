@@ -150,7 +150,7 @@ class ProductController extends Action
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
 
         $this->enableLayout();
-        $this->setLayout("layout-produit");
+        $this->setLayout("layout-ft ");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         

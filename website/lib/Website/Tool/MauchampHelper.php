@@ -69,8 +69,8 @@ class MauchampHelper
    <Adresse_Livraison_Fax />
    <Representant>CT</Representant>
    <Representant_Email>cedrictavernon@obd.fr</Representant_Email> 
-   <Representant2>CT</Representant>
-   <Representant2_Email>cedrictavernon@obd.fr</Representant_Email>
+   <Representant2>CT</Representant2>
+   <Representant2_Email>cedrictavernon@obd.fr</Representant2_Email>
 
    <Lignes>
       <Ligne>
@@ -153,6 +153,31 @@ class MauchampHelper
          <Taux_TVA>20</Taux_TVA>
          <Designation>TEST OBSERVATION</Designation>
       </Ligne>
+
+      <Ligne>
+         <Ordre>8</Ordre>
+         <Code_EAN_Article>7612894751772</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>195,20</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Sika</Designation>
+      </Ligne>
+
+      <Ligne>
+         <Ordre>8</Ordre>
+         <Code_EAN_Article>0005282507000</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>195,20</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Sika</Designation>
+      </Ligne>
+
 
 
    </Lignes>
@@ -428,7 +453,7 @@ EOT;
                             }
                               
                             else {
-                             // echo "EAN existe PAS ".$sku."<br />\n";
+                                //echo "EAN existe PAS ".$sku."<br />\n";
                             }
                               
                             //Si produit existe
@@ -439,7 +464,7 @@ EOT;
 
                             //Sinon
                             else {
-
+                              
                                 $productName    = strlen($p->Designation)>1?$p->Designation:$productName; 
                                 $missingProduct = new Object\Product(); 
                                 $missingProduct->name = $productName;

@@ -2379,7 +2379,7 @@ Les masses volumiques moyennes des contreplaqués sont :
 		else if($this->isParquetMassif()) {
 			$essence = $this->getEssence();
 			
-			return GgetMasseVolumiqueByEssence($essence);
+			return \Website\Tool\ParquetData::getMasseVolumiqueByEssence($essence);
 
 		}
 		return "";
@@ -2597,6 +2597,22 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 	public function isParquet() {
 		return $this->isParquetMassif() || $this->isParquetContrecolle();
+	}
+	public function isAccessoire() {
+		 $attributeType = strtolower($this->getSubtype());
+		 $scienergieName = strtolower($this->getName_scienergie());
+		 //echo $attributeType." ".$scienergieName."<br />";
+		 $isAccessoire =    stripos($attributeType,'accessoire')!==false 
+		        				|| stripos($attributeType,'colle')!==false 
+		        				|| stripos($attributeType,'couche')!==false
+		        				|| stripos($attributeType,'finition')!==false
+		        				|| stripos($attributeType,'structure')!==false
+		        				|| stripos($scienergieName,'accessoire')!==false
+		        				|| stripos($scienergieName,'plus value')!==false
+		        				//|| stripos($attributeType,'plinthe')!==false
+		        				//|| stripos($attributeType,'pieds pour')!==false
+		        				; 
+		  return $isAccessoire;
 	}
 
 }

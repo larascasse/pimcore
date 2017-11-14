@@ -68,7 +68,16 @@ function sendEmail() {
        
 
             hidePleaseWait();
-            alert(data);
+            alert(data.message);
+
+      },
+      error: function (transport) {
+        
+              btn.disabled=false;
+              //console.log(transport);
+              
+              hidePleaseWait();
+              alert(transport.statusText);
 
       }
   });

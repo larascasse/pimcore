@@ -104,11 +104,13 @@ class MauchampController extends Action
 
              $mail = new Pimcore_Mail();
              $mail->setIgnoreDebugMode(true);
-             $this->params["message"] = "Merci pour votre visite !";
-             $emailDocument = Document::getById(345);
+             //$this->params["message"] = "Merci pour votre visite !";
+             //$emailDocument = Document::getById(345);
 
-             $mail->setDocument($emailDocument);
-             $mail->setParams($this->getAllParams());
+             //$mail->setDocument($emailDocument);
+             //$mail->setParams($this->getAllParams());
+
+             $mail->setBodyText($this->getParam("message"));
 
             $mail->clearRecipients();
 

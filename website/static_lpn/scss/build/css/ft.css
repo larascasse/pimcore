@@ -214,6 +214,33 @@ hr {
   width: 100%;
   height: auto; }
 
+.fp .ft-content .ft-col-1 {
+  padding-right: 30px; }
+
+ul.subdescription {
+  margin-bottom: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 30px; }
+  ul.subdescription li {
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c6c6c6;
+    font-weight: 700;
+    width: 100%; }
+
+.lesplus {
+  padding: 30px;
+  background-color: #f0f0f0; }
+  .lesplus ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    .lesplus ul li {
+      padding-top: 10px; }
+
 .cover h2 {
   min-width: 1px; }
 

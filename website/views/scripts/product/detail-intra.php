@@ -13,6 +13,21 @@ $extras = $product->getRelated("extras");
 $childrens = $product->getChilds();
 $lesplus = $product->getLesPlusArray();
 
+ $caracteristiques =  $product->getCharacteristicsArray();
+$logoAssets = array();
+ foreach ($caracteristiques as $key => $value) {
+
+ 			if(!is_array($value)) {
+ 				continue;
+ 			}
+
+			if(isset($value["logo"])) {
+				$logoAssets[] = $value["logo"];
+			}
+}
+
+
+
 ?>
 
 <div class="fp">
@@ -60,11 +75,12 @@ if (strlen($subtitle)>0) {
 	<div class="col-xs-12">
 	<?php
 	 $image = $this->product->getImage_1();
-	 echo $image->getThumbnail("galleryThumbnail")->getHTML(["class"=>"img-responsive"]);
+	 echo $image->getThumbnail("magento_header")->getHTML(["class"=>"img-responsive photo"]);
 	 ?>
-
-	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
-	<?php echo nl2br($this->product->getMage_lesplus()); ?>
+	 <div class="lesplus">
+	<h3>Vous aimerez</h3>
+	<?php echo str_replace("<br />", " : ",$this->product->getMage_lesplus()); ?>
+	</div>
 	</div>
 </div>
 
@@ -85,20 +101,20 @@ if (strlen($subtitle)>0) {
 
 
 	
-	     
+<?php 
+$subDescArray = explode("\n",$this->product->getMage_sub_description());
 
+if(is_array($subDescArray) && count($subDescArray)>0) {
+	echo '<ul class="subdescription">';
 
-
-<?php
-
-
-
-if ($hasMarquageCe) {
-	echo "<h2>Déclaration de performance</h2>";
-	echo $htmlCe;
-	echo '<p class="small"><br /><br />Il n’existe pas de PV pour le classement au feu des parquets massifs et contrecollés. Les classements feu que nous indiquons sur nos fiches techniques et autres documents sont des classements dits « conventionnels », stipulés dans les DTU 51.11 (Pose flottante des parquets contrecollés) et 51.2 (Pose collée des parquets massifs) et selon la norme NF 14341+A1.</p>';
-}
+	foreach ($subDescArray as $key => $value) {
+		echo '<li>'.$value.'</li>';
+	}
+	echo "</ul>";
+} 
 ?>
+
+<br />
 <?php
 if(is_array($logoAssets) && count($logoAssets)>0) { ?>
 	<?php

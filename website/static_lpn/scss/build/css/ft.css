@@ -229,7 +229,7 @@ hr {
     font-size: 80px; }
   .cover .cover-title hr {
     width: 500px;
-    border-top: 10px solid #00FF00;
+    border-top: 10px solid #5ca246;
     display: inline-block; }
 
 .cover .ft-content {
@@ -239,9 +239,10 @@ hr {
   padding-left: 30px;
   padding-right: 30px; }
   .cover .ft-content .ft-col-1 {
-    height: 250px; }
+    padding-right: 30px;
+    height: 500px; }
   .cover .ft-content .ft-col-2 {
-    height: 250px; }
+    height: 500px; }
     .cover .ft-content .ft-col-2 > div:first-child {
       border-top: 0px solid transparent; }
 

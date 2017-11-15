@@ -784,5 +784,53 @@ EOT;
        return $xml;
   }
 
+  public static function getSiteAdresse($site=null) {
+    $sites = array();
+    $sites["75020"] = array (
+        "name" => "La Parqueterie Nouvelle - Paris",
+        "address1" => "141, rue de Bagnolet",
+        "address2" => "3 rue Pelleport",
+        "zipcode" => "75020",
+        "city" => "Paris",
+        "phone" => "01 30 40 55 55"
+    );
+
+    $sites["78420"] = array (
+        "name" => "La Parqueterie Nouvelle - Carrières - OBD",
+        "address1" => "33 rue des Entrepreneurs",
+        "address2" => "ZA des Amandiers",
+        "zipcode" => "78420",
+        "city" => "Paris",
+        "phone" => "XXXXX"
+    );
+
+    $sites["78240"] = array (
+        "name" => "La Parqueterie Nouvelle - Chambourcy",
+        "address1" => "22 route de Mantes",
+        "address2" => "",
+        "zipcode" => "78240",
+        "city" => "Chambourcy",
+        "phone" => "XXX"
+    );
+    if(isset($site)) {
+      if(array_key_exists($site, $sites))
+          return $sites[$site];
+    }
+    return $sites;
+
+
+  }
+
+  public static function getFormatedAdress($site) {
+    $site = self::getSiteAdresse($site);
+    $str = $site['address1'];
+    if(strlen($site["address2"]))
+      $str .= "\n".$site['address2'];
+
+    $str.= "\n".$site['zipcode']." ".$site['city'];
+    return $str;
+
+  }
+
     
 }

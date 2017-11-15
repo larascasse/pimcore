@@ -23,9 +23,19 @@ $orderDetail = $this->orderDetail;
   <h2><?php echo $orderDetail["Type_Piece"]?></h2>
   <p>
   <?php
+  $products= array();
+  $accessoires=array();
   foreach ($this->products as $product) {
-    echo $product->getName().'<br />';
+    if(!$product->isAccessoire()) {
+      $products[] = $product->getName();
+    }
+    else {
+      $accessoires[] = $product->getName();
+
+    }
   }
+      echo "<p><strong>".implode("<br />",$products).'</strong></p><p>'.implode(", ",$accessoires).'</p>';
+
   ?></p>
   </div>
 
@@ -35,7 +45,11 @@ $orderDetail = $this->orderDetail;
         <h2>Votre interlocuteur</h2>
         <p><?php echo $orderDetail["Representant"]?> - <?php echo $orderDetail["Representant_Email"]?></p>
         <p><?php echo $orderDetail["Representant2"]?> - <?php echo $orderDetail["Representant2_Email"]?></p>
-        <p>La Parqueterie Nouvelle - Paris<br />Angle 141 rue de Bagnolet / 3 rue Pelleport<br />75020 Paris</p>
+        <p><?php
+        $site = \Website\Tool\MauchampHelper::getSiteAdresse($orderDetail["Site"]);
+        $str = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"])).$site["phone"];
+        echo $str; 
+        ?></p>
       </div>
     </div>
   </div>

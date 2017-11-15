@@ -3,11 +3,7 @@
 
 
 $product = $this->product;
-$relatedProducts = $product->getRelated("relatedProducts");
 
-$associatedArticles = $product->getRelated("associatedArticles");
-$relatedAccessories = $product->getRelated("relatedAccessories");
-$caracteristiques = $product->getCharacteristicsFo();
 $extras = $product->getRelated("extras");
 
 $childrens = $product->getChilds();

@@ -201,6 +201,14 @@ foreach ($this->missingProducts as $product) {
 
 
           <div class="form-group has-success__">
+          <label class="form-control-label" for="inputSuccess1">Pour</label>
+          <input type="text" class="form-control form-control-success" id="inputSuccess1" name="to-email" value="<?php echo $orderDetail["Email_Client"]?>">
+          <!--<div class="form-control-feedback">Success! You've done it.</div>
+          <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
+          </div>
+
+
+            <div class="form-group has-success__">
           <label class="form-control-label" for="inputSuccess1">De la part de </label>
           <input type="text" class="form-control form-control-success" id="inputSuccess1" name="from-email" value="<?php echo $orderDetail["Representant2_Email"]?>">
           <!--<div class="form-control-feedback">Success! You've done it.</div>

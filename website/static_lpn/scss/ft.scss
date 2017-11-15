@@ -344,9 +344,31 @@ $col2Width : 470px;
 		//border-top: 20px solid $grisfonce;
 		border-bottom: 20px solid $grisclair;
 
-		> div:first-child {
+		&> div:first-child {
 			
 		}
+	}
+
+}
+
+$gap: 40px;
+.fp {
+	&.photos {
+		.ft-col-1 {
+			padding-top: 11px;
+			padding-right: $gap;
+		}
+		.ft-col-2 {
+			&> div:first-child {
+				padding-top: $gap;
+			}
+		}
+
+	}
+	.photo {
+		padding-bottom: ($gap / 2);
+		width: 100%;
+		height: auto;
 	}
 
 }

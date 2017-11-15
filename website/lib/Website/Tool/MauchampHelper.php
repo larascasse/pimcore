@@ -178,6 +178,18 @@ class MauchampHelper
          <Designation>Sika</Designation>
       </Ligne>
 
+      <Ligne>
+         <Ordre>9</Ordre>
+         <Code_EAN_Article>6303002894200</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>195,20</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Bardage</Designation>
+      </Ligne>
+
 
 
    </Lignes>
@@ -336,7 +348,8 @@ EOT;
           'Date' => (string)$xml->Date,
           'Date_Livraison' => (string)$xml->Date_Livraison,
           'Date_Confirmation' => (string)$xml->Date_Confirmation,
-          'Date_Expedition' => (string)$xml->Date_Expedition,
+          'Date_Confirmation' => (string)$xml->Date_Confirmation,
+          'Email_Client' => (string)$xml->Email_Client,
           'Acompte' => (string)$xml->Acompte,
           'Remise' => (string)$xml->Remise,
           'Type_Remise' => (string)$xml->Type_Remise,

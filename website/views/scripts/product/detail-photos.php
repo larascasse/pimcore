@@ -13,9 +13,30 @@ $extras = $product->getRelated("extras");
 $childrens = $product->getChilds();
 $lesplus = $product->getLesPlusArray();
 
+$packshotsImages = array();
+for($i=1; $i<=3; $i++) { 
+	$image = $this->product->{"getImage_" . $i}();
+	if($image) { 
+		$packshotsImages[] = $image->getThumbnail("magento_realisation");
+	} 
+	
+}
+
+$realisations =$this->product->getRealisations();
+$count=count($realisations);
+$assetsArray=array();
+for ($i=0; $i < $count; $i++) { 
+		$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
+		foreach ($assets as $asset) {
+			$assetsArray[] = $asset->getThumbnail("magento_realisation");
+		}
+}
+
+
 ?>
 
-<div class="fp">
+
+<div class="fp photos">
 <div class="ft-header">
 <div class="ft-col-1">
 	<div id="logo2" style='width:338px;height:30px'>
@@ -53,16 +74,21 @@ if (strlen($subtitle)>0) {
 <div class="ft-col-1">
 
 
-        <?php for($i=1; $i<=3; $i++) { ?>
-            <?php
-                $image = $this->product->{"getImage_" . $i}();
-            ?>
-            <?php if($image) { ?>
-                <div class="col-xs-12">
-                    <?php echo $image->getThumbnail("magento_realisation")->getHTML(["class"=>"img-responsive"]); ?>
-                </div>
-            <?php } ?>
-        <?php } ?>
+ <?
+ if(count($packshotsImages)>0) {
+ 	echo $packshotsImages[0]->getHTML(array("class"=>"img-responsive photo"));
+ }
+
+  if(count($assetsArray)>0) {
+ 	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
+ 		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
+ 	}
+ 	
+ }
+
+
+?>
+
 
 
 
@@ -74,18 +100,24 @@ if (strlen($subtitle)>0) {
 
 <div class="">
 
-
-
-<?php
-if(is_array($logoAssets) && count($logoAssets)>0) {
-	foreach ($logoAssets as  $asset) {
-		//echo '<div class="col-xs-2__">';
-    	echo  $asset->getThumbnail("magento_logo")->getHTML(array("class"=>'ft-logo')); 
-    	//echo '</div>';
-    }
-}
-
+ <?
+ if(count($packshotsImages)>1) {
+ 	for ($i=1; $i < count($packshotsImages); $i++) { 
+ 		echo $packshotsImages[$i]->getHTML(array("class"=>"img-responsive photo"));
+ 	}
+ 	
+ }
 ?>
+
+ <?
+ if(count($assetsArray)>2) {
+ 	for ($i=2; $i < count($assetsArray); $i++) { 
+ 		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
+ 	}
+ 	
+ }
+?>
+
 
 
 	

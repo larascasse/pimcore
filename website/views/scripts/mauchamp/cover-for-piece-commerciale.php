@@ -8,8 +8,8 @@ $orderDetail = $this->orderDetail;
 
 <div class="ft-header">
   <div class="ft-col-1">
-    <div id="" style='width:676px;height:60px'>
-      <?php echo $this->template("includes/logo_1l_svg.php"); ?>
+    <div id="" style='width:420px;height:124px'>
+      <?php echo $this->template("includes/logo_2l_svg.php"); ?>
     </div>
 
   </div>
@@ -20,7 +20,7 @@ $orderDetail = $this->orderDetail;
 
   <!-- First col -->
   <div class="ft-col-1">
-  <h2>Produits</h2>
+  <h2><?php echo $orderDetail["Type_Piece"]?></h2>
   <p>
   <?php
   foreach ($this->products as $product) {

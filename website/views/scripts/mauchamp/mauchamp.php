@@ -57,7 +57,8 @@ function hidePleaseWait () {
 
 
 function sendEmail() {
-  console.log("KK",$("#mailform"),$("#mailform").serialize());
+  //window.log("KK",$("#mailform"),$("#mailform").serialize());
+  $('#formEmail').modal('hide')
   showPleaseWait();
   $.ajax({
      url : '/?controller=mauchamp&action=mauchamp-sendmail',
@@ -178,58 +179,79 @@ foreach ($this->missingProducts as $product) {
 </table>
 <div class="row">
 	<div class="col-12 text-right">
-		<a class="btn  btn-outline-primary" data-toggle="collapse" href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
+		<a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
 		<a href="#" class="btn  btn-outline-primary" target="_blank">Imprimer la sélection</a>
 	</div>
 </div>
 </div>
 
+<!-- MODAL EMAIL -->
+<div class="modal" role="dialog" id="formEmail">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content"  style="background-color: #bef0ff">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Envoyer les documents par e-mail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-<div class="collapse" id="formEmail">
-	<div class="row justify-content-center">
-  <div class="card card-inverse card-info card-block" style="max-width: 800px;margin-top:80px;margin-bottom:80px;">
-  
-
-  <div class="form-group has-success__">
-  <label class="form-control-label" for="inputSuccess1">Email</label>
-  <input type="text" class="form-control form-control-success" id="inputSuccess1" name="from-email" value="<?php echo $orderDetail["Representant2_Email"]?>">
-  <!--<div class="form-control-feedback">Success! You've done it.</div>
-  <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
-  </div>
+      <div class="modal-body">
+        <div class="">
 
 
-
-    <div class="form-group has-success__">
-  <label class="form-control-label" for="inputSuccess1">Sujet</label>
-  <input type="text" class="form-control form-control-success" id="inputSuccess1" value="Votre visite à La Parqueterie Nouvelle">
-  <!--<div class="form-control-feedback">Success! You've done it.</div>
-  <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
-	</div>
-
-	<div class="form-group">
-  <label class="form-control-label" for="inputWarning1">Message</label>
-  <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
-
-Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n°<?php echo $orderDetail["Code_Commande"]?>.
+          <div class="form-group has-success__">
+          <label class="form-control-label" for="inputSuccess1">De la part de </label>
+          <input type="text" class="form-control form-control-success" id="inputSuccess1" name="from-email" value="<?php echo $orderDetail["Representant2_Email"]?>">
+          <!--<div class="form-control-feedback">Success! You've done it.</div>
+          <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
+          </div>
 
 
 
+          <div class="form-group has-success__">
+            <label class="form-control-label" for="inputSuccess1">Sujet</label>
+            <input type="text" class="form-control form-control-success" id="inputSuccess1" value="Votre visite à La Parqueterie Nouvelle">
+            <!--<div class="form-control-feedback">Success! You've done it.</div>
+            <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
+           </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="inputWarning1">Message</label>
+            <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
+Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
 Si vous avez besoin de plus amples informations, je me tiens à votre disposition :).
-
 <?php echo $orderDetail["Representant2"]?></textarea>
+            <textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
 
+          </div>
 
-</div>
- <input type="button" value="Envoyer" id="sendmail" onclick="sendEmail();return false;" />
+            <input type="button" class="btn btn-primary btn-block btn-lg" value="Envoyer" id="sendmail" onclick="sendEmail();return false;" />
+        </div>
+        <!-- / Modal body -->
 
-</div>
-
-</div>
+      </div>
+    </div>
   </div>
 </div>
-<textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
+<!-- FIN MODAL EMAIL -->
+
+</div>
+
  </form>
-<div id="pleasewaitmodal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog modal-sm"><div class="modal-content">En cours de traitement</div></div></div>
+
+
+<div id="pleasewaitmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+        <br />
+        En cours de traitement
+        <br />
+      </div>
+      </div>
+    </div>
+</div>
 
 
 

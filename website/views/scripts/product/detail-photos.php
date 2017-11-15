@@ -74,7 +74,7 @@ if (strlen($subtitle)>0) {
 <div class="ft-col-1">
 
 
- <?
+ <?php
  if(count($packshotsImages)>0) {
  	echo $packshotsImages[0]->getHTML(array("class"=>"img-responsive photo"));
  }
@@ -100,7 +100,7 @@ if (strlen($subtitle)>0) {
 
 <div class="">
 
- <?
+ <?php
  if(count($packshotsImages)>1) {
  	for ($i=1; $i < count($packshotsImages); $i++) { 
  		echo $packshotsImages[$i]->getHTML(array("class"=>"img-responsive photo"));
@@ -109,7 +109,7 @@ if (strlen($subtitle)>0) {
  }
 ?>
 
- <?
+ <?php
  if(count($assetsArray)>2) {
  	for ($i=2; $i < count($assetsArray); $i++) { 
  		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));

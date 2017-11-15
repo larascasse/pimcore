@@ -8,12 +8,13 @@ $products = $this->products;
 $idx=0;
 foreach ($products as $product) {
 	if(!$product->isAccessoire()) {
+		echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids++)); 
 		echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids++)); 
 	}
 }
 
 $idx=0;
-echo $this->template("product/detail-all-accessoires.php",array("products"=>$products)); 
+	echo $this->template("product/detail-all-accessoires.php",array("products"=>$products)); 
 
 
 foreach ($products as $product) {

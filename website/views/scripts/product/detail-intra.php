@@ -54,32 +54,21 @@ if (strlen($subtitle)>0) {
 
 <div class="row">
 
-	<div class="caracteristiques col-xs-12">
+	<div class="col-xs-12">
 	<?php echo nl2br($this->product->getMage_description()); ?>
 	</div>
-	<div class="caracteristiques col-xs-12">
+	<div class="col-xs-12">
+	<?php
+	 $image = $this->product->getImage_1();
+	 echo $image->getThumbnail("galleryThumbnail")->getHTML(["class"=>"img-responsive"]);
+	 ?>
+
 	<h3><!--Vous le choisirez pour: -->&nbsp;</h3>
 	<?php echo nl2br($this->product->getMage_lesplus()); ?>
 	</div>
 </div>
 
 
-
-<div class="row">
-        <?php for($i=1; $i<=3; $i++) { ?>
-            <?php
-                $image = $this->product->{"getImage_" . $i}();
-            ?>
-            <?php if($image) { ?>
-                <div class="col-xs-12">
-                    <a href="<?php echo $image->getThumbnail("galleryLightbox"); ?>" class="thumbnail">
-                        <img src="<?php echo $image->getThumbnail("galleryThumbnail"); ?>">
-                    </a>
-                </div>
-            <?php } ?>
-        <?php } ?>
-
-</div>
 
 
 
@@ -185,6 +174,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 	       
 
 	   		 <?php
+	   		 $strChildren="";
 	   		 if(count($childrens)>0) {
 
 	   		 	$fields["Choix"] = "getChoix";
@@ -203,11 +193,11 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 
 
-			echo   '<table class="table table-striped">  <thead><tr>';
+			$strChildren.=   '<table class="table table-striped">  <thead><tr>';
 			foreach ($fields as $key => $value) {
-				echo '<th>'.$key.'</th>';
+				$strChildren.= '<th>'.$key.'</th>';
 			}
-			echo '</tr></thead>';
+			$strChildren.= '</tr></thead>';
 
   			$index = 1;
   			$productsToDisplay =array();
@@ -236,7 +226,7 @@ foreach ($taxonomies as $label => $taxonomie) {
 						<?php
 						foreach ($fields as $key => $value) {
 							$v = $subproduct->$value();
-							echo '<td>'.$v.'</td>';
+							$strChildren.= '<td>'.$v.'</td>';
 						}
 						?>
 					     
@@ -248,8 +238,10 @@ foreach ($taxonomies as $label => $taxonomie) {
 				<?php
 
 			}
-			echo   "</table>";
+			$strChildren.=   "</table>";
 		}
+
+		//echo $strChildren;
 		?>
 
 	    </div>

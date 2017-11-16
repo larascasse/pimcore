@@ -894,7 +894,8 @@ EOT;
 
       $strArray=[];
       foreach ($sortedWords as $key => $value) {
-         $strArray[] = ucfirst($key);
+        if($value===true)
+          $strArray[] = ucfirst($key);
       }
 
 

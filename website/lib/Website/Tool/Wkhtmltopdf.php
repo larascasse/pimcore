@@ -7,17 +7,18 @@ class Wkhtmltopdf {
         return self::convert($url, $config);
     }
  
-    public static function fromString ($string, $config = array()) {
+    public static function fromString ($string, $pdfFile=null) {
  
         $tmpHtmlFile = PIMCORE_TEMPORARY_DIRECTORY . "/" . uniqid() . ".htm";
         file_put_contents($tmpHtmlFile, $string);
         $httpSource = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$tmpHtmlFile);
         //echo $httpSource."||||||".$string."//////////////";
        // die;
-        $pdfContent = self::convert($httpSource, $config);
+        $pdfContent = self::convert($httpSource,$pdfFile);
  
-        //@unlink($tmpHtmlFile);
- 
+        @unlink($tmpHtmlFile);
+
+
         return $pdfContent;
     }
  
@@ -73,8 +74,7 @@ class Wkhtmltopdf {
                 }
             }
 
-            if(!$pdfFile)
-             $tmpPdfFile = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
+            $tmpPdfFile = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
 
             $localOptions= [
                 //"--debug-javascript" => 1,

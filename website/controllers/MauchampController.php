@@ -77,6 +77,8 @@ class MauchampController extends Action
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
+        $order = \Website\Tool\MauchampHelper::parseOrder($this->getParam('xml'));
+
       
          header('Content-Type: application/json');
 
@@ -96,29 +98,13 @@ class MauchampController extends Action
          }
 
         
+        $pdfFileUrl = "";
   
 
         
 
          try {
 
-             $mail = new Pimcore_Mail();
-             $mail->setIgnoreDebugMode(true);
-             //$this->params["message"] = "Merci pour votre visite !";
-             //$emailDocument = Document::getById(345);
-
-             //$mail->setDocument($emailDocument);
-             //$mail->setParams($this->getAllParams());
-
-             $mail->setBodyText($this->getParam("message"));
-
-            $mail->clearRecipients();
-
-            $mail->addTo("florent@lesmecaniques.net",'FLorent text');
-            $mail->setSubject("Votre sélection La Parqueterie Nouvelle");
-
-            $mail->clearFrom();
-            $mail->setFrom("contact@lp-nouvelle.fr");
 
            
             try {
@@ -132,7 +118,12 @@ class MauchampController extends Action
                 /* V2 */
                 $coverHtmlData = \Pimcore\Tool::getHttpData(
                         Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$this->getParam('xml')]);
-                $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($coverHtmlData);
+
+                $pdfFile = PIMCORE_TEMPORARY_DIRECTORY . "/" .$order["orderDetail"]["Code_Commande"]."-". uniqid() . ".pdf";
+                $pdfFileUrl = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$pdfFile);
+
+                $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($coverHtmlData,$pdfFile);
+            
 
 
             }
@@ -141,89 +132,32 @@ class MauchampController extends Action
                  die;
             }
 
+            if($this->getParam('sendmail')) {
 
-            if(strlen($pdfContent)>0) {
-                $at = $mail->createAttachment($pdfContent);
-                $at->type = "application/pdf";
-                $at->filename = "viste_lpn.pdf";
-                $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
-            }
+                $mail = new Pimcore_Mail();
+                $mail->setIgnoreDebugMode(true);
 
-            $addCover = false;
-            if($addCOver) {
-                try {
+                $mail->setBodyText($this->getParam("message"));
 
-                    
-                    //Creation de la cover : 
-                    $coverPath = \Pimcore\Tool::getHttpData(
-                        Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale-pdf",null,["xml"=>$this->getParam('xml'),'createfile'=>true]);
+                $mail->clearRecipients();
 
-                    /*
-                    $pdf2show = new Zend_Pdf();
- // $pdfContent
-is the generated one
- $pdf1 = Zend_Pdf::parse($pdfContent, 1); 
- //
-cloning the page (a must do)
- $template = clone $pdf1->pages[0]; 
- //
-Creating the first page of the merged PDF with the previous content
- $page1 =
-new Zend_Pdf_Page($template); 
- // Adding this page to the final PDF
+                $mail->addTo("florent@lesmecaniques.net",'FLorent text');
+                $mail->setSubject("Votre sélection La Parqueterie Nouvelle");
 
-$pdf2show->pages[] = $page1; 
- // Loading the statif PDF
- $pdf2 =
-Zend_Pdf::load('urlToYourPDF.pdf'); 
- // cloning the page (a must do)
+                $mail->clearFrom();
+                $mail->setFrom("contact@lp-nouvelle.fr");
 
-$template2 = clone $pdf2->pages[0]; 
- // Creating the second page of the
-merged PDF with the previous content
- $page2 = new
-Zend_Pdf_Page($template2);
- // Adding this page to the final PDF 
-
-$pdf2show->pages[] = $page2; 
- sendToWebBrowser('title',
-$pdf2show->render());
-*/
-
-
-                    // LOAD PDF DOCUMENTS
-                    $pdf1 = Zend_Pdf::load($coverPath);
-                    $pdf2 = Zend_Pdf::load($contentPdfPath);
-                    // WE WILL MERGE OUR TWO PDF FILES INTO A NEW ZEND_PDF OBJECT
-                    $pdfMerged = new Zend_Pdf();
-
-                    // ADD ALL PAGES FROM THE FIRST PDF TO OUR NEW DOCUMENT
-                    foreach($pdf1->pages as $page){
-                      $clonedPage = clone $page;
-                      $pdfMerged->pages[] = $clonedPage;
-                    }
-                    // ADD ALL PAGES FROM THE SECOND PDF TO OUR NEW DOCUMENT
-                    foreach($pdf2->pages as $page){
-                      $clonedPage = clone $page;
-                      $pdfMerged->pages[] = $clonedPage;
-                    }
-                    unset($clonedPage);
-
-                    // SEND THE MERGED PDF DOCUMENT TO BROWSER
-                    //header('Content-type: application/pdf');
-                    //echo $pdfMerged->render();
-
-                    //save to a file
-                    $final = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
-                    $pdfMerged->save($final);   
+                if(strlen($pdfContent)>0) {
+                    $at = $mail->createAttachment($pdfContent);
+                    $at->type = "application/pdf";
+                    $at->filename = "visite-laparqueterienouvelle-".$order["orderDetail"]["Code_Commande"].".pdf";
+                    $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
                 }
-                catch (Exception $e) {
-                    echo $e->getMessage();exit;
-                 }
+                $mail->send();
+
             }
 
-
-            $mail->send();
+            
          }
           catch (Exception $e) {
                 // something went wrong: eg. limit exceeded, wrong configuration, ...
@@ -233,7 +167,7 @@ $pdf2show->render());
                 exit;
          }
 
-         echo json_encode(array("message"=> "Mail envoyé, chouette !"));
+         echo json_encode(array("message"=>  $this->getParam('sendmail')?"Pdf crée.. Top!":"Mail envoyé, chouette !","pdfFileUrl"=>$pdfFileUrl));
          die;
       
 

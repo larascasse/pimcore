@@ -66,10 +66,39 @@ function sendEmail() {
      method : "POST",
      success: function (data) {
 
-       
-
             hidePleaseWait();
             alert(data.message);
+
+      },
+      error: function (transport) {
+        
+              btn.disabled=false;
+              //console.log(transport);
+              
+              hidePleaseWait();
+              alert(transport.statusText);
+
+      }
+  });
+}
+
+
+function printBook() {
+  //window.log("KK",$("#mailform"),$("#mailform").serialize());
+  $('#formEmail').modal('hide')
+  showPleaseWait();
+  $.ajax({
+     url : '/?controller=mauchamp&action=mauchamp-sendmail',
+     data: $("#mailform").serialize()+'&sendmail=false',
+     method : "POST",
+     success: function (data) {
+
+            hidePleaseWait();
+            PDFObject.embed(data.pdfFileUrl, "#pdf-container");
+
+            //$('#pdfmodal .modal-content .modal-body').html('<object id="myPdf" type="application/pdf" data="' + data.pdfFileUrl +'" height="400" width="100%"></object>');
+            $('#pdfmodal').modal().handleUpdate();
+            //alert(data.message+" : "+data.pdfFileUrl);
 
       },
       error: function (transport) {
@@ -180,7 +209,7 @@ foreach ($this->missingProducts as $product) {
 <div class="row">
 	<div class="col-12 text-right">
 		<a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
-		<a href="#" class="btn  btn-outline-primary" target="_blank">Imprimer la sélection</a>
+		<a href="javascript:printBook();" class="btn  btn-outline-primary" target="_blank">Imprimer la sélection</a>
 	</div>
 </div>
 </div>
@@ -256,6 +285,22 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
         <br />
         En cours de traitement
         <br />
+      </div>
+      </div>
+    </div>
+</div>
+
+<div id="pdfmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <div class="modal-body">
+        <div id="pdf-container" style="height: 600px"></div>
       </div>
       </div>
     </div>

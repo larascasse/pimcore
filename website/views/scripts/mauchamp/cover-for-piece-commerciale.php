@@ -27,10 +27,12 @@ $orderDetail = $this->orderDetail;
   $accessoires=array();
   foreach ($this->products as $product) {
     if(!$product->isAccessoire()) {
-      $products[] = $product->getName();
+      if(!in_array($product->getName(), $products))
+        $products[] = $product->getName();
     }
     else {
-      $accessoires[] = $product->getName();
+      if(!in_array($product->getName(), $accessoires))
+       $accessoires[] = $product->getName();
 
     }
   }

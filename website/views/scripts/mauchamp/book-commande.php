@@ -18,6 +18,7 @@ $idx=0;
 
 
 foreach ($products as $product) {
-	echo $this->template("product/detail-ft.php",array("product"=>$product)); 
+	if(!$product->isPlusValue()) 
+		echo $this->template("product/detail-ft.php",array("product"=>$product)); 
 }
 ?>

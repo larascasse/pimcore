@@ -209,7 +209,7 @@ foreach ($this->missingProducts as $product) {
 <div class="row">
 	<div class="col-12 text-right">
 		<a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
-		<a href="javascript:printBook();" class="btn  btn-outline-primary" target="_blank">Imprimer la sélection</a>
+    <input type="button" class="btn  btn-outline-primary" value="Imprimer la sélection" id="printbook" onclick="printBook();return false;" />
 	</div>
 </div>
 </div>

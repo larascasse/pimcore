@@ -30,7 +30,7 @@ $products = $this->products;
 <?php
 foreach ($products as $product) {
 	//echo $product->getName()."<br >";
-	if($product->isAccessoire()) {
+	if($product->isAccessoire() && !$product->isPlusValue()) {
 
 		echo $this->template("product/detail-accessoire.php",array("product"=>$product,"index"=>$ids++)); 
 	}

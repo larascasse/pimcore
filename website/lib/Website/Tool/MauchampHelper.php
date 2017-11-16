@@ -884,6 +884,9 @@ EOT;
         else if(stristr($product->name, "terrasse")) {
           $words["terrasse"] = true;
         }
+        else if(stristr($product->name, "bardage")) {
+          $words["bardage"] = true;
+        }
         else if(stristr($product->name, "table ")) {
           $words["table"] = true;
         }

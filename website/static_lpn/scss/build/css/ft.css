@@ -165,7 +165,7 @@ hr {
 .accessoire .ft-content {
   margin-top: 20px;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   top: 0; }
   .accessoire .ft-content h2 {
     border: none;
@@ -202,6 +202,14 @@ hr {
   border-right: 20px solid #f0f0f0;
   border-bottom: 20px solid #f0f0f0; }
 
+.fp h2 {
+  border-bottom: none;
+  font-family: "HelveticaNeueRegular";
+  font-weight: 700;
+  margin-top: 0;
+  padding-top: 13px;
+  line-height: inherit; }
+
 .fp.photos .ft-col-1 {
   padding-top: 11px;
   padding-right: 40px; }
@@ -215,7 +223,7 @@ hr {
   height: auto; }
 
 .fp .ft-content .ft-col-1 {
-  padding-right: 30px; }
+  padding-right: 40px; }
 
 ul.subdescription {
   margin-bottom: 0;

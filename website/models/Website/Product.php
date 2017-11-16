@@ -1244,6 +1244,21 @@ class Website_Product extends Object_Product {
 
 	}
 
+	public function getImageAssetArray() {
+		$packshotsImages = array();
+		for($i=1; $i<=3; $i++) { 
+			$image = $this->{"getImage_" . $i}();
+			
+			if($image) { 
+				if(!(stristr($image->getFilename(),"pantone"))) {
+					$packshotsImages[] = $image;
+				}
+			} 
+			
+		}
+		return $packshotsImages;
+	}
+
 	public function getTeintePath() {
 		if(!$this->_teintePath) {
 			$teintesName=[];
@@ -2621,6 +2636,17 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		 //echo $attributeType." ".$scienergieName."<br />";
 		 $isTable =    stripos($scienergieName,'table ')!==false
 		        				//|| stripos($attributeType,'plinthe')!==false
+		        				//|| stripos($attributeType,'pieds pour')!==false
+		        				; 
+		  return $isTable;
+	}
+
+	public function isPlusValue() {
+		 $attributeType = strtolower($this->getSubtype());
+		 $scienergieName = strtolower($this->getName_scienergie());
+		 //echo $attributeType." ".$scienergieName."<br />";
+		 $isTable =    stripos($scienergieName,'plus-value ')!==false
+		        		|| stripos($scienergieName,'plus value')!==false
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 
 		  return $isTable;

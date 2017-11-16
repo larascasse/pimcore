@@ -13,7 +13,8 @@ $extras = $product->getRelated("extras");
 $childrens = $product->getChilds();
 $lesplus = $product->getLesPlusArray();
 
- $caracteristiques =  $product->getCharacteristicsArray();
+$caracteristiques =  $product->getCharacteristicsArray();
+$packshotsImages = $product->getImageAssetArray();
 $logoAssets = array();
  foreach ($caracteristiques as $key => $value) {
 
@@ -70,17 +71,22 @@ if (strlen($subtitle)>0) {
 <div class="row">
 
 	<div class="col-xs-12">
-	<?php echo nl2br($this->product->getMage_description()); ?>
+	<?php echo ($this->product->getMage_description()); ?><br /><br />
 	</div>
 	<div class="col-xs-12">
 	<?php
-	 $image = $this->product->getImage_1();
-	 echo $image->getThumbnail("magento_header")->getHTML(["class"=>"img-responsive photo"]);
+	if(count($packshotsImages)>0) {
+	 	$image = $packshotsImages[0];
+	 	echo $image->getThumbnail("magento_header")->getHTML(["class"=>"img-responsive photo"]);
+	 }
 	 ?>
+
+	 <?php if (count($lesplus)>0) : ?>
 	 <div class="lesplus">
 	<h3>Vous aimerez</h3>
 	<?php echo str_replace("<br />", " : ",$this->product->getMage_lesplus()); ?>
 	</div>
+	<?php endif; ?>
 	</div>
 </div>
 

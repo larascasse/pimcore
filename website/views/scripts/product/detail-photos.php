@@ -9,14 +9,7 @@ $extras = $product->getRelated("extras");
 $childrens = $product->getChilds();
 $lesplus = $product->getLesPlusArray();
 
-$packshotsImages = array();
-for($i=1; $i<=3; $i++) { 
-	$image = $this->product->{"getImage_" . $i}();
-	if($image) { 
-		$packshotsImages[] = $image->getThumbnail("magento_realisation");
-	} 
-	
-}
+$packshotsImages = $this->product->getImageAssetArray();
 
 $realisations =$this->product->getRealisations();
 $count=count($realisations);
@@ -27,6 +20,10 @@ for ($i=0; $i < $count; $i++) {
 			$assetsArray[] = $asset->getThumbnail("magento_realisation");
 		}
 }
+
+//Si pas de photos, on abs(ffiche pas la page)
+if(count($packshotsImages)==0 && count($realisations)==0)
+	return;
 
 
 ?>
@@ -39,8 +36,8 @@ for ($i=0; $i < $count; $i++) {
 		<?php echo $this->template("includes/logo_1l_svg.php"); ?>
 		 
 	</div>
-	<h4>Fiche produit</h4>
-		 <p><?php echo $product->getCheminDeFer() ?></p>
+	<h4>Photos</h4>
+	<p><?php echo $product->getCheminDeFer() ?></p>
 </div>
 
 <div class="ft-col-2">
@@ -72,7 +69,7 @@ if (strlen($subtitle)>0) {
 
  <?php
  if(count($packshotsImages)>0) {
- 	echo $packshotsImages[0]->getHTML(array("class"=>"img-responsive photo"));
+ 	echo $packshotsImages[0]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
  }
 
   if(count($assetsArray)>0) {
@@ -99,7 +96,7 @@ if (strlen($subtitle)>0) {
  <?php
  if(count($packshotsImages)>1) {
  	for ($i=1; $i < count($packshotsImages); $i++) { 
- 		echo $packshotsImages[$i]->getHTML(array("class"=>"img-responsive photo"));
+ 		echo $packshotsImages[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
  	}
  	
  }

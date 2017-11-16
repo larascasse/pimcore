@@ -2615,6 +2615,17 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		  return $isAccessoire;
 	}
 
+	public function isTable() {
+		 $attributeType = strtolower($this->getSubtype());
+		 $scienergieName = strtolower($this->getName_scienergie());
+		 //echo $attributeType." ".$scienergieName."<br />";
+		 $isTable =    stripos($scienergieName,'table ')!==false
+		        				//|| stripos($attributeType,'plinthe')!==false
+		        				//|| stripos($attributeType,'pieds pour')!==false
+		        				; 
+		  return $isTable;
+	}
+
 }
 
 

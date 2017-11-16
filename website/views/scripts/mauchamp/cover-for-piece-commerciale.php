@@ -57,7 +57,7 @@ $orderDetail = $this->orderDetail;
 
 
   <div class="cover-title">
-    <h1>Rénovation de salon, cuisine et salle de bain</h1>
+    <h1><?php echo $this->coverTitle; ?></h1>
     <hr/>
     <p>
       <?php echo $orderDetail["Code_Commande"]?> <br />

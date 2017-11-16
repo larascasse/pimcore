@@ -311,10 +311,13 @@ $pdf2show->render());
         
         $order = \Website\Tool\MauchampHelper::parseOrder($data);
 
+        $coverTitle = \Website\Tool\MauchampHelper::getCoverTitle($order["products"],$order["missingProducts"]);
+
         $this->view->products = $order["products"];
         $this->view->missingProducts = $order["missingProducts"];
         $this->view->transport = $order["transport"];
         $this->view->orderDetail = $order["orderDetail"];
+        $this->view->coverTitle = $coverTitle;
         $this->view->xmlOrder = $xml;
         $this->renderScript('mauchamp/book-commande.php');
 

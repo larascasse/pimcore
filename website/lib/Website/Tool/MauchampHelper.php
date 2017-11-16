@@ -397,6 +397,7 @@ EOT;
         $transportRows = array();
         $rowTotal = 0;
         $products = array();
+        $allProducts = array();
         $missingProducts = array();
 
         $lines = $xml->Lignes[0]->Ligne;
@@ -492,7 +493,8 @@ EOT;
                                     "ean" => $sku
                                     
                                 ));*/
-                                $missingProducts[] =  $missingProduct;  
+                                $missingProducts[] =  $missingProduct; 
+
                                // print_r( $missingProduct);
                                               
 
@@ -512,10 +514,11 @@ EOT;
                 }
             }
        
-           
+          $allProducts = array_merge($products,$missingProducts);
          return array(
           "orderDetail" => $orderDetail,
-         	"products"=> $products,
+          "products"=> $products,
+         	"allProducts"=> $allProducts,
          	"missingProducts"=> $missingProducts,
          	"transport"=> $transportRows,
          );
@@ -830,6 +833,72 @@ EOT;
     $str.= "\n".$site['zipcode']." ".$site['city'];
     return $str;
 
+  }
+
+  public static function getCoverTitle($products,$missingProducts=null,$orderDetail=null) {
+      $words = array();
+
+
+
+      foreach ($products as $product) {
+
+
+        if($product->isAccessoire()) {
+          //$words["parquet massif"] = true;
+          $words["accessoires"] = true;
+        }
+        else  if($product->isParquetMassif()) {
+          //$words["parquet massif"] = true;
+          $words["parquet"] = true;
+        }
+        else if($product->isParquetContrecolle()) {
+          //$words["parquet contrecolle"] = true;
+          $words["parquet"] = true;
+        }
+        else if(stristr($product->getFamille(),'terrasse')) {
+          $words["terrasse"] = true;
+          //$words["parquet"] = true;
+        }
+        else if(stristr($product->getFamille(),'bardage')) {
+          $words["bardage"] = true;
+          //$words["parquet"] = true;
+        }
+        else if($product->isTable()) {
+          $words["table"] = true;
+        }
+  
+      }
+
+      foreach ($missingProducts as $product) {
+        if(stristr($product->name, "accessoire")) {
+          $words["accessoires"] = true;
+        }
+        else if(stristr($product->name, "parquet") && stristr($product->name, "massif")) {
+          //$words["parquet massif"] = true;
+          $words["parquet"] = true;
+        }
+        else if(stristr($product->name, "parquet") && stristr($product->name, "contrecolle")) {
+          //$words["parquet contrecolle"] = true;
+          $words["parquet"] = true;
+        }
+        else if(stristr($product->name, "terrasse")) {
+          $words["terrasse"] = true;
+        }
+        else if(stristr($product->name, "table ")) {
+          $words["table"] = true;
+        }
+  
+      }
+
+      $sortedWords = array_replace(array_flip(array("parquet","bardage","table","accessoires")), $words);
+
+      $strArray=[];
+      foreach ($sortedWords as $key => $value) {
+         $strArray[] = ucfirst($key);
+      }
+
+
+      return implode(", ", $strArray);
   }
 
     

@@ -156,7 +156,7 @@ hr {
 
 
 
-
+$pageWidth : 1440px;
 $colHeight : 1700px;
 $headerHeight : 250px;
 $col1Width : 890px;
@@ -222,18 +222,20 @@ $col2Width : 470px;
 
 
 
+
 .ft-header {
 	height: $headerHeight;
 	overflow: hidden;
 	display: block;
 	//background-color: #FF0000;
-	width: 1440px;
+	width: $pageWidth;
 	position: relative;
 	.ft-col-2 {
 		position: relative;
 		height: 100%;
 		//padding-right: 35px;
-		width: 460px;
+		width: ($col2Width - 10);
+
 		& > div  {
 			position: absolute;
 			bottom: 0;
@@ -253,7 +255,7 @@ $col2Width : 470px;
 	position: absolute;
 	//background-color: #00FF00;
 	top: ($headerHeight+1);
-	width: 1440px;
+	width: $pageWidth;
 	left :0;
 
 
@@ -536,4 +538,32 @@ $padding : 30px;
 	height: 100px;
 	width: auto;
 	padding: 10px 20px 20px 0px;
+}
+
+
+
+
+
+@media print {
+	$pageWidthPrint: 1100px;
+	.ft-header {
+		width: $pageWidthPrint;
+	}
+	.ft-content {
+		width: $pageWidthPrint;
+	}
+	.ft-col-1 {
+		width: ($pageWidthPrint * 0.66 - 10);
+	}
+	.ft-col-2 {
+		width: ($pageWidthPrint * 0.33 - 30);
+		margin-left: ($pageWidthPrint * 0.66 + 30 );
+	}
+
+	.ft-header {
+		.ft-col-2 {
+			width: ($pageWidthPrint * 0.33 - 10);
+		}
+	}
+
 }

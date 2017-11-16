@@ -314,3 +314,16 @@ ul.subdescription {
   height: 100px;
   width: auto;
   padding: 10px 20px 20px 0px; }
+
+@media print {
+  .ft-header {
+    width: 1100px; }
+  .ft-content {
+    width: 1100px; }
+  .ft-col-1 {
+    width: 716px; }
+  .ft-col-2 {
+    width: 333px;
+    margin-left: 756px; }
+  .ft-header .ft-col-2 {
+    width: 353px; } }

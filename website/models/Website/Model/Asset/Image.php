@@ -116,6 +116,15 @@ class Image extends Asset\Image {
             return "";
         }
     }
+
+     public function getRelatedChoix() {
+        if($product = $this->getRelatedProduct()) {
+            return $product->getChoix();
+        }
+        else {
+            return "";
+        }
+    }
     
 
     

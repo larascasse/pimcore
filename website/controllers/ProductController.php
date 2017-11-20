@@ -151,19 +151,24 @@ class ProductController extends Action
 
         $this->enableLayout();
         $this->setLayout("layout-ft");
-
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
-        
         
 
         // "id" is the named parameters in "Static Routes"
-        $product = Object_Product::getById($this->getParam("id"));
+        try {
+            $product = Object_Product::getById($this->getParam("id"));
+        }
+        catch (\Exception $e) {
+           
+        }
+        
         
 
 
         if(!$product instanceof Object_Product) {
             // this will trigger a 404 error response
-            throw new \Zend_Controller_Router_Exception("invalid request");
+          
+            throw new \Exception("product " . $this->getParam("id") . " doesn't exist.");
         }
 
         $this->view->product = $product;
@@ -191,7 +196,7 @@ class ProductController extends Action
 
         if(!$product instanceof Object_Product) {
             // this will trigger a 404 error response
-            throw new \Zend_Controller_Router_Exception("invalid request");
+            throw new \Zend_Controller_Router_Exception("Product " . $this->getParam("id") . " doesn't exist.");
         }
 
         $this->view->product = $product;

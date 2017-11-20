@@ -1,11 +1,17 @@
 <?php 
 
 
+$products = $this->products;
+$idx=0;
+
+
+/* Cover */
 echo $this->template("mauchamp/cover-for-piece-commerciale.php",array("product"=>$product,"orderDetail" => $this->orderDetail));
 
 
-$products = $this->products;
-$idx=0;
+
+
+/* Photos / Fiche produits */
 foreach ($products as $product) {
 	if(!$product->isAccessoire()) {
 		echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids++)); 
@@ -13,10 +19,12 @@ foreach ($products as $product) {
 	}
 }
 
+/* Accessoires */
 $idx=0;
+if(count($products))
 	echo $this->template("product/detail-all-accessoires.php",array("products"=>$products)); 
 
-
+/* Fiches techniques */
 foreach ($products as $product) {
 	if(!$product->isPlusValue()) 
 		echo $this->template("product/detail-ft.php",array("product"=>$product)); 

@@ -233,6 +233,7 @@ class MauchampController extends Action
 
         $this->view->layout()->setLayout("layout-ft");
 
+
         //POST from sceinergie
         $xml = $this->getParam('xml');
         
@@ -247,13 +248,17 @@ class MauchampController extends Action
 
         $coverTitle = \Website\Tool\MauchampHelper::getCoverTitle($order["products"],$order["missingProducts"]);
 
+        
         $this->view->products = $order["products"];
+
         $this->view->missingProducts = $order["missingProducts"];
         $this->view->transport = $order["transport"];
         $this->view->orderDetail = $order["orderDetail"];
         $this->view->coverTitle = $coverTitle;
         $this->view->xmlOrder = $xml;
-        $this->renderScript('mauchamp/book-commande.php');
+
+         $this->renderScript('mauchamp/book-commande.php');
+
 
     }
 

@@ -90,6 +90,7 @@ foreach ($list->getObjects() as $object) {
 
     if(strlen($object->getEan())>0) {
          $parent = $object->getParent();
+         $parent->setChoix($object->getChoix());
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);

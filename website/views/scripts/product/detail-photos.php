@@ -70,13 +70,13 @@ if (strlen($subtitle)>0) {
  <?php
  if(count($packshotsImages)>0) {
  	echo $packshotsImages[0]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 	echo $packshotsImages[0]->getRelatedTitle();
+ 	echo $packshotsImages[0]->getRelatedTitle(true)." - ".$packshotsImages[0]->getRelatedChoix(true)." - ".$product->getChoix();
  }
 
   if(count($assetsArray)>0) {
  	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
  		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
- 		 	echo $assetsArray[$i]->getRelatedTitle(true);
+ 		echo $assetsArray[$i]->getRelatedTitle(true);
 
  	}
  	

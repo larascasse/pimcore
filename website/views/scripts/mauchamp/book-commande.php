@@ -5,7 +5,7 @@ $ids=0;
 
 
 /* Cover */
-//echo $this->template("mauchamp/cover-for-piece-commerciale.php",array("product"=>$product,"orderDetail" => $this->orderDetail));
+echo $this->template("mauchamp/cover-for-piece-commerciale.php",array("product"=>$product,"orderDetail" => $this->orderDetail));
 
 
 
@@ -14,7 +14,7 @@ $ids=0;
 foreach ($products as $product) {
 	if(!$product->isAccessoire()) {
 		echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids)); 
-		//echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids++)); 
+		echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids++)); 
 	}
 }
 

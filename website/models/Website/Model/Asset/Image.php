@@ -128,6 +128,14 @@ class Image extends Asset\Image {
             return "";
         }
     }
+    public function getRelatedChoixString() {
+        if($product = $this->getRelatedProduct()) {
+            return $product->getChoixString();
+        }
+        else {
+            return "";
+        }
+    }
     
 
     

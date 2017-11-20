@@ -70,13 +70,18 @@ if (strlen($subtitle)>0) {
  <?php
  if(count($packshotsImages)>0) {
  	echo $packshotsImages[0]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 	echo $packshotsImages[0]->getRelatedTitle(true)." - ".$packshotsImages[0]->getRelatedChoix(true)." - ".$product->getChoix();
+ 	
+ 	echo $packshotsImages[0]->getRelatedTitle(true);
+
+ 	echo "<br />".$product->getAssetIsDiffrentString($packshotsImages[0]);
+
+
  }
 
   if(count($assetsArray)>0) {
  	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
  		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 		echo $assetsArray[$i]->getRelatedTitle(true);
+ 		echo "<br />".$product->getAssetIsDiffrentString($assetsArray[0]);
 
  	}
  	
@@ -100,6 +105,7 @@ if (strlen($subtitle)>0) {
  if(count($packshotsImages)>1) {
  	for ($i=1; $i < count($packshotsImages); $i++) { 
  		echo $packshotsImages[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
+ 		echo "<br />".$product->getAssetIsDiffrentString($packshotsImages[$i]);
  	}
  	
  }
@@ -109,6 +115,7 @@ if (strlen($subtitle)>0) {
  if(count($assetsArray)>2) {
  	for ($i=2; $i < count($assetsArray); $i++) { 
  		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
+ 		echo "<br />".$product->getAssetIsDiffrentString($assetsArray[$i]);
  	}
  	
  }

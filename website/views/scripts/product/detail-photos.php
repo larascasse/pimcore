@@ -76,7 +76,7 @@ if (strlen($subtitle)>0) {
   if(count($assetsArray)>0) {
  	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
  		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
- 		 	echo $assetsArray[$i]->getRelatedTitle();
+ 		 	echo $assetsArray[$i]->getRelatedTitle(true);
 
  	}
  	

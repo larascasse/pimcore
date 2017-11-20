@@ -93,9 +93,12 @@ class Image extends Asset\Image {
 
 	}
 
-    public function getRelatedTitle() {
+    public function getRelatedTitle($full=false) {
         if($realisation_title = $this->getProperty("realisation_title")) {
                return $realisation_title;
+        }
+        else if($product = $this->getRelatedProduct() && $full) {
+            return $product->getSubtype()." ".$product->getMage_Name();
         }
         else if($product = $this->getRelatedProduct()) {
             return $product->getSubtype()." ".$product->getShort_name();

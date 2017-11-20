@@ -132,7 +132,7 @@ class MauchampController extends Action
                  die;
             }
 
-            if($this->getParam('sendmail')) {
+            if($this->getParam('sendmail')==true) {
 
                 $mail = new Pimcore_Mail();
                 $mail->setIgnoreDebugMode(true);

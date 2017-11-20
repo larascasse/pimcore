@@ -4,36 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <?php
-
-        try {
-            // output the collected meta-data
-            if(!$this->document) {
-                // use "home" document as default if no document is present
-                $this->document = Document::getById(1);
-            }
-
-            if($this->document->getTitle()) {
-                // use the manually set title if available
-                $this->headTitle()->set($this->document->getTitle());
-            }
-
-            if($this->document->getDescription()) {
-                // use the manually set description if available
-                $this->headMeta()->appendName('description', $this->document->getDescription());
-            }
-
-            //$this->headTitle()->append("pimcore Demo");
-            $this->headTitle()->setSeparator(" : ");
-
-            echo $this->headTitle();
-            echo $this->headMeta();
-        
-        } catch (Exception $e) {
-            //Bug si ce n'est pas un document !! (ex produit)
-        }
-    ?>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
  <!--<link rel="stylesheet" type="text/css" href="https://www.laparqueterienouvelle.fr/skin/frontend/lpn/default/css/main-min.css?d=<?php echo time() ?>" media="all">-->
@@ -46,22 +16,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <link rel="stylesheet" href="/website/static_lpn/scss/build/css/ft.css?t=<?php echo time()?>">
-
-
-
-
-
-    <?php echo $this->headLink(); ?>
-
-    <?php if($this->editmode) { ?>
-        <link href="/website/static/css/editmode.css?_dc=<?php echo time(); ?>" rel="stylesheet">
-    <?php } ?>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/website/static/bootstrap/assets/js/html5shiv.js"></script>
-    <script src="/website/static/bootstrap/assets/js/respond.min.js"></script>
-    <![endif]-->
-    <!--<link href="/website/static_lpn/css/lpn.css" rel="stylesheet">-->
 
 </head>
 
@@ -93,29 +47,6 @@ var dataLayer=[];
 <div id="content" class="container-pdf">
 
     <?php echo $this->layout()->content; ?>
-   <!-- <div class="row"> 
-        <div class="col-xs-12 pim-centered"">
-        <h2 style="padding: 20px 20px 20px 25px; float: left;">Fiche technique</h2>
-        <img src="/website/static_lpn/img/logo_lpn_1ligne_300_fondblanc.gif" style="padding: 20px 30px 20px 20px; float: right">
-        </div>
-
-    </div>
-
-    <div class="row"> 
-
-            <div class="col-xs-12 pim-centered pim-ft-bkg">
-                <?php //echo $this->layout()->content; 
-                ?>
-            </div>
-        </div>
-    </div>
-    -->
-
-<?php
-    // include a document-snippet - in this case the footer document
-    echo $this->inc("/" . $this->language . "/shared/includes/footer");
-?>
-
 
  <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>

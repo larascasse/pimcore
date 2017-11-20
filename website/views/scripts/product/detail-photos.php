@@ -17,7 +17,7 @@ $assetsArray=array();
 for ($i=0; $i < $count; $i++) { 
 		$assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
 		foreach ($assets as $asset) {
-			$assetsArray[] = $asset->getThumbnail("magento_realisation");
+			$assetsArray[] = $asset;
 		}
 }
 
@@ -75,8 +75,8 @@ if (strlen($subtitle)>0) {
 
   if(count($assetsArray)>0) {
  	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
- 		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
- 		echo $assetsArray[$i]->getRelatedTitle(true);
+ 		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
+ 		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getRelatedTitle(true);
 
  	}
  	
@@ -108,7 +108,7 @@ if (strlen($subtitle)>0) {
  <?php
  if(count($assetsArray)>2) {
  	for ($i=2; $i < count($assetsArray); $i++) { 
- 		echo $assetsArray[$i]->getHTML(array("class"=>"img-responsive photo"));
+ 		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
  	}
  	
  }

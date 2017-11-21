@@ -375,6 +375,29 @@ class Website_Product extends Object_Product {
 	}
 
 
+	public function getNorme_sanitaireString() {
+		return $this->getNorme_sanitaire();
+
+	}
+
+	public function getNorme_sanitaireLogo() {
+		$norme_sanitaire = $this->getNorme_sanitaire();
+		switch ($norme_sanitaire) {
+			case 'A+':
+				$path = "/norme_sanitaire/aplus";
+				break;
+			
+			default:
+				$path = "/norme_sanitaire/".$norme_sanitaire;
+				break;
+		}
+		$taxonomie =  Object::getByPath($path);
+		if($taxonomie)
+			return $taxonomie ->getLogo();
+		else return null;
+	}
+
+
 
 	public function getPoseDescription($pose) {
 		

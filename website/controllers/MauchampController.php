@@ -167,7 +167,7 @@ class MauchampController extends Action
                 exit;
          }
 
-         echo json_encode(array("message"=>  $this->getParam('sendmail')?"Pdf crée.. Top!":"Mail envoyé, chouette !","pdfFileUrl"=>$pdfFileUrl));
+         echo json_encode(array("message"=>  $this->getParam('sendmail')?"Mail envoyé, chouette !":"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
          die;
       
 

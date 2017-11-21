@@ -36,9 +36,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" href="/website/static_lpn/css/bootstrap-4.min.css" crossorigin="anonymous">
+<script   src="/website/static_lpn/js/jquery-3.1.1.min.js"></script>
 
-<script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
 
 
   <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
@@ -93,14 +93,9 @@ var dataLayer=[];
     // include a document-snippet - in this case the footer document
     echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
-<!--<script type="text/javascript" src="https://www.laparqueterienouvelle.fr/js/lpn/lpn-terrasses.min.js?d=<?php echo time() ?>"></script>-->
-
- <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
-<script src="/website/static/bootstrap/assets/js/jquery.js"></script>
 <script src="/website/static_lpn/js/pdfobject.min.js"></script>
-
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/website/static_lpn/js/tether.min.js"></script>-->
+<script src="/website/static_lpn/js/bootstrap-4.min.js"></script>
 
 
 

@@ -2538,7 +2538,6 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$str = "";
 		if($this->isParquet() && strlen($asset->getRelatedChoix()) >0 && $asset->getRelatedChoix() != $this->getChoix()) {
 			$str .= "Choix photographié : ".ucfirst($asset->getRelatedChoixString()). " et choix du produit : ".ucfirst($this->getChoixString());
-
 		}
 		return $str;
 	}

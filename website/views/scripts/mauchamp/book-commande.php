@@ -22,7 +22,15 @@ foreach ($products as $product) {
 
 /* Accessoires */
 $idx=0;
-if(count($products))
+$hasAccessoires = false;
+foreach ($products as $product) {
+	if($product->isAccessoire()) {
+		$hasAccessoires =true;
+		break;
+	}
+}
+
+if($hasAccessoires)
 	echo $this->template("product/detail-all-accessoires.php",array("products"=>$products)); 
 
 /* Fiches techniques */

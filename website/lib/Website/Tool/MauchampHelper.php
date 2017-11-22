@@ -67,10 +67,16 @@ class MauchampHelper
    <Adresse_Livraison_Adr1>2323</Adresse_Livraison_Adr1>
    <Adresse_Livraison_Telephone>9090</Adresse_Livraison_Telephone>
    <Adresse_Livraison_Fax />
+
    <Representant>CT</Representant>
    <Representant_Email>cedrictavernon@obd.fr</Representant_Email> 
+   
    <Representant2>CT</Representant2>
    <Representant2_Email>cedrictavernon@obd.fr</Representant2_Email>
+   <Representant2_Nom>Tavernon</Representant2_Nom>
+   <Representant2_Prenom>Cédric</Representant2_Prenom>
+   <Representant2_Tel>01.XXX</Representant2_Tel>
+   <Representant2_Portable>06.XXX</Representant2_Portable>
 
    <Lignes>
       <Ligne>
@@ -386,10 +392,22 @@ EOT;
           'Reference_Client' => (string)$xml->Reference_Client,
           'Etat' => (string)$xml->Etat,
           'Reglement' => (string)$xml->Reglement,
+          
           'Representant' => (string)$xml->Representant,
-          'Representant_Email' => $xml->Representant_Email,
+          'Representant_Email' => (string)$xml->Representant_Email,
+          'Representant_Nom' => (string)$xml->Representant_Nom,
+          'Representant_Prenom' => (string)$xml->Representant_Prenom,
+          'Representant_Tel' => (string)$xml->Representant_Tel,
+          'Representant_Portable' => (string)$xml->Representant_Portable,
+
           'Representant2' => (string)$xml->Representant2,
-          'Representant2_Email' => $xml->Representant2_Email,
+          'Representant2_Email' => (string)$xml->Representant2_Email,
+          'Representant2_Nom' => (string)$xml->Representant2_Nom,
+          'Representant2_Prenom' => (string)$xml->Representant2_Prenom,
+          'Representant2_Tel' => (string)$xml->Representant2_Tel,
+          'Representant2_Portable' => (string)$xml->Representant2_Portable,
+
+
           "Adresse_Facturation_Raison_Sociale"  =>  (string)$xml->Adresse_Facturation_Raison_Sociale,  
           "Adresse_Facturation_Nom"         =>  (string)$xml->Adresse_Facturation_Nom, //
           "Adresse_Facturation_Prenom"      =>  (string)$xml->Adresse_Facturation_Prenom, 

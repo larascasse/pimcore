@@ -234,7 +234,7 @@ if(count($this->products)>0) : ?>
 <?php 
 
 else :
-  echo count($this->products);
+  //echo count($this->products);
 endif; ?>
 
 <!-- MODAL EMAIL -->
@@ -278,10 +278,44 @@ endif; ?>
 
           <div class="form-group">
             <label class="form-control-label" for="inputWarning1">Message</label>
-            <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
+
+            <?php
+            //messages
+        
+        
+        if(strlen($orderDetail["Representant2"])>0) 
+          $representant = "Representant2";
+
+        else if(strlen($orderDetail["Representant"])>0) 
+          $representant = "Representant";
+
+        $strRepresentant = "";
+        if(isset($representant)) {
+            $strRepresentant .= $orderDetail[$representant."_Prenom"];
+            $strRepresentant .= " ".$orderDetail[$representant."_Nom"];
+            $strRepresentant .= " (".$orderDetail[$representant].")";
+            $strRepresentant .= "<br />".$orderDetail[$representant."_Email"];
+
+            if(strlen($orderDetail[$representant."_Tel"])>0)
+                $strRepresentant .= "<br />Tél : ".$orderDetail[$representant."_Tel"];
+
+            //if(strlen($orderDetail[$representant."_Portable"])>0)
+            //   $strRepresentant .= "<br />".$orderDetail[$_Portable."_Tel"];
+        }
+
+         $site = \Website\Tool\MauchampHelper::getSiteAdresse($orderDetail["Site"]);
+        $strSite = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"]))."<br />Tél : ".$site["phone"];
+
+
+        ?>
+       <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
 Si vous avez besoin de plus amples informations, je me tiens à votre disposition :).
-<?php echo $orderDetail["Representant2"]?></textarea>
+<?php echo $strRepresentant ?>
+
+<?php echo $strSite ?>
+  
+</textarea>
             <textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
 
           </div>

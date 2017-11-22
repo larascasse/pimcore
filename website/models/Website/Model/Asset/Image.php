@@ -104,7 +104,7 @@ class Image extends Asset\Image {
             return $product->getSubtype()." ".$product->getShort_name();
         }
         else {
-            return "NO PHOTO";
+            return "";
         }
     }
 

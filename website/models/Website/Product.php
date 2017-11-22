@@ -2560,7 +2560,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	public function getAssetIsDiffrentString($asset) {
 		$str = "";
 		if($this->isParquet() && strlen($asset->getRelatedChoix()) >0 && $asset->getRelatedChoix() != $this->getChoix()) {
-			$str .= "Choix photographié : ".ucfirst($asset->getRelatedChoixString()). " et choix du produit : ".ucfirst($this->getChoixString());
+			$str .= "Choix photographié : ".ucfirst(strtolower($asset->getRelatedChoixString())). " et choix du produit : ".ucfirst(strtolower($this->getChoixString()));
 		}
 		return $str;
 	}

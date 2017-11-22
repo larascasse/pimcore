@@ -372,12 +372,36 @@ $gap: 40px;
 		.ft-col-2 {
 			&> div:first-child {
 				padding-top: $gap;
+				padding-right:0;
+			}
+		}
+
+		.thumbnail {
+			border: none;
+			box-shadow: 0 0 0 rgba(0, 0, 0, .075);
+			margin-top:0;
+			padding:0;
+			
+			position:relative;
+			.caption {
+				position: absolute;
+				background-color:rgba(0, 0, 0, .65);
+				top:0;
+				left:0;
+				width: 100%;
+				font-size: 12px;
+				color: #FFFFFF;
+				//margin:3px;
 			}
 		}
 
 	}
 	.photo {
-		padding-bottom: ($gap / 2);
+	
+		&:first-child {
+			padding-top: 0;
+		}
+		
 		width: 100%;
 		height: auto;
 	}

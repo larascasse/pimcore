@@ -213,6 +213,8 @@ class ProductController extends Action
 
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
 
         $this->enableLayout();
         $this->view->layout()->setLayout("layout-ft");

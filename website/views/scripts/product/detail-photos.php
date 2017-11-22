@@ -25,6 +25,25 @@ for ($i=0; $i < $count; $i++) {
 if(count($packshotsImages)==0 && count($realisations)==0)
 	return;
 
+if(!function_exists("getPhotoHtml")) {
+	function getPhotoHtml($asset,$product) {
+		$str ="";
+		$str .='<div class="thumbnail">';
+		$str .=  $asset->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
+ 		
+ 		$title = $asset->getRelatedTitle($fullname=true);
+ 		if(strlen($title)>0) {
+	 		$str .='<div class="caption">';
+			$str .= $title;
+	 		$str .= "<br />".$product->getAssetIsDiffrentString($asset);
+	 		$str .= '</div>';
+ 		}
+
+ 		$str .= '</div>';
+ 		return $str;
+	}
+}
+
 
 ?>
 
@@ -48,7 +67,8 @@ $subtitle = strlen($product->getSku())>0?$product->getSku():"";
 if(strlen($product->name_scienergie_court)) {
 	if(strlen($subtitle)>0) 
 		$subtitle .=" - ";
-	$subtitle .=$product->name_scienergie_court;
+	
+	//$subtitle .=$product->name_scienergie_court;
 }
 if (strlen($subtitle)>0) {
 	echo $subtitle = '<p>'.$subtitle.'</p>';
@@ -69,19 +89,13 @@ if (strlen($subtitle)>0) {
 
  <?php
  if(count($packshotsImages)>0) {
- 	echo $packshotsImages[0]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 	
- 	echo $packshotsImages[0]->getRelatedTitle(true);
-
- 	echo "<br />".$product->getAssetIsDiffrentString($packshotsImages[0]);
-
+ 	echo getPhotoHtml($packshotsImages[0],$product);
 
  }
 
   if(count($assetsArray)>0) {
  	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
- 		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 		echo "<br />".$product->getAssetIsDiffrentString($assetsArray[0]);
+ 		echo getPhotoHtml($assetsArray[$i],$product);
 
  	}
  	
@@ -104,8 +118,8 @@ if (strlen($subtitle)>0) {
  <?php
  if(count($packshotsImages)>1) {
  	for ($i=1; $i < count($packshotsImages); $i++) { 
- 		echo $packshotsImages[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 		echo "<br />".$product->getAssetIsDiffrentString($packshotsImages[$i]);
+ 		echo getPhotoHtml($packshotsImages[$i],$product);
+ 		
  	}
  	
  }
@@ -113,9 +127,8 @@ if (strlen($subtitle)>0) {
 
  <?php
  if(count($assetsArray)>2) {
- 	for ($i=2; $i < count($assetsArray); $i++) { 
- 		echo $assetsArray[$i]->getThumbnail("magento_realisation")->getHTML(array("class"=>"img-responsive photo"));
- 		echo "<br />".$product->getAssetIsDiffrentString($assetsArray[$i]);
+ 	for ($i=2; $i < min(4,count($assetsArray)); $i++) { 
+ 		echo getPhotoHtml($assetsArray[$i],$product);
  	}
  	
  }

@@ -222,7 +222,7 @@ foreach ($this->missingProducts as $product) {
 
 <?php
 //pas de bouton si pas de prouits 
-if(!count($products)) : ?>
+if(!count($this->products)) : ?>
 <div class="row">
 	<div class="col-12 text-right">
     

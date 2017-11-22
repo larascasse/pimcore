@@ -45,8 +45,30 @@ $orderDetail = $this->orderDetail;
     <div class="row lpn-contact">
       <div class="col-xs-12">
         <h2>Votre interlocuteur</h2>
-        <p><?php echo $orderDetail["Representant"]?> - <?php echo $orderDetail["Representant_Email"]?></p>
-        <p><?php echo $orderDetail["Representant2"]?> - <?php echo $orderDetail["Representant2_Email"]?></p>
+
+        <?php
+        
+        if(strlen($orderDetail["Representant2"])>0) 
+          $representant = "Representant2";
+
+        else if(strlen($orderDetail["Representant"])>0) 
+          $representant = "Representant";
+
+        $strRepresentant = "";
+        if(isset($representant)) {
+            $strRepresentant .= $orderDetail[$representant."_Prenom"];
+            $strRepresentant .= " ".$orderDetail[$representant."_Nom"];
+            $strRepresentant .= " (".$orderDetail[$representant].")";
+            $strRepresentant .= "<br />".$orderDetail[$representant."_Email"];
+
+            if(strlen($orderDetail[$representant."_Tel"])>0)
+                $strRepresentant .= "<br />Tél : ".$orderDetail[$representant."_Tel"];
+
+            //if(strlen($orderDetail[$representant."_Portable"])>0)
+            //   $strRepresentant .= "<br />".$orderDetail[$_Portable."_Tel"];
+        }
+        ?>
+        <p><?php echo $strRepresentant ?></p>
         <p><?php
         $site = \Website\Tool\MauchampHelper::getSiteAdresse($orderDetail["Site"]);
         $str = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"])).$site["phone"];

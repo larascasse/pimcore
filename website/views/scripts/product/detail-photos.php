@@ -32,7 +32,7 @@ if(count($packshotsImages)==0 && count($realisations)==0)
 <div class="fp photos">
 <div class="ft-header">
 <div class="ft-col-1">
-	<div id="logo2" style='width:338px;height:30px'>
+	<div id="logo2" style='width:676px;height:60px'>
 		<?php echo $this->template("includes/logo_1l_svg.php"); ?>
 		 
 	</div>

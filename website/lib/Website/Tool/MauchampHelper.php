@@ -358,13 +358,14 @@ EOT;
 
       libxml_use_internal_errors(true);
     	$xml = simplexml_load_string($data);
-      if ($xml === false) {
-
-          echo "Erreur lors du chargement du XML\n";
+      if ($xml !== false) {
+        echo "Oh non!!! Erreur lors du chargement des données<br /><br /><br />";
+         echo '<textarea  cols="100" rows="20" name="xml" style="font-size:10px; color:#CCCCCC">'.$data."</textarea>";
+          
           foreach(libxml_get_errors() as $error) {
               echo "<br />", $error->message;
           }
-          echo '<textarea cols="150" rows="40">'.$data."</textarea>";
+          
           die;
       }
 

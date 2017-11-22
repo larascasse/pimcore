@@ -233,7 +233,7 @@ if(count($this->products)==0) : ?>
 </div>
 <?php 
 
-else 
+else :
   echo count($this->products);
 endif; ?>
 

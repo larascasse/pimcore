@@ -294,7 +294,7 @@ endif; ?>
             $strRepresentant .= $orderDetail[$representant."_Prenom"];
             $strRepresentant .= " ".$orderDetail[$representant."_Nom"];
             $strRepresentant .= " (".$orderDetail[$representant].")";
-            $strRepresentant .= "<br />".$orderDetail[$representant."_Email"];
+            $strRepresentant .= "\n".$orderDetail[$representant."_Email"];
 
             if(strlen($orderDetail[$representant."_Tel"])>0)
                 $strRepresentant .= "<br />Tél : ".$orderDetail[$representant."_Tel"];
@@ -304,13 +304,14 @@ endif; ?>
         }
 
          $site = \Website\Tool\MauchampHelper::getSiteAdresse($orderDetail["Site"]);
-        $strSite = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"]))."<br />Tél : ".$site["phone"];
+        $strSite = $site["name"]."\n".\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"])."\nTél : ".$site["phone"];
 
 
         ?>
        <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
 Si vous avez besoin de plus amples informations, je me tiens à votre disposition :).
+
 <?php echo $strRepresentant ?>
 
 <?php echo $strSite ?>

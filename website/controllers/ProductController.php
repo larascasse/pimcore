@@ -117,13 +117,14 @@ class ProductController extends Action
 
     public function detailIntraAction() {
 
-         $front = \Zend_Controller_Front::getInstance();
+        $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
         
 
         $this->enableLayout();
-        $this->setLayout("layout-produit");
+        $this->view->layout()->setLayout("layout-ft");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         
@@ -148,6 +149,8 @@ class ProductController extends Action
 
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
 
         $this->enableLayout();
         $this->setLayout("layout-ft");
@@ -181,9 +184,38 @@ class ProductController extends Action
 
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
         $this->enableLayout();
-        $this->setLayout("layout-produit");
+        $this->view->layout()->setLayout("layout-ft");
+
+        $definition = Object_Class::getByName("Product")->getFieldDefinitions();
+        
+        
+
+        // "id" is the named parameters in "Static Routes"
+        $product = Object_Product::getById($this->getParam("id"));
+        
+
+
+        if(!$product instanceof Object_Product) {
+            // this will trigger a 404 error response
+            throw new \Zend_Controller_Router_Exception("Product " . $this->getParam("id") . " doesn't exist.");
+        }
+
+        $this->view->product = $product;
+        //$this->view->attributes = $definition;
+
+    }
+
+     //Fiche Produit
+    public function detailPhotosAction() {
+
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+        $this->enableLayout();
+        $this->view->layout()->setLayout("layout-ft");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         

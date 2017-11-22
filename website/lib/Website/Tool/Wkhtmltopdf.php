@@ -123,8 +123,8 @@ class Wkhtmltopdf {
                 $wkhtmltopdfBinary = $web2printConfig->wkhtmltopdfBin;
             }
 
-            $cmd = $wkhtmltopdfBinary.$options." " . $httpSource . " " . $tmpPdfFile;
-           // echo $cmd; die;
+        $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
+        //   echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {

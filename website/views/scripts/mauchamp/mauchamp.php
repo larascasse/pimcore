@@ -41,6 +41,15 @@ $(document).ready(function() {
   $('#selectAllPhoto').click();
 
 
+  /** PDF */
+  $('.embed-pdf').on('click',function(e) {
+      e.preventDefault();
+      showEmbededPdf($(this).attr('href'));
+
+      
+  });
+
+
 });
 
 
@@ -94,11 +103,8 @@ function printBook() {
      success: function (data) {
 
             hidePleaseWait();
-            PDFObject.embed(data.pdfFileUrl, "#pdf-container");
-
-            //$('#pdfmodal .modal-content .modal-body').html('<object id="myPdf" type="application/pdf" data="' + data.pdfFileUrl +'" height="400" width="100%"></object>');
-            $('#pdfmodal').modal().handleUpdate();
-            //alert(data.message+" : "+data.pdfFileUrl);
+            
+            showEmbededPdf(data.pdfFileUrl);
 
       },
       error: function (transport) {
@@ -111,6 +117,11 @@ function printBook() {
 
       }
   });
+}
+
+function showEmbededPdf(pdfUrl) {
+  PDFObject.embed(pdfUrl, "#pdf-container");
+  $('#pdfmodal').modal().handleUpdate();
 }
 
 </script>
@@ -155,12 +166,12 @@ foreach ($this->products as $product) {
 	
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
 	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
-	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
+	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
 
 
 <?php if($hasPose) : ?>
 	<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
-	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
+	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
     <?php else : ?>
     <!--
     <td></td>
@@ -175,7 +186,7 @@ foreach ($this->products as $product) {
       <?php endif; ?>
     </td>
     <td class="col__">
-       <?php if($hasPhoto) : ?><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_" target="_blank">Photos</a>
+       <?php if($hasPhoto) : ?><a href="/?controller=web2print&action=get-product-photo-pdf&id=<?php echo $product->getId()?>&_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_ embed-pdf" target="_blank">Photos</a>
        <?php endif; ?>
      </td>
 

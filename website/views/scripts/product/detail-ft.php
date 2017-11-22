@@ -122,7 +122,8 @@ $subtitle = strlen($product->getSku())>0?$product->getSku():"";
 if(strlen($product->name_scienergie_court)) {
 	if(strlen($subtitle)>0) 
 		$subtitle .=" - ";
-	$subtitle .=$product->name_scienergie_court;
+	
+	//$subtitle .=$product->name_scienergie_court;
 }
 if (strlen($subtitle)>0) {
 	echo $subtitle = '<p>'.$subtitle.'</p>';

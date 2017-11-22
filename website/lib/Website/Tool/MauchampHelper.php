@@ -365,6 +365,7 @@ EOT;
               echo "<br />", $error->message;
           }
           echo '<textarea cols="150" rows="40">'.$data."</textarea>";
+          die;
       }
 
 

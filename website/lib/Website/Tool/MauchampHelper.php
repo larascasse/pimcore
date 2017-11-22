@@ -364,7 +364,7 @@ EOT;
           foreach(libxml_get_errors() as $error) {
               echo "<br />", $error->message;
           }
-          echo "<pre>".$data."</pre>";
+          echo '<textarea cols="150" rows="40">'.$data."</textarea>";
       }
 
 

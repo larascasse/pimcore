@@ -132,7 +132,7 @@ class MauchampController extends Action
                  die;
             }
 
-            if($this->getParam('sendmail')==true) {
+            if($this->getParam('sendmail')=="true") {
 
                 $mail = new Pimcore_Mail();
                 $mail->setIgnoreDebugMode(true);
@@ -167,7 +167,7 @@ class MauchampController extends Action
                 exit;
          }
 
-         echo json_encode(array("message"=>  $this->getParam('sendmail')?"Mail envoyé, chouette !":"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
+         echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?"Mail envoyé, chouette !":"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
          die;
       
 

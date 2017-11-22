@@ -293,11 +293,11 @@ endif; ?>
         if(isset($representant)) {
             $strRepresentant .= $orderDetail[$representant."_Prenom"];
             $strRepresentant .= " ".$orderDetail[$representant."_Nom"];
-            $strRepresentant .= " (".$orderDetail[$representant].")";
+           // $strRepresentant .= " (".$orderDetail[$representant].")";
             $strRepresentant .= "\n".$orderDetail[$representant."_Email"];
 
             if(strlen($orderDetail[$representant."_Tel"])>0)
-                $strRepresentant .= "<br />Tél : ".$orderDetail[$representant."_Tel"];
+                $strRepresentant .= "\nTél : ".$orderDetail[$representant."_Tel"];
 
             //if(strlen($orderDetail[$representant."_Portable"])>0)
             //   $strRepresentant .= "<br />".$orderDetail[$_Portable."_Tel"];

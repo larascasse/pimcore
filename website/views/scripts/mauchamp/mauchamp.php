@@ -1,6 +1,7 @@
 <?php
 
 $orderDetail = $this->orderDetail;
+$hasEmailContact = strlen($orderDetail["Email_Client"])>0;
 
 ?>
 
@@ -217,13 +218,20 @@ foreach ($this->missingProducts as $product) {
 
 </tbody>
 </table>
+
+
+<?php
+//pas de bouton si pas de prouits 
+if(!count($product)) : ?>
 <div class="row">
 	<div class="col-12 text-right">
+    
 		<a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
     <input type="button" class="btn  btn-outline-primary" value="Voir / Sauvegarder / Imprimer" id="printbook" onclick="printBook();return false;" />
 	</div>
 </div>
 </div>
+<?php endif; ?>
 
 <!-- MODAL EMAIL -->
 <div class="modal" role="dialog" id="formEmail">

@@ -555,6 +555,16 @@ EOT;
                     
                 }
             }
+
+          if(strlen($orderDetail["Email_Client"])==0 && strlen($orderDetail["Adresse_Facturation_Email"])>0) {
+            $orderDetail["Email_Client"] = $orderDetail["Adresse_Facturation_Email"];
+          }
+
+          if(strlen($orderDetail["Email_Client"])==0 && strlen($orderDetail["Adresse_Facturation_Livraison"])>0) {
+            $orderDetail["Email_Client"] = $orderDetail["Adresse_Facturation_Email"];
+          }
+
+
        
           $allProducts = array_merge($products,$missingProducts);
          return array(

@@ -71,7 +71,7 @@ $orderDetail = $this->orderDetail;
         <p><?php echo $strRepresentant ?></p>
         <p><?php
         $site = \Website\Tool\MauchampHelper::getSiteAdresse($orderDetail["Site"]);
-        $str = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"])).$site["phone"];
+        $str = $site["name"]."<br />".nl2br(\Website\Tool\MauchampHelper::getFormatedAdress($orderDetail["Site"]))."<br />Tél : ".$site["phone"];
         echo $str; 
         ?></p>
       </div>

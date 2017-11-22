@@ -356,8 +356,17 @@ EOT;
 
     public static function parseOrder($data) {
 
-
+      libxml_use_internal_errors(true);
     	$xml = simplexml_load_string($data);
+      if ($xml === false) {
+         
+          echo "Erreur lors du chargement du XML\n";
+          foreach(libxml_get_errors() as $error) {
+              echo "<br />", $error->message;
+          }
+      }
+
+
      
         $lines = $xml->Lignes[0]->Ligne;
 

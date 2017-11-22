@@ -158,7 +158,7 @@ foreach ($this->products as $product) {
 foreach ($this->products as $product) {
 	$sku = $product->getSku();
   $hasPose = strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0;
-  $hasPhoto = isset($product);
+  $hasPhoto = isset($product) && !$product->isAccessoire();
 	?>
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>

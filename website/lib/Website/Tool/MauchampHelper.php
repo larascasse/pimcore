@@ -355,10 +355,17 @@ EOT;
 
 
     public static function parseOrder($data) {
+      $transportRows = array();
+      $rowTotal = 0;
+      $products = array();
+      $allProducts = array();
+      $missingProducts = array();
+
+
 
       libxml_use_internal_errors(true);
     	$xml = simplexml_load_string($data);
-      if ($xml !== false) {
+      if ($xml === false) {
         echo "Oh non!!! Erreur lors du chargement des données<br /><br /><br />";
          echo '<textarea  cols="100" rows="20" name="xml" style="font-size:10px; color:#CCCCCC">'.$data."</textarea>";
           
@@ -366,8 +373,10 @@ EOT;
               echo "<br />", $error->message;
           }
           
-          die;
+          
       }
+
+      else {
 
 
      
@@ -448,11 +457,7 @@ EOT;
 
         ];
 
-        $transportRows = array();
-        $rowTotal = 0;
-        $products = array();
-        $allProducts = array();
-        $missingProducts = array();
+       
 
         $lines = $xml->Lignes[0]->Ligne;
 
@@ -586,6 +591,8 @@ EOT;
          	"missingProducts"=> $missingProducts,
          	"transport"=> $transportRows,
          );
+
+        }
     }
 
      public static function convertFloat($price) {

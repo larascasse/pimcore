@@ -231,7 +231,11 @@ if(count($this->products)==0) : ?>
 	</div>
 </div>
 </div>
-<?php endif; ?>
+<?php 
+
+else 
+  echo count($this->products);
+endif; ?>
 
 <!-- MODAL EMAIL -->
 <div class="modal" role="dialog" id="formEmail">

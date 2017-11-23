@@ -59,10 +59,12 @@ foreach ($list->getObjects() as $object) {
 
     if(stristr($scienergieCourt, "hd")) {
         $object->setSupport('HDF');
+        $object->setPimonly_masse_volumique_moyenne(850);
          $save=true;
     }
     else if(stristr($scienergieCourt, "cp")) {
         $object->setSupport('cp');
+         $object->setPimonly_masse_volumique_moyenne(780);
         $save=true;
     }
 
@@ -77,14 +79,35 @@ foreach ($list->getObjects() as $object) {
 
     if($object->getEpaisseur()==19) {
         $object->setEpaisseurUsure('5.5 mm');
+        
+        $object->setChauffantBasseTemperature(false);
+        $object->setSolRaffraichissant(false);
+        $object->setChauffantRadiantElectrique(false);
+
+
         $save=true;
     }
     else if($object->getEpaisseur()==14) {
         $object->setEpaisseurUsure('3.2 mm');
+
+        $object->setChauffantBasseTemperature(true);
+        
+        if( $object->getSupport() == 'HDF')
+            $object->setSolRaffraichissant(false);
+        else
+            $object->setSolRaffraichissant(true);
+        
+        $object->setChauffantRadiantElectrique(true);
+
         $save=true;
     }
-    if($object->getEpaisseur()==10) {
+    else if($object->getEpaisseur()==10) {
         $object->setEpaisseurUsure('2 mm');
+        
+        $object->setChauffantBasseTemperature(true);
+        $object->setSolRaffraichissant(true);
+        $object->setChauffantRadiantElectrique(true);
+
         $save=true;
     }
 

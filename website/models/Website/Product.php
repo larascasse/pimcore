@@ -1,5 +1,7 @@
 <?php
 
+use Pimcore\Model;
+
 // define a custom class,  for example:
 class Website_Product extends Object_Product {
 
@@ -314,7 +316,7 @@ class Website_Product extends Object_Product {
 	public function getPefcLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getPefc()) {
-			$taxonomie =  Object::getByPath("/labels/pefc");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/pefc");
 			return $taxonomie ->getLogo();
 		}
 	}
@@ -332,7 +334,7 @@ class Website_Product extends Object_Product {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getParquet_de_france()) {
 
-			$taxonomie =  Object::getByPath("/labels/parquet_de_france");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/parquet_de_france");
 
 			if($taxonomie)
 				return $taxonomie ->getLogo();
@@ -351,7 +353,7 @@ class Website_Product extends Object_Product {
 	public function getFscLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getFsc()) {
-			$taxonomie =  Object::getByPath("/labels/fsc");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/fsc");
 
 			if($taxonomie)
 				return $taxonomie ->getLogo();
@@ -368,7 +370,7 @@ class Website_Product extends Object_Product {
 	public function getNfLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getNf()) {
-			$taxonomie =  Object::getByPath("/labels/nf");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/nf");
 			if($taxonomie)
 				return $taxonomie ->getLogo();
 		}
@@ -391,7 +393,7 @@ class Website_Product extends Object_Product {
 				$path = "/norme_sanitaire/".$norme_sanitaire;
 				break;
 		}
-		$taxonomie =  Object::getByPath($path);
+		$taxonomie =  Pimcore\Model\Object::getByPath($path);
 		if($taxonomie)
 			return $taxonomie ->getLogo();
 		else return null;
@@ -401,7 +403,7 @@ class Website_Product extends Object_Product {
 
 	public function getPoseDescription($pose) {
 		
-		$taxonomie =  Object::getByPath("/pose/pose_".$pose);
+		$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
 		if($taxonomie)
 			return $taxonomie ->getDescription();
 		
@@ -410,7 +412,7 @@ class Website_Product extends Object_Product {
 
 	public function getPoseLogo($pose) {
 		
-		$taxonomie =  Object::getByPath("/pose/pose_".$pose);
+		$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
 		if($taxonomie)
 			return $taxonomie ->getLogo();
 		

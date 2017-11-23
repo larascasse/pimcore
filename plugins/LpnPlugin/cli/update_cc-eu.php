@@ -80,9 +80,9 @@ foreach ($list->getObjects() as $object) {
     if($object->getEpaisseur()==19) {
         $object->setEpaisseurUsure('5.5 mm');
         
-        $object->setChauffantBasseTemperature(false);
-        $object->setSolRaffraichissant(false);
-        $object->setChauffantRadiantElectrique(false);
+        $object->setChauffantBasseTemperature("0");
+        $object->setSolRaffraichissant("0");
+        $object->setChauffantRadiantElectrique("0");
 
 
         $save=true;
@@ -90,23 +90,23 @@ foreach ($list->getObjects() as $object) {
     else if($object->getEpaisseur()==14) {
         $object->setEpaisseurUsure('3.2 mm');
 
-        $object->setChauffantBasseTemperature(true);
+        $object->setChauffantBasseTemperature("1");
         
         if( $object->getSupport() == 'HDF')
-            $object->setSolRaffraichissant(false);
+            $object->setSolRaffraichissant("0");
         else
-            $object->setSolRaffraichissant(true);
+            $object->setSolRaffraichissant("1");
         
-        $object->setChauffantRadiantElectrique(true);
+        $object->setChauffantRadiantElectrique("1");
 
         $save=true;
     }
     else if($object->getEpaisseur()==10) {
         $object->setEpaisseurUsure('2 mm');
         
-        $object->setChauffantBasseTemperature(true);
-        $object->setSolRaffraichissant(true);
-        $object->setChauffantRadiantElectrique(true);
+        $object->setChauffantBasseTemperature("1");
+        $object->setSolRaffraichissant("1");
+        $object->setChauffantRadiantElectrique("1");
 
         $save=true;
     }

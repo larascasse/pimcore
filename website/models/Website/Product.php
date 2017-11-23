@@ -420,10 +420,12 @@ class Website_Product extends Object_Product {
 
 
 	public function getChauffantBasseTemperatureLogo() {
-
-		$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose-sol-chauffant");
-		if($taxonomie)
-			return $taxonomie ->getLogo();
+		$flag = $this->getChauffantBasseTemperature()==1;
+		if($flag) {
+			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose-sol-chauffant");
+			if($taxonomie)
+				return $taxonomie ->getLogo();
+		}
 	}
 	
 

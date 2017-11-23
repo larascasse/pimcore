@@ -666,7 +666,7 @@ class Website_Product extends Object_Product {
 					//New en nov 2017, on zappe pas les 0
 					if(!$showEmptyAttribute && empty($attributeValue) && $attributeValue!=="0") {
 						if ($attribute=="chauffantBasseTemperature") {
-							echo "KKKKKK.$attribute" .$attributeValue;
+							//echo "KKKKKK.$attribute" .$attributeValue;
 						}
 						continue;
 					}

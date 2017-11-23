@@ -417,6 +417,14 @@ class Website_Product extends Object_Product {
 			return $taxonomie ->getLogo();
 		
 	}
+
+
+	public function getChauffantBasseTemperatureLogo() {
+
+		$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose-sol-chauffant");
+		if($taxonomie)
+			return $taxonomie ->getLogo();
+	}
 	
 
 	public function getCharacteristicsFo() {
@@ -654,8 +662,15 @@ class Website_Product extends Object_Product {
 					if(empty($attributeValue))
 						$attributeValue = $this->$getter();
 
-					if(!$showEmptyAttribute && empty($attributeValue))
-							continue;
+
+					//New en nov 2017, on zappe pas les 0
+					if(!$showEmptyAttribute && empty($attributeValue) && $attributeValue!=="0") {
+						if ($attribute=="chauffantBasseTemperature") {
+							echo "KKKKKK.$attribute" .$attributeValue;
+						}
+						continue;
+					}
+							
 
 					//Blooean on affiche oui
 					if($value->fieldtype=="checkbox" && $attributeValue==1) {
@@ -764,11 +779,14 @@ class Website_Product extends Object_Product {
 
 					}
 					else if($value->fieldtype=="select") {
+
 							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
 							$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+							
 							if(method_exists($this, $getterDescription)) {
 								$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
 							}
+
 							if(method_exists($this, $getterLogo)) {
 								$caracteristiques[$attributeKey]['logo'] = $this->$getterLogo();
 							}

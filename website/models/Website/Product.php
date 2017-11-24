@@ -171,6 +171,7 @@ class Website_Product extends Object_Product {
 		foreach ($taxonomies as $label => $taxonomie) {
 			$childsTaxonomie[] = $label;
 		}
+
     	if(count($childsTaxonomie)==2) {
 			$varationString= implode(" ou ",$childsTaxonomie);
 		}
@@ -178,7 +179,6 @@ class Website_Product extends Object_Product {
 			$varationString= implode(" ou ",$childsTaxonomie);
 
 		}
-
 		return $varationString;
 
 	}
@@ -194,14 +194,24 @@ class Website_Product extends Object_Product {
 			if(count($taxonomies)>1) {
 				//$html.= "<p><strong>Existe en</strong><br />";
 			}
+			$idx=0;
 			foreach ($taxonomies as $label => $taxonomie) {
+				if($idx>0 && $idx==count($taxonomies)-1)
+						$html.= " ou ";
+					else if($idx>0)
+						$html.= ", ";
+
 				if(strlen(trim($taxonomie->getDescription()))>0) {
 					$html.= '<span class"desc-title">'.ucfirst(strtolower($taxonomie->getLabel())).'</span> : ';
 					$html.= "".$taxonomie->getDescription();
 				}
 				else {
+
 					$html.='<span class"desc-title">'.ucfirst(strtolower($taxonomie->getLabel())).'</span>';
+					
+
 				}
+				$idx++;
 				
 			}
 			//$html='</div></div>';
@@ -300,7 +310,8 @@ class Website_Product extends Object_Product {
 
 	}
 	public function getClasse_utilisationLogo () {
-		return $this->getTaxonomyLogoAsset('classe_utilisation');
+		if($this->isParquet())
+			return $this->getTaxonomyLogoAsset('classe_utilisation');
 
 	}
 
@@ -591,7 +602,8 @@ class Website_Product extends Object_Product {
 			'extra_content1','extra_content2',
 			'actif_web',
 			'subtype_1',
-			'notice_pose_lpn'
+			'notice_pose_lpn',
+			'chauffantAccumulationBasseTemperature'
 
 
 			);
@@ -804,6 +816,7 @@ class Website_Product extends Object_Product {
 						if($value->fieldtype=="href"){
 							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
 						}
+						
 						$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeKey,"content"=>$attributeValue);
 
 						if(method_exists($this, $getterDescription)) {

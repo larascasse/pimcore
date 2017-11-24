@@ -83,7 +83,7 @@ Usé,use
 
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";
-         $object->setTraitement_surface(("vieilli use rives abimees"));
+         $object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
          //EAN
          if(strlen($object->getEan())>0) {
@@ -93,7 +93,7 @@ Usé,use
          }
          //Article
          else  {
-            $object->setValue("pimonly_name_suffixe","vieilli usé rives abîmées");
+            $object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
             $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
             $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
          }

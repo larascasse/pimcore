@@ -43,7 +43,7 @@
   font-style: normal; }
 
 body {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.2; }
 
 @media print {
@@ -74,7 +74,7 @@ h1 {
 
 h2 {
   font-family: "Helveticaneue-light-webfont";
-  font-size: 24px;
+  font-size: 22px;
   border-bottom: 10px solid #c6c6c6;
   margin-bottom: 17px;
   line-height: 3;

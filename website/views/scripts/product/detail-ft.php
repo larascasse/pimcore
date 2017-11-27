@@ -26,6 +26,8 @@ $lesplus = $product->getLesPlusArray();
  $logoAssets = array();
  foreach ($caracteristiques as $key => $value) {
 
+ 	
+
  			if(!is_array($value)) {
  				continue;
  			}

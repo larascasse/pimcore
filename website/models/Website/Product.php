@@ -927,10 +927,19 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getMage_fichepdf() {
-		if($this->getFiche_technique_lpn())
-			return (\Pimcore\Tool::isFrontend()?"":LPN_ASSET_PREFIX).$this->getFiche_technique_lpn()->getFullPath();
-		else
+		
+	
+		if($pdf = $this->getFiche_technique_lpn()) {
+			
+			return (\Pimcore\Tool::isFrontend()?"":LPN_ASSET_PREFIX).$pdf->getFullPath();
+		}
+		else if($this->isAccessoire() && $pdf = $this->getFiche_technique_orginale()) {
+			return (\Pimcore\Tool::isFrontend()?"":LPN_ASSET_PREFIX).$pdf->getFullPath();
+		}
+		else {
+
 			return $this->getCalculatedTechnicalSheetPdfUrl();
+		}
 		return null;
 	}
 

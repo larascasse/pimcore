@@ -2320,7 +2320,7 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
 
        	if($coucheUsure>0) {
-       		 if($coucheUsure<=2.5)
+       		 if($coucheUsure<2.5)
                 $index = 0;
        		else if($coucheUsure<3.2)
                 $index = 1;

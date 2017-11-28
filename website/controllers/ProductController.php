@@ -373,7 +373,7 @@ class ProductController extends Action
         }
     }
 
-    //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/cc-pa
+    //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp
 
     //http://pimcore.florent.local/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmppa/cc-pa/fbcheg4bicmnepa
 
@@ -490,6 +490,7 @@ class ProductController extends Action
                     }
                     if($key=="ean")
                         $content .="-";
+                    
                     $row[] = ucfirst($content);
                     
             }

@@ -618,10 +618,10 @@ class Website_Product extends Object_Product {
 
 
 		//CE
-		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre","durabilite_biologique");
+		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","norme_sanitaire","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre","durabilite_biologique","coefficient_retractabilite");
 
 		//données tech générales
-		$donnesTechGeneralesFields = array("taux_humidite","coefficient_retractabilite","classe_upec","classe_utilisation","characteristics_others_tech","characteristics_others_perf");
+		$donnesTechGeneralesFields = array("taux_humidite","classe_upec","classe_utilisation","characteristics_others_tech","characteristics_others_perf");
 
 
 
@@ -2397,7 +2397,7 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 			}
 			else {
 				//TODO
-				$coeffCtSupport = \Website\Tool\ParquetData::getConductiviteThermiqueBySupport('HDF');
+				$coeffCtSupport = \Website\Tool\ParquetData::getConductiviteThermiqueBySupport($this->getSupport());
 
 				$ctSupport = (($epaisseur -(float)$this->getEpaisseurUsure()) / 1000)/$coeffCtSupport;
 				$coeffTotal = ((float)$this->getEpaisseurUsure()/1000)/$coeffCt + $ctSupport;

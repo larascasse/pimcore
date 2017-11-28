@@ -96,6 +96,10 @@ class ParquetData
           case 'cp':
             return 780;
             break;
+
+          case 'cp peuplier':
+            return 660;
+            break;
           
           case 'Latté': //Epicea
             return 500;
@@ -130,6 +134,7 @@ class ParquetData
 
 
     public static function getConductiviteThermiqueBySupport($support) {
+
 
       $masseVolumique = self::getMasseVolumiqueBySupport($support);
       $isFeuillu = false;

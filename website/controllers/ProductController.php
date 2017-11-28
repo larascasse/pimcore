@@ -461,8 +461,10 @@ class ProductController extends Action
 
              foreach ($header as $key => $title) {
 
-                    if(!isset($caracteristiques[$key]))
+                    if(!isset($caracteristiques[$key])) {
+                        $row[] = "";
                         continue;
+                    }
                     $value = $caracteristiques[$key];
                     //if(!isset($value["label"]))
                     //  continue; 

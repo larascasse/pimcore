@@ -438,6 +438,7 @@ class ProductController extends Action
 
 
              $caracteristiques =  $product->getCharacteristicsArray(false);
+             print_r($caracteristiques);
              foreach ($caracteristiques as $key => $value) {
 
             

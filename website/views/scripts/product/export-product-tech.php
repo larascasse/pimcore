@@ -24,10 +24,12 @@ foreach ($products as $product) {
 	 	continue;
 	 }
 	 
-	 $header[] = "Famille";
-	 $header[] = "EAN";
-	 $header[] = "Name";
-	 $header[] = "Url";
+	 if($idx==0) {
+		 $header[] = "Famille";
+		 $header[] = "EAN";
+		 $header[] = "Name";
+		 $header[] = "Url";
+	 }
 
 	 $row[] = $product->getCode();
 	 $row[] = $product->getEan();
@@ -48,7 +50,7 @@ foreach ($products as $product) {
  				$header[] = ucfirst(trim($value["label"]));
  			}
  			
- 			$content = $description = null;
+ 			$content = $description = "";
 
  			if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
 				$content = clean($value["content"]);

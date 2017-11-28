@@ -448,6 +448,9 @@ class ProductController extends Action
                     if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
                         continue;
                     }
+                     if(is_array($value) && isset($value["isOther"]) && $value["isOther"]) {
+                        continue;
+                    }
                     
                     try {
 

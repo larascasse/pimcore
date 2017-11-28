@@ -374,9 +374,23 @@ class ProductController extends Action
     }
 
     //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/cc-pa
+
+    //http://pimcore.florent.local/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmppa/cc-pa/fbcheg4bicmnepa
+
+    public function clean($str) {
+        $str = str_replace("<br />", " - ", $str);
+        $str = str_replace("\n", " - ", $str);
+        $str = str_replace("\r", "", $str);
+        $str = str_replace("\t", "", $str);
+        $str = strip_tags($str);
+        $str = trim($str);
+
+        return $str;
+
+    }
     public function exportProductTechAction() {
-        $this->enableLayout();
-        $this->setLayout("layout-empty");
+        $this->disableLayout();
+        $this->disableViewAutoRender();
 
         $list = Object_Product::getList(array(
                 'condition' => 'o_path LIKE \''.$this->getParam("path").'%\''
@@ -396,9 +410,70 @@ class ProductController extends Action
             //On fait un export des produits avec la liste des categories !
 
         }
-        //Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
-        $this->view->products = $products;
-        //$response = $this->getResponse();
+        
+       
+        $idx = 0;
+        $header=array();
+        $rows = array();
+        foreach ($products as $product) {
+             $row=array();
+             
+
+             if(strlen($product->ean)==0) {
+                continue;
+             }
+             
+             if($idx==0) {
+                 $header[] = "Famille";
+                 $header[] = "EAN";
+                 $header[] = "Name";
+                 $header[] = "Url";
+             }
+
+             $row[] = $product->getCode();
+             $row[] = $product->getEan()."-";
+             $row[] = $product->getMage_name();
+             $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
+
+
+             $caracteristiques =  $product->getCharacteristicsArray();
+             foreach ($caracteristiques as $key => $value) {
+
+            
+                    //if(!isset($value["label"]))
+                    //  continue;
+                    
+                    
+                    try {
+                        if($idx==0) {
+                            if(is_array($value) && array_key_exists("label", $value))
+                                $header[] = ucfirst(trim($value["label"]));
+                            else
+                                $header[] = "";
+                        }
+                    }
+                    catch (Exception $e) {
+
+                    }
+                    
+                    
+                    $content = $description = "";
+
+                    if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
+                        $content = $this->clean($value["content"]);
+                    }
+
+                    $row[] = ucfirst($content);
+                    
+            }
+
+            
+            $rows[]  = $row;
+            $idx ++;
+        }
+       
+
+
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=export.csv');
@@ -406,9 +481,40 @@ class ProductController extends Action
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo "\xEF\xBB\xBF"; // UTF-8 BOM
-       // $response->sendResponse();
+        //echo "\xEF\xBB\xBF"; // UTF-8 BOM
+        /*$disclosure="\t";
+        $out = fopen('php://output', 'w');
+        fputs($out, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
+        fputcsv($out, $header,$disclosure);
+        foreach ($rows as $row) {
+            fputcsv($out,$row,$disclosure);
+        }
+        fclose($out);
+        */
+        $this->toCSV($header,$rows,"export");
+        exit;
+
     }
+
+    public  function toCSV($header, $data, $filename) {
+        $sep  = "\t";
+        $eol  = "\n";
+        $csv  =  count($header) ? '"'. implode('"'.$sep.'"', $header).'"'.$eol : '';
+        foreach($data as $line) {
+          $csv .= '"'. implode('"'.$sep.'"', $line).'"'.$eol;
+        }
+        $encoded_csv = mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="'.$filename.'.csv"');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: '. strlen($encoded_csv));
+        echo chr(255) . chr(254) . $encoded_csv;
+        exit;
+      }
 
 
 

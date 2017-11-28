@@ -41,14 +41,19 @@ foreach ($products as $product) {
 	 foreach ($caracteristiques as $key => $value) {
 
  	
-	 		if(!isset($value["label"]))
- 				continue;
+	 		//if(!isset($value["label"]))
+ 			//	continue;
  			
  			
-
- 			if($idx==0) {
- 				$header[] = ucfirst(trim($value["label"]));
+ 			try {
+ 				if($idx==0) {
+	 				$header[] = ucfirst(trim($value["label"]));
+	 			}
  			}
+ 			catch (Exception $e) {
+
+ 			}
+ 			
  			
  			$content = $description = "";
 

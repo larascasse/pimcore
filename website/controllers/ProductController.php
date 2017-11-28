@@ -443,9 +443,15 @@ class ProductController extends Action
             
                     //if(!isset($value["label"]))
                     //  continue;
-                    
+
+
+                    if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
+                        continue;
+                    }
                     
                     try {
+
+
                         if($idx==0) {
                             if(is_array($value) && array_key_exists("label", $value))
                                 $header[$key] = ucfirst(trim($value["label"]));

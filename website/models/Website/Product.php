@@ -811,7 +811,8 @@ class Website_Product extends Object_Product {
 
 								//On va créer une ligne par valeur, pour avoir les logos
 								//Maiqs on ne va pas les afficher !!
-								$caracteristiques[$attributeKey."_".$keySelect] = array("key"=>$attribute."_".$keySelect,"label"=>$attributeLabel." - ".$selectedValue,"content"=>"Oui","is_hidden"=>false);
+								//Is_Speicla, pour le CSV..
+								$caracteristiques[$attributeKey."_".$keySelect] = array("key"=>$attribute."_".$keySelect,"label"=>$attributeLabel." - ".$selectedValue,"content"=>"Oui","is_hidden"=>false,"do_not_export"=>true);
 
 								if(method_exists($this, $getterLogo)) {
 									$caracteristiques[$attributeKey."_".$keySelect]['logo'] = $this->$getterLogo($keySelect);

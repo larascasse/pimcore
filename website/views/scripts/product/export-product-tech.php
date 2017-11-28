@@ -1,6 +1,16 @@
 <?php 
 
+function clean($str) {
+	$str = str_replace("<br />", " - ", $str);
+	$str = str_replace("\n", " - ", $str);
+	$str = str_replace("\r", "", $str);
+	$str = str_replace("\t", "", $str);
+	$str = strip_tags($str);
+	$str = trim($str);
 
+	return $str;
+
+}
 
 $products = $this->products;
 $idx = 0;
@@ -42,11 +52,11 @@ foreach ($products as $product) {
  			$content = $description = null;
 
  			if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
-				$content = strip_tags(str_replace("\n","",trim($value["content"])));
+				$content = clean($value["content"]);
  			}
 
 			if(isset($value["description"]) && strlen(trim($value["description"]))>0) {
-				$description = strip_tags(str_replace("\n","",trim($value["description"])));
+				$description = clean($value["description"]);
 			}
 
 			if(isset($description)) {

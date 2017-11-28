@@ -437,7 +437,7 @@ class ProductController extends Action
              $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
 
 
-             $caracteristiques =  $product->getCharacteristicsArray();
+             $caracteristiques =  $product->getCharacteristicsArray(false);
              foreach ($caracteristiques as $key => $value) {
 
             

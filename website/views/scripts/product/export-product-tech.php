@@ -39,7 +39,8 @@ foreach ($products as $product) {
 	 foreach ($caracteristiques as $key => $value) {
 
  	
-
+	 		if(!isset($value["label"]))
+ 				continue;
  			
  			
 

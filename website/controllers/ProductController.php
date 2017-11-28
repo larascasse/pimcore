@@ -373,6 +373,39 @@ class ProductController extends Action
         }
     }
 
+    //http://pimcore.florent.local/?controller=product&action=export-product-tech&path/catalogue/_product_base__/05contreco/tmppa/cc-pa/fbcheg4bicmnepa/3291410074683
+    public function exportProductTechAction() {
+        $this->enableLayout();
+        $this->setLayout("layout-empty");
+
+        $list = Object_Product::getList(array(
+                'condition' => 'o_path LIKE \''.$this->getParam("path").'%\''
+        ));
+
+       
+        $childs = $list;
+        $products = array();
+       
+        foreach($childs as $product){
+           
+            //OK on a toutes les categories parentes
+            $products[] = $product;
+
+            //On recupere la liste des produits par categories
+            //On assigne les categories au produit
+            //On fait un export des produits avec la liste des categories !
+
+        }
+        //Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+        $this->view->products = $products;
+        $response = $this->getResponse();
+         header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=\"export.csv\"");
+        $response->sendResponse();
+    }
+
+
+
     //http://pimcore.florent.local/ajax/jsonProductList/4416
     public function jsonProductListAjax($categoryId) {
         //$this->enableLayout();

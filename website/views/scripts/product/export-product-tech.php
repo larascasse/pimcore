@@ -42,11 +42,11 @@ foreach ($products as $product) {
  			$content = $description = null;
 
  			if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
-				$content = trim($value["content"]);
+				$content = strip_tags(str_replace("\n","",trim($value["content"])));
  			}
 
 			if(isset($value["description"]) && strlen(trim($value["description"]))>0) {
-				$description = trim($value["description"]);
+				$description = strip_tags(str_replace("\n","",trim($value["description"])));
 			}
 
 			if(isset($description)) {

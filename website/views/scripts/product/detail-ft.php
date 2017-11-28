@@ -121,7 +121,7 @@ $htmlDonneeTech .='</table>';
 <h1 style=""><?php echo $product->getMage_short_name(3000); ?></h1>
  <?php
 $subtitle = strlen($product->getSku())>0?$product->getSku():"";
-if(strlen($product->name_scienergie_court)) {
+if(strlen($product->name_scienergie_court) && 1==2) {
 	if(strlen($subtitle)>0) 
 		$subtitle .=" - ";
 	

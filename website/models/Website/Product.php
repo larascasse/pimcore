@@ -789,6 +789,7 @@ class Website_Product extends Object_Product {
 						if(count($caracteristiquesOthers)>0) {
 							foreach ($caracteristiquesOthers as $valueOther) {
 								$caracteristiques[$valueOther["label"]] = $valueOther;
+								$caracteristiques[$valueOther["isOther"]] = true;
 									//print_r($valueOther);
 
 							}

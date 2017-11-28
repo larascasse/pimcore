@@ -414,6 +414,7 @@ class ProductController extends Action
        
         $idx = 0;
         $header=array();
+        
         $rows = array();
         foreach ($products as $product) {
              $row=array();
@@ -424,10 +425,10 @@ class ProductController extends Action
              }
              
              if($idx==0) {
-                 $header[] = "Famille";
-                 $header[] = "EAN";
-                 $header[] = "Name";
-                 $header[] = "Url";
+                 $header['famille'] = "Famille";
+                 $header['ean'] = "EAN";
+                 $header['name'] = "Name";
+                 $header['url'] = "Url";
              }
 
              $row[] = $product->getCode();
@@ -447,14 +448,19 @@ class ProductController extends Action
                     try {
                         if($idx==0) {
                             if(is_array($value) && array_key_exists("label", $value))
-                                $header[] = ucfirst(trim($value["label"]));
+                                $header[$key] = ucfirst(trim($value["label"]));
                             else
-                                $header[] = "";
+                                $header[$key] = "";
                         }
                     }
                     catch (Exception $e) {
 
                     }
+
+                    //ON vire les colones qui ne sont pas dans le header
+                    if(!array_key_exists($key, $header)) {
+                        continue;
+                    }   
                     
                     
                     $content = $description = "";

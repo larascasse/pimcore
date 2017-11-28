@@ -398,10 +398,10 @@ class ProductController extends Action
         }
         //Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         $this->view->products = $products;
-        $response = $this->getResponse();
+        //$response = $this->getResponse();
          header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename=\"export.csv\"");
-        $response->sendResponse();
+       // $response->sendResponse();
     }
 
 

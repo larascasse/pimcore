@@ -373,7 +373,7 @@ class ProductController extends Action
         }
     }
 
-    //http://pimcore.florent.local/?controller=product&action=export-product-tech&path/catalogue/_product_base__/05contreco/tmppa/cc-pa/fbcheg4bicmnepa/3291410074683
+    //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/cc-pa
     public function exportProductTechAction() {
         $this->enableLayout();
         $this->setLayout("layout-empty");
@@ -399,8 +399,14 @@ class ProductController extends Action
         //Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         $this->view->products = $products;
         //$response = $this->getResponse();
-         header("Content-type: text/csv");
-        header("Content-Disposition: attachment; filename=\"export.csv\"");
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=export.csv');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo "\xEF\xBB\xBF"; // UTF-8 BOM
        // $response->sendResponse();
     }
 

@@ -26,10 +26,12 @@ foreach ($products as $product) {
 	 
 	 $header[] = "Famille";
 	 $header[] = "EAN";
+	 $header[] = "Name";
 	 $header[] = "Url";
 
 	 $row[] = $product->getCode();
 	 $row[] = $product->getEan();
+	 $row[] = $product->getMage_name();
 	 $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
 
 
@@ -38,12 +40,8 @@ foreach ($products as $product) {
 
  	
 
- 			if(!is_array($value)) {
- 				continue;
- 			}
-
- 			if(!isset($value["label"]))
- 				continue;
+ 			
+ 			
 
  			if($idx==0) {
  				$header[] = ucfirst(trim($value["label"]));
@@ -55,7 +53,9 @@ foreach ($products as $product) {
 				$content = clean($value["content"]);
  			}
 
-			if(isset($value["description"]) && strlen(trim($value["description"]))>0) {
+ 			$row[] = ucfirst($content);
+
+			/*if(isset($value["description"]) && strlen(trim($value["description"]))>0) {
 				$description = clean($value["description"]);
 			}
 
@@ -66,7 +66,7 @@ foreach ($products as $product) {
 			}
 			else {
 				$row[] = ucfirst($content);
-			}
+			}*/
 
 			
 
@@ -74,7 +74,7 @@ foreach ($products as $product) {
 			
 	}
 
-	$row["url"] = $product->getEan();
+	
 	$rows[]  = $row;
 	$idx ++;
 }

@@ -426,13 +426,13 @@ class ProductController extends Action
              
              if($idx==0) {
                  $header['famille'] = "Famille";
-                 $header['ean'] = "EAN";
+                 //$header['ean'] = "EAN";
                  $header['name'] = "Name";
                  $header['url'] = "Url";
              }
 
              $row[] = $product->getCode();
-             $row[] = $product->getEan()."-";
+             //$row[] = $product->getEan()."-";
              $row[] = $product->getMage_name();
              $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
 

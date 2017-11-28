@@ -681,7 +681,7 @@ class Website_Product extends Object_Product {
 
 		$dimentionsStringExtended = $this->getDimensionsStringExtended();
 		if(strlen($dimentionsStringExtended)>0)
-			$caracteristiques["Dimensions"] = array("label"=>"Dimensions","key"=>"dimensions","content"=>$dimentionsStringExtended,"isDescription" => true);
+			$caracteristiques["dimensions"] = array("label"=>"Dimensions","key"=>"dimensions","content"=>$dimentionsStringExtended,"isDescription" => true);
 
 		
 

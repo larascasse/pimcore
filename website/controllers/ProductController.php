@@ -438,40 +438,29 @@ class ProductController extends Action
 
 
              $caracteristiques =  $product->getCharacteristicsArray(false);
-             print_r($caracteristiques);
-             die;
-             foreach ($caracteristiques as $key => $value) {
 
-            
-                    //if(!isset($value["label"]))
-                    //  continue;
-
-
-                    if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
-                        continue;
-                    }
-                     if(is_array($value) && isset($value["isOther"]) && $value["isOther"]) {
-                        continue;
-                    }
-                    
+            if($idx==0) {
+                foreach ($caracteristiques as $key => $value) {
                     try {
-
-
-                        if($idx==0) {
-                            if(is_array($value) && array_key_exists("label", $value))
-                                $header[$key] = ucfirst(trim($value["label"]));
-                            else
-                                $header[$key] = "";
+                        if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
+                            continue;
                         }
+                         if(is_array($value) && isset($value["isOther"]) && $value["isOther"]) {
+                            continue;
+                        }
+                        $header[$key] = ucfirst(trim($value["label"]));
                     }
                     catch (Exception $e) {
 
                     }
+                }
+            }
 
-                    //ON vire les colones qui ne sont pas dans le header
-                    if(!array_key_exists($key, $header)) {
-                        continue;
-                    }   
+             foreach ($header as $key => $title) {
+
+                    $value = $caracteristiques[$key];
+                    //if(!isset($value["label"]))
+                    //  continue; 
                     
                     
                     $content = $description = "";

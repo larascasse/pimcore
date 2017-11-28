@@ -416,6 +416,11 @@ class ProductController extends Action
         $header=array();
         
         $rows = array();
+
+        foreach ($products as $product) {
+
+
+        }
         foreach ($products as $product) {
              $row=array();
              
@@ -424,22 +429,19 @@ class ProductController extends Action
                 continue;
              }
              
-             if($idx==0) {
-                 $header['famille'] = "Famille";
-                 //$header['ean'] = "EAN";
-                 $header['name'] = "Name";
-                 $header['url'] = "Url";
-             }
+            
 
-             $row[] = $product->getCode();
-             //$row[] = $product->getEan()."-";
-             $row[] = $product->getMage_name();
-             $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
+            
 
 
              $caracteristiques =  $product->getCharacteristicsArray();
 
             if($idx==0) {
+                $header['famille'] = "Famille";
+                 //$header['ean'] = "EAN";
+                 $header['name'] = "Name";
+                 $header['url'] = "Url";
+
                 foreach ($caracteristiques as $key => $value) {
                     if(!is_array($value) || !isset($value["label"]))
                         continue; 
@@ -459,12 +461,21 @@ class ProductController extends Action
                 }
             }
 
+             $row[] = $product->getCode();
+             //$row[] = $product->getEan()."-";
+             $row[] = $product->getMage_name();
+             $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
+
              foreach ($header as $key => $title) {
 
                     if(!isset($caracteristiques[$key])) {
                         $row[] = "";
                         continue;
                     }
+
+                    if($key=='famille' || $key=='name' || $key=='url' )
+                        continue;
+                    
                     $value = $caracteristiques[$key];
                     //if(!isset($value["label"]))
                     //  continue; 

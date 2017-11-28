@@ -413,8 +413,10 @@ class Website_Product extends Object_Product {
 
 
 	public function getPoseDescription($pose) {
-		
 		$fixation = $this->getFixation();
+		return $fixation." ".$pose;
+
+		
 		if($fixation=="click" && $pose=="flottante") {
 			$taxonomie =  Pimcore\Model\Object::getByPath("/pose//pose/pose_flottante_click");
 		}
@@ -438,7 +440,7 @@ class Website_Product extends Object_Product {
 		else {
 			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
 		}
-		
+
 		if($taxonomie)
 			return $taxonomie ->getLogo();
 		

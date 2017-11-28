@@ -995,9 +995,9 @@ class Website_Product extends Object_Product {
    		 	if($this->getParent() instanceof Object_Product) {
 
 
-   		 		$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
+   		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
    		 		if($this->getParent()->getParent() instanceof Object_Product) {
-					$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
+					$parentParentSuffixe = $this->getParent()->getParent()->pimonly_name_suffixe." ";
 				}
 
    		 	}
@@ -1016,7 +1016,7 @@ class Website_Product extends Object_Product {
     		$str =trim($str);
 
     		if(strlen($this->getPimonly_name_suffixe())>0) {
-    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->getPimonly_name_suffixe();
+    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
     		$str =trim($str);
     		Object_Abstract::setGetInheritedValues($inheritance); 
@@ -1030,7 +1030,7 @@ class Website_Product extends Object_Product {
     		$str =trim($str);
 
     		if(strlen($this->getPimonly_name_suffixe())>0) {
-    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->getPimonly_name_suffixe();
+    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
     		$str =trim($str);
     		$str = substr($str,0,$stringlength);

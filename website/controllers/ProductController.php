@@ -490,7 +490,7 @@ class ProductController extends Action
                     }
                     if($key=="ean")
                         $content .="-";
-                    
+                    $content .=$key;
                     $row[] = ucfirst($content);
                     
             }

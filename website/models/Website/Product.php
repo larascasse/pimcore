@@ -617,7 +617,7 @@ class Website_Product extends Object_Product {
 		
 	}
 
-	public function getCharacteristicsArray() {
+	public function getCharacteristicsArray($removeEmpty=true) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    
@@ -676,7 +676,7 @@ class Website_Product extends Object_Product {
 				$ignoreFields[]=$attribute;
 			}
 		}
-		$showEmptyAttribute = false;
+		$showEmptyAttribute = !$removeEmpty;
 		$caracteristiques = array();
 
 		$dimentionsStringExtended = $this->getDimensionsStringExtended();
@@ -789,7 +789,7 @@ class Website_Product extends Object_Product {
 						if(count($caracteristiquesOthers)>0) {
 							foreach ($caracteristiquesOthers as $valueOther) {
 								$caracteristiques[$valueOther["label"]] = $valueOther;
-								//$caracteristiques[$valueOther["isOther"]] = true;
+								$caracteristiques[$valueOther["label"]]["isOther"] = true;
 									//print_r($valueOther);
 
 							}

@@ -441,6 +441,9 @@ class ProductController extends Action
 
             if($idx==0) {
                 foreach ($caracteristiques as $key => $value) {
+                    if(!is_array($value) || !isset($value["label"]))
+                        continue; 
+
                     try {
                         if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
                             continue;

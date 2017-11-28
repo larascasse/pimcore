@@ -47,7 +47,10 @@ foreach ($products as $product) {
  			
  			try {
  				if($idx==0) {
-	 				$header[] = ucfirst(trim($value["label"]));
+ 					if(array_key_exists("label", $value))
+	 					$header[] = ucfirst(trim($value["label"]));
+	 				else
+	 					$header[] = "";
 	 			}
  			}
  			catch (Exception $e) {

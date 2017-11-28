@@ -488,9 +488,8 @@ class ProductController extends Action
                     if(isset($value["content"]) && strlen(trim($value["content"]))>0) {
                         $content = $this->clean($value["content"]);
                     }
-                    if($key=="ean")
-                        $content .="-";
-                    $content .=$key;
+                    if($key=="EAN")
+                        $content .=" -";
                     $row[] = ucfirst($content);
                     
             }

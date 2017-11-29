@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-13T10:18:47+02:00
+* Generated at: 2017-11-27T18:41:35+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -43,11 +43,26 @@ Fields Summary:
 - shipping_type [select]
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
-- classe_utilisation [calculatedValue]
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
-- normes [objectbricks]
+- essence [input]
+- support [select]
+- epaisseurUsure [input]
+- norme_sanitaire [select]
+- classe_utilisation [calculatedValue]
+- classe_upec [calculatedValue]
+- masse_volumique [calculatedValue]
+- pimonly_masse_volumique_moyenne [input]
+- classe_reaction_feu_eu [calculatedValue]
+- classe_reaction_feu_fr [calculatedValue]
+- degagement_formaldehyde [calculatedValue]
+- resistance_thermique [calculatedValue]
+- conductivite_thermique_total [calculatedValue]
+- condition_mise_en_oeuvre [calculatedValue]
+- taux_humidite [input]
+- coefficient_retractabilite [calculatedValue]
+- durabilite_ecologique [calculatedValue]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
@@ -98,15 +113,15 @@ Fields Summary:
 - quantity_min_txt [input]
 - quantity_min_txt_not_configurable [checkbox]
 - characteristics_others [textarea]
+- characteristics_others_tech [textarea]
+- characteristics_others_perf [textarea]
 - unite [input]
 - mode_calcul [input]
 - rendement [input]
 - famille [input]
 - qualite [input]
-- essence [input]
 - classe [input]
 - classe_service [input]
-- epaisseurUsure [input]
 - extras [objects]
 - chanfreins [input]
 - origine_bois [input]
@@ -117,15 +132,14 @@ Fields Summary:
 - motif [select]
 - pieceHumide [checkbox]
 - sousCoucheIntegree [checkbox]
-- chauffantBasseTemperature [checkbox]
-- chauffantAccumulationBasseTemperature [checkbox]
-- solRaffraichissant [checkbox]
+- chauffantBasseTemperature [select]
+- chauffantRadiantElectrique [select]
+- chauffantAccumulationBasseTemperature [select]
+- solRaffraichissant [select]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
-- norme_sanitaire [select]
-- support [select]
 - image_1 [image]
 - image_2 [image]
 - image_3 [image]
@@ -214,11 +228,26 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByClasse_utilisation ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByNormes ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_utilisation ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_upec ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMasse_volumique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_masse_volumique_moyenne ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_eu ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_fr ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByDegagement_formaldehyde ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByResistance_thermique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConductivite_thermique_total ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCondition_mise_en_oeuvre ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTaux_humidite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCoefficient_retractabilite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByDurabilite_ecologique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
@@ -269,15 +298,15 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_min_txt_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others_tech ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others_perf ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByUnite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMode_calcul ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_service ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByOrigine_bois ($value, $limit = 0) 
@@ -289,14 +318,13 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantRadiantElectrique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_3 ($value, $limit = 0) 
@@ -386,7 +414,12 @@ public $mage_custom_option;
 public $meta_title;
 public $meta_description;
 public $meta_keywords;
-public $normes;
+public $essence;
+public $support;
+public $epaisseurUsure;
+public $norme_sanitaire;
+public $pimonly_masse_volumique_moyenne;
+public $taux_humidite;
 public $price_1;
 public $price_2;
 public $price_3;
@@ -437,15 +470,15 @@ public $quantity_max;
 public $quantity_min_txt;
 public $quantity_min_txt_not_configurable;
 public $characteristics_others;
+public $characteristics_others_tech;
+public $characteristics_others_perf;
 public $unite;
 public $mode_calcul;
 public $rendement;
 public $famille;
 public $qualite;
-public $essence;
 public $classe;
 public $classe_service;
-public $epaisseurUsure;
 public $extras;
 public $chanfreins;
 public $origine_bois;
@@ -457,14 +490,13 @@ public $motif;
 public $pieceHumide;
 public $sousCoucheIntegree;
 public $chauffantBasseTemperature;
+public $chauffantRadiantElectrique;
 public $chauffantAccumulationBasseTemperature;
 public $solRaffraichissant;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
 public $nf;
-public $norme_sanitaire;
-public $support;
 public $image_1;
 public $image_2;
 public $image_3;
@@ -1044,7 +1076,7 @@ public function setPrice ($price) {
 }
 
 /**
-* Get weight - Poids de base
+* Get weight - Poids de base (en kg)
 * @return string
 */
 public function getWeight () {
@@ -1060,7 +1092,7 @@ public function getWeight () {
 }
 
 /**
-* Set weight - Poids de base
+* Set weight - Poids de base (en kg)
 * @param string $weight
 * @return \Pimcore\Model\Object\Product
 */
@@ -1408,26 +1440,6 @@ public function setMage_custom_option ($mage_custom_option) {
 }
 
 /**
-* Get classe_utilisation - Classe d'utilisation
-* @return \Pimcore\Model\Object\Data\CalculatedValue
-*/
-public function getClasse_utilisation () {
-	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_utilisation');
-	$data->setContextualData("object", null, null, null);
-	$data = Service::getCalculatedFieldValue($this, $data);
-	return $data;
-	}
-
-/**
-* Set classe_utilisation - Classe d'utilisation
-* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_utilisation
-* @return \Pimcore\Model\Object\Product
-*/
-public function setClasse_utilisation ($classe_utilisation) {
-	return $this;
-}
-
-/**
 * Get meta_title - Métas Title
 * @return string
 */
@@ -1506,30 +1518,378 @@ public function setMeta_keywords ($meta_keywords) {
 }
 
 /**
-* @return \Pimcore\Model\Object\Objectbrick
+* Get essence - Essence
+* @return string
 */
-public function getNormes () {
-	$data = $this->normes;
-	if(!$data) { 
-		if(\Pimcore\Tool::classExists("\\Pimcore\\Model\\Object\\Product\\Normes")) { 
-			$data = new \Pimcore\Model\Object\Product\Normes($this, "normes");
-			$this->normes = $data;
-		} else {
-			return null;
-		}
+public function getEssence () {
+	$preValue = $this->preGetValue("essence"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
 	}
-	$preValue = $this->preGetValue("normes"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { return $preValue;}
-	 return $data;
+	$data = $this->essence;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("essence")->isEmpty($data)) {
+		return $this->getValueFromParent("essence");
+	}
+	return $data;
 }
 
 /**
-* Set normes - normes
-* @param \Pimcore\Model\Object\Objectbrick $normes
+* Set essence - Essence
+* @param string $essence
 * @return \Pimcore\Model\Object\Product
 */
-public function setNormes ($normes) {
-	$this->normes = $this->getClass()->getFieldDefinition("normes")->preSetData($this, $normes);
+public function setEssence ($essence) {
+	$this->essence = $essence;
+	return $this;
+}
+
+/**
+* Get support - Support (Contrecollé)
+* @return string
+*/
+public function getSupport () {
+	$preValue = $this->preGetValue("support"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->support;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("support")->isEmpty($data)) {
+		return $this->getValueFromParent("support");
+	}
+	return $data;
+}
+
+/**
+* Set support - Support (Contrecollé)
+* @param string $support
+* @return \Pimcore\Model\Object\Product
+*/
+public function setSupport ($support) {
+	$this->support = $support;
+	return $this;
+}
+
+/**
+* Get epaisseurUsure - Epaisseur couche d'usure
+* @return string
+*/
+public function getEpaisseurUsure () {
+	$preValue = $this->preGetValue("epaisseurUsure"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->epaisseurUsure;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseurUsure")->isEmpty($data)) {
+		return $this->getValueFromParent("epaisseurUsure");
+	}
+	return $data;
+}
+
+/**
+* Set epaisseurUsure - Epaisseur couche d'usure
+* @param string $epaisseurUsure
+* @return \Pimcore\Model\Object\Product
+*/
+public function setEpaisseurUsure ($epaisseurUsure) {
+	$this->epaisseurUsure = $epaisseurUsure;
+	return $this;
+}
+
+/**
+* Get norme_sanitaire - Norme Sanitaire
+* @return string
+*/
+public function getNorme_sanitaire () {
+	$preValue = $this->preGetValue("norme_sanitaire"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->norme_sanitaire;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("norme_sanitaire")->isEmpty($data)) {
+		return $this->getValueFromParent("norme_sanitaire");
+	}
+	return $data;
+}
+
+/**
+* Set norme_sanitaire - Norme Sanitaire
+* @param string $norme_sanitaire
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNorme_sanitaire ($norme_sanitaire) {
+	$this->norme_sanitaire = $norme_sanitaire;
+	return $this;
+}
+
+/**
+* Get classe_utilisation - Classe d'utilisation
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getClasse_utilisation () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_utilisation');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set classe_utilisation - Classe d'utilisation
+* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_utilisation
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_utilisation ($classe_utilisation) {
+	return $this;
+}
+
+/**
+* Get classe_upec - Classement UPEC
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getClasse_upec () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_upec');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set classe_upec - Classement UPEC
+* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_upec
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_upec ($classe_upec) {
+	return $this;
+}
+
+/**
+* Get masse_volumique - Masse volumique (kg/m3)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getMasse_volumique () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('masse_volumique');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set masse_volumique - Masse volumique (kg/m3)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $masse_volumique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMasse_volumique ($masse_volumique) {
+	return $this;
+}
+
+/**
+* Get pimonly_masse_volumique_moyenne - Masse volumique moyenne fournisseur
+* @return string
+*/
+public function getPimonly_masse_volumique_moyenne () {
+	$preValue = $this->preGetValue("pimonly_masse_volumique_moyenne"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_masse_volumique_moyenne;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_masse_volumique_moyenne")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_masse_volumique_moyenne");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_masse_volumique_moyenne - Masse volumique moyenne fournisseur
+* @param string $pimonly_masse_volumique_moyenne
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_masse_volumique_moyenne ($pimonly_masse_volumique_moyenne) {
+	$this->pimonly_masse_volumique_moyenne = $pimonly_masse_volumique_moyenne;
+	return $this;
+}
+
+/**
+* Get classe_reaction_feu_eu - Classement feu (NF EN 13501-1)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getClasse_reaction_feu_eu () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_reaction_feu_eu');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set classe_reaction_feu_eu - Classement feu (NF EN 13501-1)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_reaction_feu_eu
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_reaction_feu_eu ($classe_reaction_feu_eu) {
+	return $this;
+}
+
+/**
+* Get classe_reaction_feu_fr - Classement feu (NF P 92 507)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getClasse_reaction_feu_fr () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('classe_reaction_feu_fr');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set classe_reaction_feu_fr - Classement feu (NF P 92 507)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $classe_reaction_feu_fr
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse_reaction_feu_fr ($classe_reaction_feu_fr) {
+	return $this;
+}
+
+/**
+* Get degagement_formaldehyde - Dégagement formaldéhyde
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getDegagement_formaldehyde () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('degagement_formaldehyde');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set degagement_formaldehyde - Dégagement formaldéhyde
+* @param \Pimcore\Model\Object\Data\CalculatedValue $degagement_formaldehyde
+* @return \Pimcore\Model\Object\Product
+*/
+public function setDegagement_formaldehyde ($degagement_formaldehyde) {
+	return $this;
+}
+
+/**
+* Get resistance_thermique - Résistance thermique (en m2/KW)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getResistance_thermique () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('resistance_thermique');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set resistance_thermique - Résistance thermique (en m2/KW)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $resistance_thermique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setResistance_thermique ($resistance_thermique) {
+	return $this;
+}
+
+/**
+* Get conductivite_thermique_total - Conductivite thermique totale (en W/mK)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getConductivite_thermique_total () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('conductivite_thermique_total');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set conductivite_thermique_total - Conductivite thermique totale (en W/mK)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $conductivite_thermique_total
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConductivite_thermique_total ($conductivite_thermique_total) {
+	return $this;
+}
+
+/**
+* Get condition_mise_en_oeuvre - Condition de mise en oeuvre
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getCondition_mise_en_oeuvre () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('condition_mise_en_oeuvre');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set condition_mise_en_oeuvre - Condition de mise en oeuvre
+* @param \Pimcore\Model\Object\Data\CalculatedValue $condition_mise_en_oeuvre
+* @return \Pimcore\Model\Object\Product
+*/
+public function setCondition_mise_en_oeuvre ($condition_mise_en_oeuvre) {
+	return $this;
+}
+
+/**
+* Get taux_humidite - Taux d'humidité sortie d'usine
+* @return string
+*/
+public function getTaux_humidite () {
+	$preValue = $this->preGetValue("taux_humidite"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->taux_humidite;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("taux_humidite")->isEmpty($data)) {
+		return $this->getValueFromParent("taux_humidite");
+	}
+	return $data;
+}
+
+/**
+* Set taux_humidite - Taux d'humidité sortie d'usine
+* @param string $taux_humidite
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTaux_humidite ($taux_humidite) {
+	$this->taux_humidite = $taux_humidite;
+	return $this;
+}
+
+/**
+* Get coefficient_retractabilite - Coefficient rétractabilite
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getCoefficient_retractabilite () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('coefficient_retractabilite');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set coefficient_retractabilite - Coefficient rétractabilite
+* @param \Pimcore\Model\Object\Data\CalculatedValue $coefficient_retractabilite
+* @return \Pimcore\Model\Object\Product
+*/
+public function setCoefficient_retractabilite ($coefficient_retractabilite) {
+	return $this;
+}
+
+/**
+* Get durabilite_ecologique - Durabilité écologique
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getDurabilite_ecologique () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('durabilite_ecologique');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set durabilite_ecologique - Durabilité écologique
+* @param \Pimcore\Model\Object\Data\CalculatedValue $durabilite_ecologique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setDurabilite_ecologique ($durabilite_ecologique) {
 	return $this;
 }
 
@@ -2834,6 +3194,58 @@ public function setCharacteristics_others ($characteristics_others) {
 }
 
 /**
+* Get characteristics_others_tech - Caractéristiques Autre Technique
+* @return string
+*/
+public function getCharacteristics_others_tech () {
+	$preValue = $this->preGetValue("characteristics_others_tech"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->characteristics_others_tech;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("characteristics_others_tech")->isEmpty($data)) {
+		return $this->getValueFromParent("characteristics_others_tech");
+	}
+	return $data;
+}
+
+/**
+* Set characteristics_others_tech - Caractéristiques Autre Technique
+* @param string $characteristics_others_tech
+* @return \Pimcore\Model\Object\Product
+*/
+public function setCharacteristics_others_tech ($characteristics_others_tech) {
+	$this->characteristics_others_tech = $characteristics_others_tech;
+	return $this;
+}
+
+/**
+* Get characteristics_others_perf - Caractéristiques Autre Performance
+* @return string
+*/
+public function getCharacteristics_others_perf () {
+	$preValue = $this->preGetValue("characteristics_others_perf"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->characteristics_others_perf;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("characteristics_others_perf")->isEmpty($data)) {
+		return $this->getValueFromParent("characteristics_others_perf");
+	}
+	return $data;
+}
+
+/**
+* Set characteristics_others_perf - Caractéristiques Autre Performance
+* @param string $characteristics_others_perf
+* @return \Pimcore\Model\Object\Product
+*/
+public function setCharacteristics_others_perf ($characteristics_others_perf) {
+	$this->characteristics_others_perf = $characteristics_others_perf;
+	return $this;
+}
+
+/**
 * Get unite - Unité
 * @return string
 */
@@ -2964,32 +3376,6 @@ public function setQualite ($qualite) {
 }
 
 /**
-* Get essence - Essence
-* @return string
-*/
-public function getEssence () {
-	$preValue = $this->preGetValue("essence"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->essence;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("essence")->isEmpty($data)) {
-		return $this->getValueFromParent("essence");
-	}
-	return $data;
-}
-
-/**
-* Set essence - Essence
-* @param string $essence
-* @return \Pimcore\Model\Object\Product
-*/
-public function setEssence ($essence) {
-	$this->essence = $essence;
-	return $this;
-}
-
-/**
 * Get classe - Classe d'usage
 * @return string
 */
@@ -3038,32 +3424,6 @@ public function getClasse_service () {
 */
 public function setClasse_service ($classe_service) {
 	$this->classe_service = $classe_service;
-	return $this;
-}
-
-/**
-* Get epaisseurUsure - Epaisseur couche d'usure
-* @return string
-*/
-public function getEpaisseurUsure () {
-	$preValue = $this->preGetValue("epaisseurUsure"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->epaisseurUsure;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseurUsure")->isEmpty($data)) {
-		return $this->getValueFromParent("epaisseurUsure");
-	}
-	return $data;
-}
-
-/**
-* Set epaisseurUsure - Epaisseur couche d'usure
-* @param string $epaisseurUsure
-* @return \Pimcore\Model\Object\Product
-*/
-public function setEpaisseurUsure ($epaisseurUsure) {
-	$this->epaisseurUsure = $epaisseurUsure;
 	return $this;
 }
 
@@ -3329,7 +3689,7 @@ public function setSousCoucheIntegree ($sousCoucheIntegree) {
 
 /**
 * Get chauffantBasseTemperature - Compatible sol chauffant basse température
-* @return boolean
+* @return string
 */
 public function getChauffantBasseTemperature () {
 	$preValue = $this->preGetValue("chauffantBasseTemperature"); 
@@ -3345,7 +3705,7 @@ public function getChauffantBasseTemperature () {
 
 /**
 * Set chauffantBasseTemperature - Compatible sol chauffant basse température
-* @param boolean $chauffantBasseTemperature
+* @param string $chauffantBasseTemperature
 * @return \Pimcore\Model\Object\Product
 */
 public function setChauffantBasseTemperature ($chauffantBasseTemperature) {
@@ -3354,8 +3714,34 @@ public function setChauffantBasseTemperature ($chauffantBasseTemperature) {
 }
 
 /**
-* Get chauffantAccumulationBasseTemperature - à accumulation basse température
-* @return boolean
+* Get chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
+* @return string
+*/
+public function getChauffantRadiantElectrique () {
+	$preValue = $this->preGetValue("chauffantRadiantElectrique"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->chauffantRadiantElectrique;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantRadiantElectrique")->isEmpty($data)) {
+		return $this->getValueFromParent("chauffantRadiantElectrique");
+	}
+	return $data;
+}
+
+/**
+* Set chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
+* @param string $chauffantRadiantElectrique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChauffantRadiantElectrique ($chauffantRadiantElectrique) {
+	$this->chauffantRadiantElectrique = $chauffantRadiantElectrique;
+	return $this;
+}
+
+/**
+* Get chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
+* @return string
 */
 public function getChauffantAccumulationBasseTemperature () {
 	$preValue = $this->preGetValue("chauffantAccumulationBasseTemperature"); 
@@ -3370,8 +3756,8 @@ public function getChauffantAccumulationBasseTemperature () {
 }
 
 /**
-* Set chauffantAccumulationBasseTemperature - à accumulation basse température
-* @param boolean $chauffantAccumulationBasseTemperature
+* Set chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
+* @param string $chauffantAccumulationBasseTemperature
 * @return \Pimcore\Model\Object\Product
 */
 public function setChauffantAccumulationBasseTemperature ($chauffantAccumulationBasseTemperature) {
@@ -3380,8 +3766,8 @@ public function setChauffantAccumulationBasseTemperature ($chauffantAccumulation
 }
 
 /**
-* Get solRaffraichissant - Compatible sol rafraichissant
-* @return boolean
+* Get solRaffraichissant - Compatible sol chauffant réversible
+* @return string
 */
 public function getSolRaffraichissant () {
 	$preValue = $this->preGetValue("solRaffraichissant"); 
@@ -3396,8 +3782,8 @@ public function getSolRaffraichissant () {
 }
 
 /**
-* Set solRaffraichissant - Compatible sol rafraichissant
-* @param boolean $solRaffraichissant
+* Set solRaffraichissant - Compatible sol chauffant réversible
+* @param string $solRaffraichissant
 * @return \Pimcore\Model\Object\Product
 */
 public function setSolRaffraichissant ($solRaffraichissant) {
@@ -3506,58 +3892,6 @@ public function getNf () {
 */
 public function setNf ($nf) {
 	$this->nf = $nf;
-	return $this;
-}
-
-/**
-* Get norme_sanitaire - Norme Sanitaire
-* @return string
-*/
-public function getNorme_sanitaire () {
-	$preValue = $this->preGetValue("norme_sanitaire"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->norme_sanitaire;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("norme_sanitaire")->isEmpty($data)) {
-		return $this->getValueFromParent("norme_sanitaire");
-	}
-	return $data;
-}
-
-/**
-* Set norme_sanitaire - Norme Sanitaire
-* @param string $norme_sanitaire
-* @return \Pimcore\Model\Object\Product
-*/
-public function setNorme_sanitaire ($norme_sanitaire) {
-	$this->norme_sanitaire = $norme_sanitaire;
-	return $this;
-}
-
-/**
-* Get support - Support (Contrecollé)
-* @return string
-*/
-public function getSupport () {
-	$preValue = $this->preGetValue("support"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->support;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("support")->isEmpty($data)) {
-		return $this->getValueFromParent("support");
-	}
-	return $data;
-}
-
-/**
-* Set support - Support (Contrecollé)
-* @param string $support
-* @return \Pimcore\Model\Object\Product
-*/
-public function setSupport ($support) {
-	$this->support = $support;
 	return $this;
 }
 

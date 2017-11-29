@@ -107,19 +107,21 @@ return [
         "id" => 7
     ],
     8 => [
+        "id" => 8,
         "name" => "id",
         "pattern" => "/\\/id\\/([\\d]+)/",
         "reverse" => "/id/%id",
         "module" => NULL,
         "controller" => "product",
-        "action" => "detail-intra",
+        "action" => "detail-ft",
         "variables" => "id",
         "defaults" => "",
-        "siteId" => NULL,
+        "siteId" => [
+
+        ],
         "priority" => 1,
         "creationDate" => 1444209775,
-        "modificationDate" => 1444250368,
-        "id" => 8
+        "modificationDate" => 1509644631
     ],
     9 => [
         "name" => "ean",
@@ -262,15 +264,117 @@ return [
         "pattern" => "/\\/mauchamp/",
         "reverse" => "/mauchamp",
         "module" => "",
-        "controller" => "lpn",
+        "controller" => "mauchamp",
         "action" => "mauchamp",
-        "variables" => NULL,
+        "variables" => "",
         "defaults" => NULL,
         "siteId" => [
 
         ],
         "priority" => 1,
         "creationDate" => 1507736693,
-        "modificationDate" => 1507740402
+        "modificationDate" => 1509355506
+    ],
+    19 => [
+        "id" => 19,
+        "name" => "mauchamp-test",
+        "pattern" => "/\\/mauchamp-test/",
+        "reverse" => "/mauchamp-test",
+        "module" => "",
+        "controller" => "mauchamp",
+        "action" => "mauchamp-test",
+        "variables" => "",
+        "defaults" => "",
+        "siteId" => [
+
+        ],
+        "priority" => 2,
+        "creationDate" => 1508141456,
+        "modificationDate" => 1509355497
+    ],
+    20 => [
+        "id" => 20,
+        "name" => "pdf",
+        "pattern" => "/\\/pdf\\/(.*)/",
+        "reverse" => "/pdf/%id",
+        "module" => "",
+        "controller" => "web2print",
+        "action" => "get-product-preview-pdf",
+        "variables" => "id",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1509355409,
+        "modificationDate" => 1509355493
+    ],
+    21 => [
+        "id" => 21,
+        "name" => "mauchamp-client-test",
+        "pattern" => "/\\/mauchamp-client-test/",
+        "reverse" => "/mauchamp-client-test",
+        "module" => "",
+        "controller" => "mauchamp",
+        "action" => "mauchamp-client-test",
+        "variables" => "",
+        "defaults" => "",
+        "siteId" => [
+
+        ],
+        "priority" => 9,
+        "creationDate" => 1509644683,
+        "modificationDate" => 1509644720
+    ],
+    22 => [
+        "id" => 22,
+        "name" => "mauchamp-client-test2",
+        "pattern" => "/\\/mauchamp-client-test\\/(.*)/",
+        "reverse" => "/mauchamp-client-test/%codeclient",
+        "module" => "",
+        "controller" => "mauchamp",
+        "action" => "mauchamp-client-test",
+        "variables" => "codeclient",
+        "defaults" => "",
+        "siteId" => [
+
+        ],
+        "priority" => 10,
+        "creationDate" => 1509644722,
+        "modificationDate" => 1509644756
+    ],
+    23 => [
+        "id" => 23,
+        "name" => "Fiche prouit",
+        "pattern" => "/\\/fp\\/([\\d]+)/",
+        "reverse" => "/fp/%id",
+        "module" => NULL,
+        "controller" => "product",
+        "action" => "detail-fp",
+        "variables" => "id",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1510129393,
+        "modificationDate" => 1510129433
+    ],
+    24 => [
+        "id" => 24,
+        "name" => "Book.pdf",
+        "pattern" => "/\\/book\\.pdf/",
+        "reverse" => "/book.pdf",
+        "module" => "",
+        "controller" => "mauchamp",
+        "action" => "cover-for-piece-commerciale-pdf",
+        "variables" => "",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1510847291,
+        "modificationDate" => 1510847376
     ]
 ];

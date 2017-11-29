@@ -1,16 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-11T15:09:35+02:00
+* Generated at: 2017-11-02T15:01:41+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
 - code [input]
 - label [input]
+- label_scienergie [input]
+- logo [image]
 - localizedfields [localizedfields]
 -- description [textarea]
 -- help [textarea]
@@ -23,6 +25,8 @@ namespace Pimcore\Model\Object;
 /**
 * @method \Pimcore\Model\Object\Taxonomy\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Taxonomy\Listing getByLabel ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Taxonomy\Listing getByLabel_scienergie ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Taxonomy\Listing getByLogo ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Taxonomy\Listing getByLocalizedfields ($field, $value, $locale = null, $limit = 0) 
 */
 
@@ -32,6 +36,8 @@ public $o_classId = 6;
 public $o_className = "taxonomy";
 public $code;
 public $label;
+public $label_scienergie;
+public $logo;
 public $localizedfields;
 
 
@@ -88,6 +94,52 @@ public function getLabel () {
 */
 public function setLabel ($label) {
 	$this->label = $label;
+	return $this;
+}
+
+/**
+* Get label_scienergie - Label (Scienergie)
+* @return string
+*/
+public function getLabel_scienergie () {
+	$preValue = $this->preGetValue("label_scienergie"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->label_scienergie;
+	return $data;
+}
+
+/**
+* Set label_scienergie - Label (Scienergie)
+* @param string $label_scienergie
+* @return \Pimcore\Model\Object\Taxonomy
+*/
+public function setLabel_scienergie ($label_scienergie) {
+	$this->label_scienergie = $label_scienergie;
+	return $this;
+}
+
+/**
+* Get logo - Logo
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getLogo () {
+	$preValue = $this->preGetValue("logo"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->logo;
+	return $data;
+}
+
+/**
+* Set logo - Logo
+* @param \Pimcore\Model\Asset\Image $logo
+* @return \Pimcore\Model\Object\Taxonomy
+*/
+public function setLogo ($logo) {
+	$this->logo = $logo;
 	return $this;
 }
 

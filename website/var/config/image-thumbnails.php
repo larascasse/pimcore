@@ -795,5 +795,29 @@ return [
         "modificationDate" => 1497255730,
         "creationDate" => 1497255561,
         "id" => "magento_h_half"
+    ],
+    "magento_logo" => [
+        "items" => [
+            [
+                "method" => "scaleByHeight",
+                "arguments" => [
+                    "height" => 132,
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento_logo",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 90,
+        "highResolution" => 0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1509631349,
+        "creationDate" => 1509631318,
+        "id" => "magento_logo"
     ]
 ];

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-13T10:18:47+02:00
+* Generated at: 2017-11-27T18:41:35+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -43,11 +43,26 @@ Fields Summary:
 - shipping_type [select]
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
-- classe_utilisation [calculatedValue]
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
-- normes [objectbricks]
+- essence [input]
+- support [select]
+- epaisseurUsure [input]
+- norme_sanitaire [select]
+- classe_utilisation [calculatedValue]
+- classe_upec [calculatedValue]
+- masse_volumique [calculatedValue]
+- pimonly_masse_volumique_moyenne [input]
+- classe_reaction_feu_eu [calculatedValue]
+- classe_reaction_feu_fr [calculatedValue]
+- degagement_formaldehyde [calculatedValue]
+- resistance_thermique [calculatedValue]
+- conductivite_thermique_total [calculatedValue]
+- condition_mise_en_oeuvre [calculatedValue]
+- taux_humidite [input]
+- coefficient_retractabilite [calculatedValue]
+- durabilite_ecologique [calculatedValue]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
@@ -98,15 +113,15 @@ Fields Summary:
 - quantity_min_txt [input]
 - quantity_min_txt_not_configurable [checkbox]
 - characteristics_others [textarea]
+- characteristics_others_tech [textarea]
+- characteristics_others_perf [textarea]
 - unite [input]
 - mode_calcul [input]
 - rendement [input]
 - famille [input]
 - qualite [input]
-- essence [input]
 - classe [input]
 - classe_service [input]
-- epaisseurUsure [input]
 - extras [objects]
 - chanfreins [input]
 - origine_bois [input]
@@ -117,15 +132,14 @@ Fields Summary:
 - motif [select]
 - pieceHumide [checkbox]
 - sousCoucheIntegree [checkbox]
-- chauffantBasseTemperature [checkbox]
-- chauffantAccumulationBasseTemperature [checkbox]
-- solRaffraichissant [checkbox]
+- chauffantBasseTemperature [select]
+- chauffantRadiantElectrique [select]
+- chauffantAccumulationBasseTemperature [select]
+- solRaffraichissant [select]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
-- norme_sanitaire [select]
-- support [select]
 - image_1 [image]
 - image_2 [image]
 - image_3 [image]
@@ -180,7 +194,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1507882727,
+   'modificationDate' => 1511804494,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -199,7 +213,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
      'title' => NULL,
      'width' => NULL,
      'height' => NULL,
-     'collapsible' => false,
+     'collapsible' => NULL,
      'collapsed' => NULL,
      'bodyStyle' => NULL,
      'datatype' => 'layout',
@@ -799,7 +813,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'weight',
-                 'title' => 'Poids de base',
+                 'title' => 'Poids de base (en kg)',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -1139,30 +1153,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              34 => 
-              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                 'fieldtype' => 'calculatedValue',
-                 'width' => 0,
-                 'calculatorClass' => '\\Website\\Generator',
-                 'queryColumnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
-                 'name' => 'classe_utilisation',
-                 'title' => 'Classe d\'utilisation',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
             ),
              'locked' => false,
           )),
@@ -1278,19 +1268,180 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'childs' => 
             array (
               0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Objectbricks::__set_state(array(
-                 'fieldtype' => 'objectbricks',
-                 'phpdocType' => '\\Pimcore\\Model\\Object\\Objectbrick',
-                 'allowedTypes' => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => '',
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 255,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'essence',
+                 'title' => 'Essence',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
                 array (
-                  0 => 'techMarquageCE',
-                  1 => 'techDopParquetFinition',
-                  2 => 'techDopParquet',
-                  3 => 'techAttributeSol',
+                  0 => 
+                  array (
+                    'key' => 'MDF',
+                    'value' => 'MDF',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'HDF',
+                    'value' => 'HDF',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Multiplis Bouleau',
+                    'value' => 'Multiplis Bouleau',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Latté',
+                    'value' => 'Latté',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Contreplaqué',
+                    'value' => 'cp',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Contreplaqué peuplier',
+                    'value' => 'cp peuplier',
+                  ),
                 ),
-                 'maxItems' => '',
-                 'name' => 'normes',
-                 'title' => 'normes',
+                 'width' => 600,
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(255)',
+                 'columnType' => 'varchar(255)',
+                 'phpdocType' => 'string',
+                 'name' => 'support',
+                 'title' => 'Support (Contrecollé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => '',
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 255,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'epaisseurUsure',
+                 'title' => 'Epaisseur couche d\'usure',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'A+',
+                    'value' => 'A+',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'A',
+                    'value' => 'A',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'B',
+                    'value' => 'B',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Eco1',
+                    'value' => 'Eco1',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Eco2',
+                    'value' => 'Eco2',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Eco3',
+                    'value' => 'Eco3',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Eco4',
+                    'value' => 'Eco4',
+                  ),
+                ),
+                 'width' => 600,
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(255)',
+                 'columnType' => 'varchar(255)',
+                 'phpdocType' => 'string',
+                 'name' => 'norme_sanitaire',
+                 'title' => 'Norme Sanitaire',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'classe_utilisation',
+                 'title' => 'Classe d\'utilisation',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -1300,7 +1451,294 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'columnType' => NULL,
-                 'queryColumnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'classe_upec',
+                 'title' => 'Classement UPEC',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'masse_volumique',
+                 'title' => 'Masse volumique (kg/m3)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              7 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_masse_volumique_moyenne',
+                 'title' => 'Masse volumique moyenne fournisseur',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              8 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'classe_reaction_feu_eu',
+                 'title' => 'Classement feu (NF EN 13501-1)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              9 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'classe_reaction_feu_fr',
+                 'title' => 'Classement feu (NF P 92 507)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              10 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'degagement_formaldehyde',
+                 'title' => 'Dégagement formaldéhyde',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              11 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'resistance_thermique',
+                 'title' => 'Résistance thermique (en m2/KW)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              12 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'conductivite_thermique_total',
+                 'title' => 'Conductivite thermique totale (en W/mK)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              13 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'condition_mise_en_oeuvre',
+                 'title' => 'Condition de mise en oeuvre',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              14 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'taux_humidite',
+                 'title' => 'Taux d\'humidité sortie d\'usine',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              15 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'coefficient_retractabilite',
+                 'title' => 'Coefficient rétractabilite',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              16 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'durabilite_ecologique',
+                 'title' => 'Durabilité écologique',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
@@ -1451,30 +1889,40 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 array (
                   0 => 
                   array (
+                    'key' => 'Rainure & languettes 2 cotés',
+                    'value' => 'rainurelanguette',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Rainure & languettes 4 cotés',
+                    'value' => 'rainurelanguette4cotes',
+                  ),
+                  2 => 
+                  array (
                     'key' => 'A visser',
                     'value' => 'avisser',
                   ),
-                  1 => 
+                  3 => 
                   array (
                     'key' => 'A coller',
                     'value' => 'acoller',
                   ),
-                  2 => 
+                  4 => 
                   array (
                     'key' => 'A clouer',
                     'value' => 'aclouer',
                   ),
-                  3 => 
+                  5 => 
                   array (
                     'key' => 'Invisible',
                     'value' => 'invisible',
                   ),
-                  4 => 
+                  6 => 
                   array (
                     'key' => 'Flottante',
                     'value' => 'flottante',
                   ),
-                  5 => 
+                  7 => 
                   array (
                     'key' => 'Système Click',
                     'value' => 'click',
@@ -2644,65 +3092,75 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       8 => 
                       array (
+                        'key' => 'Verni brossé satiné',
+                        'value' => 'Verni brossé satine',
+                      ),
+                      9 => 
+                      array (
                         'key' => 'Brut',
                         'value' => 'brut',
                       ),
-                      9 => 
+                      10 => 
                       array (
                         'key' => 'Brut de sciage',
                         'value' => 'Brut de sciage',
                       ),
-                      10 => 
+                      11 => 
                       array (
                         'key' => 'Brossé brut',
                         'value' => 'brosse',
                       ),
-                      11 => 
+                      12 => 
                       array (
                         'key' => 'Brossé Veinage Noir',
                         'value' => 'brosse-veinage-noir',
                       ),
-                      12 => 
+                      13 => 
                       array (
                         'key' => 'Huilé',
                         'value' => 'huile',
                       ),
-                      13 => 
+                      14 => 
                       array (
                         'key' => 'Huile cire',
                         'value' => 'huile-cire',
                       ),
-                      14 => 
+                      15 => 
+                      array (
+                        'key' => 'Huile aqua',
+                        'value' => 'huile-aqua',
+                      ),
+                      16 => 
                       array (
                         'key' => 'Peinture d\'Aujourd\'hui',
                         'value' => 'peint',
                       ),
-                      15 => 
+                      17 => 
                       array (
                         'key' => 'Peinture d\'origine',
                         'value' => 'peintorigine',
                       ),
-                      16 => 
+                      18 => 
                       array (
                         'key' => 'Peinture blanche',
                         'value' => ' Peinture blanche',
                       ),
-                      17 => 
+                      19 => 
                       array (
                         'key' => 'Peinture noire',
                         'value' => ' Peinture noire',
                       ),
-                      18 => 
+                      20 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      19 => 
+                      21 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      20 => 
+                      22 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',
@@ -2763,22 +3221,42 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       1 => 
                       array (
                         'key' => 'Brossé accentué',
-                        'value' => ' brosse accentue',
+                        'value' => 'brosse accentue',
                       ),
                       2 => 
+                      array (
+                        'key' => 'Brossé rives abimées',
+                        'value' => 'brosse rives abimees',
+                      ),
+                      3 => 
                       array (
                         'key' => 'Brut',
                         'value' => 'brut',
                       ),
-                      3 => 
-                      array (
-                        'key' => 'Brut de sciage',
-                        'value' => ' brut de sciage',
-                      ),
                       4 => 
                       array (
+                        'key' => 'Brut de sciage',
+                        'value' => 'brut de sciage',
+                      ),
+                      5 => 
+                      array (
                         'key' => 'Vieilli rives abimées',
-                        'value' => ' vieilli rives abimees',
+                        'value' => 'vieilli rives abimees',
+                      ),
+                      6 => 
+                      array (
+                        'key' => 'Usé',
+                        'value' => 'use',
+                      ),
+                      7 => 
+                      array (
+                        'key' => 'Vieilli usé rives abimées',
+                        'value' => 'vieilli use rives abimees',
+                      ),
+                      8 => 
+                      array (
+                        'key' => 'Vieilli usé et brossé rives abimées',
+                        'value' => 'vieilli use brosse rives abimees',
                       ),
                     ),
                      'width' => '',
@@ -3163,9 +3641,55 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleSearch' => false,
               )),
               1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => 500,
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'characteristics_others_tech',
+                 'title' => 'Caractéristiques Autre Technique',
+                 'tooltip' => 'Utilisé pour les caractéristiques magento',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => 500,
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'characteristics_others_perf',
+                 'title' => 'Caractéristiques Autre Performance',
+                 'tooltip' => 'Utilisé pour les caractéristiques magento',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
@@ -3186,7 +3710,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              2 => 
+              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -3210,7 +3734,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              3 => 
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -3235,7 +3759,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              4 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -3259,7 +3783,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              5 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -3283,31 +3807,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              6 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => '',
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'essence',
-                 'title' => 'Essence',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => false,
-              )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -3331,10 +3831,10 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
@@ -3343,30 +3843,6 @@ Combien d\'unité dans 1 m2',
                  'name' => 'classe_service',
                  'title' => 'Classe de service',
                  'tooltip' => '(ex classe 4 ...)',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              9 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => '',
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'epaisseurUsure',
-                 'title' => 'Epaisseur couche d\'usure',
-                 'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
@@ -3415,7 +3891,7 @@ Combien d\'unité dans 1 m2',
               11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
@@ -3439,7 +3915,7 @@ Combien d\'unité dans 1 m2',
               12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
@@ -3463,7 +3939,7 @@ Combien d\'unité dans 1 m2',
               13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
@@ -3674,12 +4150,26 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               20 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
                  'name' => 'chauffantBasseTemperature',
                  'title' => 'Compatible sol chauffant basse température',
                  'tooltip' => '',
@@ -3696,14 +4186,28 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               21 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
-                 'name' => 'chauffantAccumulationBasseTemperature',
-                 'title' => 'à accumulation basse température',
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'chauffantRadiantElectrique',
+                 'title' => 'Compatible sol chauffant radiant électrique',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -3718,14 +4222,28 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               22 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
-                 'name' => 'solRaffraichissant',
-                 'title' => 'Compatible sol rafraichissant',
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'chauffantAccumulationBasseTemperature',
+                 'title' => 'Compatible à accumulation basse température',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -3740,6 +4258,42 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               23 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'solRaffraichissant',
+                 'title' => 'Compatible sol chauffant réversible',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -3761,7 +4315,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -3783,7 +4337,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -3805,7 +4359,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -3814,118 +4368,6 @@ Combien d\'unité dans 1 m2',
                  'phpdocType' => 'boolean',
                  'name' => 'nf',
                  'title' => 'NF',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              27 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'A+',
-                    'value' => 'A+',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'A',
-                    'value' => 'A',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'B',
-                    'value' => 'B',
-                  ),
-                  3 => 
-                  array (
-                    'key' => 'Eco1',
-                    'value' => 'Eco1',
-                  ),
-                  4 => 
-                  array (
-                    'key' => 'Eco2',
-                    'value' => 'Eco2',
-                  ),
-                  5 => 
-                  array (
-                    'key' => 'Eco3',
-                    'value' => 'Eco3',
-                  ),
-                  6 => 
-                  array (
-                    'key' => 'Eco4',
-                    'value' => 'Eco4',
-                  ),
-                ),
-                 'width' => 600,
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(255)',
-                 'columnType' => 'varchar(255)',
-                 'phpdocType' => 'string',
-                 'name' => 'norme_sanitaire',
-                 'title' => 'Norme Sanitaire',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              28 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'MDF',
-                    'value' => 'MDF',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'HDF',
-                    'value' => 'HDF',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'Multiplis Bouleau',
-                    'value' => 'Multiplis Bouleau',
-                  ),
-                  3 => 
-                  array (
-                    'key' => 'Latté',
-                    'value' => 'Latté',
-                  ),
-                  4 => 
-                  array (
-                    'key' => 'Contreplaqué',
-                    'value' => 'cp',
-                  ),
-                ),
-                 'width' => 600,
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(255)',
-                 'columnType' => 'varchar(255)',
-                 'phpdocType' => 'string',
-                 'name' => 'support',
-                 'title' => 'Support (Contrecollé)',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -5454,7 +5896,7 @@ Combien d\'unité dans 1 m2',
          'locked' => false,
       )),
     ),
-     'locked' => false,
+     'locked' => NULL,
   )),
    'icon' => '',
    'previewUrl' => '/id/%o_id',

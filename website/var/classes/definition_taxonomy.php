@@ -1,16 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2017-10-11T15:09:35+02:00
+* Generated at: 2017-11-02T15:01:41+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
 - code [input]
 - label [input]
+- label_scienergie [input]
+- logo [image]
 - localizedfields [localizedfields]
 -- description [textarea]
 -- help [textarea]
@@ -21,7 +23,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'taxonomy',
    'description' => '',
    'creationDate' => 1380723573,
-   'modificationDate' => 1507727375,
+   'modificationDate' => 1509631301,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -92,7 +94,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
           1 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
-             'width' => '',
+             'width' => NULL,
              'queryColumnType' => 'varchar',
              'columnType' => 'varchar',
              'columnLength' => 255,
@@ -114,6 +116,54 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleSearch' => true,
           )),
           2 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 255,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'label_scienergie',
+             'title' => 'Label (Scienergie)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => true,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+          )),
+          3 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+             'fieldtype' => 'image',
+             'width' => '',
+             'height' => '',
+             'uploadPath' => '',
+             'queryColumnType' => 'int(11)',
+             'columnType' => 'int(11)',
+             'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+             'name' => 'logo',
+             'title' => 'Logo',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => NULL,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Data\Localizedfields::__set_state(array(
              'fieldtype' => 'localizedfields',
              'phpdocType' => '\\Pimcore\\Model\\Object\\Localizedfield',
@@ -133,7 +183,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -156,7 +206,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -170,20 +220,20 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'region' => NULL,
              'layout' => NULL,
              'title' => NULL,
-             'width' => NULL,
-             'height' => NULL,
+             'width' => '',
+             'height' => '',
              'maxTabs' => NULL,
              'labelWidth' => NULL,
              'hideLabelsWhenTabsReached' => NULL,
              'referencedFields' => 
             array (
             ),
-             'tooltip' => NULL,
-             'mandatory' => NULL,
-             'noteditable' => NULL,
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
              'index' => NULL,
-             'locked' => NULL,
-             'style' => NULL,
+             'locked' => false,
+             'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
              'columnType' => NULL,

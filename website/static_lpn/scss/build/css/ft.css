@@ -43,7 +43,7 @@
   font-style: normal; }
 
 body {
-  font-size: 20px;
+  font-size: 23px;
   line-height: 1.2; }
 
 @media print {
@@ -74,7 +74,7 @@ h1 {
 
 h2 {
   font-family: "Helveticaneue-light-webfont";
-  font-size: 20px;
+  font-size: 23px;
   border-bottom: 10px solid #c6c6c6;
   margin-bottom: 17px;
   line-height: 3;
@@ -191,12 +191,14 @@ hr {
     padding-top: 0; }
 
 .ft .ft-content .ft-col-1 {
+  font-size: 19px;
   padding-left: 20px;
   border-left: 20px solid #f0f0f0;
   border-top: 20px solid #f0f0f0;
   border-bottom: 20px solid #f0f0f0; }
 
 .ft .ft-content .ft-col-2 {
+  font-size: 19px;
   padding-top: 0;
   border-right: 20px solid #f0f0f0;
   border-bottom: 20px solid #f0f0f0; }

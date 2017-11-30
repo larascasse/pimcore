@@ -667,7 +667,7 @@ class Website_Product extends Object_Product {
 
 
 		//Ordre des champs
-		$order = array('Dimensions', 'Support', 'Essence', 'Choix', 'Qualité', 'Traitement de surface','Finition','Chanfreins');
+		$order = array('Dimensions', 'Essence', 'Choix', 'Support', 'Ep. couche d\'usure', 'Traitement de surface','Finition','Chanfreins','Qualité');
 
 
 		foreach($attributes as $key=> $value) {

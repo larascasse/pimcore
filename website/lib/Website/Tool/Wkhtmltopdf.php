@@ -128,7 +128,7 @@ class Wkhtmltopdf {
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {
-                    echo "Lpn wkhtmltopdf reported error (" . $retVal . ")";
+                    echo "Lpn wkhtmltopdf reported error (" . $retVal . ")". "\ncommand was:" . $cmd;
                     die;
                     throw new \Exception("wkhtmltopdf reported error (" . $retVal . "): \n" . $output . "\ncommand was:" . $cmd);
                 }

@@ -339,6 +339,9 @@ $col2Width : 470px;
 		border-left: 20px solid $grisclair;
 		border-top: 20px solid $grisclair;
 		border-bottom: 20px solid $grisclair;
+		td {
+			padding-right: 50px;
+		}
 	}
 
 	.ft-col-2 {

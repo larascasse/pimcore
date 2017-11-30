@@ -196,6 +196,8 @@ hr {
   border-left: 20px solid #f0f0f0;
   border-top: 20px solid #f0f0f0;
   border-bottom: 20px solid #f0f0f0; }
+  .ft .ft-content .ft-col-1 td {
+    padding-right: 50px; }
 
 .ft .ft-content .ft-col-2 {
   font-size: 19px;

@@ -60,11 +60,35 @@ foreach ($list->getObjects() as $object) {
     if(stristr($scienergieCourt, "hd")) {
         $object->setSupport('HDF');
         $object->setPimonly_masse_volumique_moyenne(850);
-         $save=true;
+
+        if($object->getEpaisseur()==10) {
+            $object->setPimonly_conductivite_thermique_total(0.164);
+            $object->setPimonly_resistance_thermique(0.061);
+        }
+        else if($object->getEpaisseur()==14) {
+            $object->setPimonly_conductivite_thermique_total(0.172);
+            $object->setPimonly_resistance_thermique(0.081);
+        }
+
+        $save=true;
     }
     else if(stristr($scienergieCourt, "cp")) {
         $object->setSupport('cp');
-         $object->setPimonly_masse_volumique_moyenne(780);
+        $object->setPimonly_masse_volumique_moyenne(780);
+
+        if($object->getEpaisseur()==10) {
+            $object->setPimonly_conductivite_thermique_total(0.163);
+            $object->setPimonly_resistance_thermique(0.062);
+        }
+        else if($object->getEpaisseur()==14) {
+            $object->setPimonly_conductivite_thermique_total(0.168);
+            $object->setPimonly_resistance_thermique(0.083);
+        }
+         else if($object->getEpaisseur()==19) {
+            $object->setPimonly_conductivite_thermique_total(0.166);
+            $object->setPimonly_resistance_thermique(0.114);
+        }
+
         $save=true;
     }
 

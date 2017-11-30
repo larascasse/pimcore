@@ -154,7 +154,7 @@ Tous les autres parquets.
         } 
         elseif ($context->getFieldname() == "durabilite_biologique") {
 
-            return "--";
+            return $product->getDurabiliteEcologique();
         } 
 
 

@@ -94,7 +94,7 @@ class ParquetData
             break;
 
           case 'cp':
-            return 780;
+            return 650;
             break;
 
           case 'cp peuplier':

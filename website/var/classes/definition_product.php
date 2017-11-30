@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-27T18:41:35+01:00
+* Generated at: 2017-11-30T11:42:25+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -58,7 +58,9 @@ Fields Summary:
 - classe_reaction_feu_fr [calculatedValue]
 - degagement_formaldehyde [calculatedValue]
 - resistance_thermique [calculatedValue]
+- pimonly_resistance_thermique [input]
 - conductivite_thermique_total [calculatedValue]
+- pimonly_conductivite_thermique_total [input]
 - condition_mise_en_oeuvre [calculatedValue]
 - taux_humidite [input]
 - coefficient_retractabilite [calculatedValue]
@@ -194,7 +196,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1511804494,
+   'modificationDate' => 1512038540,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -1350,14 +1352,14 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               2 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 255,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'epaisseurUsure',
-                 'title' => 'Epaisseur couche d\'usure',
+                 'title' => 'Ep. couche d\'usure',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -1625,6 +1627,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleSearch' => false,
               )),
               12 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_resistance_thermique',
+                 'title' => 'Résistance thermique Fournisseur',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1648,7 +1674,31 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              14 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_conductivite_thermique_total',
+                 'title' => 'Conductivite thermique totale (founisseur)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1672,7 +1722,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1696,7 +1746,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1720,7 +1770,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1935,7 +1985,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'columnType' => 'text',
                  'phpdocType' => 'array',
                  'name' => 'fixation',
-                 'title' => 'Type de pose / Fixation',
+                 'title' => 'Fixation',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,

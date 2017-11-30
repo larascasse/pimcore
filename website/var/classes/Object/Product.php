@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-27T18:41:35+01:00
+* Generated at: 2017-11-30T11:42:25+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -58,7 +58,9 @@ Fields Summary:
 - classe_reaction_feu_fr [calculatedValue]
 - degagement_formaldehyde [calculatedValue]
 - resistance_thermique [calculatedValue]
+- pimonly_resistance_thermique [input]
 - conductivite_thermique_total [calculatedValue]
+- pimonly_conductivite_thermique_total [input]
 - condition_mise_en_oeuvre [calculatedValue]
 - taux_humidite [input]
 - coefficient_retractabilite [calculatedValue]
@@ -243,7 +245,9 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_fr ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByDegagement_formaldehyde ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByResistance_thermique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_resistance_thermique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConductivite_thermique_total ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_conductivite_thermique_total ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCondition_mise_en_oeuvre ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTaux_humidite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCoefficient_retractabilite ($value, $limit = 0) 
@@ -419,6 +423,8 @@ public $support;
 public $epaisseurUsure;
 public $norme_sanitaire;
 public $pimonly_masse_volumique_moyenne;
+public $pimonly_resistance_thermique;
+public $pimonly_conductivite_thermique_total;
 public $taux_humidite;
 public $price_1;
 public $price_2;
@@ -1570,7 +1576,7 @@ public function setSupport ($support) {
 }
 
 /**
-* Get epaisseurUsure - Epaisseur couche d'usure
+* Get epaisseurUsure - Ep. couche d'usure
 * @return string
 */
 public function getEpaisseurUsure () {
@@ -1586,7 +1592,7 @@ public function getEpaisseurUsure () {
 }
 
 /**
-* Set epaisseurUsure - Epaisseur couche d'usure
+* Set epaisseurUsure - Ep. couche d'usure
 * @param string $epaisseurUsure
 * @return \Pimcore\Model\Object\Product
 */
@@ -1788,6 +1794,32 @@ public function setResistance_thermique ($resistance_thermique) {
 }
 
 /**
+* Get pimonly_resistance_thermique - Résistance thermique Fournisseur
+* @return string
+*/
+public function getPimonly_resistance_thermique () {
+	$preValue = $this->preGetValue("pimonly_resistance_thermique"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_resistance_thermique;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_resistance_thermique")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_resistance_thermique");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_resistance_thermique - Résistance thermique Fournisseur
+* @param string $pimonly_resistance_thermique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_resistance_thermique ($pimonly_resistance_thermique) {
+	$this->pimonly_resistance_thermique = $pimonly_resistance_thermique;
+	return $this;
+}
+
+/**
 * Get conductivite_thermique_total - Conductivite thermique totale (en W/mK)
 * @return \Pimcore\Model\Object\Data\CalculatedValue
 */
@@ -1804,6 +1836,32 @@ public function getConductivite_thermique_total () {
 * @return \Pimcore\Model\Object\Product
 */
 public function setConductivite_thermique_total ($conductivite_thermique_total) {
+	return $this;
+}
+
+/**
+* Get pimonly_conductivite_thermique_total - Conductivite thermique totale (founisseur)
+* @return string
+*/
+public function getPimonly_conductivite_thermique_total () {
+	$preValue = $this->preGetValue("pimonly_conductivite_thermique_total"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_conductivite_thermique_total;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_conductivite_thermique_total")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_conductivite_thermique_total");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_conductivite_thermique_total - Conductivite thermique totale (founisseur)
+* @param string $pimonly_conductivite_thermique_total
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_conductivite_thermique_total ($pimonly_conductivite_thermique_total) {
+	$this->pimonly_conductivite_thermique_total = $pimonly_conductivite_thermique_total;
 	return $this;
 }
 
@@ -1998,7 +2056,7 @@ public function setPrice_4 ($price_4) {
 }
 
 /**
-* Get fixation - Type de pose / Fixation
+* Get fixation - Fixation
 * @return array
 */
 public function getFixation () {
@@ -2014,7 +2072,7 @@ public function getFixation () {
 }
 
 /**
-* Set fixation - Type de pose / Fixation
+* Set fixation - Fixation
 * @param array $fixation
 * @return \Pimcore\Model\Object\Product
 */

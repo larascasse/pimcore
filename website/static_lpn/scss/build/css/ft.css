@@ -317,6 +317,7 @@ ul.subdescription {
   width: 240px; }
 
 .dl-horizontal td {
+  font-family: "HelveticaNeueRegular";
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px; }

@@ -654,8 +654,8 @@ class Website_Product extends Object_Product {
 		//$hiddenFields = array("pose_aclouer","pose_avisser","pose_aclouer","pose_avisser");
 
 
-		//CE
-		$descriptionFields = array('Dimensions', 'essence','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage');
+		//Descitptio
+		$descriptionFields = array('Dimensions', 'essence','motif','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage');
 
 
 		//CE
@@ -2467,7 +2467,7 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 			return $this->getPimonly_conductivite_thermique_total();
 		}
 
-		
+
 		$rT = $this->getResistanceThermique();
 
 		if($rT>0) {

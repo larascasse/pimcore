@@ -86,10 +86,10 @@ Usé,use
     if(strlen($object->getEan())>0) {
         switch ($object->getLargeur()) {
             case '540':
-                $object->setValue('largeur_txt','Longueurs panachées 160/180/200 mm');
+                $object->setValue('largeur_txt','Largeurs panachées 160/180/200 mm');
                 break;
             case '600':
-                $object->setValue('largeur_txt','Longueurs panachées 180/200/220 mm');
+                $object->setValue('largeur_txt','Largeurs panachées 180/200/220 mm');
                 break;
             default:
                 # code...

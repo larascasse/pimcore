@@ -191,7 +191,7 @@ Conductivité thermique du bois (λ en w / m. K)
         break;
       case '22':
         # code...
-        $UP =  "U₂sP₂";
+        $UP =  "U₂₅P₂";
         break;
       case '23':
         # code...

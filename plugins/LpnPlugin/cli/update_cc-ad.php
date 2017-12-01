@@ -86,10 +86,10 @@ Usé,use
     if(strlen($object->getEan())>0) {
         switch ($object->getLargeur()) {
             case '540':
-                $object->setValue('largeur_txt','Largeurs panachées 160/180/200 mm');
+                $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
                 break;
             case '600':
-                $object->setValue('largeur_txt','Largeurs panachées 180/200/220 mm');
+                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
                 break;
             default:
                 # code...
@@ -113,7 +113,7 @@ Usé,use
          //Article
          else  {
             //$object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées 1200 à 2300 mm');
+            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
             $object->setValue('chanfreins','2');
          }
          
@@ -131,7 +131,7 @@ Usé,use
          }
          else {
             $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées 1200 à 2300 mm');
+            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
          }
 
 

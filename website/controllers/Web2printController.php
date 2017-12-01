@@ -50,7 +50,7 @@ class Web2printController extends Action
 
 	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
-        	$filename = "product_".$id.".pdf";
+        	$filename = "lpn-ft-".$product->getMage_short_name(3000)."_".$id.".pdf";
 	    
 
 
@@ -118,13 +118,13 @@ class Web2printController extends Action
             //die;
             $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
-            $filename = "product_".$id."_photos.pdf";
+            $filename = "lpn-photos-".$product->getMage_short_name(3000)."_".$id.".pdf";
         
 
 
             $headers = [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename=" . ' . $filename . '";"',
+                'Content-Disposition' => 'inline; filename="' . $filename . '";"',
                 'Cache-Control' => 'private'
             ];
 

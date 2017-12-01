@@ -9,7 +9,7 @@ $products = $this->products;
 <div class="accessoire">
 	<div class="ft-header">
 		<div class="ft-col-1">
-			<div id="logo2" style='width:338px;height:30px'>
+	<div id="logo2" style='width:507px;height:45px'>
 				<?php echo $this->template("includes/logo_1l_svg.php"); ?>
 				 
 			</div>

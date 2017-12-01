@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/05contreco/tmpar%'
+       o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'
 
     ");
 

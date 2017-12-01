@@ -51,7 +51,8 @@ class Web2printController extends Action
 	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
         	$filename = "lpn-ft-".$product->getMage_short_name(3000)."_".$id.".pdf";
-	    
+	           
+               $filename = \Pimcore\File::getValidFilename($filename);
 
 
        		$headers = [
@@ -119,6 +120,7 @@ class Web2printController extends Action
             $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
             $filename = "lpn-photos-".$product->getMage_short_name(3000)."_".$id.".pdf";
+            $filename = \Pimcore\File::getValidFilename($filename);
         
 
 

@@ -114,6 +114,7 @@ Usé,use
          else  {
             //$object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
             $object->setValue('longueur_txt','Longueurs panachées 1200 à 2300 mm');
+            $object->setValue('chanfreins','2');
          }
          
          $save=true;

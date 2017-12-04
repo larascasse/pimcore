@@ -84,7 +84,7 @@ Usé,use
 
     //largeur
     if(strlen($object->getEan())>0) {
-        switch ($object->getLargeur()) {
+        /*switch ($object->getLargeur()) {
             case '540':
                 //$object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
                 break;
@@ -94,7 +94,9 @@ Usé,use
             default:
                 # code...
                 break;
-        }
+        }*/
+        //pimonly_section
+        $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
     }
     //CONTEMPORAIN
     /*if(stristr($article, "FMCHEG2")) {
@@ -155,7 +157,7 @@ Usé,use
    // $object->setValue('country_of_manufacture','Belgique');
 
     if($object->getEpaisseur()==16) {
-        $object->setEpaisseurUsure('4.5 mm');
+         $object->setEpaisseurUsure('4.5 mm');
          $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
 

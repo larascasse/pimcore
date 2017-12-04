@@ -34,14 +34,18 @@ echo $this->image("image", [
                         );
 ?>
     <div>
-      <h1><?= $this->textarea("title",[
+      <?php $titre = $this->textarea("title",[
         "nl2br" => true,
         "width" => 600,
         "height" => 50,
         "placeholder" => "Titre",
         "class" => "editmode" //Edit mode
-    ]); ?></h1>
-      
+    ]);
+
+    if($this->editmode || !$titre->isEmpty()) : ?>
+      <h1><?php echo $titre ?></h1>
+     <?php endif; ?> 
+     
       <?php 
 
       $textarea = $this->textarea("description",[

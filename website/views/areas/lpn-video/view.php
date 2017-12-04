@@ -11,6 +11,7 @@
                         "loop" => "true", 
                         "fluid"=>"true",
                         "muted"=>"muted",
+                        "playsinline" => "true"
                     ],
         "removeAttributes" => [
                     "controls"

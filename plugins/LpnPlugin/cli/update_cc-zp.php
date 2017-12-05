@@ -90,7 +90,7 @@ Usé,use
             case '12':
                 $object->setValue('support','cp');
                 $object->setEpaisseurUsure('3.2 mm');
-                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
+                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-longueurs");
 
 
             case '14':
@@ -101,6 +101,8 @@ Usé,use
                 $object->setValue('support','Latté');
                 //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('4 mm');
+                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
+
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
                 }

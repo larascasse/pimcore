@@ -120,15 +120,15 @@ Usé,use
 
          if(stristr($object->getEan(), "614401")) {
             $object->setValue('largeur_txt',"Largeurs panachées 71/148/182 mm");
-            $object->setValue("pimonly_name_suffixe",$object->getEpaisseur().", largeurs panachées 71/148/182,long.".$object->getLongueur()." mm");
+            $object->setValue("pimonly_name_suffixe","Ep. : ".$object->getEpaisseur()." mm, largeurs panachées 71/148/182, long.".$object->getLongueur()." mm");
         } 
         else if(stristr($object->getEan(), "215429")) {
             $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-             $object->setValue("pimonly_name_suffixe",$object->getEpaisseur().", largeurs panachées 92/148/189,long.".$object->getLongueur()." mm");
+             $object->setValue("pimonly_name_suffixe","Ep. : ".$object->getEpaisseur()." mm, largeurs panachées 92/148/189, long.".$object->getLongueur()." mm");
         }
         else if(stristr($object->getEan(), "21557")) {
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
-             $object->setValue("pimonly_name_suffixe",$object->getEpaisseur().", largeurs panachées 148/189/240,long.".$object->getLongueur()." mm");
+             $object->setValue("pimonly_name_suffixe","Ep. : ".$object->getEpaisseur()." mm, largeurs panachées 148/189/240, long.".$object->getLongueur()." mm");
         }
         else {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
@@ -176,9 +176,10 @@ Usé,use
 
        
         if(strlen($parent->name)>0) {
-            $parent->setValue('chanfreins',"2 ou rives abimées");
+            $parent->setValue('name',null);
             
         } 
+        $parent->setValue('chanfreins',"2 ou rives abimées");
         $parent->save();
         
 

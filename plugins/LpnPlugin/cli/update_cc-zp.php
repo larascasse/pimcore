@@ -90,6 +90,8 @@ Usé,use
             case '12':
                 $object->setValue('support','cp');
                 $object->setEpaisseurUsure('3.2 mm');
+                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
+
 
             case '14':
                 $object->setValue('support','Latté');

@@ -98,6 +98,9 @@ Usé,use
             case '15':
                 $object->setValue('support','Latté');
                 $object->setEpaisseurUsure('4 mm');
+                if($object->getLargeur()==92) {
+                    $object->setFixation('rainurelanguette-2cotes-fausses-languettes');
+                }
                 break;
             case '21':
                 $object->setValue('support','cp peuplier');
@@ -110,12 +113,17 @@ Usé,use
 
         if(stristr($scienergie, "HUILE AQUA")) {
             $parent->setValue('finition',"huile-aqua");
+            $parent->setValue('pimonly_name_suffixe',"huile aqua");
         }
         if(stristr($scienergie, "VERNIS AQUA")) {
             $parent->setValue('finition',"Verni aqua");
+            $parent->setValue('pimonly_name_suffixe',"verni aqua");
+
         }
         else if(stristr($scienergie, "HUILE CIRE")) {
             $parent->setValue('finition',"huile-cire");
+            $parent->setValue('pimonly_name_suffixe',"huile cire");
+
         }
 
          if(stristr($object->getEan(), "614401")) {

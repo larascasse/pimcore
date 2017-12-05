@@ -64,7 +64,7 @@ foreach ($list->getObjects() as $object) {
          $save=true;
     }
     else if(stristr($scienergieCourt, "cp")) {*/
-        $object->setSupport('cp');
+        //$object->setSupport('cp');
         $save=true;
     //}
 

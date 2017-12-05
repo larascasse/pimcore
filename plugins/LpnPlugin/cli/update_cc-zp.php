@@ -85,7 +85,7 @@ Usé,use
     //epaisseur
 
     if(strlen($object->getEan())>0) {
-        $object->setFixation(array('rainurelanguette-4cotes'));
+        $object->setFixation(array('rainurelanguette4cotes'));
         switch ($object->getEpaisseur()) {
             case '12':
                 $object->setValue('support','cp');
@@ -97,6 +97,7 @@ Usé,use
                 break;
             case '15':
                 $object->setValue('support','Latté');
+                //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('4 mm');
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));

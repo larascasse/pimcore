@@ -86,7 +86,8 @@ Usé,use
     //CONTEMPORAIN
     if(stristr($article, "F2CHE")) {
         echo "OK !\n";
-         $object->setValue("typeLame","2-frises");
+         $parent->setValue("typeLame","2-frises");
+         $parent->setValue("pimonly_name_suffixe","2 frises");
 
 
         
@@ -98,7 +99,8 @@ Usé,use
 
     //vieilli rives abimees
     else if(stristr($article, "F3CHE")) {
-         $object->setValue("typeLame","3-frises");
+         $parent->setValue("typeLame","3-frises");
+         $parent->setValue("pimonly_name_suffixe","3 frises");
          $save=true;
 
 

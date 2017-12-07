@@ -123,16 +123,16 @@ Usé,use
         $suffixe = "";
         if(stristr($scienergie, "HUILE AQUA")) {
             $parent->setValue('finition',"huile-aqua");
-            $suffixe.= "huile aqua");
+            $suffixe.= "huile aqua";
         }
         if(stristr($scienergie, "VERNIS AQUA")) {
             $parent->setValue('finition',"Verni aqua");
-             $suffixe.= "vernis aqua");
+             $suffixe.= "vernis aqua";
 
         }
         else if(stristr($scienergie, "HUILE CIRE")) {
             $parent->setValue('finition',"huile-cire");
-             $suffixe.= "huile cire");
+             $suffixe.= "huile cire";
         }
 
         $suffixe.=" ".$object->getChoixString();

@@ -463,7 +463,7 @@ class ProductController extends Action
 
              $row[] = $product->getCode();
              //$row[] = $product->getEan()."-";
-             $row[] = $product->getMage_name();
+             $row[] = $product->getMage_short_name(3000);;
              $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
 
              foreach ($header as $key => $title) {

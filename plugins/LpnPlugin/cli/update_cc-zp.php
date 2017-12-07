@@ -96,6 +96,9 @@ Usé,use
             case '14':
                 $object->setValue('support','Latté');
                 $object->setEpaisseurUsure('4 mm');
+                if($object->getLargeur()==71) {
+                    $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
+                }
                 break;
             case '15':
                 $object->setValue('support','Latté');
@@ -116,18 +119,28 @@ Usé,use
                 break;
         }
 
+
+        $suffixe = "";
         if(stristr($scienergie, "HUILE AQUA")) {
             $parent->setValue('finition',"huile-aqua");
-            $parent->setValue('pimonly_name_suffixe',"huile aqua");
+            $suffixe.= "huile aqua");
         }
         if(stristr($scienergie, "VERNIS AQUA")) {
             $parent->setValue('finition',"Verni aqua");
-            $parent->setValue('pimonly_name_suffixe',"verni aqua");
+             $suffixe.= "vernis aqua");
 
         }
         else if(stristr($scienergie, "HUILE CIRE")) {
             $parent->setValue('finition',"huile-cire");
-            $parent->setValue('pimonly_name_suffixe',"huile cire");
+             $suffixe.= "huile cire");
+        }
+
+        $suffixe.=" ".$object->getChoixString();
+        $parent->setValue('pimonly_name_suffixe',$suffixe);
+
+        if(stristr($scienergie, "SCRAPPE")) {
+            //$parent->setValue('traitement_surface',"rives scrapees");
+            //$parent->setValue('pimonly_name_suffixe',"huile cire");
 
         }
 

@@ -138,16 +138,24 @@ foreach ($list->getObjects() as $object) {
     if(strlen($object->getEan())>0) {
          $parent = $object->getParent();
          $parent->setChoix($object->getChoix());
+
+         $suffixe = "";
+         if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
+           $suffixe.=' Click';
+        }
+
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',null);
+            $parent->setValue('pimonly_name_suffixe',$suffixe);
 
         }  
         else {
             $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
+            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString().$suffixe);
         }
+
+
 
         
         $save=true;

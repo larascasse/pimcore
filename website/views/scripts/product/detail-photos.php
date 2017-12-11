@@ -11,7 +11,7 @@ $lesplus = $product->getLesPlusArray();
 
 $packshotsImages = $this->product->getImageAssetArray();
 
-$realisations =$this->product->getRealisations();
+$realisations = 	$this->product->getRealisations();
 $count=count($realisations);
 $assetsArray=array();
 for ($i=0; $i < $count; $i++) { 

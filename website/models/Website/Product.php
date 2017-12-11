@@ -1356,16 +1356,54 @@ class Website_Product extends Object_Product {
 
 	public function getImageAssetArray() {
 		$packshotsImages = array();
+		$doublons=array();
 		for($i=1; $i<=3; $i++) { 
 			$image = $this->{"getImage_" . $i}();
 			
 			if($image) { 
 				if(!(stristr($image->getFilename(),"pantone"))) {
-					$packshotsImages[] = $image;
+					$path = $image->getThumbnail("magento_realisation")->getPath();
+
+					//echo $path."<br />";
+					if(!in_array($path , $doublons)) {
+						$packshotsImages[] = $image;
+						$doublons[] = $path;
+					}
+					
+
 				}
 			} 
 			
 		}
+
+		$galleryImages =$this->getGallery();
+		if(is_array($galleryImages)) {
+			foreach($galleryImages as $element) {
+				if($element instanceof Asset_Folder) {
+					$assets=Asset_Folder::getById($element->id)->getChilds();
+					$assetsArray[$i]=array();
+					foreach ($assets as $asset) {
+						if($asset instanceof Asset_Image) {
+							$path = $aseet->getThumbnail("magento_realisation")->getPath();
+							if(!in_array($path , $doublons)) {
+								$packshotsImages[] = $asset;
+								$doublons[] = $path;
+							}
+						}
+					}
+				}
+				elseif($element instanceof Asset_Image) {
+					
+					$path = $element->getThumbnail("magento_realisation")->getPath();
+					if(!in_array($path, $doublons)) {
+						$packshotsImages[] = $element;
+						$doublons[] = $path;
+					}
+				}
+			}
+		}
+
+
 		return $packshotsImages;
 	}
 

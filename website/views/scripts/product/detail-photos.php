@@ -21,9 +21,78 @@ for ($i=0; $i < $count; $i++) {
 		}
 }
 
+
+
+
 //Si pas de photos, on abs(ffiche pas la page)
 if(count($packshotsImages)==0 && count($realisations)==0)
 	return;
+
+$imageLeft=array();
+$imageRight=array();
+
+//colonne de gauche
+if(count($packshotsImages)>0) {
+	$imageLeft[] = array_shift($packshotsImages);
+}
+if(count($assetsArray)>0) {
+	$imageLeft[] = array_shift($assetsArray);
+
+}
+
+
+
+//colonne de droite
+if(count($packshotsImages)>0) {
+	$imageRight[] = array_shift($packshotsImages);
+}
+if(count($packshotsImages)>0) {
+	$imageRight[] = array_shift($packshotsImages);
+}
+if(count($assetsArray)>0) {
+	$imageRight[] = array_shift($assetsArray);
+
+}
+
+if(count($imageRight)<=2 && count($packshotsImages)>0) {
+	$imageRight[] = array_shift($packshotsImages);
+}
+if(count($imageRight)<=2 && count($assetsArray)>0) {
+	$imageRight[] = array_shift($assetsArray);
+}
+
+
+//colonne de gauche
+if(count($packshotsImages)>0) {
+	$imageLeft[] = array_shift($packshotsImages);
+}
+if(count($assetsArray)>0) {
+	$imageLeft[] = array_shift($assetsArray);
+
+}
+
+
+if(count($assetsArray)>0) {
+	$imageRight[] = array_shift($assetsArray);
+
+}
+if(count($assetsArray)>0) {
+	$imageRight[] = array_shift($assetsArray);
+
+}
+
+//colonne de gauche
+if(count($packshotsImages)>0) {
+	$imageLeft[] = array_shift($packshotsImages);
+}
+if(count($assetsArray)>0) {
+	$imageLeft[] = array_shift($assetsArray);
+
+}
+
+
+
+
 
 if(!function_exists("getPhotoHtml")) {
 	function getPhotoHtml($asset,$product) {
@@ -88,19 +157,11 @@ if (strlen($subtitle)>0) {
 
 
  <?php
- if(count($packshotsImages)>0) {
- 	echo getPhotoHtml($packshotsImages[0],$product);
 
+ foreach ($imageLeft as $asset) {
+ 	echo getPhotoHtml($asset,$product);
  }
-
-  if(count($assetsArray)>0) {
- 	for ($i=0; $i < min(count($assetsArray),2); $i++) { 
- 		echo getPhotoHtml($assetsArray[$i],$product);
-
- 	}
- 	
- }
-
+ 
 
 ?>
 
@@ -116,21 +177,9 @@ if (strlen($subtitle)>0) {
 <div class="">
 
  <?php
- if(count($packshotsImages)>1) {
- 	for ($i=1; $i < count($packshotsImages); $i++) { 
- 		echo getPhotoHtml($packshotsImages[$i],$product);
- 		
- 	}
- 	
- }
-?>
-
- <?php
- if(count($assetsArray)>2) {
- 	for ($i=2; $i < min(4,count($assetsArray)); $i++) { 
- 		echo getPhotoHtml($assetsArray[$i],$product);
- 	}
- 	
+ 
+ foreach ($imageRight as $asset) {
+ 	echo getPhotoHtml($asset,$product);
  }
 ?>
 

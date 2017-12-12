@@ -99,7 +99,7 @@ Usé,use
         $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
     }
     //CONTEMPORAIN
-    /*if(stristr($article, "FMCHEG2")) {
+    if(stristr($article, "vbm")) {
         echo "OK !\n";
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
@@ -108,51 +108,40 @@ Usé,use
 
          //EAN
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
 
          }
          //Article
          else  {
-            //$object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
-            $object->setValue('chanfreins','2');
+            $object->setValue("finition","Verni mat");
+            $parent->setValue("pimonly_name_suffixe","vernis mat");
+            $parent->save();
+            
          }
          
          $save=true;
     }
 
     //vieilli rives abimees
-    else if(stristr($article, "FMCHERA")) {
+    else if(stristr($article, "vbs")) {
           $object->setTraitement_surface(("vieilli rives abimees"));
 
 
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
          }
          else {
-            $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
+            $object->setValue("finition","Verni satiné");
+            $parent->setValue("pimonly_name_suffixe","vernis satiné");
+            $parent->save();
          }
 
 
         
     }
 
-    if(stristr($scienergie, "HUILE AQUA")) {
-        $object->setValue('finition',"huile-aqua");
-    }
-    else if(stristr($scienergie, "HUILE CIRE")) {
-        $object->setValue('finition',"huile-cire");
-    }
-
-
-    //TODO
-    if(stristr($scienergie, "TRES ACCENTU")) {
-        $object->setValue('traitement_surface',"vieilli tres accentue");
-    }
-    */
+    
     //$object->setValue('origine_bois','France');
    // $object->setValue('country_of_manufacture','Belgique');
 

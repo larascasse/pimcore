@@ -99,7 +99,7 @@ Usé,use
         $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
     }
     //CONTEMPORAIN
-    if(stristr($article, "vbm")) {
+    if(stristr($article, "vbm") || stristr($article, "bic")) {
         echo "OK !\n";
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 

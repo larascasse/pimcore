@@ -133,7 +133,7 @@ Usé,use
             $object->setTraitement_surface(("vieilli rives abimees"));
             $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
             $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
-            $object->setValue('chanfreins','rives abimées');
+            $object->setValue('chanfreins','rives abîmées');
          }
 
 
@@ -144,6 +144,7 @@ Usé,use
         $object->setValue('finition',"huile-aqua");
         if(strlen($object->getEan())==0) {
             $parent->setValue("pimonly_name_suffixe","huile aqua");
+             $parent->save();
 
         }
     }
@@ -151,6 +152,7 @@ Usé,use
         $object->setValue('finition',"huile-cire");
         if(strlen($object->getEan())==0) {
             $parent->setValue("pimonly_name_suffixe","huile cire");
+             $parent->save();
 
         }
     }
@@ -160,7 +162,7 @@ Usé,use
     if(stristr($scienergie, "TRES ACCENTU")) {
         $object->setValue('traitement_surface',"vieilli tres accentue");
         $object->setValue("pimonly_name_suffixe","vieilli très accentué");
-        $object->setValue('chanfreins','rives abimées');
+        $object->setValue('chanfreins','rives abîmées');
     }
 
     //$object->setValue('origine_bois','France');
@@ -199,13 +201,14 @@ Usé,use
             $parent->setValue('name',null);
             
         } 
-        $parent->save();
+       
         
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         
     }
     else {
+        $parent->save();
         echo "\nArticle:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
     }
    // continue;
@@ -214,48 +217,6 @@ Usé,use
     if($save)
         $object->save();
 
-
-    continue;
-    $values = array();
-    $objectToSave = Object::getById($object->getId());
-    foreach ($fieldsToClean as $key => $fieldName) {
-        # code...
-        
-        
-
-        $value = $object->getValueForFieldName($fieldName);
-        if(!($object->getParent() instanceof Website_Product)) {
-            $parentValue = $object->getParent()->getParent()->getValueForFieldName($fieldName);
-         
-        }
-        else {
-            $parentValue = $object->getParent()->getValueForFieldName($fieldName);
-        }
-
-        
-
-        if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
-            echo "--> nullify $fieldName : ".$object->getSku()."  -----    $value <-> $parentValue\n";
-            
-            
-            $values[$fieldName]=null;
-            
-
-
-            //$objectToSave->setPublished(true);
-            
-        }
-   
-    }
-
-    if(count( $values)>0) {
-        $objectToSave->setValues($values);
-        //print_r($values);
-
-        echo "\n";
-        $objectToSave->save();
-    }
-    
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

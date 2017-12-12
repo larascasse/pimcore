@@ -126,7 +126,7 @@ Usé,use
 
     //vieilli rives abimees
     else if(stristr($article, "vbs")) {
-          $object->setTraitement_surface(("vieilli rives abimees"));
+         
 
 
          if(strlen($object->getEan())>0) {

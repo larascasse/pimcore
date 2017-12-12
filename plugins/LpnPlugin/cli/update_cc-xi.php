@@ -115,8 +115,8 @@ Usé,use
          //Article
          else  {
             $object->setValue("finition","Verni mat");
-            $parent->setValue("pimonly_name_suffixe","vernis mat");
-            $parent->save();
+            $object->setValue("pimonly_name_suffixe","vernis mat");
+           // $parent->save();
             
          }
          
@@ -133,8 +133,8 @@ Usé,use
          }
          else {
             $object->setValue("finition","Verni satiné");
-            $parent->setValue("pimonly_name_suffixe","vernis satiné");
-            $parent->save();
+            $object->setValue("pimonly_name_suffixe","vernis satiné");
+           // $parent->save();
          }
 
 

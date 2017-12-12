@@ -97,6 +97,7 @@ Usé,use
         }*/
         //pimonly_section
         $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
+        $object->setValue('traitement_surface',"brosse");
     }
     //CONTEMPORAIN
     if(stristr($article, "vbm") || stristr($article, "bic")) {

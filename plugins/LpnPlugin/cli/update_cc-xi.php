@@ -96,7 +96,7 @@ Usé,use
                 break;
         }*/
         //pimonly_section
-        $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
+        $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
     }
     //CONTEMPORAIN
     if(stristr($article, "vbm") || stristr($article, "bic")) {

@@ -122,7 +122,7 @@ Usé,use
 
     //vieilli rives abimees
     else if(stristr($article, "FMCHERA")) {
-          $object->setTraitement_surface(("vieilli rives abimees"));
+         
 
 
          if(strlen($object->getEan())>0) {
@@ -130,8 +130,10 @@ Usé,use
 
          }
          else {
+            $object->setTraitement_surface(("vieilli rives abimees"));
             $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
             $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
+            $object->setValue('chanfreins','rives abimées');
          }
 
 
@@ -140,15 +142,25 @@ Usé,use
 
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"huile-aqua");
+        if(strlen($object->getEan())==0) {
+            $parent->setValue("pimonly_name_suffixe","huile aqua");
+
+        }
     }
     else if(stristr($scienergie, "HUILE CIRE")) {
         $object->setValue('finition',"huile-cire");
+        if(strlen($object->getEan())==0) {
+            $parent->setValue("pimonly_name_suffixe","huile cire");
+
+        }
     }
 
 
     //TODO
     if(stristr($scienergie, "TRES ACCENTU")) {
         $object->setValue('traitement_surface',"vieilli tres accentue");
+        $object->setValue("pimonly_name_suffixe","vieilli très accentué");
+        $object->setValue('chanfreins','rives abimées');
     }
 
     //$object->setValue('origine_bois','France');

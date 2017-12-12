@@ -125,18 +125,18 @@ Usé,use
             $parent->setValue('finition',"huile-aqua");
             $suffixe.= "huile aqua";
         }
-        if(stristr($scienergie, "VERNIS AQUA")) {
+        if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")) {
             $parent->setValue('finition',"Verni aqua");
              $suffixe.= "vernis aqua";
 
         }
-        else if(stristr($scienergie, "HUILE CIRE")) {
+        else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")) {
             $parent->setValue('finition',"huile-cire");
              $suffixe.= "huile cire";
         }
 
         $suffixe.=" ".$object->getChoixString();
-        $parent->setValue('pimonly_name_suffixe',$suffixe);
+        $parent->setValue('pimonly_name_suffixe',trim($suffixe));
 
         if(stristr($scienergie, "SCRAPPE")) {
             //$parent->setValue('traitement_surface',"rives scrapees");

@@ -205,7 +205,7 @@ Usé,use
             $parent->setValue('name',null);
             
         } 
-        $parent->setValue('chanfreins',"2 ou rives abimées");
+        $parent->setValue('chanfreins',"2 ou rives abîmées");
         $parent->save();
         
 

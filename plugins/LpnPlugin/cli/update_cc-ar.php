@@ -148,7 +148,7 @@ Usé,use
 
     if(strlen($object->getEan())>0) {
        
-
+        //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
         /* $parent = $object->getParent();
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {

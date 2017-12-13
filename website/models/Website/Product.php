@@ -2545,9 +2545,15 @@ Les masses volumiques moyennes des contreplaqués sont :
 					case 'cp':
 						return 780;
 						break;
-					case 'Latté': //Epicea
-						return 500;
+					case 'cp peuplier':
+						return 600;
 						break;
+
+					case 'Latté': //Epicea
+						return 600;
+						break;
+
+				
 					
 					default:
 						return 500;

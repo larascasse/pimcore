@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-30T11:42:25+01:00
+* Generated at: 2017-12-13T14:11:11+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
@@ -46,6 +46,13 @@ Fields Summary:
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
+- chauffantBasseTemperature [select]
+- chauffantRadiantElectrique [select]
+- solRaffraichissant [select]
+- chauffantAccumulationBasseTemperature [select]
+- pimonlyX_chauffantBasseTemperature [calculatedValue]
+- pimonlyX_chauffantRadiantElectrique [calculatedValue]
+- pimonlyX_solRaffraichissant [calculatedValue]
 - essence [input]
 - support [select]
 - epaisseurUsure [input]
@@ -134,10 +141,6 @@ Fields Summary:
 - motif [select]
 - pieceHumide [checkbox]
 - sousCoucheIntegree [checkbox]
-- chauffantBasseTemperature [select]
-- chauffantRadiantElectrique [select]
-- chauffantAccumulationBasseTemperature [select]
-- solRaffraichissant [select]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
@@ -196,7 +199,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1512038540,
+   'modificationDate' => 1513170671,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -1256,6 +1259,243 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'fieldtype' => 'panel',
              'labelWidth' => 100,
              'layout' => NULL,
+             'name' => 'chauffage',
+             'type' => NULL,
+             'region' => NULL,
+             'title' => 'chauffage',
+             'width' => NULL,
+             'height' => NULL,
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'permissions' => NULL,
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'chauffantBasseTemperature',
+                 'title' => 'Compatible sol chauffant basse température',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'chauffantRadiantElectrique',
+                 'title' => 'Compatible sol chauffant radiant électrique',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'solRaffraichissant',
+                 'title' => 'Compatible sol chauffant réversible',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'chauffantAccumulationBasseTemperature',
+                 'title' => 'Compatible à accumulation basse température',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonlyX_chauffantBasseTemperature',
+                 'title' => 'Compatible sol chauffant basse température (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonlyX_chauffantRadiantElectrique',
+                 'title' => 'Compatible sol chauffant radiant électrique (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonlyX_solRaffraichissant',
+                 'title' => 'Compatible sol chauffant réversible (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'locked' => false,
+          )),
+          3 => 
+          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+             'fieldtype' => 'panel',
+             'labelWidth' => 100,
+             'layout' => NULL,
              'name' => 'tech',
              'type' => NULL,
              'region' => NULL,
@@ -1310,8 +1550,8 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   2 => 
                   array (
-                    'key' => 'Multiplis Bouleau',
-                    'value' => 'Multiplis Bouleau',
+                    'key' => 'HDF hydrofuge',
+                    'value' => 'HDF hydrofuge',
                   ),
                   3 => 
                   array (
@@ -1320,7 +1560,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   4 => 
                   array (
-                    'key' => 'Contreplaqué',
+                    'key' => 'Contreplaqué bouleau',
                     'value' => 'cp',
                   ),
                   5 => 
@@ -1335,7 +1575,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'columnType' => 'varchar(255)',
                  'phpdocType' => 'string',
                  'name' => 'support',
-                 'title' => 'Support (Contrecollé)',
+                 'title' => 'Support / âme',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -1641,7 +1881,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -1689,7 +1929,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -1797,7 +2037,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          3 => 
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -1914,7 +2154,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          4 => 
+          5 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 150,
@@ -1939,40 +2179,35 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 array (
                   0 => 
                   array (
-                    'key' => 'Rainure & languettes 2 cotés',
+                    'key' => 'Rainure & languettes',
                     'value' => 'rainurelanguette',
                   ),
                   1 => 
                   array (
-                    'key' => 'Rainure & languettes 4 cotés',
-                    'value' => 'rainurelanguette4cotes',
+                    'key' => 'Rainure & languettes 2 cotés et fausses languettes',
+                    'value' => 'rainurelanguette-2cotes-fausses-languettes',
                   ),
                   2 => 
                   array (
-                    'key' => 'A visser',
-                    'value' => 'avisser',
+                    'key' => 'Rainure & languettes',
+                    'value' => 'rainurelanguette4cotes',
                   ),
                   3 => 
                   array (
-                    'key' => 'A coller',
-                    'value' => 'acoller',
+                    'key' => 'Rainure & languettes en bout',
+                    'value' => 'rainurelanguette-en-bout',
                   ),
                   4 => 
-                  array (
-                    'key' => 'A clouer',
-                    'value' => 'aclouer',
-                  ),
-                  5 => 
                   array (
                     'key' => 'Invisible',
                     'value' => 'invisible',
                   ),
-                  6 => 
+                  5 => 
                   array (
                     'key' => 'Flottante',
                     'value' => 'flottante',
                   ),
-                  7 => 
+                  6 => 
                   array (
                     'key' => 'Système Click',
                     'value' => 'click',
@@ -3112,63 +3347,63 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       2 => 
                       array (
-                        'key' => 'Verni blanchi',
-                        'value' => 'Verni blanchi',
+                        'key' => 'Vernis aqua',
+                        'value' => 'Verni aqua',
                       ),
                       3 => 
                       array (
-                        'key' => 'Verni blanchi mat',
-                        'value' => 'Verni blanchi mat',
+                        'key' => 'Vernis blanchi',
+                        'value' => 'Verni blanchi',
                       ),
                       4 => 
                       array (
-                        'key' => 'Verni satiné',
-                        'value' => 'Verni satiné',
+                        'key' => 'Vernis blanchi mat',
+                        'value' => 'Verni blanchi mat',
                       ),
                       5 => 
                       array (
-                        'key' => 'Verni mat',
-                        'value' => 'Verni mat',
+                        'key' => 'Vernis satiné',
+                        'value' => 'Verni satiné',
                       ),
                       6 => 
                       array (
-                        'key' => 'Verni brossé mat',
-                        'value' => 'Verni brossé mat',
+                        'key' => 'Vernis mat',
+                        'value' => 'Verni mat',
                       ),
                       7 => 
                       array (
-                        'key' => 'Verni brossé classique',
-                        'value' => 'Verni brossé classique',
+                        'key' => 'Vernis cérusé mat',
+                        'value' => 'vernis cérusé mat',
                       ),
                       8 => 
                       array (
-                        'key' => 'Verni brossé satiné',
-                        'value' => 'Verni brossé satine',
-                      ),
-                      9 => 
-                      array (
-                        'key' => 'Brut',
+                        'key' => 'Brute',
                         'value' => 'brut',
                       ),
-                      10 => 
+                      9 => 
                       array (
                         'key' => 'Brut de sciage',
                         'value' => 'Brut de sciage',
                       ),
-                      11 => 
+                      10 => 
                       array (
                         'key' => 'Brossé brut',
                         'value' => 'brosse',
                       ),
-                      12 => 
+                      11 => 
                       array (
                         'key' => 'Brossé Veinage Noir',
                         'value' => 'brosse-veinage-noir',
                       ),
-                      13 => 
+                      12 => 
                       array (
                         'key' => 'Huilé',
                         'value' => 'huile',
+                      ),
+                      13 => 
+                      array (
+                        'key' => 'Huilé mat',
+                        'value' => 'huile mat',
                       ),
                       14 => 
                       array (
@@ -3182,35 +3417,40 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       16 => 
                       array (
+                        'key' => 'Huile UV',
+                        'value' => 'huile UV',
+                      ),
+                      17 => 
+                      array (
                         'key' => 'Peinture d\'Aujourd\'hui',
                         'value' => 'peint',
                       ),
-                      17 => 
+                      18 => 
                       array (
                         'key' => 'Peinture d\'origine',
                         'value' => 'peintorigine',
                       ),
-                      18 => 
+                      19 => 
                       array (
                         'key' => 'Peinture blanche',
                         'value' => ' Peinture blanche',
                       ),
-                      19 => 
+                      20 => 
                       array (
                         'key' => 'Peinture noire',
                         'value' => ' Peinture noire',
                       ),
-                      20 => 
+                      21 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      21 => 
+                      22 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      22 => 
+                      23 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',
@@ -3275,7 +3515,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       2 => 
                       array (
-                        'key' => 'Brossé rives abimées',
+                        'key' => 'Brossé rives abîmées',
                         'value' => 'brosse rives abimees',
                       ),
                       3 => 
@@ -3290,7 +3530,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       5 => 
                       array (
-                        'key' => 'Vieilli rives abimées',
+                        'key' => 'Vieilli rives abîmées',
                         'value' => 'vieilli rives abimees',
                       ),
                       6 => 
@@ -3300,13 +3540,23 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       7 => 
                       array (
-                        'key' => 'Vieilli usé rives abimées',
-                        'value' => 'vieilli use rives abimees',
+                        'key' => 'Rives scrapées',
+                        'value' => 'rives scrapees',
                       ),
                       8 => 
                       array (
-                        'key' => 'Vieilli usé et brossé rives abimées',
+                        'key' => 'Vieilli usé rives abîmées',
+                        'value' => 'vieilli use rives abimees',
+                      ),
+                      9 => 
+                      array (
+                        'key' => 'Vieilli usé et brossé rives abîmées',
                         'value' => 'vieilli use brosse rives abimees',
+                      ),
+                      10 => 
+                      array (
+                        'key' => 'Vieilli très accentué rives abîmées',
+                        'value' => 'vieilli tres accentue',
                       ),
                     ),
                      'width' => '',
@@ -3649,7 +3899,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          5 => 
+          6 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4065,33 +4315,33 @@ Combien d\'unité dans 1 m2',
                 array (
                   0 => 
                   array (
-                    'key' => 'Multifrise',
-                    'value' => 'multifrise',
-                    'id' => 'extModel35478-1',
+                    'key' => '2 frises',
+                    'value' => '2-frises',
                   ),
                   1 => 
                   array (
-                    'key' => 'Monolame',
-                    'value' => 'monolame',
-                    'id' => 'extModel35478-2',
+                    'key' => '3 frises',
+                    'value' => '3-frises',
                   ),
                   2 => 
                   array (
-                    'key' => 'Dalle',
-                    'value' => 'dalle',
-                    'id' => 'extModel35478-3',
+                    'key' => 'Monolame',
+                    'value' => 'monolame',
                   ),
                   3 => 
                   array (
-                    'key' => 'Panneau',
-                    'value' => 'panneau',
-                    'id' => 'extModel35478-4',
+                    'key' => 'Dalle',
+                    'value' => 'dalle',
                   ),
                   4 => 
                   array (
+                    'key' => 'Panneau',
+                    'value' => 'panneau',
+                  ),
+                  5 => 
+                  array (
                     'key' => 'Plinthe',
                     'value' => 'plinthe',
-                    'id' => 'extModel35478-5',
                   ),
                 ),
                  'width' => '',
@@ -4200,150 +4450,6 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               20 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Oui',
-                    'value' => '1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Non',
-                    'value' => '0',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'chauffantBasseTemperature',
-                 'title' => 'Compatible sol chauffant basse température',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              21 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Oui',
-                    'value' => '1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Non',
-                    'value' => '0',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'chauffantRadiantElectrique',
-                 'title' => 'Compatible sol chauffant radiant électrique',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              22 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Oui',
-                    'value' => '1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Non',
-                    'value' => '0',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'chauffantAccumulationBasseTemperature',
-                 'title' => 'Compatible à accumulation basse température',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              23 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Oui',
-                    'value' => '1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Non',
-                    'value' => '0',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'solRaffraichissant',
-                 'title' => 'Compatible sol chauffant réversible',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4365,7 +4471,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              25 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4387,7 +4493,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              26 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4409,7 +4515,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4434,7 +4540,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          6 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4570,7 +4676,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          7 => 
+          8 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4634,7 +4740,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          8 => 
+          9 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4786,7 +4892,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          9 => 
+          10 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5016,7 +5122,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          10 => 
+          11 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5103,7 +5209,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          11 => 
+          12 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5154,7 +5260,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          12 => 
+          13 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,

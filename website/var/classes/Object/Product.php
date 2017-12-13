@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-30T11:42:25+01:00
+* Generated at: 2017-12-13T14:11:11+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.11.46
 
 
 Fields Summary: 
@@ -46,6 +46,13 @@ Fields Summary:
 - meta_title [input]
 - meta_description [input]
 - meta_keywords [input]
+- chauffantBasseTemperature [select]
+- chauffantRadiantElectrique [select]
+- solRaffraichissant [select]
+- chauffantAccumulationBasseTemperature [select]
+- pimonlyX_chauffantBasseTemperature [calculatedValue]
+- pimonlyX_chauffantRadiantElectrique [calculatedValue]
+- pimonlyX_solRaffraichissant [calculatedValue]
 - essence [input]
 - support [select]
 - epaisseurUsure [input]
@@ -134,10 +141,6 @@ Fields Summary:
 - motif [select]
 - pieceHumide [checkbox]
 - sousCoucheIntegree [checkbox]
-- chauffantBasseTemperature [select]
-- chauffantRadiantElectrique [select]
-- chauffantAccumulationBasseTemperature [select]
-- solRaffraichissant [select]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
@@ -233,6 +236,13 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantRadiantElectrique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_chauffantBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_chauffantRadiantElectrique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_solRaffraichissant ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
@@ -321,10 +331,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMotif ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChauffantRadiantElectrique ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
@@ -418,6 +424,10 @@ public $mage_custom_option;
 public $meta_title;
 public $meta_description;
 public $meta_keywords;
+public $chauffantBasseTemperature;
+public $chauffantRadiantElectrique;
+public $solRaffraichissant;
+public $chauffantAccumulationBasseTemperature;
 public $essence;
 public $support;
 public $epaisseurUsure;
@@ -495,10 +505,6 @@ public $typeLame;
 public $motif;
 public $pieceHumide;
 public $sousCoucheIntegree;
-public $chauffantBasseTemperature;
-public $chauffantRadiantElectrique;
-public $chauffantAccumulationBasseTemperature;
-public $solRaffraichissant;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
@@ -1524,6 +1530,170 @@ public function setMeta_keywords ($meta_keywords) {
 }
 
 /**
+* Get chauffantBasseTemperature - Compatible sol chauffant basse température
+* @return string
+*/
+public function getChauffantBasseTemperature () {
+	$preValue = $this->preGetValue("chauffantBasseTemperature"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->chauffantBasseTemperature;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantBasseTemperature")->isEmpty($data)) {
+		return $this->getValueFromParent("chauffantBasseTemperature");
+	}
+	return $data;
+}
+
+/**
+* Set chauffantBasseTemperature - Compatible sol chauffant basse température
+* @param string $chauffantBasseTemperature
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChauffantBasseTemperature ($chauffantBasseTemperature) {
+	$this->chauffantBasseTemperature = $chauffantBasseTemperature;
+	return $this;
+}
+
+/**
+* Get chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
+* @return string
+*/
+public function getChauffantRadiantElectrique () {
+	$preValue = $this->preGetValue("chauffantRadiantElectrique"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->chauffantRadiantElectrique;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantRadiantElectrique")->isEmpty($data)) {
+		return $this->getValueFromParent("chauffantRadiantElectrique");
+	}
+	return $data;
+}
+
+/**
+* Set chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
+* @param string $chauffantRadiantElectrique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChauffantRadiantElectrique ($chauffantRadiantElectrique) {
+	$this->chauffantRadiantElectrique = $chauffantRadiantElectrique;
+	return $this;
+}
+
+/**
+* Get solRaffraichissant - Compatible sol chauffant réversible
+* @return string
+*/
+public function getSolRaffraichissant () {
+	$preValue = $this->preGetValue("solRaffraichissant"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->solRaffraichissant;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("solRaffraichissant")->isEmpty($data)) {
+		return $this->getValueFromParent("solRaffraichissant");
+	}
+	return $data;
+}
+
+/**
+* Set solRaffraichissant - Compatible sol chauffant réversible
+* @param string $solRaffraichissant
+* @return \Pimcore\Model\Object\Product
+*/
+public function setSolRaffraichissant ($solRaffraichissant) {
+	$this->solRaffraichissant = $solRaffraichissant;
+	return $this;
+}
+
+/**
+* Get chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
+* @return string
+*/
+public function getChauffantAccumulationBasseTemperature () {
+	$preValue = $this->preGetValue("chauffantAccumulationBasseTemperature"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->chauffantAccumulationBasseTemperature;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantAccumulationBasseTemperature")->isEmpty($data)) {
+		return $this->getValueFromParent("chauffantAccumulationBasseTemperature");
+	}
+	return $data;
+}
+
+/**
+* Set chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
+* @param string $chauffantAccumulationBasseTemperature
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChauffantAccumulationBasseTemperature ($chauffantAccumulationBasseTemperature) {
+	$this->chauffantAccumulationBasseTemperature = $chauffantAccumulationBasseTemperature;
+	return $this;
+}
+
+/**
+* Get pimonlyX_chauffantBasseTemperature - Compatible sol chauffant basse température (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonlyX_chauffantBasseTemperature () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_chauffantBasseTemperature');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonlyX_chauffantBasseTemperature - Compatible sol chauffant basse température (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_chauffantBasseTemperature
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonlyX_chauffantBasseTemperature ($pimonlyX_chauffantBasseTemperature) {
+	return $this;
+}
+
+/**
+* Get pimonlyX_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonlyX_chauffantRadiantElectrique () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_chauffantRadiantElectrique');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonlyX_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_chauffantRadiantElectrique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonlyX_chauffantRadiantElectrique ($pimonlyX_chauffantRadiantElectrique) {
+	return $this;
+}
+
+/**
+* Get pimonlyX_solRaffraichissant - Compatible sol chauffant réversible (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonlyX_solRaffraichissant () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_solRaffraichissant');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonlyX_solRaffraichissant - Compatible sol chauffant réversible (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_solRaffraichissant
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonlyX_solRaffraichissant ($pimonlyX_solRaffraichissant) {
+	return $this;
+}
+
+/**
 * Get essence - Essence
 * @return string
 */
@@ -1550,7 +1720,7 @@ public function setEssence ($essence) {
 }
 
 /**
-* Get support - Support (Contrecollé)
+* Get support - Support / âme
 * @return string
 */
 public function getSupport () {
@@ -1566,7 +1736,7 @@ public function getSupport () {
 }
 
 /**
-* Set support - Support (Contrecollé)
+* Set support - Support / âme
 * @param string $support
 * @return \Pimcore\Model\Object\Product
 */
@@ -3742,110 +3912,6 @@ public function getSousCoucheIntegree () {
 */
 public function setSousCoucheIntegree ($sousCoucheIntegree) {
 	$this->sousCoucheIntegree = $sousCoucheIntegree;
-	return $this;
-}
-
-/**
-* Get chauffantBasseTemperature - Compatible sol chauffant basse température
-* @return string
-*/
-public function getChauffantBasseTemperature () {
-	$preValue = $this->preGetValue("chauffantBasseTemperature"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->chauffantBasseTemperature;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantBasseTemperature")->isEmpty($data)) {
-		return $this->getValueFromParent("chauffantBasseTemperature");
-	}
-	return $data;
-}
-
-/**
-* Set chauffantBasseTemperature - Compatible sol chauffant basse température
-* @param string $chauffantBasseTemperature
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChauffantBasseTemperature ($chauffantBasseTemperature) {
-	$this->chauffantBasseTemperature = $chauffantBasseTemperature;
-	return $this;
-}
-
-/**
-* Get chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
-* @return string
-*/
-public function getChauffantRadiantElectrique () {
-	$preValue = $this->preGetValue("chauffantRadiantElectrique"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->chauffantRadiantElectrique;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantRadiantElectrique")->isEmpty($data)) {
-		return $this->getValueFromParent("chauffantRadiantElectrique");
-	}
-	return $data;
-}
-
-/**
-* Set chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
-* @param string $chauffantRadiantElectrique
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChauffantRadiantElectrique ($chauffantRadiantElectrique) {
-	$this->chauffantRadiantElectrique = $chauffantRadiantElectrique;
-	return $this;
-}
-
-/**
-* Get chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
-* @return string
-*/
-public function getChauffantAccumulationBasseTemperature () {
-	$preValue = $this->preGetValue("chauffantAccumulationBasseTemperature"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->chauffantAccumulationBasseTemperature;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chauffantAccumulationBasseTemperature")->isEmpty($data)) {
-		return $this->getValueFromParent("chauffantAccumulationBasseTemperature");
-	}
-	return $data;
-}
-
-/**
-* Set chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
-* @param string $chauffantAccumulationBasseTemperature
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChauffantAccumulationBasseTemperature ($chauffantAccumulationBasseTemperature) {
-	$this->chauffantAccumulationBasseTemperature = $chauffantAccumulationBasseTemperature;
-	return $this;
-}
-
-/**
-* Get solRaffraichissant - Compatible sol chauffant réversible
-* @return string
-*/
-public function getSolRaffraichissant () {
-	$preValue = $this->preGetValue("solRaffraichissant"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->solRaffraichissant;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("solRaffraichissant")->isEmpty($data)) {
-		return $this->getValueFromParent("solRaffraichissant");
-	}
-	return $data;
-}
-
-/**
-* Set solRaffraichissant - Compatible sol chauffant réversible
-* @param string $solRaffraichissant
-* @return \Pimcore\Model\Object\Product
-*/
-public function setSolRaffraichissant ($solRaffraichissant) {
-	$this->solRaffraichissant = $solRaffraichissant;
 	return $this;
 }
 

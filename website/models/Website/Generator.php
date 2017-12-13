@@ -157,6 +157,21 @@ Tous les autres parquets.
             return $product->getDurabiliteEcologique();
         } 
 
+         elseif ($context->getFieldname() == "pimonlyX_chauffantBasseTemperature") {
+
+            return $product->getCalculatedChauffantBasseTemperature();
+        } 
+
+         elseif ($context->getFieldname() == "pimonlyX_chauffantRadiantElectrique") {
+
+            return $product->getCalculatedChauffantRadiantElectrique();
+        } 
+
+         elseif ($context->getFieldname() == "pimonlyX_solRaffraichissant") {
+
+            return $product->getCalculatedSolRaffraichissant();
+        } 
+
 
         else {
             \Logger::error("unknown field : ".$context->getFieldname());

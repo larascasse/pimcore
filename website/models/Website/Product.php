@@ -2792,6 +2792,181 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		return true;
 	}
 
+	public function getCalculatedChauffantBasseTemperature() {
+		$epaisseur = $this->getEpaisseur();
+		$largeur = $this->getLargeur();
+		$essence = $this->getEssence();
+
+
+
+		$compatibleEnPoseColleeEnPlein = false;
+
+		if($this->isParquetMassif()) {
+			if($epaisseur <= 14 && $largeur <= 150 && ($largeur/$epaisseur)<11) {
+				$compatibleEnPoseColleeEnPlein = true;
+			}
+			else if($epaisseur <= 23 && $largeur <= 150 && ($largeur/$epaisseur)<7) {
+				$compatibleEnPoseColleeEnPlein = true;
+			}
+		}
+		else if($this->isParquetContrecolle()) {
+
+			$support = $this->getSupport();
+			$coucheUsure = (float)$this->getEpaisseurUsure();
+
+			$debug = $support."/".$epaisseur."/".$coucheUsure."/".$largeur;
+
+			if($support == "HDF") {
+
+				if($epaisseur <= 10.8 && $coucheUsure <=2.5 && $largeur<=130) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 14 && $coucheUsure <=2.5 && $largeur<=165) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 14 && $coucheUsure <= 3.5 && $largeur<=190) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+			}
+
+			else if($support == "cp" || $support == "Latté") {
+				if($epaisseur <= 12 && $coucheUsure <=3.5 && $largeur<=185) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 16 && $coucheUsure <=5 && $largeur<=185) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 14 && $coucheUsure <= 3.5 && $largeur<=190) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				
+			}
+			else if($support == "cp peuplier") {
+				if($epaisseur <= 14 && $coucheUsure <=3.5 && $largeur<=185) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+			}
+
+		}
+
+
+
+		$compatibleEnPoseFlottante = " non en pose flottante";
+
+		if($this->isParquetContrecolle()) {
+
+			$support = $this->getSupport();
+			$coucheUsure = (float)$this->getEpaisseurUsure();
+
+			$debug = $support."/".$epaisseur."/".$coucheUsure."/".$largeur;
+
+			if($support == "HDF") {
+
+				if($epaisseur <= 10.8 && $coucheUsure <=2.5 && $largeur<=130) {
+					$compatibleEnPoseFlottante = " oui en pose flottante avec sous-couche d'épaisseur < 2.5 mm et de résistance thermique < 0.035";
+				}
+				
+				else if($epaisseur <= 14 && $coucheUsure <= 3.5 && $largeur<=165) {
+					$compatibleEnPoseFlottante = " oui en pose flottante avec sous-couche d'épaisseur < 2.5 mm et derésistance thermique < 0.035";
+				}
+			}
+
+			else if($support == "cp" || $support == "Latté") {
+				$compatibleEnPoseFlottante = "??? en pose flottante";
+				
+			}
+			else if($support == "cp peuplier") {
+				if($epaisseur <= 14 && $coucheUsure <=3.5 && $largeur<=185) {
+					$compatibleEnPoseFlottante = " oui en pose flottante avec sous-couche d'épaisseur < 3 mm et de résistance thermique < 0.06";
+				}
+			}
+
+		}
+
+		$return = "";
+
+		if($compatibleEnPoseColleeEnPlein) {
+			$return .= "Oui, en pose collée en plein";
+		}
+		else {
+			$return .= "Non, en pose collée en plein";
+		}
+	   if(strlen($compatibleEnPoseFlottante)>0) {
+			$return .=" - ".$compatibleEnPoseFlottante;
+		}
+		else {
+			$return .="Non";
+		}
+		
+
+
+		$return .= "    ---- valeur:".$debug;
+
+		return trim($return);
+	}
+
+	public function getCalculatedChauffantRadiantElectrique() {
+		return getCalculatedChauffantBasseTemperature()." si température finale du parquet < 28°";
+	}
+
+	public function getCalculatedSolRaffraichissant() {
+		
+		$epaisseur = $this->getEpaisseur();
+		$largeur = $this->getLargeur();
+		$essence = $this->getEssence();
+
+		$compatibleEnPoseColleeEnPlein = false;
+
+		if($this->isParquetMassif()) {
+			if($epaisseur <= 14 && $largeur <= 150 && ($largeur/$epaisseur)<10) {
+				$compatibleEnPoseColleeEnPlein = true;
+			}
+	
+		}
+		else if($this->isParquetContrecolle()) {
+
+			$support = $this->getSupport();
+			$coucheUsure = (float)$this->getEpaisseurUsure();
+
+			$debug = $support."/".$epaisseur."/".$coucheUsure."/".$largeur;
+
+			if($support == "HDF") {
+
+				if($epaisseur <= 10.8 && $coucheUsure <=2.5 && $largeur<=130) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 14 && $coucheUsure <=2.5 && $largeur<=165) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 14 && $coucheUsure <= 3.5 && $largeur<=190) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+			}
+
+			else if($support == "cp" || $support == "Latté") {
+				if($epaisseur <= 12 && $coucheUsure <=3.5 && $largeur<=190) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+
+				
+			}
+
+
+		}
+
+		if($compatibleEnPoseColleeEnPlein) {
+			$return .= "Oui, en pose collée en plein";
+		}
+		else {
+			$return .= "Non, en pose collée en plein";
+		}
+		
+
+		$return .= "    ---- valeur:".$debug;
+		return $return;
+
+	}
+
 	public function getPreviewUrl() {
 		return "/id/".$this->getId();
 	}

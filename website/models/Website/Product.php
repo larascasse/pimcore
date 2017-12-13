@@ -2906,7 +2906,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 	public function getCalculatedChauffantRadiantElectrique() {
-		return getCalculatedChauffantBasseTemperature()." si température finale du parquet < 28°";
+		return $this->getCalculatedChauffantBasseTemperature()." si température finale du parquet < 28°";
 	}
 
 	public function getCalculatedSolRaffraichissant() {

@@ -86,9 +86,14 @@ Usé,use
     //CONTEMPORAIN
     if(stristr($article, "F2CHE")) {
         echo "OK !\n";
-         $parent->setValue("typeLame","2-frises");
-         $parent->setValue("pimonly_name_suffixe","2 frises");
+         if(strlen($object->getEan())>0) {
+             $parent->setValue("typeLame","2-frises");
+             $parent->setValue("pimonly_name_suffixe","2 frises");
+         }
+         else {
+             $parent->setValue("pimonly_name_suffixe","vernis brossé mat");
 
+         }
 
         
 
@@ -99,8 +104,13 @@ Usé,use
 
     //vieilli rives abimees
     else if(stristr($article, "F3CHE")) {
-         $parent->setValue("typeLame","3-frises");
-         $parent->setValue("pimonly_name_suffixe","3 frises");
+         if(strlen($object->getEan())>0) {   
+             $parent->setValue("typeLame","3-frises");
+             $parent->setValue("pimonly_name_suffixe","3 frises");
+         }
+         else {
+             $parent->setValue("pimonly_name_suffixe","vernis brossé mat");
+         }
          $save=true;
 
 

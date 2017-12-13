@@ -2793,6 +2793,12 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 	public function getCalculatedChauffantBasseTemperature() {
+
+		if(!$this->isParquet()) {
+			return "";
+		}
+
+		
 		$epaisseur = $this->getEpaisseur();
 		$largeur = $this->getLargeur();
 		$essence = $this->getEssence();
@@ -2906,10 +2912,17 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 	public function getCalculatedChauffantRadiantElectrique() {
+		if(!$this->isParquet()) {
+			return "";
+		}
 		return $this->getCalculatedChauffantBasseTemperature()." si température finale du parquet < 28°";
 	}
 
 	public function getCalculatedSolRaffraichissant() {
+
+		if(!$this->isParquet()) {
+			return "";
+		}
 		
 		$epaisseur = $this->getEpaisseur();
 		$largeur = $this->getLargeur();

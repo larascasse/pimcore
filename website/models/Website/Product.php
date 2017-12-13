@@ -2953,7 +2953,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 		}
-
+		$return = "";
 		if($compatibleEnPoseColleeEnPlein) {
 			$return .= "Oui, en pose collée en plein";
 		}

@@ -125,9 +125,10 @@ Usé,use
                 break;
         }
 
-        if(strlen($longueur_txt)==0 && $object->getLongueur()==1860) {
+        /*if(strlen($longueur_txt)==0 && $object->getLongueur()==1860) {
              $longueur_txt =  "Longueur : 1860 mm, présence de demi-lames de début";
         }
+        */
         if(strlen($longueur_txt)>0) {
              $object->setValue('longueur_txt',$longueur_txt);
         }
@@ -172,7 +173,7 @@ Usé,use
              $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur().", présence de demi-lames de début");
         }
         else if($object->getLongueur() == 1860) {
-             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions.", présence de demi-lames de début");
+            $object->setValue('longueur_txt',"Longueur: ".$object->getLongueur()." mm, présence de demi-lames de début");
         }
         else {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);

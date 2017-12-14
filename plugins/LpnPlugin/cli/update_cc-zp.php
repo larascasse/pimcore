@@ -126,7 +126,7 @@ Usé,use
         }
 
         if(strlen($longueur_txt)==0 && $object->getLongueur()==1860) {
-             $longueur_txt =  "Longueur : 1860 mm, présence de demi-lames de début");
+             $longueur_txt =  "Longueur : 1860 mm, présence de demi-lames de début";
         }
         if(strlen($longueur_txt)>0) {
              $object->setValue('longueur_txt',$longueur_txt);

@@ -86,11 +86,17 @@ Usé,use
 
     if(strlen($object->getEan())>0) {
         $object->setFixation(array('rainurelanguette4cotes'));
+
+        $longueur_txt = "";
         switch ($object->getEpaisseur()) {
             case '12':
                 $object->setValue('support','cp');
+                if($object->getLargeur() == 160) {
+
+                }
                 $object->setEpaisseurUsure('3.2 mm');
-                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
+                 $longueur_txt = "Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début";
+               // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
 
 
             case '14':
@@ -117,6 +123,13 @@ Usé,use
             default:
                 # code...
                 break;
+        }
+
+        if(strlen($longueur_txt)==0 && $object->getLongueur()==1860) {
+             $longueur_txt =  "Longueur : 1860 mm, présence de demi-lames de début");
+        }
+        if(strlen($longueur_txt)>0) {
+             $object->setValue('longueur_txt',$longueur_txt);
         }
 
 
@@ -152,11 +165,14 @@ Usé,use
         } 
         else if(stristr($object->getEan(), "215429")) {
             $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur()."");
+             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur().", présence de demi-lames de début");
         }
         else if(stristr($object->getEan(), "21557")) {
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur()."");
+             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur().", présence de demi-lames de début");
+        }
+        else if($object->getLongueur() == 1860) {
+             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions.", présence de demi-lames de début");
         }
         else {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);

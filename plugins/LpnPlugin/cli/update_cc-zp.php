@@ -172,11 +172,14 @@ Usé,use
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
              $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur());
         }
-        else if($object->getLongueur() == 1860) {
-            $object->setValue('longueur_txt',"Longueur: ".$object->getLongueur()." mm, présence de demi-lames de début");
-        }
+        
         else {
             $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+        }
+
+        if($object->getLongueur() == 1860) {
+            $object->setValue('longueur_txt',"Longueur: ".$object->getLongueur()." mm, présence de demi-lames de début");
+            //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
         }
 
     }

@@ -166,11 +166,11 @@ Usé,use
         } 
         else if(stristr($object->getEan(), "215429")) {
             $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur().", présence de demi-lames de début");
+             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur());
         }
         else if(stristr($object->getEan(), "21557")) {
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur().", présence de demi-lames de début");
+             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur());
         }
         else if($object->getLongueur() == 1860) {
             $object->setValue('longueur_txt',"Longueur: ".$object->getLongueur()." mm, présence de demi-lames de début");

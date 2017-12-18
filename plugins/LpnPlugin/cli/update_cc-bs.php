@@ -160,20 +160,18 @@ Usé,use
          $object->setEpaisseurUsure('4.5 mm');
          $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
+        $object->setValue('pimonly_resistance_thermique','0.082');
         $object->setPimonly_masse_volumique_moyenne(700);
 
         $save=true;
     }
-    else if($object->getEpaisseur()==19) {
-        $object->setEpaisseurUsure('5.5 mm');
-        $object->setChanfreins('2');
-        $object->setPimonly_masse_volumique_moyenne(690);
-        $save=true;
-    }
+
     else if($object->getEpaisseur()==22) {
         $object->setEpaisseurUsure('7 mm');
         $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
+        $object->setValue('pimonly_resistance_thermique','0.129');
+
         $object->setPimonly_masse_volumique_moyenne(680);
         $save=true;
     }

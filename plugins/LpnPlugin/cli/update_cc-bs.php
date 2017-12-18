@@ -159,7 +159,7 @@ Usé,use
     if($object->getEpaisseur()==16) {
          $object->setEpaisseurUsure('4.5 mm');
          $object->setChanfreins('0 ou 2');
-        $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
+        $object->setValue('longueur_txt','Longueurs panachées de 800 à 2000 mm (70% > 1500mm)');
         $object->setValue('pimonly_resistance_thermique','0.082');
         $object->setValue('pose',array('acoller'));
         $object->setPimonly_masse_volumique_moyenne(700);
@@ -176,7 +176,7 @@ Usé,use
     else if($object->getEpaisseur()==22) {
         $object->setEpaisseurUsure('7 mm');
         $object->setChanfreins('0 ou 2');
-        $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
+        $object->setValue('longueur_txt','Longueurs panachées de 800 à 2000 mm (70% > 1500mm)');
         $object->setValue('pimonly_resistance_thermique','0.129');
         $object->setValue('pose',array('acoller','aclouer'));
 

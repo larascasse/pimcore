@@ -2856,16 +2856,16 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 				else if($epaisseur <= 16 && $coucheUsure <=5 && $largeur<=185) {
 					$compatibleEnPoseColleeEnPlein = true;
 				}
-				else if($epaisseur <= 16 && $coucheUsure <=5 && $largeur<=220 && stripos($this->getCode(),"bs")>0) {
+				/*else if($epaisseur <= 16 && $coucheUsure <=5 && $largeur<=220 && stripos($this->getCode(),"bs")>0) {
 					$compatibleEnPoseColleeEnPlein = true;
-				}
+				}*/
 				else if($epaisseur <= 14 && $coucheUsure <= 3.5 && $largeur<=190) {
 					$compatibleEnPoseColleeEnPlein = true;
 				}
 				//BEAUSOLAIL / GARANTIE
-				else if($epaisseur <= 22 && $coucheUsure <=7 && $largeur<=220 && stripos($this->getCode(),"bs")>0) {
+				/*else if($epaisseur <= 22 && $coucheUsure <=7 && $largeur<=220 && stripos($this->getCode(),"bs")>0) {
 					$compatibleEnPoseColleeEnPlein = true;
-				}
+				}*/
 				
 			}
 			else if($support == "cp peuplier") {

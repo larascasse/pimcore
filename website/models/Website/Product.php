@@ -2806,14 +2806,28 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 		$compatibleEnPoseColleeEnPlein = false;
+		$warningSuivantLargeur ="";
 
 		if($this->isParquetMassif()) {
-			if($epaisseur <= 14 && $largeur <= 150 && ($largeur/$epaisseur)<11) {
-				$compatibleEnPoseColleeEnPlein = true;
+			if($epaisseur>0) {
+				if($epaisseur <= 14 && $largeur <= 150 && ($largeur/$epaisseur)<11) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
+				else if($epaisseur <= 23 && $largeur <= 150 && ($largeur/$epaisseur)<7) {
+					$compatibleEnPoseColleeEnPlein = true;
+				}
 			}
-			else if($epaisseur <= 23 && $largeur <= 150 && ($largeur/$epaisseur)<7) {
-				$compatibleEnPoseColleeEnPlein = true;
+			else {
+				if($epaisseur <= 14 && $largeur <= 150) {
+					$compatibleEnPoseColleeEnPlein = true;
+					$warningSuivantLargeur = " suivant largeur";
+				}
+				else if($epaisseur <= 23 && $largeur <= 150) {
+					$compatibleEnPoseColleeEnPlein = true;
+					$warningSuivantLargeur = " suivant largeur";
+				}
 			}
+			
 		}
 		else if($this->isParquetContrecolle()) {
 
@@ -2899,7 +2913,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$return = "";
 
 		if($compatibleEnPoseColleeEnPlein) {
-			$return .= "Oui, en pose collée en plein";
+			$return .= "Oui, en pose collée en plein".$warningSuivantLargeur;
 		}
 		else {
 			$return .= "Non, en pose collée en plein";

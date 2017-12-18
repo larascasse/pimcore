@@ -98,7 +98,7 @@ Usé,use
                 $object->setEpaisseurUsure('3.2 mm');
                  $longueur_txt = "Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début";
                // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
-
+                 break;
 
             case '14':
                 $object->setValue('support','Latté');

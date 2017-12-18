@@ -52,7 +52,7 @@ foreach ($list->getObjects() as $object) {
 
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
-    $article = $object->code;
+    $code = $article = $object->code;
     $parent = $object->getParent();
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -150,9 +150,8 @@ Usé,use
         }
 
         $suffixe.=" ".$object->getChoixString();
-        if(strlen($object->getEan())>0) {
-            $parent->setValue('pimonly_name_suffixe',trim($suffixe));
-        }
+        $parent->setValue('pimonly_name_suffixe',trim($suffixe));
+       
 
         if(stristr($scienergie, "SCRAPPE")) {
             //$parent->setValue('traitement_surface',"rives scrapees");

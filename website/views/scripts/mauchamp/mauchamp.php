@@ -163,7 +163,7 @@ foreach ($this->products as $product) {
 	?>
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>
-	<td class="col__"><?php echo $product->getName()?></td>
+	<td class="col__"><?php echo $product->getMage_name()?></td>
 	
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
 	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>

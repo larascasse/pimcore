@@ -163,6 +163,12 @@ Usé,use
         $object->setValue('pimonly_resistance_thermique','0.082');
         $object->setPimonly_masse_volumique_moyenne(700);
 
+        if($object->getEpaisseur()<=220) {
+            $object->setValue('chauffantBasseTemperature','1');
+            $object->setValue('chauffantRadiantElectrique','1');
+            $object->setValue('solRaffraichissant','1');
+        }
+
         $save=true;
     }
 
@@ -171,6 +177,13 @@ Usé,use
         $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
         $object->setValue('pimonly_resistance_thermique','0.129');
+
+        if($object->getEpaisseur()<=220)
+             $object->setValue('chauffantBasseTemperature','1');
+        else
+            $object->setValue('chauffantBasseTemperature','0');
+        $object->setValue('chauffantRadiantElectrique','0');
+        $object->setValue('solRaffraichissant','0');
 
         $object->setPimonly_masse_volumique_moyenne(680);
         $save=true;

@@ -946,6 +946,18 @@ EOT;
           $words["bardage"] = true;
           //$words["parquet"] = true;
         }
+        else if(stristr($product->getFamille(),'vinyl')) {
+          $words["Vinyl"] = true;
+          //$words["parquet"] = true;
+        }
+        else if(stristr($product->getFamille(),'strat')) {
+          $words["Stratifié"] = true;
+          //$words["parquet"] = true;
+        }
+        else if(stristr($product->getFamille(),'beton')) {
+          $words["beton"] = true;
+          //$words["parquet"] = true;
+        }
         else if($product->isTable()) {
           $words["table"] = true;
         }

@@ -2913,16 +2913,16 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$return = "";
 
 		if($compatibleEnPoseColleeEnPlein) {
-			$return .= "Oui, en pose collée en plein".$warningSuivantLargeur;
+			$return .= "Oui en pose collée en plein".$warningSuivantLargeur;
 		}
 		else {
-			$return .= "Non, en pose collée en plein";
+			$return .= "Non testé en pose collée en plein";
 		}
 	   if(strlen($compatibleEnPoseFlottante)>0) {
 			$return .=" - ".$compatibleEnPoseFlottante;
 		}
 		else {
-			$return .="Non";
+			$return .="Non testé";
 		}
 		
 
@@ -2936,7 +2936,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		if(!$this->isParquet()) {
 			return "";
 		}
-		return $this->getCalculatedChauffantBasseTemperature()." si température finale du parquet < 28°";
+		return $this->getCalculatedChauffantBasseTemperature()." (si température finale du parquet < 28°)";
 	}
 
 	public function getCalculatedSolRaffraichissant() {
@@ -2999,10 +2999,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		}
 		$return = "";
 		if($compatibleEnPoseColleeEnPlein) {
-			$return .= "Oui, en pose collée en plein".$warningSuivantLargeur;
+			$return .= "Oui en pose collée en plein".$warningSuivantLargeur;
 		}
 		else {
-			$return .= "Non";
+			$return .= "Non testé";
 		}
 		
 

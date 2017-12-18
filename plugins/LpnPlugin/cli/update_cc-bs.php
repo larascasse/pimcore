@@ -161,6 +161,7 @@ Usé,use
          $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
         $object->setValue('pimonly_resistance_thermique','0.082');
+        $object->setValue('pose',array('acoller'));
         $object->setPimonly_masse_volumique_moyenne(700);
 
         if($object->getEpaisseur()<=220) {
@@ -177,6 +178,7 @@ Usé,use
         $object->setChanfreins('0 ou 2');
         $object->setValue('longueur_txt','Longueurs panachées de 800 à 2500 mm (70% > 1500mm)');
         $object->setValue('pimonly_resistance_thermique','0.129');
+        $object->setValue('pose',array('acoller','aclouer'));
 
         if($object->getEpaisseur()<=220)
              $object->setValue('chauffantBasseTemperature','1');

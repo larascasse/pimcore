@@ -223,7 +223,7 @@ Usé,use
         $save=true;
 
        
-        if(strlen($parent->name)>0) {
+        if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
             $parent->setValue('name',null);
             
         } 

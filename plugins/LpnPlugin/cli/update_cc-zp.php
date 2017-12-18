@@ -15,7 +15,7 @@ Object_Abstract::setGetInheritedValues(false);
 
 
 Pimcore_Model_Cache::disable();
-
+\Pimcore\Model\Version::disable();
 
 $conditionFilters = array("
        o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-zp%'
@@ -53,6 +53,7 @@ foreach ($list->getObjects() as $object) {
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
+    $ean  = $object->ean;
     $parent = $object->getParent();
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -139,18 +140,37 @@ Usé,use
             $parent->setValue('finition',"huile-aqua");
             $suffixe.= "huile aqua";
         }
-        if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")) {
+        if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
             $parent->setValue('finition',"Verni aqua");
              $suffixe.= "vernis aqua";
 
         }
-        else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")) {
+        else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
             $parent->setValue('finition',"huile-cire");
              $suffixe.= "huile cire";
         }
 
-        $suffixe.=" ".$object->getChoixString();
+
+        //MULTI
+        if(stristr($code,"xzp")  || stristr($code,"zzp")) {
+            echo "MULTI";
+            if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
+                $suffixe.= "huile cire ou vernis aqua";
+                $parent->setValue('finition',"huile-cire-ou-vernis-aqua");
+                
+            }
+            else {
+                $parent->setValue('finition',"huile-cire");
+
+                $suffixe.= "huile cire";
+            }
+        }
+
+        //melange de choix dans Scienergie.. on passe par l'EAN
+        //$suffixe.=" ".$object->getChoixString();
+        
         $parent->setValue('pimonly_name_suffixe',trim($suffixe));
+        //echo "\n set suffixe ".trim($suffixe)."\n";
        
 
         if(stristr($scienergie, "SCRAPPE")) {
@@ -161,19 +181,19 @@ Usé,use
 
          if(stristr($object->getEan(), "614401")) {
             $object->setValue('largeur_txt',"Largeurs panachées 71/148/182 mm");
-            $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 71/148/182, long.".$object->getLongueur()."");
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 71/148/182, long.".$object->getLongueur());
         } 
         else if(stristr($object->getEan(), "215429")) {
             $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur());
+             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur());
         }
         else if(stristr($object->getEan(), "21557")) {
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
-             $object->setValue("pimonly_name_suffixe","Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur());
+             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur());
         }
         
         else {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->pimonly_dimensions);
         }
 
         if($object->getLongueur() == 1860) {
@@ -289,5 +309,5 @@ Usé,use
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }
-
+\Pimcore\Model\Version::enable();
 ?>

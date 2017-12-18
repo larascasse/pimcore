@@ -15,7 +15,7 @@ Object_Abstract::setGetInheritedValues(false);
 
 
 Pimcore_Model_Cache::disable();
-
+\Pimcore\Model\Version::disable();
 
 $conditionFilters = array("
        o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'
@@ -227,5 +227,5 @@ foreach ($list->getObjects() as $object) {
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }
-
+\Pimcore\Model\Version::enable();
 ?>

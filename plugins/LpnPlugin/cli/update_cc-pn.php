@@ -90,6 +90,8 @@ Usé,use
         //$object->setValue('support','3 plis massif');
 
         $longueur_txt = "";
+
+        $object->set
         switch ($object->getEpaisseur()) {
             case '18':
             case '21':
@@ -127,6 +129,8 @@ Usé,use
 
         
         $parent->setValue('pimonly_name_suffixe',trim($suffixe));
+        $parent->setValue('name',null);
+        $parent->setValue('short_name',null);
         //echo "\n set suffixe ".trim($suffixe)."\n";
 
         if(stristr($code,"fvd")) {

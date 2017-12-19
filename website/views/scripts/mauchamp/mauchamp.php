@@ -296,6 +296,9 @@ endif; ?>
            // $strRepresentant .= " (".$orderDetail[$representant].")";
             $strRepresentant .= "\n".$orderDetail[$representant."_Email"];
 
+            $strRepresentant .= "\n";
+
+
             if(strlen($orderDetail[$representant."_Tel"])>0)
                 $strRepresentant .= "\nTél : ".$orderDetail[$representant."_Tel"];
 
@@ -310,7 +313,8 @@ endif; ?>
         ?>
        <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
-Si vous avez besoin de plus amples informations, je me tiens à votre disposition :).
+
+Si vous avez besoin de plus amples informations, je me tiens à votre disposition :)
 
 <?php echo $strRepresentant ?>
 

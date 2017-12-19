@@ -130,6 +130,10 @@ Usé,use
         $parent->setValue('pimonly_name_suffixe',trim($suffixe));
         $parent->setValue('name',null);
         $parent->setValue('short_name',null);
+
+        $object->setValue('name',null);
+        $object->setValue('short_name',null);
+
         //echo "\n set suffixe ".trim($suffixe)."\n";
 
         if(stristr($code,"fvd")) {

@@ -175,13 +175,8 @@ class MauchampController extends Action
                     if(isset($clonedPage))
                         unset($clonedPage);
 
-                    if (($file = @fopen($pdfFile,'wb')) === false ) {
-                        //require_once 'Zend/Pdf/Exception.php';
-                        //throw new Zend_Pdf_Exception( "Can not open '$filename' file for writing." );
-                    }
-                    $pdfMerged->save($file);
-                    fclose($file);
-                    $pdfContent = file_get_contents($file);
+                    $pdfContent = $pdfMerged->render();
+                    file_put_contents($pdfFile, $pdfContent);
                  }
 
 

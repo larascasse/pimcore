@@ -80,7 +80,7 @@ class MauchampController extends Action
         $order = \Website\Tool\MauchampHelper::parseOrder($this->getParam('xml'));
 
       
-         header('Content-Type: application/json');
+        
 
           $ftUrls = array();
 
@@ -113,20 +113,14 @@ class MauchampController extends Action
         $pdfFileUrl = "";
   
 
-           die;
+    
 
          try {
 
 
            
             try {
-               // echo "try generate";
-                 //Generate PDF
-                /* V1 
-                $httpsource = implode(" ", $ftUrls);
-                $contentPdfPath = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
-                $pdfContent = $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpsource,$contentPdfPath);
-                */
+                
                 /* V2 */
                 $coverHtmlData = \Pimcore\Tool::getHttpData(
                         Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$this->getParam('xml')]);
@@ -235,6 +229,7 @@ class MauchampController extends Action
                 exit;
          }
 
+         header('Content-Type: application/json');
          echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?"Mail envoyé, chouette !":"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
          die;
       

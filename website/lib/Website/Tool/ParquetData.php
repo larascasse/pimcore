@@ -105,13 +105,15 @@ class ParquetData
             return 500;
             break;
 
-          case 'Multiplis Bouleau': //Epicea
+          case 'Multiplis Bouleau': 
             return 700;
             break;
 
-          case 'Multiplis Epicéa': //Epicea
+          case '3 plis massif': //Epicea
             return 460;
             break;
+
+
           
           default:
             //return $support;

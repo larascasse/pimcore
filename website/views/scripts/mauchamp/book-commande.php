@@ -35,7 +35,7 @@ if($hasAccessoires)
 
 /* Fiches techniques */
 foreach ($products as $product) {
-	if(!$product->isPlusValue()) 
+	if(!$product->isPlusValue() && !$this->getFiche_technique_lpn()) 
 		echo $this->template("product/detail-ft.php",array("product"=>$product)); 
 }
 ?>

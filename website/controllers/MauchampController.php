@@ -206,7 +206,7 @@ class MauchampController extends Action
                 $mail->setSubject("Détail de votre ".$order["orderDetail"]["Type_Piece"]." ".$order["orderDetail"]["Code_Commande"]." -  La Parqueterie Nouvelle");
 
                 $mail->clearFrom();
-                $mail->setFrom("contact@lp-nouvelle.fr");
+                $mail->setFrom("eshop@lp-nouvelle.fr","La Parqueterie Nouvelle");
 
                 if(strlen($pdfContent)>0) {
                     $at = $mail->createAttachment($pdfContent);

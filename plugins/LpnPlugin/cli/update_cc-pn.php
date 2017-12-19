@@ -91,7 +91,6 @@ Usé,use
 
         $longueur_txt = "";
 
-        $object->set
         switch ($object->getEpaisseur()) {
             case '18':
             case '21':

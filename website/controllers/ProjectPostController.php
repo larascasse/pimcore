@@ -76,8 +76,8 @@ class ProjectPostController extends Action
 
         $list = Object\ProjectPost::getList([
             //"limit" => $items,
-            //"order" => "DESC",
-            //"orderKey" => "date"
+            "order" => "DESC",
+            "orderKey" => "date"
         ]);
 
         $fields =   array();

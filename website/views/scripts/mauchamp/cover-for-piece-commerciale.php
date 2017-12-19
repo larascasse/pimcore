@@ -58,7 +58,7 @@ $orderDetail = $this->orderDetail;
         if(isset($representant)) {
             $strRepresentant .= $orderDetail[$representant."_Prenom"];
             $strRepresentant .= " ".$orderDetail[$representant."_Nom"];
-            $strRepresentant .= " (".$orderDetail[$representant].")";
+            //$strRepresentant .= " (".$orderDetail[$representant].")";
             $strRepresentant .= "<br />".$orderDetail[$representant."_Email"];
 
             if(strlen($orderDetail[$representant."_Tel"])>0)

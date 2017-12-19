@@ -84,8 +84,13 @@ class MauchampController extends Action
 
           $ftUrls = array();
 
+          $ftIncludedSkus = array();
+         
+
           if (is_array($this->getParam('ft'))) {
             foreach ($this->getParam('ft') as $key => $sku) {
+
+                $ftIncludedSkus[] = $sku;
                 
                 $existingProductList = Object\Product::getByEan($sku);
                 if($existingProductList->count()>=1) 
@@ -97,11 +102,18 @@ class MauchampController extends Action
             }
          }
 
+          $photosIncludedSkus = array();
+          if (is_array($this->getParam('photos'))) {
+            foreach ($this->getParam('photos') as $key => $sku) {
+                $photosIncludedSkus[] = $sku;
+            }
+         }
+
         
         $pdfFileUrl = "";
   
 
-        
+           die;
 
          try {
 
@@ -122,7 +134,57 @@ class MauchampController extends Action
                 $pdfFile = PIMCORE_TEMPORARY_DIRECTORY . "/" .$order["orderDetail"]["Code_Commande"]."-". uniqid() . ".pdf";
                 $pdfFileUrl = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$pdfFile);
 
-                $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($coverHtmlData,$pdfFile);
+                $debugOnlyStatique = false;
+
+                if(!$debugOnlyStatique) {
+                     $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($coverHtmlData,$pdfFile);
+
+                 }
+
+
+                /*** AJOUT DES FT DYN **/
+
+                //on ajoute les fihes rtechniques si elle ne sont pas dynbamqieusw
+                 
+                 $pdfMerged = new Zend_Pdf();
+                 $this->products = $order["products"];
+                 if(count($this->products)>0) {
+                     foreach ($this->products as $product) {
+                         
+                         if($product->getFiche_technique_lpn()) {
+                            $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
+                            
+                            $pdf = Zend_Pdf::load($pdfpath); 
+                            foreach($pdf->pages as $page){
+
+                              $clonedPage = clone $page;
+                              $pdfMerged->pages[] = $clonedPage;
+                            }
+                            unset($clonedPage);
+                         }
+                     }
+                }
+
+                 //OK, on a des PDF statiques, on insere avant le PDF Dynalmique
+                 if(count($pdfMerged->pages)>0) {
+
+                    //On charge le PDF dynamique ;
+                    if(isset($pdfContent)) {
+                        $pdfDyn = Zend_Pdf::parse($pdfContent); 
+                        $reversedPages = array_reverse($pdfDyn->pages);
+                        foreach($reversedPages as $page){
+                          $clonedPage = clone $page;
+                          array_unshift($pdfMerged->pages,$clonedPage);
+                          //$pdfMerged->pages[] = $clonedPage;
+                        }
+                    }
+                    if(isset($clonedPage))
+                        unset($clonedPage);
+
+                    $pdfContent = $pdfMerged->render();
+                 }
+
+
             
 
 
@@ -257,7 +319,7 @@ class MauchampController extends Action
         $this->view->coverTitle = $coverTitle;
         $this->view->xmlOrder = $xml;
 
-         $this->renderScript('mauchamp/book-commande.php');
+        $this->renderScript('mauchamp/book-commande.php');
 
 
     }
@@ -292,16 +354,60 @@ class MauchampController extends Action
             //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
             $data = \Website\Tool\MauchampHelper::getDebugOrder();
 
-
-
-
-         $fileContent = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$data]);
-
-
-         //$filepath = $tmpPdfFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
-         $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($fileContent);
         
-        $filename = "laparqueterrienouvelle.pdf";
+
+        $debugOnlyStatique = false;
+
+        if(!$debugOnlyStatique) {
+             $fileContent = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$data]);
+
+
+             //$filepath = $tmpPdfFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
+             $pdfContent = \Website\Tool\Wkhtmltopdf::fromString($fileContent);
+
+         }
+
+         //OK, on ajoute les fihes rtechniques si elle ne sont pas dynbamqieusw
+         $order = \Website\Tool\MauchampHelper::parseOrder($data);        
+         $this->products = $order["products"];
+        
+         $pdfMerged = new Zend_Pdf();
+         foreach ($this->products as $product) {
+             
+             if($product->getFiche_technique_lpn()) {
+                $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
+                
+                $pdf = Zend_Pdf::load($pdfpath); 
+                foreach($pdf->pages as $page){
+
+                  $clonedPage = clone $page;
+                  $pdfMerged->pages[] = $clonedPage;
+                }
+                unset($clonedPage);
+             }
+         }
+
+         if(count($pdfMerged->pages)>0) {
+
+            //On charge le PDF dynamique ;
+            if(isset($pdfContent)) {
+                $pdfDyn = Zend_Pdf::parse($pdfContent); 
+                $reversedPages = array_reverse($pdfDyn->pages);
+                foreach($reversedPages as $page){
+                  $clonedPage = clone $page;
+                  array_unshift($pdfMerged->pages,$clonedPage);
+                  //$pdfMerged->pages[] = $clonedPage;
+                }
+            }
+            if(isset($clonedPage))
+                unset($clonedPage);
+
+            $pdfContent = $pdfMerged->render();
+         }
+         
+
+        
+        $filename = "laparqueterienouvelle.pdf";
 
          $headers = [
                 'Content-Type' => 'application/pdf',

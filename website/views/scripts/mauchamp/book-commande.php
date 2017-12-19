@@ -13,8 +13,20 @@ echo $this->template("mauchamp/cover-for-piece-commerciale.php",array("product"=
 /* Photos / Fiche produits */
 foreach ($products as $product) {
 	if(!$product->isAccessoire()) {
-		echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids)); 
-		echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids++)); 
+
+		
+
+		if(strlen(trim($product->getDescription()))>0) {
+			echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids)); 
+		}
+
+		if(count($product->getImageAssetArray())>0) {
+			echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids));
+
+		}
+
+		
+		$ids ++;
 	}
 }
 
@@ -35,7 +47,7 @@ if($hasAccessoires)
 
 /* Fiches techniques */
 foreach ($products as $product) {
-	if(!$product->isPlusValue() && !$this->getFiche_technique_lpn()) 
+	if(!$product->isPlusValue() && !$product->getFiche_technique_lpn()) 
 		echo $this->template("product/detail-ft.php",array("product"=>$product)); 
 }
 ?>

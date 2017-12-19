@@ -947,11 +947,11 @@ EOT;
           //$words["parquet"] = true;
         }
         else if(stristr($product->getFamille(),'vinyl')) {
-          $words["Vinyl"] = true;
+          $words["vinyl"] = true;
           //$words["parquet"] = true;
         }
         else if(stristr($product->getFamille(),'strat')) {
-          $words["Stratifié"] = true;
+          $words["stratifié"] = true;
           //$words["parquet"] = true;
         }
         else if(stristr($product->getFamille(),'beton')) {
@@ -965,10 +965,8 @@ EOT;
       }
 
       foreach ($missingProducts as $product) {
-        if(stristr($product->name, "accessoire")) {
-          $words["accessoires"] = true;
-        }
-        else if(stristr($product->name, "parquet") && stristr($product->name, "massif")) {
+        
+        if(stristr($product->name, "parquet") && stristr($product->name, "massif")) {
           //$words["parquet massif"] = true;
           $words["parquet"] = true;
         }
@@ -985,10 +983,19 @@ EOT;
         else if(stristr($product->name, "table ")) {
           $words["table"] = true;
         }
+        else if(stristr($product->name, "vinyl ")) {
+          $words["vinyl"] = true;
+        }
+        else if(stristr($product->name, "stratifi ")) {
+          $words["stratifié"] = true;
+        }
+        else if(stristr($product->name, "accessoire")) {
+          $words["accessoires"] = true;
+        }
   
       }
 
-      $sortedWords = array_replace(array_flip(array("parquet","bardage","table","accessoires")), $words);
+      $sortedWords = array_replace(array_flip(array("parquet","terrasse","bardage","table","vinyl","stratifié","accessoires")), $words);
 
       $strArray=[];
       foreach ($sortedWords as $key => $value) {

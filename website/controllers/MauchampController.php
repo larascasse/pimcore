@@ -199,7 +199,11 @@ class MauchampController extends Action
                 $mail->clearRecipients();
 
                 $mail->addTo("florent@lesmecaniques.net",'FLorent text');
-                $mail->setSubject("Votre sélection La Parqueterie Nouvelle");
+                $mail->addBcc("florent@lesmecaniques.net");
+
+                $mail->setReplyTo($this->getParam("from-email"));
+
+                $mail->setSubject("Détail de votre ".$order["orderDetail"]["Type_Piece"]." ".$order["orderDetail"]["Code_Commande"]." -  La Parqueterie Nouvelle");
 
                 $mail->clearFrom();
                 $mail->setFrom("contact@lp-nouvelle.fr");
@@ -207,7 +211,7 @@ class MauchampController extends Action
                 if(strlen($pdfContent)>0) {
                     $at = $mail->createAttachment($pdfContent);
                     $at->type = "application/pdf";
-                    $at->filename = "visite-laparqueterienouvelle-".$order["orderDetail"]["Code_Commande"].".pdf";
+                    $at->filename = "visite-laparqueterienouvelle-".$order["orderDetail"]["Type_Piece"]."-".$order["orderDetail"]["Code_Commande"].".pdf";
                     $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
                 }
                 $mail->send();

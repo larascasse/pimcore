@@ -203,7 +203,7 @@ class MauchampController extends Action
 
                 $mail->setReplyTo($this->getParam("from-email"));
 
-                $mail->setSubject("Détail de votre ".$order["orderDetail"]["Type_Piece"]." ".$order["orderDetail"]["Code_Commande"]." -  La Parqueterie Nouvelle");
+                $mail->setSubject($this->getParam("subject"));
 
                 $mail->clearFrom();
                 $mail->setFrom("eshop@lp-nouvelle.fr","La Parqueterie Nouvelle");

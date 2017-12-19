@@ -271,7 +271,7 @@ endif; ?>
 
           <div class="form-group has-success__">
             <label class="form-control-label" for="inputSuccess1">Sujet</label>
-            <input type="text" class="form-control form-control-success" id="inputSuccess1" value="Votre visite à La Parqueterie Nouvelle">
+            <input type="text" class="form-control form-control-success" id="inputSuccess1" value="<?php echo "En détail, votre ".$orderDetail["Type_Piece"]." ".$orderDetail["Code_Commande"]." -  La Parqueterie Nouvelle" ?>" name="subject">
             <!--<div class="form-control-feedback">Success! You've done it.</div>
             <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
            </div>

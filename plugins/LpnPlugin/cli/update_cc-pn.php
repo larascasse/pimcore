@@ -120,10 +120,10 @@ Usé,use
         $suffixe .= $object->getChoixString();
 
         if(stristr($code,"fvd")) {
-           $suffixe .= " brut longeurs variables";
+           $suffixe .= " brut";
         }
         else {
-            $suffixe .= " brut longeurs fixes";
+            $suffixe .= " brut";
         }
 
         

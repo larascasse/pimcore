@@ -16,6 +16,11 @@ class ProjectPostController extends Action
 
         // get a list of news objects and order them by date
         $blogList = new Object_ProjectPost_List();
+
+        $blogList->setOrderKey("date");
+        $blogList->setOrder("DESC");
+
+
         //$blogList->setOrderKey("date");
         //$blogList->setOrder("DESC");
 

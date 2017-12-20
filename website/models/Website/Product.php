@@ -644,7 +644,8 @@ class Website_Product extends Object_Product {
 			'actif_web',
 			'subtype_1',
 			'notice_pose_lpn',
-			'chauffantAccumulationBasseTemperature'
+			'chauffantAccumulationBasseTemperature',
+			'qualite'
 
 
 			);

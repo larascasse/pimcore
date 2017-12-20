@@ -2809,6 +2809,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$warningSuivantLargeur ="";
 
 		if($this->isParquetMassif()) {
+			$debug = "";
 			if($epaisseur>0) {
 				if($epaisseur <= 14 && $largeur <= 150 && ($largeur/$epaisseur)<11) {
 					$compatibleEnPoseColleeEnPlein = true;

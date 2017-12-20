@@ -130,7 +130,7 @@ if(is_array($result) && count($result)>0)  {
       <?php 
       else : 
         ?>
-        <h4 style="padding-bottom: 40px; text-align: center;">Informations WEB</h4>
+        <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
        
         <?php
         foreach ($customer as $key => $value) {

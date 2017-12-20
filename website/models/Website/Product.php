@@ -2388,12 +2388,15 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 		return  (float)$this->getEpaisseurUsure();
 	}
 
+
+
+
 	public function getCalculatedClasseUtilisation() {
 		 
         $classes = [
             "A" => ["21","21","21","22","22"],
             "B" => ["21","21","22","23","31"],
-            "C" => ["21","23","31","33","34"],
+            "C" => ["21","23","31","33","34"], 
             "D" => ["31","31","33","34","41"],
         ];
       
@@ -2422,6 +2425,11 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
                 $index = 3;
             else if($coucheUsure>=7)
                 $index = 4;
+
+            //FB TODO : pour le parquet massin NOIN NRUT
+            if($this->isParquetMassif() && $index==4) {
+            	$index = 3;
+            }
              
              //return "KKK".$index." ".$coucheUsure;
 

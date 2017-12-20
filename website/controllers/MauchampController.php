@@ -41,8 +41,8 @@ class MauchampController extends Action
         if(isset($xml))
             $data = $xml;
         else
-            //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-            $data = \Website\Tool\MauchampHelper::getDebugOrder();
+            $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+            //$data = \Website\Tool\MauchampHelper::getDebugOrder();
         
         if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
             $client = \Website\Tool\MauchampHelper::parseClient($data);

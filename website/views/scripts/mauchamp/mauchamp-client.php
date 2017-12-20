@@ -73,6 +73,10 @@ function sendEmail(target) {
 
 <?php
 $email = $this->client->Email_Contact;
+
+$customer = \Website\Tool\MagentoHelper::loadMagentoCustomer($email);
+
+/*
 $client = new SoapClient('https://www.laparqueterienouvelle.fr/api/v2_soap/?wsdl');
 
 // If some stuff requires api authentification,
@@ -93,16 +97,16 @@ if(is_array($result) && count($result)>0)  {
     $customer = $result[0];
     //var_dump ($customer);
 }
-
+*/
 ?>
 
-  <div class="container" style="padding-top: 40px;">
+  <div class="container__" style="padding-top: 40px;">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       
 
       <?php if (!$customer) : ?>
-      <h4 style="padding-bottom: 40px;">Client WEB a créer pour l'email <i><?php echo $email; ?></i></h4>
+      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->client->Code_Client ?> - <?php echo $email; ?></i></h4>
       <form id="mailform" class="form-horizontal">
       <div class="text-center">
         
@@ -126,11 +130,11 @@ if(is_array($result) && count($result)>0)  {
       <?php 
       else : 
         ?>
-
+        <h4 style="padding-bottom: 40px; text-align: center;">Informations WEB</h4>
        
         <?php
         foreach ($customer as $key => $value) {
-            echo $key." : ".$value."<br />";
+             echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
         }
 
 
@@ -146,12 +150,12 @@ if(is_array($result) && count($result)>0)  {
        
         echo '<div class="row">';
         for($i=0; $i<count($value); $i++){
-           echo '<div class="col-sm-4"><hr /><h4>Adresse</h4>';
+           echo '<div class="col-sm-6"><hr /><h4>Adresse</h4>';
           $adresse = $value[$i];
           
           foreach ($adresse as $keyAdresse => $valueAdresse) {
             
-            echo '<div class="form-group"><label>'.$keyAdresse.' : </label> <input disabled value="'.$valueAdresse.'" /></div>';
+            echo '<div class="form-group row"><label>'.$keyAdresse.' : </label> <input disabled value="'.$valueAdresse.'"  class="form-control" /></div>';
           }
           echo '</div>';
 
@@ -159,7 +163,7 @@ if(is_array($result) && count($result)>0)  {
         echo '</div>';
     }
     else if(is_string($value)) {
-        echo '<div class="form-group"><label>'.$key.' : </label> <input disabled value="'.$value.'" /></div>';
+        echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
     }
   
 }

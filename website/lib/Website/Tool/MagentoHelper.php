@@ -35,7 +35,7 @@ class MagentoHelper
             'complex_filter' => array(
                 array(
                     'key' => 'email',
-                    'value' => array('key' => 'in', 'value' => "florent@lesmecaniques.net")
+                    'value' => array('key' => 'in', 'value' => $email)
                 )
             )
         );

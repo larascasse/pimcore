@@ -29,7 +29,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  }
        	  
        	  else {
-       	  	  $url = "http://magento.florent.local/LPN/get_a_product_magmi.php?time=".time();
+       	  	  $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php?time=".time();
 	    	  $params = array();
 
 	    	  if($withChildren) {

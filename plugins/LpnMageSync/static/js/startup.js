@@ -24,6 +24,48 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
 
     },
 
+    postOpenObject: function(obj,type){
+        console.log("postOpenObject",obj);
+        //withchildren,configurable,create
+        if(obj.data.general.o_classId==5) {
+
+             var menu = new Ext.SplitButton({
+                text: t('sync magento avec enfants'),
+                iconCls: "pimcore_icon_publish",
+                scale: "medium",
+                handler: this.syncProduct.bind(obj,true,false,false),
+                menu: [
+                    {
+                        text: t('sync magento seul'),
+                        iconCls: "pimcore_icon_save",
+                        //withchildren,configurable,create
+                        handler: this.syncProduct.bind(obj,false,false,false)
+                    },
+                    {
+                        text: t('create magento avec enfants'),
+                        iconCls: "pimcore_icon_save",
+                        //withchildren,configurable,create
+                        handler: this.syncProduct.bind(obj,true,false,true)
+                    },
+                    {
+                        text: t('create magento seul'),
+                        iconCls: "pimcore_icon_save",
+                        handler: this.syncProduct.bind(obj,false,false,true)
+                    },
+                    {
+                        text: t('Effacer le cache'),
+                        iconCls: "pimcore_icon_save",
+                        handler: this.syncProduct.bind(obj)
+                    }
+                ]
+            });
+            obj.toolbar.insert(5, menu);
+        }
+           
+
+
+    },
+
    /* postOpenObject : function(object,type){
     	var ref=this;
 
@@ -37,7 +79,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     },*/
     
     sync : function () {
-    console.log("this",this)
+       console.log("this",this)
        var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
        //return;
          // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
@@ -48,11 +90,64 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
             method: "post",
             success: function (response) {
                 try{
-                    pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+                   // pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
 
                     var rdata = Ext.decode(response.responseText);
                     if (rdata && rdata.success) {
                         pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+                       // this.resetChanges();
+                        //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
+                    }
+                    else {
+                        pimcore.helpers.showPrettyError(rdata.type, t("error"), t("error_sync"),
+                            rdata.message, rdata.stack, rdata.code);
+                    }
+                } catch(e){
+                    pimcore.helpers.showNotification(t("error"), t("error_sync"), "error");
+                }
+                
+
+
+                if(typeof callback == "function") {
+                    callback();
+                }
+            }.bind(this),
+            failure: function () {
+                this.tab.unmask();
+            },
+        });
+
+     
+    },
+
+
+     syncProduct : function (withChildren,configurable,create) {
+        console.log("syncProduct",this);
+        if(!this.data)
+            return;
+       var url = '/plugin/LpnMageSync/index/publish-to-Magento/id/' +this.id;
+       if(withChildren)
+        url+="/withChildren/1";
+       if(configurable)
+        url+="/configurable/1";
+       if(create)
+        url+="/create/1";
+       console.log(url)
+       //return;
+       //return;
+         // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
+
+        Ext.Ajax.request({
+            //url: '/plugin/LpnMageSync/index/download/id/' +this.id,
+            url: url,
+            method: "get",
+            success: function (response) {
+                try{
+                   // pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+
+                    var rdata = Ext.decode(response.responseText);
+                    if (rdata && rdata.success) {
+                        pimcore.helpers.showNotification(t("save"), t("successful_sync")+rdata.message, "success");
                        // this.resetChanges();
                         //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
                     }

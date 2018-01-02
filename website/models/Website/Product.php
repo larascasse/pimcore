@@ -2107,7 +2107,7 @@ class Website_Product extends Object_Product {
         				$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
 						*/
         				/* VERSION CLOUD */
-        				$path = 'http:'.$asset->getThumbnail("magento_realisation")->getPath();
+        				$path = $asset->getThumbnail("magento_realisation")->getPath();
 
 						$return[] = $path."::realisation";
 					}

@@ -1317,7 +1317,7 @@ class Website_Product extends Object_Product {
 			*/
 
         	/* VERSION CLOUD */
-        	$path = 'http:'.$this->getImage_1()->getThumbnail("magento_small")->getPath();
+        	$path = $this->getImage_1()->getThumbnail("magento_small")->getPath();
 
         	return $path;
     	}
@@ -1338,7 +1338,7 @@ class Website_Product extends Object_Product {
 
 
         	/* VERSION CLOUD */
-        	$path = 'http:'.$this->getImage_2()->getThumbnail("magento_small")->getPath();
+        	$path = $this->getImage_2()->getThumbnail("magento_small")->getPath();
 
         	return $path;
     	}
@@ -1354,7 +1354,7 @@ class Website_Product extends Object_Product {
         	$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
 			¨/
         	/* VERSION CLOUD */
-        	$path = 'http:'.$this->getImage_3()->getThumbnail("magento_small")->getPath();
+        	$path = $this->getImage_3()->getThumbnail("magento_small")->getPath();
 
         	return $path;
     	}

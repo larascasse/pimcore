@@ -2120,7 +2120,7 @@ class Website_Product extends Object_Product {
 						$return[] = $path."::realisation";
 						*/
 				/* VERSION CLOUD */
-				$path = 'http:'.$element->getThumbnail("magento_realisation")->getPath();
+				$path = $element->getThumbnail("magento_realisation")->getPath();
 				$return[] = $path."::realisation";
 			}
 		}

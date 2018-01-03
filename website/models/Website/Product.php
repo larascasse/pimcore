@@ -48,9 +48,15 @@ class Website_Product extends Object_Product {
     	
 
     	if(!$path) {
-    		$path = '/'.$field.'/'.strtolower($value);
+    		$path = '/'.$field.'/'.strtolower(\Pimcore\File::getValidFilename($value));
     	}
     	$data = Object_Abstract::getByPath($path);
+
+    	//Migration
+    	if(!($data instanceof Object_Taxonomy)) {
+    		$path = '/taxonomies/'.$field.'/'.strtolower(\Pimcore\File::getValidFilename($value));
+    		$data = Object_Abstract::getByPath($path);
+    	}
 
 		if(!($data instanceof Object_Taxonomy)) {
 			$datas = Object_Taxonomy::getByCode($value);
@@ -65,6 +71,7 @@ class Website_Product extends Object_Product {
 			$data = new Object\Taxonomy();
 			$data->setLabel($value);
 			$data->setDescription('');
+			$data->setEditorial('');
 
 		}
 
@@ -219,6 +226,37 @@ class Website_Product extends Object_Product {
 		}
 
 	}
+
+	private function getTaxonomyEditorial($field) {
+
+    	//detail taxo
+		$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
+		if(count($taxonomies) > 0) {
+			//$html='<div class="row"><div class="col">';
+			$html='';
+			if(count($taxonomies)>1) {
+				$html.= "<p><strong>".$this->getTaxonomyObject($field)->getLabel()."</strong><br />";
+			}
+			$idx=0;
+			foreach ($taxonomies as $label => $taxonomie) {
+				if($idx>0 && $idx==count($taxonomies)-1)
+					$html.= " ou ";
+				else if($idx>0)
+					$html.= ", ";
+
+				if(strlen(trim($taxonomie->getEditorial()))>0) {
+					$html.= "".$taxonomie->getEditorial();
+				}
+				
+				$idx++;
+				
+			}
+			//$html='</div></div>';
+			return $html;
+		}
+
+	}
+
 
 
 	private function getTaxonomyLogoAsset($field) {
@@ -1822,12 +1860,51 @@ class Website_Product extends Object_Product {
    		 Object_Abstract::setGetInheritedValues(true); 
 
    		 $str="";
-   		 if(strlen(trim($this->getDescription())))
-   		 	$str = "<h2>".$this->getShort_description_title()."</h2><p>".nl2br($this->getDescription())."</p>";
-   		  Object_Abstract::setGetInheritedValues($inheritance); 
+
+   		 if(strlen(trim($this->getShort_description_title()))>0) {
+   		 		$str .= "<h2>".$this->getShort_description_title()."</h2>";
+   		 }
+
+   		 if(strlen(trim($this->getDescription()))) {
+   		 	//if(strlen(trim($this->getShort_description_title()))>0) {
+   		 		//$str .= "<h2>".$this->getShort_description_title()."</h2>";
+   		 	//}
+   		 	$str .= "<p>".nl2br($this->getDescription())."</p>";
+   		 }
+   		 else {
+   		 	$str .= $this->getCalculatedDescription();
+   		 }
+   		 	
+   		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
 		   		
 
+	}
+
+	public function getCalculatedDescription() {
+		$description = array();
+
+
+
+		if($this->isParquet()) {
+			$fields = array("choix","traitement_surface","finition","support","motif");
+			foreach ($fields as $field) {
+				$content  = trim($this->getTaxonomyEditorial($field));
+
+				if(strlen($content)>0)
+					$description[] = $this->getTaxonomyEditorial($field);
+				/*$getter = "get" . ucfirst($field);
+				$getterString = $getter."String";
+				$getterDescription = $getter."Description";
+				$getterLogo = $getter."Logo";
+				$getterEditorial = $getter."Editorial";
+				if(method_exists($this, $getter) || method_exists($this, $getterEditorial)) {
+					$description[] = $getterEditorial();
+				}*/
+				# code...
+			}
+		}
+		return implode("<br /><br />",$description);
 	}
 
 

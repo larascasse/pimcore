@@ -239,16 +239,16 @@ class Website_Product extends Object_Product {
 			}
 			$idx=0;
 			foreach ($taxonomies as $label => $taxonomie) {
-				if($idx>0 && $idx==count($taxonomies)-1)
-					$html.= " ou ";
-				else if($idx>0)
-					$html.= ", ";
+				
 
 				if(strlen(trim($taxonomie->getEditorial()))>0) {
+					if($idx>0)
+						$html.= "<br />";
 					$html.= "".$taxonomie->getEditorial();
+					$idx++;
 				}
 				
-				$idx++;
+				
 				
 			}
 			//$html='</div></div>';

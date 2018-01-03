@@ -235,7 +235,7 @@ class Website_Product extends Object_Product {
 			//$html='<div class="row"><div class="col">';
 			$html='';
 			if(count($taxonomies)>1) {
-				$html.= "<p><strong>".$this->getFieldDefinition($field)->getTitle()."</strong><br />";
+				$html.= "<p><strong>".$this->getClass()->getFieldDefinition($field)->getTitle()."</strong><br />";
 			}
 			$idx=0;
 			foreach ($taxonomies as $label => $taxonomie) {

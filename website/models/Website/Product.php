@@ -233,9 +233,10 @@ class Website_Product extends Object_Product {
 		$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
 		if(count($taxonomies) > 0) {
 			//$html='<div class="row"><div class="col">';
-			$html='';
+			$html = '';
+			$title ='';
 			if(count($taxonomies)>1) {
-				$html.= "<p><strong>".$this->getClass()->getFieldDefinition($field)->getTitle()."</strong><br />";
+				$title = "<p><strong>".$this->getClass()->getFieldDefinition($field)->getTitle()."</strong><br />";
 			}
 			$idx=0;
 			foreach ($taxonomies as $label => $taxonomie) {
@@ -244,6 +245,8 @@ class Website_Product extends Object_Product {
 				if(strlen(trim($taxonomie->getEditorial()))>0) {
 					if($idx>0)
 						$html.= "<br />";
+					else
+						$html.=$title;
 					$html.= "".$taxonomie->getEditorial();
 					$idx++;
 				}

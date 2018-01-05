@@ -30,7 +30,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         if(obj.data.general.o_classId==5) {
 
              var menu = new Ext.SplitButton({
-                text: t('sync magento avec enfants'),
+                text: t('sync magento + enfants'),
                 iconCls: "pimcore_icon_publish",
                 scale: "medium",
                 handler: this.syncProduct.bind(obj,true,false,false),
@@ -42,15 +42,32 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
                         handler: this.syncProduct.bind(obj,false,false,false)
                     },
                     {
-                        text: t('create magento avec enfants'),
+                        text: t('sync configurable'),
+                        iconCls: "pimcore_icon_save",
+                        handler: this.syncProduct.bind(obj,true,true,false)
+                    },
+                    {
+                        xtype: 'menuseparator'
+                    },
+                    {
+                        text: t('create magento + enfants'),
                         iconCls: "pimcore_icon_save",
                         //withchildren,configurable,create
                         handler: this.syncProduct.bind(obj,true,false,true)
                     },
                     {
-                        text: t('create magento seul'),
+                        text: t('create seul'),
                         iconCls: "pimcore_icon_save",
                         handler: this.syncProduct.bind(obj,false,false,true)
+                    },
+                    
+                    {
+                        text: t('create configurable'),
+                        iconCls: "pimcore_icon_save",
+                        handler: this.syncProduct.bind(obj,true,true,true)
+                    },
+                    {
+                        xtype: 'menuseparator'
                     },
                     {
                         text: t('Effacer le cache'),

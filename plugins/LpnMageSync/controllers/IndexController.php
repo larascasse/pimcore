@@ -22,6 +22,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
        	  $withChildren = $this->getParam("withChildren");
        	  $configurable = $this->getParam("configurable");
+
        	  $create = $this->getParam("create");
 
        	  if(!$product instanceof Object_Product) {
@@ -29,15 +30,18 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  }
        	  
        	  else {
-       	  	  $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php?time=".time();
+       	  	  $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
 	    	  $params = array();
+
+	    	  $params["time"] = time();
 
 	    	  if($withChildren) {
 	    	  	$params["path"] = $product->getFullPath();
+
 	    	  	if($configurable)
 	    	  		$params["configurable"] = 1;
-	    	  	else
-	    	  		$params["simple"] = 1;
+	    	  	//else if($simple)
+	    	  	//	$params["simple"] = 1;
 	    	  	
 	    	  }
 	    	  else if(strlen($product->getEan())>0) {

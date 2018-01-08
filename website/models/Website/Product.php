@@ -236,7 +236,7 @@ class Website_Product extends Object_Product {
 			$html = '';
 			$title ='';
 			if(count($taxonomies)>1) {
-				$title = "<p><strong>".$this->getClass()->getFieldDefinition($field)->getTitle()."</strong><br />";
+				$title = "<strong>".$this->getClass()->getFieldDefinition($field)->getTitle()."</strong><br />";
 			}
 			$idx=0;
 			foreach ($taxonomies as $label => $taxonomie) {
@@ -247,7 +247,7 @@ class Website_Product extends Object_Product {
 						$html.= "<br />";
 					else
 						$html.=$title;
-					$html.= "".$taxonomie->getEditorial();
+					$html.= $taxonomie->getEditorial();
 					$idx++;
 				}
 				
@@ -1867,6 +1867,9 @@ class Website_Product extends Object_Product {
    		 if(strlen(trim($this->getShort_description_title()))>0) {
    		 		$str .= "<h2>".$this->getShort_description_title()."</h2>";
    		 }
+   		 else {
+   		 		$str .= "<h2>".$this->getCalculatedShortDescriptionTitle()."</h2>";
+   		 }
 
    		 if(strlen(trim($this->getDescription()))) {
    		 	//if(strlen(trim($this->getShort_description_title()))>0) {
@@ -1882,6 +1885,10 @@ class Website_Product extends Object_Product {
 		return $str;
 		   		
 
+	}
+
+	public function getCalculatedShortDescriptionTitle() {
+		return $this->getMage_short_name();
 	}
 
 	public function getCalculatedDescription() {

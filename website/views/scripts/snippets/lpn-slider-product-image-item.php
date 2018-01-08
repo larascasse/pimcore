@@ -20,7 +20,7 @@ echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getP
 <div class="card-block">
   <p class="card-title"><?php echo  $asset->getRelatedTitle() ?></p>
   <p class="card-text"><?php echo $asset->getRelatedDescription()?></p>
-
-
 </div>
+
+
 </div>

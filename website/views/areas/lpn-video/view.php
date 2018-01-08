@@ -1,7 +1,4 @@
-
-
-
-    <?php $video = $this->video("video", [
+<?php $video = $this->video("video", [
         "html5" => true,
         "thumbnail" => "content",
         "height" => "auto",
@@ -80,4 +77,3 @@
 
 
     ?>
-</section>

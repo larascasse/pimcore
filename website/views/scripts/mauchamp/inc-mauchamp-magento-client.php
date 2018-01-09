@@ -25,7 +25,7 @@ $email = $this->email;
      method : "GET",
      success: function (data) {
 
-            hidePleaseWait();
+            //hidePleaseWait();
             console.log(data.customer);
             if(data.customer) {
               $('#known-customer').show();
@@ -40,7 +40,7 @@ $email = $this->email;
         
               console.log(transport);
               
-              hidePleaseWait();
+              //hidePleaseWait();
               alert(transport.statusText);
 
       }

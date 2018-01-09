@@ -97,7 +97,7 @@ function createCustomer(target) {
 	        
 			<div class="form-group"  style="padding-bottom: 40px;">
 				<input type="button" class="btn btn-primary btn-lg" name="button" onclick="createCustomer(this)" value="Créer un compte web" /><br />
-				<div style="display: block;">
+				<div style="display: none;">
 					<textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
 				</div>
 	     </div>

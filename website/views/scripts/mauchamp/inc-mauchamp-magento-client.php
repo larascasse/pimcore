@@ -59,10 +59,11 @@ function createCustomer(target) {
      data: $("#mailform").serialize(),
      method : "POST",
      success: function (data) {
-
+     		alert(data);
+     		btn.disabled=false;
             hidePleaseWait();
-            alert(data);
-            btn.disabled=false;
+            
+            
 
       },
       error: function (transport) {
@@ -76,7 +77,13 @@ function createCustomer(target) {
       }
 
   });
-  showPleaseWait();
+  try {
+  	showPleaseWait();
+  }
+  catch(e) {
+  	console.warn(e);
+  }
+  
 }
 
 

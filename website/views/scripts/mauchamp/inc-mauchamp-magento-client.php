@@ -71,7 +71,7 @@ function createCustomer(target) {
   btn.disabled=true;
   
   $.ajax({
-     url : '/plugin/LpnMageSync/index/create-magento-client/',
+     url : '/plugin/LpnMageSync/front/create-magento-client/',
      data: $("#mailform").serialize(),
      method : "POST",
      success: function (data) {

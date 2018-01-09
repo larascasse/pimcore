@@ -11,6 +11,22 @@ $email = $this->email;
 });
 
 
+// Extended disable function
+jQuery.fn.extend({
+    disable: function(state) {
+        return this.each(function() {
+            var $this = $(this);
+            if($this.is('input, button, textarea, select'))
+              this.disabled = state;
+            else
+              $this.toggleClass('disabled', state);
+        });
+    }
+});
+
+
+
+
 	function loadMagentoClient() {
   //window.log("KK",$("#mailform"),$("#mailform").serialize());
   $('#exampleModalLongTitle').html('Chargement des données');
@@ -61,7 +77,12 @@ function createCustomer(target) {
      success: function (data) {
      		alert(data);
      		btn.disabled=false;
-            hidePleaseWait();
+            try {
+			  	hidePleaseWait();
+			  }
+			  catch(e) {
+			  	console.warn(e);
+			  }
             
             
 
@@ -71,7 +92,12 @@ function createCustomer(target) {
               btn.disabled=false;
               console.log(transport);
               
-              hidePleaseWait();
+             try {
+			  	hidePleaseWait();
+			  }
+			  catch(e) {
+			  	console.warn(e);
+			  }
               alert(transport.statusText);
 
       }

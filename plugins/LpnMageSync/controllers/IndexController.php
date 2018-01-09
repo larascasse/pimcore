@@ -75,41 +75,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
     	 
     }
 
-    //http://pimcore.florent.local/plugin/LpnMageSync/index/load-magento-client/email/florent@lesmecaniques.net
-    public function loadMagentoClientAction() {
-    	 $this->disableLayout();
-		$this->disableViewAutoRender();
-
-    	$email = $this->getParam("email");
-
-    	 
-    	$customer = \Website\Tool\MagentoHelper::loadMagentoCustomer($email);
-    	 $this->response = array(
-	    	  	"success" => "true", 
-	    	  	"customer"=>$customer
-
-	    	  );
-
-    	$this->_helper->json->sendJson($this->response);
-    }
-
-    //http://pimcore.florent.local/plugin/LpnMageSync/index/load-magento-client/email/florent@lesmecaniques.net
-    public function createMagentoClientAction() {
-    	$this->disableLayout();
-		$this->disableViewAutoRender();
-		
-    	$xml = $this->getParam("xml");
-
-    	$data = Pimcore\Tool::getHttpData('http://magento.florent.local/LPN/create_customer.php',null,["xml"=>$xml]);
-
-    	$response = $this->getResponse();
-        $response->setHeader('Content-Type', 'application/json', true);
-        $response->setBody($data);
-        $response->sendResponse();
-        exit;
-    	 
-
-    }
+ 
 
 
 }

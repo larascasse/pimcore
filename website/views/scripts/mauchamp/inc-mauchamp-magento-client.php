@@ -15,7 +15,7 @@ $email = $this->email;
   //window.log("KK",$("#mailform"),$("#mailform").serialize());
   $('#exampleModalLongTitle').html('Chargement des données');
   //showPleaseWait();
-  var url = '/plugin/LpnMageSync/index/load-magento-client/email/<?php echo $email ?>';
+  var url = '/plugin/LpnMageSync/front/load-magento-client/email/<?php echo $email ?>';
   console.log("url... "+url);
   $('#unknown-customer').hide();
   $('#known-customer').hide();

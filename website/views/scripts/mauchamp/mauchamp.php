@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 
 function showPleaseWait () {
-            $('#pleasewaitmodal').modal();
+            $('#pleasewaitmodal').modal({animation: false});
         };
 
 function hidePleaseWait () {

@@ -21,7 +21,7 @@ $(document).ready(function() {
 function showPleaseWait (message) {
             if(typeof(message)=='undefined')
                 message = 'En cours de traitement';
-            $('#pleasewaitmodal').modal();
+            $('#pleasewaitmodal').modal({animation: false});
         };
 
 function hidePleaseWait (message) {

@@ -53,7 +53,7 @@ function createCustomer(target) {
   window.log("KK",$("#mailform"),$("#mailform").serialize());
   var btn = $(target);
   btn.disabled=true;
-  showPleaseWait();
+  
   $.ajax({
      url : '/plugin/LpnMageSync/index/create-magento-client/',
      data: $("#mailform").serialize(),
@@ -76,6 +76,7 @@ function createCustomer(target) {
       }
 
   });
+  showPleaseWait();
 }
 
 

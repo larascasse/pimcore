@@ -11,7 +11,11 @@ use Pimcore\Model\Document\Page;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
-use Pimcore\Tool;
+
+use Website\Tool
+;
+
+
 
 class MauchampController extends Action
 {
@@ -41,8 +45,8 @@ class MauchampController extends Action
         if(isset($xml))
             $data = $xml;
         else
-            $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-            //$data = \Website\Tool\MauchampHelper::getDebugOrder();
+            //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+            $data = Website\Tool\MauchampHelper::getDebugOrder();
         
         if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
             $client = \Website\Tool\MauchampHelper::parseClient($data);
@@ -67,6 +71,7 @@ class MauchampController extends Action
             $this->view->transport = $order["transport"];
             $this->view->orderDetail = $order["orderDetail"];
             $this->view->xmlOrder = $data;
+            $this->view->xmlClient = \Website\Tool\MauchampHelper::buildXmlClientFromOrder($data);//Website\Tool\MagentoHelper::buildXmlClientFromOrder($data);
 
         }
         

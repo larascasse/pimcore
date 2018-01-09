@@ -49,5 +49,29 @@ class MagentoHelper
         return $customer;
     }
 
+    public static function createMagentoCustomer($email) {
+        $url = 'https://www.laparqsueterienouvelle.fr/LPN/create_customer.php';
+
+        // If some stuff requires api authentification,
+        // then get a session token
+        $session = $client->login(self::$apiUsername, self::$apiPassword);
+        $complexFilter = array(
+            'complex_filter' => array(
+                array(
+                    'key' => 'email',
+                    'value' => array('key' => 'in', 'value' => $email)
+                )
+            )
+        );
+        $customer = false;
+        $result = $client->customerCustomerList($session, $complexFilter);
+        if(is_array($result) && count($result)>0)  {
+
+            $customer = $result[0];
+            //var_dump ($customer);
+        }
+        return $customer;
+    }
+
     
 }

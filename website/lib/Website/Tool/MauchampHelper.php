@@ -29,8 +29,8 @@ class MauchampHelper
    <Type_Piece>Commande</Type_Piece>
    <Code_Commande>CCAKLMLMLM</Code_Commande>
    <Code_Commande_Web>200000905</Code_Commande_Web>
-   <Code_Client>DIVERS15</Code_Client>
-   <Email_Client>florent@lesmecaniques.net</Email_Client>
+   <Code_Client>AZERTY2</Code_Client>
+   <Email_Client>florent.berenger+test5crea@gmail.com</Email_Client>
    <Reference_Client>WEB/2/florent@lesmecaniques.net</Reference_Client>
    <Date>2015-01-22 13:34:46</Date>
    <DateLivraison>2015-01-22 13:34:46</DateLivraison>
@@ -47,15 +47,16 @@ class MauchampHelper
    <Mode_livraison>pickupatstore_1</Mode_livraison>
    <Moyen_Paiement>checkmo</Moyen_Paiement>
    <Code_Depot>LPN78420</Code_Depot>
-   <Adresse_Facturation_Raison_Sociale />
+   <Adresse_Facturation_Raison_Sociale>LES MECANIQUES</Adresse_Facturation_Raison_Sociale>
    <Adresse_Facturation_Nom>Bérenger</Adresse_Facturation_Nom>
    <Adresse_Facturation_Prenom>Florent</Adresse_Facturation_Prenom>
    <Adresse_Facturation_Email>florent@lesmecaniques.net</Adresse_Facturation_Email>
-   <Adresse_Facturation_Ville>909090</Adresse_Facturation_Ville>
-   <Adresse_Facturation_CP>90909</Adresse_Facturation_CP>
+   <Adresse_Facturation_Ville>Paris</Adresse_Facturation_Ville>
+   <Adresse_Facturation_CP>75009</Adresse_Facturation_CP>
    <Adresse_Facturation_Code_Pays>FR</Adresse_Facturation_Code_Pays>
-   <Adresse_Facturation_Adr1>2323</Adresse_Facturation_Adr1>
-   <Adresse_Facturation_Telephone>9090</Adresse_Facturation_Telephone>
+   <Adresse_Facturation_Adr1>5 rue de Provence</Adresse_Facturation_Adr1>
+   <Adresse_Facturation_Telephone>0140506050</Adresse_Facturation_Telephone>
+   <Adresse_Facturation_Portable>0661845373</Adresse_Facturation_Portable>
    <Adresse_Facturation_Fax />
    <Adresse_Livraison_Raison_Sociale />
    <Adresse_Livraison_Nom>Bérenger</Adresse_Livraison_Nom>
@@ -283,6 +284,67 @@ EOT;
 EOT;
     return $data;
     }
+
+
+
+    public static function buildXmlClientFromOrder($xmlOrder) {
+      $xml = simplexml_load_string($xmlOrder);
+
+       $adresse = [
+          'Nom' => (string)$xml->Adresse_Facturation_Raison_Sociale,
+          'Adr1' => (string)$xml->Adresse_Facturation_Adr1,
+          'Adr2' => (string)$xml->Adresse_Facturation_Adr2,
+          'Cp' => (string)$xml->Adresse_Facturation_CP,
+          'Ville' => (string)$xml->Adresse_Facturation_Ville,
+          'Telephone' => (string)$xml->Adresse_Facturation_Telephone,
+          'Portable' => (string)$xml->Adresse_Facturation_Portable,
+          'Pays' => (string)$$xml->Adresse_Facturation_Code_Pays,
+          'Email' => (string)$xml->Adresse_Facturation_Email,
+
+
+        ]
+        ;
+
+
+        $codeClient = strpos((string)$xml->Code_Client,"DIVERS")!==false?"":(string)$xml->Code_Client;
+       $client = [
+          'Code_Client' => $codeClient,
+          'Nom' => (string)$xml->Adresse_Facturation_Raison_Sociale,
+          'Nom_Contact' => (string)$xml->Adresse_Facturation_Nom,
+          'Prenom_Contact' => (string)$xml->Adresse_Facturation_Prenom,
+          'Email_Contact' => (string)$xml->Email_Client,
+          'Indice_Code_Prix' => "4",
+          
+        ];
+
+       $xmlClient = new \SimpleXMLElement('<ClientXML_Azure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>');
+    
+      $callback =  function ($v, $k) use (&$xmlClient, &$callback) {
+
+              if (is_array($v)) {
+                  array_walk_recursive($v, $callback);
+              }
+              $xmlClient->addChild($k);
+              $xmlClient->$k=$v;
+          };
+        
+      array_walk_recursive($client, $callback);
+
+       $ADRESSES_CLients = $xmlClient->addChild('ADRESSES_CLients');
+       $ADRESSE_Azure = $ADRESSES_CLients->addChild('ADRESSE_Azure');
+                  
+        foreach ($adresse as $k => $v){
+            $ADRESSE_Azure->addChild($k);
+            $ADRESSE_Azure->$k=$v;
+        }
+
+
+
+       return $xmlClient->asXML();
+  
+    }
+
+
 
     public static function isClientRequest($data) {
       return strstr($data, "ClientXML_Azure");
@@ -840,7 +902,7 @@ EOT;
 
 
 
-                  $xml = new SimpleXMLElement('<Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>');
+                  $xml = new \SimpleXMLElement('<Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>');
     
                   $callback =  function ($v, $k) use (&$xml, &$callback) {
 

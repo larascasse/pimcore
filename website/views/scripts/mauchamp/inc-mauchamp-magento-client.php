@@ -14,7 +14,7 @@ $email = $this->email;
 	function loadMagentoClient() {
   //window.log("KK",$("#mailform"),$("#mailform").serialize());
   $('#exampleModalLongTitle').html('Chargement des données');
-  showPleaseWait();
+  //showPleaseWait();
   var url = '/plugin/LpnMageSync/index/load-magento-client/email/<?php echo $email ?>';
   console.log("url... "+url);
   $('#unknown-customer').hide();

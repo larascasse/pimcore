@@ -2,6 +2,7 @@
 
 $orderDetail = $this->orderDetail;
 $hasEmailContact = strlen($orderDetail["Email_Client"])>0;
+$xmlClient = $this->xmlClient;
 
 ?>
 
@@ -231,6 +232,18 @@ if(count($this->products)>0) : ?>
 	</div>
 </div>
 </div>
+
+
+<div class="row" style="padding-top: 40px">
+  <div class="col-12 text-center">
+<?php
+/* Cover */
+echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
+
+?>
+</div>
+</div>
+
 <?php 
 
 else :

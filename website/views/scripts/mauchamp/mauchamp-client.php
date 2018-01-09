@@ -1,3 +1,8 @@
+<?php
+$email = $this->client->Email_Contact;
+
+?>
+
 <div style="display: none;">
             <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
 </div>
@@ -7,6 +12,7 @@
 
 $(document).ready(function() {
 	window.log("INIT");
+  //loadMagentoClient();
   
 });
 
@@ -39,34 +45,9 @@ jQuery.fn.extend({
 });
 
 
-function sendEmail(target) {
-  window.log("KK",$("#mailform"),$("#mailform").serialize());
-  var btn = $(target);
-  btn.disabled=true;
-  showPleaseWait();
-  $.ajax({
-     url : 'https://www.laparqueterienouvelle.fr/LPN/create_customer.php',
-     data: $("#mailform").serialize(),
-     method : "POST",
-     success: function (data) {
 
-            hidePleaseWait();
-            alert(data);
-            btn.disabled=false;
 
-      },
-      error: function (transport) {
-        
-              btn.disabled=false;
-              console.log(transport);
-              
-              hidePleaseWait();
-              alert(transport.statusText);
 
-      }
-
-  });
-}
 
 </script>
 
@@ -74,7 +55,7 @@ function sendEmail(target) {
 <?php
 $email = $this->client->Email_Contact;
 
-$customer = \Website\Tool\MagentoHelper::loadMagentoCustomer($email);
+//$customer = \Website\Tool\MagentoHelper::loadMagentoCustomer($email);
 
 /*
 $client = new SoapClient('https://www.laparqueterienouvelle.fr/api/v2_soap/?wsdl');
@@ -104,41 +85,12 @@ if(is_array($result) && count($result)>0)  {
   <div class="row">
     <div class="col-12">
       
+<?php
+/* Cover */
+echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$email,"xmlClient"=>$this->xmlClient));
 
-      <?php if (!$customer) : ?>
-      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->client->Code_Client ?> - <?php echo $email; ?></i></h4>
-      <form id="mailform" class="form-horizontal">
-      <div class="text-center">
-        
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" class="btn btn-primary" name="newsletter" value="1" /> Inscription Newsletter
-          </label>
-        </div>
-        
-        <div class="form-group"  style="padding-bottom: 40px;">
-          <input type="button" class="btn btn-primary btn-lg" name="button" onclick="sendEmail(this)" value="Créer un compte web" /><br />
-          <div style="display: none;">
-            <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
-          </div>
-        </div>
-
-
-
-      </div>
-
-      <?php 
-      else : 
-        ?>
-        <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
-       
-        <?php
-        foreach ($customer as $key => $value) {
-             echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
-        }
-
-
-    endif; ?>
+?>
+  
 <hr />
 <br /><br /><br /><br /><br /><br /><br />
  <h4>Données client</h4>

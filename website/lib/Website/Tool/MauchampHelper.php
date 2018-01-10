@@ -29,8 +29,8 @@ class MauchampHelper
    <Type_Piece>Commande</Type_Piece>
    <Code_Commande>CCAKLMLMLM</Code_Commande>
    <Code_Commande_Web>200000905</Code_Commande_Web>
-   <Code_Client>AZERTY2</Code_Client>
-   <Email_Client>florent.berenger+test5crea@gmail.com</Email_Client>
+   <Code_Client>AZERTY3</Code_Client>
+   <Email_Client>florent.berenger+test6crea@gmail.com</Email_Client>
    <Reference_Client>WEB/2/florent@lesmecaniques.net</Reference_Client>
    <Date>2015-01-22 13:34:46</Date>
    <DateLivraison>2015-01-22 13:34:46</DateLivraison>

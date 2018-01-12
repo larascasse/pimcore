@@ -232,7 +232,7 @@ if(count($this->products)>0) : ?>
 	</div>
 </div>
 </div>
-
+<textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
 
 <div class="row" style="padding-top: 40px">
   <div class="col-12 text-center">
@@ -335,7 +335,7 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
 <?php echo $strSite ?>
   
 </textarea>
-            <textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
+            
 
           </div>
 
@@ -350,7 +350,6 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
 <!-- FIN MODAL EMAIL -->
 
 </div>
-<textarea  cols="100" rows="20" name="xml" style="display:none"><?php echo $this->xmlOrder ?></textarea>
 
  </form>
 

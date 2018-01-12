@@ -456,7 +456,7 @@ EOT;
      
         $lines = $xml->Lignes[0]->Ligne;
 
-        if($lines->count()<1){
+        if($lines && $lines->count()<1){
             
 
         }
@@ -535,6 +535,7 @@ EOT;
 
         $lines = $xml->Lignes[0]->Ligne;
 
+        if( $lines ) {
             $itemsCount = 0;
             
             for($i=0; $i<$lines->count(); $i++){
@@ -646,6 +647,10 @@ EOT;
                     
                 }
             }
+
+        }
+
+            
 
           if(strlen($orderDetail["Email_Client"])==0 && strlen($orderDetail["Adresse_Facturation_Email"])>0) {
             $orderDetail["Email_Client"] = $orderDetail["Adresse_Facturation_Email"];

@@ -36,7 +36,7 @@ class LpnMageSync_FrontController extends \Pimcore\Controller\Action
 		
     	$xml = $this->getParam("xml");
 
-    	$data = Pimcore\Tool::getHttpData('https://www.laparqueterienouvelle.fr/LPN/create_customer.php',null,["xml"=>$xml]);
+        $data = \Website\Tool\MagentoHelper::createMagentoCustomer($xml);
 
     	$response = $this->getResponse();
         $response->setHeader('Content-Type', 'application/json', true);

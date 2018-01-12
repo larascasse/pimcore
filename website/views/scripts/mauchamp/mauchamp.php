@@ -350,6 +350,7 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
 <!-- FIN MODAL EMAIL -->
 
 </div>
+<textarea  cols="100" rows="20" name="xml" style="display:none"><?php echo $this->xmlOrder ?></textarea>
 
  </form>
 
@@ -395,7 +396,7 @@ foreach ($this->orderDetail as $key => $value) {
 ?>
 <div>
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<textarea  cols="100" rows="20" name="xml" style="font-size:10px; color:#CCCCCC"><?php echo $this->xmlOrder ?></textarea>
+<textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#CCCCCC"><?php echo $this->xmlOrder ?></textarea>
 </div>
 
 <?php 

@@ -34,7 +34,7 @@ class LpnMageSync_FrontController extends \Pimcore\Controller\Action
     	$this->disableLayout();
 		$this->disableViewAutoRender();
 		
-    	$xml = $this->getParam("xml");
+    	$xml = $this->getParam("xmlclient");
 
         $data = \Website\Tool\MagentoHelper::createMagentoCustomer($xml);
 

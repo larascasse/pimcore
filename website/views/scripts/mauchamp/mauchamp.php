@@ -164,8 +164,16 @@ foreach ($this->products as $product) {
 	?>
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>
-	<td class="col__"><?php echo $product->getMage_short_name(3000)?></td>
-	
+	<td class="col__"><?php echo $product->getMage_short_name(3000)?>
+    <?php if ($product->isParquet()): 
+
+      $chauffantBasseTemperature = Object_Service::getOptionsForSelectField($product,"chauffantBasseTemperature")[$product->getChauffantBasseTemperature()];
+      $chauffantRadiantElectrique = Object_Service::getOptionsForSelectField($product,"chauffantRadiantElectrique")[$product->getChauffantRadiantElectrique()];
+      $solRaffraichissant = Object_Service::getOptionsForSelectField($product,"solRaffraichissant")[$product->getSolRaffraichissant()];
+
+      ?>
+    <p class="small">Sol chauffant basse temperature : <?php echo  $chauffantBasseTemperature; ?><br />Sol chauffant basse température électrique : <?php echo  $chauffantRadiantElectrique; ?><br />Sol basse température réversible : <?php echo  $solRaffraichissant; ?></p></td>
+	<?php endif; ?>
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
 	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
 	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>

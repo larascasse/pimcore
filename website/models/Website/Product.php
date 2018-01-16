@@ -2573,9 +2573,14 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 	
 
 	public function getResistanceThermique() {
+
+
 		
 		if($this->getPimonly_resistance_thermique()>0)
 			return $this->getPimonly_resistance_thermique();
+
+		if($this->isParquet())
+			return false;
 
 
 		$coeffCt = \Website\Tool\ParquetData::getConductiviteThermiqueByEssence($this->getEssence());
@@ -2608,7 +2613,10 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 			return $this->getPimonly_conductivite_thermique_total();
 		}
 
+		if($this->isParquet())
+			return false;
 
+		
 		$rT = $this->getResistanceThermique();
 
 		if($rT>0) {

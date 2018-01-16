@@ -179,10 +179,13 @@ echo $htmlStd;
 
 
 
-if ($hasMarquageCe && $product->isParquet()) {
+if ($hasMarquageCe && ($product->isParquet() || $this->isTerrasse())) {
 	echo "<h2>Déclaration de performance</h2>";
 	echo $htmlCe;
-	echo '<p class="small"><br /><br />Il n’existe pas de PV pour le classement au feu des parquets massifs et contrecollés. Les classements feu que nous indiquons sur nos fiches techniques et autres documents sont des classements dits « conventionnels », stipulés dans les DTU 51.11 (Pose flottante des parquets contrecollés) et 51.2 (Pose collée des parquets massifs) et selon la norme NF 14341+A1.</p>';
+	if($product->isParquet()) {
+		echo '<p class="small"><br /><br />Il n’existe pas de PV pour le classement au feu des parquets massifs et contrecollés. Les classements feu que nous indiquons sur nos fiches techniques et autres documents sont des classements dits « conventionnels », stipulés dans les DTU 51.11 (Pose flottante des parquets contrecollés) et 51.2 (Pose collée des parquets massifs) et selon la norme NF 14341+A1.</p>';
+	}
+	
 }
 ?>
 <hr />

@@ -686,7 +686,8 @@ class Website_Product extends Object_Product {
 			'subtype_1',
 			'notice_pose_lpn',
 			'chauffantAccumulationBasseTemperature',
-			'qualite'
+			'qualite',
+			'is_lot'
 
 
 			);
@@ -2687,6 +2688,10 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 
 
 */
+		if(strlen($this->getPimonly_classe_reaction_feu_eu())>0) {
+			return $this->getPimonly_classe_reaction_feu_eu();
+		}
+
 		$massif = $this->isParquetMassif();
 		$contreciolle = $this->isParquetContrecolle();
 		$masseVolumique = (int)$this->getMasseVolumique();
@@ -2767,6 +2772,12 @@ http://www.parquetfrancais.org/guide-pro/technique-reglementation/reglementation
 
 
 	public function getClasseReactionFeuFr() {
+
+		if(strlen($this->getPimonly_classe_reaction_feu_fr())>0) {
+			return $this->getPimonly_classe_reaction_feu_fr();
+		}
+
+
 		/* 
 NB : les classements actuels, définis par la norme NF EN 13501-1 indiquent que les classes A2 fl s2, B fl s1 & s2 et C fl s2 satisfont aux exigences M3. Les classes D fl s1 et s2 satisfont aux exigences M4.
 Autrement dit, hors des cas particuliers cités, tous les parquets conviennent quel que soit le mode de pose. */
@@ -3123,6 +3134,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 
+
+	public function isTerrasse() {
+		return $this->getFamille() == "10TERRASSE";
+	}
 
 
 	public function isParquetMassif() {

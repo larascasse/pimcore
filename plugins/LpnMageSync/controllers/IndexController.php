@@ -90,7 +90,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php';
        	  $params = array();
 		  $params["time"] = time();
-		  $params["path"] = $key;
+		  $params["key"] = $key;
 
 	    	$content = \Pimcore\Tool::getHttpData($url,$params);
 	    	

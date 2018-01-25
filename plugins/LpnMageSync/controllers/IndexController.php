@@ -87,7 +87,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $key =  $this->getParam("key");
 
 
-       	  $url = 'http://magento.florent.local/LPN/sync_pim_document.php';
+       	  $url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php';
        	  $params = array();
 		  $params["time"] = time();
 		  $params["path"] = $key;

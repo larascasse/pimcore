@@ -58,6 +58,10 @@ class LpnController extends Action
         $listing = new \Pimcore\Model\Document\Listing(); 
         $listing->setCondition("parentId = 236");
 
+        
+        $key =  $this->getParam("key");
+        
+
         $pages=array();
         foreach($listing as $doc) {
             //echo $doc->getContent();
@@ -75,6 +79,11 @@ class LpnController extends Action
     [description]
     */
                 if($doc instanceOf Document\Page) {
+
+                    if(strlen($key)>0 && $key != $doc->getKey()) {
+                       continue;
+                    }
+
                     $page = array (
                         "content" => Document\Service::render($doc),
                         "description" => $doc->getDescription(),
@@ -104,8 +113,11 @@ class LpnController extends Action
         $this->disableViewAutoRender();
 
         $listing = new \Pimcore\Model\Document\Listing(); 
+
+        $key =  $this->getParam("key");
        // $listing->setCondition("parentId = 230");
         $listing->setCondition('path LIKE \'/cms-block/%\'');
+
         $pages=array();
         foreach($listing as $doc) {
             //echo $doc->getContent();
@@ -123,6 +135,12 @@ class LpnController extends Action
     [description]
     */
                 if($doc instanceOf Document\Page) {
+
+                    if(strlen($key)>0 && $key != $doc->getKey() ) {
+                       continue;
+                    }
+
+
                     $page = array (
                         "content" => Document\Service::render($doc),
                         "description" => $doc->getDescription(),

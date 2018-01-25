@@ -75,6 +75,43 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
     	 
     }
 
+        //http://pimcore.florent.local/plugin/LpnMageSync/index/publish-cms-block/key/XXXXXXX
+
+    public function publishCmsBlockAction() {
+
+
+    	  $this->disableLayout();
+
+       	  $this->disableViewAutoRender();
+
+       	  $key =  $this->getParam("key");
+
+
+       	  $url = 'http://magento.florent.local/LPN/sync_pim_document.php';
+       	  $params = array();
+		  $params["time"] = time();
+		  $params["path"] = $key;
+
+	    	$content = \Pimcore\Tool::getHttpData($url,$params);
+	    	
+    	  $this->response = array(
+    	  	"success" => "true", 
+    	  	"content"=>$content,
+    	  	"message"=>$content,
+    	  	"url" => $url,
+    	  	//"params" =>implode(",",array_keys($params)),
+    	  	"params" =>serialize($params)
+
+    	  );
+
+	          
+
+       	  
+       	  $this->_helper->json->sendJson($this->response);
+       	  	
+    	 
+    }
+
  
 
 

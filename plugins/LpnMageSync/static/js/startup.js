@@ -97,21 +97,22 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     
     sync : function () {
        console.log("this",this)
-       var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
-       //return;
-         // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
+       //var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
+       var url = '/plugin/LpnMageSync/index/publish-cms-block/key/'+this.data.key;
+       console.log(url)
+
 
         Ext.Ajax.request({
             //url: '/plugin/LpnMageSync/index/download/id/' +this.id,
             url: url,
-            method: "post",
+            method: "get",
             success: function (response) {
                 try{
                    // pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
 
                     var rdata = Ext.decode(response.responseText);
                     if (rdata && rdata.success) {
-                        pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+                        pimcore.helpers.showNotification(t("save"), t("successful_sync")+rdata.message, "success");
                        // this.resetChanges();
                         //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
                     }
@@ -133,7 +134,6 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
                 this.tab.unmask();
             },
         });
-
      
     },
 

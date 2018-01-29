@@ -95,7 +95,7 @@ Usé,use
         $object->setChauffantRadiantElectrique("1");
         $object->setSolRaffraichissant("0");
 
-        $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
+        $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
 
         //TOP

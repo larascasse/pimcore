@@ -698,7 +698,7 @@ class Website_Product extends Object_Product {
 
 
 		//Descitptio
-		$descriptionFields = array('Dimensions', 'essence','motif','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage');
+		$descriptionFields = array('Dimensions', 'essence','motif','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage','catalogue');
 
 
 		//CE
@@ -2543,9 +2543,16 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 	
 	public function getClasseUpec() {
 		$cu = $this->getCalculatedClasseUtilisation();
-		$pieceHumide = $this->getPieceHumide();
+		$pieceHumide = $this->isCompatiblePieceHumide();
 		return \Website\Tool\ParquetData::getUpecByClasseUtilisation($cu,$pieceHumide);
 
+	}
+
+	public function isCompatiblePieceHumide() {
+		$pieceHumide = $this->getPieceHumide();
+		if (strlen($pieceHumide)>4 || $pieceHumide==1)
+			return true;
+		return false;
 	}
 
 /*
@@ -2809,7 +2816,9 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 	public function getCoefficientRetractabilite() {
+
 		$essence = $this->getEssence();
+
 		switch ($essence) {
 			case 'CHE':
 				return "Chêne : radial=0,16 et tangentiel=0,32";
@@ -2830,6 +2839,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 				break;
 			case 'DOU':
 				return "Douglas : radial=0,12 et tangentiel=0,29";
+				break;
+
+			case 'BAM':
+				return "";
 				break;
 			
 			default:

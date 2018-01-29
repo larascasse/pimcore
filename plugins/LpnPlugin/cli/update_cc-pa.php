@@ -72,13 +72,13 @@ foreach ($list->getObjects() as $object) {
             case '12':
                  $object->setChauffantBasseTemperature("1");
                  $object->setChauffantRadiantElectrique("1");
-                 $object->setSolRaffraichissant("0");
+                 $object->setSolRaffraichissant("1");
                  break;
 
             case '14':
                  $object->setChauffantBasseTemperature("1");
                  $object->setChauffantRadiantElectrique("1");
-                 $object->setSolRaffraichissant("1");
+                 $object->setSolRaffraichissant("0");
                  break;
 
           

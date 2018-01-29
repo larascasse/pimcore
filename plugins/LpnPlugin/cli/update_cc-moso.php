@@ -95,6 +95,8 @@ Usé,use
         $object->setChauffantRadiantElectrique("1");
         $object->setSolRaffraichissant("0");
 
+        $object->setValue("pimonly_name_suffixe",$object->getPimonly_section());
+
 
         //TOP
         if(stristr($ean, "110128")) {
@@ -171,7 +173,7 @@ Usé,use
            else {
                 $object->setPimonly_resistance_thermique("0.1152");
                 $object->setPimonly_conductivite_thermique_total("0.13");
-                 $object->setClasse("31");
+                $object->setClasse("31");
            }
 
         }

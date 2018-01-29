@@ -97,6 +97,12 @@ Usé,use
 
         $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
+        if(stristr($scienergie, "BROSS")) {
+            $object->setTraitement_surface(("brosse"));
+        }
+
+  
+
 
         //TOP
         if(stristr($ean, "110128")) {

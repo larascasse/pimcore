@@ -89,6 +89,13 @@ Usé,use
         $object->setFixation(array('rainurelanguette4cotes'));
 
         $longueur_txt = "";
+
+        $object->setChauffantBasseTemperature("1");
+        $object->setSolRaffraichissant("0");
+        $object->setChauffantRadiantElectrique("1");
+
+
+
         switch ($object->getEpaisseur()) {
             case '12':
                 $object->setValue('support','cp');

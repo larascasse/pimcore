@@ -2481,6 +2481,9 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
 
 	public function getCalculatedClasseUtilisation() {
+
+		if(strlen($this->getClasse())>0)
+			return $this->getClasse();
 		 
         $classes = [
             "A" => ["21","21","21","22","22"],

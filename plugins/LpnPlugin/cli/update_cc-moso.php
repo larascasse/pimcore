@@ -106,12 +106,12 @@ Usé,use
            $object->setEpaisseurUsure('2.5 mm');
 
            if(stristr($scienergie, "DENSIF")) {
-                $object->setPimonly_resistance_thermique("0.0591");
+                $object->setPimonly_resistance_thermique("0.0542");
                 $object->setPimonly_conductivite_thermique_total("0.18");
                  $object->setClasse("31");
            }
            else {
-                $object->setPimonly_resistance_thermique("0.0542");
+                $object->setPimonly_resistance_thermique("0.0591");
                 $object->setPimonly_conductivite_thermique_total("0.17");
                  $object->setClasse("23");
            }
@@ -146,12 +146,12 @@ Usé,use
             $object->setEpaisseurUsure('2.5 mm');
 
             if(stristr($scienergie, "DENSIF")) {
-                $object->setPimonly_resistance_thermique("0.0591");
+                $object->setPimonly_resistance_thermique("0.0542");
                 $object->setPimonly_conductivite_thermique_total("0.18");
                  $object->setClasse("31");
            }
            else {
-                $object->setPimonly_resistance_thermique("0.0542");
+                $object->setPimonly_resistance_thermique("0.0591");
                 $object->setPimonly_conductivite_thermique_total("0.17");
                  $object->setClasse("23");
            }

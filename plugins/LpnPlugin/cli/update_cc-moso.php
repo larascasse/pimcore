@@ -85,6 +85,30 @@ Usé,use
     $save = true;
     //epaisseur
 
+    $techDescription = array();
+    $techTech = array();
+    $techCe = array();
+
+
+
+    
+   
+
+    if(stristr($scienergie, "DENSIF")) {
+        $techTech[] = "Densité (Couche supérieure) : +/- 1050 kg/m3";
+        $techTech[] = "Contribution BREEAM : HEA 2, MAT 5 (DT)";
+        $techTech[] = "Dureté Brinell : >= 9.5kg/mm2";
+    }
+    else {
+        $techTech[] = "Densité (Couche supérieure) : +/- 700 kg/m3";
+        $techTech[] = "Contribution BREEAM : HEA 2, MAT 1";
+        $techTech[] = "Dilatation bambou: 0,14% pour 1% de variation d’humidité";
+        $techTech[] = "Dureté Brinell : >= 4kg/mm2";
+    }
+
+
+
+
     if(strlen($object->getEan())>0) {
 
         $object->setFixation(array('click'));
@@ -119,8 +143,9 @@ Usé,use
            else {
                 $object->setPimonly_resistance_thermique("0.0591");
                 $object->setPimonly_conductivite_thermique_total("0.17");
-                 $object->setClasse("23");
+                $object->setClasse("23");
            }
+           $techDescription [] = "Garantie : 10 ans";
            
 
 
@@ -143,6 +168,9 @@ Usé,use
                 $object->setClasse("31");
            }
 
+           $techDescription [] = "Garantie : 30 ans";
+
+
         }
         //TOP
         else if(stristr($ean, "110125")) {
@@ -161,6 +189,9 @@ Usé,use
                 $object->setPimonly_conductivite_thermique_total("0.17");
                  $object->setClasse("23");
            }
+
+           $techDescription [] = "Garantie : 10 ans";
+
 
 
         }
@@ -182,7 +213,19 @@ Usé,use
                 $object->setClasse("31");
            }
 
+           $techDescription [] = "Garantie : 30 ans";
+
         }
+
+
+
+
+        $techTech[] = "Contribution LEED BD+C - v4 : EQ2 / v2009: MR 6, IEQ 4.3";
+        $techTech[] = "Contribution HQE : 2.4.1, 2.4.2, 2.4.3";
+
+        $object->setCharacteristics_others(implode("\n", $techDescription));
+        $object->setCharacteristics_others_tech(implode("\n", $techTech));
+        $object->setCharacteristics_others_perf(implode("\n", $techCe));
 
     
 

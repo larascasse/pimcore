@@ -131,7 +131,9 @@ class ProductController extends Action
         
 
         // "id" is the named parameters in "Static Routes"
+        Object_Abstract::setHideUnpublished(false);
         $product = Object_Product::getById($this->getParam("id"));
+        Object_Abstract::setHideUnpublished(true);
         
 
 
@@ -159,7 +161,9 @@ class ProductController extends Action
 
         // "id" is the named parameters in "Static Routes"
         try {
+            Object_Abstract::setHideUnpublished(false);
             $product = Object_Product::getById($this->getParam("id"));
+            Object_Abstract::setHideUnpublished(true);
         }
         catch (\Exception $e) {
            
@@ -189,12 +193,15 @@ class ProductController extends Action
         $this->enableLayout();
         $this->view->layout()->setLayout("layout-ft");
 
+
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         
         
 
         // "id" is the named parameters in "Static Routes"
+        Object_Abstract::setHideUnpublished(false);
         $product = Object_Product::getById($this->getParam("id"));
+        Object_Abstract::setHideUnpublished(true);
         
 
 
@@ -388,13 +395,20 @@ class ProductController extends Action
         return $str;
 
     }
+
+    //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-zp
     public function exportProductTechAction() {
         $this->disableLayout();
         $this->disableViewAutoRender();
+        Object_Abstract::setHideUnpublished(false);
+
 
         $list = Object_Product::getList(array(
-                'condition' => 'o_path LIKE \''.$this->getParam("path").'%\''
+                'condition' => 'o_path LIKE \''.$this->getParam("path").'%\'',
+                'unpublished' => true,
+                'orderKey' => 'name',
         ));
+
 
        
         $childs = $list;
@@ -498,7 +512,7 @@ class ProductController extends Action
             $rows[]  = $row;
             $idx ++;
         }
-       
+       Object_Abstract::setHideUnpublished(true);
 
 
         header('Content-Description: File Transfer');

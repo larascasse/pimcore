@@ -59,7 +59,7 @@ foreach ($list->getObjects() as $object) {
 
     $save=false;
 
-    if(stristr($scienergieCourt, "hd") || strstr($scienergieCourt, " H ")) {
+    if(stristr($scienergieCourt, "hd") || stristr($scienergieCourt, " H ")) {
         $object->setSupport('HDF');
         $object->setPimonly_masse_volumique_moyenne(850);
 
@@ -74,7 +74,7 @@ foreach ($list->getObjects() as $object) {
 
         $save=true;
     }
-    else if(stristr($scienergieCourt, "cp") || strstr($scienergieCourt, " P ")) {
+    else if(stristr($scienergieCourt, "cp") || stristr($scienergieCourt, " P ")) {
         $object->setSupport('cp');
         $object->setPimonly_masse_volumique_moyenne(780);
 

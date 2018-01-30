@@ -134,7 +134,7 @@ Usé,use
            $object->setChanfreins("4");
           // $object->setFixation(array('click'));
            $object->setEpaisseurUsure('2.5 mm');
-           $this->setNorme_sanitaire("A+");
+           $object->setNorme_sanitaire("A+");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.0542");
@@ -157,7 +157,7 @@ Usé,use
             $object->setChanfreins("4");
            // $object->setFixation(array('rainurelanguette'));
             $object->setEpaisseurUsure('4 mm');
-            $this->setNorme_sanitaire("A");
+            $object->setNorme_sanitaire("A");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.1074");
@@ -180,7 +180,7 @@ Usé,use
             $object->setChanfreins("4");
             
             $object->setEpaisseurUsure('2.5 mm');
-            $this->setNorme_sanitaire("A+");
+            $object->setNorme_sanitaire("A+");
 
             if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.0542");
@@ -204,7 +204,7 @@ Usé,use
             $object->setChanfreins("4");
            // $object->setFixation(array('rainurelanguette'));
             $object->setEpaisseurUsure('4 mm');
-            $this->setNorme_sanitaire("A");
+            $object->setNorme_sanitaire("A");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.1074");

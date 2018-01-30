@@ -1,5 +1,5 @@
 <?php
-
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-mo
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -135,6 +135,7 @@ Usé,use
           // $object->setFixation(array('click'));
            $object->setEpaisseurUsure('2.5 mm');
            $object->setNorme_sanitaire("A+");
+           $object->setPimonly_classe_reaction_feu_eu("Cfls1");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.0542");
@@ -158,6 +159,7 @@ Usé,use
            // $object->setFixation(array('rainurelanguette'));
             $object->setEpaisseurUsure('4 mm');
             $object->setNorme_sanitaire("A");
+            $object->setPimonly_classe_reaction_feu_eu("Dfls1");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.1074");
@@ -181,6 +183,7 @@ Usé,use
             
             $object->setEpaisseurUsure('2.5 mm');
             $object->setNorme_sanitaire("A+");
+            $object->setPimonly_classe_reaction_feu_eu("Cfls1");
 
             if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.0542");
@@ -205,6 +208,7 @@ Usé,use
            // $object->setFixation(array('rainurelanguette'));
             $object->setEpaisseurUsure('4 mm');
             $object->setNorme_sanitaire("A");
+            $object->setPimonly_classe_reaction_feu_eu("Dfls1");
 
            if(stristr($scienergie, "DENSIF")) {
                 $object->setPimonly_resistance_thermique("0.1074");

@@ -17,15 +17,17 @@ Object_Abstract::setGetInheritedValues(false);
 Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
-$conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'
+$conditionFilters = array(
+       "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
+       "o_id >8600",
 
-    ");
+    );
 
 
 $list = new Pimcore\Model\Object\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
+$list->setOrder( 'order.orderDate desc' );
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
 
@@ -192,6 +194,7 @@ foreach ($list->getObjects() as $object) {
         $object->save();
 
     unset($object);
+    unset($parent);
     continue;
     
     

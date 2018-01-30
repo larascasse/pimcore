@@ -1,6 +1,6 @@
 <?php
 
-
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-eu
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)
@@ -94,12 +94,30 @@ foreach ($list->getObjects() as $object) {
         $save=true;
     }
 
-    if(stristr($scienergieCourt, "rl")) {
-        $object->setFixation(array('rainurelanguette'));
-        $save=true;
+    
+    if(stristr($scienergie, "BROSS")) {
+     $object->setTraitement_surface(("brosse"));
     }
+    if(stristr($object->getName(), "vernis mat")) {
+     $object->setFinition(("Verni mat"));
+    }
+    elseif(stristr($object->getName(), "huile teinte réactive")) {
+     $object->setFinition(("huile teinte reactive"));
+    }
+    elseif(stristr($object->getName(), "vernis mat")) {
+     $object->setFinition(("vernis cérusé mat"));
+    }
+    elseif(stristr($object->getName(), "huilé")) {
+     $object->setFinition(("huile"));
+    }
+
+
     if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
         $object->setFixation(array('click'));
+        $save=true;
+    }
+    else {
+        $object->setFixation(array('rainurelanguette'));
         $save=true;
     }
 

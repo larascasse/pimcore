@@ -191,47 +191,9 @@ foreach ($list->getObjects() as $object) {
     if($save)
         $object->save();
 
-
+    unset($object);
     continue;
-    $values = array();
-    $objectToSave = Object::getById($object->getId());
-    foreach ($fieldsToClean as $key => $fieldName) {
-        # code...
-        
-        
-
-        $value = $object->getValueForFieldName($fieldName);
-        if(!($object->getParent() instanceof Website_Product)) {
-            $parentValue = $object->getParent()->getParent()->getValueForFieldName($fieldName);
-         
-        }
-        else {
-            $parentValue = $object->getParent()->getValueForFieldName($fieldName);
-        }
-
-        
-
-        if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
-            echo "--> nullify $fieldName : ".$object->getSku()."  -----    $value <-> $parentValue\n";
-            
-            
-            $values[$fieldName]=null;
-            
-
-
-            //$objectToSave->setPublished(true);
-            
-        }
-   
-    }
-
-    if(count( $values)>0) {
-        $objectToSave->setValues($values);
-        //print_r($values);
-
-        echo "\n";
-        $objectToSave->save();
-    }
+    
     
     
 

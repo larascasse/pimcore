@@ -104,7 +104,7 @@ foreach ($list->getObjects() as $object) {
     }
 
     if(stristr($scienergieCourt, "BR ")) {
-        $object->setMotif('baton rompu');
+        $object->setMotif(' baton rompu');
         $save=true;
     }
 

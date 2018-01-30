@@ -19,7 +19,7 @@ Pimcore_Model_Cache::disable();
 
 $conditionFilters = array(
        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
-       "o_id >10000",
+       //"o_id >10000",
 
     );
 
@@ -28,7 +28,7 @@ $list = new Pimcore\Model\Object\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder( 'id DESC' );
-$list->setOrder("DESC");
+//$list->setOrder("DESC");
 $list->setOrderKey("o_id");
 
 

@@ -57,7 +57,7 @@ foreach ($list->getObjects() as $object) {
 
     $save=false;
 
-    if(stristr($scienergieCourt, "hd")) {
+    if(stristr($scienergieCourt, "hd") || strstr($scienergieCourt, " H ")) {
         $object->setSupport('HDF');
         $object->setPimonly_masse_volumique_moyenne(850);
 
@@ -72,7 +72,7 @@ foreach ($list->getObjects() as $object) {
 
         $save=true;
     }
-    else if(stristr($scienergieCourt, "cp")) {
+    else if(stristr($scienergieCourt, "cp") || strstr($scienergieCourt, " P ")) {
         $object->setSupport('cp');
         $object->setPimonly_masse_volumique_moyenne(780);
 
@@ -98,6 +98,11 @@ foreach ($list->getObjects() as $object) {
     }
     if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
         $object->setFixation(array('click'));
+        $save=true;
+    }
+
+    if(stristr($scienergieCourt, "BR ")) {
+        $object->setMotif('baton rompu');
         $save=true;
     }
 

@@ -14,6 +14,8 @@ Object_Abstract::setHideUnpublished(false);
 Object_Abstract::setGetInheritedValues(false);
 
 
+//
+
 Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
@@ -27,8 +29,8 @@ $conditionFilters = array(
 $list = new Pimcore\Model\Object\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
-//$list->setOrder( 'id DESC' );
-//$list->setOrder("DESC");
+
+$list->setOrder("DESC");
 $list->setOrderKey("o_id");
 
 

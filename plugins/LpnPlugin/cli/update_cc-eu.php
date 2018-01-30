@@ -27,7 +27,7 @@ $conditionFilters = array(
 $list = new Pimcore\Model\Object\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
-$list->setOrder( 'o_id DESC' );
+$list->setOrder( 'id DESC' );
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
 

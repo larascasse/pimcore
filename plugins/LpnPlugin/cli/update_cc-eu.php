@@ -145,19 +145,25 @@ foreach ($list->getObjects() as $object) {
          $parent->setChoix($object->getChoix());
 
          $suffixe = "";
+         $prefixe = "";
+
          if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
            $suffixe.=' Click';
+        }
+
+         if(stristr($scienergieCourt, "BR ")) {
+            $prefixe = "Bâton Rompu ";
         }
 
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',$suffixe);
+            $parent->setValue('pimonly_name_suffixe',$prefixe.$suffixe);
 
         }  
         else {
             $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString().$suffixe);
+            $parent->setValue('pimonly_name_suffixe',$prefixe.$parent->getChoixString().$suffixe);
         }
 
 

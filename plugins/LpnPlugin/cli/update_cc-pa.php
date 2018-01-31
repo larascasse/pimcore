@@ -115,8 +115,9 @@ foreach ($list->getObjects() as $object) {
    
     
 
-    Object_Abstract::setGetInheritedValues($inheritance); 
+    
 
 }
+Object_Abstract::setGetInheritedValues($inheritance); 
 \Pimcore\Model\Version::enable();
 ?>

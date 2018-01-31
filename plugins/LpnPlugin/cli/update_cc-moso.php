@@ -376,8 +376,9 @@ Usé,use
     
     
 
-    Object_Abstract::setGetInheritedValues($inheritance); 
+    
 
 }
+Object_Abstract::setGetInheritedValues($inheritance); 
 \Pimcore\Model\Version::enable();
 ?>

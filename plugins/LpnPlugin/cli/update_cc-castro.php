@@ -97,7 +97,7 @@ Usé,use
     
    
 
-    if(stristr($scienergie, "DENSIF")) {
+    /*if(stristr($scienergie, "DENSIF")) {
         $techTech[] = "Densité (Couche supérieure) : +/- 1050 kg/m3";
         $techTech[] = "Contribution BREEAM : HEA 2, MAT 5 (DT)";
         $techTech[] = "Dureté Brinell : >= 9.5kg/mm2";
@@ -107,7 +107,7 @@ Usé,use
         $techTech[] = "Contribution BREEAM : HEA 2, MAT 1";
         $techTech[] = "Dilatation bambou: 0,14% pour 1% de variation d’humidité";
         $techTech[] = "Dureté Brinell : >= 4kg/mm2";
-    }
+    }*/
 
 
 
@@ -116,6 +116,7 @@ Usé,use
 
         $object->setPose(array('acoller','flottante'));
         $object->setSupport('cp');
+
 
         //DOUSSIE
         if(stristr($famille, "FMDOUG4COUVE0CF")) {
@@ -150,6 +151,8 @@ Usé,use
 
         switch ($epaisseur) {
             case 10:
+
+                $object->setValue('longueur_txt','Longueurs panachées de 500 à 1500 mm');
                 //Sauf teck
                 if($largeur==120 && $famille != 'FMTECG4COUVE0CF') {
                     $object->setEpaisseurUsure('3 mm');
@@ -158,9 +161,13 @@ Usé,use
                     $object->setEpaisseurUsure('4 mm');
                 }
                 break;
-            
+
+            case 13:
+                
+
             default:
                 $object->setEpaisseurUsure('4 mm');
+                $object->setValue('longueur_txt','Longueurs panachées de 500 à 2400 mm');
                 break;
         }
        
@@ -232,11 +239,12 @@ Usé,use
         $save=true;
 
        
-        if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
+        /*if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
             $parent->setValue('name',null);
             
-        } 
-        $parent->save();
+        } */
+        //$parent->save();
+        $object->save();
         
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
@@ -249,7 +257,7 @@ Usé,use
 
    
    // if($save)
-        $object->save();
+        
 
 
 

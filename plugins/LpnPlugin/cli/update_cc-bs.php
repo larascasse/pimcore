@@ -164,7 +164,7 @@ Usé,use
         $object->setValue('pose',array('acoller'));
         $object->setPimonly_masse_volumique_moyenne(700);
 
-        if($object->getEpaisseur()<=220) {
+        if($object->getLargeur()<=220) {
             $object->setValue('chauffantBasseTemperature','1');
             $object->setValue('chauffantRadiantElectrique','1');
             $object->setValue('solRaffraichissant','1');
@@ -180,7 +180,7 @@ Usé,use
         $object->setValue('pimonly_resistance_thermique','0.129');
         $object->setValue('pose',array('acoller','aclouer'));
 
-        if($object->getEpaisseur()<=220)
+        if($object->getLargeur()<=220)
              $object->setValue('chauffantBasseTemperature','1');
         else
             $object->setValue('chauffantBasseTemperature','0');

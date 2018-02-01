@@ -3152,7 +3152,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 	public function getDegagementFormaldehyde() {
-		return str_replace(array("A+","A"), array("E1","XXXX"), $this->getNorme_sanitaire());
+		return str_replace(array("A+","A"), array("E1","E1"), $this->getNorme_sanitaire());
 	}
 
 

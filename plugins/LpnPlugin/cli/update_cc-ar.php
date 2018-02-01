@@ -147,6 +147,11 @@ Usé,use
    
 
     if(strlen($object->getEan())>0) {
+
+        $object->setChauffantBasseTemperature("1");
+        $object->setChauffantRadiantElectrique("1");
+        $object->setSolRaffraichissant("0");
+
        
         //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
         /* $parent = $object->getParent();

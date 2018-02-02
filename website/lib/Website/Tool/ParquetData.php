@@ -272,6 +272,8 @@ Conductivité thermique du bois (λ en w / m. K)
       case 'FRE':
       case 'HET':
       case 'IRO':
+      case 'SPI':
+
       case 'MAK':
       case 'MAN':
       case 'MOA':
@@ -280,6 +282,7 @@ Conductivité thermique du bois (λ en w / m. K)
       case 'ORM':
       case 'PAD':
       case 'ZEB':
+      case 'DOU':
         return "C";
         break;
 
@@ -287,7 +290,6 @@ Conductivité thermique du bois (λ en w / m. K)
       case 'AMA':
       case 'ANG':
       case 'CAB':
-      case 'DOU':
       case 'EPE':
       case 'IPE':
       case 'JAT':

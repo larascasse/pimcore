@@ -294,7 +294,7 @@ Conductivité thermique du bois (λ en w / m. K)
       case 'MER':
       case 'WEN':
       case 'PAL':
-        return "B";
+        return "D";
         break;
       
       default:

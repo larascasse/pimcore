@@ -255,6 +255,7 @@ Conductivité thermique du bois (λ en w / m. K)
       case 'MEL':
       case 'MER':
       case 'NOY':
+      case 'NOA':
       case 'PIN':
       case 'SIP':
       case 'TEC':

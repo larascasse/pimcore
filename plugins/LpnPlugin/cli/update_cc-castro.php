@@ -116,6 +116,9 @@ Usé,use
 
         $object->setPose(array('acoller','flottante'));
         $object->setSupport('cp');
+        $object->setOrigine_bois('Afrique');
+        //$object->setPimonly_masse_volumique_moyenne(680);
+        $object->setPimonly_conductivite_thermique_total("0.185 +/- 0.02");
 
 
         //DOUSSIE
@@ -146,7 +149,7 @@ Usé,use
         }
         //TECK
         elseif(stristr($famille, "FMTECG4COUVE0CF")) {
-
+             $object->setOrigine_bois('Asie');
         }
 
         switch ($epaisseur) {
@@ -174,7 +177,7 @@ Usé,use
 
 
         $object->setChauffantBasseTemperature("1");
-        $object->setChauffantRadiantElectrique("1");
+        $object->setChauffantRadiantElectrique("0");
         $object->setSolRaffraichissant("0");
 
         $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);

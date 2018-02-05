@@ -18,4 +18,4 @@ website/var/config/system.xml
 vendor/*
 /website/var/composer
 /website/var/config/web2print.php
-/website/email/*
+/website/var/email/*

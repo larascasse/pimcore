@@ -523,84 +523,8 @@ class Website_Product extends Object_Product {
 	
 
 	public function getCharacteristicsFo() {
-		//$attributes = Object_Class::getByName("Product")->getFieldDefinitions();`
 		
-		$attributes = $this->getClass()->getFieldDefinitions();
-		$includeFields = array("fiche_technique_orginale","fiche_technique_lpn",'notice_pose_lpn');
-		$showEmptyAttribute = false;
-		$caracteristiques = array();
-
-		$fields = array("epaisseur");
-		foreach($attributes as $key=> $value) {
-
-			$attribute  =  $value->getName();
-			$attributeLabel = $value->getTitle();
-			
-			if(!in_array($attribute,$includeFields)) {
-				unset($attributeValue);
-				continue;
-			}
-			$this->getClass()->getFieldDefinition($value->getName());
-			//print_r( $value->fieldtype);
-			$getter = "get" . ucfirst($attribute);
-			
-			
-			if(!empty($this)) {
-				if(method_exists($this, $getter)) {
-					$attributeValue = $this->$getter();
-
-					if(!$showEmptyAttribute && empty($attributeValue))
-							continue;
-
-					//Object bricks
-					if($value->fieldtype=="objectbricks") {
-						//print_r($value);
-						$getter2 = $attributeValue->getBrickGetters()[0];
-						//echo $getter2;
-						/*echo "<pre>";
-						print_r($attributeValue->getBrickGetters()[0]);
-							echo "</pre>";*/
-						//getHtmlTable
-						if(method_exists($attributeValue, $getter2) && $attributeValue->$getter2()) {
-							$attributeValue=$attributeValue->$getter2()->getTest();
-							$caracteristiques[] = array("label"=>$attribute,"content"=>$attributeValue);
-						}
-					}
-					//Fieldcollections
-					else if($value->fieldtype=="fieldcollections") {
-						
-						$returnValue ="";
-						if($attributeValue) {
-							foreach($attributeValue->getItems() as $fieldCollectionData) {						
-
-								if($fieldCollectionData->getType()=="ProductFieldCollection") {
-									$caracteristiques[] = array("label"=>$attribute,"content"=>$fieldCollectionData->prix);
-								}
-							}
-
-						}
-						
-
-					}
-					//Multi href
-					else if(is_array($attributeValue)) {
-						$attributeValue = implode($attributeValue);
-						$caracteristiques[] = array("label"=>$attribute." ".$attributeLabel,"content"=>$attributeValue);
-
-					}
-					//Documents
-					else {
-						if($value->fieldtype=="href"){
-							$attributeValue = '<a href="'.$attributeValue.'" target="_blank">> télécharger</a>';
-						}
-						$caracteristiques[] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
-					}
-
-				} 
-			}
-								
-		}
-		return $caracteristiques;
+		return $this->getCharacteristicsArray();
 	}
 
 
@@ -610,7 +534,6 @@ class Website_Product extends Object_Product {
 		$caracteristiques = $this->getCharacteristicsArray();
 
 		if($isHTML) {
-			//if(strtolower($catalogue)=="matieres" || strtolower($catalogue)=="matières") {
 				$html ="<dl>\n";
 				foreach ($caracteristiques as $key => $value) {
 					if(!isset($value["label"]))
@@ -626,21 +549,6 @@ class Website_Product extends Object_Product {
 				}
 				
 				$html .="</dl>\n";
-			/*}
-			else {
-				$html ="<ul>\n";
-				foreach ($caracteristiques as $key => $value) {
-					$html.= '<li><div class="col-md-5 col-sm-5"><div class="nsg_ft0">';
-					$html.= strlen($value["label"])>0?ucfirst(trim($value["label"])):"";
-					$html.= '</div></div>';
-					$html.= '<div class="col-md-9 col-sm-9 nsg_ft1">';
-					$html.= ucfirst(trim($value["content"]));
-					$html.= '</div>';
-					$html.="</li>\n";
-				}
-				$html .="</ul>\n";
-			}*/
-			
 			return $html;
 
 		}
@@ -1868,7 +1776,7 @@ class Website_Product extends Object_Product {
    		 if(strlen(trim($this->getShort_description_title()))>0) {
    		 		$str .= "<h2>".$this->getShort_description_title()."</h2>";
    		 }
-   		 else {
+   		 else if(!$this->isTable()){
    		 		$str .= "<h2>".$this->getCalculatedShortDescriptionTitle()."</h2>";
    		 }
 

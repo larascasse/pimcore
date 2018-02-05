@@ -376,5 +376,39 @@ return [
         "priority" => 0,
         "creationDate" => 1510847291,
         "modificationDate" => 1510847376
+    ],
+    25 => [
+        "id" => 25,
+        "name" => "cmsbloc-single",
+        "pattern" => "/\\/cms-block\\/(.*)\\//",
+        "reverse" => "/cms-block/%key/",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "get-all-cms-blocks",
+        "variables" => "key",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1516875526,
+        "modificationDate" => 1516878573
+    ],
+    26 => [
+        "id" => 26,
+        "name" => "cmpage-single",
+        "pattern" => "/\\/cms-page\\/(.*)\\//",
+        "reverse" => "/cms-page/%key/",
+        "module" => "",
+        "controller" => "lpn",
+        "action" => "get-all-pages",
+        "variables" => "key",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1516875636,
+        "modificationDate" => 1516878576
     ]
 ];

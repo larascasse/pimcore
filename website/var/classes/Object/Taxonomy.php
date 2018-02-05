@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-02T15:01:41+01:00
+* Generated at: 2018-01-03T16:05:14+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.30.232
 
 
 Fields Summary: 
@@ -16,6 +16,7 @@ Fields Summary:
 - localizedfields [localizedfields]
 -- description [textarea]
 -- help [textarea]
+-- editorial [textarea]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -183,6 +184,19 @@ public function getHelp ($language = null) {
 }
 
 /**
+* Get editorial - Contenu Fiche produit
+* @return string
+*/
+public function getEditorial ($language = null) {
+	$data = $this->getLocalizedfields()->getLocalizedValue("editorial", $language);
+	$preValue = $this->preGetValue("editorial"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	 return $data;
+}
+
+/**
 * Set localizedfields - 
 * @param \Pimcore\Model\Object\Localizedfield $localizedfields
 * @return \Pimcore\Model\Object\Taxonomy
@@ -209,6 +223,16 @@ public function setDescription ($description, $language = null) {
 */
 public function setHelp ($help, $language = null) {
 	$this->getLocalizedfields()->setLocalizedValue("help", $help, $language);
+	return $this;
+}
+
+/**
+* Set editorial - Contenu Fiche produit
+* @param string $editorial
+* @return \Pimcore\Model\Object\Taxonomy
+*/
+public function setEditorial ($editorial, $language = null) {
+	$this->getLocalizedfields()->setLocalizedValue("editorial", $editorial, $language);
 	return $this;
 }
 

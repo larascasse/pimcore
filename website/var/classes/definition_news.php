@@ -1,17 +1,34 @@
 <?php 
 
-/** Generated at 2016-08-30T17:26:16+02:00 */
+/** 
+* Generated at: 2018-01-03T12:14:48+01:00
+* Inheritance: no
+* Variants: no
+* Changed by: florent (6)
+* IP: 172.31.30.232
+
+
+Fields Summary: 
+- localizedfields [localizedfields]
+-- title [input]
+-- shortText [textarea]
+-- text [wysiwyg]
+- date [datetime]
+- image_1 [image]
+- image_2 [image]
+- image_3 [image]
+*/ 
 
 
 return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'news',
    'description' => '',
    'creationDate' => 1368613289,
-   'modificationDate' => 1385983015,
+   'modificationDate' => 1514978087,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
-   'useTraits' => NULL,
+   'useTraits' => '',
    'allowInherit' => false,
    'allowVariants' => false,
    'showVariants' => false,
@@ -52,7 +69,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
           0 => 
           Pimcore\Model\Object\ClassDefinition\Data\Localizedfields::__set_state(array(
              'fieldtype' => 'localizedfields',
-             'phpdocType' => 'array',
+             'phpdocType' => '\\Pimcore\\Model\\Object\\Localizedfield',
              'childs' => 
             array (
               0 => 
@@ -135,10 +152,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'height' => '',
              'maxTabs' => NULL,
              'labelWidth' => NULL,
+             'hideLabelsWhenTabsReached' => NULL,
              'referencedFields' => 
             array (
             ),
-             'fieldDefinitionsCache' => NULL,
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -173,47 +190,39 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'childs' => 
             array (
               0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\KeyValue::__set_state(array(
-                 'fieldtype' => 'keyValue',
-                 'phpdocType' => 'Object_Data_KeyValue',
-                 'keyWidth' => 200,
-                 'valueWidth' => 500,
-                 'descWidth' => 200,
-                 'unitWidth' => NULL,
-                 'height' => NULL,
-                 'maxheight' => 0,
-                 'groupWidth' => 200,
-                 'groupDescWidth' => NULL,
-                 'multivalent' => false,
-                 'metawidth' => 200,
-                 'metaVisible' => false,
-                 'name' => 'keyvaluepairs',
-                 'title' => 'KEY',
+              Pimcore\Model\Object\ClassDefinition\Data\Datetime::__set_state(array(
+                 'fieldtype' => 'datetime',
+                 'queryColumnType' => 'bigint(20)',
+                 'columnType' => 'bigint(20)',
+                 'phpdocType' => '\\Carbon\\Carbon',
+                 'defaultValue' => NULL,
+                 'useCurrentDate' => false,
+                 'name' => 'date',
+                 'title' => 'Date',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
-                 'columnType' => NULL,
-                 'queryColumnType' => NULL,
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               1 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Datetime::__set_state(array(
-                 'fieldtype' => 'datetime',
-                 'queryColumnType' => 'bigint(20)',
-                 'columnType' => 'bigint(20)',
-                 'phpdocType' => 'Zend_Date',
-                 'defaultValue' => NULL,
-                 'useCurrentDate' => false,
-                 'name' => 'date',
-                 'title' => 'Date',
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => 350,
+                 'height' => 350,
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_1',
+                 'title' => 'Image',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -235,8 +244,8 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'uploadPath' => '',
                  'queryColumnType' => 'int(11)',
                  'columnType' => 'int(11)',
-                 'phpdocType' => 'Asset_Image',
-                 'name' => 'image_1',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_2',
                  'title' => 'Image',
                  'tooltip' => '',
                  'mandatory' => false,
@@ -259,31 +268,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'uploadPath' => '',
                  'queryColumnType' => 'int(11)',
                  'columnType' => 'int(11)',
-                 'phpdocType' => 'Asset_Image',
-                 'name' => 'image_2',
-                 'title' => 'Image',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              4 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
-                 'fieldtype' => 'image',
-                 'width' => 350,
-                 'height' => 350,
-                 'uploadPath' => '',
-                 'queryColumnType' => 'int(11)',
-                 'columnType' => 'int(11)',
-                 'phpdocType' => 'Asset_Image',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
                  'name' => 'image_3',
                  'title' => 'Image',
                  'tooltip' => '',
@@ -310,7 +295,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
   )),
    'icon' => '',
    'previewUrl' => '/%title_n%o_id',
-   'group' => NULL,
+   'group' => '',
    'propertyVisibility' => 
   array (
     'grid' => 

@@ -1,17 +1,17 @@
 <?php 
 
 /** 
-* Generated at: 2017-12-13T14:11:11+01:00
+* Generated at: 2018-01-30T16:46:20+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.15.147
 
 
 Fields Summary: 
-- meta_title2 [input]
 - actif_web [checkbox]
 - obsolete [checkbox]
+- is_lot [select]
 - code [input]
 - ean [input]
 - configurable_free_1 [input]
@@ -44,25 +44,29 @@ Fields Summary:
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
 - meta_title [input]
+- meta_title2 [input]
 - meta_description [input]
 - meta_keywords [input]
 - chauffantBasseTemperature [select]
+- pimonly_chauffantBasseTemperature [calculatedValue]
 - chauffantRadiantElectrique [select]
+- pimonly_chauffantRadiantElectrique [calculatedValue]
 - solRaffraichissant [select]
+- pimonly_solRaffraichissant [calculatedValue]
 - chauffantAccumulationBasseTemperature [select]
-- pimonlyX_chauffantBasseTemperature [calculatedValue]
-- pimonlyX_chauffantRadiantElectrique [calculatedValue]
-- pimonlyX_solRaffraichissant [calculatedValue]
 - essence [input]
 - support [select]
 - epaisseurUsure [input]
 - norme_sanitaire [select]
+- classe [input]
 - classe_utilisation [calculatedValue]
 - classe_upec [calculatedValue]
 - masse_volumique [calculatedValue]
 - pimonly_masse_volumique_moyenne [input]
 - classe_reaction_feu_eu [calculatedValue]
+- pimonly_classe_reaction_feu_eu [textarea]
 - classe_reaction_feu_fr [calculatedValue]
+- pimonly_classe_reaction_feu_fr [textarea]
 - degagement_formaldehyde [calculatedValue]
 - resistance_thermique [calculatedValue]
 - pimonly_resistance_thermique [input]
@@ -129,7 +133,6 @@ Fields Summary:
 - rendement [input]
 - famille [input]
 - qualite [input]
-- classe [input]
 - classe_service [input]
 - extras [objects]
 - chanfreins [input]
@@ -139,7 +142,7 @@ Fields Summary:
 - surface [input]
 - typeLame [select]
 - motif [select]
-- pieceHumide [checkbox]
+- pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
@@ -199,9 +202,9 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByIs_lot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
@@ -234,25 +237,29 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_chauffantBasseTemperature ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantRadiantElectrique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_chauffantRadiantElectrique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySolRaffraichissant ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_solRaffraichissant ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantAccumulationBasseTemperature ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_chauffantBasseTemperature ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_chauffantRadiantElectrique ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPimonlyX_solRaffraichissant ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEssence ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySupport ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseurUsure ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_utilisation ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_upec ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMasse_volumique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_masse_volumique_moyenne ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_eu ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_classe_reaction_feu_eu ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_fr ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_classe_reaction_feu_fr ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByDegagement_formaldehyde ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByResistance_thermique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_resistance_thermique ($value, $limit = 0) 
@@ -319,7 +326,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_service ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
@@ -387,9 +393,9 @@ class Product extends Concrete {
 
 public $o_classId = 5;
 public $o_className = "product";
-public $meta_title2;
 public $actif_web;
 public $obsolete;
+public $is_lot;
 public $code;
 public $ean;
 public $configurable_free_1;
@@ -422,6 +428,7 @@ public $shipping_type;
 public $mage_qty_description;
 public $mage_custom_option;
 public $meta_title;
+public $meta_title2;
 public $meta_description;
 public $meta_keywords;
 public $chauffantBasseTemperature;
@@ -432,7 +439,10 @@ public $essence;
 public $support;
 public $epaisseurUsure;
 public $norme_sanitaire;
+public $classe;
 public $pimonly_masse_volumique_moyenne;
+public $pimonly_classe_reaction_feu_eu;
+public $pimonly_classe_reaction_feu_fr;
 public $pimonly_resistance_thermique;
 public $pimonly_conductivite_thermique_total;
 public $taux_humidite;
@@ -493,7 +503,6 @@ public $mode_calcul;
 public $rendement;
 public $famille;
 public $qualite;
-public $classe;
 public $classe_service;
 public $extras;
 public $chanfreins;
@@ -568,32 +577,6 @@ public static function create($values = array()) {
 }
 
 /**
-* Get meta_title2 - meta_title2
-* @return string
-*/
-public function getMeta_title2 () {
-	$preValue = $this->preGetValue("meta_title2"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_title2;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title2")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_title2");
-	}
-	return $data;
-}
-
-/**
-* Set meta_title2 - meta_title2
-* @param string $meta_title2
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_title2 ($meta_title2) {
-	$this->meta_title2 = $meta_title2;
-	return $this;
-}
-
-/**
 * Get actif_web - Actif Web ?
 * @return boolean
 */
@@ -642,6 +625,32 @@ public function getObsolete () {
 */
 public function setObsolete ($obsolete) {
 	$this->obsolete = $obsolete;
+	return $this;
+}
+
+/**
+* Get is_lot - Est un lot ?
+* @return string
+*/
+public function getIs_lot () {
+	$preValue = $this->preGetValue("is_lot"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->is_lot;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("is_lot")->isEmpty($data)) {
+		return $this->getValueFromParent("is_lot");
+	}
+	return $data;
+}
+
+/**
+* Set is_lot - Est un lot ?
+* @param string $is_lot
+* @return \Pimcore\Model\Object\Product
+*/
+public function setIs_lot ($is_lot) {
+	$this->is_lot = $is_lot;
 	return $this;
 }
 
@@ -1478,6 +1487,32 @@ public function setMeta_title ($meta_title) {
 }
 
 /**
+* Get meta_title2 - meta_title2
+* @return string
+*/
+public function getMeta_title2 () {
+	$preValue = $this->preGetValue("meta_title2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_title2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title2")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_title2");
+	}
+	return $data;
+}
+
+/**
+* Set meta_title2 - meta_title2
+* @param string $meta_title2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_title2 ($meta_title2) {
+	$this->meta_title2 = $meta_title2;
+	return $this;
+}
+
+/**
 * Get meta_description - Meta Descriptions
 * @return string
 */
@@ -1556,6 +1591,26 @@ public function setChauffantBasseTemperature ($chauffantBasseTemperature) {
 }
 
 /**
+* Get pimonly_chauffantBasseTemperature - Compatible sol chauffant basse température DTU (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonly_chauffantBasseTemperature () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonly_chauffantBasseTemperature');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonly_chauffantBasseTemperature - Compatible sol chauffant basse température DTU (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonly_chauffantBasseTemperature
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_chauffantBasseTemperature ($pimonly_chauffantBasseTemperature) {
+	return $this;
+}
+
+/**
 * Get chauffantRadiantElectrique - Compatible sol chauffant radiant électrique
 * @return string
 */
@@ -1578,6 +1633,26 @@ public function getChauffantRadiantElectrique () {
 */
 public function setChauffantRadiantElectrique ($chauffantRadiantElectrique) {
 	$this->chauffantRadiantElectrique = $chauffantRadiantElectrique;
+	return $this;
+}
+
+/**
+* Get pimonly_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique  DTU (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonly_chauffantRadiantElectrique () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonly_chauffantRadiantElectrique');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonly_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique  DTU (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonly_chauffantRadiantElectrique
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_chauffantRadiantElectrique ($pimonly_chauffantRadiantElectrique) {
 	return $this;
 }
 
@@ -1608,6 +1683,26 @@ public function setSolRaffraichissant ($solRaffraichissant) {
 }
 
 /**
+* Get pimonly_solRaffraichissant - Compatible sol chauffant réversible DTU (Calculé)
+* @return \Pimcore\Model\Object\Data\CalculatedValue
+*/
+public function getPimonly_solRaffraichissant () {
+	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonly_solRaffraichissant');
+	$data->setContextualData("object", null, null, null);
+	$data = Service::getCalculatedFieldValue($this, $data);
+	return $data;
+	}
+
+/**
+* Set pimonly_solRaffraichissant - Compatible sol chauffant réversible DTU (Calculé)
+* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonly_solRaffraichissant
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_solRaffraichissant ($pimonly_solRaffraichissant) {
+	return $this;
+}
+
+/**
 * Get chauffantAccumulationBasseTemperature - Compatible à accumulation basse température
 * @return string
 */
@@ -1630,66 +1725,6 @@ public function getChauffantAccumulationBasseTemperature () {
 */
 public function setChauffantAccumulationBasseTemperature ($chauffantAccumulationBasseTemperature) {
 	$this->chauffantAccumulationBasseTemperature = $chauffantAccumulationBasseTemperature;
-	return $this;
-}
-
-/**
-* Get pimonlyX_chauffantBasseTemperature - Compatible sol chauffant basse température (Calculé)
-* @return \Pimcore\Model\Object\Data\CalculatedValue
-*/
-public function getPimonlyX_chauffantBasseTemperature () {
-	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_chauffantBasseTemperature');
-	$data->setContextualData("object", null, null, null);
-	$data = Service::getCalculatedFieldValue($this, $data);
-	return $data;
-	}
-
-/**
-* Set pimonlyX_chauffantBasseTemperature - Compatible sol chauffant basse température (Calculé)
-* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_chauffantBasseTemperature
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonlyX_chauffantBasseTemperature ($pimonlyX_chauffantBasseTemperature) {
-	return $this;
-}
-
-/**
-* Get pimonlyX_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique (Calculé)
-* @return \Pimcore\Model\Object\Data\CalculatedValue
-*/
-public function getPimonlyX_chauffantRadiantElectrique () {
-	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_chauffantRadiantElectrique');
-	$data->setContextualData("object", null, null, null);
-	$data = Service::getCalculatedFieldValue($this, $data);
-	return $data;
-	}
-
-/**
-* Set pimonlyX_chauffantRadiantElectrique - Compatible sol chauffant radiant électrique (Calculé)
-* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_chauffantRadiantElectrique
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonlyX_chauffantRadiantElectrique ($pimonlyX_chauffantRadiantElectrique) {
-	return $this;
-}
-
-/**
-* Get pimonlyX_solRaffraichissant - Compatible sol chauffant réversible (Calculé)
-* @return \Pimcore\Model\Object\Data\CalculatedValue
-*/
-public function getPimonlyX_solRaffraichissant () {
-	$data = new \Pimcore\Model\Object\Data\CalculatedValue('pimonlyX_solRaffraichissant');
-	$data->setContextualData("object", null, null, null);
-	$data = Service::getCalculatedFieldValue($this, $data);
-	return $data;
-	}
-
-/**
-* Set pimonlyX_solRaffraichissant - Compatible sol chauffant réversible (Calculé)
-* @param \Pimcore\Model\Object\Data\CalculatedValue $pimonlyX_solRaffraichissant
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonlyX_solRaffraichissant ($pimonlyX_solRaffraichissant) {
 	return $this;
 }
 
@@ -1794,6 +1829,32 @@ public function getNorme_sanitaire () {
 */
 public function setNorme_sanitaire ($norme_sanitaire) {
 	$this->norme_sanitaire = $norme_sanitaire;
+	return $this;
+}
+
+/**
+* Get classe - Classe d'usage
+* @return string
+*/
+public function getClasse () {
+	$preValue = $this->preGetValue("classe"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->classe;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("classe")->isEmpty($data)) {
+		return $this->getValueFromParent("classe");
+	}
+	return $data;
+}
+
+/**
+* Set classe - Classe d'usage
+* @param string $classe
+* @return \Pimcore\Model\Object\Product
+*/
+public function setClasse ($classe) {
+	$this->classe = $classe;
 	return $this;
 }
 
@@ -1904,6 +1965,32 @@ public function setClasse_reaction_feu_eu ($classe_reaction_feu_eu) {
 }
 
 /**
+* Get pimonly_classe_reaction_feu_eu - Classement feu (NF EN 13501-1)
+* @return string
+*/
+public function getPimonly_classe_reaction_feu_eu () {
+	$preValue = $this->preGetValue("pimonly_classe_reaction_feu_eu"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_classe_reaction_feu_eu;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_classe_reaction_feu_eu")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_classe_reaction_feu_eu");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_classe_reaction_feu_eu - Classement feu (NF EN 13501-1)
+* @param string $pimonly_classe_reaction_feu_eu
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_classe_reaction_feu_eu ($pimonly_classe_reaction_feu_eu) {
+	$this->pimonly_classe_reaction_feu_eu = $pimonly_classe_reaction_feu_eu;
+	return $this;
+}
+
+/**
 * Get classe_reaction_feu_fr - Classement feu (NF P 92 507)
 * @return \Pimcore\Model\Object\Data\CalculatedValue
 */
@@ -1920,6 +2007,32 @@ public function getClasse_reaction_feu_fr () {
 * @return \Pimcore\Model\Object\Product
 */
 public function setClasse_reaction_feu_fr ($classe_reaction_feu_fr) {
+	return $this;
+}
+
+/**
+* Get pimonly_classe_reaction_feu_fr - Classement feu (NF P 92 507)
+* @return string
+*/
+public function getPimonly_classe_reaction_feu_fr () {
+	$preValue = $this->preGetValue("pimonly_classe_reaction_feu_fr"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_classe_reaction_feu_fr;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_classe_reaction_feu_fr")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_classe_reaction_feu_fr");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_classe_reaction_feu_fr - Classement feu (NF P 92 507)
+* @param string $pimonly_classe_reaction_feu_fr
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_classe_reaction_feu_fr ($pimonly_classe_reaction_feu_fr) {
+	$this->pimonly_classe_reaction_feu_fr = $pimonly_classe_reaction_feu_fr;
 	return $this;
 }
 
@@ -3604,32 +3717,6 @@ public function setQualite ($qualite) {
 }
 
 /**
-* Get classe - Classe d'usage
-* @return string
-*/
-public function getClasse () {
-	$preValue = $this->preGetValue("classe"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->classe;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("classe")->isEmpty($data)) {
-		return $this->getValueFromParent("classe");
-	}
-	return $data;
-}
-
-/**
-* Set classe - Classe d'usage
-* @param string $classe
-* @return \Pimcore\Model\Object\Product
-*/
-public function setClasse ($classe) {
-	$this->classe = $classe;
-	return $this;
-}
-
-/**
 * Get classe_service - Classe de service
 * @return string
 */
@@ -3865,7 +3952,7 @@ public function setMotif ($motif) {
 
 /**
 * Get pieceHumide - Compatible pièces humides
-* @return boolean
+* @return string
 */
 public function getPieceHumide () {
 	$preValue = $this->preGetValue("pieceHumide"); 
@@ -3881,7 +3968,7 @@ public function getPieceHumide () {
 
 /**
 * Set pieceHumide - Compatible pièces humides
-* @param boolean $pieceHumide
+* @param string $pieceHumide
 * @return \Pimcore\Model\Object\Product
 */
 public function setPieceHumide ($pieceHumide) {

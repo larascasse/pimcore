@@ -1,17 +1,17 @@
 <?php 
 
 /** 
-* Generated at: 2017-12-13T14:11:11+01:00
+* Generated at: 2018-01-30T16:46:20+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.15.147
 
 
 Fields Summary: 
-- meta_title2 [input]
 - actif_web [checkbox]
 - obsolete [checkbox]
+- is_lot [select]
 - code [input]
 - ean [input]
 - configurable_free_1 [input]
@@ -44,25 +44,29 @@ Fields Summary:
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
 - meta_title [input]
+- meta_title2 [input]
 - meta_description [input]
 - meta_keywords [input]
 - chauffantBasseTemperature [select]
+- pimonly_chauffantBasseTemperature [calculatedValue]
 - chauffantRadiantElectrique [select]
+- pimonly_chauffantRadiantElectrique [calculatedValue]
 - solRaffraichissant [select]
+- pimonly_solRaffraichissant [calculatedValue]
 - chauffantAccumulationBasseTemperature [select]
-- pimonlyX_chauffantBasseTemperature [calculatedValue]
-- pimonlyX_chauffantRadiantElectrique [calculatedValue]
-- pimonlyX_solRaffraichissant [calculatedValue]
 - essence [input]
 - support [select]
 - epaisseurUsure [input]
 - norme_sanitaire [select]
+- classe [input]
 - classe_utilisation [calculatedValue]
 - classe_upec [calculatedValue]
 - masse_volumique [calculatedValue]
 - pimonly_masse_volumique_moyenne [input]
 - classe_reaction_feu_eu [calculatedValue]
+- pimonly_classe_reaction_feu_eu [textarea]
 - classe_reaction_feu_fr [calculatedValue]
+- pimonly_classe_reaction_feu_fr [textarea]
 - degagement_formaldehyde [calculatedValue]
 - resistance_thermique [calculatedValue]
 - pimonly_resistance_thermique [input]
@@ -129,7 +133,6 @@ Fields Summary:
 - rendement [input]
 - famille [input]
 - qualite [input]
-- classe [input]
 - classe_service [input]
 - extras [objects]
 - chanfreins [input]
@@ -139,7 +142,7 @@ Fields Summary:
 - surface [input]
 - typeLame [select]
 - motif [select]
-- pieceHumide [checkbox]
+- pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
@@ -199,7 +202,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1513170671,
+   'modificationDate' => 1517327180,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -260,30 +263,6 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'childs' => 
             array (
               0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'meta_title2',
-                 'title' => 'meta_title2',
-                 'tooltip' => 'Utilisé pour débuter les meta.. car si on change ka place de l\'onglet, ca permet d\'av voir l\'ihneritance, sinon, ca copie au save !!',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => true,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -305,7 +284,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              2 => 
+              1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -325,6 +304,42 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '0',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'is_lot',
+                 'title' => 'Est un lot ?',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               3 => 
@@ -1044,7 +1059,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
               30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 32,
@@ -1053,7 +1068,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'name' => 'leadtime',
                  'title' => 'Délai de Livraison',
                  'tooltip' => '',
-                 'mandatory' => true,
+                 'mandatory' => false,
                  'noteditable' => false,
                  'index' => true,
                  'locked' => false,
@@ -1206,6 +1221,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'meta_title2',
+                 'title' => 'meta_title2',
+                 'tooltip' => 'Utilisé pour débuter les meta.. car si on change ka place de l\'onglet, ca permet d\'av voir l\'ihneritance, sinon, ca copie au save !!',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
                  'width' => 800,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
@@ -1227,7 +1266,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              2 => 
+              3 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -1262,7 +1301,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'name' => 'chauffage',
              'type' => NULL,
              'region' => NULL,
-             'title' => 'chauffage',
+             'title' => 'Chauffage sol',
              'width' => NULL,
              'height' => NULL,
              'collapsible' => false,
@@ -1309,6 +1348,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleSearch' => false,
               )),
               1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonly_chauffantBasseTemperature',
+                 'title' => 'Compatible sol chauffant basse température DTU (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1344,7 +1407,31 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              2 => 
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonly_chauffantRadiantElectrique',
+                 'title' => 'Compatible sol chauffant radiant électrique  DTU (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1380,7 +1467,31 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              3 => 
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
+                 'fieldtype' => 'calculatedValue',
+                 'width' => 0,
+                 'calculatorClass' => '\\Website\\Generator',
+                 'queryColumnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
+                 'name' => 'pimonly_solRaffraichissant',
+                 'title' => 'Compatible sol chauffant réversible DTU (Calculé)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1413,78 +1524,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => true,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              4 => 
-              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                 'fieldtype' => 'calculatedValue',
-                 'width' => 0,
-                 'calculatorClass' => '\\Website\\Generator',
-                 'queryColumnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
-                 'name' => 'pimonlyX_chauffantBasseTemperature',
-                 'title' => 'Compatible sol chauffant basse température (Calculé)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              5 => 
-              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                 'fieldtype' => 'calculatedValue',
-                 'width' => 0,
-                 'calculatorClass' => '\\Website\\Generator',
-                 'queryColumnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
-                 'name' => 'pimonlyX_chauffantRadiantElectrique',
-                 'title' => 'Compatible sol chauffant radiant électrique (Calculé)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              6 => 
-              Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
-                 'fieldtype' => 'calculatedValue',
-                 'width' => 0,
-                 'calculatorClass' => '\\Website\\Generator',
-                 'queryColumnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => '\\Pimcore\\Model\\Object\\Data\\CalculatedValue',
-                 'name' => 'pimonlyX_solRaffraichissant',
-                 'title' => 'Compatible sol chauffant réversible (Calculé)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
-                 'relationType' => false,
-                 'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
@@ -1595,7 +1634,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 55,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'epaisseurUsure',
@@ -1675,6 +1714,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleSearch' => false,
               )),
               4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 30,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'classe',
+                 'title' => 'Classe d\'usage',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1698,7 +1761,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              5 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1722,7 +1785,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              6 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1746,13 +1809,13 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 30,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'pimonly_masse_volumique_moyenne',
@@ -1770,7 +1833,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1794,7 +1857,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              9 => 
+              10 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'pimonly_classe_reaction_feu_eu',
+                 'title' => 'Classement feu (NF EN 13501-1)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1818,7 +1904,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
+              12 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'pimonly_classe_reaction_feu_fr',
+                 'title' => 'Classement feu (NF P 92 507)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1842,7 +1951,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              11 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1866,7 +1975,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              12 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1890,7 +1999,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1914,7 +2023,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1938,7 +2047,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1962,7 +2071,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1986,7 +2095,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2010,7 +2119,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2130,7 +2239,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               3 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 15,
@@ -2199,15 +2308,25 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   4 => 
                   array (
+                    'key' => 'Rainure & languettes 2 cotés et bouts coupés d\'équerre',
+                    'value' => 'rainurelanguette-cote-bout-equerre',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Rainure 2 cotés fausse languette et bouts coupés d\'équerre',
+                    'value' => 'rainure-cote-bout-equerre',
+                  ),
+                  6 => 
+                  array (
                     'key' => 'Invisible',
                     'value' => 'invisible',
                   ),
-                  5 => 
+                  7 => 
                   array (
                     'key' => 'Flottante',
                     'value' => 'flottante',
                   ),
-                  6 => 
+                  8 => 
                   array (
                     'key' => 'Système Click',
                     'value' => 'click',
@@ -2323,7 +2442,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 15,
@@ -2454,7 +2573,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 15,
@@ -2568,7 +2687,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 15,
@@ -2754,7 +2873,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 255,
@@ -2764,7 +2883,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'title' => 'Section',
                      'tooltip' => '',
                      'mandatory' => false,
-                     'noteditable' => true,
+                     'noteditable' => false,
                      'index' => false,
                      'locked' => false,
                      'style' => '',
@@ -2824,7 +2943,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   3 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 100,
@@ -3217,7 +3336,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   2 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 100,
@@ -3263,7 +3382,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   4 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 100,
@@ -3347,110 +3466,145 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       2 => 
                       array (
-                        'key' => 'Vernis aqua',
-                        'value' => 'Verni aqua',
-                      ),
-                      3 => 
-                      array (
-                        'key' => 'Vernis blanchi',
-                        'value' => 'Verni blanchi',
-                      ),
-                      4 => 
-                      array (
-                        'key' => 'Vernis blanchi mat',
-                        'value' => 'Verni blanchi mat',
-                      ),
-                      5 => 
-                      array (
-                        'key' => 'Vernis satiné',
-                        'value' => 'Verni satiné',
-                      ),
-                      6 => 
-                      array (
-                        'key' => 'Vernis mat',
-                        'value' => 'Verni mat',
-                      ),
-                      7 => 
-                      array (
-                        'key' => 'Vernis cérusé mat',
-                        'value' => 'vernis cérusé mat',
-                      ),
-                      8 => 
-                      array (
                         'key' => 'Brute',
                         'value' => 'brut',
                       ),
-                      9 => 
+                      3 => 
                       array (
                         'key' => 'Brut de sciage',
                         'value' => 'Brut de sciage',
                       ),
-                      10 => 
+                      4 => 
                       array (
                         'key' => 'Brossé brut',
                         'value' => 'brosse',
                       ),
-                      11 => 
+                      5 => 
                       array (
                         'key' => 'Brossé Veinage Noir',
                         'value' => 'brosse-veinage-noir',
                       ),
-                      12 => 
+                      6 => 
                       array (
                         'key' => 'Huilé',
                         'value' => 'huile',
                       ),
-                      13 => 
+                      7 => 
+                      array (
+                        'key' => 'Ciré',
+                        'value' => 'cire',
+                      ),
+                      8 => 
+                      array (
+                        'key' => 'Pré-huilé',
+                        'value' => 'pre-huile',
+                      ),
+                      9 => 
                       array (
                         'key' => 'Huilé mat',
                         'value' => 'huile mat',
                       ),
-                      14 => 
+                      10 => 
                       array (
                         'key' => 'Huile cire',
                         'value' => 'huile-cire',
                       ),
-                      15 => 
+                      11 => 
+                      array (
+                        'key' => 'Huile cire ou vernis aqua',
+                        'value' => 'huile-cire-ou-vernis-aqua',
+                      ),
+                      12 => 
                       array (
                         'key' => 'Huile aqua',
                         'value' => 'huile-aqua',
                       ),
-                      16 => 
+                      13 => 
                       array (
                         'key' => 'Huile UV',
                         'value' => 'huile UV',
                       ),
-                      17 => 
+                      14 => 
+                      array (
+                        'key' => 'Huile teinte réactive',
+                        'value' => 'huile teinte reactive',
+                      ),
+                      15 => 
                       array (
                         'key' => 'Peinture d\'Aujourd\'hui',
                         'value' => 'peint',
                       ),
-                      18 => 
+                      16 => 
                       array (
                         'key' => 'Peinture d\'origine',
                         'value' => 'peintorigine',
                       ),
-                      19 => 
+                      17 => 
                       array (
                         'key' => 'Peinture blanche',
                         'value' => ' Peinture blanche',
                       ),
-                      20 => 
+                      18 => 
                       array (
                         'key' => 'Peinture noire',
                         'value' => ' Peinture noire',
                       ),
+                      19 => 
+                      array (
+                        'key' => 'Vernis aqua',
+                        'value' => 'Verni aqua',
+                      ),
+                      20 => 
+                      array (
+                        'key' => 'Vernis blanchi',
+                        'value' => 'Verni blanchi',
+                      ),
                       21 => 
+                      array (
+                        'key' => 'Vernis blanchi mat',
+                        'value' => 'Verni blanchi mat',
+                      ),
+                      22 => 
+                      array (
+                        'key' => 'Vernis satiné',
+                        'value' => 'Verni satiné',
+                      ),
+                      23 => 
+                      array (
+                        'key' => 'Vernis mat',
+                        'value' => 'Verni mat',
+                      ),
+                      24 => 
+                      array (
+                        'key' => 'Vernis cérusé mat',
+                        'value' => 'vernis cérusé mat',
+                      ),
+                      25 => 
+                      array (
+                        'key' => 'Vernis blanc',
+                        'value' => 'vernis blanc',
+                      ),
+                      26 => 
+                      array (
+                        'key' => 'Vernis taupe',
+                        'value' => 'vernis taupe',
+                      ),
+                      27 => 
+                      array (
+                        'key' => 'Vernis colonial',
+                        'value' => 'vernis colonial',
+                      ),
+                      28 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      22 => 
+                      29 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      23 => 
+                      30 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',
@@ -3623,7 +3777,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       3 => 
                       array (
-                        'key' => 'Face Antidérapante',
+                        'key' => 'Rainuré',
                         'value' => 'antiderapant',
                       ),
                       4 => 
@@ -3715,7 +3869,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 10,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'choix',
@@ -3802,7 +3956,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   0 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 10,
@@ -3826,7 +3980,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   1 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 10,
@@ -3992,7 +4146,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 5,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'unite',
@@ -4013,10 +4167,10 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 5,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mode_calcul',
@@ -4062,10 +4216,10 @@ Combien d\'unité dans 1 m2',
               6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 10,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'famille',
@@ -4086,10 +4240,10 @@ Combien d\'unité dans 1 m2',
               7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 10,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'qualite',
@@ -4108,30 +4262,6 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               8 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => '',
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'classe',
-                 'title' => 'Classe d\'usage',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4155,7 +4285,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => 300,
@@ -4188,7 +4318,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              11 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4212,7 +4342,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              12 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4236,7 +4366,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4260,7 +4390,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -4284,7 +4414,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              15 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4308,7 +4438,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              16 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -4364,7 +4494,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -4405,13 +4535,32 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
+              17 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Oui en pose collée en plein',
+                    'value' => 'oui collage en plein',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => 'non',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
                  'name' => 'pieceHumide',
                  'title' => 'Compatible pièces humides',
                  'tooltip' => '',
@@ -4427,7 +4576,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4449,7 +4598,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4471,7 +4620,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              21 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4493,7 +4642,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              22 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4515,7 +4664,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,

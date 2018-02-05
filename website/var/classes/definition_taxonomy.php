@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2017-11-02T15:01:41+01:00
+* Generated at: 2018-01-03T16:05:14+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.46
+* IP: 172.31.30.232
 
 
 Fields Summary: 
@@ -16,6 +16,7 @@ Fields Summary:
 - localizedfields [localizedfields]
 -- description [textarea]
 -- help [textarea]
+-- editorial [textarea]
 */ 
 
 
@@ -23,7 +24,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'taxonomy',
    'description' => '',
    'creationDate' => 1380723573,
-   'modificationDate' => 1509631301,
+   'modificationDate' => 1514991914,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -154,7 +155,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -207,6 +208,29 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => '',
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'editorial',
+                 'title' => 'Contenu Fiche produit',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',

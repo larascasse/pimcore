@@ -17,3 +17,4 @@ website/var/config/system.xml
 /website/var/formbuilder/*
 vendor/*
 /website/var/composer
+/website/var/config/web2print.php

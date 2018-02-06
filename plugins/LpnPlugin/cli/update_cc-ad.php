@@ -168,9 +168,15 @@ Usé,use
 
     //TODO
     if(stristr($scienergie, "TRES ACCENTU")) {
-        $object->setValue('traitement_surface',"vieilli tres accentue");
-        $object->setValue("pimonly_name_suffixe","vieilli très accentué");
-        $object->setValue('chanfreins','rives abîmées');
+        if(strlen($object->getEan())==0) {
+
+        }
+        else {
+            $object->setValue('traitement_surface',"vieilli tres accentue");
+            $object->setValue("pimonly_name_suffixe","vieilli très accentué");
+            $object->setValue('chanfreins','rives abîmées');
+        }
+        
     }
 
     //$object->setValue('origine_bois','France');

@@ -109,7 +109,7 @@ Usé,use
 
          if(strlen($object->getEan())>0) {
             
-
+            
             if(stristr($scienergieCourt, "xl")) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
@@ -121,7 +121,7 @@ Usé,use
                 $object->setValue('longueur_txt','Longueurs panachées 1800 à 2700 mm');
                 $suffixeEan.="x140/180/220x1800-2700";
             }
-            $suffixeEan .= 'x'.$object->getLargeur().'x'.$object->getLongueur();
+           
             $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
          }

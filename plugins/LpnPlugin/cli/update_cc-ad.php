@@ -1,6 +1,6 @@
 <?php
 
-
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-ad
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)
@@ -97,7 +97,7 @@ Usé,use
                  $suffixeEan .= 'x180/200/220';
                 break;
             default:
-                $suffixeEan .= ' x '.$object->getLargeur();
+                $suffixeEan .= 'x'.$object->getLargeur();
                 break;
         }
     }
@@ -107,7 +107,7 @@ Usé,use
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
          $longueur_txt = 'Longueurs panachées de 1200 à 2300 mm';
-         $suffixeEan .= 'x 1200-2300';
+         $suffixeEan .= 'x1200-2300';
         
 
          //EAN

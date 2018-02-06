@@ -208,6 +208,10 @@ Usé,use
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
              $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur());
         }
+         else if(stristr($object->getEan(), "6193302500756")) {
+          
+             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."Ep. ".$object->getEpaisseur().", long. 400 à 2500 mm");
+        }
         
         else {
             $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->pimonly_dimensions);

@@ -82,17 +82,22 @@ Usé,use
     echo "\n$article ?";
 
 
+    $suffixeEan = "";
     //largeur
     if(strlen($object->getEan())>0) {
+
+        $suffixeEan .= $object->getLargeur();
         switch ($object->getLargeur()) {
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
+                $suffixeEan .= ' x 160/180/200';
                 break;
             case '600':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
+                 $suffixeEan .= 'x 180/200/220';
                 break;
             default:
-                # code...
+                $suffixeEan .= ' x '.$object->getLargeur();
                 break;
         }
     }
@@ -101,19 +106,20 @@ Usé,use
         echo "OK !\n";
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
-
+         $longueur_txt = 'Longueurs panachées de 1200 à 2300 mm';
+         $suffixeEan .= 'x 1200 à 2300 mm';
         
 
          //EAN
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 
          }
          //Article
          else  {
             //$object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
+            $object->setValue('longueur_txt',$longueur_txt);
             $object->setValue('chanfreins','2');
          }
          
@@ -123,16 +129,18 @@ Usé,use
     //vieilli rives abimees
     else if(stristr($article, "FMCHERA")) {
          
-
+         $longueur_txt = 'Longueurs panachées de 1200 à 2300 mm';
+         $suffixeEan .= 'x 1200 à 2300 mm';
 
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
          }
          else {
+            $object->setValue('longueur_txt',$longueur_txt);
             $object->setTraitement_surface(("vieilli rives abimees"));
             $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
-            $object->setValue('longueur_txt','Longueurs panachées de 1200 à 2300 mm');
+            
             $object->setValue('chanfreins','rives abîmées');
          }
 

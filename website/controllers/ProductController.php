@@ -451,6 +451,7 @@ class ProductController extends Action
              $caracteristiques =  $product->getCharacteristicsArray();
 
             if($idx==0) {
+                $header['actif'] = "Actif Web";
                 $header['famille'] = "Famille";
                  //$header['ean'] = "EAN";
                  $header['name'] = "Name";
@@ -475,6 +476,7 @@ class ProductController extends Action
                 }
             }
 
+             $row[] = $product->getActif_web();
              $row[] = $product->getCode();
              //$row[] = $product->getEan()."-";
              $row[] = $product->getMage_short_name(3000);;
@@ -482,7 +484,7 @@ class ProductController extends Action
 
              foreach ($header as $key => $title) {
 
-                    if($key=='famille' || $key=='name' || $key=='url' )
+                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' )
                         continue;
 
                     if(!isset($caracteristiques[$key])) {

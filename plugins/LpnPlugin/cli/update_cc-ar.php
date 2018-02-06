@@ -81,7 +81,7 @@ Usé,use
 */
     echo "\n$article ?";
 
-    $suffixeEan .= $object->getEpaisseur();
+    $suffixeEan = $object->getEpaisseur();
 
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";
@@ -109,7 +109,7 @@ Usé,use
 
          if(strlen($object->getEan())>0) {
             
-            
+
             if(stristr($scienergieCourt, "xl")) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');

@@ -168,7 +168,7 @@ Usé,use
 
     //TODO
     if(stristr($scienergie, "TRES ACCENTU")) {
-        if(strlen($object->getEan())==0) {
+        if(strlen($object->getEan())>0) {
 
         }
         else {

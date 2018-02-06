@@ -86,7 +86,7 @@ Usé,use
     //largeur
     if(strlen($object->getEan())>0) {
 
-        $suffixeEan .= $object->getLargeur();
+        $suffixeEan .= $object->getEpaisseur();
         switch ($object->getLargeur()) {
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');

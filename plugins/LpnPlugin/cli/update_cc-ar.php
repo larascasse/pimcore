@@ -81,13 +81,16 @@ Usé,use
 */
     echo "\n$article ?";
 
+    $suffixeEan .= $object->getEpaisseur();
+
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";
          $object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
          //EAN
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            $suffixeEan .= 'x'.$object->getLargeur().'x'.$object->getLongueur();
+            $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 
          }
@@ -105,17 +108,21 @@ Usé,use
 
 
          if(strlen($object->getEan())>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+            
 
             if(stristr($scienergieCourt, "xl")) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
+                $suffixeEan.="x220/260/300x2000-3000";
 
             }
             else {
                 $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
                 $object->setValue('longueur_txt','Longueurs panachées 1800 à 2700 mm');
+                $suffixeEan.="x140/180/220x1800-2700";
             }
+            $suffixeEan .= 'x'.$object->getLargeur().'x'.$object->getLongueur();
+            $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
          }
          else {

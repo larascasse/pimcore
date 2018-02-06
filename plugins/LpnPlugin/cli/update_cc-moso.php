@@ -1,6 +1,9 @@
 <?php
 //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-mo
 
+//plugins/LpnPlugin/odata/pimcore$ php import_ean_to_pimcore.php startswith=fmbamg4 nonactif=1
+//plugins/LpnPlugin/odata/pimcore$ php import_ean_to_pimcore.php startswith=fmbamg0 nonactif=1
+
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)

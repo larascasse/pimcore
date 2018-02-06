@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-mo
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bois-exo/cc-cf
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -150,6 +150,10 @@ Usé,use
         //TECK
         elseif(stristr($famille, "FMTECG4COUVE0CF")) {
              $object->setOrigine_bois('Asie');
+        }
+
+        //WENGE
+        elseif(stristr($famille, "FMTECG4COUVE0CF")) {
         }
 
         switch ($epaisseur) {

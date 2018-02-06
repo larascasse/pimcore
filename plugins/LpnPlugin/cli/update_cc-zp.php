@@ -94,6 +94,8 @@ Usé,use
         $object->setSolRaffraichissant("0");
         $object->setChauffantRadiantElectrique("1");
 
+        $isMotif = stristr($code,"xzp")  || stristr($code,"zzp");
+
 
 
         switch ($object->getEpaisseur()) {
@@ -103,6 +105,7 @@ Usé,use
 
                 }
                 $object->setEpaisseurUsure('3.2 mm');
+                if(!$isMotif)
                  $longueur_txt = "Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début";
                // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
                  break;
@@ -118,7 +121,9 @@ Usé,use
                 $object->setValue('support','Latté');
                 //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('4 mm');
-                $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
+
+                if(!$isMotif)
+                    $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
 
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
@@ -127,6 +132,11 @@ Usé,use
             case '21':
                 $object->setValue('support','cp peuplier');
                 $object->setEpaisseurUsure('6 mm');
+                break;
+
+            //INDUS
+            case '19':
+                $longueur_txt = "Longueurs variables de 400 à 2500 mm";
                 break;
             default:
                 # code...
@@ -137,9 +147,9 @@ Usé,use
              $longueur_txt =  "Longueur : 1860 mm, présence de demi-lames de début";
         }
         */
-        if(strlen($longueur_txt)>0) {
+        //if(strlen($longueur_txt)>0) {
              $object->setValue('longueur_txt',$longueur_txt);
-        }
+        //}
 
 
         $suffixe = "";

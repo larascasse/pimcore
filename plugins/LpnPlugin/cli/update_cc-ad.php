@@ -90,11 +90,11 @@ Usé,use
         switch ($object->getLargeur()) {
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
-                $suffixeEan .= ' x 160/180/200';
+                $suffixeEan .= 'x160/180/200';
                 break;
             case '600':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x 180/200/220';
+                 $suffixeEan .= 'x180/200/220';
                 break;
             default:
                 $suffixeEan .= ' x '.$object->getLargeur();
@@ -107,7 +107,7 @@ Usé,use
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
          $longueur_txt = 'Longueurs panachées de 1200 à 2300 mm';
-         $suffixeEan .= 'x 1200 à 2300 mm';
+         $suffixeEan .= 'x 1200-2300';
         
 
          //EAN
@@ -130,7 +130,7 @@ Usé,use
     else if(stristr($article, "FMCHERA")) {
          
          $longueur_txt = 'Longueurs panachées de 1200 à 2300 mm';
-         $suffixeEan .= 'x 1200 à 2300 mm';
+         $suffixeEan .= 'x1200-2300';
 
          if(strlen($object->getEan())>0) {
             $object->setValue("pimonly_name_suffixe",$suffixeEan);

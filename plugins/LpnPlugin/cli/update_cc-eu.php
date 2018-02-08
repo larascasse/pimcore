@@ -1,6 +1,8 @@
 <?php
 
 //http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-eu
+
+//
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)
@@ -21,7 +23,7 @@ Pimcore_Model_Cache::disable();
 
 $conditionFilters = array(
        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
-       //"o_id >10000",
+       "o_id >10000",
 
     );
 
@@ -127,6 +129,10 @@ foreach ($list->getObjects() as $object) {
         $object->setMotif(' baton rompu');
         $save=true;
     }
+    else if(stristr($scienergieCourt, "PDH ")) {
+        $object->setMotif(' pth');
+
+    }
 
     if($object->getEpaisseur()==19) {
         $object->setEpaisseurUsure('5.5 mm');
@@ -173,9 +179,28 @@ foreach ($list->getObjects() as $object) {
            $suffixe.=' Click';
         }
 
-         if(stristr($scienergieCourt, "BR ")) {
+        if(stristr($scienergieCourt, "BR ")) {
             $prefixe = "Bâton Rompu ";
         }
+
+        if(stristr($scienergieCourt, "PDH ")) {
+            $prefixe = "Point de Hongrie ";
+        }
+
+
+   
+        if(stristr($scienergieCourt, "PDH ")) {
+            if($object->getLargeur()==92) {
+                $suffixe .= " angle 45°";
+            }
+            else if($object->getLargeur()==124) {
+                $suffixe .= " angle 52°";
+            }
+
+        }
+
+
+
 
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {

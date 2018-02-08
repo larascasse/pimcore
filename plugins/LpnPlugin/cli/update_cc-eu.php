@@ -188,13 +188,13 @@ foreach ($list->getObjects() as $object) {
         }
 
 
-   
+        $suffixe2 = "";
         if(stristr($scienergieCourt, "PDH ")) {
             if($object->getLargeur()==92) {
-                $suffixe .= " angle 45°";
+                $suffixe2 .= " angle 45°";
             }
             else if($object->getLargeur()==124) {
-                $suffixe .= " angle 52°";
+                $suffixe2 .= " angle 52°";
             }
 
         }
@@ -204,12 +204,12 @@ foreach ($list->getObjects() as $object) {
 
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
-            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport())." ".$suffixe2.$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$suffixe);
 
         }  
         else {
-            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport())." ".$suffixe2.$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$parent->getChoixString().$suffixe);
         }
 

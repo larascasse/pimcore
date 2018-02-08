@@ -204,12 +204,12 @@ foreach ($list->getObjects() as $object) {
 
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
-            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport())." ".$suffixe2.$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport()).$suffixe2." ".$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$suffixe);
 
         }  
         else {
-            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport())." ".$suffixe2.$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport()).$suffixe2." ".$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$parent->getChoixString().$suffixe);
         }
 

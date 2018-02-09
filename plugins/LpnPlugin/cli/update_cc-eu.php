@@ -68,7 +68,7 @@ foreach ($list->getObjects() as $object) {
 
     $save=false;
 
-    if(stristr($scienergieCourt, "hd") || stristr($scienergieCourt, " H ")) {
+    if(stristr($scienergieCourt, " hd") || stristr($scienergieCourt, " H ")) {
         $object->setSupport('HDF');
         $object->setPimonly_masse_volumique_moyenne(850);
 

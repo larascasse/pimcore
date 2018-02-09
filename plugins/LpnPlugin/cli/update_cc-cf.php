@@ -119,7 +119,7 @@ Usé,use
 
    
     if(strlen($object->getEan())>0) {
-         $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->pimonly_dimensions);
+         $object->setValue("pimonly_name_suffixe",$object->getChoixString()." Click ".$object->pimonly_dimensions);
 
         
         $save=true;

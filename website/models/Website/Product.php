@@ -606,7 +606,7 @@ class Website_Product extends Object_Product {
 
 
 		//Descitptio
-		$descriptionFields = array('Dimensions', 'essence','motif','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage','catalogue');
+		$descriptionFields = array('Dimensions', 'essence','motif','angle','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage','catalogue');
 
 
 		//CE
@@ -618,7 +618,7 @@ class Website_Product extends Object_Product {
 
 
 		//Ordre des champs
-		$order = array('dimensions', 'Essence', 'Choix', 'Support / âme', 'Ep. couche d\'usure', 'Traitement de surface','Finition','Chanfreins','Qualité');
+		$order = array('dimensions', 'Essence', 'Choix', 'Support / âme', 'Ep. couche d\'usure', 'Traitement de surface','Finition','Chanfreins','Qualité','Motif','Angle');
 
 
 		foreach($attributes as $key=> $value) {

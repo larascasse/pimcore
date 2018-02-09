@@ -112,7 +112,7 @@ Usé,use
 
             case '14':
                 $object->setValue('support','Latté');
-                $object->setEpaisseurUsure('4 mm');
+                $object->setEpaisseurUsure('3.6 mm');
                 if($object->getLargeur()==71) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
                 }

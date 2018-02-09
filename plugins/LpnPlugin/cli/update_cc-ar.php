@@ -52,6 +52,7 @@ foreach ($list->getObjects() as $object) {
 
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
+    $scienergie_converti = $object->name_scienergie_converti; //huilé cire
     $article = $object->code;
     $parent = $object->getParent();
 
@@ -136,7 +137,7 @@ Usé,use
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"huile-aqua");
     }
-    else if(stristr($scienergie, "HUILE CIRE")) {
+    else if(stristr($scienergie, "HUILE CIRE") ||  stristr($scienergie_converti, "huilé cire")) {
         $object->setValue('finition',"huile-cire");
     }
 

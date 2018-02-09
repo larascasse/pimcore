@@ -96,7 +96,7 @@ Usé,use
                 break;
         }*/
         //pimonly_section
-        $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
+        $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section()."x800-1200");
     }
     //CONTEMPORAIN
     /*if(stristr($article, "FMCHEG2")) {

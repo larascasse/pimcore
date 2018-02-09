@@ -197,18 +197,18 @@ foreach ($list->getObjects() as $object) {
         if(stristr($scienergieCourt, "PDH ")) {
             if($object->getLargeur()==92) {
                 $suffixe2 .= " angle 45°";
-                $techDescription[] = "Angle : 45°";
+               // $techDescription[] = "Angle : 45°";
                 $object->setAngle('angle 45°');
             }
             else if($object->getLargeur()==124) {
                 $suffixe2 .= " angle 52°";
-                $techDescription[] = "Angle : 52°";
+                //$techDescription[] = "Angle : 52°";
                 $object->setAngle('angle 52°');
             }
 
         }
 
-        $object->setCharacteristics_others(implode("\n", $techDescription));
+        //$object->setCharacteristics_others(implode("\n", $techDescription));
 
 
 

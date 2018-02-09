@@ -48,6 +48,11 @@ foreach ($list->getObjects() as $object) {
         continue;
 
 
+    $techDescription = array();
+    $techTech = array();
+    $techCe = array();
+
+
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
     //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
@@ -192,12 +197,16 @@ foreach ($list->getObjects() as $object) {
         if(stristr($scienergieCourt, "PDH ")) {
             if($object->getLargeur()==92) {
                 $suffixe2 .= " angle 45°";
+                $techDescription[] = "Angle : 45°";
             }
             else if($object->getLargeur()==124) {
                 $suffixe2 .= " angle 52°";
+                $techDescription[] = "Angle : 52°";
             }
 
         }
+
+        $object->setCharacteristics_others(implode("\n", $techDescription));
 
 
 

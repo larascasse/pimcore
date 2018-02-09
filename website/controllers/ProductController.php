@@ -431,31 +431,25 @@ class ProductController extends Action
         
         $rows = array();
 
+        //On récupere toutes les entetes d'abord
+        $header['actif'] = "Actif Web";
+        $header['famille'] = "Famille";
+        //$header['ean'] = "EAN";
+        $header['name'] = "Name";
+        $header['url'] = "Url";
+                 
+
         foreach ($products as $product) {
 
-
-        }
-        foreach ($products as $product) {
-             $row=array();
-             
-
-             if(strlen($product->ean)==0) {
+            if(strlen($product->ean)==0) {
                 continue;
              }
-             
-            
 
-            
-
-
-             $caracteristiques =  $product->getCharacteristicsArray();
+            $caracteristiques =  $product->getCharacteristicsArray();
 
             if($idx==0) {
-                $header['actif'] = "Actif Web";
-                $header['famille'] = "Famille";
-                 //$header['ean'] = "EAN";
-                 $header['name'] = "Name";
-                 $header['url'] = "Url";
+                
+             }
 
                 foreach ($caracteristiques as $key => $value) {
                     if(!is_array($value) || !isset($value["label"]))
@@ -474,7 +468,29 @@ class ProductController extends Action
 
                     }
                 }
-            }
+           
+
+
+            $idx ++;
+        }
+
+        $idx = 0;
+        foreach ($products as $product) {
+             $row=array();
+             
+
+             if(strlen($product->ean)==0) {
+                continue;
+             }
+             
+            
+
+            
+
+
+             $caracteristiques =  $product->getCharacteristicsArray();
+
+            
 
              $row[] = $product->getActif_web();
              $row[] = $product->getCode();

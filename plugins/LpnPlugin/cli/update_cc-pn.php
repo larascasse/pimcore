@@ -89,6 +89,8 @@ Usé,use
         //$object->setFixation(array('rainurelanguette4cotes'));
         //$object->setValue('support','3 plis massif');
 
+
+
         $longueur_txt = "";
 
         switch ($object->getEpaisseur()) {
@@ -167,7 +169,21 @@ Usé,use
             
         } 
         $parent->setValue('chanfreins',"2 ou rives abîmées");
+        
+        $parent->setChauffantBasseTemperature("1");
+        $parent->setChauffantRadiantElectrique("1");
+        $parent->setSolRaffraichissant("0");
+
+        $object->setChauffantBasseTemperature("");
+        $object->setChauffantRadiantElectrique("");
+        $object->setSolRaffraichissant("");
+
+
         $parent->save();
+
+        //if($save)
+        $object->save();
+
         
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
@@ -179,8 +195,7 @@ Usé,use
    // continue;
 
    
-    if($save)
-        $object->save();
+    
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

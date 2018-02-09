@@ -208,7 +208,7 @@ foreach ($list->getObjects() as $object) {
 
         }
 
-        //$object->setCharacteristics_others(implode("\n", $techDescription));
+        $object->setCharacteristics_others(implode("\n", $techDescription));
 
 
 

@@ -117,7 +117,7 @@ function createCustomer(target) {
 </script>
 
 
-       <div id="unknown-customer" style="display:none">
+<div id="unknown-customer" style="display:none">
       <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></i></h4>
       <form id="mailform" class="form-horizontal">
       
@@ -129,31 +129,25 @@ function createCustomer(target) {
 	          </label>
 	        </div>
 	        
-			<div class="form-group"  style="padding-bottom: 40px;">
-				<input type="button" class="btn btn-primary btn-lg" name="button" onclick="createCustomer(this)" value="Créer un compte web" /><br />
-				<div style="display: none;">
-					<textarea  cols="50" rows="20" name="xmlclient"><?php echo $this->xmlClient->asXML() ?></textarea>
-				</div>
-	     </div>
+          <div class="form-group"  style="padding-bottom: 40px;">
+            <input type="button" class="btn btn-primary btn-lg" name="button" onclick="createCustomer(this)" value="Créer un compte web" /><br />
+            <div style="display: none;">
+              <textarea  cols="50" rows="20" name="xmlclient"><?php echo $this->xmlClient->asXML() ?></textarea>
+            </div>
+          </div>
+
+      </div>
 
 
 	   </form>
-      </div>
+ </div>
 
-  </div>
 
-          <div id="known-customer" style="display:none">
+<div id="known-customer" style="display:none">
         <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
-       
-        <?php
-        if(isset($this->xmlClient)) {
-        	foreach ($this->xmlClient as $key => $value) {
-	             echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
-	        }
-        }
-        
-        ?>
-        </div>
+</div>
+
+<br /><br /><br /><br /><br /><br />
 
 
         <?php

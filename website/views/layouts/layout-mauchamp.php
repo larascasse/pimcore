@@ -91,7 +91,7 @@ var dataLayer=[];
 
 <?php
     // include a document-snippet - in this case the footer document
-    echo $this->inc("/" . $this->language . "/shared/includes/footer");
+    //echo $this->inc("/" . $this->language . "/shared/includes/footer");
 ?>
 <script src="/website/static_lpn/js/pdfobject.min.js"></script>
 <script src="/website/static_lpn/js/tether.min.js"></script>-->

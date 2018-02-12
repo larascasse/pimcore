@@ -131,6 +131,8 @@ function showEmbededPdf(pdfUrl) {
 <div style="padding-top: 80px;">
 	<table class="table table-bordered table-striped">
 		<thead class="thead-inverse__">
+
+
 <?php
 $hasOnePose = false;
 foreach ($this->products as $product) {
@@ -162,6 +164,7 @@ foreach ($this->products as $product) {
 
 
 foreach ($this->products as $product) {
+  continue;
 	$sku = $product->getSku();
   $hasPose = strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0;
   $hasPhoto = isset($product) && !$product->isAccessoire();
@@ -215,7 +218,7 @@ foreach ($this->products as $product) {
 
 <?php
 foreach ($this->missingProducts as $product) {
- 
+ continue;
   ?>
   <tr class="row__">
   <td class="col__"><?php echo $product->ean ?></td>
@@ -246,8 +249,10 @@ if(count($this->products)>0) : ?>
 </div>
 <textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
 
+
+
 <div class="row" style="padding-top: 40px">
-  <div class="col-12 text-center">
+  <div class="col-12">
 <?php
 /* Cover */
 echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
@@ -397,14 +402,7 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
 
 
 <p class="small" style="color:#cccccc">
-<?php 
 
-foreach ($this->orderDetail as $key => $value) {
-  //echo $key." : ".$value."<br />";
-  # code...
-}
-
-?>
 <div>
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#CCCCCC"><?php echo $this->xmlOrder ?></textarea>
@@ -412,5 +410,6 @@ foreach ($this->orderDetail as $key => $value) {
 
 <?php 
 //var_dump($_SERVER); 
+
 ?>
 </p>

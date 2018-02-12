@@ -340,7 +340,8 @@ EOT;
 
 
 
-       return $xmlClient->asXML();
+      // return $xmlClient->asXML();
+       return $xmlClient;
   
     }
 
@@ -978,7 +979,7 @@ EOT;
     $site = self::getSiteAdresse($site);
     $str = $site['address1'];
     if(strlen($site["address2"]))
-      $str .= "\n".$site['address2'];
+      $str .= ", ".$site['address2'];
 
     $str.= "\n".$site['zipcode']." ".$site['city'];
     return $str;
@@ -1071,7 +1072,7 @@ EOT;
       }
 
 
-      return implode(", ", $strArray);
+      return implode("<br />", $strArray);
   }
 
     

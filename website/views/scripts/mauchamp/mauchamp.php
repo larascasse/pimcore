@@ -143,11 +143,15 @@ foreach ($this->products as $product) {
 			<tr>
       <th>EAN</th>
       <th>Nom</th>
-      <th colspan="2"><input type="checkbox" id="selectAllFt" /></th>
+      <!--<th colspan="2"><input type="checkbox" id="selectAllFt" /></th>-->
+      
+      <th colspan="1"></th>
       <?php if ($hasOnePose) : ?>
-      <th colspan="2"><input type="checkbox" id="selectAllPose" /></th>
+      <!--<th colspan="2"><input type="checkbox" id="selectAllPose" /></th>-->
+      <th colspan="1"></th>
     <?php endif ?>
-      <th colspan="2"><input type="checkbox" id="selectAllPhoto" /></th>
+     <!-- <th colspan="2"><input type="checkbox" id="selectAllPhoto" /></th>-->
+      <th colspan="1"></th>
     </tr>
 		</thead>
 		<tbody>
@@ -175,12 +179,12 @@ foreach ($this->products as $product) {
     <p class="small">Sol chauffant basse temperature : <?php echo  $chauffantBasseTemperature; ?><br />Sol chauffant basse température électrique : <?php echo  $chauffantRadiantElectrique; ?><br />Sol basse température réversible : <?php echo  $solRaffraichissant; ?></p></td>
 	<?php endif; ?>
 	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
-	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
+	<!--<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>-->
 	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
 
 
 <?php if($hasPose) : ?>
-	<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
+	<!--<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>-->
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
     <?php else : ?>
     <!--
@@ -192,7 +196,7 @@ foreach ($this->products as $product) {
 
     <td class="col__">
       <?php if($hasPhoto) : ?>
-      <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>
+     <!-- <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>-->
       <?php endif; ?>
     </td>
     <td class="col__">

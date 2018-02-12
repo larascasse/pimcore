@@ -118,7 +118,7 @@ function createCustomer(target) {
 
 
        <div id="unknown-customer" style="display:none">
-      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->client->Code_Client ?> - <?php echo $email; ?></i></h4>
+      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></i></h4>
       <form id="mailform" class="form-horizontal">
       
 	     <div class="text-center">
@@ -132,7 +132,7 @@ function createCustomer(target) {
 			<div class="form-group"  style="padding-bottom: 40px;">
 				<input type="button" class="btn btn-primary btn-lg" name="button" onclick="createCustomer(this)" value="Créer un compte web" /><br />
 				<div style="display: none;">
-					<textarea  cols="50" rows="20" name="xmlclient"><?php echo $this->xmlClient ?></textarea>
+					<textarea  cols="50" rows="20" name="xmlclient"><?php echo $this->xmlClient->asXML() ?></textarea>
 				</div>
 	     </div>
 
@@ -146,12 +146,25 @@ function createCustomer(target) {
         <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
        
         <?php
-        if(isset($customer)) {
-        	foreach ($customer as $key => $value) {
+        if(isset($this->xmlClient)) {
+        	foreach ($this->xmlClient as $key => $value) {
 	             echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
 	        }
         }
         
         ?>
         </div>
+
+
+        <?php
+        if(isset($this->xmlClient)) {
+          foreach ($this->xmlClient as $key => $value) {
+               echo '<div class="row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-3">'.$value.'</div></div>';
+          }
+        }
+        
+        ?>
+
+
+
 

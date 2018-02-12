@@ -193,12 +193,12 @@ foreach ($this->products as $product) {
     -->
 <?php endif; ?>
 
-
+  <!-- 
     <td class="col__">
       <?php if($hasPhoto) : ?>
-     <!-- <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>-->
+     <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>
       <?php endif; ?>
-    </td>
+    </td>-->
     <td class="col__">
        <?php if($hasPhoto) : ?><a href="/?controller=web2print&action=get-product-photo-pdf&id=<?php echo $product->getId()?>&_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_ embed-pdf" target="_blank">Photos</a>
        <?php endif; ?>

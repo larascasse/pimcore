@@ -164,7 +164,6 @@ foreach ($this->products as $product) {
 
 
 foreach ($this->products as $product) {
-  continue;
 	$sku = $product->getSku();
   $hasPose = strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0;
   $hasPhoto = isset($product) && !$product->isAccessoire();
@@ -218,7 +217,6 @@ foreach ($this->products as $product) {
 
 <?php
 foreach ($this->missingProducts as $product) {
- continue;
   ?>
   <tr class="row__">
   <td class="col__"><?php echo $product->ean ?></td>

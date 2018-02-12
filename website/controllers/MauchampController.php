@@ -33,7 +33,7 @@ class MauchampController extends Action
     public function mauchampAction() {
 
         $front = \Zend_Controller_Front::getInstance();
-        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        //$front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
 
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 

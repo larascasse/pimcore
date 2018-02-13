@@ -45,7 +45,7 @@ foreach ($list->getObjects() as $object) {
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
-    $fieldsToClean = ["famille","meta_title","meta_description"];
+    $fieldsToClean = ["meta_title","meta_description","image_1","image_2","image_3"];
 
     $values = array();
     $objectToSave = Object::getById($object->getId());

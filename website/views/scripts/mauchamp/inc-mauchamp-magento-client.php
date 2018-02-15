@@ -118,7 +118,13 @@ function createCustomer(target) {
 
 
 <div id="unknown-customer" style="display:none">
-      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></i></h4>
+      <h4 style="padding-bottom: 40px; text-align: center;">Chargement du compte ...</h4>
+      
+ </div>
+
+
+<div id="unknown-customer" style="display:none">
+      <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></h4>
       <form id="mailform" class="form-horizontal">
       
 	     <div class="text-center">

@@ -79,8 +79,7 @@ echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$
 ?>
   
 <hr />
-<br /><br /><br /><br /><br /><br /><br />
- <h4>Données client</h4>
+
 
 <?php foreach ($this->client as $key => $value) {
 

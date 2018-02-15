@@ -89,12 +89,12 @@ echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$
        
         echo '<div class="row">';
         for($i=0; $i<count($value); $i++){
-           echo '<div class="col-sm-6"><hr /><h4>Adresse</h4>';
+           echo '<div class="col-sm-6"><h4>Adresse '.($i==0?"facturation":"livraison").'</h4>';
           $adresse = $value[$i];
           
           foreach ($adresse as $keyAdresse => $valueAdresse) {
             
-            echo '<div class="form-group row"><label>'.$keyAdresse.' : </label> <input disabled value="'.$valueAdresse.'"  class="form-control" /></div>';
+            echo '<div class="row"><div class="col-2">'.$keyAdresse.'</div><div class="col-10">'.$valueAdresse.'</div></div>';
           }
           echo '</div>';
 
@@ -102,7 +102,7 @@ echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$
         echo '</div>';
     }
     else if(is_string($value)) {
-        echo '<div class="form-group row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-10"><input disabled value="'.$value.'"  class="form-control"/></div></div>';
+        //echo '<div class="row"><div class="col-sm-2">'.$key.' : </label></div><div class="col-sm-10">'.$value.'</div></div>';
     }
   
 }

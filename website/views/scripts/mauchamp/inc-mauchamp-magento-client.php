@@ -152,15 +152,17 @@ function createCustomer(target) {
 
 <div id="known-customer" style="display:none">
         <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
+        <div class="row" id="client-container">
+        </div>
 </div>
 
 <br /><br /><br /><br /><br /><br />
 
-
+ <h4>Données client</h4>
         <?php
         if(isset($this->xmlClient)) {
           foreach ($this->xmlClient as $key => $value) {
-               echo '<div class="row"><div class="col-sm-2"><label>'.$key.' : </label></div><div class="col-sm-3">'.$value.'</div></div>';
+               echo '<div class="row"><div class="col-sm-3">'.$key.' : </div><div class="col-sm-3">'.$value.'</div></div>';
           }
         }
         

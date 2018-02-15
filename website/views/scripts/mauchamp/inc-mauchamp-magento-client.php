@@ -1,12 +1,23 @@
 <?php
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
+
+
 $email = $this->email;
+
+ $validator = new EmailValidator();
+
+$isEmailValid = $validator->isValid($email, new RFCValidation());
+
 
 ?>
 <script>
 
 	$(document).ready(function() {
 	window.log("INIT");
+  <?php if ($isEmailValid) { ?>
   loadMagentoClient();
+  <?php } ?>
   
 });
 
@@ -117,12 +128,17 @@ function createCustomer(target) {
 
 </script>
 
-
+<?php if($isEmailValid) { ?>
 <div id="waiting-customer">
       <h4 style="padding-bottom: 40px; text-align: center;">Chargement du compte web ...</h4>
       
  </div>
-
+<?php } else { ?>
+  <div id="waiting-customer">
+      <h4 style="padding-bottom: 40px; text-align: center; color:#FF0000">Email Client non valide</h4>
+      
+ </div>
+<?php } ?>
 
 <div id="unknown-customer" style="display:none">
       <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></h4>

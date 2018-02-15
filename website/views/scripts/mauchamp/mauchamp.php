@@ -68,26 +68,34 @@ function hidePleaseWait () {
 
 
 function sendEmail() {
-  //window.log("KK",$("#mailform"),$("#mailform").serialize());
-  $('#formEmail').modal('hide')
+  window.log("sendEmail",$("#mailform"),$("#mailform").serialize());
+
+  $('#formEmail').modal('hide');
   showPleaseWait();
+  setTimeout(function(){ 
+    hidePleaseWait(); 
+    }, 3000);
+  
   $.ajax({
      url : '/?controller=mauchamp&action=mauchamp-sendmail',
      data: $("#mailform").serialize()+'&sendmail=true',
      method : "POST",
      success: function (data) {
 
-            hidePleaseWait();
+            //hidePleaseWait();
+           // btn.disabled=false;
             alert(data.message);
 
       },
       error: function (transport) {
         
-              btn.disabled=false;
+             // btn.disabled=false;
               //console.log(transport);
               
-              hidePleaseWait();
-              alert(transport.statusText);
+              //hidePleaseWait();
+              window.log("transport",transport);
+              if(transport.message)
+               alert(transport.message);
 
       }
   });
@@ -111,7 +119,7 @@ function printBook() {
       },
       error: function (transport) {
         
-              btn.disabled=false;
+             // btn.disabled=false;
               //console.log(transport);
               
               hidePleaseWait();
@@ -249,21 +257,7 @@ if(count($this->products)>0) : ?>
 
 
 
-<div class="row" style="padding-top: 40px">
-  <div class="col-12">
-<?php
-/* Cover */
-echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
 
-?>
-</div>
-</div>
-
-<?php 
-
-else :
-  //echo count($this->products);
-endif; ?>
 
 <!-- MODAL EMAIL -->
 <div class="modal" role="dialog" id="formEmail">
@@ -365,13 +359,34 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
 <!-- FIN MODAL EMAIL -->
 
 </div>
-
  </form>
+
+
+<div class="row" style="padding-top: 40px">
+  <div class="col-12">
+<?php
+/* Cover */
+echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
+
+?>
+</div>
+</div>
+
+<?php 
+
+else :
+  //echo count($this->products);
+endif; ?>
 
 
 <div id="pleasewaitmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
+        <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
         <div class="modal-body">
         <br />
         En cours de traitement
@@ -397,7 +412,7 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
     </div>
 </div>
 
-
+ </form>
 
 <p class="small" style="color:#cccccc">
 

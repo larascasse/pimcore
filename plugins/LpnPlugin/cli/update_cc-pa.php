@@ -1,6 +1,7 @@
 <?php
 
-
+// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-pa
+// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-pa-autre
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)

@@ -1,7 +1,7 @@
 <?php
 
-// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-bw
-// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-bw-autre
+// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bw
+// http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bw-autre
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -100,6 +100,7 @@ foreach ($list->getObjects() as $object) {
    
 
     if(strlen($object->getEan())>0) {
+        $object->setName("");
         $object->save();
 
         //$parent->save();

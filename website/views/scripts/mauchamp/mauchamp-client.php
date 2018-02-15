@@ -2,11 +2,11 @@
 $email = $this->client->Email_Contact;
 
 ?>
-
+<!--
 <div style="display: none;">
             <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
 </div>
-
+-->
 
 <script>
 

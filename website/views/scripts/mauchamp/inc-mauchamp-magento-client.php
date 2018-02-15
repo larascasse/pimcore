@@ -40,6 +40,7 @@ jQuery.fn.extend({
      //data: $("#mailform").serialize(),
      method : "GET",
      success: function (data) {
+            $('#waiting-customer').hide();
 
             //hidePleaseWait();
             console.log(data.customer);
@@ -53,7 +54,7 @@ jQuery.fn.extend({
 
       },
       error: function (transport) {
-        
+            $('#waiting-customer').hide();
               console.log(transport);
               
               //hidePleaseWait();
@@ -117,7 +118,7 @@ function createCustomer(target) {
 </script>
 
 
-<div id="unknown-customer" style="display:none">
+<div id="waiting-customer" style="display:none">
       <h4 style="padding-bottom: 40px; text-align: center;">Chargement du compte ...</h4>
       
  </div>

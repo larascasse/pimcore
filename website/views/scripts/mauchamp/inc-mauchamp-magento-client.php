@@ -118,8 +118,8 @@ function createCustomer(target) {
 </script>
 
 
-<div id="waiting-customer" style="display:none">
-      <h4 style="padding-bottom: 40px; text-align: center;">Chargement du compte ...</h4>
+<div id="waiting-customer">
+      <h4 style="padding-bottom: 40px; text-align: center;">Chargement du compte web ...</h4>
       
  </div>
 

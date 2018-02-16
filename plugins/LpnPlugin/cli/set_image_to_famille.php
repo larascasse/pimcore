@@ -47,7 +47,7 @@ $objects = array();
         //$object =$object->getParent();
          $values = array();
         $fields = array("image_1","image_2","image_3","image_4","image_texture");
-        echo "\n".(string)$parentToSave->getMage_Name();
+        echo "\n".(string)$object->getMage_Name();
         $scienergie = $object->name_scienergie;
         
          if(stristr($scienergieCourt, "BR ") || stristr($scienergieCourt, "PDH ")) {

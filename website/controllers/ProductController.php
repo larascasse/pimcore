@@ -507,7 +507,7 @@ class ProductController extends Action
 
              foreach ($header as $key => $title) {
 
-                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' )
+                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' || $key=='image_1' || $key=='image_2' || $key=='image_3' || $key=='image_4' || $key=='image_texture' )
                         continue;
 
                     if(!isset($caracteristiques[$key])) {

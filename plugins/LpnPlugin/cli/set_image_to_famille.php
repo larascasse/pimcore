@@ -46,18 +46,54 @@ foreach ($list->getObjects() as $object) {
     
     //COPIE DE SCIERGNER COURT
     
-   
+    $save = false;
 
     $objectToSave = Object::getById($object->getId());
-
+    $fields = array("image_1","image_2","image_3","image_4","image_texture");
+     $values = array();
     if($objectToSave instanceOf Object_Product)  {
 
-        echo "\nTRY ".$objectToSave->getMage_Name();
-            $image_1 = $object->getImage_1();
-            echo " || ".$image_1." <=> ".$$objectToSave->image_1;
-        
+       foreach ($fields as $fieldName) {
+            $getter = "get" . ucfirst($fieldName);
+            $setter = "set" . ucfirst($fieldName);
+            $field = $object->$getter();
+            //echo (string)$objectToSave->$fieldName; die;
+           // echo "\nTRY ".$objectToSave->getMage_Name();
+            if(!$objectToSave->$fieldName && (string)$field != "lpn-1l-pantone.gif" && $object->getChoix()=="MAT") {
+                 
+                echo "\n --> ADD $fieldName / ".$field." <=> ".$objectToSave->$fieldName;
+                //$objectToSave->$setter($field);
+                $values[$fieldName] = $field;
+                $save = true;
+               
+            }
+            else if($object->getChoix()!="MAT") {
+                 
+                echo "\n --> REMOVE $fieldName / ".$field." <=> ".$objectToSave->$fieldName;
+                //$objectToSave->$setter($field);
+                $values[$fieldName] = $field;
+                $save = true;
+               
+            }
+            else {
+                //echo "\n--> SKIP ".$objectToSave->getMage_Name();
+                //echo "  ".$field." <=> ".$objectToSave->$fieldName;
+                //$values[$fieldName] = null;
+
+            }
+       }
+       
+
+         if($save) {
+            //print_r($values);
+             $objectToSave->setValues($values);
+             $objectToSave->save();
+        }
             
     }
+
+
+
        /* if(strlen($teinte)>0) {
 
             $values = array();
@@ -76,6 +112,21 @@ foreach ($list->getObjects() as $object) {
 
 
    // Object_Abstract::setGetInheritedValues($inheritance); 
+
+}
+
+foreach ($list->getObjects() as $object) {
+        $parentToSave = $object->getParent();
+         $values = array();
+        $fields = array("image_1","image_2","image_3","image_4","image_texture");
+        foreach ($fields as $fieldName) {
+            $values[$fieldName] = null;
+        }
+         $parentToSave->setValues($values);
+        $parentToSave->save();
+
+
+
 
 }
 

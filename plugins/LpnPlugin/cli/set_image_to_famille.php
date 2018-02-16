@@ -42,6 +42,28 @@ $list->load();
 $objects = array();
  echo "objects in list ".count($list->getObjects()).'\n';
 //Logger::debug("objects in list:" . count($list->getObjects()));
+
+ foreach ($list->getObjects() as $object) {
+        //$object =$object->getParent();
+         $values = array();
+        $fields = array("image_1","image_2","image_3","image_4","image_texture");
+        echo "\n".(string)$parentToSave->getMage_Name();
+        $scienergie = $object->name_scienergie;
+        
+         if(stristr($scienergieCourt, "BR ") || stristr($scienergieCourt, "PDH ")) {
+            foreach ($fields as $fieldName) {
+                echo "remove".$fieldName;
+                $values[$fieldName] = null;
+            }
+             $object->setValues($values);
+            $object->save();
+         }
+
+
+
+}
+die;
+
 foreach ($list->getObjects() as $object) {
     //COPIE DE SCIERGNER COURT
     

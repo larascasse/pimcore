@@ -66,7 +66,7 @@ foreach ($list->getObjects() as $object) {
                 $save = true;
                
             }
-            else if($object->getChoix()!="MAT") {
+            else if($object->getChoix()!="MAT" || (string)$field == "lpn-1l-pantone.gif") {
                  
                 echo "\n --> REMOVE $fieldName / ".$field." <=> ".$objectToSave->$fieldName;
                 //$objectToSave->$setter($field);

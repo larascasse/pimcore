@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2018-01-30T16:46:20+01:00
+* Generated at: 2018-02-14T17:03:26+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -43,6 +43,12 @@ Fields Summary:
 - shipping_type [select]
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
+- image_1 [image]
+- image_2 [image]
+- image_3 [image]
+- image_4 [image]
+- image_texture [image]
+- gallery [multihref]
 - meta_title [input]
 - meta_title2 [input]
 - meta_description [input]
@@ -142,20 +148,18 @@ Fields Summary:
 - surface [input]
 - typeLame [select]
 - motif [select]
+- angle [input]
 - pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
-- image_1 [image]
-- image_2 [image]
-- image_3 [image]
-- gallery [multihref]
 - realisations [multihref]
 - fiche_technique_lpn [href]
 - fiche_technique_orginale [href]
 - notice_pose_lpn [href]
+- fiche_securite [href]
 - re_skus [objects]
 - cs_skus [objects]
 - pimonly_category_pose [href]
@@ -202,7 +206,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1517327180,
+   'modificationDate' => 1518624206,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -1181,6 +1185,190 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'fieldtype' => 'panel',
              'labelWidth' => 100,
              'layout' => '',
+             'name' => 'Images',
+             'type' => NULL,
+             'region' => 'east',
+             'title' => 'Images',
+             'width' => 300,
+             'height' => '',
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'permissions' => NULL,
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => 300,
+                 'height' => 300,
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_1',
+                 'title' => 'Base Img / Lifestyle',
+                 'tooltip' => 'Life Style',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float:left',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => 300,
+                 'height' => 300,
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_2',
+                 'title' => 'Small Img / packshot',
+                 'tooltip' => 'Packshot',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float:left',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => 300,
+                 'height' => 300,
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_3',
+                 'title' => 'Thumb Img / Zoom 1',
+                 'tooltip' => 'Zoom',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float:left',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => 300,
+                 'height' => 300,
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_4',
+                 'title' => 'Thumb Img 2 / Zoom 2',
+                 'tooltip' => 'Zoom 2',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float:left',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
+                 'fieldtype' => 'image',
+                 'width' => '',
+                 'height' => '',
+                 'uploadPath' => '',
+                 'queryColumnType' => 'int(11)',
+                 'columnType' => 'int(11)',
+                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+                 'name' => 'image_texture',
+                 'title' => 'Image (texture / face)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Multihref::__set_state(array(
+                 'fieldtype' => 'multihref',
+                 'width' => 600,
+                 'height' => '',
+                 'maxItems' => '',
+                 'assetUploadPath' => '',
+                 'queryColumnType' => 'text',
+                 'phpdocType' => 'array',
+                 'relationType' => true,
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'assetTypes' => 'image',
+                  ),
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'lazyLoading' => false,
+                 'classes' => 
+                array (
+                ),
+                 'pathFormatterClass' => '',
+                 'name' => 'gallery',
+                 'title' => 'Autres Images pour la galerie',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'float:left',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'locked' => false,
+          )),
+          2 => 
+          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+             'fieldtype' => 'panel',
+             'labelWidth' => 100,
+             'layout' => '',
              'name' => 'meta_web',
              'type' => NULL,
              'region' => '',
@@ -1293,7 +1481,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          2 => 
+          3 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -1530,7 +1718,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          3 => 
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -2146,7 +2334,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          4 => 
+          5 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -2263,7 +2451,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          5 => 
+          6 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 150,
@@ -3694,7 +3882,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       7 => 
                       array (
-                        'key' => 'Rives scrapées',
+                        'key' => 'Rives abîmées',
                         'value' => 'rives scrapees',
                       ),
                       8 => 
@@ -4053,7 +4241,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          6 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4536,6 +4724,30 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               17 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'angle',
+                 'title' => 'Angle',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -4576,7 +4788,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4598,7 +4810,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4620,7 +4832,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4642,7 +4854,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4664,7 +4876,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -4682,142 +4894,6 @@ Combien d\'unité dans 1 m2',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-            ),
-             'locked' => false,
-          )),
-          7 => 
-          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
-             'fieldtype' => 'panel',
-             'labelWidth' => 100,
-             'layout' => '',
-             'name' => 'Images',
-             'type' => NULL,
-             'region' => 'east',
-             'title' => 'Images',
-             'width' => 300,
-             'height' => '',
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'permissions' => NULL,
-             'childs' => 
-            array (
-              0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
-                 'fieldtype' => 'image',
-                 'width' => 300,
-                 'height' => 300,
-                 'uploadPath' => '',
-                 'queryColumnType' => 'int(11)',
-                 'columnType' => 'int(11)',
-                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
-                 'name' => 'image_1',
-                 'title' => 'Base Image / Lifestyle',
-                 'tooltip' => 'Life Style',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => 'float:left',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              1 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
-                 'fieldtype' => 'image',
-                 'width' => 300,
-                 'height' => 300,
-                 'uploadPath' => '',
-                 'queryColumnType' => 'int(11)',
-                 'columnType' => 'int(11)',
-                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
-                 'name' => 'image_2',
-                 'title' => 'Small Image / packshot',
-                 'tooltip' => 'Packshot',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => 'float:left',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              2 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Image::__set_state(array(
-                 'fieldtype' => 'image',
-                 'width' => 300,
-                 'height' => 300,
-                 'uploadPath' => '',
-                 'queryColumnType' => 'int(11)',
-                 'columnType' => 'int(11)',
-                 'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
-                 'name' => 'image_3',
-                 'title' => 'Thumbnail Image',
-                 'tooltip' => 'Zoom',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => 'float:left',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              3 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Multihref::__set_state(array(
-                 'fieldtype' => 'multihref',
-                 'width' => 600,
-                 'height' => '',
-                 'maxItems' => '',
-                 'assetUploadPath' => '',
-                 'queryColumnType' => 'text',
-                 'phpdocType' => 'array',
-                 'relationType' => true,
-                 'objectsAllowed' => false,
-                 'assetsAllowed' => true,
-                 'assetTypes' => 
-                array (
-                  0 => 
-                  array (
-                    'assetTypes' => 'image',
-                  ),
-                ),
-                 'documentsAllowed' => false,
-                 'documentTypes' => 
-                array (
-                ),
-                 'lazyLoading' => false,
-                 'classes' => 
-                array (
-                ),
-                 'pathFormatterClass' => NULL,
-                 'name' => 'gallery',
-                 'title' => 'Autres Images pour la galerie',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => 'float:left',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
@@ -5025,6 +5101,47 @@ Combien d\'unité dans 1 m2',
                  'pathFormatterClass' => NULL,
                  'name' => 'notice_pose_lpn',
                  'title' => 'Notice de pose',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
+                 'fieldtype' => 'href',
+                 'width' => '',
+                 'assetUploadPath' => '',
+                 'relationType' => true,
+                 'queryColumnType' => 
+                array (
+                  'id' => 'int(11)',
+                  'type' => 'enum(\'document\',\'asset\',\'object\')',
+                ),
+                 'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\Object\\AbstractObject',
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'lazyLoading' => false,
+                 'classes' => 
+                array (
+                ),
+                 'pathFormatterClass' => '',
+                 'name' => 'fiche_securite',
+                 'title' => 'Fiche de sécurité',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,

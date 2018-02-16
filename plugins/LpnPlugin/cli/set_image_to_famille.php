@@ -48,7 +48,10 @@ $objects = array();
          $values = array();
         $fields = array("image_1","image_2","image_3","image_4","image_texture");
         echo "\n".(string)$object->getMage_Name();
+
         $scienergie = $object->name_scienergie;
+        $scienergieCourt = $object->name_scienergie_court;
+
         
          if(stristr($scienergieCourt, "BR ") || stristr($scienergieCourt, "PDH ")) {
             foreach ($fields as $fieldName) {

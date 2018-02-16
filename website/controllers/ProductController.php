@@ -404,7 +404,7 @@ class ProductController extends Action
 
 
         $list = Object_Product::getList(array(
-                'condition' => 'o_path LIKE \''.$this->getParam("path").'%\'',
+                'condition' => 'o_path LIKE \''.$this->getParam("path").'%\' AND ean IS NOT NULL',
                 'unpublished' => true,
                 'orderKey' => 'name',
         ));

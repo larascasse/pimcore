@@ -470,7 +470,7 @@ class ProductController extends Action
 
             $idx ++;
         }
-        $header['image_1'] = "Image 1";
+        $header['image1'] = "Image 1";
         $header['image_2'] = "Image 2";
         $header['image_3'] = "Image Z1";
         $header['image_4'] = "Image Z2";
@@ -533,11 +533,11 @@ class ProductController extends Action
                     
             }
 
-            $row[] = $product->getImage_1()?(string)$product->getImage_1()->getFilename():"";
-            $row[] = $product->getImage_2()?(string)$product->getImage_2()->getFilename():"";
-            $row[] = $product->getImage_3()?(string)$product->getImage_3()->getFilename():"";
-            $row[] = $product->getImage_4()?(string)$product->getImage_4()->getFilename():"";
-            $row[] = $product->getImage_texture()?(string)$product->getImage_texture()->getFilename():"";
+            $row[] = ($product->getImage_1() && (string)$product->getImage_1()->getFilename() != "lpn-1l-pantone.gif") ?(string)$product->getImage_1()->getFilename():"";
+            $row[] = ($product->getImage_2() && (string)$product->getImage_2()->getFilename() != "lpn-1l-pantone.gif")()?(string)$product->getImage_2()->getFilename():"";
+            $row[] = ($product->getImage_3() && (string)$product->getImage_3()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_3()->getFilename():"";
+            $row[] = ($product->getImage_4() && (string)$product->getImage_4()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_4()->getFilename():"";
+            $row[] = ($product->getImage_texture() && (string)$product->getImage_texture()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_texture()->getFilename():"";
             
             $rows[]  = $row;
             $idx ++;

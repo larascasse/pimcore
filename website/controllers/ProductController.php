@@ -534,7 +534,7 @@ class ProductController extends Action
             }
 
             $row[] = ($product->getImage_1() && (string)$product->getImage_1()->getFilename() != "lpn-1l-pantone.gif") ?(string)$product->getImage_1()->getFilename():"";
-            $row[] = ($product->getImage_2() && (string)$product->getImage_2()->getFilename() != "lpn-1l-pantone.gif")()?(string)$product->getImage_2()->getFilename():"";
+            $row[] = ($product->getImage_2() && (string)$product->getImage_2()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_2()->getFilename():"";
             $row[] = ($product->getImage_3() && (string)$product->getImage_3()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_3()->getFilename():"";
             $row[] = ($product->getImage_4() && (string)$product->getImage_4()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_4()->getFilename():"";
             $row[] = ($product->getImage_texture() && (string)$product->getImage_texture()->getFilename() != "lpn-1l-pantone.gif")?(string)$product->getImage_texture()->getFilename():"";

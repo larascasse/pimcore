@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2018-01-30T16:46:20+01:00
+* Generated at: 2018-02-14T17:03:26+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -43,6 +43,12 @@ Fields Summary:
 - shipping_type [select]
 - mage_qty_description [textarea]
 - mage_custom_option [textarea]
+- image_1 [image]
+- image_2 [image]
+- image_3 [image]
+- image_4 [image]
+- image_texture [image]
+- gallery [multihref]
 - meta_title [input]
 - meta_title2 [input]
 - meta_description [input]
@@ -142,20 +148,18 @@ Fields Summary:
 - surface [input]
 - typeLame [select]
 - motif [select]
+- angle [input]
 - pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
-- image_1 [image]
-- image_2 [image]
-- image_3 [image]
-- gallery [multihref]
 - realisations [multihref]
 - fiche_technique_lpn [href]
 - fiche_technique_orginale [href]
 - notice_pose_lpn [href]
+- fiche_securite [href]
 - re_skus [objects]
 - cs_skus [objects]
 - pimonly_category_pose [href]
@@ -236,6 +240,12 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_qty_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_custom_option ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_3 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_4 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByImage_texture ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByGallery ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
@@ -335,20 +345,18 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getBySurface ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTypeLame ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMotif ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByAngle ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByImage_1 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByImage_2 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByImage_3 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByGallery ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRealisations ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_lpn ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNotice_pose_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFiche_securite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRe_skus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCs_skus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_pose ($value, $limit = 0) 
@@ -427,6 +435,12 @@ public $leadtime;
 public $shipping_type;
 public $mage_qty_description;
 public $mage_custom_option;
+public $image_1;
+public $image_2;
+public $image_3;
+public $image_4;
+public $image_texture;
+public $gallery;
 public $meta_title;
 public $meta_title2;
 public $meta_description;
@@ -512,20 +526,18 @@ public $colisage;
 public $surface;
 public $typeLame;
 public $motif;
+public $angle;
 public $pieceHumide;
 public $sousCoucheIntegree;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
 public $nf;
-public $image_1;
-public $image_2;
-public $image_3;
-public $gallery;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
 public $notice_pose_lpn;
+public $fiche_securite;
 public $re_skus;
 public $cs_skus;
 public $pimonly_category_pose;
@@ -1457,6 +1469,162 @@ public function getMage_custom_option () {
 */
 public function setMage_custom_option ($mage_custom_option) {
 	$this->mage_custom_option = $mage_custom_option;
+	return $this;
+}
+
+/**
+* Get image_1 - Base Img / Lifestyle
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getImage_1 () {
+	$preValue = $this->preGetValue("image_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->image_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_1")->isEmpty($data)) {
+		return $this->getValueFromParent("image_1");
+	}
+	return $data;
+}
+
+/**
+* Set image_1 - Base Img / Lifestyle
+* @param \Pimcore\Model\Asset\Image $image_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setImage_1 ($image_1) {
+	$this->image_1 = $image_1;
+	return $this;
+}
+
+/**
+* Get image_2 - Small Img / packshot
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getImage_2 () {
+	$preValue = $this->preGetValue("image_2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->image_2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_2")->isEmpty($data)) {
+		return $this->getValueFromParent("image_2");
+	}
+	return $data;
+}
+
+/**
+* Set image_2 - Small Img / packshot
+* @param \Pimcore\Model\Asset\Image $image_2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setImage_2 ($image_2) {
+	$this->image_2 = $image_2;
+	return $this;
+}
+
+/**
+* Get image_3 - Thumb Img / Zoom 1
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getImage_3 () {
+	$preValue = $this->preGetValue("image_3"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->image_3;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_3")->isEmpty($data)) {
+		return $this->getValueFromParent("image_3");
+	}
+	return $data;
+}
+
+/**
+* Set image_3 - Thumb Img / Zoom 1
+* @param \Pimcore\Model\Asset\Image $image_3
+* @return \Pimcore\Model\Object\Product
+*/
+public function setImage_3 ($image_3) {
+	$this->image_3 = $image_3;
+	return $this;
+}
+
+/**
+* Get image_4 - Thumb Img 2 / Zoom 2
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getImage_4 () {
+	$preValue = $this->preGetValue("image_4"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->image_4;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_4")->isEmpty($data)) {
+		return $this->getValueFromParent("image_4");
+	}
+	return $data;
+}
+
+/**
+* Set image_4 - Thumb Img 2 / Zoom 2
+* @param \Pimcore\Model\Asset\Image $image_4
+* @return \Pimcore\Model\Object\Product
+*/
+public function setImage_4 ($image_4) {
+	$this->image_4 = $image_4;
+	return $this;
+}
+
+/**
+* Get image_texture - Image (texture / face)
+* @return \Pimcore\Model\Asset\Image
+*/
+public function getImage_texture () {
+	$preValue = $this->preGetValue("image_texture"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->image_texture;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_texture")->isEmpty($data)) {
+		return $this->getValueFromParent("image_texture");
+	}
+	return $data;
+}
+
+/**
+* Set image_texture - Image (texture / face)
+* @param \Pimcore\Model\Asset\Image $image_texture
+* @return \Pimcore\Model\Object\Product
+*/
+public function setImage_texture ($image_texture) {
+	$this->image_texture = $image_texture;
+	return $this;
+}
+
+/**
+* Get gallery - Autres Images pour la galerie
+* @return \Pimcore\Model\Asset\image[]
+*/
+public function getGallery () {
+	$preValue = $this->preGetValue("gallery"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("gallery")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("gallery")->isEmpty($data)) {
+		return $this->getValueFromParent("gallery");
+	}
+	return $data;
+}
+
+/**
+* Set gallery - Autres Images pour la galerie
+* @param \Pimcore\Model\Asset\image[] $gallery
+* @return \Pimcore\Model\Object\Product
+*/
+public function setGallery ($gallery) {
+	$this->gallery = $this->getClass()->getFieldDefinition("gallery")->preSetData($this, $gallery);
 	return $this;
 }
 
@@ -3951,6 +4119,32 @@ public function setMotif ($motif) {
 }
 
 /**
+* Get angle - Angle
+* @return string
+*/
+public function getAngle () {
+	$preValue = $this->preGetValue("angle"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->angle;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("angle")->isEmpty($data)) {
+		return $this->getValueFromParent("angle");
+	}
+	return $data;
+}
+
+/**
+* Set angle - Angle
+* @param string $angle
+* @return \Pimcore\Model\Object\Product
+*/
+public function setAngle ($angle) {
+	$this->angle = $angle;
+	return $this;
+}
+
+/**
 * Get pieceHumide - Compatible pièces humides
 * @return string
 */
@@ -4107,110 +4301,6 @@ public function setNf ($nf) {
 }
 
 /**
-* Get image_1 - Base Image / Lifestyle
-* @return \Pimcore\Model\Asset\Image
-*/
-public function getImage_1 () {
-	$preValue = $this->preGetValue("image_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->image_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_1")->isEmpty($data)) {
-		return $this->getValueFromParent("image_1");
-	}
-	return $data;
-}
-
-/**
-* Set image_1 - Base Image / Lifestyle
-* @param \Pimcore\Model\Asset\Image $image_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setImage_1 ($image_1) {
-	$this->image_1 = $image_1;
-	return $this;
-}
-
-/**
-* Get image_2 - Small Image / packshot
-* @return \Pimcore\Model\Asset\Image
-*/
-public function getImage_2 () {
-	$preValue = $this->preGetValue("image_2"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->image_2;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_2")->isEmpty($data)) {
-		return $this->getValueFromParent("image_2");
-	}
-	return $data;
-}
-
-/**
-* Set image_2 - Small Image / packshot
-* @param \Pimcore\Model\Asset\Image $image_2
-* @return \Pimcore\Model\Object\Product
-*/
-public function setImage_2 ($image_2) {
-	$this->image_2 = $image_2;
-	return $this;
-}
-
-/**
-* Get image_3 - Thumbnail Image
-* @return \Pimcore\Model\Asset\Image
-*/
-public function getImage_3 () {
-	$preValue = $this->preGetValue("image_3"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->image_3;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_3")->isEmpty($data)) {
-		return $this->getValueFromParent("image_3");
-	}
-	return $data;
-}
-
-/**
-* Set image_3 - Thumbnail Image
-* @param \Pimcore\Model\Asset\Image $image_3
-* @return \Pimcore\Model\Object\Product
-*/
-public function setImage_3 ($image_3) {
-	$this->image_3 = $image_3;
-	return $this;
-}
-
-/**
-* Get gallery - Autres Images pour la galerie
-* @return \Pimcore\Model\Asset\image[]
-*/
-public function getGallery () {
-	$preValue = $this->preGetValue("gallery"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->getClass()->getFieldDefinition("gallery")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("gallery")->isEmpty($data)) {
-		return $this->getValueFromParent("gallery");
-	}
-	return $data;
-}
-
-/**
-* Set gallery - Autres Images pour la galerie
-* @param \Pimcore\Model\Asset\image[] $gallery
-* @return \Pimcore\Model\Object\Product
-*/
-public function setGallery ($gallery) {
-	$this->gallery = $this->getClass()->getFieldDefinition("gallery")->preSetData($this, $gallery);
-	return $this;
-}
-
-/**
 * Get realisations - Réalisations (Gallery)
 * @return \Pimcore\Model\Asset\folder[]
 */
@@ -4311,6 +4401,32 @@ public function getNotice_pose_lpn () {
 */
 public function setNotice_pose_lpn ($notice_pose_lpn) {
 	$this->notice_pose_lpn = $this->getClass()->getFieldDefinition("notice_pose_lpn")->preSetData($this, $notice_pose_lpn);
+	return $this;
+}
+
+/**
+* Get fiche_securite - Fiche de sécurité
+* @return \Pimcore\Model\Asset
+*/
+public function getFiche_securite () {
+	$preValue = $this->preGetValue("fiche_securite"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("fiche_securite")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fiche_securite")->isEmpty($data)) {
+		return $this->getValueFromParent("fiche_securite");
+	}
+	return $data;
+}
+
+/**
+* Set fiche_securite - Fiche de sécurité
+* @param \Pimcore\Model\Asset $fiche_securite
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFiche_securite ($fiche_securite) {
+	$this->fiche_securite = $this->getClass()->getFieldDefinition("fiche_securite")->preSetData($this, $fiche_securite);
 	return $this;
 }
 
@@ -5307,13 +5423,13 @@ protected static $_relationFields = array (
   array (
     'type' => 'objects',
   ),
-  'extras' => 
-  array (
-    'type' => 'objects',
-  ),
   'gallery' => 
   array (
     'type' => 'multihref',
+  ),
+  'extras' => 
+  array (
+    'type' => 'objects',
   ),
   'realisations' => 
   array (
@@ -5328,6 +5444,10 @@ protected static $_relationFields = array (
     'type' => 'href',
   ),
   'notice_pose_lpn' => 
+  array (
+    'type' => 'href',
+  ),
+  'fiche_securite' => 
   array (
     'type' => 'href',
   ),

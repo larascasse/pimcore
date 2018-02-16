@@ -533,11 +533,11 @@ class ProductController extends Action
                     
             }
 
-            $row[] = (string)$product->getImage_1()->getSrc();
-            $row[] = (string)$product->getImage_2()->getSrc();
-            $row[] = (string)$product->getImage_3()->getSrc();
-            $row[] = (string)$product->getImage_4()->getSrc();
-            $row[] = (string)$product->getImage_texture()->getSrc();
+            $row[] = $product->getImage_1()?(string)$product->getImage_1()->getFilename():"";
+            $row[] = $product->getImage_2()?(string)$product->getImage_2()->getFilename():"";
+            $row[] = $product->getImage_3()?(string)$product->getImage_3()->getFilename():"";
+            $row[] = $product->getImage_4()?(string)$product->getImage_4()->getFilename():"";
+            $row[] = $product->getImage_texture()?(string)$product->getImage_texture()->getFilename():"";
             
             $rows[]  = $row;
             $idx ++;

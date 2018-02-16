@@ -43,7 +43,6 @@ $objects = array();
  echo "objects in list ".count($list->getObjects()).'\n';
 //Logger::debug("objects in list:" . count($list->getObjects()));
 foreach ($list->getObjects() as $object) {
-    
     //COPIE DE SCIERGNER COURT
     
     $save = false;
@@ -119,7 +118,9 @@ foreach ($list->getObjects() as $object) {
         $parentToSave = $object->getParent();
          $values = array();
         $fields = array("image_1","image_2","image_3","image_4","image_texture");
+        echo "\n".(string)$parentToSave->getMage_Name();
         foreach ($fields as $fieldName) {
+            echo "remove".$fieldName;
             $values[$fieldName] = null;
         }
          $parentToSave->setValues($values);

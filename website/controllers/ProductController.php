@@ -437,7 +437,7 @@ class ProductController extends Action
         //$header['ean'] = "EAN";
         $header['name'] = "Name";
         $header['url'] = "Url";
-                 
+
 
         foreach ($products as $product) {
 
@@ -447,32 +447,39 @@ class ProductController extends Action
 
             $caracteristiques =  $product->getCharacteristicsArray();
 
-            if($idx==0) {
-                
-             }
 
-                foreach ($caracteristiques as $key => $value) {
-                    if(!is_array($value) || !isset($value["label"]))
-                        continue; 
+            foreach ($caracteristiques as $key => $value) {
+                if(!is_array($value) || !isset($value["label"]) || isset($header[$key]))
+                    continue; 
 
-                    try {
-                        if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
-                            continue;
-                        }
-                         if(is_array($value) && isset($value["isOther"]) && $value["isOther"]) {
-                            continue;
-                        }
-                        $header[$key] = ucfirst(trim($value["label"]));
+                try {
+                    if(is_array($value) && isset($value["do_not_export"]) && $value["do_not_export"]) {
+                        continue;
                     }
-                    catch (Exception $e) {
-
+                     if(is_array($value) && isset($value["isOther"]) && $value["isOther"]) {
+                        continue;
                     }
+                    $header[$key] = ucfirst(trim($value["label"]));
                 }
+                catch (Exception $e) {
+
+                }
+            }
            
 
 
             $idx ++;
         }
+        $header['image_1'] = "Image 1";
+        $header['image_2'] = "Image 2";
+        $header['image_3'] = "Image Z1";
+        $header['image_4'] = "Image Z2";
+        $header['image_texture'] = "Image Face";
+
+
+
+
+
 
         $idx = 0;
         foreach ($products as $product) {
@@ -526,6 +533,11 @@ class ProductController extends Action
                     
             }
 
+            $row[] = (string)$product->getImage_1();
+            $row[] = (string)$product->getImage_2();
+            $row[] = (string)$product->getImage_3();
+            $row[] = (string)$product->getImage_4();
+            $row[] = (string)$product->getImage_texture();
             
             $rows[]  = $row;
             $idx ++;

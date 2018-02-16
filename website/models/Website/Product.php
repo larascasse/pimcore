@@ -7,6 +7,7 @@ class Website_Product extends Object_Product {
 
 	private $_teintePath;
 	private $_choixString;
+	private $_characteristicsArray;
 	/**
      * Dummy which can be overwritten by a parent class, this is a hook executed in every getter of the properties in the object
      * @param string $key
@@ -567,6 +568,10 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getCharacteristicsArray($removeEmpty=true) {
+
+		if(isset($this->_characteristicsArray)) {
+			return $this->_characteristicsArray;
+		}
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    
@@ -855,6 +860,8 @@ class Website_Product extends Object_Product {
 		//classement des caracxteriqyes
 		
 		$sortedCaracteristiques = array_replace(array_flip($order), $caracteristiques);
+
+		$this->_characteristicsArray = $sortedCaracteristiques;
 
 		return $sortedCaracteristiques;
 	}

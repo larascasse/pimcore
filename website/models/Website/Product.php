@@ -3080,10 +3080,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 	public function isParquetMassif() {
-		return $this->getFamille() == "01MASSIF";
+		return $this->getFamille() == "01MASSIF" || ($this->getFamille()=="97LOTS" && stristr($this->getName_scienergie(),"massif"));
 	}
 	public function isParquetContrecolle() {
-		return $this->getFamille() == "05CONTRECO";
+		return $this->getFamille() == "05CONTRECO" || ($this->getFamille()=="97LOTS" && stristr($this->getName_scienergie(),"contrecolle"));
 	}
 	public function isParquet() {
 		return $this->isParquetMassif() || $this->isParquetContrecolle();

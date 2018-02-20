@@ -55,6 +55,35 @@ $(document).ready(function() {
 });
 
 
+function showProductPhotos(ean) {
+  console.log("SHow "+ean);
+  var carouselId = 'caroussel-'+ean;
+  var carouselContainer = '#container-'+carouselId;
+  console.log($('#'+carouselId),carouselContainer,$(carouselContainer))
+
+  $('#photomodal .modal-body').html($(carouselContainer).html());
+  $('#photomodal #'+carouselId).attr('id','modalcarousel');
+  $('#photomodal .carousel-control-prev').attr('href','#modalcarousel');
+  $('#photomodal .carousel-control-next').attr('href','#modalcarousel');
+  $('#photomodal .carousel-indicators li').attr('data-target','#modalcarousel');
+
+  //$('#photomodal').modal('handleUpdate')
+  
+  //$('#modalcarousel').carousel();
+
+  $('#photomodal:has(.carousel)').on('shown', function() {
+      var $carousel = $(this).find('.carousel');
+
+      if ($carousel.data('carousel') && $carousel.data('carousel').sliding) {
+      $carousel.find('.active').trigger($.support.transition.end);
+      }
+    }
+  );
+  $('#photomodal').modal({animation: false});
+  //$('.'+carouselId).carousel();
+
+}
+
 
 function showPleaseWait () {
             $('#pleasewaitmodal').modal({animation: false});
@@ -144,6 +173,9 @@ function showEmbededPdf(pdfUrl) {
 <?php
 $hasOnePose = false;
 foreach ($this->products as $product) {
+  echo $this->template("product/inc-product-images-slider.php",array("product"=>$product));
+
+
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
     $hasOnePose = true;
     break;
@@ -210,7 +242,8 @@ foreach ($this->products as $product) {
       <?php endif; ?>
     </td>-->
     <td class="col__">
-       <?php if($hasPhoto) : ?><a href="/?controller=web2print&action=get-product-photo-pdf&id=<?php echo $product->getId()?>&_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_ embed-pdf" target="_blank">Photos</a>
+       <?php if($hasPhoto) : ?><!--<a href="/?controller=web2print&action=get-product-photo-pdf&id=<?php echo $product->getId()?>&_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_ embed-pdf" target="_blank">Photos</a>-->
+        <a href="#" class="btn-link noajaxload btn-inverse_" onclick="showProductPhotos('<?php echo $product->getEan()?>');return false;">Photos</a>
        <?php endif; ?>
      </td>
 
@@ -411,6 +444,23 @@ endif; ?>
       </div>
     </div>
 </div>
+
+<div id="photomodal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="max-width: 90%;">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <div class="modal-body">
+        
+      </div>
+      </div>
+    </div>
+</div>
+
 
  </form>
 

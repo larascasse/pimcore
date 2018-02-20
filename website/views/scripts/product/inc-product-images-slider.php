@@ -44,6 +44,29 @@ $carousel_js_id = 'caroussel-'.$product->getEan();
             <?php 
             $i++;
             } ?>
+
+             <?php 
+            $count=0;
+            $i=0;
+            foreach ($assetsArray as $asset) {
+              
+                $image = $asset;
+                ?>
+                 <div class="carousel-item <?php if($i==1) { ?> active<?php } ?>">
+                    <img class="d-block" src="<?php echo $image->getThumbnail("productCarousel"); ?>">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <!--<h1><?php echo $this->product->getName(); ?></h1>
+                            <div class="caption"></div>
+                            <div class="margin-bottom-10"></div>-->
+                        </div>
+                    </div>
+                </div>
+            <?php 
+            $i++;
+            } ?>
+
+            
     </div>
     <a class="carousel-control-prev" href="#<?php echo $carousel_js_id;?>" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

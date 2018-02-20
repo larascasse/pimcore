@@ -32,7 +32,7 @@ $carousel_js_id = 'caroussel-'.$product->getEan();
             	$image = $asset;
             	?>
             	 <div class="carousel-item <?php if($i==1) { ?> active<?php } ?>">
-	                <img class="d-block w-100" src="<?php echo $image->getThumbnail("productCarousel"); ?>">
+	                <img class="d-block" src="<?php echo $image->getThumbnail("productCarousel"); ?>">
 	                <div class="container">
 	                    <div class="carousel-caption">
 	      				 	<!--<h1><?php echo $this->product->getName(); ?></h1>

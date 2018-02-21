@@ -172,14 +172,17 @@ function showEmbededPdf(pdfUrl) {
 
 <?php
 $hasOnePose = false;
+
 foreach ($this->products as $product) {
   echo $this->template("product/inc-product-images-slider.php",array("product"=>$product));
 
 
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
     $hasOnePose = true;
-    break;
   }
+ // if(isset($product) && !$product->isAccessoire() && count($product->getImageAssetArray())>0)
+  //  $hasOnePhoto = true;
+
 }
 ?>
 			<tr>

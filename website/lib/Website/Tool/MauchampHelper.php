@@ -956,7 +956,7 @@ EOT;
         "address2" => "ZA des Amandiers",
         "zipcode" => "78420",
         "city" => "Paris",
-        "phone" => "XXXXX"
+        "phone" => "01 39 13 08 73"
     );
 
     $sites["78240"] = array (
@@ -965,7 +965,7 @@ EOT;
         "address2" => "",
         "zipcode" => "78240",
         "city" => "Chambourcy",
-        "phone" => "XXX"
+        "phone" => "01 30 06 09 22"
     );
     if(isset($site)) {
       if(array_key_exists($site, $sites))

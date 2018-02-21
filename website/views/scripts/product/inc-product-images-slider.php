@@ -4,11 +4,18 @@ $packshotsImages = $this->product->getImageAssetArray();
 $realisations =     $this->product->getRealisations();
 $count=count($realisations);
 $assetsArray=array();
+
+
+foreach ($packshotsImages as $asset) {
+    $assetsArray[] = $asset;
+}
+
+
 for ($i=0; $i < $count; $i++) { 
-        $assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
-        foreach ($assets as $asset) {
-            $assetsArray[] = $asset;
-        }
+    $assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
+    foreach ($assets as $asset) {
+        $assetsArray[] = $asset;
+    }
 }
 
 //ne pas modifier, voir dans
@@ -24,26 +31,7 @@ $carousel_js_id = 'caroussel-'.$product->getEan();
         <?php } ?>
     </ol>
     <div class="carousel-inner">
-        <?php 
-        	$count=0;
-            $i=0;
-        	foreach ($packshotsImages as $asset) {
-              
-            	$image = $asset;
-            	?>
-            	 <div class="carousel-item <?php if($i==1) { ?> active<?php } ?>">
-	                <img class="d-block" src="<?php echo $image->getThumbnail("productCarousel"); ?>">
-	                <div class="container">
-	                    <div class="carousel-caption">
-	      				 	<!--<h1><?php echo $this->product->getName(); ?></h1>
-	                      	<div class="caption"></div>
-	                        <div class="margin-bottom-10"></div>-->
-	                    </div>
-	                </div>
-            	</div>
-            <?php 
-            $i++;
-            } ?>
+   
 
              <?php 
             $count=0;
@@ -66,7 +54,7 @@ $carousel_js_id = 'caroussel-'.$product->getEan();
             $i++;
             } ?>
 
-            
+
     </div>
     <a class="carousel-control-prev" href="#<?php echo $carousel_js_id;?>" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

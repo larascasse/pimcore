@@ -228,11 +228,10 @@ foreach ($this->products as $product) {
 <?php if($hasPose) : ?>
 	<!--<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>-->
 	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
-    <?php else : ?>
-    <!--
+    <?php elseif($hasOnePose) : ?>
+    
     <td></td>
-      <td></td>
-    -->
+      
 <?php endif; ?>
 
   <!-- 

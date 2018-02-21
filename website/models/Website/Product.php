@@ -612,7 +612,7 @@ class Website_Product extends Object_Product {
 
 
 		//Descitptio
-		$descriptionFields = array('Dimensions', 'essence','motif','angle','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage','catalogue');
+		$descriptionFields = array('Dimensions', 'essence','motif','angle','origine_bois', 'country_of_manufacture','support','epaisseurUsure','choix', 'qualite', 'traitement_surface','finition','chanfreins','fixation','typeLame','pose','ean','profil','characteristics_others','pefc','fsc','parquet_de_france','nf','colisage','catalogue');
 
 
 		//CE
@@ -2535,7 +2535,7 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 		if($this->getPimonly_resistance_thermique()>0)
 			return $this->getPimonly_resistance_thermique();
 
-		if($this->isParquet())
+		if(!$this->isParquet())
 			return false;
 
 
@@ -2569,7 +2569,7 @@ R = 0,003/0,23 + 0,008/0,12 = 0,01 3 + 0,067 = 0,08 m . °K / W
 			return $this->getPimonly_conductivite_thermique_total();
 		}
 
-		if($this->isParquet())
+		if(!$this->isParquet())
 			return false;
 
 		

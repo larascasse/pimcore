@@ -1,5 +1,5 @@
 <?php
-
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bs
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 

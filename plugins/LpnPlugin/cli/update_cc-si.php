@@ -24,7 +24,7 @@ $conditionFilters = array(
 );
 
 
-$list = new Pimcore\Model\Object\Listing();
+$list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
@@ -140,7 +140,7 @@ foreach ($list->getObjects() as $object) {
 
     $parent->save();
     $object->save();
-    
+
     echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         
    

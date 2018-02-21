@@ -8,6 +8,7 @@ class Website_Product extends Object_Product {
 	private $_teintePath;
 	private $_choixString;
 	private $_characteristicsArray;
+	private $_imageAssetArray;
 	/**
      * Dummy which can be overwritten by a parent class, this is a hook executed in every getter of the properties in the object
      * @param string $key
@@ -1318,11 +1319,23 @@ class Website_Product extends Object_Product {
 
 	}
 
-	public function getImageAssetArray() {
+	public function getImageAssetArray($withRealisations = false) {
+
+		if(isset($this->_imageAssetArray))
+			return $this->_imageAssetArray;
+
+
+
+
+
 		$packshotsImages = array();
 		$doublons=array();
-		for($i=1; $i<=3; $i++) { 
-			$image = $this->{"getImage_" . $i}();
+		for($i=1; $i<=5; $i++) { 
+
+			if($i!=5)
+				$image = $this->{"getImage_" . $i}();
+			else
+				$image = $this->getImage_texture();
 			
 			if($image) { 
 				if(!(stristr($image->getFilename(),"pantone"))) {
@@ -1339,6 +1352,8 @@ class Website_Product extends Object_Product {
 			} 
 			
 		}
+
+
 
 		$galleryImages =$this->getGallery();
 		if(is_array($galleryImages)) {
@@ -1367,6 +1382,22 @@ class Website_Product extends Object_Product {
 			}
 		}
 
+
+		if($withRealisations) {
+			$realisations =     $this->getRealisations();
+			$count=count($realisations);
+			for ($i=0; $i < $count; $i++) { 
+			    $assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
+			    foreach ($assets as $element) {
+			    	$path = $element->getThumbnail("magento_realisation")->getPath();
+			    	if(!in_array($path, $doublons)) {
+						$packshotsImages[] = $element;
+						$doublons[] = $path;
+					}
+			    }
+			}
+		}
+		$this->_imageAssetArray = $packshotsImages;
 
 		return $packshotsImages;
 	}

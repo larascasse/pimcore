@@ -1,22 +1,11 @@
 <?php
+
 $product = $this->product;
-$packshotsImages = $this->product->getImageAssetArray();
-$realisations =     $this->product->getRealisations();
-$count=count($realisations);
-$assetsArray=array();
+
+$assetsArray = $this->product->getImageAssetArray($realisation=true);
 
 
-foreach ($packshotsImages as $asset) {
-    $assetsArray[] = $asset;
-}
 
-
-for ($i=0; $i < $count; $i++) { 
-    $assets=Asset_Folder::getById($realisations[$i]->id)->getChilds();
-    foreach ($assets as $asset) {
-        $assetsArray[] = $asset;
-    }
-}
 
 //ne pas modifier, voir dans
 $carousel_js_id = 'caroussel-'.$product->getEan();

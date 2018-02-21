@@ -173,17 +173,6 @@ class MauchampHelper
          <Designation>Sika</Designation>
       </Ligne>
 
-      <Ligne>
-         <Ordre>8</Ordre>
-         <Code_EAN_Article>0005282507000</Code_EAN_Article>
-         <Nombre>2.0000</Nombre>
-         <Quantite_Unite>2.0000</Quantite_Unite>
-         <Prix_HT>195,20</Prix_HT>
-         <Pourc_Remise>0</Pourc_Remise>
-         <Taux_TVA>20</Taux_TVA>
-         <Observation />
-         <Designation>Sika</Designation>
-      </Ligne>
 
       <Ligne>
          <Ordre>9</Ordre>
@@ -222,15 +211,15 @@ class MauchampHelper
       </Ligne>
 
       <Ligne>
-         <Ordre>11</Ordre>
-         <Code_EAN_Article>103000503062</Code_EAN_Article>
+         <Ordre>12</Ordre>
+         <Code_EAN_Article>3524830049147</Code_EAN_Article>
          <Nombre>1.0000</Nombre>
          <Quantite_Unite>1.0000</Quantite_Unite>
          <Prix_HT>408.87</Prix_HT>
          <Pourc_Remise>0</Pourc_Remise>
          <Taux_TVA>20</Taux_TVA>
          <Observation>Largeur: laTES, Longeur: LTEST</Observation>
-         <Designation>XXXPlateau De Table Ostende à Partir De Vieux Fond De Wagon Chêne Rabote 2mm Brut - (longueur Max 2700mm )</Designation>
+         <Designation>TEST PHOTO NE MARCHE PAS</Designation>
       </Ligne>
 
 

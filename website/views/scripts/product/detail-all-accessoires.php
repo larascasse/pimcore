@@ -28,6 +28,7 @@ $products = $this->products;
 
 
 <?php
+$ids=0;
 foreach ($products as $product) {
 	//echo $product->getName()."<br >";
 	if($product->isAccessoire() && !$product->isPlusValue()) {

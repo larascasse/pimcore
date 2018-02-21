@@ -3151,11 +3151,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		 $attributeType = strtolower($this->getSubtype());
 		 $scienergieName = strtolower($this->getName_scienergie());
 		 //echo $attributeType." ".$scienergieName."<br />";
-		 $isTable =    stripos($scienergieName,'plus-value ')!==false
+		 $isPlusValue =    stripos($scienergieName,'plus-value ')!==false
 		        		|| stripos($scienergieName,'plus value')!==false
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 
-		  return $isTable;
+		  return $isPlusValue;
 	}
 
 }

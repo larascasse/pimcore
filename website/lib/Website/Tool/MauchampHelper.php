@@ -222,6 +222,18 @@ class MauchampHelper
          <Designation>TEST PHOTO NE MARCHE PAS</Designation>
       </Ligne>
 
+      <Ligne>
+         <Ordre>13</Ordre>
+         <Code_EAN_Article>7612894751772</Code_EAN_Article>
+         <Nombre>2.0000</Nombre>
+         <Quantite_Unite>2.0000</Quantite_Unite>
+         <Prix_HT>195,20</Prix_HT>
+         <Pourc_Remise>0</Pourc_Remise>
+         <Taux_TVA>20</Taux_TVA>
+         <Observation />
+         <Designation>Sika II</Designation>
+      </Ligne>
+
 
 
    </Lignes>

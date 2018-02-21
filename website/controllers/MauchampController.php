@@ -315,6 +315,16 @@ class MauchampController extends Action
 
         $coverTitle = \Website\Tool\MauchampHelper::getCoverTitle($order["products"],$order["missingProducts"]);
 
+
+        //on vire les produits dupliqués
+        //Deha fait dan le paerse order !!
+        /*$uniqueProducts = array();
+        if(is_array($order["products"])) {
+          foreach ($order["products"] as $product) {
+            $uniqueProducts[$product->getEan()] = $product;
+          }
+        }*/
+
         
         $this->view->products = $order["products"];
 
@@ -375,20 +385,32 @@ class MauchampController extends Action
          //OK, on ajoute les fihes rtechniques si elle ne sont pas dynbamqieusw
          $order = \Website\Tool\MauchampHelper::parseOrder($data);        
          $this->products = $order["products"];
+
+         $existingPaths = array();
         
          $pdfMerged = new Zend_Pdf();
          foreach ($this->products as $product) {
              
              if($product->getFiche_technique_lpn()) {
                 $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
-                
-                $pdf = Zend_Pdf::load($pdfpath); 
-                foreach($pdf->pages as $page){
 
-                  $clonedPage = clone $page;
-                  $pdfMerged->pages[] = $clonedPage;
+                //On check qu'on en a pas deja fait une...
+                if(!in_array($pdfpath,$existingPaths)) {
+
+                    $existingPath[] = $pdfpath;
+
+                    $pdf = Zend_Pdf::load($pdfpath); 
+                    foreach($pdf->pages as $page){
+
+                      $clonedPage = clone $page;
+                      $pdfMerged->pages[] = $clonedPage;
+                    }
+                    unset($clonedPage);
+
                 }
-                unset($clonedPage);
+
+               
+               
              }
          }
 

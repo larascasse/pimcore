@@ -763,20 +763,25 @@ class ProductController extends Action
                 //On va chercher dans AZURE
                // echo "loadAzureProduct".$productEan;
                 $productValues = \Website\Tool\MauchampHelper::loadAzureProduct($productEan);
-                $product = new Website_Product();
-                $product->setValues($productValues); 
-                if(!$product instanceof Object_Product) {
+                
+                
+                if(!is_array($productValues)) {
 
                     // this will trigger a 404 error response
                 //throw new \Zend_Controller_Router_Exception("invalid request");
                     $this->view->message = array('danger','EAN '.$productEan.' Inconnu');
                 }
-                $this->view->product = $product;
+                else {
+                    $product = new Website_Product();
+                    $product->setValues($productValues); 
+                    $this->view->product = $product;
+                }
 
 
                 
             }
-            $this->view->product = $product;
+            else 
+                $this->view->product = $product;
         }
         
         

@@ -770,8 +770,13 @@ class ProductController extends Action
             $order = \Website\Tool\MauchampHelper::loadAzureInvoice($productEan);
              //print_r($order);
              //die;
-             if(isset($order))
+             if(isset($order)) {
+                $order->Code_Commande = $order->Code_Piece;
+                $order->Reference_Client = $order->Reference_Client_Lies;
+                $order->Adresse_Facturation_Raison_Sociale = $order->Adresse_Facturation_Nom;
+
                 $this->view->order = $order;
+            }
             else {
                 $this->view->ean = $productEan;
                $this->view->message = array('danger','Facture '.$productEan.' inconnue');

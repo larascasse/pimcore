@@ -82,7 +82,7 @@ height:100%;
 
 <div class="row landscape text-center">
 	<div class="col-12">
-<h1  class="display-1" style="letter-spacing: 0.1rem"><strong><?php echo $product->getEan() ?></strong></h1>
+<h1  class="display-1" style="letter-spacing: 0.1rem; color:black"><strong><?php echo $product->getEan() ?></strong></h1>
 <h1  class="display-3"><strong><?php echo $product->getPimonly_dimensions() ?></strong></h1>
 <h2 class="p-3 display-4"><?php echo $productName  ?></h2>
  <?php

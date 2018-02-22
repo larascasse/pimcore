@@ -22,11 +22,12 @@ if (!isset($product)) {
 ?>
 
 
-<div class="page row align-items-center justify-content-center text-center" style="height:300px">
+<div class="page row align-items-center justify-content-center text-center" style="height:250px">
 <div class="col-10">
+<h2>Etiquette</h2>
 <form>
 <div class="form-group">
-<input class="form-control form-control-lg" name="ean" type="text" placeholder="EAN">
+<input class="form-control form-control-lg" name="ean" type="text" placeholder="EAN" value="<?php echo isset($this->ean)?$this->ean:""?>">
 </div>
 <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
 </form>

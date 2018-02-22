@@ -45,8 +45,12 @@ else {
 	$productName = str_ireplace("monolame ", "", $productName);
 	$productName = str_ireplace("RIVES ABIMEES ", "", $productName);
 	$productName = str_ireplace("PEFC", "", $productName);
+	$productName = str_ireplace("nf ", " ", $productName);
 	$productName = str_ireplace("massif ", " ", $productName);
 	$productName = str_ireplace("contrecolle ", " ", $productName);
+	$productName = str_ireplace("g2 ", " ", $productName);
+	$productName = str_ireplace("teinte ", " ", $productName);
+	$productName = str_ireplace("contemporain ", " ", $productName);
 	$productName = str_ireplace(" - ", " ", $productName);
 	$productName = str_ireplace("  ", " ", $productName);
 	$productName = str_ireplace("( ", "(", $productName);
@@ -54,21 +58,24 @@ else {
 	$productName =ucfirst($productName);
 ?>
 <style type="text/css" media="print">
-  @media print {
+	
+/* DYMO 
+@media print {
 html,body{height:100%;width:100%;margin:0;padding:0;}
- @page {
-	size: A4 landscape;
-	max-height:100%;
-	max-width:100%
-	}
-   body{
-   	width:100%;
-    height:100%;
-    -webkit-transform: rotate(-90deg) scale(1.3,1.3)  translate(-5%,25%); 
-    -moz-transform:rotate(-90deg) scale(1,1) 
+@page {
+size: A4 landscape;
+max-height:100%;
+max-width:100%
+}
+body{
+	width:100%;
+height:100%;
+-webkit-transform: rotate(-90deg) scale(1.3,1.3)  translate(-5%,25%); 
+-moz-transform:rotate(-90deg) scale(1,1) 
 }    
 }
 }
+*/
 </style>
 
 
@@ -76,7 +83,7 @@ html,body{height:100%;width:100%;margin:0;padding:0;}
 	<div class="col-12">
 <h1  class="display-1" style="letter-spacing: 0.1rem"><strong><?php echo $product->getEan() ?></strong></h1>
 <h1  class="display-3"><strong><?php echo $product->getDimensionsStringEtiquette() ?></strong></h1>
-<h4 class="p-3"><?php echo $productName  ?></h4>
+<h3 class="p-3"><?php echo $productName  ?></h3>
  <?php
 $subtitle = "";//strlen($product->getSku())>0?$product->getSku():"";
 if(strlen($product->name_scienergie_court)) {

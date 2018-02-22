@@ -1,6 +1,7 @@
 <?php
 $product = $this->product;
-
+$order = $this->order;
+$orderAzure = $this->order;
 ?>
 
 <?php
@@ -18,7 +19,7 @@ if(isset($this->message)) {
 ?>
 
 <?php
-if (!isset($product)) {
+if (!isset($product) && !isset($order) ) {
 ?>
 
 
@@ -37,7 +38,8 @@ if (!isset($product)) {
 
 <?php
 }
-else {
+elseif (isset($product)) {
+	
 	$productName = $product->getName(3000);
 	$productName = str_ireplace("parquet ", "", $productName);
 	$productName = str_ireplace("plancher ", "", $productName);
@@ -140,11 +142,94 @@ $httpFile = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],
 <img src="<?php echo $httpFile?>" />
 </div>
 </div>
-<script type="text/javascript">
-	var productName="<?php echo wordwrap($this->product->getName(),60,'\\n'); ?>";
 
-</script>
-<img src="" id="labelImage" />
+<?php
+}
+
+
+elseif (isset($order)) {
+	
+?>
+<style type="text/css" media="print">
+	
+/* DYMO 
+@media print {
+html,body{height:100%;width:100%;margin:0;padding:0;}
+@page {
+size: A4 landscape;
+max-height:100%;
+max-width:100%
+}
+body{
+	width:100%;
+height:100%;
+-webkit-transform: rotate(-90deg) scale(1.3,1.3)  translate(-5%,25%); 
+-moz-transform:rotate(-90deg) scale(1,1) 
+}    
+}
+}
+*/
+</style>
+
+<style>
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+</style>
+
+
+<div class="row landscape text-center">
+	<div class="col-12">
+<h1  class="display-1 p-3" style="letter-spacing: 0.1rem; color:black; font-size:5em"><strong><?php echo $orderAzure->Code_Commande ?></strong></h1>
+<h1  class="display-1 p-3" style="letter-spacing: 0.1rem; color:black; font-size:3em"><strong>Client : <?php echo $orderAzure->getCodeClient() ?></strong></h1>
+<?php if(strlen($orderAzure->Reference_Client)>0) {?>
+<h1  class="display-3 p-3"><strong>Réf : <?php echo $orderAzure->Reference_Client ?></strong></h1>
+<?php } ?>
+
+<h2 class="p-3 display-4">Fact : <?php echo $orderAzure->Adresse_Facturation_Raison_Sociale ?></h2>
+<p>
+	Site : <?php echo $orderAzure->Code_SITE ?><br />
+	Dépot : <?php echo $orderAzure->Code_Depot ?><br />
+	Date : <?php echo $orderAzure->Date ?><br /><br />
+
+ 
+
+<?php
+// Seul le texte à écrire est obligatoire
+$barcodeOptions = array(
+	'text' =>  $orderAzure->Code_Commande,
+	//'barHeight' => 100,
+	'barHeight' => 20,
+	'fontSize' => 10,
+	//'barThickWidth' => 2,
+	'factor' => 1,
+
+
+);
+// Pas d'options requises
+$rendererOptions = array();
+// Tracé du code-barres dans une nouvelle image
+$imageResource = Zend_Barcode::draw(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+);
+$imgFile = PIMCORE_TEMPORARY_DIRECTORY . "/barcode_" . $orderAzure->Code_Commande . ".png";
+imagepng($imageResource, $imgFile);
+
+$httpFile = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$imgFile);
+
+?>
+<?php echo $this->template("includes/logo_1l_small_svg.php"); ?>
+
+<img src="<?php echo $httpFile?>" />
+</div>
+</div>
+
 <?php
 }
 ?>
+

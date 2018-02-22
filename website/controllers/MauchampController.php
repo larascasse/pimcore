@@ -258,7 +258,7 @@ class MauchampController extends Action
 
         $this->view->codecommande=$codecommande;
         
-        $xml = $order = \Website\Tool\MauchampHelper::loadAzureOrder($codecommande);
+        $xml = $order = \Website\Tool\MauchampHelper::loadAzureOrderXml($codecommande);
         if(isset($xml)) {
             $this->view->xml =  $xml;
         }

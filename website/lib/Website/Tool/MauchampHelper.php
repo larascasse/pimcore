@@ -685,9 +685,74 @@ EOT;
     return $price;
   }
 
+  public static function loadAzureInvoice($codecommande) {
+        $svc = $svc = new \LPNEntities(LPN_SERVICE_URL);
+        $query = getQuery($svc,"invoice",$codecommande);//self::getParam("code_commande"));
+        $response = $query->Execute();
+        $orders = array();
+        
+        try {
+          do {
+              if(isset($nextProductToken) && $nextProductToken != null) {            
+                  $response = $svc->Execute($nextProductToken);
+
+
+              }
+
+              $index=0;
+              foreach($response->Result as $orderAzure) {
+                  return $orderAzure;
+                
+              }
+           }
+          while(($nextProductToken = $response->GetContinuation()) != null);
+
+      }
+      catch (Exception $e)
+        {
+  
+             echo  "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getMessage(); 
+        }
+
+       return null;
+  }
+
 
   public static function loadAzureOrder($codecommande) {
-  	$svc = $svc = new \LPNEntities(LPN_SERVICE_URL);
+        $svc = $svc = new \LPNEntities(LPN_SERVICE_URL);
+        $query = getQuery($svc,"order",$codecommande);//self::getParam("code_commande"));
+        $response = $query->Execute();
+        $orders = array();
+        
+        try {
+          do {
+              if(isset($nextProductToken) && $nextProductToken != null) {            
+                  $response = $svc->Execute($nextProductToken);
+
+
+              }
+
+              $index=0;
+              foreach($response->Result as $orderAzure) {
+                  return $orderAzure;
+                
+              }
+           }
+          while(($nextProductToken = $response->GetContinuation()) != null);
+
+      }
+      catch (Exception $e)
+        {
+  
+             echo  "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getMessage(); 
+        }
+
+       return null;
+  }
+
+
+  public static function loadAzureOrderXml($codecommande) {
+  	    $svc = $svc = new \LPNEntities(LPN_SERVICE_URL);
         $query = getQuery($svc,"order",$codecommande);//self::getParam("code_commande"));
         $response = $query->Execute();
         $orders = array();

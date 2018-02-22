@@ -740,7 +740,7 @@ class ProductController extends Action
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
-        
+
         $this->enableLayout();
         $this->setLayout("layout-mauchamp");
 
@@ -752,7 +752,36 @@ class ProductController extends Action
         $productId = $this->getParam("id");
         $productEan = $this->getParam("ean");
 
-        if(isset($productId)) {
+        //Commande
+        if(stripos($productEan,"c")===0) {
+             $order = \Website\Tool\MauchampHelper::loadAzureOrder($productEan);
+             //print_r($order);
+             //die;
+             if(isset($order))
+                $this->view->order = $order;
+            else {
+                $this->view->ean = $productEan;
+               $this->view->message = array('danger','Commande '.$productEan.' inconnue');
+            }
+
+        }
+        else if (stripos($productEan,"f")===0) {
+            
+            $order = \Website\Tool\MauchampHelper::loadAzureInvoice($productEan);
+             //print_r($order);
+             //die;
+             if(isset($order))
+                $this->view->order = $order;
+            else {
+                $this->view->ean = $productEan;
+               $this->view->message = array('danger','Facture '.$productEan.' inconnue');
+            }
+        }
+
+
+
+
+        else if(isset($productId)) {
             $product = Object_Product::getById($this->getParam("id"));
              if(!$product instanceof Object_Product) {
                 // this will trigger a 404 error response

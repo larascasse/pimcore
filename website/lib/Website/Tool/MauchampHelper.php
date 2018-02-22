@@ -1076,5 +1076,86 @@ EOT;
       return implode("<br />", $strArray);
   }
 
+  public static function loadAzureProduct($ean) {
+
+      $svc = new \LPNEntities(LPN_SERVICE_URL);
+      $query = getQuery($svc,"ean",$ean,0,false);
+
+        $response = $query->Execute();
+        $orders = array();
+        
+        try {
+          do {
+              if(isset($nextProductToken) && $nextProductToken != null) {            
+                  $response = $svc->Execute($nextProductToken);
+
+
+              }
+
+              $index=0;
+              foreach($response->Result as $productAzure) {
+                   $productValues = \Website\Tool\MauchampHelper::convertAzureProductToPimcoreArray($productAzure);
+                   
+                   //$product->setValues($productValues);
+                   return $productValues;
+              }
+          
+          }
+          while(($nextProductToken = $response->GetContinuation()) != null);
+
+      }
+      catch (Exception $e)
+        {
+  
+             echo  "Error:" . $e->getError() . "<br>" . "Detailed Error:" . $e->getMessage(); 
+        }
+  }
+
+  public static function convertAzureProductToPimcoreArray($Product) {
+            $p = array();
+           $data=array();
+           //$mappingRaw = [[0,"Article","code"],[1,"Code_EAN_Article","ean"],[2,"Article Designation","name"],
+           //[3,"Epaisseur","epaisseur"],[4,"Largeur","largeur"],[5,"Longueur","longueur"],[6,"nbrpp","nbrpp"],[7,"Choix","choix"],
+           //[8,"Essence","essence"],[9,"Qualite","qualite"],[10,"Article Famille","famille"],[11,"name_scienergie_court","name_scienergie_court"]];
+           $p["code"] = $Product->Code_Article;
+           $p["ean"] = $Product->Code_EAN_Article;
+           $p["name"] = $Product->Libelle_Article;
+           $data[3]=$p["epaisseur"] = round($Product->Epaisseur);
+           $data[4]=$p["largeur"] = round($Product->Largeur);
+           $data[5]=$p["longueur"] = round($Product->Longueur);
+           $data[6]=$p["nbrpp"] = isset($Product->Nbrpp)?$Product->Nbrpp:"";
+           $data[7]=$p["choix"] = $Product->Code_Choix;
+           $data[8]=$p["essence"] = $Product->Code_Essence;
+           $data[9]=$p["qualite"] = $Product->Code_Qualite;
+           $data[10]=$p["famille"] = $Product->Code_Famille;
+           $data[11]=$p["name_scienergie_court"] = $Product->Libelle_Court_Ean;
+            $data[12]=$p["published"] = $Product->Obsolete=="false" && $Product->Actif=="true";
+
+           $p["actif_web"] = $Product->Actif=="true"?true:false;
+           $p["obsolete"] = $Product->Obsolete=="true"?true:false;
+
+
+            if($p['ean']=='3760102973141') {
+              //var_dump($Product);
+              //exit;
+
+            }
+
+
+            //print_r($Product);
+            //exit;
+            //var_dump($Product);
+            //exit;
+           // $data[12]=$p["published"] = $Product->Obsolete=="true"?false:true;
+           // $p["unite"] = $Product->Unite;
+            $p["colisage"] = $Product->getColisage();
+            $p["unite"] = $Product->getUnite();
+            $p["nbrpp"] = $Product->getNbrpp();
+
+            //TODO : weight
+            $p["weight"] = $Product->getWeightParQuantiteUnite();
+            return $p;
+  }
+
     
 }

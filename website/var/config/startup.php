@@ -118,6 +118,7 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/framework/'. PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/lpnservices/');
 require_once 'urldef.php';
 require_once 'functions.php';
+require_once 'LPNEntities.php';
 
 
 Zend_Loader_AutoloaderFactory::factory([

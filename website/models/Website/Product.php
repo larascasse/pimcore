@@ -1725,7 +1725,7 @@ class Website_Product extends Object_Product {
 		if($this->getConditionnement())
 			$varationString[]=$this->getConditionnement();
 		
-		return count($varationString)>0?implode($varationString,"/"):"";
+		return count($varationString)>0?implode($varationString," x "):"";
 	}
 
 	public function getPimonly_dimensions() {

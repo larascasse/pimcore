@@ -7,6 +7,7 @@ use Pimcore\Mail;
 use Pimcore\Tool;
 
 
+
 ini_set('display_errors', 1);
         error_reporting(E_ALL);
 
@@ -733,6 +734,58 @@ class ProductController extends Action
 
             $this->jsonProductImagesAjax($product->getId());
         }
+    }
+
+    public function printDepotLabelAction() {
+        $this->enableLayout();
+        $this->setLayout("layout-mauchamp");
+
+        $definition = Object_Class::getByName("Product")->getFieldDefinitions();
+        
+        
+
+        // "id" is the named parameters in "Static Routes"
+        $productId = $this->getParam("id");
+        $productEan = $this->getParam("ean");
+
+        if(isset($productId)) {
+            $product = Object_Product::getById($this->getParam("id"));
+             if(!$product instanceof Object_Product) {
+                // this will trigger a 404 error response
+                throw new \Zend_Controller_Router_Exception("invalid request");
+            }
+            $this->view->product = $product;
+        }
+        else if(isset($productEan)) {
+             $product = Object_Product::getByEan($productEan,1);
+             if(!$product instanceof Object_Product) {
+
+                //On va chercher dans AZURE
+               // echo "loadAzureProduct".$productEan;
+                $productValues = \Website\Tool\MauchampHelper::loadAzureProduct($productEan);
+                $product = new Website_Product();
+                $product->setValues($productValues); 
+                if(!$product instanceof Object_Product) {
+
+                    // this will trigger a 404 error response
+                //throw new \Zend_Controller_Router_Exception("invalid request");
+                    $this->view->message = array('danger','EAN '.$productEan.' Inconnu');
+                }
+                $this->view->product = $product;
+
+
+                
+            }
+            $this->view->product = $product;
+        }
+        
+        
+
+
+       
+
+        
+        //$this->view->attributes = $definition;
     }
 
     

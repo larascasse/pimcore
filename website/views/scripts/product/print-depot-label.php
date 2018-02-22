@@ -79,6 +79,17 @@ height:100%;
 */
 </style>
 
+<style>
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+</style>
+
 
 <div class="row landscape text-center">
 	<div class="col-12">

@@ -26,7 +26,7 @@ if (!isset($product)) {
 <div class="col-10">
 <form>
 <div class="form-group">
-<input class="form-control form-control-lg" name="ean" type="text" placeholder="615160844">
+<input class="form-control form-control-lg" name="ean" type="text" placeholder="EAN">
 </div>
 <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
 </form>
@@ -37,7 +37,7 @@ if (!isset($product)) {
 <?php
 }
 else {
-	$productName = $product->getMage_short_name(3000);
+	$productName = $product->getName(3000);
 	$productName = str_ireplace("parquet ", "", $productName);
 	$productName = str_ireplace("plancher ", "", $productName);
 	$productName = str_ireplace("chene ", "", $productName);
@@ -82,8 +82,8 @@ height:100%;
 <div class="row landscape text-center">
 	<div class="col-12">
 <h1  class="display-1" style="letter-spacing: 0.1rem"><strong><?php echo $product->getEan() ?></strong></h1>
-<h1  class="display-3"><strong><?php echo $product->getDimensionsStringEtiquette() ?></strong></h1>
-<h3 class="p-3"><?php echo $productName  ?></h3>
+<h1  class="display-3"><strong><?php echo $product->getPimonly_dimensions() ?></strong></h1>
+<h2 class="p-3 display-4"><?php echo $productName  ?></h2>
  <?php
 $subtitle = "";//strlen($product->getSku())>0?$product->getSku():"";
 if(strlen($product->name_scienergie_court)) {

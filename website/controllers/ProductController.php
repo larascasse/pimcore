@@ -769,6 +769,7 @@ class ProductController extends Action
 
                     // this will trigger a 404 error response
                 //throw new \Zend_Controller_Router_Exception("invalid request");
+                    $this->view->ean = $productEan;
                     $this->view->message = array('danger','EAN '.$productEan.' Inconnu');
                 }
                 else {

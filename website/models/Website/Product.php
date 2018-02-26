@@ -961,13 +961,25 @@ class Website_Product extends Object_Product {
    		 //Pas beoin pour le titre...
    		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
-   		/* try {
-   		 	$parentSuffixe = $this->getParent()->getPimonly_name_suffixe()." ";
-			$parentParentSuffixe = $this->getParent()->getParent()->getPimonly_name_suffixe()." ";
+   		
+
+   		 try {
+
+   		 	if($this->getParent() instanceof Object_Product) {
+
+
+   		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
+   		 		if($this->getParent()->getParent() instanceof Object_Product) {
+					$parentParentSuffixe = $this->getParent()->getParent()->pimonly_name_suffixe." ";
+				}
+
+   		 	}
+   		 	
 
    		 } catch (\Exception $e) {
             //
-         }*/
+         }
+         
 
 
 		//Shortname

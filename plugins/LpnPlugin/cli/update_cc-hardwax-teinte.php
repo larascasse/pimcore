@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
-    "o_path LIKE '//catalogue/_product_base__/50finition/teintes/huile-hardwax-teinte%'",
+    "o_path LIKE '/catalogue/_product_base__/50finition/teintes/huile-hardwax-teinte%'",
     "ean IS NOT NULL"
 
 );

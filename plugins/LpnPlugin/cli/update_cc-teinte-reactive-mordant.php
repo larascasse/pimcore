@@ -90,7 +90,7 @@ foreach ($list->getObjects() as $object) {
    //$object->setValue('pimonly_name_suffixe',"1 + 0.3 L");
    //$object->setVolume("1 + 0.3");
 
-   $parentSuffixe = str_ireplace("ACCESSOIRE FINITION MORDANT  ","",$scienergie);
+   $parentSuffixe = str_ireplace("ACCESSOIRE FINITION MORDANT ","",$scienergie);
    $parentSuffixe = str_ireplace(" - application au rouleau poil court sans ressuyage - recouvrable après 24h - conso 10m2/litre -","",$parentSuffixe);
    $parentSuffixe = ucfirst(strtolower($parentSuffixe));
    

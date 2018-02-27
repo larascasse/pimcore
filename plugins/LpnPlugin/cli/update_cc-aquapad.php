@@ -76,7 +76,7 @@ foreach ($list->getObjects() as $object) {
         $object->setVolume("1");
 
     }
-    else if(stristr($scienergie, "5")) {
+    else if(stristr($scienergieCourt, "5")) {
         $suffixe = "5 L";
         $object->setVolume("5");
 
@@ -90,9 +90,18 @@ foreach ($list->getObjects() as $object) {
    //$object->setValue('pimonly_name_suffixe',"1 + 0.3 L");
    //$object->setVolume("1 + 0.3");
 
-   $parentSuffixe = str_replace("ACCESSOIRE FINITION TEINTE AQUA PAD ","",$scienergie);
-   $parentSuffixe = str_replace(" - A appliquer à la monobrosse avec un pad blanc ou à la brosse en réssuyant immédiatement - A appliquer en 1 couche, séchage 24h avant d' être recouvert - Conso 15/20m2/Litre/Couche -","",$parentSuffixe);
+   $parentSuffixe = str_ireplace("ACCESSOIRE FINITION TEINTE AQUA PAD ","",$scienergie);
+   $parentSuffixe = str_ireplace(" - A appliquer à la monobrosse avec un pad blanc ou à la brosse en réssuyant immédiatement - A appliquer en 1 couche, séchage 24h avant d' être recouvert - Conso 15/20m2/Litre/Couche -","",$parentSuffixe);
    $parentSuffixe = ucfirst(strtolower($parentSuffixe));
+   
+   $parentSuffixe = str_ireplace("- a appliquer à la monobrosse avec un pad blanc ou à la brosse en réssuyant immédiatement - a appliquer en 1 couche, séchage 24h avant d' être recouvert - conso 15/20m2/litre/couche -","",$parentSuffixe);
+
+   $parentSuffixe = str_ireplace("Creme","Crême",$parentSuffixe);
+   $parentSuffixe = str_ireplace("Chene","Chêne",$parentSuffixe);
+   $parentSuffixe = str_ireplace("Wenge","Wengé",$parentSuffixe);
+   $parentSuffixe = str_ireplace("Leger","Léger",$parentSuffixe);
+   $parentSuffixe = str_ireplace("Fonce","Foncé",$parentSuffixe);
+
 
    $parent->setValue('pimonly_name_suffixe',$parentSuffixe);
    $parent->configurable_free_1 = $parentSuffixe;

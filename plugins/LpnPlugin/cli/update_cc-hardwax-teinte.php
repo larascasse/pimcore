@@ -76,7 +76,7 @@ foreach ($list->getObjects() as $object) {
         $object->setVolume("1");
 
     }
-    else if(stristr($scienergie, "5")) {
+    else if(stristr($scienergieCourt, "5")) {
         $suffixe = "5 L";
         $object->setVolume("5");
 

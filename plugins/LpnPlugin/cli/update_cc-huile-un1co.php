@@ -89,7 +89,7 @@ foreach ($list->getObjects() as $object) {
    $object->setValue('pimonly_name_suffixe',"1 + 0.3 L");
    $object->setVolume("1 + 0.3");
 
-   $parent->setValue('pimonly_name_suffixe',str_replace(" 1 + 0.3 L","",$parent->pimonly_name_suffixe));
+   $parent->setValue('pimonly_name_suffixe',str_replace(" 1+0.3 L","",$parent->pimonly_name_suffixe));
    $parent->setVolume("");
 
 

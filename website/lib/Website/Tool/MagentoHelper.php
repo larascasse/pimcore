@@ -8,7 +8,7 @@ use Pimcore\Model\Document\Page;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
-use Pimcore\Tool;
+use \Pimcore\Tool;
 
 use LpnPlugin;
 
@@ -50,7 +50,7 @@ class MagentoHelper
     }
 
     public static function createMagentoCustomer($xml) {
-        $data = Pimcore\Tool::getHttpData('https://www.laparqueterienouvelle.fr/create_customer.php',null,["xml"=>$xml]);
+        $data = \Pimcore\Tool::getHttpData('https://www.laparqueterienouvelle.fr/create_customer.php',null,["xml"=>$xml]);
         return $data;
     }
 

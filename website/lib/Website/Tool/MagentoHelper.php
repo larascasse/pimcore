@@ -50,7 +50,7 @@ class MagentoHelper
     }
 
     public static function createMagentoCustomer($xml) {
-        $data = \Pimcore\Tool::getHttpData('https://www.laparqueterienouvelle.fr/create_customer.php',null,["xml"=>$xml]);
+        $data = \Pimcore\Tool::getHttpData('https://www.laparqueterienouvelle.fr/LPN/create_customer.php',null,["xml"=>$xml]);
         return $data;
     }
 

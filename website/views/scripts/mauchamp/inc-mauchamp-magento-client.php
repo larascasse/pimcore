@@ -5,7 +5,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 
 $email = $this->email;
 
- $validator = new EmailValidator();
+$validator = new EmailValidator();
 
 $isEmailValid = $validator->isValid($email, new RFCValidation());
 
@@ -78,16 +78,17 @@ jQuery.fn.extend({
 
 
 function createCustomer(target) {
-  window.log("KK",$("#mailform"),$("#mailform").serialize());
+  window.log("KK",$("#mailform-client"),$("#mailform-client").serialize());
   var btn = $(target);
   btn.disabled=true;
   
   $.ajax({
      url : '/plugin/LpnMageSync/front/create-magento-client/',
-     data: $("#mailform").serialize(),
+     data: $("#mailform-client").serialize(),
      method : "POST",
      success: function (data) {
-     		alert(data);
+        console.warn('OK',data);
+     		alert(data.message);
      		btn.disabled=false;
             try {
 			  	hidePleaseWait();
@@ -101,16 +102,19 @@ function createCustomer(target) {
       },
       error: function (transport) {
         
-              btn.disabled=false;
-              console.log(transport);
+        btn.disabled=false;
+        console.warn('Error',transport);
               
-             try {
+        try {
 			  	hidePleaseWait();
 			  }
 			  catch(e) {
 			  	console.warn(e);
 			  }
-              alert(transport.statusText);
+        if(typeof(transport.message) != "undefined")
+          alert("Erreur : "+transport.message);
+        else
+          alert("Erreur bizarre, connecxion inexistante")
 
       }
 
@@ -142,7 +146,7 @@ function createCustomer(target) {
 
 <div id="unknown-customer" style="display:none">
       <h4 style="padding-bottom: 40px; text-align: center;"><?php echo $this->xmlClient->Code_Client ?> - <?php echo $email; ?></h4>
-      <form id="mailform" class="form-horizontal">
+      <form id="mailform-client" class="form-horizontal">
       
 	     <div class="text-center">
 	        
@@ -154,7 +158,7 @@ function createCustomer(target) {
 	        
           <div class="form-group"  style="padding-bottom: 40px;">
             <input type="button" class="btn btn-primary btn-lg" name="button" onclick="createCustomer(this)" value="Créer un compte web" /><br />
-            <div style="display: none;">
+            <div style="display: block;">
               <textarea  cols="50" rows="20" name="xmlclient"><?php echo $this->xmlClient->asXML() ?></textarea>
             </div>
           </div>

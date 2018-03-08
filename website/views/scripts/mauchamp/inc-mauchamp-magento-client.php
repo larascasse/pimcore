@@ -88,14 +88,15 @@ function createCustomer(target) {
      method : "POST",
      success: function (data) {
         console.warn('OK',data);
-     		alert(data.message);
-     		btn.disabled=false;
+     		
             try {
 			  	hidePleaseWait();
 			  }
 			  catch(e) {
 			  	console.warn(e);
 			  }
+        alert(data.message);
+        btn.disabled=false;
             
             
 

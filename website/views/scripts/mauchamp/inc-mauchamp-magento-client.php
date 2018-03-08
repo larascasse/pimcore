@@ -95,12 +95,13 @@ function createCustomer(target) {
 			  catch(e) {
 			  	console.warn(e);
 			  }
+
         if(typeof(data.message) != "undefined") {
           alert(data.message);
         
         }
         else {
-          alert(data);
+          alert("bizarre ..."+data);
         }
         btn.disabled=false;
             
@@ -177,7 +178,7 @@ function createCustomer(target) {
  </div>
 
 
-<div id="known-customer" style="display:none">
+<div id="known-customer" style="display:block">
         <h4 style="padding-bottom: 40px; text-align: center;">Client existant sur le WEB</h4>
         <div class="row" id="client-container">
         </div>

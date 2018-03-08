@@ -55,8 +55,12 @@ class MauchampController extends Action
 
             //On remplace au cas ou, s'il ny a pas d'email de contact...
             $xmlClient = simplexml_load_string($xml);
+
+            if(strlen($client->Email_Contact)>0)
             $xmlClient->Email_Contact = $client->Email_Contact;
-            $xmlClient->Nom_Contact = $client->Nom_Contact;
+            
+            if(strlen($client->Nom_Contact)>0)
+              $xmlClient->Nom_Contact = $client->Nom_Contact;
             //print_r($client);
             try {
                 $this->view->client = $client;

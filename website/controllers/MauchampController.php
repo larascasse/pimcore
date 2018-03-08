@@ -51,15 +51,16 @@ class MauchampController extends Action
         if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
             $client = \Website\Tool\MauchampHelper::parseClient($data);
 
-            $xmlClient = $xml;
+            
 
             //On remplace au cas ou, s'il ny a pas d'email de contact...
-            $xmlClient->Email_Contact = $xml->Email_Contact;
-            $xmlClient->Nom_Contact = $xml->Nom_Contact;
+            $xmlClient = $xml;
+            $xmlClient->Email_Contact = $client->Email_Contact;
+            $xmlClient->Nom_Contact = $client->Nom_Contact;
             //print_r($client);
             try {
                 $this->view->client = $client;
-                $this->view->xmlClient = simplexml_load_string($xml);
+                $this->view->xmlClient = simplexml_load_string($xmlClient);
                 $this->renderScript('mauchamp/mauchamp-client.php');
                 
             }

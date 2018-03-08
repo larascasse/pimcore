@@ -410,7 +410,7 @@ EOT;
         }
       }
 
-      if(!isset($client->Nom_Contact) || !is_string($client->Nom_Contact)) {
+      if(!isset($client->Nom_Contact) || !is_string($client->Nom_Contact) || strlen($client->Nom_Contact) == 0) {
           foreach ($noms as $key => $noms) {
             if(strlen(trim($nom))>0) {
               $xml->Nom_Contact = $client->Nom_Contact = $nom;

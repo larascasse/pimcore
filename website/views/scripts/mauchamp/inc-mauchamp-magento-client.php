@@ -89,13 +89,19 @@ function createCustomer(target) {
      success: function (data) {
         console.warn('OK',data);
      		
-            try {
+        try {
 			  	hidePleaseWait();
 			  }
 			  catch(e) {
 			  	console.warn(e);
 			  }
-        alert(data.message);
+        if(typeof(data.message) != "undefined") {
+          alert(data.message);
+        
+        }
+        else {
+          alert(data);
+        }
         btn.disabled=false;
             
             

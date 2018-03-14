@@ -89,6 +89,12 @@ class Wkhtmltopdf {
                 "--margin-top" => 15,
                 "--margin-left" => 15,
                 "--margin-right" => 15,
+                "--javascript-delay" => 10,
+                //"--default-header" => "toto",
+                //"--no-header-line" => 1,
+                "--footer-html" => \Pimcore\Tool::getHostUrl()."/website/views/layouts/inc_footer_pdf.html",
+                "--title" => $pdfFile,
+                //"--footer-title" => "title toto"
                 //"--javascript-delay" =>2000
             ];
 

@@ -149,6 +149,7 @@ hr {
     font-size: 15px; }
 
 .ft-content {
+  background-image: url(images/logo_fili2.png);
   position: absolute;
   top: 251px;
   width: 1440px;

@@ -80,6 +80,7 @@ body {
 	font-size: $font-size-std;
 	//color: #575757;
 	line-height : 1.2;
+
 }
 
 @media print {
@@ -167,6 +168,7 @@ $col2Width : 470px;
 	display:block;
 	height: ($colHeight + $headerHeight);
 	page-break-after: always;
+
 }
 
 .accessoire {
@@ -252,6 +254,7 @@ $col2Width : 470px;
 
 .ft-content {
 	//border: 10px solid $grisclair;
+	background-image: url(images/logo_fili2.png);
 	position: absolute;
 	//background-color: #00FF00;
 	top: ($headerHeight+1);

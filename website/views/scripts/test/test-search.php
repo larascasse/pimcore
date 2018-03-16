@@ -137,7 +137,7 @@
 
 <div class="dropdown" id="essence-menu">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="essence" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Essence
+   Chêne
   </button>
   <div class="dropdown-menu" aria-labelledby="essence">
 	<a class="dropdown-item" href="#chene" data-desc=" en chêne">Chêne</a>
@@ -174,7 +174,7 @@
 
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="teinte" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Teinte
+    Teinté
   </button>
   <div class="dropdown-menu" aria-labelledby="teinte">
 	<a class="dropdown-item" href="#" data-desc="brut">Brut</a>
@@ -246,9 +246,9 @@ Structure  </button>
  Largeur
   </button>
   <div class="dropdown-menu" aria-labelledby="largeur">
-	<a class="dropdown-item" href="#" data-desc=", à lames étroites">étroite</a>
-	<a class="dropdown-item" href="#" data-desc=", à lames larges pour donner une impression d'espace">large</a>
-	<a class="dropdown-item" href="#" data-desc=", à lames très larges, pour de trèèèeeees grandes pièces">très large</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames étroites">lames étroites</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames larges pour donner une impression d'espace">Lames larges</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames très larges, pour de trèèèeeees grandes pièces">Lames très larges</a>
   </div>
 </div>
 
@@ -259,9 +259,9 @@ Structure  </button>
    Longueur
   </button>
   <div class="dropdown-menu" aria-labelledby="longueur">
-	<a class="dropdown-item" href="#" data-desc=", à lames courtes">courte</a>
-	<a class="dropdown-item" href="#" data-desc=", à lames longues">longues</a>
-	<a class="dropdown-item" href="#" data-desc=", à lames très longueus">très longues</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames courtes">Lames courte</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames longues">Lames longues</a>
+	<a class="dropdown-item" href="#" data-desc=", à lames très longueus">Lames très longues</a>
   </div>
 </div>
 </div>

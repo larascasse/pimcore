@@ -45,7 +45,7 @@
   	$(this).addClass('active');
   
   	$(".level-0").fadeIn();
-  	$(".level-0-title").html(btn.html());
+  	$(".level-0-title").html(btn.html().toLowerCase());
   	//$(".level-2").fadeIn();
 
   }

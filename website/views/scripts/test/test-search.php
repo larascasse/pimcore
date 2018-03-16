@@ -233,9 +233,9 @@ Structure  </button>
     Epaisseur
   </button>
   <div class="dropdown-menu" aria-labelledby="epaisseur">
-	<a class="dropdown-item" href="#" data-desc="fin, idéal pour de la rénovation">fin</a>
-	<a class="dropdown-item" href="#" data-desc="d'épaisseur standard">14/15mm</a>
-	<a class="dropdown-item" href="#"  data-desc="épais, ponçable plusieurs fois">>15 mm</a>
+	<a class="dropdown-item" href="#" data-desc=", fin, idéal pour de la rénovation">fin</a>
+	<a class="dropdown-item" href="#" data-desc=", d'épaisseur standard">14/15mm</a>
+	<a class="dropdown-item" href="#"  data-desc=", épais, ponçable plusieurs fois">>15 mm</a>
   </div>
 </div>
 

@@ -29,10 +29,12 @@ class TestController extends Action {
     }
 
     public function testSearchAction() {
+                $front = \Zend_Controller_Front::getInstance();
+
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
 
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
-        
+
         $this->enableLayout();
         $this->setLayout("layout-mauchamp");
     }

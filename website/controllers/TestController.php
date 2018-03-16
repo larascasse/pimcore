@@ -27,4 +27,9 @@ class TestController extends Action {
         readfile($t->getFileSystemPath());
         exit;
     }
+
+    public function testSearchAction() {
+        $this->enableLayout();
+        $this->setLayout("layout-mauchamp");
+    }
 }

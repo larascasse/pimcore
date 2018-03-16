@@ -186,8 +186,8 @@
 
 
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="color" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Couleur
+  <button class="btn btn-secondary dropdown-toggle filled" type="button" id="color" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Gris
   </button>
   <div class="dropdown-menu" aria-labelledby="color">
 	<a class="dropdown-item" href="#" data-desc=", d'aspect bois brut">Bois brut</a>

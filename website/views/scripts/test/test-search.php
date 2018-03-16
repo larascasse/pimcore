@@ -136,7 +136,7 @@
 
 
 <div class="dropdown" id="essence-menu">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="essence" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle filled" type="button" id="essence" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Chêne
   </button>
   <div class="dropdown-menu" aria-labelledby="essence">
@@ -173,7 +173,7 @@
 
 
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="teinte" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle filled" type="button" id="teinte" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Teinté
   </button>
   <div class="dropdown-menu" aria-labelledby="teinte">

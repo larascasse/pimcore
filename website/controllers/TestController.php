@@ -29,6 +29,10 @@ class TestController extends Action {
     }
 
     public function testSearchAction() {
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+        
         $this->enableLayout();
         $this->setLayout("layout-mauchamp");
     }

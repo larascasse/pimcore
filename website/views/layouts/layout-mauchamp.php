@@ -92,7 +92,9 @@ var dataLayer=[];
 
 
 <script src="/website/static_lpn/js/pdfobject.min.js"></script>
-<script src="/website/static_lpn/js/tether.min.js"></script>    
+<script src="/website/static_lpn/js/tether.min.js"></script> 
+<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script> 
+   
 <script src="/website/static_lpn/js/bootstrap-4.min.js"></script>
 
 

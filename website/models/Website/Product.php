@@ -2481,11 +2481,11 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
                 $index = 4;
 
             //FB TODO : pour le parquet massin NOIN NRUT
-            if($this->isParquetMassif() && $index==4 && $this->getChoix() != "BR0") {
-            		 return $coucheUsure."ZZZ".$durete;
+            if($this->isParquetMassif() && $index==4 && $this->getQualité() != "BR0") {
+            		 //return $coucheUsure."ZZZ".$durete.";
             	$index = 3;
             }
-             	 return $coucheUsure."AAAAA".$durete;
+             //return $coucheUsure."AAAAA".$durete;
              //return "KKK".$index." ".$coucheUsure;
 
             if(isset($classes[$durete]) && isset($classes[$durete][$index]))

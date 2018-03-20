@@ -62,7 +62,7 @@ foreach ($list->getObjects() as $object) {
 
     $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
 
-    $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton rompu") !== false;
+    $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
 
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -181,6 +181,10 @@ foreach ($list->getObjects() as $object) {
 
     if($isPointDeHongrie ) {
          $object->setValue('longueur_txt','Longueur pointe à pointe '.$longueur." mm");
+         $suffixeEan.="x".$longueur;
+
+    }
+    else if($isbatonRompu ) {
          $suffixeEan.="x".$longueur;
 
     }

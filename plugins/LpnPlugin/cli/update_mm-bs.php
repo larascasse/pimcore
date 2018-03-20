@@ -124,6 +124,10 @@ foreach ($list->getObjects() as $object) {
             $suffixeEan.="x400-1600";
         }
     }
+    else if($epaisseur == 10) {
+        $object->setValue('longueur_txt','Longueurs panachées de 300 à 500 mm');
+        $suffixeEan.="x300-500";
+    }
     
     //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 

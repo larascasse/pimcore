@@ -176,7 +176,7 @@ foreach ($list->getObjects() as $object) {
 
     echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         
-
+    $object->setPublished(true);
    $object->save();
     
 

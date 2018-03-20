@@ -2481,7 +2481,7 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
                 $index = 4;
 
             //FB TODO : pour le parquet massin NOIN NRUT
-            if($this->isParquetMassif() && $index==4 && $this->getQualité() != "BR0") {
+            if($this->isParquetMassif() && $index==4 && $this->getQualite() != "BR0") {
             		 //return $coucheUsure."ZZZ".$durete.";
             	$index = 3;
             }

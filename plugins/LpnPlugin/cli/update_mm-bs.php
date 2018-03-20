@@ -60,6 +60,10 @@ foreach ($list->getObjects() as $object) {
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
 
+    $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
+
+    $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton rompu") !== false;
+
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
@@ -108,7 +112,7 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
 
-    if(($epaisseur == 23 || $epaisseur == 14)  && $code != "MMCHEG2CHCWBBBS" && $object->getMotif() != "pth"  && $object->getMotif() != "baton rompu") {
+    if(($epaisseur == 23 || $epaisseur == 14)  && $code != "MMCHEG2CHCWBBBS" && !$isbatonRompu && !$isPointDeHongrie) {
 
         if($largeur>= 50 && $largeur<=70) {
             $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
@@ -131,7 +135,7 @@ foreach ($list->getObjects() as $object) {
     
     //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
-    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS" && $object->getMotif() != "pth"  && $object->getMotif() != "baton rompu") {
+    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS"  && !$isbatonRompu && !$isPointDeHongrie) {
         $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
         switch ($longueur) {
              case 500:
@@ -175,8 +179,9 @@ foreach ($list->getObjects() as $object) {
         }
     }
 
-    if($object->getMotif() == "pth" ) {
+    if($isPointDeHongrie ) {
          $object->setValue('longueur_txt','Longueur pointe à pointe '.$longueur." mm");
+         $suffixeEan.="x".$longueur;
 
     }
 

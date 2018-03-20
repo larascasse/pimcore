@@ -2456,10 +2456,11 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
 
         //Si contrecollé
+        $coucheUsure = (float)$this->getEpaisseurUsure();
         if($this->isParquetContrecolle())
        	 	$coucheUsure = (float)$this->getEpaisseurUsure();
         //si massif
-       	else 
+       	else if($coucheUsure==0)
        	 	$coucheUsure = (int)$this->getEpaisseur();
 
 

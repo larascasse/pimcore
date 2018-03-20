@@ -108,7 +108,7 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
 
-    if(($epaisseur == 23 || $epaisseur == 14)  && $code != "MMCHEG2CHCWBBBS") {
+    if(($epaisseur == 23 || $epaisseur == 14)  && $code != "MMCHEG2CHCWBBBS" && $object->getMotif() != "pth"  && $object->getMotif() != "baton rompu") {
 
         if($largeur>= 50 && $largeur<=70) {
             $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
@@ -131,7 +131,7 @@ foreach ($list->getObjects() as $object) {
     
     //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
-    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS") {
+    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS" && $object->getMotif() != "pth"  && $object->getMotif() != "baton rompu") {
         $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
         switch ($longueur) {
              case 500:
@@ -173,6 +173,11 @@ foreach ($list->getObjects() as $object) {
                 # code...
                 break;
         }
+    }
+
+    if($object->getMotif() == "pth" ) {
+         $object->setValue('longueur_txt','Longueur pointe à pointe '.$longueur." mm");
+
     }
 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);

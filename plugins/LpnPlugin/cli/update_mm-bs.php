@@ -75,6 +75,7 @@ foreach ($list->getObjects() as $object) {
             //$object->setChauffantBasseTemperature("0");
             //$object->setSolRaffraichissant("0");
             //$object->setChauffantRadiantElectrique("0");
+            $object->setPose(array('acoller'));
 
             break;
 
@@ -85,6 +86,7 @@ foreach ($list->getObjects() as $object) {
             //$object->setChauffantBasseTemperature("0");
             //$object->setSolRaffraichissant("0");
             //$object->setChauffantRadiantElectrique("0");
+            $object->setPose(array('acoller'));
 
             break;
 
@@ -95,6 +97,7 @@ foreach ($list->getObjects() as $object) {
             //$object->setChauffantBasseTemperature("0");
             //$object->setSolRaffraichissant("0");
             //$object->setChauffantRadiantElectrique("0");
+            $object->setPose(array('aclouer','acoller'));
 
             break;
         
@@ -103,7 +106,7 @@ foreach ($list->getObjects() as $object) {
             break;
     }
 
-    $suffixeEan =$object->getEpaisseur()."x".$object->getlargeur();
+    $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
     
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
     switch ($longueur) {

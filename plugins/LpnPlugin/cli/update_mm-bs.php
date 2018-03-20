@@ -127,40 +127,43 @@ foreach ($list->getObjects() as $object) {
     
     //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
-    switch ($longueur) {
-         case 500:
-            $object->setValue('longueur_txt','Longueurs panachées de 300 à 500 mm');
-            $suffixeEan.="x300-500";
-            break;
+    if($longueur > 0) {
+        $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
+        switch ($longueur) {
+             case 500:
+                $object->setValue('longueur_txt','Longueurs panachées de 300 à 500 mm');
+                $suffixeEan.="x300-500";
+                break;
 
-        case 1400:
-            $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
-            $suffixeEan.="x350-1400";
-            break;
+            case 1400:
+                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                $suffixeEan.="x350-1400";
+                break;
 
-        case 1500:
-            $object->setValue('longueur_txt','Longueurs panachées de 300 à 1500 mm');
-            $suffixeEan.="x300-1500";
-            break;
+            case 1500:
+                $object->setValue('longueur_txt','Longueurs panachées de 300 à 1500 mm');
+                $suffixeEan.="x300-1500";
+                break;
 
-        case 1600:
-            $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
-            $suffixeEan.="x400-1600";
-            break;
+            case 1600:
+                $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
+                $suffixeEan.="x400-1600";
+                break;
 
-        case 2000:
-            $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
-            $suffixeEan.="x400-2000";
-            break;
+            case 2000:
+                $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+                $suffixeEan.="x400-2000";
+                break;
 
-        case 2400:
-            $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
-            $suffixeEan.="x500-2400";
-            break;
-        
-        default:
-            # code...
-            break;
+            case 2400:
+                $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                $suffixeEan.="x500-2400";
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);

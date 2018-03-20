@@ -107,7 +107,25 @@ foreach ($list->getObjects() as $object) {
     }
 
     $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
+
+    if($epaisseur == 23 || $epaisseur == 14) {
+
+        if($largeur>= 50 && $largeur<=70) {
+            $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+            $suffixeEan.="x350-1400";
+        }
+
+        if($epaisseur == 23 && $largeur>=75 && $largeur <=180 ) {
+             $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+            $suffixeEan.="x400-2000";
+        }
+        else if($epaisseur == 14 && $largeur>=90) {
+            $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
+            $suffixeEan.="x400-1600";
+        }
+    }
     
+    //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
     switch ($longueur) {
          case 500:

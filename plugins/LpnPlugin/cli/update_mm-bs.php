@@ -158,7 +158,7 @@ foreach ($list->getObjects() as $object) {
         }
         if(stripos($this->getCalculatedChauffantRadiantElectrique(),"oui") === 0) {
             $object->setChauffantRadiantElectrique("0");   
-        }     }
+        }     
 
     //}
     

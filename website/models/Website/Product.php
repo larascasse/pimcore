@@ -988,8 +988,11 @@ class Website_Product extends Object_Product {
 		if(strlen($this->getPimonly_name_suffixe())>0) {
 			$str .= " ".$parentParentSuffixe." ".$parentSuffixe." ".$this->getPimonly_name_suffixe();
 		}
+		
 		$str = str_replace("  ", " ", $str);
-		$str =trim($str);
+    	$str = str_replace("   ", " ", $str);
+    	$str =trim($str);
+
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
@@ -1035,7 +1038,9 @@ class Website_Product extends Object_Product {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
     		$str = str_replace("  ", " ", $str);
+    		$str = str_replace("   ", " ", $str);
     		$str =trim($str);
+
     		Object_Abstract::setGetInheritedValues($inheritance); 
     		return $str;
     	}
@@ -1051,6 +1056,7 @@ class Website_Product extends Object_Product {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
     		$str = str_replace("  ", " ", $str);
+    		$str = str_replace("   ", " ", $str);
 
     		$str =trim($str);
     		$str = substr($str,0,$stringlength);

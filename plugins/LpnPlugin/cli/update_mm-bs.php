@@ -139,6 +139,11 @@ foreach ($list->getObjects() as $object) {
                 $suffixeEan.="x300-500";
                 break;
 
+            case 600:
+                 $object->setValue('longueur_txt','Longueurs panachées de 300 à 500 mm');
+                 $suffixeEan.="x300-500";
+                break;
+
             case 1400:
                 $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
                 $suffixeEan.="x350-1400";

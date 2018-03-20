@@ -2463,7 +2463,7 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
        	else if($coucheUsure==0)
        	 	$coucheUsure = (int)$this->getEpaisseur();
 
-       	 return $coucheUsure."KK";
+       	 return $coucheUsure."KK".$durete;
 
 
 

@@ -59,6 +59,7 @@ foreach ($list->getObjects() as $object) {
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
+    $choix = $object->getChoix();
 
     $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
 
@@ -110,7 +111,7 @@ foreach ($list->getObjects() as $object) {
             break;
     }
 
-    $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
+    $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
 
     if(($epaisseur == 23 || $epaisseur == 14)  && $code != "MMCHEG2CHCWBBBS" && !$isbatonRompu && !$isPointDeHongrie) {
 
@@ -119,10 +120,15 @@ foreach ($list->getObjects() as $object) {
             $suffixeEan.="x350-1400";
         }
 
-        if($epaisseur == 23 && $largeur>=75 && $largeur <=180 ) {
+        else if($epaisseur == 23 && $largeur>=75 && $largeur <=180 ) {
              $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
             $suffixeEan.="x400-2000";
         }
+         else if($epaisseur == 14 && ($largeur==110 || $largeur==130) && $choix == "CHC") {
+            $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                $suffixeEan.="x500-2400";
+        }
+
         else if($epaisseur == 14 && $largeur>=90) {
             $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
             $suffixeEan.="x400-1600";
@@ -135,7 +141,7 @@ foreach ($list->getObjects() as $object) {
     
     //Quand il y aura les longueurs max
     // 23 ou 14mm => Longueurs de 350 à 1400mm pour les Largeurs de 50 à70mm - Ep: 23mm => Longueurs de 400 à 2000mm pour les Largeurs de 75 à 180mm - EP: 14mm => Longueurs de 400 à 1600mm pour les Largeurs de 90mm et + 
-    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS"  && !$isbatonRompu && !$isPointDeHongrie) {
+    if($longueur > 0 && $code != "MMCHEG2CHCWBBBS"  && !$isbatonRompu && !$isPointDeHongrie && 1==2) {
         $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
         switch ($longueur) {
              case 500:

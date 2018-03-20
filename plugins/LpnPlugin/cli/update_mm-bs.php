@@ -226,6 +226,11 @@ foreach ($list->getObjects() as $object) {
         }
 
     }
+
+    else if ($code == "MMCHEG2CHCWBBBS") {
+        $suffixeEan = "23 mm";
+    }
+
  
     
     //Quand il y aura les longueurs max

@@ -2463,7 +2463,7 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
        	else if($coucheUsure==0)
        	 	$coucheUsure = (int)$this->getEpaisseur();
 
-       	 return $coucheUsure."KK".$durete;
+
 
 
 
@@ -2482,9 +2482,10 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
             //FB TODO : pour le parquet massin NOIN NRUT
             if($this->isParquetMassif() && $index==4 && $this->getChoix() != "BR0") {
+            		 return $coucheUsure."ZZZ".$durete;
             	$index = 3;
             }
-             
+             	 return $coucheUsure."AAAAA".$durete;
              //return "KKK".$index." ".$coucheUsure;
 
             if(isset($classes[$durete]) && isset($classes[$durete][$index]))

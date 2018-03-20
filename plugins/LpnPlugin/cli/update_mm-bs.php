@@ -147,6 +147,22 @@ foreach ($list->getObjects() as $object) {
 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
+    //if($object->getChauffantBasseTemperature()==0) {
+        if(stripos($this->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
+            $object->setChauffantBasseTemperature("1");
+        }
+
+        if(stripos($this->getCalculatedSolRaffraichissant(),"oui") === 0) {
+            $object->setSolRaffraichissant("0");
+            
+        }
+        if(stripos($this->getCalculatedChauffantRadiantElectrique(),"oui") === 0) {
+            $object->setChauffantRadiantElectrique("0");   
+        }     }
+
+    //}
+    
+
 
     
     $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());

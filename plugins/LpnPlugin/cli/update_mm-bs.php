@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bs
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-bs
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -213,8 +213,8 @@ foreach ($list->getObjects() as $object) {
 
        
     if(strlen($parent->name)>0) {
-       $parent->setValue('name',null);
-       $parent->save();
+       //$parent->setValue('name',null);
+       //$parent->save();
         
     } 
 

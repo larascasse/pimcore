@@ -153,11 +153,11 @@ foreach ($list->getObjects() as $object) {
         }
 
         if(stripos($object->getCalculatedSolRaffraichissant(),"oui") === 0) {
-            $object->setSolRaffraichissant("0");
+            $object->setSolRaffraichissant("1");
             
         }
         if(stripos($object->getCalculatedChauffantRadiantElectrique(),"oui") === 0) {
-            $object->setChauffantRadiantElectrique("0");   
+            $object->setChauffantRadiantElectrique("1");   
         }     
 
     //}

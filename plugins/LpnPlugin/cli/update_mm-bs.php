@@ -60,10 +60,13 @@ foreach ($list->getObjects() as $object) {
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
     $choix = $object->getChoix();
+    $qualite  = $object->getQualite();
 
     $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
 
     $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
+
+    $isBrut = $qualite == "BR0" || $qualite == "CTB";
 
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -113,122 +116,224 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
 
+    // BRUT
 
-    //EPAISSEUR 14
-    if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
-        
-        if($choix == "PR0") {
-            if ($largeur <=90) {
-                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
-                $suffixeEan.="x350-1400";
+    if($isBrut) {
+        //EPAISSEUR 14 
+        if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
+            
+            if($choix == "PR0") {
+                if ($largeur <=90) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
+                    $suffixeEan.="x400-1600";
+                }
             }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
-                $suffixeEan.="x400-1600";
+
+            else if($choix == "ELC") {
+                if ($largeur <=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
+                    $suffixeEan.="x250-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 300 à 1500 mm');
+                    $suffixeEan.="x300-1500";
+                }
             }
+            else if($choix == "NA0") {
+                if ($largeur <=90) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
+                    $suffixeEan.="x250-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 300 à 1600 mm');
+                    $suffixeEan.="x300-1600";
+                }
+            }
+            else if($choix == "CAC") {
+                if ($largeur <=130) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                    $suffixeEan.="x500-2400";
+                }
+               
+            }
+            else if($choix == "CHC") {
+                if ($largeur <=130) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                    $suffixeEan.="x500-2400";
+                }
+               
+            }
+            else if($choix == "DE0") {
+                if ($largeur <=130) {
+                    $object->setValue('longueur_txt','Longueurs suivant lots');
+                    $suffixeEan.="";
+                }
+               
+            }
+
         }
 
-        else if($choix == "ELC") {
-            if ($largeur <=70) {
-                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
-                $suffixeEan.="x250-1400";
-            }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 300 à 1500 mm');
-                $suffixeEan.="x300-1500";
-            }
+        //EPAISSEUR 10
+        else if($epaisseur == 10 && !$isbatonRompu && !$isPointDeHongrie) {
+            $object->setValue('longueur_txt','Longueurs panachées de 250 à 600 mm');
+            $suffixeEan.="x250-600";
         }
-        else if($choix == "NA0") {
-            if ($largeur <=90) {
-                $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
-                $suffixeEan.="x250-1400";
+
+
+        //EPAISSEUR 23 mm
+        else if(($epaisseur == 23)  && $code != "MMCHEG2CHCWBBBS" && !$isbatonRompu && !$isPointDeHongrie) {
+
+            if($choix == "PR0") {
+                if($largeur>= 50 && $largeur<=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+                    $suffixeEan.="x400-2000";
+                }
             }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 300 à 1600 mm');
-                $suffixeEan.="x300-1600";
+
+            else if($choix == "ELC") {
+                if($largeur>= 50 && $largeur<=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
+                    $suffixeEan.="x250-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+                    $suffixeEan.="x400-2000";
+                }
             }
-        }
-        else if($choix == "CAC") {
-            if ($largeur <=130) {
+            else if($choix == "NA0") {
+                if($largeur>= 50 && $largeur<=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
+                    $suffixeEan.="x250-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
+                }
+            }
+            else if($choix == "CAC" || $choix == "CHC") {
                 $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
                 $suffixeEan.="x500-2400";
             }
-           
-        }
-        else if($choix == "CHC") {
-            if ($largeur <=130) {
-                $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
-                $suffixeEan.="x500-2400";
-            }
-           
-        }
-        else if($choix == "DE0") {
-            if ($largeur <=130) {
+            else if($choix == "DE0") {
+             
                 $object->setValue('longueur_txt','Longueurs suivant lots');
                 $suffixeEan.="";
+                
+               
             }
-           
+
+        }
+
+        else if ($code == "MMCHEG2CHCWBBBS") {
+            $suffixeEan = "23 mm";
         }
 
     }
 
-    //EPAISSEUR 10
-    else if($epaisseur == 10 && !$isbatonRompu && !$isPointDeHongrie) {
-        $object->setValue('longueur_txt','Longueurs panachées de 250 à 600 mm');
-        $suffixeEan.="x250-600";
-    }
-
-
-    //EPAISSEUR 23 mm
-    else if(($epaisseur == 23)  && $code != "MMCHEG2CHCWBBBS" && !$isbatonRompu && !$isPointDeHongrie) {
-
-        if($choix == "PR0") {
-            if($largeur>= 50 && $largeur<=70) {
-                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
-                $suffixeEan.="x350-1400";
-            }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
-                $suffixeEan.="x400-2000";
-            }
-        }
-
-        else if($choix == "ELC") {
-            if($largeur>= 50 && $largeur<=70) {
-                $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
-                $suffixeEan.="x250-1400";
-            }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
-                $suffixeEan.="x400-2000";
-            }
-        }
-        else if($choix == "NA0") {
-            if($largeur>= 50 && $largeur<=70) {
-                $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
-                $suffixeEan.="x250-1400";
-            }
-            else {
-                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
-                $suffixeEan.="x350-1400";
-            }
-        }
-        else if($choix == "CAC" || $choix == "CHC") {
-            $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
-            $suffixeEan.="x500-2400";
-        }
-        else if($choix == "DE0") {
-         
-            $object->setValue('longueur_txt','Longueurs suivant lots');
-            $suffixeEan.="";
+    //VERNIS
+    else if(!$isBrut) {
+        //EPAISSEUR 14 
+        if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
             
-           
+            if($choix == "PR0") {
+                if ($largeur <=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 400 à 1600 mm');
+                    $suffixeEan.="x400-1600";
+                }
+            }
+
+            else if($choix == "ELC") {
+                if ($largeur <=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
+                    $suffixeEan.="x250-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 300 à 1600 mm');
+                    $suffixeEan.="x300-1600";
+                }
+            }
+            else if($choix == "NA0") {
+                if ($largeur <=70) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 300 à 1500 mm');
+                    $suffixeEan.="x300-1500";
+                }
+            }
+            else if($choix == "CAC") {
+                if ($largeur <=130) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 et + mm (70%)');
+                    $suffixeEan.="x500-plus";
+                }
+                else {
+                    $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                    $suffixeEan.="x500-2400";
+                }
+               
+            }
+            else if($choix == "CHC") {
+                if ($largeur <=130) {
+                    $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                    $suffixeEan.="x500-2400";
+                }
+               
+            }
+            
+
         }
 
-    }
+        //EPAISSEUR 10
+        else if($epaisseur == 10 && !$isbatonRompu && !$isPointDeHongrie) {
+            $object->setValue('longueur_txt','Longueurs panachées de 350 à 600 mm');
+            $suffixeEan.="x350-600";
+        }
 
-    else if ($code == "MMCHEG2CHCWBBBS") {
-        $suffixeEan = "23 mm";
+
+        //EPAISSEUR 23 mm
+        else if(($epaisseur == 23)  && $code != "MMCHEG2CHCWBBBS" && !$isbatonRompu && !$isPointDeHongrie) {
+
+            if($choix == "PR0") {
+                
+                $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+                $suffixeEan.="x400-2000";
+                
+            }
+
+            else if($choix == "ELC") {
+                $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
+                $suffixeEan.="x400-2000";
+                
+            }
+            else if($choix == "NA0") {
+                $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                $suffixeEan.="x350-1400";
+                
+            }
+            else if($choix == "CAC" || $choix == "CHC") {
+                $object->setValue('longueur_txt','Longueurs panachées de 500 à 1400 mm (30%) et 1500 à 2400 mm (70%)');
+                $suffixeEan.="x500-2400";
+            }
+            
+
+        }
+
+        
+
+        }
     }
 
  

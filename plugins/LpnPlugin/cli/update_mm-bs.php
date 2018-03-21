@@ -343,7 +343,7 @@ foreach ($list->getObjects() as $object) {
     }
 
     //FRENE / HETRE
-    else if($this->getEssence() == "FRE" || $this->getEssence() == "HET") {
+    else if($object->getEssence() == "FRE" || $object->getEssence() == "HET") {
         if(stripos($scienergie, 'bateau')>0) {
             $object->setValue('longueur_txt','Longueurs panachées de 500 à 1500 mm');
             $suffixeEan.="x500-1500";

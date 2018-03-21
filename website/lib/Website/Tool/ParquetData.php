@@ -313,5 +313,67 @@ Conductivité thermique du bois (λ en w / m. K)
     }
 
   }
+
+   public static function getCoefficientRetractabilteByEssence($essence) {
+      switch ($essence) {
+        case 'CHE':
+          return "Chêne : radial=0,16 et tangentiel=0,32";
+          break;
+        case 'ERA':
+          return "Erable : radial=0,17 et tangentiel=0,24";
+          break;
+
+        case 'NOY':
+          return "Noyer : radial=0,09 et tangentiel=0,14";
+          break;
+
+        case 'FRE':
+          return "Frêne : radial=0,20 et tangentiel=0,30";
+          break;
+        
+        case 'TEC':
+          return "Teck : radial=0,14 et tangentiel=0,27";
+          break;
+        
+        case 'DGL':
+          return "Douglas : radial=0,12 et tangentiel=0,29";
+          break;
+
+        case 'HET':
+          return "Hêtre : radial=0,25 et tangentiel=0,42";
+          break;
+
+        case 'CHA':
+          return "Châtaigner : radial=0,14 et tangentiel=0,24";
+          break;
+
+        case 'DOU':
+          return "Doussié : radial=0,12 et tangentiel=0,20";
+          break;
+
+        case 'IRO':
+          return "Iroko : radial=0,16 et tangentiel=0,27";
+          break;
+
+        case 'DOU':
+          return "Doussié : radial=0,12 et tangentiel=0,20";
+          break;
+
+        case 'DOU':
+          return "Doussié : radial=0,12 et tangentiel=0,20";
+          break;
+
+
+
+        case 'BAM':
+          return "";
+          break;
+        
+        default:
+          return " ";
+          break;
+      }
+
+  }
     
 }

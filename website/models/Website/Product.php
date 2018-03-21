@@ -2793,36 +2793,9 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 		$essence = $this->getEssence();
 
-		switch ($essence) {
-			case 'CHE':
-				return "Chêne : radial=0,16 et tangentiel=0,32";
-				break;
-			case 'ERA':
-				return "Erable : radial=0,17 et tangentiel=0,24";
-				break;
+		return \Website\Tool\ParquetData::getCoefficientRetractabilteByEssence($essence);
 
-			case 'NOY':
-				return "Noyer : radial=0,09 et tangentiel=0,14";
-				break;
-
-			case 'FRE':
-				return "Noyer : radial=0,20 et tangentiel=0,30";
-				break;
-			case 'TEC':
-				return "Noyer : radial=0,08 et tangentiel=0,14";
-				break;
-			case 'DGL':
-				return "Douglas : radial=0,12 et tangentiel=0,29";
-				break;
-
-			case 'BAM':
-				return "";
-				break;
-			
-			default:
-				return " ";
-				break;
-		}
+		
 	}
 
 

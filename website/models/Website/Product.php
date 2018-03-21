@@ -2489,7 +2489,7 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
                 $index = 4;
 
             //FB TODO : pour le parquet massin NON NRUT
-            if($this->isParquetMassif() && $index==4 && $this->getQualite() != "BR0" && $this->getQualite() != "CTB" && stripos($scienergie, "THERMO")===false) {
+            if($this->isParquetMassif() && $index==4 && $this->getQualite() != "BR0" && $this->getQualite() != "CTB" && stripos($this->getName(), "THERMO")!==false) {
             		 //return $coucheUsure."ZZZ".$durete.";
             	$index = 3;
             }

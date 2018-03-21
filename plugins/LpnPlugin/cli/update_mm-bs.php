@@ -422,7 +422,7 @@ foreach ($list->getObjects() as $object) {
 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
-    //if($object->getChauffantBasseTemperature()==0) {
+    if($object->getEssence() != "HET") {
         if(stripos($object->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
             $object->setChauffantBasseTemperature("1");
         }

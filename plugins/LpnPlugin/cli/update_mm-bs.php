@@ -333,7 +333,7 @@ foreach ($list->getObjects() as $object) {
 
         
 
-        }
+        
     }
 
  

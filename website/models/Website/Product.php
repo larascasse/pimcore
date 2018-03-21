@@ -3082,7 +3082,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		}
 		
 
-		$return .= "    ---- valeur:".$debug;
+		//$return .= "    ---- valeur:".$debug;
 		return $return;
 
 	}

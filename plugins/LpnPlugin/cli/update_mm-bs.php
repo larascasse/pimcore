@@ -69,7 +69,8 @@ foreach ($list->getObjects() as $object) {
 
     $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
 
-    $isBrut = $qualite == "BR0" || $qualite == "CTB";
+    $isThermo = stripos($scienergie, "THERMO")>0;
+    $isBrut = $qualite == "BR0" || $qualite == "CTB" && !$isThermo ;
 
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -242,8 +243,8 @@ foreach ($list->getObjects() as $object) {
     }
 
     //VERNIS
-    else if(!$isBrut) {
-        
+    else if(!$isBrut && !$isThermo) {
+
         //EPAISSEUR 14 
         if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
             

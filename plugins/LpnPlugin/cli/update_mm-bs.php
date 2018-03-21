@@ -126,7 +126,7 @@ foreach ($list->getObjects() as $object) {
         if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
             
             if($choix == "PR0") {
-                if ($largeur <=90) {
+                if ($largeur <=70) {
                     $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
                     $suffixeEan.="x350-1400";
                 }
@@ -147,7 +147,7 @@ foreach ($list->getObjects() as $object) {
                 }
             }
             else if($choix == "NA0") {
-                if ($largeur <=90) {
+                if ($largeur <=70) {
                     $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
                     $suffixeEan.="x250-1400";
                 }
@@ -213,8 +213,8 @@ foreach ($list->getObjects() as $object) {
             }
             else if($choix == "NA0") {
                 if($largeur>= 50 && $largeur<=70) {
-                    $object->setValue('longueur_txt','Longueurs panachées de 250 à 1400 mm');
-                    $suffixeEan.="x250-1400";
+                    $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');
+                    $suffixeEan.="x350-1400";
                 }
                 else {
                     $object->setValue('longueur_txt','Longueurs panachées de 350 à 1400 mm');

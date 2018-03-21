@@ -1020,7 +1020,7 @@ EOT;
         "address1" => "33 rue des Entrepreneurs",
         "address2" => "ZA des Amandiers",
         "zipcode" => "78420",
-        "city" => "Paris",
+        "city" => "Carrières / Seine",
         "phone" => "01 39 13 08 73"
     );
 

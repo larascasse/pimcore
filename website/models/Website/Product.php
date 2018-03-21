@@ -3144,6 +3144,12 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	public function isParquet() {
 		return $this->isParquetMassif() || $this->isParquetContrecolle();
 	}
+
+	public function isParquetBrut() {
+		return $this->isParquet() && ($this->getQualite() == "BR0" || $this->getQualite() == "CTB");
+	}
+
+
 	public function isAccessoire() {
 		 $attributeType = strtolower($this->getSubtype());
 		 $scienergieName = strtolower($this->getName_scienergie());

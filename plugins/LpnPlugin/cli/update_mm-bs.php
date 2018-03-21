@@ -70,8 +70,9 @@ foreach ($list->getObjects() as $object) {
     $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
 
     $isThermo = stripos($scienergie, "THERMO")>0;
-    $isBrut = $qualite == "BR0" || $qualite == "CTB" && !$isThermo ;
-
+    $isBrut = $object->isParquetBrut() && !$isThermo ;
+    $isChene = $object->getEssence()=="CHE";
+ 
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
@@ -122,7 +123,7 @@ foreach ($list->getObjects() as $object) {
 
     // BRUT
 
-    if($isBrut) {
+    if($isBrut && $isChene) {
         //EPAISSEUR 14 
         if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
             
@@ -243,7 +244,7 @@ foreach ($list->getObjects() as $object) {
     }
 
     //VERNIS
-    else if(!$isBrut && !$isThermo) {
+    else if(!$isBrut && !$isThermo  && $isChene) {
 
         //EPAISSEUR 14 
         if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
@@ -338,6 +339,23 @@ foreach ($list->getObjects() as $object) {
 
         
 
+        
+    }
+
+    //FRENE / HETRE
+    else if($this->getEssence() == "FRE" || $this->getEssence() == "HET") {
+        if(stripos($scienergie, 'bateau')>0) {
+            $object->setValue('longueur_txt','Longueurs panachées de 500 à 1500 mm');
+            $suffixeEan.="x500-1500";
+        }
+        else if($isThermo) {
+            $object->setValue('longueur_txt','Longueurs panachées de 600 à 2000 mm');
+            $suffixeEan.="x600-2000";
+        }
+        else {
+            $object->setValue('longueur_txt','Longueurs panachées de 600 à 2000 mm');
+            $suffixeEan.="x600-2000";
+        }
         
     }
 

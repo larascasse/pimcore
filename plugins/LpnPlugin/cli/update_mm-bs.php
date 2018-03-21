@@ -243,6 +243,7 @@ foreach ($list->getObjects() as $object) {
 
     //VERNIS
     else if(!$isBrut) {
+        
         //EPAISSEUR 14 
         if($epaisseur == 14 && !$isbatonRompu && !$isPointDeHongrie) {
             

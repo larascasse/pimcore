@@ -445,7 +445,12 @@ foreach ($list->getObjects() as $object) {
             $object->setChauffantRadiantElectrique("0"); 
         }  
 
-    //}
+    }
+    else if($object->getEssence() == "HET") {
+        $object->setChauffantRadiantElectrique("0"); 
+        $object->setChauffantBasseTemperature("0");
+        $object->setSolRaffraichissant("0");
+    }
     
 
 

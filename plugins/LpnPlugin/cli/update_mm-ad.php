@@ -155,18 +155,32 @@ foreach ($list->getObjects() as $object) {
     //SURFACE
     $parentSuffixeEan = "";
 
+    if(stristr($article, "MHCHE") && !$isBrut) {
+        $parent->setMotif('pth');
+        $parent->setAngle('45°');
+        $parentSuffixeEan .=" Point de Hongrie";
+        $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+
+
+    }
+    elseif(stristr($article, "MBCHE") && !$isBrut) {
+        $object->setMotif(' baton rompu');
+        $parentSuffixeEan .=" Bâton rompu";
+    }
+
+
      //TODO
     if(stristr($scienergie, "TRES ACCENTU")) {
         
         $parent->setValue('traitement_surface',"vieilli tres accentue");
-        $parentSuffixeEan .= "vieilli très accentué";
+        $parentSuffixeEan .= " vieilli très accentué";
         $object->setValue('chanfreins','rives abîmées'); 
         $object->setChoix('ELV');
     }
     else if(stristr($article, "MMCHERA") && !$isBrut) {
 
         $parent->setTraitement_surface(("vieilli rives abimees"));
-        $parentSuffixeEan .= "rives abîmées";
+        $parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
         $object->setChoix('ELV');
   
@@ -176,6 +190,7 @@ foreach ($list->getObjects() as $object) {
         $object->setChoix('ELC');
 
     }
+    
 
 
     //HUILE

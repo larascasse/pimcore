@@ -800,9 +800,9 @@ class Website_Product extends Object_Product {
 
 					}
 					else if($value->fieldtype=="select") {
-							$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+							$optionsSelect2 = Object_Service::getOptionsForSelectField($this,$attribute);
 							if(isset($optionsSelect2[$attributeValue])) {
-								$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
+								$attributeValue=$optionsSelect2[$attributeValue];
 								$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
 								
 								if(method_exists($this, $getterDescription)) {

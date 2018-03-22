@@ -65,9 +65,8 @@ foreach ($list->getObjects() as $object) {
     $longueur = $object->getLongueur();
     $qualite = $object->getQualite();
 
-    $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
-
-    $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
+    $isPointDeHongrie = stripos($article, "MHCHE") === 0;
+    $isbatonRompu = stripos($article, "MBCHE") === 0;
 
     $isThermo = stripos($scienergie, "THERMO")>0;
     $isBrut = $object->isParquetBrut() && !$isThermo ;
@@ -108,6 +107,7 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan = "";
     $longueur_txt = "";
+    
     if($isBrut) {
         $longueur_txt = 'Longueurs panachées de 400 à 2000 mm';
         $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
@@ -115,7 +115,7 @@ foreach ($list->getObjects() as $object) {
         
             
     }
-    else {
+    else if(!$isPointDeHongrie && !$isbatonRompu) {
 
         $suffixeEan .= $object->getEpaisseur();
         
@@ -148,6 +148,17 @@ foreach ($list->getObjects() as $object) {
 
 
     }
+
+    else if($isPointDeHongrie) {
+
+        $suffixeEan .= 'x'.$object->getLargeur()."x".$this->getLongueur()." 45°";
+    } 
+
+    else if($isbatonRompu) {
+
+        $suffixeEan .= 'x'.$object->getLargeur()."x".$this->getLongueur();
+    }
+
     $object->setValue('longueur_txt',$longueur_txt); 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
@@ -160,6 +171,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
         $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+
 
 
     }

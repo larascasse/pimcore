@@ -763,8 +763,15 @@ class Website_Product extends Object_Product {
 							foreach ($attributeValue as $optionSelect => $keySelect) {
 								//echo($optionSelect." ".$keySelect);
 								$option = Object_Service::getOptionsForSelectField($this,$attribute);
-								$selectedValue = $option[$keySelect]; 
-								$display[] = $selectedValue;
+
+								if(isset($option[$keySelect])) {
+									$selectedValue = $option[$keySelect]; 
+									$display[] = $selectedValue;
+								}
+								else {
+									$selectedValue = $keySelect."?"; 
+									$display[] = $selectedValue;
+								}
 
 								//On va créer une ligne par valeur, pour avoir les logos
 								//Maiqs on ne va pas les afficher !!
@@ -793,17 +800,24 @@ class Website_Product extends Object_Product {
 
 					}
 					else if($value->fieldtype=="select") {
+							$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+							if(isset($optionsSelect2[$attributeValue])) {
+								$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
+								$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+								
+								if(method_exists($this, $getterDescription)) {
+									$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
+								}
 
-							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
-							$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue);
+								if(method_exists($this, $getterLogo)) {
+									$caracteristiques[$attributeKey]['logo'] = $this->$getterLogo();
+								}
+
+							}
+							else {
+								$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue."?");
+							}
 							
-							if(method_exists($this, $getterDescription)) {
-								$caracteristiques[$attributeKey]['description'] = $this->$getterDescription();
-							}
-
-							if(method_exists($this, $getterLogo)) {
-								$caracteristiques[$attributeKey]['logo'] = $this->$getterLogo();
-							}
 					}
 
 					else if($value->fieldtype=="objectbricks") {
@@ -1220,7 +1234,15 @@ class Website_Product extends Object_Product {
 						if($value->fieldtype=="multiselect" || $value->fieldtype=="multiselect") {
 							$display = array();
 							foreach ($attributeValue as $optionSelect => $valueSelect) {
-								$display[]=Object_Service::getOptionsForSelectField($this,$attribute)[$valueSelect];
+								$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+								
+								if(isset($optionsSelect2[$valueSelect])) {
+
+									$display[]=$optionsSelect2[$valueSelect];
+								}
+								else {
+									$display[]=$valueSelect."?";
+								}
 
 							}
 
@@ -1236,8 +1258,18 @@ class Website_Product extends Object_Product {
 
 					}
 					else if($value->fieldtype=="select") {
-							$attributeValue=Object_Service::getOptionsForSelectField($this,$attribute)[$attributeValue];
-							$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+								
+							if(isset($optionsSelect2[$attributeValue])) {
+								$attributeValue=$optionsSelect2[$attributeValue]];
+								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
+							}
+							else {
+								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue."?");
+
+							}
+
+							
 					}
 					
 					else {

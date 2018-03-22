@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bs
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-ad
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -61,6 +61,14 @@ foreach ($list->getObjects() as $object) {
     $longueur = $object->getLongueur();
     $qualite = $object->getQualite();
 
+    $isPointDeHongrie = stripos($scienergieCourt, "hongrie") !== false || stripos($scienergieCourt, "pth") !== false || stripos($scienergie, "point de hongrie") !== false;
+
+    $isbatonRompu = stripos($scienergieCourt, "br") !== false || stripos($scienergieCourt, "baton rompu") !== false || stripos($scienergie, "baton") !== false;
+
+    $isThermo = stripos($scienergie, "THERMO")>0;
+    $isBrut = $object->isParquetBrut() && !$isThermo ;
+    $isChene = $object->getEssence()=="CHE";
+
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
@@ -101,7 +109,7 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
 
 
-    if($qualite == "CTB") {
+    if($isBrut) {
         $suffixeEan.="x400-2000";
         $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
            
@@ -114,14 +122,25 @@ foreach ($list->getObjects() as $object) {
         if(stripos($object->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
             $object->setChauffantBasseTemperature("1");
         }
+        else {
+            $object->setChauffantBasseTemperature("0");
+        }
 
         if(stripos($object->getCalculatedSolRaffraichissant(),"oui") === 0) {
             $object->setSolRaffraichissant("1");
             
         }
+        else {
+            $object->setSolRaffraichissant("0");
+        }
+
         if(stripos($object->getCalculatedChauffantRadiantElectrique(),"oui") === 0) {
             $object->setChauffantRadiantElectrique("1");   
-        }     
+        }  
+        else {
+         $object->setChauffantRadiantElectrique("0");   
+        }
+          
 
     //}
     

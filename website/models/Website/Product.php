@@ -1262,7 +1262,7 @@ class Website_Product extends Object_Product {
 							$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
 								
 							if(isset($optionsSelect2[$attributeValue])) {
-								$attributeValue=$optionsSelect2[$attributeValue]];
+								$attributeValue=$optionsSelect2[$attributeValue];
 								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 							}
 							else {

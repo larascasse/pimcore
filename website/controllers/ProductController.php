@@ -471,7 +471,7 @@ class ProductController extends Action
 
             $idx ++;
         }
-        $header['image1'] = "Image 1";
+        $header['image_1'] = "Image 1";
         $header['image_2'] = "Image 2";
         $header['image_3'] = "Image Z1";
         $header['image_4'] = "Image Z2";

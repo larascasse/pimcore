@@ -85,10 +85,7 @@ foreach ($list->getObjects() as $object) {
             
         
             $object->setEpaisseurUsure('8 mm');
-            //$object->setChauffantBasseTemperature("0");
-            //$object->setSolRaffraichissant("0");
-            //$object->setChauffantRadiantElectrique("0");
-            //$object->setPose(array('acoller'));
+            $object->setPose(array('aclouer','acoller'));
 
             break;
 
@@ -96,10 +93,7 @@ foreach ($list->getObjects() as $object) {
             
         
             $object->setEpaisseurUsure('5 mm');
-            //$object->setChauffantBasseTemperature("0");
-            //$object->setSolRaffraichissant("0");
-            //$object->setChauffantRadiantElectrique("0");
-            //$object->setPose(array('acoller'));
+            $object->setPose(array('acoller'));
 
             break;
 

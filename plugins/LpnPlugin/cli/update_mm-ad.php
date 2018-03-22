@@ -151,12 +151,12 @@ foreach ($list->getObjects() as $object) {
 
     else if($isPointDeHongrie) {
 
-        $suffixeEan .= 'x'.$object->getLargeur()."x".$this->getLongueur()." 45°";
+        $suffixeEan .= 'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
     } 
 
     else if($isbatonRompu) {
 
-        $suffixeEan .= 'x'.$object->getLargeur()."x".$this->getLongueur();
+        $suffixeEan .= 'x'.$object->getLargeur()."x".$object->getLongueur();
     }
 
     $object->setValue('longueur_txt',$longueur_txt); 

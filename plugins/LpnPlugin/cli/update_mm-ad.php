@@ -54,6 +54,7 @@ foreach ($list->getObjects() as $object) {
     $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
     $ean  = $object->ean;
+    $article = $object->getCode();
     $parent = $object->getParent();
     $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
@@ -106,17 +107,81 @@ foreach ($list->getObjects() as $object) {
             break;
     }
 
-    $suffixeEan =$object->getEpaisseur()."x".$object->getLargeur();
-
-
-    if($isBrut) {
-        $suffixeEan.="x400-2000";
-        $object->setValue('longueur_txt','Longueurs panachées de 400 à 2000 mm');
-           
-    }
     
 
+    $suffixeEan = "";
+    $longueur_txt = "";
+    if($isBrut) {
+        $longueur_txt = 'Longueurs panachées de 400 à 2000 mm';
+        $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
+        $suffixeEan.="x400-2000";
+        
+            
+    }
+    else {
+
+        $suffixeEan .= $object->getEpaisseur();
+        
+        switch ($object->getLargeur()) {
+            case '540':
+                $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
+                $suffixeEan .= 'x160/180/200';
+                break;
+            case '600':
+                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
+                 $suffixeEan .= 'x180/200/220';
+                break;
+            default:
+                $suffixeEan .= 'x'.$object->getLargeur();
+                break;
+        }
+
+        $longueur_txt = 'Longueurs panachées de 500 à 2000 mm';
+        $suffixeEan .= 'x500-2000';
+
+
+    }
+    $object->setValue('longueur_txt',$longueur_txt); 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
+
+
+    //SURFACE
+    $parentSuffixeEan = "";
+
+     //TODO
+    if(stristr($scienergie, "TRES ACCENTU")) {
+        
+        $parent->setValue('traitement_surface',"vieilli tres accentue");
+        $parentSuffixeEan .= "vieilli très accentué";
+        $object->setValue('chanfreins','rives abîmées');   
+    }
+    else if(stristr($article, "MMCHERA")) {
+
+        $parent->setTraitement_surface(("vieilli rives abimees"));
+        $parentSuffixeEan .= "rives abîmées";
+        $parent->setValue('chanfreins','rives abîmées');
+  
+    }
+    elseif(stristr($article, "MMCHEG2")) {
+        $parent->setValue('chanfreins','2');
+
+    }
+
+
+    //HUILE
+    if(stristr($scienergie, "HUILE AQUA")) {
+        $parent->setValue('finition',"huile-aqua");
+        $parentSuffixeEan .= "huile aqua";
+    }
+    else if(stristr($scienergie, "HUILE CIRE")) {
+        $parent->setValue('finition',"huile-cire");
+        $parentSuffixeEan .= "huile cire";      
+    }
+
+
+    $parent->setValue("pimonly_name_suffixe",$parentSuffixeEan);
+
+
 
     //if($object->getChauffantBasseTemperature()==0) {
         if(stripos($object->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
@@ -142,24 +207,25 @@ foreach ($list->getObjects() as $object) {
         }
           
 
-    //}
-    
-
 
     
-    $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
+    //$parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
 
        
-    if(strlen($parent->name)>0) {
-       $parent->setValue('name',null);
-       $parent->save();
+    
+      
         
-    } 
+    
+
+    
+    
+    $parent->setValue('name',null);
+    $parent->save();
+
+    $object->setPublished(true);
+    $object->save();
 
     echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
-        
-    $object->setPublished(true);
-   $object->save();
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

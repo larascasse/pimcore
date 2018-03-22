@@ -1234,7 +1234,7 @@ class Website_Product extends Object_Product {
 						if($value->fieldtype=="multiselect" || $value->fieldtype=="multiselect") {
 							$display = array();
 							foreach ($attributeValue as $optionSelect => $valueSelect) {
-								$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+								$optionsSelect2 = Object_Service::getOptionsForSelectField($this,$attribute);
 								
 								if(isset($optionsSelect2[$valueSelect])) {
 
@@ -1259,7 +1259,7 @@ class Website_Product extends Object_Product {
 
 					}
 					else if($value->fieldtype=="select") {
-							$optionsSelect2 = bject_Service::getOptionsForSelectField($this,$attribute);
+							$optionsSelect2 = Object_Service::getOptionsForSelectField($this,$attribute);
 								
 							if(isset($optionsSelect2[$attributeValue])) {
 								$attributeValue=$optionsSelect2[$attributeValue];

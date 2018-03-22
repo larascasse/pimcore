@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-ad
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-ad
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -126,6 +126,16 @@ foreach ($list->getObjects() as $object) {
         $suffixeEan .= $object->getEpaisseur();
         
         switch ($object->getLargeur()) {
+             case '390':
+                $object->setValue('largeur_txt','Largeurs panachées : 110/130/150 mm');
+                $suffixeEan .= 'x110/130/150';
+                break;
+
+            case '460':
+                $object->setValue('largeur_txt','Largeurs panachées : 130/150/180 mm');
+                $suffixeEan .= 'x130/150/180';
+                break;
+
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
                 $suffixeEan .= 'x160/180/200';

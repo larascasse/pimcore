@@ -160,7 +160,8 @@ foreach ($list->getObjects() as $object) {
         
         $parent->setValue('traitement_surface',"vieilli tres accentue");
         $parentSuffixeEan .= "vieilli très accentué";
-        $object->setValue('chanfreins','rives abîmées');   
+        $object->setValue('chanfreins','rives abîmées'); 
+        $object->setChoix('ELV');
     }
     else if(stristr($article, "MMCHERA") && !$isBrut) {
 

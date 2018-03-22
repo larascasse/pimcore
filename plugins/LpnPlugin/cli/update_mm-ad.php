@@ -155,14 +155,14 @@ foreach ($list->getObjects() as $object) {
         $parentSuffixeEan .= "vieilli très accentué";
         $object->setValue('chanfreins','rives abîmées');   
     }
-    else if(stristr($article, "MMCHERA")) {
+    else if(stristr($article, "MMCHERA") && !$isBrut) {
 
         $parent->setTraitement_surface(("vieilli rives abimees"));
         $parentSuffixeEan .= "rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
   
     }
-    elseif(stristr($article, "MMCHEG2")) {
+    elseif(stristr($article, "MMCHEG2") && !$isBrut) {
         $parent->setValue('chanfreins','2');
 
     }
@@ -171,15 +171,15 @@ foreach ($list->getObjects() as $object) {
     //HUILE
     if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
-        $parentSuffixeEan .= "huile aqua";
+        $parentSuffixeEan .= " huile aqua";
     }
     else if(stristr($scienergie, "HUILE CIRE")) {
         $parent->setValue('finition',"huile-cire");
-        $parentSuffixeEan .= "huile cire";      
+        $parentSuffixeEan .= " huile cire";      
     }
 
 
-    $parent->setValue("pimonly_name_suffixe",$parentSuffixeEan);
+    $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));
 
 
 

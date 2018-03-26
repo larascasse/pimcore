@@ -131,53 +131,53 @@ foreach ($list->getObjects() as $object) {
                 break;
         }
         
-        switch ($object->getLargeur()) {
+       /* switch ($object->getLargeur()) {
              case '390':
                 $object->setValue('largeur_txt','Largeurs panachées : 110/130/150 mm');
-                $suffixeEan .= 'x110/130/150';
+                $suffixeEan .= 'x110-150';
                 break;
 
             case '460':
                 $object->setValue('largeur_txt','Largeurs panachées : 130/150/180 mm');
-                $suffixeEan .= 'x130/150/180';
+                $suffixeEan .= 'x130-180';
                 break;
 
             case '530':
                 $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
-                $suffixeEan .= 'x140/180/220';
+                $suffixeEan .= 'x140-220';
                 break;
 
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/220 mm');
-                $suffixeEan .= 'x160/180/220';
+                $suffixeEan .= 'x160-220';
                 break;
 
             case '600':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x180/200/220';
+                 $suffixeEan .= 'x180-220';
             case '720 XXXXX':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120/140/160/180/200';
+                 $suffixeEan .= 'x120-200';
                 break;
              
              case '760':
                 $object->setValue('largeur_txt','Largeurs panachées : 220/260/300 mm');
-                 $suffixeEan .= 'x220/260/300';
+                 $suffixeEan .= 'x220-300';
                 break;
 
              case '800':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120/140/160/180/200 ';
+                 $suffixeEan .= 'x120-200 ';
                 break;
             case '1020XXX':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120/140/160/180/200 ';
+                 $suffixeEan .= 'x120-200 ';
                 break;
             default:
                 $suffixeEan .= 'x'.$object->getLargeur();
                 break;
         }
-
+    */
  
 
         if($isDalle) {
@@ -235,11 +235,11 @@ foreach ($list->getObjects() as $object) {
          $suffixeEan = '20/23x';
          if(stripos($scienergieCourt, 'xl')) {
             $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-            $suffixeEan .= 'x220/260/300';
+            $suffixeEan .= 'x220-300';
          }
          else {
             $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
-            $suffixeEan .= 'x140/180/220';
+            $suffixeEan .= 'x140-220';
          }
          $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
          $suffixeEan .= 'x2000-3000';

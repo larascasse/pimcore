@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-ad
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-pa
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
-    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ad%'",
+    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-pa%'",
     "ean IS NOT NULL"
 );
 
@@ -80,18 +80,12 @@ foreach ($list->getObjects() as $object) {
     echo "\n$article ?";
 
     switch ($epaisseur) {
-         case 20:
-            
         
-            $object->setEpaisseurUsure('8 mm');
-            $object->setPose(array('aclouer','acoller'));
-
-            break;
 
         case 14:
             
         
-            $object->setEpaisseurUsure('5 mm');
+            $object->setEpaisseurUsure('7 mm');
             $object->setPose(array('acoller'));
 
             break;
@@ -107,49 +101,12 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan = "";
     $longueur_txt = "";
+
+    $longueur_txt = 'Longueurs panachées de 400 à 1320 mm';
+    $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
+    $suffixeEan.="x400-1320";
     
-    if($isBrut) {
-        $longueur_txt = 'Longueurs panachées de 400 à 2000 mm';
-        $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
-        $suffixeEan.="x400-2000";
-        
-            
-    }
-    else if(!$isPointDeHongrie && !$isbatonRompu) {
-
-        $suffixeEan .= $object->getEpaisseur();
-        
-        switch ($object->getLargeur()) {
-             case '390':
-                $object->setValue('largeur_txt','Largeurs panachées : 110/130/150 mm');
-                $suffixeEan .= 'x110/130/150';
-                break;
-
-            case '460':
-                $object->setValue('largeur_txt','Largeurs panachées : 130/150/180 mm');
-                $suffixeEan .= 'x130/150/180';
-                break;
-
-            case '540':
-                $object->setValue('largeur_txt','Largeurs panachées : 160/180/200 mm');
-                $suffixeEan .= 'x160/180/200';
-                break;
-            case '600':
-                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x180/200/220';
-                break;
-            default:
-                $suffixeEan .= 'x'.$object->getLargeur();
-                break;
-        }
-
-        $longueur_txt = 'Longueurs panachées de 500 à 2000 mm';
-        $suffixeEan .= 'x500-2000';
-
-
-    }
-
-    else if($isPointDeHongrie) {
+   if($isPointDeHongrie) {
 
         $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
     } 
@@ -181,45 +138,7 @@ foreach ($list->getObjects() as $object) {
     }
 
 
-     //TODO
-    if(stristr($scienergie, "TRES ACCENTU")) {
-        
-        $parent->setValue('traitement_surface',"vieilli tres accentue");
-        $parentSuffixeEan .= " vieilli très accentué";
-        $object->setValue('chanfreins','rives abîmées'); 
-        $object->setChoix('ELV');
-    }
-    else if(stristr($article, "MMCHERA") && !$isBrut) {
-
-        $parent->setTraitement_surface(("vieilli rives abimees"));
-        $parentSuffixeEan .= " rives abîmées";
-        $parent->setValue('chanfreins','rives abîmées');
-        $object->setChoix('ELV');
-  
-    }
-    elseif(stristr($article, "MMCHEG2") && !$isBrut) {
-        $parent->setValue('chanfreins','2');
-        $object->setChoix('ELC');
-
-    }
     
-
-
-    //HUILE
-    if(stripos($scienergie, "PP") >0) {
-         $parent->setValue('finition',"brut");
-    }
-    if(stristr($scienergie, "HUILE AQUA")) {
-        $parent->setValue('finition',"huile-aqua");
-        $parentSuffixeEan .= " huile aqua";
-    }
-    else if(stristr($scienergie, "HUILE CIRE")) {
-        $parent->setValue('finition',"huile-cire");
-        $parentSuffixeEan .= " huile cire";      
-    }
-
-
-    $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));
 
 
 
@@ -245,11 +164,7 @@ foreach ($list->getObjects() as $object) {
         else {
          $object->setChauffantRadiantElectrique("0");   
         }
-          
-
-
-    
-    //$parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
+        
 
        
     
@@ -259,8 +174,8 @@ foreach ($list->getObjects() as $object) {
 
     
     
-    $parent->setValue('name',null);
-    $parent->save();
+    //$parent->setValue('name',null);
+    //$parent->save();
 
     $object->setPublished(true);
     $object->save();

@@ -342,7 +342,7 @@ foreach ($list->getObjects() as $object) {
 
     
     if($isDalle) {
-        $parent->setValue('name',str_replace('Parquet chêne massif ','Parquet Versailles en chêne massif',$parent->getParent()->getName()));
+        $parent->setValue('name',str_replace('Parquet chêne massif ','Parquet Versailles en chêne massif ',$parent->getParent()->getName()));
     }
     else {
         $parent->setValue('name',null);

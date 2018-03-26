@@ -184,12 +184,12 @@ foreach ($list->getObjects() as $object) {
             switch ($object->getLargeur()) {
                 case '700':
                      $object->setValue('largeur_txt','');
-                     $suffixeEan .= 'x700x700';
+                     $suffixeEan = $object->getEpaisseur().'x700x700';
                 break;
 
                 case '1020':
                      $object->setValue('largeur_txt','');
-                     $suffixeEan .= 'x1020x1020';
+                     $suffixeEan .= $object->getEpaisseur().'x1020x1020';
                 break;
             }
             

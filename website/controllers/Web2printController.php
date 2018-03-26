@@ -37,7 +37,7 @@ class Web2printController extends Action
 
     		 $product = Object_Product::getById($this->getParam("id"));
 
-	        if(!$product instanceof Object_Product || !$product->isPublished()) {
+	        if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
 	            
 	           
 	            //throw new \Zend_Controller_Router_Exception("invalid request");

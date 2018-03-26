@@ -102,11 +102,26 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan = "";
     $longueur_txt = "";
 
-    $longueur_txt = 'Longueurs panachées de 600 à 1800 mm';
+   
     $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
-    $suffixeEan.="x600-1800";
 
-    $object->setValue('chanfreins','4'); 
+
+    if($isBrut) {
+        $object->setValue('chanfreins','0'); 
+        $longueur_txt = 'Longueurs panachées de 350 à 1200 mm';
+        $suffixeEan.="x350-1200";
+
+    }
+    else if ($largeur<=90) {
+        $longueur_txt = 'Longueurs panachées de 400 à 1200 mm';
+        $suffixeEan.="x400-1200";
+    }
+    else {
+        $object->setValue('chanfreins','4'); 
+        $longueur_txt = 'Longueurs panachées de 350 à 1800 mm';
+        $suffixeEan.="x350-1800";
+    }
+    
 
     
    if($isPointDeHongrie) {

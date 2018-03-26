@@ -102,9 +102,9 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan = "";
     $longueur_txt = "";
 
-    $longueur_txt = 'Longueurs panachées de 400 à 1320 mm';
+    $longueur_txt = 'Longueurs panachées de 400 à 1300 mm';
     $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
-    $suffixeEan.="x400-1320";
+    $suffixeEan.="x400-1300";
 
     $object->setValue('chanfreins','4'); 
 

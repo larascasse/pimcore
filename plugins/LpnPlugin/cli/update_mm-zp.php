@@ -139,6 +139,8 @@ foreach ($list->getObjects() as $object) {
                 break;
         }
 
+        $longueur_txt = 'Longueurs panachées de 400 à 2500 mm';
+
        
 
     }

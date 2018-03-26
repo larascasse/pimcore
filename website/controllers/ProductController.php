@@ -438,7 +438,7 @@ class ProductController extends Action
         //$header['ean'] = "EAN";
         $header['name'] = "Name";
         $header['url'] = "Url";
-        $header['longeurS'] = "Longueur Scienergie";
+        $header['longueur_scienergie'] = "Longueur Scienergie";
 
 
         foreach ($products as $product) {
@@ -510,7 +510,7 @@ class ProductController extends Action
 
              foreach ($header as $key => $title) {
 
-                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' || $key=='image_1' || $key=='image_2' || $key=='image_3' || $key=='image_4' || $key=='image_texture' )
+                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' || $key=='image_1' || $key=='image_2' || $key=='image_3' || $key=='image_4' || $key=='image_texture' || $key=='longueur_scienergie')
                         continue;
 
                     if(!isset($caracteristiques[$key])) {

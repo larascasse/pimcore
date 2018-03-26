@@ -71,6 +71,7 @@ foreach ($list->getObjects() as $object) {
     $isThermo = stripos($scienergie, "THERMO")>0;
     $isBrut = $object->isParquetBrut() && !$isThermo ;
     $isChene = $object->getEssence()=="CHE";
+    $isDalle = stripos($scienergie, "VERSAILLES")>0;;
 
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
@@ -118,6 +119,17 @@ foreach ($list->getObjects() as $object) {
     else if(!$isPointDeHongrie && !$isbatonRompu) {
 
         $suffixeEan .= $object->getEpaisseur();
+
+        switch ($epaisseur) {
+            case '15':
+                $object->setValue('largeur_txt','Largeurs panachées : 120/140/180/200 mm');
+                $suffixeEan .= 'x120/140/160/180/200';
+                break;
+            case '20':
+                $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
+                $suffixeEan .= 'x140/180/220';
+                break;
+        }
         
         switch ($object->getLargeur()) {
              case '390':
@@ -130,14 +142,34 @@ foreach ($list->getObjects() as $object) {
                 $suffixeEan .= 'x130/150/180';
                 break;
 
+            case '530':
+                $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
+                $suffixeEan .= 'x140/180/220';
+                break;
+
             case '540':
                 $object->setValue('largeur_txt','Largeurs panachées : 160/180/220 mm');
                 $suffixeEan .= 'x160/180/220';
                 break;
+
             case '600':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
                  $suffixeEan .= 'x180/200/220';
-            case '800':
+            case '720 XXXXX':
+                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
+                 $suffixeEan .= 'x120/140/160/180/200';
+                break;
+             
+             case '760':
+                $object->setValue('largeur_txt','Largeurs panachées : 220/260/300 mm');
+                 $suffixeEan .= 'x220/260/300';
+                break;
+
+             case '800':
+                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
+                 $suffixeEan .= 'x120/140/160/180/200 ';
+                break;
+            case '1020XXX':
                 $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
                  $suffixeEan .= 'x120/140/160/180/200 ';
                 break;
@@ -146,8 +178,26 @@ foreach ($list->getObjects() as $object) {
                 break;
         }
 
-        $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
-        $suffixeEan .= 'x1800-2700';
+ 
+
+        if($isDalle) {
+            switch ($object->getLargeur()) {
+                case '700':
+                     $object->setValue('largeur_txt','');
+                     $suffixeEan .= 'x700x700';
+                break;
+
+                case '1020':
+                     $object->setValue('largeur_txt','');
+                     $suffixeEan .= 'x1020x1020';
+                break;
+            }
+            
+        }
+        else {
+            $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+            $suffixeEan .= 'x1800-2700';
+        }
 
 
     }
@@ -162,26 +212,44 @@ foreach ($list->getObjects() as $object) {
         $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
     }
 
-    $object->setValue('longueur_txt',$longueur_txt); 
-    $object->setValue("pimonly_name_suffixe",$suffixeEan);
+ 
 
 
     //SURFACE
     $parentSuffixeEan = "";
 
-    if(stristr($article, "MMCHEUB")) {
+    if($isDalle) {
+        $parent->setTraitement_surface(("vieilli rives abimees"));
+        $parentSuffixeEan .= " Versailles rives abîmées";
+        $parent->setValue('chanfreins','rives abîmées');
+        $parent->setMotif('dalle-versailles');
+        $parent->setTypeLame('dalle');
+
+    }
+    else if(stristr($article, "MMCHEUB")) {
          $parent->setTraitement_surface(("vieilli use brosse rives abimees"));
          $parentSuffixeEan .="vieilli usé brossé rives abîmées";
 
-         $parent->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
-         //$object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
+         $parent->setValue('epaisseur_txt','de 20 à 23 mm');
+
+         $suffixeEan = '20/23x';
+         if(stripos($scienergieCourt, 'xl')) {
+            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+            $suffixeEan .= 'x220/260/300';
+         }
+         else {
+            $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+            $suffixeEan .= 'x140/180/220';
+         }
+         $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
+         $suffixeEan .= 'x2000-3000';
 
     }
     else if(stristr($article, "MHCHE") && !$isBrut) {
         $parent->setMotif(' pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
-        $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+        $parent->setValue('longueur_txt','Longueur pointe à pointe '."650"." mm");
 
 
 
@@ -198,21 +266,22 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('traitement_surface',"vieilli tres accentue");
         $parentSuffixeEan .= " vieilli très accentué";
         $object->setValue('chanfreins','rives abîmées'); 
-        $object->setChoix('ELV');
     }
+    
     else if(stristr($article, "MMCHERA") && !$isBrut) {
 
         $parent->setTraitement_surface(("vieilli rives abimees"));
         $parentSuffixeEan .= " rives abîmées";
-        $parent->setValue('chanfreins','rives abîmées');
-        $object->setChoix('ELV');
-  
+        $parent->setValue('chanfreins','rives abîmées');  
     }
+
     elseif(stristr($article, "MMCHEG2") && !$isBrut) {
         $parent->setValue('chanfreins','2');
-        $object->setChoix('ELC');
 
     }
+
+    $object->setValue('longueur_txt',$longueur_txt); 
+    $object->setValue("pimonly_name_suffixe",$suffixeEan);
     
 
 

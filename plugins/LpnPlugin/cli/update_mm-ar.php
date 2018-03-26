@@ -232,7 +232,8 @@ foreach ($list->getObjects() as $object) {
 
          $parent->setValue('epaisseur_txt','de 20 à 23 mm');
 
-         $suffixeEan = '20/23x';
+         $suffixeEan = '20/23';
+         
          if(stripos($scienergieCourt, 'xl')) {
             $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
             $suffixeEan .= 'x220-300';

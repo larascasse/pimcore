@@ -82,6 +82,7 @@ foreach ($list->getObjects() as $object) {
 
     switch ($epaisseur) {
          case 20:
+         case 22:
             
         
             $object->setEpaisseurUsure('7 mm');

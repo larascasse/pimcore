@@ -438,6 +438,7 @@ class ProductController extends Action
         //$header['ean'] = "EAN";
         $header['name'] = "Name";
         $header['url'] = "Url";
+        $header['longeurS'] = "Longueur Scienergie";
 
 
         foreach ($products as $product) {
@@ -505,6 +506,7 @@ class ProductController extends Action
              //$row[] = $product->getEan()."-";
              $row[] = $product->getMage_short_name(3000);;
              $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
+             $row[] = $product->getLongueur();
 
              foreach ($header as $key => $title) {
 

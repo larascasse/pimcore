@@ -169,7 +169,15 @@ foreach ($list->getObjects() as $object) {
     //SURFACE
     $parentSuffixeEan = "";
 
-    if(stristr($article, "MHCHE") && !$isBrut) {
+    if(stristr($article, "MMCHEUB")) {
+         $parent->setTraitement_surface(("vieilli use brosse rives abimees"));
+         $parentSuffixeEan .="vieilli usé brossé rives abîmées";
+
+         $parent->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
+         //$object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
+
+    }
+    else if(stristr($article, "MHCHE") && !$isBrut) {
         $parent->setMotif(' pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";

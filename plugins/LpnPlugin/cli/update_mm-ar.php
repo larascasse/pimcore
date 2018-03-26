@@ -193,6 +193,7 @@ foreach ($list->getObjects() as $object) {
                      $suffixeEan .= $object->getEpaisseur().'x1020x1020';
                 break;
             }
+
             
         }
         else {
@@ -340,8 +341,13 @@ foreach ($list->getObjects() as $object) {
     
 
     
+    if($isDalle) {
+        $parent->setValue('name',str_replace('Parquet chêne massif ','Dalle Versailles en chêne massif',parent->getName());
+    }
+    else {
+        $parent->setValue('name',null);
+    }
     
-    $parent->setValue('name',null);
     $parent->save();
 
     $object->setPublished(true);

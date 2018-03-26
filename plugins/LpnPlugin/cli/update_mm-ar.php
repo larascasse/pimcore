@@ -233,7 +233,7 @@ foreach ($list->getObjects() as $object) {
          $parent->setValue('epaisseur_txt','de 20 à 23 mm');
 
          $suffixeEan = '20/23';
-         
+
          if(stripos($scienergieCourt, 'xl')) {
             $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
             $suffixeEan .= 'x220-300';
@@ -250,7 +250,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setMotif(' pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
-        $parent->setValue('longueur_txt','Longueur pointe à pointe '."650"." mm");
+        $parent->setValue('longueur_txt','Longueur pointe à pointe : '."650"." mm");
 
 
 

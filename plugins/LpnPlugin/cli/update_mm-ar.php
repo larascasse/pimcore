@@ -222,7 +222,7 @@ foreach ($list->getObjects() as $object) {
 
     if($isDalle) {
         $parent->setTraitement_surface(("vieilli rives abimees"));
-        $parentSuffixeEan .= " Versailles rives abîmées";
+        $parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
         $parent->setMotif('dalle-versailles');
         $parent->setTypeLame('dalle');

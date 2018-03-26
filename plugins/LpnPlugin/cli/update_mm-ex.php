@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-pa
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-ex
 
 include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
 
@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
-    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-pa%'",
+    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ex%'",
     "ean IS NOT NULL"
 );
 
@@ -102,9 +102,9 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan = "";
     $longueur_txt = "";
 
-    $longueur_txt = 'Longueurs panachées de 400 à 1320 mm';
+    $longueur_txt = 'Longueurs panachées de 600 à 1800 mm';
     $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
-    $suffixeEan.="x400-1320";
+    $suffixeEan.="x600-1800";
 
     $object->setValue('chanfreins','4'); 
 
@@ -125,21 +125,6 @@ foreach ($list->getObjects() as $object) {
 
     //SURFACE
     $parentSuffixeEan = "";
-
-    if(stristr($article, "MHCHE") && !$isBrut) {
-        $parent->setMotif(' pth');
-        $parent->setAngle('45°');
-        $parentSuffixeEan .=" Point de Hongrie";
-        $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
-
-
-
-    }
-    elseif(stristr($article, "MBCHE") && !$isBrut) {
-        $parent->setMotif(' baton rompu');
-        $parentSuffixeEan .=" Bâton rompu";
-    }
-
 
     
 

@@ -123,11 +123,11 @@ foreach ($list->getObjects() as $object) {
         switch ($epaisseur) {
             case '15':
                 $object->setValue('largeur_txt','Largeurs panachées : 120/140/180/200 mm');
-                $suffixeEan .= 'x120/140/160/180/200';
+                $suffixeEan .= 'x120-200';
                 break;
             case '20':
                 $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
-                $suffixeEan .= 'x140/180/220';
+                $suffixeEan .= 'x140-220';
                 break;
         }
         

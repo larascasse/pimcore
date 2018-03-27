@@ -12,7 +12,7 @@ class Wkhtmltopdf {
         $tmpHtmlFile = PIMCORE_TEMPORARY_DIRECTORY . "/" . uniqid() . ".htm";
         file_put_contents($tmpHtmlFile, $string);
         $httpSource = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$tmpHtmlFile);
-        echo $httpSource."||||||".$string."//////////////";
+        //echo $httpSource."||||||".$string."//////////////";
        // die;
         $pdfContent = self::convert($httpSource,$pdfFile);
  
@@ -130,7 +130,7 @@ class Wkhtmltopdf {
             }
 
         $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
-        //   echo $cmd; die;
+        echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {

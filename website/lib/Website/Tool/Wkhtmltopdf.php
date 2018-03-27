@@ -93,7 +93,7 @@ class Wkhtmltopdf {
                 //"--default-header" => "toto",
                 //"--no-header-line" => 1,
                 "--footer-html" => \Pimcore\Tool::getHostUrl()."/website/views/layouts/inc_footer_pdf.html",
-                "--title" => $pdfFile,
+                //"--title" => $pdfFile,
                 //"--footer-title" => "title toto"
                 //"--javascript-delay" =>2000
             ];
@@ -134,7 +134,7 @@ class Wkhtmltopdf {
             }
 
         $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
-        echo $cmd; die;
+        //echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {

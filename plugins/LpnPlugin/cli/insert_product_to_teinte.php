@@ -25,8 +25,6 @@ $conditionFilters = array(
 
 $list = new Pimcore\Model\Object\Teinte\Listing();
 $list->setUnpublished(true);
-Object_Abstract::setGetInheritedValues(true);
-
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
@@ -55,15 +53,16 @@ foreach ($list->getObjects() as $object) {
 
     $conditionFilters = array(
     "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'",
-   // "ean IS NULL",
+    //"ean IS NULL",
     //"code IS NOT NULL",
     "LOWER(name) like '% ".strtolower($teinteName)." %'"
     );
 
     print_r($conditionFilters);
 
+    Object_Abstract::setGetInheritedValues(true);
 
-    $listProduct = new Pimcore\Model\Object\Product::getList(["unpublished" => true]);
+    $listProduct = new Pimcore\Model\Object\Product\Listing();
     $listProduct->setUnpublished(true);
     $listProduct->setCondition(implode(" AND ", $conditionFilters));
 

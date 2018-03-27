@@ -63,7 +63,7 @@ foreach ($list->getObjects() as $teinte) {
 
    // print_r($conditionFilters);
 
-    Object_Abstract::setGetInheritedValues(true);
+    //Object_Abstract::setGetInheritedValues(true);
 
     $listProduct = new Pimcore\Model\Object\Product\Listing();
     $listProduct->setUnpublished(true);
@@ -78,6 +78,7 @@ foreach ($list->getObjects() as $teinte) {
 
             echo "".$teinteName." - ".$product->getName()."\n";
             $product->setPimonly_teinte_rel(array($teinte));
+            $produc->save();
         }
 
 

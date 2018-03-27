@@ -66,8 +66,8 @@ foreach ($list->getObjects() as $object) {
     $listProduct->setUnpublished(true);
     $listProduct->setCondition(implode(" AND ", $conditionFilters));
 
-    $db = \Pimcore\Db::get();
-    $fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
+   // $db = \Pimcore\Db::get();
+    //$fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
 
     foreach ($listProduct->getObjects() as $product) {
         if(stristr(" ".$teinteName." ",$product->getName())>0)

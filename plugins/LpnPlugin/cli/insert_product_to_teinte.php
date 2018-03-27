@@ -70,8 +70,9 @@ foreach ($list->getObjects() as $object) {
     //$fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
 
     foreach ($listProduct->getObjects() as $product) {
+        echo "TEST : ".$teinteName." - ".$product->getName()."\n";
         if(stristr(" ".$teinteName." ",$product->getName())>0)
-            echo $teinteName." - ".$product->getName()."\n";
+            echo "\n".$teinteName." - ".$product->getName()."\n";
 
     }
 

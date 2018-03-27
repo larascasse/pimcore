@@ -134,7 +134,7 @@ class Wkhtmltopdf {
             }
 
         $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
-        //echo $cmd; die;
+        echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {

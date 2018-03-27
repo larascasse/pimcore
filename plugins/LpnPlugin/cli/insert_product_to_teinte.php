@@ -78,7 +78,7 @@ foreach ($list->getObjects() as $teinte) {
 
             echo "".$teinteName." - ".$product->getName()."\n";
             $product->setPimonly_teinte_rel(array($teinte));
-            $produc->save();
+            $product->save();
         }
 
 

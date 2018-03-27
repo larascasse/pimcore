@@ -53,7 +53,7 @@ foreach ($list->getObjects() as $object) {
 
     $conditionFilters = array(
     "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'",
-    "ean IS NULL",
+    //"ean IS NULL",
     "code IS NOT NULL",
     "name like '% ".$teinteName." %'"
     );

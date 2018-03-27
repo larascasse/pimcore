@@ -38,8 +38,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 	    	  if($withChildren) {
 	    	  	$params["path"] = $product->getFullPath();
 
-	    	  	if($configurable)
-	    	  		$params["configurable"] = 1;
+	    	  	
 	    	  	//else if($simple)
 	    	  	//	$params["simple"] = 1;
 	    	  	
@@ -54,6 +53,9 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 	    	  if($create) {
 	    	  	$params["create"] = 1;
 	    	  }
+
+          if($configurable)
+              $params["configurable"] = 1;
 	    	
 	    	  $content = \Pimcore\Tool::getHttpData($url,$params);
 	    	

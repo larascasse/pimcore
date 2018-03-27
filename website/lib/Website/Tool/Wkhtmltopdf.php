@@ -98,6 +98,10 @@ class Wkhtmltopdf {
                 //"--javascript-delay" =>2000
             ];
 
+            if($pdfFile && strlen($pdfFile)>0) {
+                $localOptions["--title"] = $pdfFile;
+            }
+
             if(is_array($postArray)) {
                 $b = array();
                 foreach ($postArray as $key => $value) {
@@ -130,7 +134,7 @@ class Wkhtmltopdf {
             }
 
         $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
-        echo $cmd; die;
+        //echo $cmd; die;
             system( $cmd, $retVal);
 
               if ($retVal != 0 && $retVal != 1) {

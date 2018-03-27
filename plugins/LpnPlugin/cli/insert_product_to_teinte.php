@@ -53,12 +53,12 @@ foreach ($list->getObjects() as $object) {
 
     $conditionFilters = array(
     "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'",
-    //"ean IS NULL",
-    //"code IS NOT NULL",
-    "LOWER(name) like '% ".strtolower($teinteName)." %'"
+    "ean IS NULL",
+    "code IS NOT NULL",
+    //"LOWER(name) like '% ".strtolower($teinteName)." %'"
     );
 
-    print_r($conditionFilters);
+   // print_r($conditionFilters);
 
     Object_Abstract::setGetInheritedValues(true);
 
@@ -66,8 +66,12 @@ foreach ($list->getObjects() as $object) {
     $listProduct->setUnpublished(true);
     $listProduct->setCondition(implode(" AND ", $conditionFilters));
 
+    $db = \Pimcore\Db::get();
+    $fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
+
     foreach ($listProduct->getObjects() as $product) {
-        echo $teinteName." ".$product->getName()."\n";
+        if(stristr(" ".$teinteName." ",$product->getName()>0)
+            echo $teinteName." - ".$product->getName()."\n";
 
     }
 

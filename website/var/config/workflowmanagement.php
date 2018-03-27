@@ -37,7 +37,8 @@ return [
             [
                 "name" => "update_picture",
                 "label" => "Mise à jour des images",
-                "objectLayout" => 3
+                "objectLayout" => 3,
+                "elementPublished" => FALSE
             ],
             [
                 "name" => "contents_to_review",
@@ -45,7 +46,13 @@ return [
             ],
             [
                 "name" => "contents_validated",
-                "label" => "Content ready to publish"
+                "label" => "Content ready to publish",
+                "objectLayout" => 0
+            ],
+            [
+                "name" => "content_published",
+                "label" => "content_published",
+                "objectLayout" => 0
             ]
         ],
         "actions" => [
@@ -100,8 +107,8 @@ return [
                 ]
             ],
             [
-                "name" => "contents_updated",
-                "label" => "Contents up-to-date",
+                "name" => "contentsupdated",
+                "label" => "Contents uptodate",
                 "transitionTo" => [
                     "processing" => [
                         "contents_to_review"
@@ -130,7 +137,7 @@ return [
                 "label" => "Contents are ready to publish",
                 "transitionTo" => [
                     "processing" => [
-                        "contents_preapared"
+                        "contents_validated"
                     ]
                 ],
                 "notes" => [
@@ -152,11 +159,37 @@ return [
                 ]
             ],
             [
-                "name" => "image-missing",
+                "name" => "image_missing",
                 "label" => "Manque les images",
                 "transitionTo" => [
                     "processing" => [
                         "update_picture"
+                    ]
+                ],
+                "notes" => [
+                    "required" => FALSE,
+                    "title" => "",
+                    "type" => ""
+                ],
+                "additionalFields" => [
+
+                ],
+                "users" => [
+
+                ],
+                "notificationUsers" => [
+
+                ],
+                "events" => [
+
+                ]
+            ],
+            [
+                "name" => "content_published",
+                "label" => "content_published",
+                "transitionTo" => [
+                    "done" => [
+                        "content_published"
                     ]
                 ],
                 "notes" => [
@@ -184,8 +217,26 @@ return [
             ],
             "new" => [
                 "validActions" => [
+                    "contentsupdated" => NULL,
+                    "contents_ready" => NULL,
                     "process" => NULL,
-                    "reject" => NULL
+                    "reject" => NULL,
+                    "image_missing" => NULL,
+                    "content_published" => NULL
+                ]
+            ],
+            "contents_validated" => [
+                "validActions" => [
+                    "contentsupdated" => NULL,
+                    "contents_ready" => NULL,
+                    "process" => NULL,
+                    "content_published" => NULL
+                ]
+            ],
+            "update_picture" => [
+                "validActions" => [
+                    "contents_ready" => NULL,
+                    "content_published" => NULL
                 ]
             ]
         ],
@@ -208,6 +259,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1518541960
+        "modificationDate" => 1519640720
     ]
 ];

@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2018-02-14T17:03:26+01:00
+* Generated at: 2018-03-26T23:14:22+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -28,8 +28,6 @@ Fields Summary:
 - short_name [input]
 - pimonly_name_suffixe [input]
 - pimonly_dimensions [input]
-- price [input]
-- weight [input]
 - short_description [textarea]
 - mage_sub_description [textarea]
 - short_description_title [input]
@@ -82,19 +80,22 @@ Fields Summary:
 - taux_humidite [input]
 - coefficient_retractabilite [calculatedValue]
 - durabilite_ecologique [calculatedValue]
+- price [input]
 - price_1 [input]
 - price_2 [input]
 - price_3 [input]
 - price_4 [input]
 - fixation [multiselect]
-- pose [multiselect]
 - fixation_not_configurable [checkbox]
+- pose [multiselect]
+- choix [input]
+- choix_not_configurable [checkbox]
 - epaisseur [input]
 - epaisseur_txt [input]
-- epaisseur_type [select]
 - epaisseur_not_configurable [checkbox]
 - largeur [input]
 - largeur_txt [input]
+- largeur_type [select]
 - largeur_colis [input]
 - largeur_not_configurable [checkbox]
 - longueur [input]
@@ -117,15 +118,12 @@ Fields Summary:
 - conditionnement [input]
 - conditionnement_not_configurable [checkbox]
 - nbrpp [input]
-- finition [select]
-- finition_not_configurable [checkbox]
 - traitement_surface [select]
 - traitement_surface_not_configurable [checkbox]
+- finition [select]
+- finition_not_configurable [checkbox]
 - profil [multiselect]
 - profil_not_configurable [checkbox]
-- pimonly_profil_label [input]
-- choix [input]
-- choix_not_configurable [checkbox]
 - configurable_free_2 [input]
 - quantity_min [input]
 - quantity_max [input]
@@ -135,6 +133,7 @@ Fields Summary:
 - characteristics_others_tech [textarea]
 - characteristics_others_perf [textarea]
 - unite [input]
+- weight [input]
 - mode_calcul [input]
 - rendement [input]
 - famille [input]
@@ -168,6 +167,7 @@ Fields Summary:
 - associatedArticles [objects]
 - origineArticles [objects]
 - Categories [nonownerobjects]
+- mage_visibility [select]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
 - mage_name [textarea]
@@ -197,7 +197,6 @@ Fields Summary:
 - mage_produitsfinition [input]
 - mage_produitsentretien [input]
 - mage_cs_skus [input]
-- mage_visibility [select]
 - mage_origine_arbre [textarea]
 */ 
 
@@ -225,8 +224,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByShort_name ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByWeight ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByShort_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_sub_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByShort_description_title ($value, $limit = 0) 
@@ -279,19 +276,22 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByTaux_humidite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCoefficient_retractabilite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByDurabilite_ecologique ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPose ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPose ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_txt ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLargeur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLargeur_txt ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeur_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLargeur_colis ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLargeur_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLongueur ($value, $limit = 0) 
@@ -314,15 +314,12 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByConditionnement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConditionnement_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProfil ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProfil_not_configurable ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPimonly_profil_label ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
@@ -332,6 +329,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others_tech ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCharacteristics_others_perf ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByUnite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByWeight ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMode_calcul ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
@@ -364,6 +362,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_entretien ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAssociatedArticles ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByOrigineArticles ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_name ($value, $limit = 0) 
@@ -393,7 +392,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMage_produitsfinition ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_produitsentretien ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_cs_skus ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_origine_arbre ($value, $limit = 0) 
 */
 
@@ -420,8 +418,6 @@ public $name;
 public $short_name;
 public $pimonly_name_suffixe;
 public $pimonly_dimensions;
-public $price;
-public $weight;
 public $short_description;
 public $mage_sub_description;
 public $short_description_title;
@@ -460,19 +456,22 @@ public $pimonly_classe_reaction_feu_fr;
 public $pimonly_resistance_thermique;
 public $pimonly_conductivite_thermique_total;
 public $taux_humidite;
+public $price;
 public $price_1;
 public $price_2;
 public $price_3;
 public $price_4;
 public $fixation;
-public $pose;
 public $fixation_not_configurable;
+public $pose;
+public $choix;
+public $choix_not_configurable;
 public $epaisseur;
 public $epaisseur_txt;
-public $epaisseur_type;
 public $epaisseur_not_configurable;
 public $largeur;
 public $largeur_txt;
+public $largeur_type;
 public $largeur_colis;
 public $largeur_not_configurable;
 public $longueur;
@@ -495,15 +494,12 @@ public $volume_not_configurable;
 public $conditionnement;
 public $conditionnement_not_configurable;
 public $nbrpp;
-public $finition;
-public $finition_not_configurable;
 public $traitement_surface;
 public $traitement_surface_not_configurable;
+public $finition;
+public $finition_not_configurable;
 public $profil;
 public $profil_not_configurable;
-public $pimonly_profil_label;
-public $choix;
-public $choix_not_configurable;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -513,6 +509,7 @@ public $characteristics_others;
 public $characteristics_others_tech;
 public $characteristics_others_perf;
 public $unite;
+public $weight;
 public $mode_calcul;
 public $rendement;
 public $famille;
@@ -545,6 +542,7 @@ public $pimonly_category_finition;
 public $pimonly_category_entretien;
 public $associatedArticles;
 public $origineArticles;
+public $mage_visibility;
 public $accessoirepopin;
 public $mage_accessoirepopin;
 public $mage_name;
@@ -574,7 +572,6 @@ public $mage_produitspose;
 public $mage_produitsfinition;
 public $mage_produitsentretien;
 public $mage_cs_skus;
-public $mage_visibility;
 public $mage_origine_arbre;
 
 
@@ -1079,58 +1076,6 @@ public function getPimonly_dimensions () {
 */
 public function setPimonly_dimensions ($pimonly_dimensions) {
 	$this->pimonly_dimensions = $pimonly_dimensions;
-	return $this;
-}
-
-/**
-* Get price - Prix Public HT
-* @return string
-*/
-public function getPrice () {
-	$preValue = $this->preGetValue("price"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price")->isEmpty($data)) {
-		return $this->getValueFromParent("price");
-	}
-	return $data;
-}
-
-/**
-* Set price - Prix Public HT
-* @param string $price
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice ($price) {
-	$this->price = $price;
-	return $this;
-}
-
-/**
-* Get weight - Poids de base (en kg)
-* @return string
-*/
-public function getWeight () {
-	$preValue = $this->preGetValue("weight"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->weight;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("weight")->isEmpty($data)) {
-		return $this->getValueFromParent("weight");
-	}
-	return $data;
-}
-
-/**
-* Set weight - Poids de base (en kg)
-* @param string $weight
-* @return \Pimcore\Model\Object\Product
-*/
-public function setWeight ($weight) {
-	$this->weight = $weight;
 	return $this;
 }
 
@@ -2403,6 +2348,32 @@ public function setDurabilite_ecologique ($durabilite_ecologique) {
 }
 
 /**
+* Get price - Prix Public HT
+* @return string
+*/
+public function getPrice () {
+	$preValue = $this->preGetValue("price"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price")->isEmpty($data)) {
+		return $this->getValueFromParent("price");
+	}
+	return $data;
+}
+
+/**
+* Set price - Prix Public HT
+* @param string $price
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice ($price) {
+	$this->price = $price;
+	return $this;
+}
+
+/**
 * Get price_1 - Négoce (1)
 * @return string
 */
@@ -2533,6 +2504,32 @@ public function setFixation ($fixation) {
 }
 
 /**
+* Get fixation_not_configurable - Fixation non configurable
+* @return boolean
+*/
+public function getFixation_not_configurable () {
+	$preValue = $this->preGetValue("fixation_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->fixation_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("fixation_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set fixation_not_configurable - Fixation non configurable
+* @param boolean $fixation_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFixation_not_configurable ($fixation_not_configurable) {
+	$this->fixation_not_configurable = $fixation_not_configurable;
+	return $this;
+}
+
+/**
 * Get pose - Pose
 * @return array
 */
@@ -2559,28 +2556,54 @@ public function setPose ($pose) {
 }
 
 /**
-* Get fixation_not_configurable - Fixation non configurable
-* @return boolean
+* Get choix - Choix
+* @return string
 */
-public function getFixation_not_configurable () {
-	$preValue = $this->preGetValue("fixation_not_configurable"); 
+public function getChoix () {
+	$preValue = $this->preGetValue("choix"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->fixation_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fixation_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("fixation_not_configurable");
+	$data = $this->choix;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
+		return $this->getValueFromParent("choix");
 	}
 	return $data;
 }
 
 /**
-* Set fixation_not_configurable - Fixation non configurable
-* @param boolean $fixation_not_configurable
+* Set choix - Choix
+* @param string $choix
 * @return \Pimcore\Model\Object\Product
 */
-public function setFixation_not_configurable ($fixation_not_configurable) {
-	$this->fixation_not_configurable = $fixation_not_configurable;
+public function setChoix ($choix) {
+	$this->choix = $choix;
+	return $this;
+}
+
+/**
+* Get choix_not_configurable - Choix non configurable
+* @return boolean
+*/
+public function getChoix_not_configurable () {
+	$preValue = $this->preGetValue("choix_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choix_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("choix_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set choix_not_configurable - Choix non configurable
+* @param boolean $choix_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoix_not_configurable ($choix_not_configurable) {
+	$this->choix_not_configurable = $choix_not_configurable;
 	return $this;
 }
 
@@ -2633,32 +2656,6 @@ public function getEpaisseur_txt () {
 */
 public function setEpaisseur_txt ($epaisseur_txt) {
 	$this->epaisseur_txt = $epaisseur_txt;
-	return $this;
-}
-
-/**
-* Get epaisseur_type - Epaisseur (type)
-* @return string
-*/
-public function getEpaisseur_type () {
-	$preValue = $this->preGetValue("epaisseur_type"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->epaisseur_type;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseur_type")->isEmpty($data)) {
-		return $this->getValueFromParent("epaisseur_type");
-	}
-	return $data;
-}
-
-/**
-* Set epaisseur_type - Epaisseur (type)
-* @param string $epaisseur_type
-* @return \Pimcore\Model\Object\Product
-*/
-public function setEpaisseur_type ($epaisseur_type) {
-	$this->epaisseur_type = $epaisseur_type;
 	return $this;
 }
 
@@ -2737,6 +2734,32 @@ public function getLargeur_txt () {
 */
 public function setLargeur_txt ($largeur_txt) {
 	$this->largeur_txt = $largeur_txt;
+	return $this;
+}
+
+/**
+* Get largeur_type - Type de  largeur
+* @return string
+*/
+public function getLargeur_type () {
+	$preValue = $this->preGetValue("largeur_type"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->largeur_type;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("largeur_type")->isEmpty($data)) {
+		return $this->getValueFromParent("largeur_type");
+	}
+	return $data;
+}
+
+/**
+* Set largeur_type - Type de  largeur
+* @param string $largeur_type
+* @return \Pimcore\Model\Object\Product
+*/
+public function setLargeur_type ($largeur_type) {
+	$this->largeur_type = $largeur_type;
 	return $this;
 }
 
@@ -3313,58 +3336,6 @@ public function setNbrpp ($nbrpp) {
 }
 
 /**
-* Get finition - Finition
-* @return string
-*/
-public function getFinition () {
-	$preValue = $this->preGetValue("finition"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->finition;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition")->isEmpty($data)) {
-		return $this->getValueFromParent("finition");
-	}
-	return $data;
-}
-
-/**
-* Set finition - Finition
-* @param string $finition
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFinition ($finition) {
-	$this->finition = $finition;
-	return $this;
-}
-
-/**
-* Get finition_not_configurable - Finition non configurable
-* @return boolean
-*/
-public function getFinition_not_configurable () {
-	$preValue = $this->preGetValue("finition_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->finition_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("finition_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set finition_not_configurable - Finition non configurable
-* @param boolean $finition_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFinition_not_configurable ($finition_not_configurable) {
-	$this->finition_not_configurable = $finition_not_configurable;
-	return $this;
-}
-
-/**
 * Get traitement_surface - Traitement de surface
 * @return string
 */
@@ -3417,6 +3388,58 @@ public function setTraitement_surface_not_configurable ($traitement_surface_not_
 }
 
 /**
+* Get finition - Finition
+* @return string
+*/
+public function getFinition () {
+	$preValue = $this->preGetValue("finition"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->finition;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition")->isEmpty($data)) {
+		return $this->getValueFromParent("finition");
+	}
+	return $data;
+}
+
+/**
+* Set finition - Finition
+* @param string $finition
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFinition ($finition) {
+	$this->finition = $finition;
+	return $this;
+}
+
+/**
+* Get finition_not_configurable - Finition non configurable
+* @return boolean
+*/
+public function getFinition_not_configurable () {
+	$preValue = $this->preGetValue("finition_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->finition_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("finition_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set finition_not_configurable - Finition non configurable
+* @param boolean $finition_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFinition_not_configurable ($finition_not_configurable) {
+	$this->finition_not_configurable = $finition_not_configurable;
+	return $this;
+}
+
+/**
 * Get profil - Profil
 * @return array
 */
@@ -3465,84 +3488,6 @@ public function getProfil_not_configurable () {
 */
 public function setProfil_not_configurable ($profil_not_configurable) {
 	$this->profil_not_configurable = $profil_not_configurable;
-	return $this;
-}
-
-/**
-* Get pimonly_profil_label - Label pour attribut configurable
-* @return string
-*/
-public function getPimonly_profil_label () {
-	$preValue = $this->preGetValue("pimonly_profil_label"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->pimonly_profil_label;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_profil_label")->isEmpty($data)) {
-		return $this->getValueFromParent("pimonly_profil_label");
-	}
-	return $data;
-}
-
-/**
-* Set pimonly_profil_label - Label pour attribut configurable
-* @param string $pimonly_profil_label
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPimonly_profil_label ($pimonly_profil_label) {
-	$this->pimonly_profil_label = $pimonly_profil_label;
-	return $this;
-}
-
-/**
-* Get choix - Choix
-* @return string
-*/
-public function getChoix () {
-	$preValue = $this->preGetValue("choix"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->choix;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
-		return $this->getValueFromParent("choix");
-	}
-	return $data;
-}
-
-/**
-* Set choix - Choix
-* @param string $choix
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChoix ($choix) {
-	$this->choix = $choix;
-	return $this;
-}
-
-/**
-* Get choix_not_configurable - Choix non configurable
-* @return boolean
-*/
-public function getChoix_not_configurable () {
-	$preValue = $this->preGetValue("choix_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->choix_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("choix_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set choix_not_configurable - Choix non configurable
-* @param boolean $choix_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChoix_not_configurable ($choix_not_configurable) {
-	$this->choix_not_configurable = $choix_not_configurable;
 	return $this;
 }
 
@@ -3777,6 +3722,32 @@ public function getUnite () {
 */
 public function setUnite ($unite) {
 	$this->unite = $unite;
+	return $this;
+}
+
+/**
+* Get weight - Poids de base (en kg)
+* @return string
+*/
+public function getWeight () {
+	$preValue = $this->preGetValue("weight"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->weight;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("weight")->isEmpty($data)) {
+		return $this->getValueFromParent("weight");
+	}
+	return $data;
+}
+
+/**
+* Set weight - Poids de base (en kg)
+* @param string $weight
+* @return \Pimcore\Model\Object\Product
+*/
+public function setWeight ($weight) {
+	$this->weight = $weight;
 	return $this;
 }
 
@@ -4613,6 +4584,32 @@ public function setOrigineArticles ($origineArticles) {
 }
 
 /**
+* Get mage_visibility - mage_visibility
+* @return string
+*/
+public function getMage_visibility () {
+	$preValue = $this->preGetValue("mage_visibility"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_visibility;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_visibility")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_visibility");
+	}
+	return $data;
+}
+
+/**
+* Set mage_visibility - mage_visibility
+* @param string $mage_visibility
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_visibility ($mage_visibility) {
+	$this->mage_visibility = $mage_visibility;
+	return $this;
+}
+
+/**
 * Get accessoirepopin - Checkout Products
 * @return \Pimcore\Model\Object\product[] | \Pimcore\Model\Object\category[]
 */
@@ -5363,32 +5360,6 @@ public function getMage_cs_skus () {
 */
 public function setMage_cs_skus ($mage_cs_skus) {
 	$this->mage_cs_skus = $mage_cs_skus;
-	return $this;
-}
-
-/**
-* Get mage_visibility - mage_visibility
-* @return string
-*/
-public function getMage_visibility () {
-	$preValue = $this->preGetValue("mage_visibility"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->mage_visibility;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_visibility")->isEmpty($data)) {
-		return $this->getValueFromParent("mage_visibility");
-	}
-	return $data;
-}
-
-/**
-* Set mage_visibility - mage_visibility
-* @param string $mage_visibility
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMage_visibility ($mage_visibility) {
-	$this->mage_visibility = $mage_visibility;
 	return $this;
 }
 

@@ -39,17 +39,17 @@ $objects = array();
  echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
 
-foreach ($list->getObjects() as $object) {
+foreach ($list->getObjects() as $teinte) {
 
 
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
     //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
 
-    if(!($object instanceof Object_Teinte))
+    if(!($teinte instanceof Object_Teinte))
         continue;
     
-    $teinteName = $object->getName();
+    $teinteName = $teinte->getName();
 
     $conditionFilters = array(
     "( 
@@ -74,8 +74,12 @@ foreach ($list->getObjects() as $object) {
 
     foreach ($listProduct->getObjects() as $product) {
         //echo "TEST : ".$teinteName." - ".$product->getName()."\n";
-        if(stripos(" ".$product->getName()." ",$teinteName)>0)
+        if(stripos(" ".$product->getName()." ",$teinteName)>0) {
+
             echo "".$teinteName." - ".$product->getName()."\n";
+            $product->setPimonly_teinte_rel(array($teinte));
+        }
+
 
     }
 

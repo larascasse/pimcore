@@ -57,7 +57,7 @@ class Web2printController extends Action
 
        		$headers = [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $filename . '";"',
+                'Content-Disposition' => 'inline; filename="' . $filename . '"',
                 'Cache-Control' => 'private'
             ];
 

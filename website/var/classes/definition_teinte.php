@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-10-21T17:24:22+02:00
+* Generated at: 2018-03-26T22:30:42+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 85.169.54.82
+* IP: 172.31.15.147
 
 
 Fields Summary: 
@@ -14,6 +14,7 @@ Fields Summary:
 - image [image]
 - hexacolor [input]
 - products_relation [nonownerobjects]
+- teinte_type [select]
 */ 
 
 
@@ -21,7 +22,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1477063461,
+   'modificationDate' => 1522096242,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -169,13 +170,55 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'fieldtype' => 'nonownerobjects',
              'width' => '',
              'height' => '',
-             'maxItems' => NULL,
+             'maxItems' => '',
              'queryColumnType' => 'text',
              'phpdocType' => 'array',
              'relationType' => true,
              'classes' => NULL,
+             'pathFormatterClass' => NULL,
              'name' => 'products_relation',
              'title' => 'products_relation',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'columnType' => NULL,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          5 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Teinté',
+                'value' => 'teinte_classique',
+              ),
+              1 => 
+              array (
+                'key' => 'Teinte réactive',
+                'value' => 'teinte_reactive',
+              ),
+              2 => 
+              array (
+                'key' => 'Peint',
+                'value' => 'peint',
+              ),
+            ),
+             'width' => 300,
+             'defaultValue' => '',
+             'queryColumnType' => 'varchar(190)',
+             'columnType' => 'varchar(190)',
+             'phpdocType' => 'string',
+             'name' => 'teinte_type',
+             'title' => 'Type de teinte',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -184,7 +227,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
-             'columnType' => NULL,
+             'relationType' => false,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,

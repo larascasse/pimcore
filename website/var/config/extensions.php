@@ -45,6 +45,7 @@ return [
         "Magepim" => "",
         "LpnMageSync" => TRUE,
         "Bootstrap" => TRUE,
-        "ImportExport" => TRUE
+        "ImportExport" => TRUE,
+        "WorkflowGui" => TRUE
     ]
 ];

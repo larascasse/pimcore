@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2016-10-21T17:24:22+02:00
+* Generated at: 2018-03-26T22:30:42+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 85.169.54.82
+* IP: 172.31.15.147
 
 
 Fields Summary: 
@@ -14,6 +14,7 @@ Fields Summary:
 - image [image]
 - hexacolor [input]
 - products_relation [nonownerobjects]
+- teinte_type [select]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -21,10 +22,11 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\Teinte\Listing getByName ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Teinte\Listing getByDescription ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByName ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByDescription ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByTeinte_type ($value, $limit = 0) 
 */
 
 class Teinte extends Concrete {
@@ -35,6 +37,7 @@ public $name;
 public $description;
 public $image;
 public $hexacolor;
+public $teinte_type;
 
 
 /**
@@ -148,6 +151,32 @@ public function getHexacolor () {
 */
 public function setHexacolor ($hexacolor) {
 	$this->hexacolor = $hexacolor;
+	return $this;
+}
+
+/**
+* Get teinte_type - Type de teinte
+* @return string
+*/
+public function getTeinte_type () {
+	$preValue = $this->preGetValue("teinte_type"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->teinte_type;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("teinte_type")->isEmpty($data)) {
+		return $this->getValueFromParent("teinte_type");
+	}
+	return $data;
+}
+
+/**
+* Set teinte_type - Type de teinte
+* @param string $teinte_type
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setTeinte_type ($teinte_type) {
+	$this->teinte_type = $teinte_type;
 	return $this;
 }
 

@@ -58,6 +58,8 @@ foreach ($list->getObjects() as $object) {
     "name like '% ".$teinteName." %'"
     );
 
+    print_r($conditionFilters);
+
 
     $listProduct = new Pimcore\Model\Object\Product\Listing();
     $listProduct->setUnpublished(true);

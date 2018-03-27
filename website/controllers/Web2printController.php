@@ -48,6 +48,8 @@ class Web2printController extends Action
 
 	        $httpSource = Pimcore\Tool::getHostUrl()."/id/".$id;//."?t=".$time();
 
+            echo $httpSource ;
+
 	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
         	$filename = "lpn-ft-".$product->getMage_short_name(3000)."_".$id.".pdf";
@@ -126,7 +128,7 @@ class Web2printController extends Action
 
             $headers = [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $filename . '";"',
+                'Content-Disposition' => 'inline; filename="' . $filename . '"',
                 'Cache-Control' => 'private'
             ];
 

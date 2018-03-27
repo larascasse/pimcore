@@ -71,7 +71,7 @@ foreach ($list->getObjects() as $object) {
 
     foreach ($listProduct->getObjects() as $product) {
         echo "TEST : ".$teinteName." - ".$product->getName()."\n";
-        if(stristr(" ".$teinteName." ",$product->getName())>0)
+        if(stripos(" ".$teinteName." ",$product->getName())>0)
             echo "\n".$teinteName." - ".$product->getName()."\n";
 
     }

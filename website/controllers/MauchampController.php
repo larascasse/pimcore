@@ -227,7 +227,7 @@ class MauchampController extends Action
                 if(strlen($pdfContent)>0) {
                     $at = $mail->createAttachment($pdfContent);
                     $at->type = "application/pdf";
-                    $at->filename = "visite-laparqueterienouvelle-".$order["orderDetail"]["Type_Piece"]."-".$order["orderDetail"]["Code_Commande"].".pdf";
+                    $at->filename = "detail-".$order["orderDetail"]["Type_Piece"]."-".$order["orderDetail"]["Code_Commande"]."-laparqueterienouvelle.pdf";
                     $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
                 }
                 $mail->send();

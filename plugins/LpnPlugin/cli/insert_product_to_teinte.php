@@ -54,7 +54,8 @@ foreach ($list->getObjects() as $object) {
     $conditionFilters = array(
     "( 
          o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'
-        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ar/mm-ar-finis%'",
+        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ar/mm-ar-finis%'
+    )",
     "ean IS NULL",
     "code IS NOT NULL",
     //"LOWER(name) like '% ".strtolower($teinteName)." %'"

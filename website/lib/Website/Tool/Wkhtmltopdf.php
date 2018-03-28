@@ -1,6 +1,7 @@
 <?php
 //TODO
 namespace Website\Tool;
+use Pimcore\Logger;
 class Wkhtmltopdf {
  
     public static function fromUrl ($url, $config = array()) {

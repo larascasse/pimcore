@@ -136,6 +136,7 @@ class Wkhtmltopdf {
         $cmd = $wkhtmltopdfBinary.$options." '" . $httpSource . "' '" . $tmpPdfFile."'";
         //echo $cmd; die;
             system( $cmd, $retVal);
+            Logger::log("Wkhtml mcmd : ".$cmd);
 
               if ($retVal != 0 && $retVal != 1) {
                     echo "Lpn wkhtmltopdf reported error (" . $retVal . ")". "\ncommand was:" . $cmd;

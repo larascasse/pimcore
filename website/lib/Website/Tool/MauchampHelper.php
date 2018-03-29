@@ -593,7 +593,7 @@ EOT;
                             $_product = null;
 
                             $sku = trim($p->Code_EAN_Article);             
-                            $existingProductList = Object\Product::getByEan($sku);
+                            $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
 
                             //print_r($parent);
                             if($existingProductList->count()==1) {

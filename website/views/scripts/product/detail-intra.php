@@ -47,11 +47,12 @@ $logoAssets = array();
 <h1 style=""><?php echo $product->getMage_short_name(3000); ?></h1>
  <?php
 $subtitle = strlen($product->getSku())>0?$product->getSku():"";
-if(strlen($product->name_scienergie_court)) {
+
+/*if(strlen($product->name_scienergie_court)) {
 	if(strlen($subtitle)>0) 
 		$subtitle .=" - ";
 	$subtitle .=$product->name_scienergie_court;
-}
+}*/
 if (strlen($subtitle)>0) {
 	echo $subtitle = '<p>'.$subtitle.'</p>';
 }

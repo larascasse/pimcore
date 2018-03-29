@@ -296,7 +296,7 @@ if(count($this->products)>0) : ?>
 
 <!-- MODAL EMAIL -->
 <div class="modal" role="dialog" id="formEmail">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg"  style="max-width: 90%;">
     <div class="modal-content"  style="background-color: #bef0ff">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Envoyer les documents par e-mail</h5>
@@ -372,7 +372,7 @@ if(count($this->products)>0) : ?>
 
 Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
 
-Si vous avez besoin de plus amples informations, je me tiens à votre disposition :)
+Si vous avez besoin de plus amples informations, je me tiens à votre disposition.
 
 <?php echo $strRepresentant ?>
 

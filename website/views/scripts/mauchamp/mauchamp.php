@@ -370,7 +370,7 @@ if(count($this->products)>0) : ?>
         ?>
        <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 
-Vous trouverez, en pièce jointe, toutes les informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
+Vous trouverez, en pièce jointe, l’ensemble des informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
 
 Si vous avez besoin de plus amples informations, je me tiens à votre disposition.
 

@@ -57,7 +57,9 @@ $childrens = $this->products;
 
 				//Configurables
 				if($subProduct->getEan()=="") {
-					$subProductChildrens = $subProduct->getChilds();
+
+
+					$subProductChildrens = $subProduct->getChildren(null,true);
 		
 					
 					foreach ($subProductChildrens as $subsubProduct) {

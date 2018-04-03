@@ -1,5 +1,10 @@
 <?php
 
+if($this->error) {
+  echo $this->error;
+  return;
+}
+
 $orderDetail = $this->orderDetail;
 $hasEmailContact = strlen($orderDetail["Email_Client"])>0;
 $xmlClient = $this->xmlClient;

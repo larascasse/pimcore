@@ -47,11 +47,15 @@ class MauchampController extends Action
 
         if(isset($xml))
             $data = $xml;
-        else
+        else {
+            $data = false;
             //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-            $data = Website\Tool\MauchampHelper::getDebugOrder();
-        
-        if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
+            //$data = Website\Tool\MauchampHelper::getDebugOrder();
+        }
+            
+        if($data) {
+          if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
+            
             $client = \Website\Tool\MauchampHelper::parseClient($data);
 
             
@@ -60,7 +64,7 @@ class MauchampController extends Action
             $xmlClient = simplexml_load_string($xml);
 
             if(strlen($client->Email_Contact)>0)
-            $xmlClient->Email_Contact = $client->Email_Contact;
+              $xmlClient->Email_Contact = $client->Email_Contact;
             
             if(strlen($client->Nom_Contact)>0)
               $xmlClient->Nom_Contact = $client->Nom_Contact;
@@ -73,21 +77,27 @@ class MauchampController extends Action
             }
             catch (Exception $e) {
                 //echo "klmklmklkm".$e->getMessage();
+               $this->view->error = "Erreur render script";
             }
             //die;
-        }
+          }
 
-        //ORDER
+          //ORDER
+          else {
+              $order = \Website\Tool\MauchampHelper::parseOrder($data);
+              $this->view->products = $order["products"];
+              $this->view->missingProducts = $order["missingProducts"];
+              $this->view->transport = $order["transport"];
+              $this->view->orderDetail = $order["orderDetail"];
+              $this->view->xmlOrder = $data;
+              $this->view->xmlClient = \Website\Tool\MauchampHelper::buildXmlClientFromOrder($data);//Website\Tool\MagentoHelper::buildXmlClientFromOrder($data);
+
+          }
+        }
         else {
-            $order = \Website\Tool\MauchampHelper::parseOrder($data);
-            $this->view->products = $order["products"];
-            $this->view->missingProducts = $order["missingProducts"];
-            $this->view->transport = $order["transport"];
-            $this->view->orderDetail = $order["orderDetail"];
-            $this->view->xmlOrder = $data;
-            $this->view->xmlClient = \Website\Tool\MauchampHelper::buildXmlClientFromOrder($data);//Website\Tool\MagentoHelper::buildXmlClientFromOrder($data);
-
+          $this->view->error = "Erreur 01";
         }
+      
         
     }
 

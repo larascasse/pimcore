@@ -20,7 +20,7 @@ $childrens = $this->products;
 	   		 if(count($childrens)>0) {
 
 	   		 	$fields["Famille"] = "getFamille";
-	   		 	$fields["Choix"] = "getChoix";
+	   		 	$fields["Choix"] = "getChoixString";
 	   		 	$fields["Epaisseur"] = "getEpaisseurString";
 	   		 	$fields["Largeur"] = "getLargeurString";
 	   		 	$fields["Longueur"] = "getLongueurString";

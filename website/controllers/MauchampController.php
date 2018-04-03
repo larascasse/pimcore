@@ -12,8 +12,11 @@ use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
 
-use Website\Tool
-;
+use Website\Tool;
+
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
+
 
 
 
@@ -95,6 +98,20 @@ class MauchampController extends Action
 
         $order = \Website\Tool\MauchampHelper::parseOrder($this->getParam('xml'));
 
+
+        if($this->getParam('sendmail')=="true") {
+           $to_email = $this->getParam("to-email");
+           $validator = new EmailValidator();
+           $isEmailValid = $validator->isValid($to_email, new RFCValidation());
+           if(!$isEmailValid) {
+             header('Content-Type: application/json');
+              echo json_encode(array("message"=>  "Adresse email invalide !!!!"));
+              die;
+           }
+
+        }
+       
+
       
         
 
@@ -103,8 +120,6 @@ class MauchampController extends Action
           $ftIncludedSkus = array();
           if (is_array($this->getParam('ft'))) {
             foreach ($this->getParam('ft') as $key => $sku) {
-
-                
                 
                 $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
                 if($existingProductList->count()>=1) {
@@ -243,14 +258,17 @@ class MauchampController extends Action
                 $mail->clearRecipients();
 
                 $mail->addTo("florent@lesmecaniques.net",'FLorent text');
+                //$mail->addTo($this->getParam("to-email"));
+
                 $mail->addBcc("florent@lesmecaniques.net");
 
                 $mail->setReplyTo($this->getParam("from-email"));
+                $mail->addCc($this->getParam("from-email"));
 
                 $mail->setSubject($this->getParam("subject"));
 
                 $mail->clearFrom();
-                $mail->setFrom("eshop@lp-nouvelle.fr","La Parqueterie Nouvelle");
+                $mail->setFrom("contact@lp-nouvelle.fr","La Parqueterie Nouvelle");
 
                 if(strlen($pdfContent)>0) {
                     $at = $mail->createAttachment($pdfContent);

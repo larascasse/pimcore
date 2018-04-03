@@ -1659,12 +1659,12 @@ class Website_Product extends Object_Product {
 
 	}
 
-	public function getEpaisseurString() {
+	public function getEpaisseurString($suffixe = " mm") {
 		if(strlen($value=$this->getEpaisseur_txt())>0) {
 			return $value;
 		}
 		else {
-			return $this->getEpaisseur();
+			return $this->getEpaisseur().$suffixe ;
 		}
 	}
 

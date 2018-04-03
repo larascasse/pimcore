@@ -302,11 +302,17 @@ class Website_Product extends Object_Product {
 	}
 
 
+
+
 	public function getChoixDescription () {
 		return $this->getTaxonomyDescription('choix');
 		
 	}
 
+
+	public function getFinitionString () {
+		return $this->getSingleTaxonomyString('finition');
+	}
 	
 	/**
 	* @return string

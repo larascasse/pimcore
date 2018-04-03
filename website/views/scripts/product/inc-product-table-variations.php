@@ -27,7 +27,7 @@ $childrens = $this->products;
 
 
 	   		 	$fields["Surface"] = "getTraitement_surface";
-	   		 	$fields["Finition"] = "getFinition";
+	   		 	$fields["Finition"] = "getFinitionString";
 	   		 	$fields["Support"] = "getSupport";
 
 	   		 	$fields["CU"] = "getCoucheUsure";

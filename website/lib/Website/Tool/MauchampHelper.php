@@ -536,7 +536,7 @@ EOT;
        
 
         $lines = $xml->Lignes[0]->Ligne;
-
+        $shippingAmountHT = 0;
         if( $lines ) {
             $itemsCount = 0;
             

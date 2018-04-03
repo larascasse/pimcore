@@ -257,8 +257,8 @@ class MauchampController extends Action
 
                 $mail->clearRecipients();
 
-                $mail->addTo("florent@lesmecaniques.net",'FLorent text');
-                //$mail->addTo($this->getParam("to-email"));
+                //$mail->addTo("florent@lesmecaniques.net",'Florent text');
+                $mail->addTo($this->getParam("to-email"));
 
                 $mail->addBcc("florent@lesmecaniques.net");
 

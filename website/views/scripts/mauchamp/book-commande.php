@@ -28,9 +28,12 @@ foreach ($products as $product) {
 		
 		if(!$product->isAccessoire()) {
 
-			if(strlen(trim($product->getDescription()))>0) {
-				echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids)); 
+			if(!$product->isTable()) {
+				if(strlen(trim($product->getDescription()))>0) {
+					echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids)); 
+				}
 			}
+			
 
 			if(count($product->getImageAssetArray(true))>0) {
 				echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids));
@@ -97,7 +100,9 @@ foreach ($products as $product) {
 	if(in_array($product->getSku(),$ftIncludedSkus)) {
 		if(!$product->isPlusValue() && !$product->getFiche_technique_lpn() && !$product->isAccessoire())  {
 
-			echo $this->template("product/detail-ft.php",array("product"=>$product)); 
+			if(!$product->isTable()) {
+				echo $this->template("product/detail-ft.php",array("product"=>$product));
+			} 
 		}
 	}
 }

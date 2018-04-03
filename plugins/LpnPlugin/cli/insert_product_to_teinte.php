@@ -53,8 +53,8 @@ foreach ($list->getObjects() as $teinte) {
 
     $conditionFilters = array(
     "( 
-         o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'
-        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ar/mm-ar-finis%'
+         o_path LIKE '/catalogue/_product_base__/05contreco/tmp/%'
+        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/%'
     )",
     "ean IS NULL",
     "code IS NOT NULL",
@@ -83,6 +83,9 @@ foreach ($list->getObjects() as $teinte) {
 
 
     }
+
+    $teinte->setPublished(true);
+    $teinte->save();
 
 
 

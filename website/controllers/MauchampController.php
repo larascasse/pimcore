@@ -262,8 +262,12 @@ class MauchampController extends Action
 
                 $mail->addBcc("florent@lesmecaniques.net");
 
-                $mail->setReplyTo($this->getParam("from-email"));
-                $mail->addCc($this->getParam("from-email"));
+                $isEmailValid = $validator->isValid($this->getParam("from-email"), new RFCValidation());
+                if($isEmailValid) {
+                  $mail->setReplyTo($this->getParam("from-email"));
+                  $mail->addCc($this->getParam("from-email"));
+                }
+               
 
                 $mail->setSubject($this->getParam("subject"));
 

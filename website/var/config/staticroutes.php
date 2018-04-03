@@ -410,5 +410,22 @@ return [
         "priority" => 0,
         "creationDate" => 1516875636,
         "modificationDate" => 1516878576
+    ],
+    27 => [
+        "id" => 27,
+        "name" => "teinte",
+        "pattern" => "/\\/teinte\\/([\\d]+)/",
+        "reverse" => "/teinte/%id",
+        "module" => NULL,
+        "controller" => "teinte",
+        "action" => "detail",
+        "variables" => "id",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1522771962,
+        "modificationDate" => 1522771998
     ]
 ];

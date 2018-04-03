@@ -1668,21 +1668,21 @@ class Website_Product extends Object_Product {
 		}
 	}
 
-	public function getLongueurString() {
+	public function getLongueurString($suffixe = " mm") {
 		if(strlen($value=$this->getLongueur_txt())>0) {
 			return $value;
 		}
 		else {
-			return $this->getLongueur();
+			return $this->getLongueur().$suffixe;
 		}
 	}
 
-	public function getLargeurString() {
+	public function getLargeurString($suffixe = " mm") {
 		if(strlen($value=$this->getlargeur_txt())>0) {
 			return $value;
 		}
 		else {
-			return $this->getLargeur();
+			return $this->getLargeur().$suffixe;
 		}
 	}
 

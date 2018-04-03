@@ -3151,7 +3151,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		return "/id/".$this->getId();
 	}
 	public function getPreviewLink() {
-		return "<a href=\"/id/".$this->getId()."\">Voir</a>";
+		return "<a href=\"/id/".$this->getId()."\" target=\"_blank\">Voir</a>";
 	}
 
 

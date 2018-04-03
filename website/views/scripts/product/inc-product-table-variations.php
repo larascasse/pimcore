@@ -3,10 +3,16 @@
 $childrens = $this->products;
 
 ?>
+<style>
+.table.table-striped td {
+	padding: 0.3em;
+}
+
+</style>
 
 <div class="row">
 	<div class="col">
-	    <div class="">
+	    <div>
 	       
 
 	   		 <?php
@@ -19,7 +25,7 @@ $childrens = $this->products;
 	   		 	$fields["Largeur"] = "getLargeurString";
 	   		 	$fields["Longueur"] = "getLongueurString";
 
-	   		 	
+
 	   		 	$fields["Surface"] = "getTraitement_surface";
 	   		 	$fields["Finition"] = "getFinition";
 	   		 	$fields["Support"] = "getSupport";
@@ -30,15 +36,16 @@ $childrens = $this->products;
 	   		 	$fields["Colisage"] = "getColisage";
 	   		 	
 	   		 	//$fields["Dimensions"] = "getPimonly_dimensions";
-	   		 	$fields["Utilisation"] = "getCalculatedClasseUtilisation";
+	   		 	$fields["Classe"] = "getCalculatedClasseUtilisation";
 	   		 	$fields["EAN"] = "getEan";
 
-	   		 	$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";
+	   		 	//$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";
+	   		 	$fields["Prix  HT"] = "getPrice_4";
 	   		 	$fields["FT"] = "getPreviewLink";
 
 
 
-			$strChildren.=   '<table class="table table-striped">  <thead><tr>';
+			$strChildren.=   '<table class="table table-striped" style="font-size: 10px">  <thead><tr>';
 			foreach ($fields as $key => $value) {
 				$strChildren.= '<th>'.$key.'</th>';
 			}
@@ -87,7 +94,7 @@ $childrens = $this->products;
 							}
 							
 								
-							$strChildren.= '<td>'.$v.'</td>';
+							$strChildren.= '<td style="padding: 0.3em;">'.$v.'</td>';
 						}
 						?>
 					

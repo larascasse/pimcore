@@ -21,9 +21,9 @@ $childrens = $this->products;
 
 	   		 	$fields["Famille"] = "getFamille";
 	   		 	$fields["Choix"] = "getChoixString";
-	   		 	$fields["Epaisseur"] = "getEpaisseurString";
-	   		 	$fields["Largeur"] = "getLargeurString";
-	   		 	$fields["Longueur"] = "getLongueurString";
+	   		 	$fields["Ep."] = "getEpaisseurString";
+	   		 	$fields["Larg."] = "getLargeurString";
+	   		 	$fields["Long."] = "getLongueurString";
 
 
 	   		 	$fields["Surface"] = "getTraitement_surface";
@@ -40,7 +40,7 @@ $childrens = $this->products;
 	   		 	$fields["EAN"] = "getEan";
 
 	   		 	//$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";
-	   		 	$fields["Prix  HT"] = "getPrice_4";
+	   		 	$fields["Prix HT"] = "getPrice_4";
 	   		 	$fields["FT"] = "getPreviewLink";
 
 

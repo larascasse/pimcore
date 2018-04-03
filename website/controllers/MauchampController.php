@@ -101,19 +101,17 @@ class MauchampController extends Action
           $ftUrls = array();
 
           $ftIncludedSkus = array();
-         
-
           if (is_array($this->getParam('ft'))) {
             foreach ($this->getParam('ft') as $key => $sku) {
 
-                $ftIncludedSkus[] = $sku;
                 
-                $existingProductList = Object\Product::getByEan($sku);
-                if($existingProductList->count()>=1) 
-                       $product = $existingProductList->current();
-
-                if($product) {
+                
+                $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
+                if($existingProductList->count()>=1) {
+                    
+                    $product = $existingProductList->current();
                     $ftUrls[] = Pimcore\Tool::getHostUrl().'/pdf/'.$product->getId();
+                    $ftIncludedSkus[] = $sku;
                 }
             }
          }
@@ -121,7 +119,27 @@ class MauchampController extends Action
           $photosIncludedSkus = array();
           if (is_array($this->getParam('photos'))) {
             foreach ($this->getParam('photos') as $key => $sku) {
-                $photosIncludedSkus[] = $sku;
+                $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
+                if($existingProductList->count()>=1) {
+                  $product = $existingProductList->current();
+                  $photosIncludedSkus[] = $sku;
+
+                }
+                
+            }
+         }
+
+         $poseIncludedSkus = array();
+          if (is_array($this->getParam('pose'))) {
+            foreach ($this->getParam('pose') as $key => $sku) {
+                $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
+                if($existingProductList->count()>=1) {
+
+                  $product = $existingProductList->current();
+                  $poseIncludedSkus[] = $sku;
+
+                }
+                
             }
          }
 
@@ -129,7 +147,8 @@ class MauchampController extends Action
         $pdfFileUrl = "";
   
 
-    
+      
+
 
          try {
 
@@ -139,7 +158,14 @@ class MauchampController extends Action
                 
                 /* V2 */
                 $coverHtmlData = \Pimcore\Tool::getHttpData(
-                        Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$this->getParam('xml')]);
+                        Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,[
+                          "xml"=>$this->getParam('xml'),
+                          "ftIncludedSkus" => $ftIncludedSkus,
+                          "poseIncludedSkus" => $poseIncludedSkus,
+                          "photosIncludedSkus" => $photosIncludedSkus,
+
+
+                        ]);
 
                 $pdfFile = PIMCORE_TEMPORARY_DIRECTORY . "/" .$order["orderDetail"]["Code_Commande"]."-". uniqid() . ".pdf";
                 $pdfFileUrl = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$pdfFile);
@@ -160,8 +186,10 @@ class MauchampController extends Action
                  $this->products = $order["products"];
                  if(count($this->products)>0) {
                      foreach ($this->products as $product) {
+
+
                          
-                         if($product->getFiche_technique_lpn()) {
+                         if(in_array($product->getSku(),$ftIncludedSkus) && $product->getFiche_technique_lpn()) {
                             $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
                             
                             $pdf = Zend_Pdf::load($pdfpath); 
@@ -336,6 +364,11 @@ class MauchampController extends Action
           }
         }*/
 
+        //print_r($this->getParam('ftIncludedSkus'));
+        //print_r($this->getParam('poseIncludedSkus'));
+        //print_r($this->getParam('photosIncludedSkus'));
+        //die;
+
         
         $this->view->products = $order["products"];
 
@@ -344,6 +377,12 @@ class MauchampController extends Action
         $this->view->orderDetail = $order["orderDetail"];
         $this->view->coverTitle = $coverTitle;
         $this->view->xmlOrder = $xml;
+        
+        $this->view->ftIncludedSkus = is_array($this->getParam('ftIncludedSkus'))?$this->getParam('ftIncludedSkus'):array();
+        $this->view->poseIncludedSkus = is_array($this->getParam('poseIncludedSkus'))?$this->getParam('poseIncludedSkus'):array();
+        $this->view->photosIncludedSkus = is_array($this->getParam('photosIncludedSkus'))?$this->getParam('photosIncludedSkus'):array();
+
+
 
         $this->renderScript('mauchamp/book-commande.php');
 
@@ -385,7 +424,12 @@ class MauchampController extends Action
         $debugOnlyStatique = false;
 
         if(!$debugOnlyStatique) {
-             $fileContent = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,["xml"=>$data]);
+             $fileContent = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/?controller=mauchamp&action=cover-for-piece-commerciale",null,[
+              "xml"=>$data,
+              "ftIncludedSkus" => $this->getParam('ftIncludedSkus'),
+              "poseIncludedSkus" => $this->getParam('poseIncludedSkus'),
+              "photosIncludedSkus" => $this->getParam('photosIncludedSkus'),
+            ]);
 
 
              //$filepath = $tmpPdfFile = PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";

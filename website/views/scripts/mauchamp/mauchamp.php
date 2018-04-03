@@ -3,6 +3,7 @@
 $orderDetail = $this->orderDetail;
 $hasEmailContact = strlen($orderDetail["Email_Client"])>0;
 $xmlClient = $this->xmlClient;
+$showCheckbox = true;
 
 ?>
 
@@ -13,27 +14,27 @@ $(document).ready(function() {
   $('#selectAllFt').on('click', function () {
   	//console.log('KKKKKKKKK',$('input[type="checkbox"]', '.check-ft'))
     if ($(this).hasClass('allChecked')) {
-        $('.check-ft').attr('checked', false);
+        $('.check-ft').prop('checked', false);
     } else {
-        $('.check-ft').attr('checked', true);
+        $('.check-ft').prop('checked', true);
     }
     $(this).toggleClass('allChecked');
   });
   $('#selectAllPose').on('click', function () {
   	//console.log('KKKKKKKKK',$('input[type="checkbox"]', '.check-ft'))
     if ($(this).hasClass('allChecked')) {
-        $('.check-pose').attr('checked', false);
+        $('.check-pose').prop('checked', false);
     } else {
-        $('.check-pose').attr('checked', true);
+        $('.check-pose').prop('checked', true);
     }
     $(this).toggleClass('allChecked');
   });
   $('#selectAllPhoto').on('click', function () {
   	//console.log('KKKKKKKKK',$('input[type="checkbox"]', '.check-ft'))
     if ($(this).hasClass('allChecked')) {
-        $('.check-photo').attr('checked', false);
+        $('.check-photo').prop('checked', false);
     } else {
-        $('.check-photo').attr('checked', true);
+        $('.check-photo').prop('checked', true);
     }
     $(this).toggleClass('allChecked');
   });
@@ -103,7 +104,7 @@ function sendEmail() {
   showPleaseWait();
   setTimeout(function(){ 
     hidePleaseWait(); 
-    }, 3000);
+    }, 4000);
   
   $.ajax({
      url : '/?controller=mauchamp&action=mauchamp-sendmail',
@@ -172,6 +173,7 @@ function showEmbededPdf(pdfUrl) {
 
 <?php
 $hasOnePose = false;
+$hasOnePhoto = false;
 
 foreach ($this->products as $product) {
   echo $this->template("product/inc-product-images-slider.php",array("product"=>$product));
@@ -180,23 +182,34 @@ foreach ($this->products as $product) {
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
     $hasOnePose = true;
   }
- // if(isset($product) && !$product->isAccessoire() && count($product->getImageAssetArray())>0)
-  //  $hasOnePhoto = true;
+
+ if (!$product->isAccessoire() && count($product->getImageAssetArray())>0) {
+    $hasOnePhoto = true;
+ }
 
 }
 ?>
 			<tr>
       <th>EAN</th>
       <th>Nom</th>
-      <!--<th colspan="2"><input type="checkbox" id="selectAllFt" /></th>-->
-      
+      <?php if ($showCheckbox) : ?>
+      <th colspan="1"><input type="checkbox" id="selectAllFt" /></th>
+      <?php endif; ?>
       <th colspan="1"></th>
       <?php if ($hasOnePose) : ?>
-      <!--<th colspan="2"><input type="checkbox" id="selectAllPose" /></th>-->
+
+        <?php if($showCheckbox) : ?>
+        <th colspan="1"><input type="checkbox" id="selectAllPose" /></th>
+        <?php endif; ?>
       <th colspan="1"></th>
     <?php endif ?>
-     <!-- <th colspan="2"><input type="checkbox" id="selectAllPhoto" /></th>-->
+
+    <?php if ($hasOnePhoto) : ?>
+      <?php if($showCheckbox) : ?>
+       <th colspan="1"><input type="checkbox" id="selectAllPhoto" /></th>
+      <?php endif ?>
       <th colspan="1"></th>
+    <?php endif ?>
     </tr>
 		</thead>
 		<tbody>
@@ -214,6 +227,8 @@ foreach ($this->products as $product) {
 	<tr class="row__">
 	<td class="col__"><?php echo $sku ?></td>
 	<td class="col__"><?php echo $product->getMage_short_name(3000)?>
+    
+
     <?php if ($product->isParquet()): 
 
       $chauffantBasseTemperature = Object_Service::getOptionsForSelectField($product,"chauffantBasseTemperature")[$product->getChauffantBasseTemperature()];
@@ -223,32 +238,45 @@ foreach ($this->products as $product) {
       ?>
     <p class="small">Sol chauffant basse temperature : <?php echo  $chauffantBasseTemperature; ?><br />Sol chauffant basse température électrique : <?php echo  $chauffantRadiantElectrique; ?><br />Sol basse température réversible : <?php echo  $solRaffraichissant; ?></p></td>
 	<?php endif; ?>
-	<!--<div class="col"><a href="<?php echo $product->getMage_fichepdf()?>" class="btn noajaxload" target="_blank">Fiche technique V1</a></div>-->
-	<!--<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>-->
+
+
+  <?php if ($showCheckbox) : ?>
+	<td class="col__"><input type="checkbox" class="check-ft" name="ft[]" value="<?php echo $product->getSku()?>"/></td>
+  <?php endif ?>
 	<td class="col__"><a href="<?php echo $product->getMage_fichepdf()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Fiche technique</a></td>
 
 
-<?php if($hasPose) : ?>
-	<!--<td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>-->
-	<td class="col__"><a href="/id/<?php echo $product->getId()?>?_dc=<?php echo time()?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
-    <?php elseif($hasOnePose) : ?>
+<?php if($hasOnePose) : ?>
+	
+  <?php if ($showCheckbox) : ?>
+    <td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
+  <?php endif ?>
+
+	<td class="col__">
+     <?php if($hasOnePose) : ?>
+    <a href="<?php $urlFichePose ?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
+   <?php endif; ?>
     
-    <td></td>
+  </td>
       
 <?php endif; ?>
 
-  <!-- 
+
+<?php if($hasOnePhoto) : ?>
+
+     <?php if ($showCheckbox) : ?>
     <td class="col__">
       <?php if($hasPhoto) : ?>
      <input type="checkbox"  class="check-photo"  name="photos[]" value="<?php echo $product->getSku()?>"/>
       <?php endif; ?>
-    </td>-->
+    </td>
+    <?php endif; ?>
     <td class="col__">
-       <?php if($hasPhoto) : ?><!--<a href="/?controller=web2print&action=get-product-photo-pdf&id=<?php echo $product->getId()?>&_dc=<?php echo time()?>" class="btn-link noajaxload btn-inverse_ embed-pdf" target="_blank">Photos</a>-->
+       <?php if($hasPhoto) : ?>
         <a href="#" class="btn-link noajaxload btn-inverse_" onclick="showProductPhotos('<?php echo $product->getEan()?>');return false;">Photos</a>
        <?php endif; ?>
      </td>
-
+<?php endif; ?>
 
 
 	</tr>

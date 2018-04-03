@@ -3,31 +3,45 @@
 $products = $this->products;
 $ids=0;
 
+$ftIncludedSkus = $this->ftIncludedSkus;
+$poseIncludedSkus = $this->poseIncludedSkus;
+$photosIncludedSkus = $this->photosIncludedSkus;
+
+print_r($photosIncludedSkus);
+
 
 /* Cover */
-echo $this->template("mauchamp/cover-for-piece-commerciale.php",array("product"=>$product,"orderDetail" => $this->orderDetail));
+echo $this->template("mauchamp/cover-for-piece-commerciale.php",array(
+	"product"=>$product,
+	"orderDetail" => $this->orderDetail,
+	//"ftIncludedSkus" => $ftIncludedSkus,
+
+));
 
 
 //return;
 
 /* Photos / Fiche produits */
 foreach ($products as $product) {
-	if(!$product->isAccessoire()) {
 
+	if(in_array($product->getSku(),$photosIncludedSkus)) {
 		
+		if(!$product->isAccessoire()) {
 
-		if(strlen(trim($product->getDescription()))>0) {
-			echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids)); 
+			if(strlen(trim($product->getDescription()))>0) {
+				echo $this->template("product/detail-intra.php",array("product"=>$product,"index"=>$ids)); 
+			}
+
+			if(count($product->getImageAssetArray(true))>0) {
+				echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids));
+
+			}
+
+			
+			$ids ++;
 		}
-
-		if(count($product->getImageAssetArray(true))>0) {
-			echo $this->template("product/detail-photos.php",array("product"=>$product,"index"=>$ids));
-
-		}
-
-		
-		$ids ++;
 	}
+	
 }
 
 
@@ -36,7 +50,7 @@ foreach ($products as $product) {
 $idx=0;
 $hasAccessoires = false;
 foreach ($products as $product) {
-	if($product->isAccessoire()) {
+	if($product->isAccessoire() && in_array($product->getSku(),$photosIncludedSkus)) {
 		$hasAccessoires =true;
 		break;
 	}
@@ -49,16 +63,19 @@ if($hasAccessoires) {
 	$pageProduct=array();
 	foreach ($products as $product) {
 		//echo $product->getName()."<br >";
-		if( $product->isAccessoire() && !$product->isPlusValue()) {
-			$page = floor($ids/4);
-			if(!isset($pageProduct[$page]))
-				$pageProduct[$page]=array();
 
-			//echo $page."/".$ids."    ";
+		if(in_array($product->getSku(),$photosIncludedSkus)) {
+			if( $product->isAccessoire() && !$product->isPlusValue()) {
+				$page = floor($ids/4);
+				if(!isset($pageProduct[$page]))
+					$pageProduct[$page]=array();
 
-			array_push($pageProduct[$page],$product);
-			//echo "lklmklkm";
-			$ids++;
+				//echo $page."/".$ids."    ";
+
+				array_push($pageProduct[$page],$product);
+				//echo "lklmklkm";
+				$ids++;
+			}
 		}
 		
 	}
@@ -76,9 +93,12 @@ if($hasAccessoires) {
 
 /* Fiches techniques */
 foreach ($products as $product) {
-	if(!$product->isPlusValue() && !$product->getFiche_technique_lpn() && !$product->isAccessoire())  {
 
-		echo $this->template("product/detail-ft.php",array("product"=>$product)); 
+	if(in_array($product->getSku(),$ftIncludedSkus)) {
+		if(!$product->isPlusValue() && !$product->getFiche_technique_lpn() && !$product->isAccessoire())  {
+
+			echo $this->template("product/detail-ft.php",array("product"=>$product)); 
+		}
 	}
 }
 ?>

@@ -95,10 +95,20 @@ function hidePleaseWait () {
         };
 
 
-
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 
 function sendEmail() {
   window.log("sendEmail",$("#mailform"),$("#mailform").serialize());
+
+  var email = $("#input-email").val();
+  if (!validateEmail(email)) {
+    alert("Adresse email invalide !!");
+    return false;
+
+  }
 
   $('#formEmail').modal('hide');
   showPleaseWait();
@@ -176,7 +186,6 @@ $hasOnePose = false;
 $hasOnePhoto = false;
 
 foreach ($this->products as $product) {
-  echo $this->template("product/inc-product-images-slider.php",array("product"=>$product));
 
 
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
@@ -196,8 +205,8 @@ foreach ($this->products as $product) {
       <th colspan="1"><input type="checkbox" id="selectAllFt" /></th>
       <?php endif; ?>
       <th colspan="1"></th>
+     
       <?php if ($hasOnePose) : ?>
-
         <?php if($showCheckbox) : ?>
         <th colspan="1"><input type="checkbox" id="selectAllPose" /></th>
         <?php endif; ?>
@@ -311,14 +320,32 @@ if(count($this->products)>0) : ?>
 <div class="row">
 	<div class="col-12 text-right">
     
-		<a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer la sélection par email</a>
-    <input type="button" class="btn  btn-outline-primary" value="Voir / Sauvegarder / Imprimer" id="printbook" onclick="printBook();return false;" />
+		<input type="button" class="btn  btn-outline-primary" value="Visualiser / imprimer" id="printbook" onclick="printBook();return false;" />
+    <a class="btn  btn-outline-primary" data-toggle="modal" data-target="#formEmail"  href="#formEmail" aria-expanded="false" aria-controls="formEmail" role="button">Envoyer le PimPamPoum au client</a>
+    
 	</div>
 </div>
 </div>
 <textarea  cols="100" rows="20" name="xml"  style="display: none"><?php echo $this->xmlOrder ?></textarea>
 
 
+<style>
+
+
+#formEmail input.form-control{
+  display : inline-block;
+  width: 80%;
+
+}
+
+#formEmail label.form-control-label {
+  background-color: #FF0000;
+  width: 20% !important;
+}
+
+
+
+</style>
 
 
 
@@ -327,7 +354,7 @@ if(count($this->products)>0) : ?>
   <div class="modal-dialog modal-lg"  style="max-width: 90%;">
     <div class="modal-content"  style="background-color: #bef0ff">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Envoyer les documents par e-mail</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Envoyer par e-mail</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -338,15 +365,15 @@ if(count($this->products)>0) : ?>
 
 
           <div class="form-group has-success__">
-          <label class="form-control-label" for="inputSuccess1">Pour</label>
-          <input type="text" class="form-control form-control-success" id="inputSuccess1" name="to-email" value="<?php echo $orderDetail["Email_Client"]?>">
+          <label class="form-control-label" for="inputSuccess1" style="width: 10%">Pour</label>
+          <input type="text" class="form-control form-control-success" id="input-email" name="to-email" value="<?php echo $orderDetail["Email_Client"]?>">
           <!--<div class="form-control-feedback">Success! You've done it.</div>
           <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
           </div>
 
 
             <div class="form-group has-success__">
-          <label class="form-control-label" for="inputSuccess1">De la part de </label>
+          <label class="form-control-label" for="inputSuccess1" style="width: 10%">De la part de / Cc</label>
           <input type="text" class="form-control form-control-success" id="inputSuccess1" name="from-email" value="<?php echo $orderDetail["Representant2_Email"]?>">
           <!--<div class="form-control-feedback">Success! You've done it.</div>
           <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
@@ -355,8 +382,8 @@ if(count($this->products)>0) : ?>
 
 
           <div class="form-group has-success__">
-            <label class="form-control-label" for="inputSuccess1">Sujet</label>
-            <input type="text" class="form-control form-control-success" id="inputSuccess1" value="<?php echo "Voici le détail de votre ".strtolower($orderDetail["Type_Piece"])." n°".$orderDetail["Code_Commande"]." @ La Parqueterie Nouvelle" ?>" name="subject">
+            <label class="form-control-label" for="inputSuccess1" style="width: 10%">Sujet</label>
+            <input type="text" class="form-control form-control-success" id="inputSuccess1" value="<?php echo "Voici le détail de votre ".strtolower($orderDetail["Type_Piece"])." ".$orderDetail["Code_Commande"]." @ La Parqueterie Nouvelle" ?>" name="subject">
             <!--<div class="form-control-feedback">Success! You've done it.</div>
             <small class="form-text text-muted">Example help text that remains unchanged.</small>-->
            </div>
@@ -398,7 +425,7 @@ if(count($this->products)>0) : ?>
         ?>
        <textarea class="form-control" rows="10" id="inputWarning1" name="message">Bonjour,
 
-Vous trouverez, en pièce jointe, l’ensemble des informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> n° <?php echo $orderDetail["Code_Commande"]?>.
+Vous trouverez, en pièce jointe, l’ensemble des informations relatives à votre <?php echo strtolower($orderDetail["Type_Piece"]) ?> <?php echo $orderDetail["Code_Commande"]?>.
 
 Si vous avez besoin de plus amples informations, je me tiens à votre disposition.
 
@@ -429,7 +456,7 @@ Si vous avez besoin de plus amples informations, je me tiens à votre dispositio
   <div class="col-12">
 <?php
 /* Cover */
-echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
+//echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$orderDetail["Email_Client"],"xmlClient"=>$xmlClient));
 
 ?>
 </div>
@@ -498,7 +525,7 @@ endif; ?>
 
 <div>
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#CCCCCC"><?php echo $this->xmlOrder ?></textarea>
+<textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#dddddd"><?php echo $this->xmlOrder ?></textarea>
 </div>
 
 <?php 

@@ -1659,6 +1659,33 @@ class Website_Product extends Object_Product {
 
 	}
 
+	public function getEpaisseurString() {
+		if(strlen($value=$this->getEpaisseur_txt())>0) {
+			return $value;
+		}
+		else {
+			return $this->getEpaisseur();
+		}
+	}
+
+	public function getLongueurString() {
+		if(strlen($value=$this->getLongueur_txt())>0) {
+			return $value;
+		}
+		else {
+			return $this->getLongueur();
+		}
+	}
+
+	public function getLargeurString() {
+		if(strlen($value=$this->getlargeur_txt())>0) {
+			return $value;
+		}
+		else {
+			return $this->getLargeur();
+		}
+	}
+
 
 
 	public function getDimensionsString() {

@@ -190,90 +190,10 @@ foreach ($taxonomies as $label => $taxonomie) {
 
 <hr />
 -->
+<?php
+//echo $this->template("inc-product-table-variations.php",array("products"=>$childrens));
 
-<div class="row">
-	<div class="col">
-	    <div class="">
-	       
-
-	   		 <?php
-	   		 $strChildren="";
-	   		 if(count($childrens)>0) {
-
-	   		 	$fields["Choix"] = "getChoix";
-	   		 	$fields["Surface"] = "getTraitement_surface";
-	   		 	$fields["Finition"] = "getFinition";
-	   		 	$fields["Support"] = "getSupport";
-	   		 	if($product->isParquetContrecolle()) {
-	   		 		$fields["CU"] = "getCoucheUsure";
-	   		 	}
-	   		 	$fields["Colisage"] = "getColisage";
-	   		 	$fields["Dimensions"] = "getPimonly_dimensions";
-	   		 	$fields["Utilisation"] = "getCalculatedClasseUtilisation";
-	   		 	$fields["EAN"] = "getEan";
-	   		 	$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";
-	   		 	$fields["FT"] = "getPreviewLink";
-
-
-
-			$strChildren.=   '<table class="table table-striped">  <thead><tr>';
-			foreach ($fields as $key => $value) {
-				$strChildren.= '<th>'.$key.'</th>';
-			}
-			$strChildren.= '</tr></thead>';
-
-  			$index = 1;
-  			$productsToDisplay =array();
-			foreach ($childrens as $subProduct) {
-
-				//Configurables
-				if($subProduct->getEan()=="") {
-					$subProductChildrens = $subProduct->getChilds();
-		
-					
-					foreach ($subProductChildrens as $subsubProduct) {
-						$productsToDisplay[] = $subsubProduct;
-					
-					}
-
-				}
-				else { 
-					$productsToDisplay[] = $subProduct;
-					
-				}
-			}
-
-			foreach ($productsToDisplay as $subproduct) {
-				?>
-					<tr>
-						<?php
-						foreach ($fields as $key => $value) {
-							$v = $subproduct->$value();
-							$strChildren.= '<td>'.$v.'</td>';
-						}
-						?>
-					     
-					   
-					    
-					    </tr>
-
-
-				<?php
-
-			}
-			$strChildren.=   "</table>";
-		}
-
-		//echo $strChildren;
-		?>
-
-	    </div>
-	</div>
-
- <!-- Fin product header -->  
-
-
-</div> <!-- row -->
+?>
 
 
 

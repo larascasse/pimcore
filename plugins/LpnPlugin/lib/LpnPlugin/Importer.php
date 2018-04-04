@@ -1238,7 +1238,7 @@
 
         $className = Pimcore_Tool::getModelClassMapping($className);
 
-        $existingProductList = Object_Product::getByEan($product["ean"]);
+        $existingProductList = Object_Product::getByEan($product["ean"],['unpublished' => true]);
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();

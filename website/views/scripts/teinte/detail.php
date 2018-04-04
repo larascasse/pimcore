@@ -30,6 +30,17 @@ echo "<h1>".$teinteName."</h1>";
 <?php
 foreach ($products as $product) { 
 	echo "<h5>".$product->getMage_short_name()." - ".$product->getCode()."</h5>";
+	for ($i=1;$i<5;$i++) {
+		$image = $product->{"getImage_" . $i}();
+		if($image) {
+			echo '<img src="'.$image->getThumbnail("galleryCarouselPreview").'"/>';
+		}
+	}
+	
+            	
+            	
+	                
+
 	echo $this->template("product/inc-product-table-variations.php",array("products"=>array($product)));
 	echo "<hr />";
 

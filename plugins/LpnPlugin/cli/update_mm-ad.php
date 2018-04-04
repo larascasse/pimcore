@@ -189,7 +189,7 @@ foreach ($list->getObjects() as $object) {
         $object->setValue('chanfreins','rives abîmées'); 
         $object->setChoix('ELV');
     }
-    else if(stristr($article, "MMCHERA") && !$isBrut) {
+    else if( (stristr($article, "MMCHERA") || stristr($article, "MBCHERA") || stristr($article, "MHCHERA")) && !$isBrut) {
 
         $parent->setTraitement_surface(("vieilli rives abimees"));
         $parentSuffixeEan .= " vieilli rives abîmées";

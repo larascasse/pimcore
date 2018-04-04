@@ -36,19 +36,21 @@ class TeinteController extends Action
         $this->enableLayout();
 
         // get a list of news objects and order them by date
-        $productList = new Object_Teinte_List();
+        $teinteList = new Object_Teinte_List();
         $conditionFilters = array("lENGTH(code)>0","ean is NULL");
-        $productList->setCondition(implode(" AND ", $conditionFilters));
+     
+
+        $teinteList->setCondition(implode(" AND ", $conditionFilters));
 
         //$catalogList->setOrderKey("date");
-        $productList->setOrder("ASC");
-        $productList->load();
+        $teinteList->setOrder("ASC");
+        $teinteList->load();
 
-        $paginator = Zend_Paginator::factory($productList);
+        $paginator = Zend_Paginator::factory($teinteList);
         $paginator->setCurrentPageNumber( $this->_getParam('page') );
         $paginator->setItemCountPerPage(40);
 
-        $this->view->products = $paginator;
+        $this->view->teintes = $paginator;
     }
 
 
@@ -79,7 +81,20 @@ class TeinteController extends Action
 
         $this->view->teinte = $teinte;
         $this->view->products = $teinte->getProductsArticle();
-		//$this->view->attributes = $definition;
+
+        $list = new Object_Teinte_List();
+        $conditionFilters = array("o_path LIKE '/teintes/teintes/_import_%'");
+
+        $list->setCondition(implode(" AND ", $conditionFilters));
+
+        //$catalogList->setOrderKey("date");
+        $list->setOrder("ASC");
+        $list->setUnpublished(true);
+        $list->load();
+        
+
+
+        $this->view->teintes = $list->getObjects();
 
     }
 

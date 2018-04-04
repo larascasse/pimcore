@@ -2,6 +2,24 @@
 $teinteName = $this->teinte->getName();
 $products = $this->products;
 
+?>
+
+<div class="row">
+<div class="col-2">
+	<ul style="padding: 0;margin: 0;list-style:none; font-size:10px;">
+<?php
+if(is_array($this->teintes)) {
+	foreach ($this->teintes as $allTeinte) {
+		echo '<li style="padding: 0;margin: 0;list-style:none;"><a href="/teinte/'.$allTeinte->getId().'">'.$allTeinte->getName().'</a></li>';
+	}
+}
+?>
+</ul>
+</div>
+<div class="col-10">
+
+
+<?php
 
 echo "<h1>".$teinteName."</h1>";
 
@@ -16,3 +34,6 @@ foreach ($products as $product) {
 	echo "<hr />";
 
 }
+?>
+</div>
+</div>

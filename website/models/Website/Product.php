@@ -311,7 +311,18 @@ class Website_Product extends Object_Product {
 
 
 	public function getFinitionString () {
-		return $this->getSingleTaxonomyString('finition');
+
+		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"finition");
+		$value = $this->getFinition();
+		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		return $value;
+		
+	}
+	public function getTraitement_surfaceString () {
+		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"traitement_surface");
+		$value = $this->geTtraitement_surface();
+		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		return $value;
 	}
 	
 	/**

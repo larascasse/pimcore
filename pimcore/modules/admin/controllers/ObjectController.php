@@ -1483,13 +1483,7 @@ class Admin_ObjectController extends \Pimcore\Controller\Action\Admin\Element
 
 
                     $object->save();
-
-                    echo "FFFFFFFFF";
-                    $data = Object\Service::gridObjectData($object, $this->getParam("fields"), $requestedLanguage);
-                    echo "GGGGGGGGGGG";
                     $this->_helper->json(["data" => Object\Service::gridObjectData($object, $this->getParam("fields"), $requestedLanguage), "success" => true]);
-                    echo "HHHHHHHHHHH";
-
                 } catch (\Exception $e) {
                     $this->_helper->json(["success" => false, "message" => $e->getMessage()]);
                 }
@@ -1636,12 +1630,9 @@ class Admin_ObjectController extends \Pimcore\Controller\Action\Admin\Element
 
             $objects = [];
             foreach ($list->getObjects() as $object) {
-                echo "FFFFFFF";
                 $o = Object\Service::gridObjectData($object, $fields, $requestedLanguage);
-                echo "GGGGGGGG";
                 $objects[] = $o;
             }
-            echo "HHHHH";
             $this->_helper->json(["data" => $objects, "success" => true, "total" => $list->getTotalCount()]);
         }
     }

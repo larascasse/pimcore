@@ -1,7 +1,6 @@
 <?php
 
 use Pimcore\Model;
-use Website\Tool;
 
 // define a custom class,  for example:
 class Website_Product extends Object_Product {
@@ -1156,18 +1155,17 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_meta_title() {
-		//return '';
-		//$inheritance = Object_Abstract::doGetInheritedValues(); 
-   		 //Object_Abstract::setGetInheritedValues(true); 
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";
-   		 echo "0";
    		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle") {
 			 $meta = $this->meta_title;
    		 }
 		 else {
-		 	echo "1";
+
 		 	 $meta = $this->getMage_short_name(50);
-		 	 echo "2";
+		 	 
 		 	 if(strlen($meta)<45 && strlen(trim($this->getSubtype2()))>0)
 		 	 	$meta .= " - ". ucfirst(trim($this->getSubtype2()));
 		 	 
@@ -1177,13 +1175,9 @@ class Website_Product extends Object_Product {
 		 	 if(strlen($meta)<29)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }
-		 echo "3-";
-   		// Object_Abstract::setGetInheritedValues($inheritance); 
-   		 echo "4".$meta;
-   		 $meta = trim($meta);
-   		 echo "5".$meta;
-   		 $meta = str_replace("�", "", $meta);
-   		 echo "6".$meta;
+
+   		 Object_Abstract::setGetInheritedValues($inheritance); 
+   		 //TODO : pourquoi des espaces bizarre arrive ???
    		 $meta = Website\Tool\ForceUTF8::fixUTF8($meta);
    		 return $meta;
    	}
@@ -1209,6 +1203,8 @@ class Website_Product extends Object_Product {
 		 }
 
    		 Object_Abstract::setGetInheritedValues($inheritance); 
+   		 //TODO : pourquoi des espaces bizarre arrive ???
+   		 $meta = Website\Tool\ForceUTF8::fixUTF8($meta);
    		 return $meta;
    	}
 

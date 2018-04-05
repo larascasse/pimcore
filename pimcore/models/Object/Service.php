@@ -364,8 +364,10 @@ class Service extends Model\Element\Service
                         if (in_array($key, Concrete::$systemColumnNames)) {
                             $data[$dataKey] = $object->$getter();
                         } else {
+                            echo "AAAA";
                             $valueObject = self::getValueForObject($object, $key, $brickType, $brickKey, $def);
                             $data['inheritedFields'][$dataKey] = ["inherited" => $valueObject->objectid != $object->getId(), "objectid" => $valueObject->objectid];
+                            echo "BBBB";
 
                             if (method_exists($def, "getDataForGrid")) {
                                 $tempData = $def->getDataForGrid($valueObject->value, $object);
@@ -379,7 +381,9 @@ class Service extends Model\Element\Service
                                     $data[$dataKey] = $tempData;
                                 }
                             } else {
+                                echo "CCCCC";
                                 $data[$dataKey] = $valueObject->value;
+                                 echo "DDDDD";
                             }
                         }
                     }

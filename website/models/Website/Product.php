@@ -1156,8 +1156,8 @@ class Website_Product extends Object_Product {
 
 	public function getMage_meta_title() {
 		//return '';
-		$inheritance = Object_Abstract::doGetInheritedValues(); 
-   		 Object_Abstract::setGetInheritedValues(true); 
+		//$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 //Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";
    		 echo "0";
    		 if($this->meta_title && strlen($this->meta_title)>0 && $this->meta_title!="La Parqueterie Nouvelle") {
@@ -1177,7 +1177,7 @@ class Website_Product extends Object_Product {
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }
 		 echo "3-";
-   		 Object_Abstract::setGetInheritedValues($inheritance); 
+   		// Object_Abstract::setGetInheritedValues($inheritance); 
    		 echo "4".$meta;
    		 $meta = trim($meta);
    		 echo "5".$meta;

@@ -1641,6 +1641,7 @@ class Admin_ObjectController extends \Pimcore\Controller\Action\Admin\Element
                 echo "GGGGGGGG";
                 $objects[] = $o;
             }
+            echo "HHHHH";
             $this->_helper->json(["data" => $objects, "success" => true, "total" => $list->getTotalCount()]);
         }
     }

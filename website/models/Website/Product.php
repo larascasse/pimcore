@@ -1176,7 +1176,7 @@ class Website_Product extends Object_Product {
 		 	 if(strlen($meta)<29)
 		 	 	$meta .= " - La Parqueterie Nouvelle";
 		 }
-		 echo "3";
+		 echo "3-";
    		 Object_Abstract::setGetInheritedValues($inheritance); 
    		 echo "4".$meta;
    		 return $meta;

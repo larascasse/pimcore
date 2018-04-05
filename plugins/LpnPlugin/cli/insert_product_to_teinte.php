@@ -74,7 +74,7 @@ foreach ($list->getObjects() as $teinte) {
 
     foreach ($listProduct->getObjects() as $product) {
         //echo "TEST : ".$teinteName." - ".$product->getName()."\n";
-        if(stripos($product->getName()," ".$teinteName." ")>0) {
+        if(stripos($product->getMage_name()," ".$teinteName." ")>0) {
 
             echo "".$teinteName." - ".$product->getName()."\n";
             $product->setPimonly_teinte_rel(array($teinte));

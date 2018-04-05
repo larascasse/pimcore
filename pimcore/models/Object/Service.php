@@ -336,7 +336,7 @@ class Service extends Model\Element\Service
                 }
 
                 if (!empty($key)) {
-
+                    echo $key."-";
                     // some of the not editable field require a special response
 
                     $getter = "get".ucfirst($key);

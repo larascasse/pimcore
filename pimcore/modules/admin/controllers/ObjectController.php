@@ -1636,7 +1636,9 @@ class Admin_ObjectController extends \Pimcore\Controller\Action\Admin\Element
 
             $objects = [];
             foreach ($list->getObjects() as $object) {
+                echo "FFFFFFF";
                 $o = Object\Service::gridObjectData($object, $fields, $requestedLanguage);
+                echo "GGGGGGGG";
                 $objects[] = $o;
             }
             $this->_helper->json(["data" => $objects, "success" => true, "total" => $list->getTotalCount()]);

@@ -414,7 +414,7 @@ class Service extends Model\Element\Service
                 }
             }
         }
-
+        print_r($data);
         return $data;
     }
 

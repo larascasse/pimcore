@@ -1483,7 +1483,10 @@ class Admin_ObjectController extends \Pimcore\Controller\Action\Admin\Element
 
 
                     $object->save();
+
                     $this->_helper->json(["data" => Object\Service::gridObjectData($object, $this->getParam("fields"), $requestedLanguage), "success" => true]);
+                    echo "FFFFFFFFF";
+                    
                 } catch (\Exception $e) {
                     $this->_helper->json(["success" => false, "message" => $e->getMessage()]);
                 }

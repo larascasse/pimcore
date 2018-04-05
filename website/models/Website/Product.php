@@ -1180,6 +1180,7 @@ class Website_Product extends Object_Product {
    		 Object_Abstract::setGetInheritedValues($inheritance); 
    		 echo "4".$meta;
    		 echo "5".trim($meta);
+   		 $meta = str_replace("�", "", $meta);
    		 return $meta;
    	}
 

@@ -1155,7 +1155,7 @@ class Website_Product extends Object_Product {
 
 
 	public function getMage_meta_title() {
-
+		return '';
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
    		 $meta = "La Parqueterie Nouvelle";

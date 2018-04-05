@@ -1184,7 +1184,7 @@ class Website_Product extends Object_Product {
    		 echo "5".$meta;
    		 $meta = str_replace("�", "", $meta);
    		 echo "6".$meta;
-   		 $meta = Website\Tool\Encoding::fixUTF8($meta);
+   		 $meta = Website\Tool\ForceUTF8::fixUTF8($meta);
    		 return $meta;
    	}
 

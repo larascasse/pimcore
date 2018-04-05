@@ -38,7 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
   */
 namespace Website\Tool;
 
-class Encoding {
+class ForceUTF8 {
 
   const ICONV_TRANSLIT = "TRANSLIT";
   const ICONV_IGNORE = "IGNORE";

@@ -1,6 +1,7 @@
 <?php
 
 use Pimcore\Model;
+use Website\Tool;
 
 // define a custom class,  for example:
 class Website_Product extends Object_Product {
@@ -1183,6 +1184,7 @@ class Website_Product extends Object_Product {
    		 echo "5".$meta;
    		 $meta = str_replace("�", "", $meta);
    		 echo "6".$meta;
+   		 $meta = Website\Tool\Encoding::fixUTF8($meta);
    		 return $meta;
    	}
 

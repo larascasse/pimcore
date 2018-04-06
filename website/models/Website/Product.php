@@ -786,7 +786,7 @@ class Website_Product extends Object_Product {
 									$display[] = $selectedValue;
 								}
 								else {
-									$selectedValue = $keySelect."?"; 
+									$selectedValue = $keySelect."."; 
 									$display[] = $selectedValue;
 								}
 

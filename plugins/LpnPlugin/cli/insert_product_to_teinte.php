@@ -57,7 +57,7 @@ $products  = $listProduct->getObjects();
 $productsCheck = array();
 
 foreach ($products as $product) {
-    $productsCheck[]=array("name"=>$product->getMage_name(),"product"=>$product);
+    $productsCheck[]=array("name"=>strtolower($product->getMage_name()),"product"=>$product);
 }
 
 $productToSave = array();
@@ -71,7 +71,7 @@ foreach ($list->getObjects() as $teinte) {
     if(!($teinte instanceof Object_Teinte))
         continue;
     
-    $teinteName = $teinte->getName();
+    $teinteName = strtolower($teinte->getName());
 
     echo "\n\nTEST : ".$teinteName."\n";
    

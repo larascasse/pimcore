@@ -73,7 +73,7 @@ foreach ($list->getObjects() as $teinte) {
     
     $teinteName = strtolower($teinte->getName());
 
-    echo "\n\nTEST : ".$teinteName."\n";
+    echo "\n\TEINTE : ".$teinteName."\n";
    
 
    // print_r($conditionFilters);
@@ -86,7 +86,10 @@ foreach ($list->getObjects() as $teinte) {
     //$fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
 
     foreach ($productsCheck as $productCheck) {
-        //echo "TEST : ".$teinteName." - ".$product->getName()."\n";
+        if (isset($forceTeinteName) && strlen($forceTeinteName)>0) {
+            echo "TEST : ".$teinteName."----".$productCheck["name"]."--\n";
+        }
+        //
         if(stripos($productCheck["name"]," ".$teinteName." ")>0) {
             $product = $productCheck["product"];
             echo "".$teinteName." - ".$productCheck["name"]."\n";

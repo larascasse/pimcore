@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `lpn_pimpampoum`;
 CREATE TABLE IF NOT EXISTS `lpn_pimpampoum` (
 `id` INT NOT NULL AUTO_INCREMENT,
 `type` varchar(100) DEFAULT NULL ,
-`data` longtext,
+`xml` longtext,
 `codeClient` varchar(20) DEFAULT NULL ,
 `codePiece` varchar(20) DEFAULT NULL ,
 `toEmail` varchar(100) DEFAULT NULL ,
@@ -40,7 +40,7 @@ class PimPamPoum extends AbstractModel {
     /**
      * @var string
      */
-    public $data;
+    public $xml;
 
     /**
      * @var string
@@ -122,14 +122,14 @@ class PimPamPoum extends AbstractModel {
      /**
      * @param $value
      */
-    public function setData($value) {
+    public function setXml($value) {
         $this->data = $value;
     }
  
     /**
      * @return string
      */
-    public function getData() {
+    public function getXml() {
         return $this->data;
     }
     

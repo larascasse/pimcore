@@ -303,7 +303,7 @@ class MauchampController extends Action
                 // reachable via http://your.domain/plugin/LpnPlugin/index/index
                 $pimpampoum = new \LpnPlugin\Model\PimPamPoum();
                 $pimpampoum->setValue("type","pimpampoum-".$order["orderDetail"]["Type_Piece"]);
-                $pimpampoum->setData($xml);
+                $pimpampoum->setXml($xml);
                 $pimpampoum->settoEmail($this->getParam("to-email"));
                 $pimpampoum->setFromEmail($this->getParam("from-email"));
                 $pimpampoum->setCodePiece($order["orderDetail"]["Code_Commande"]);

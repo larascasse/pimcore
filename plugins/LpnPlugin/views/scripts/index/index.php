@@ -1,2 +1,1 @@
-
-LpnPlugin Plugin works!
+<?php echo $this->message; ?>

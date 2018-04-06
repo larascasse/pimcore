@@ -48,9 +48,16 @@ class MauchampController extends Action
         if(isset($xml))
             $data = $xml;
         else {
-            $data = false;
-            //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-            //$data = Website\Tool\MauchampHelper::getDebugOrder();
+
+            if($this->getParam('debug')) {
+               //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+              $data = Website\Tool\MauchampHelper::getDebugOrder();
+            }
+            else {
+              $data = false;
+            }
+            
+           
         }
             
         if($data) {
@@ -192,7 +199,8 @@ class MauchampController extends Action
 
                         ]);
 
-                $pdfFile = PIMCORE_TEMPORARY_DIRECTORY . "/" .$order["orderDetail"]["Code_Commande"]."-". uniqid() . ".pdf";
+                $pdfFileName = $order["orderDetail"]["Code_Commande"]."-". uniqid() . ".pdf";
+                $pdfFile = PIMCORE_TEMPORARY_DIRECTORY . "/" .$pdfFileName;
                 $pdfFileUrl = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],"",$pdfFile);
 
                 $debugOnlyStatique = false;
@@ -291,6 +299,22 @@ class MauchampController extends Action
                     $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
                 }
                 $mail->send();
+
+                // reachable via http://your.domain/plugin/LpnPlugin/index/index
+                $pimpampoum = new \LpnPlugin\Model\PimPamPoum();
+                $pimpampoum->setValue("type","pimpampoum-".$order["orderDetail"]["Type_Piece"]);
+                $pimpampoum->setData($xml);
+                $pimpampoum->settoEmail($this->getParam("to-email"));
+                $pimpampoum->setFromEmail($this->getParam("from-email"));
+                $pimpampoum->setCodePiece($order["orderDetail"]["Code_Commande"]);
+                $pimpampoum->setDate(time());
+                //$pimpampoum->setCodeClient($order["orderDetail"]["Code_Client"]);
+                $pimpampoum->setFile($pdfFileName);
+
+                //$vote->setUsername('foobar!'.mt_rand(1, 999));
+                $pimpampoum->save();
+
+                $this->view->message = "OK !!";
 
             }
 

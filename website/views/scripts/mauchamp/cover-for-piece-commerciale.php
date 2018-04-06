@@ -95,7 +95,7 @@ $orderDetail = $this->orderDetail;
 
 
 <div class="ft-footer">
-<!--<h2>Nos adresses</h2>
+<h2>Nos adresses</h2>
 <div class="row showroom-adresses">
   <div class="col-xs-4">
     <p>La Parqueterie Nouvelle - Paris<br />Angle 141 rue de Bagnolet / 3 rue Pelleport<br />75020 Paris</p>
@@ -109,7 +109,7 @@ $orderDetail = $this->orderDetail;
     <p>La Parqueterie Nouvelle - Chambourcy<br />22, route de Mantes<br />78240 Chambourcy</p>
   </div>
 </div>
--->
+
 </div>
 
 

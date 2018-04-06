@@ -241,7 +241,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('finition',"Verni satiné");
         $parentSuffixeEan .= " vernis satiné";      
     }
-    else if(stristr($scienergie, " brut ")) {
+    else if(stristr($scienergie, " brut")) {
         //$parent->setValue('finition',"Verni satiné");
         $parentSuffixeEan .= " Brut";      
     }

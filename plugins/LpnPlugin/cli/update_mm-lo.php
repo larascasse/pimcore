@@ -237,6 +237,14 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('finition',"huile");
         $parentSuffixeEan .= " huilé";      
     }
+    else if(stristr($scienergie, "satine")) {
+        $parent->setValue('finition',"Verni satiné");
+        $parentSuffixeEan .= " vernis satiné";      
+    }
+    else if(stristr($scienergie, " brut ")) {
+        //$parent->setValue('finition',"Verni satiné");
+        $parentSuffixeEan .= " Brut";      
+    }
 
 
     $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));

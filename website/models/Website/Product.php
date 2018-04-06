@@ -1262,7 +1262,7 @@ class Website_Product extends Object_Product {
 									$display[]=$optionsSelect2[$valueSelect];
 								}
 								else {
-									$display[]=$valueSelect."?";
+									$display[]=$valueSelect.".";
 								
 								}
 

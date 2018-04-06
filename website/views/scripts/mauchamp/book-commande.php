@@ -7,7 +7,7 @@ $ftIncludedSkus = $this->ftIncludedSkus;
 $poseIncludedSkus = $this->poseIncludedSkus;
 $photosIncludedSkus = $this->photosIncludedSkus;
 
-print_r($photosIncludedSkus);
+//print_r($photosIncludedSkus);
 
 
 /* Cover */

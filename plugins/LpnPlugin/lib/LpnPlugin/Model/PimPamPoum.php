@@ -123,14 +123,14 @@ class PimPamPoum extends AbstractModel {
      * @param $value
      */
     public function setXml($value) {
-        $this->data = $value;
+        $this->xml = $value;
     }
  
     /**
      * @return string
      */
     public function getXml() {
-        return $this->data;
+        return $this->xml;
     }
     
     /**

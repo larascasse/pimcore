@@ -242,9 +242,12 @@ foreach ($list->getObjects() as $object) {
     $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));
 
 
+    $object->setSolRaffraichissant("0");
+    $object->setChauffantBasseTemperature("0");
+    $object->setChauffantRadiantElectrique("0"); 
 
     //if($object->getChauffantBasseTemperature()==0) {
-        if(stripos($object->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
+       /* if(stripos($object->getCalculatedChauffantBasseTemperature(),"oui") === 0) {
             $object->setChauffantBasseTemperature("1");
         }
         else {
@@ -265,7 +268,7 @@ foreach ($list->getObjects() as $object) {
         else {
          $object->setChauffantRadiantElectrique("0");   
         }
-          
+         */ 
 
 
     

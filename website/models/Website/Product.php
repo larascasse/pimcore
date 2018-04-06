@@ -832,7 +832,7 @@ class Website_Product extends Object_Product {
 
 							}
 							else {
-								$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue."?");
+								$caracteristiques[$attributeKey] = array("key"=>$attribute,"label"=>$attributeLabel,"content"=>$attributeValue.".");
 							}
 							
 					}
@@ -1287,7 +1287,7 @@ class Website_Product extends Object_Product {
 								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue);
 							}
 							else {
-								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue."?");
+								$caracteristiques[] = array("label"=>$attributeLabel,"content"=>$attributeValue.".");
 
 							}
 

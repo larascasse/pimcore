@@ -39,6 +39,28 @@ $objects = array();
  echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
 
+
+ $conditionFilters = array(
+    "( 
+         o_path LIKE '/catalogue/_product_base__/05contreco/tmp/%'
+        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/%'
+    )",
+    "ean IS NULL",
+    "code IS NOT NULL",
+    //"LOWER(name) like '% ".strtolower($teinteName)." %'"
+    );
+
+$listProduct = new Pimcore\Model\Object\Product\Listing();
+$listProduct->setUnpublished(true);
+$listProduct->setCondition(implode(" AND ", $conditionFilters));
+$products  = $listProduct->getObjects();
+$productsCheck = array();
+
+foreach ($products as $product) {
+    $productsCheck[]=array("name"=>$product->getMage_name(),"product"=>$product);
+}
+
+$productToSave = array();
 foreach ($list->getObjects() as $teinte) {
 
 
@@ -51,34 +73,27 @@ foreach ($list->getObjects() as $teinte) {
     
     $teinteName = $teinte->getName();
 
-    $conditionFilters = array(
-    "( 
-         o_path LIKE '/catalogue/_product_base__/05contreco/tmp/%'
-        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/%'
-    )",
-    "ean IS NULL",
-    "code IS NOT NULL",
-    //"LOWER(name) like '% ".strtolower($teinteName)." %'"
-    );
+    echo "\n\nTEST : ".$teinteName."\n";
+   
 
    // print_r($conditionFilters);
 
     //Object_Abstract::setGetInheritedValues(true);
 
-    $listProduct = new Pimcore\Model\Object\Product\Listing();
-    $listProduct->setUnpublished(true);
-    $listProduct->setCondition(implode(" AND ", $conditionFilters));
+   
 
    // $db = \Pimcore\Db::get();
     //$fieldsArray = $db->fetchCol("SELECT oo_id FROM `object_query_5` where ");
 
-    foreach ($listProduct->getObjects() as $product) {
+    foreach ($productsCheck as $productCheck) {
         //echo "TEST : ".$teinteName." - ".$product->getName()."\n";
-        if(stripos($product->getMage_name()," ".$teinteName." ")>0) {
-
-            echo "".$teinteName." - ".$product->getName()."\n";
+        if(stripos($productCheck["name"]," ".$teinteName." ")>0) {
+            $product = $productCheck["product"];
+            echo "".$teinteName." - ".$productCheck["name"]."\n";
             $product->setPimonly_teinte_rel(array($teinte));
-            $product->save();
+            //$productCheck["toSave"] = "yes";
+            //$product->save();
+            $productToSave[$product->getId()] = $product;
         }
 
 
@@ -87,11 +102,10 @@ foreach ($list->getObjects() as $teinte) {
     $teinte->setPublished(true);
     $teinte->save();
 
-
-
-
-
-
+}
+foreach ($productToSave as $product) {
+    $product->save();
+    echo "Saved ".$product->getName()." ".$product->getId()."\n";
 }
 \Pimcore\Model\Version::enable();
 ?>

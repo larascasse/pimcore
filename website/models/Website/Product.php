@@ -2938,7 +2938,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 	
 	*/
-	public function isCompatibleSolChauffantBasseTemperature() {
+	/*public function isCompatibleSolChauffantBasseTemperature() {
 		return true;
 	}
 	public function isCompatibleSolChauffantRayonnant() {
@@ -2946,7 +2946,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 	public function isCompatibleSolRafraichissant() {
 		return true;
-	}
+	}*/
 
 	public function getCalculatedChauffantBasseTemperature() {
 
@@ -3095,6 +3095,16 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		}
 		return $this->getCalculatedChauffantBasseTemperature()." (si température finale du parquet < 28°)";
 	}
+
+	public function getChauffantRadiantElectriqueString () {
+		if($this->getChauffantRadiantElectrique() == "1") {
+			return "Nous contacter";
+		}
+		else return $this->getChauffantRadiantElectrique();
+
+	}
+
+
 
 	public function getCalculatedSolRaffraichissant() {
 

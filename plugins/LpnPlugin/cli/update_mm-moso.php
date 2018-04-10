@@ -21,7 +21,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
-        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/mm-bambou/mm-mo%'",
+        "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-bambou/mm-mo%'",
        "ean IS NOT NULL"
 );
 

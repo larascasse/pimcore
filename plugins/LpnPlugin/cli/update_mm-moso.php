@@ -1,5 +1,5 @@
 <?php
-//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/05contreco/tmp/cc-bambou/cc-mo
+//http://pim.laparqueterienouvelle.fr/?controller=product&action=export-product-tech&path=/catalogue/_product_base__/01massif/tmp/mm-bambou/mm-mo
 
 //plugins/LpnPlugin/odata/pimcore$ php import_ean_to_pimcore.php startswith=fmbamg4 nonactif=1
 //plugins/LpnPlugin/odata/pimcore$ php import_ean_to_pimcore.php startswith=fmbamg0 nonactif=1
@@ -155,13 +155,15 @@ Usé,use
            $object->setNorme_sanitaire("A+");
            $object->setPimonly_classe_reaction_feu_eu("Cfls1");
 
+           $object->setClasse("34");
+           $object->setEpaisseurUsure('6 mm');
+
            $techTech[] = "Densité (Couche supérieure) : +/- 850 kg/m3";
            $techTech[] = "Contribution BREEAM : HEA 2, MAT 1, MAT 3, MAT 5";
            $techTech[] = "Dureté Brinell : >= 9.5kg/mm2";
 
             $object->setPimonly_resistance_thermique("0.0872");
             $object->setPimonly_conductivite_thermique_total("0.21");
-            $object->setClasse("34");
             
 
            $techDescription [] = "Garantie : 30 ans";

@@ -232,7 +232,7 @@ class MauchampController extends Action
                             if($product->getFiche_technique_lpn()) {
                               $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
                             }
-                            else if($product->getFiche_technique_orginale()) {
+                            else if($product->isAccessoire() && $product->getFiche_technique_orginale()) {
                               $pdfpath = $product->getFiche_technique_orginale()->getFileSystemPath();
                             }
                             

@@ -222,8 +222,19 @@ class MauchampController extends Action
 
 
                          
-                         if(in_array($product->getSku(),$ftIncludedSkus) && $product->getFiche_technique_lpn()) {
-                            $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
+                         if(in_array($product->getSku(),$ftIncludedSkus) 
+                            && $product->getFiche_technique_lpn()
+                            || ($product->isAccessoire() && $product->getFiche_technique_orginale())
+
+                          ) {
+
+
+                            if($product->getFiche_technique_lpn()) {
+                              $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
+                            }
+                            else if($product->getFiche_technique_orginale()) {
+                              $pdfpath = $product->getFiche_technique_orginale()->getFileSystemPath();
+                            }
                             
                             $pdf = Zend_Pdf::load($pdfpath); 
                             foreach($pdf->pages as $page){

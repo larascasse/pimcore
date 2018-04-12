@@ -79,15 +79,30 @@ class ProjectPostController extends Action
 
         $this->disableViewAutoRender();
 
-        $list = Object\ProjectPost::getList([
-            //"limit" => $items,
+       
+
+        $conditionFilters = array(//"limit" => $items,
             "order" => "DESC",
             "orderKey" => "o_creationdate"
-        ]);
+        );
+
+         $key =trim ($this->getParam("key")) ;
+
+       /* if (strlen($this->getParam("key"))>0) {
+           
+            $conditionFilters[] = array("o_key LIKE '" . $this->getParam("key") . "'");
+        } */
+        
+        $list = Object\ProjectPost::getList($conditionFilters);
+
 
         $fields =   array();
 
         foreach ($list as $item) {
+            if(strlen($key)>0 && $key != $item->getKey() ) {
+               continue;
+            }
+
             $fields[] = $item->getShortArray();
         }
         

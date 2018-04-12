@@ -101,7 +101,7 @@ class ProjectPostController extends Action
 
         foreach ($list as $item) {
 
-            echo "/".$item->getKey()."<br />/n";
+            echo "/".$item->getKey()."  -------   $key<br />/n";
             if(strlen($key)>0 && $key != $item->getKey() ) {
                continue;
             }

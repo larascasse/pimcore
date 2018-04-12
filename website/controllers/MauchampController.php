@@ -51,7 +51,7 @@ class MauchampController extends Action
 
             if($this->getParam('debug')) {
                //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-              $data = Website\Tool\MauchampHelper::getDebugOrder();
+              $data = Website\Tool\MauchampHelper::getDebugOrder2();
             }
             else {
               $data = false;
@@ -236,13 +236,21 @@ class MauchampController extends Action
                               $pdfpath = $product->getFiche_technique_orginale()->getFileSystemPath();
                             }
                             
-                            $pdf = Zend_Pdf::load($pdfpath); 
-                            foreach($pdf->pages as $page){
+                            try {
 
-                              $clonedPage = clone $page;
-                              $pdfMerged->pages[] = $clonedPage;
+
+                              $pdf = Zend_Pdf::load($pdfpath); 
+                              foreach($pdf->pages as $page){
+
+                                $clonedPage = clone $page;
+                                $pdfMerged->pages[] = $clonedPage;
+                              }
+                              unset($clonedPage);
                             }
-                            unset($clonedPage);
+                             catch (Exception $e) {
+                                  echo json_encode(array("message"=> $e->getMessage(),"message3"=>"Zend_Pdf::load(".$pdfpath.")"));
+                                 die;
+                            }
                          }
                      }
                 }
@@ -250,21 +258,29 @@ class MauchampController extends Action
                  //OK, on a des PDF statiques, on insere avant le PDF Dynalmique
                  if(count($pdfMerged->pages)>0) {
 
-                    //On charge le PDF dynamique ;
-                    if(isset($pdfContent)) {
-                        $pdfDyn = Zend_Pdf::parse($pdfContent); 
-                        $reversedPages = array_reverse($pdfDyn->pages);
-                        foreach($reversedPages as $page){
-                          $clonedPage = clone $page;
-                          array_unshift($pdfMerged->pages,$clonedPage);
-                          //$pdfMerged->pages[] = $clonedPage;
-                        }
-                    }
-                    if(isset($clonedPage))
-                        unset($clonedPage);
+                    try {
 
-                    $pdfContent = $pdfMerged->render();
-                    file_put_contents($pdfFile, $pdfContent);
+                      //On charge le PDF dynamique ;
+                      if(isset($pdfContent)) {
+                          $pdfDyn = Zend_Pdf::parse($pdfContent); 
+                          $reversedPages = array_reverse($pdfDyn->pages);
+                          foreach($reversedPages as $page){
+                            $clonedPage = clone $page;
+                            array_unshift($pdfMerged->pages,$clonedPage);
+                            //$pdfMerged->pages[] = $clonedPage;
+                          }
+                      }
+                      if(isset($clonedPage))
+                          unset($clonedPage);
+
+                      $pdfContent = $pdfMerged->render();
+                      file_put_contents($pdfFile, $pdfContent);
+                     }
+                     catch (Exception $e) {
+                          echo json_encode(array("message"=> $e->getMessage(),"message2"=>"error rendering Zend"));
+                         die;
+                    }
+
                  }
 
 

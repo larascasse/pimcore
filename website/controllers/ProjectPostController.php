@@ -99,6 +99,8 @@ class ProjectPostController extends Action
         $fields =   array();
 
         foreach ($list as $item) {
+
+            echo "$key"."/".$item->getKey()."<br />/n";
             if(strlen($key)>0 && $key != $item->getKey() ) {
                continue;
             }

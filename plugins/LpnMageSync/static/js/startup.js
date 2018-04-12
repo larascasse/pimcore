@@ -193,10 +193,10 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     syncRealisation : function () {
        console.log("this",this)
        //var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
-       var url = '/plugin/LpnMageSync/index/publish-cms-block/key/'+this.data.general.o_key;
-       console.log(url,this.data,this.general)
-       console.log(url,this.data,this.key)
-       alert(url);
+       var url = '/plugin/LpnMageSync/index/publish-cms-block/real/'+this.data.general.o_key;
+       //console.log(url,this.data,this.general)
+       //console.log(url,this.data,this.key)
+       //alert(url);
 
         Ext.Ajax.request({
             //url: '/plugin/LpnMageSync/index/download/id/' +this.id,

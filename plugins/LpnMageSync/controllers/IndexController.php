@@ -87,12 +87,18 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $this->disableViewAutoRender();
 
        	  $key =  $this->getParam("key");
+          $real =  $this->getParam("real");
 
 
        	  $url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php';
        	  $params = array();
 		  $params["time"] = time();
-		  $params["key"] = $key;
+
+        if($key && strlen($key)>0)
+		      $params["key"] = $key;
+        else if($real && strlen($real)>0)
+          $params["real"] = $real;
+
 
 	    	$content = \Pimcore\Tool::getHttpData($url,$params);
 	    	

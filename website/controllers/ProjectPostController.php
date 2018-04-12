@@ -83,7 +83,8 @@ class ProjectPostController extends Action
 
         $conditionFilters = array(//"limit" => $items,
             "order" => "DESC",
-            "orderKey" => "o_creationdate"
+            "orderKey" => "o_creationdate",
+            'unpublished' => true,
         );
 
          $key =trim ($this->getParam("key")) ;
@@ -100,7 +101,7 @@ class ProjectPostController extends Action
 
         foreach ($list as $item) {
 
-            echo "$key"."/".$item->getKey()."<br />/n";
+            echo "/".$item->getKey()."<br />/n";
             if(strlen($key)>0 && $key != $item->getKey() ) {
                continue;
             }

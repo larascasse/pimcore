@@ -104,6 +104,7 @@ class ProjectPostController extends Action
             if(strlen($key)>0 && $key != $item->getKey() ) {
                continue;
             }
+            echo "OKOKOKOK !!!!!";
 
             $fields[] = $item->getShortArray();
         }

@@ -3236,7 +3236,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		 $scienergieName = strtolower($this->getName_scienergie());
 		 //echo $attributeType." ".$scienergieName."<br />";
 		 $isTable =    stripos($scienergieName,'table ')!==false
-		        				//|| stripos($attributeType,'plinthe')!==false
+		        				|| stripos($this->getCode(),'LOTTABLE')!==false
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 
 		  return $isTable;

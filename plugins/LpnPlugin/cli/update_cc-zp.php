@@ -59,7 +59,15 @@ foreach ($list->getObjects() as $object) {
     $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
     $ean  = $object->ean;
-    $parent = $object->getParent();
+
+       if(!array_key_exists($object->getCode(), $savedParent)) {
+             $parent = $object->getParent();
+
+        }
+        else {
+             $parent = false;
+        }
+   
 
 
    
@@ -192,35 +200,38 @@ Usé,use
 
 
         //MULTI
-        if(stristr($code,"xzp")  || stristr($code,"zzp")) {
-            echo "MULTI";
-            if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
-                $parentSuffixeEan.= "huile cire ou vernis aqua";
-                $parent->setValue('finition',"huile-cire-ou-vernis-aqua");
-                
+        if($parent) {
+            if(stristr($code,"xzp")  || stristr($code,"zzp")) {
+                echo "MULTI";
+                if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
+                    $parentSuffixeEan.= "huile cire ou vernis aqua";
+                    $parent->setValue('finition',"huile-cire-ou-vernis-aqua");
+                    
+                }
+                else {
+                    $parent->setValue('finition',"huile-cire");
+
+                    $parentSuffixeEan.= "huile cire";
+                }
             }
-            else {
-                $parent->setValue('finition',"huile-cire");
 
-                $parentSuffixeEan.= "huile cire";
+
+            //SURFACE
+            
+
+            if($isPointDeHongrie && !$isBrut) {
+                $parent->setMotif(' pth');
+                $parent->setAngle('45°');
+                $parentSuffixeEan .=" Point de Hongrie";
+                $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+
+
+
             }
-        }
-
-        //SURFACE
-        
-
-        if($isPointDeHongrie && !$isBrut) {
-            $parent->setMotif(' pth');
-            $parent->setAngle('45°');
-            $parentSuffixeEan .=" Point de Hongrie";
-            $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
-
-
-
-        }
-        elseif($isbatonRompu&& !$isBrut) {
-            $parent->setMotif(' baton rompu');
-            $parentSuffixeEan .=" Bâton rompu";
+            elseif($isbatonRompu&& !$isBrut) {
+                $parent->setMotif(' baton rompu');
+                $parentSuffixeEan .=" Bâton rompu";
+            }
         }
 
 
@@ -287,16 +298,19 @@ Usé,use
          $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
 
        
-       
-        if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
-            $parent->setValue('name',null);
-            
-        } 
+     
 
-        $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
-        $parent->setValue('chanfreins',"2 ou rives abîmées");
+        if($parent && !array_key_exists($parent->getCode(), $savedParent)) {
 
-        if(!array_key_exists($parent->getCode(), $savedParent)) {
+            if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
+                $parent->setValue('name',null);
+                
+            } 
+
+            $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
+            $parent->setValue('chanfreins',"2 ou rives abîmées");
+
+
             $savedParent[$parent->getCode()] = 1;
             $parent->save();
         }

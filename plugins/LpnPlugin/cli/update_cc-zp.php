@@ -40,7 +40,7 @@ $objects = array();
 
 echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
-
+    $savedParent = array();
 foreach ($list->getObjects() as $object) {
 
 
@@ -59,7 +59,7 @@ foreach ($list->getObjects() as $object) {
     $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
     $ean  = $object->ean;
-
+    
        if(!array_key_exists($object->getCode(), $savedParent)) {
              $parent = $object->getParent();
 

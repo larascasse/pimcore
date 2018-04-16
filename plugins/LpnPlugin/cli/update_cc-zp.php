@@ -269,7 +269,7 @@ Usé,use
         }
         
         else {
-            $suffixeEan .= $object->getChoixString()." ".$longueur;
+            $suffixeEan .= $object->getChoixString()." ".$object->getEpaisseur()."x".$object->getLargeur()."x".$longueur;
         }
 
         if($object->getLongueur() == 1860) {

@@ -76,6 +76,7 @@ Usé,use
     echo "\n$article ?";
 
     $save = true;
+    $savedParent = array();
     //epaisseur
 
     if(strlen($object->getEan())>0) {
@@ -294,7 +295,12 @@ Usé,use
 
         $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
         $parent->setValue('chanfreins',"2 ou rives abîmées");
-        $parent->save();
+
+        if(!array_key_exists($parent->getCode(), $savedParent)) {
+            $savedParent[$parent->getCode()] = 1;
+            $parent->save();
+        }
+       
 
         $object->save();
         

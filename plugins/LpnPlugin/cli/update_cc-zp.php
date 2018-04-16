@@ -250,7 +250,7 @@ Usé,use
         }
 
 
-         if(stristr($object->getEan(), "614401")) {
+         if(stristr($object->getEan(), "614401") || stristr($object->getEan(), "214401")) {
             $object->setValue('largeur_txt',"Largeurs panachées 71/148/182 mm");
             $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x71/148/182x".$longueur;
         } 
@@ -262,6 +262,12 @@ Usé,use
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
             
             $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x148/189/240x".$longueur;
+        }
+        //148/182/210
+        else if(stristr($object->getEan(), "214540") || stristr($object->getEan(), "614540")) {
+            $object->setValue('largeur_txt',"Largeurs panachées 148/182/210 mm");
+            
+            $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x148/182/210x".$longueur;
         }
          else if(stristr($object->getEan(), "6193302500756")) {
           

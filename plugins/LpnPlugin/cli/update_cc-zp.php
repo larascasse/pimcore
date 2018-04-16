@@ -20,7 +20,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array(
-    "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-zp%'",
+    "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-zp/cc-ambre/fmcheg2cacambzp%'",
     "ean IS NOT NULL"
 );
 
@@ -45,9 +45,10 @@ Object_Abstract::setGetInheritedValues(false);
 
 
 //Logger::debug("objects in list:" . count($list->getObjects()));
-    $savedParent = array();
-foreach ($list->getObjects() as $object) {
+$savedParent = array();
 
+foreach ($list->getObjects() as $object) {
+    //print_r($savedParent);
 
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
@@ -64,7 +65,7 @@ foreach ($list->getObjects() as $object) {
     $code = $article = $object->code;
     $ean  = $object->ean;
 
-       if(!array_key_exists($object->getCode(), $savedParent)) {
+       if(!in_array($object->getCode(),$savedParent)) {
              $parent = $object->getParent();
 
         }
@@ -88,7 +89,7 @@ Usé,use
     echo "\n$article ?";
 
     $save = true;
-    $savedParent = array();
+  
     //epaisseur
 
     if(strlen($object->getEan())>0) {
@@ -309,9 +310,8 @@ Usé,use
        
      
 
-        if($parent && !array_key_exists($parent->getCode(), $savedParent)) {
-
-            if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
+        if($parent) {
+           if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
                 $parent->setValue('name',null);
                 
             } 
@@ -320,7 +320,7 @@ Usé,use
             $parent->setValue('chanfreins',"2 ou rives abîmées");
 
             echo "save ".$parent->getCode()."\n";
-            $savedParent[$parent->getCode()] = 1;
+            $savedParent[] = $parent->getCode();
             $parent->save();
         }
        

@@ -95,6 +95,7 @@ Usé,use
         $isMotif = stristr($code,"xzp")  || stristr($code,"zzp") || $isPointDeHongrie || $isbatonRompu;
 
 
+        $longueur = $object->getLongueur();
 
         switch ($object->getEpaisseur()) {
             case '12':
@@ -103,8 +104,11 @@ Usé,use
 
                 }
                 $object->setEpaisseurUsure('3.2 mm');
-                if(!$isMotif)
-                 $longueur_txt = "Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début";
+                if(!$isMotif) {
+
+                    $longueur_txt = "Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début";
+                    $longueur = "1100-2200";
+                }
                // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
                  break;
 
@@ -120,8 +124,10 @@ Usé,use
                 //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('4 mm');
 
-                if(!$isMotif)
+                if(!$isMotif) {
                     $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
+                    $longueur = "1100-2200";
+                }
 
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
@@ -133,8 +139,10 @@ Usé,use
                 //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('5 mm');
 
-                if(!$isMotif)
+                if(!$isMotif) {
                     $object->setValue('longueur_txt',"Longueurs variables de 2000 à 3000 mm");
+                    $longueur = "2000-3000";
+                }
 
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
@@ -220,7 +228,7 @@ Usé,use
         //melange de choix dans Scienergie.. on passe par l'EAN
         //$suffixe.=" ".$object->getChoixString();
         
-        $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
+       
         //echo "\n set suffixe ".trim($suffixe)."\n";
        
 
@@ -244,24 +252,24 @@ Usé,use
 
          if(stristr($object->getEan(), "614401")) {
             $object->setValue('largeur_txt',"Largeurs panachées 71/148/182 mm");
-            $suffixeEan .= $object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 71/148/182, long.".$object->getLongueur();
+            $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x71/148/182x".$longueur;
         } 
         else if(stristr($object->getEan(), "215429")) {
             $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-            $suffixeEan .= $object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 92/148/189, long.".$object->getLongueur();
+            $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x92/148/189x".$longueur;
         }
         else if(stristr($object->getEan(), "21557")) {
             $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
             
-            $suffixeEan .= $object->getChoixString()." "."Ep. ".$object->getEpaisseur().", larg. 148/189/240, long.".$object->getLongueur();
+            $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x148/189/240x".$longueur;
         }
          else if(stristr($object->getEan(), "6193302500756")) {
           
-             $suffixeEan .= $object->getChoixString()." "."Ep. ".$object->getEpaisseur().", long. 400 à 2500 mm";
+             $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x400-2500";
         }
         
         else {
-            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->pimonly_dimensions);
+            $suffixeEan .= $object->getChoixString()." ".$longueur;
         }
 
         if($object->getLongueur() == 1860) {
@@ -269,7 +277,7 @@ Usé,use
             //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
         }
 
-         $object->setValue("pimonly_name_suffixe",$suffixeEan);
+         $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
 
        
        
@@ -277,6 +285,8 @@ Usé,use
             $parent->setValue('name',null);
             
         } 
+
+        $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
         $parent->setValue('chanfreins',"2 ou rives abîmées");
         $parent->save();
 

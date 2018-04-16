@@ -186,25 +186,31 @@ Usé,use
         //}
 
 
-        $parentSuffixeEan = "";
-
-        if(stristr($scienergie, "HUILE AQUA")) {
-            $parent->setValue('finition',"huile-aqua");
-            $parentSuffixeEan.= "huile aqua";
-        }
-        if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
-            $parent->setValue('finition',"Verni aqua");
-             $parentSuffixeEan.= "vernis aqua";
-
-        }
-        else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
-            $parent->setValue('finition',"huile-cire");
-             $parentSuffixeEan.= "huile cire";
-        }
+       
 
 
-        //MULTI
+
+      
         if($parent) {
+
+             $parentSuffixeEan = "";
+
+            if(stristr($scienergie, "HUILE AQUA")) {
+                $parent->setValue('finition',"huile-aqua");
+                $parentSuffixeEan.= "huile aqua";
+            }
+            if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
+                $parent->setValue('finition',"Verni aqua");
+                 $parentSuffixeEan.= "vernis aqua";
+
+            }
+            else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
+                $parent->setValue('finition',"huile-cire");
+                 $parentSuffixeEan.= "huile cire";
+            }
+
+
+              //MULTI
             if(stristr($code,"xzp")  || stristr($code,"zzp")) {
                 echo "MULTI";
                 if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
@@ -221,8 +227,6 @@ Usé,use
 
 
             //SURFACE
-            
-
             if($isPointDeHongrie && !$isBrut) {
                 $parent->setMotif(' pth');
                 $parent->setAngle('45°');
@@ -299,7 +303,8 @@ Usé,use
             //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
         }
 
-         $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
+        
+        $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
 
        
      

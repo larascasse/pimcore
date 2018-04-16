@@ -262,12 +262,12 @@ Usé,use
         $suffixeEan = "";
          if($isPointDeHongrie) {
 
-            $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
+            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
         } 
 
         else if($isbatonRompu) {
 
-            $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
         }
 
 

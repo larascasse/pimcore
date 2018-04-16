@@ -59,7 +59,7 @@ foreach ($list->getObjects() as $object) {
     $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
     $ean  = $object->ean;
-    
+
        if(!array_key_exists($object->getCode(), $savedParent)) {
              $parent = $object->getParent();
 
@@ -310,7 +310,7 @@ Usé,use
             $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
             $parent->setValue('chanfreins',"2 ou rives abîmées");
 
-
+            echo "save ".$parent->getCode()."\n";
             $savedParent[$parent->getCode()] = 1;
             $parent->save();
         }

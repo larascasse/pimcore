@@ -39,6 +39,11 @@ $list->load();
 $objects = array();
 
 echo "objects in list ".count($list->getObjects())."\n";
+
+$inheritance = Object_Abstract::doGetInheritedValues(); 
+Object_Abstract::setGetInheritedValues(false); 
+
+
 //Logger::debug("objects in list:" . count($list->getObjects()));
     $savedParent = array();
 foreach ($list->getObjects() as $object) {
@@ -51,8 +56,7 @@ foreach ($list->getObjects() as $object) {
     if(!($object instanceof Object_Product))
         continue;
     
-    $inheritance = Object_Abstract::doGetInheritedValues(); 
-    Object_Abstract::setGetInheritedValues(false); 
+  
 
 
     $scienergieCourt = $object->name_scienergie_court;
@@ -332,8 +336,9 @@ Usé,use
 
     
 
-    Object_Abstract::setGetInheritedValues($inheritance); 
+    
 
 }
+Object_Abstract::setGetInheritedValues($inheritance); 
 \Pimcore\Model\Version::enable();
 ?>

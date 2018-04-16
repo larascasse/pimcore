@@ -20,7 +20,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array(
-    "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-zp/cc-ambre/fmcheg2cacambzp%'",
+    "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-zp%'",
     "ean IS NOT NULL"
 );
 

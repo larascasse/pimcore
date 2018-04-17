@@ -435,7 +435,7 @@ class ProductController extends Action
         //On récupere toutes les entetes d'abord
         $header['actif'] = "Actif Web";
         $header['famille'] = "Famille";
-        //$header['ean'] = "EAN";
+        $header['ean'] = "EAN";
         $header['name'] = "Name";
         $header['url'] = "Url";
         $header['longueur_scienergie'] = "Longueur Scienergie";
@@ -503,14 +503,14 @@ class ProductController extends Action
 
              $row[] = $product->getActif_web();
              $row[] = $product->getCode();
-             //$row[] = $product->getEan()."-";
+             $row[] = $product->getEan()."-";
              $row[] = $product->getMage_short_name(3000);;
              $row[] = 'https://pim.laparqueterienouvelle.fr/id/'.$product->getId();
              $row[] = $product->getLongueur();
 
              foreach ($header as $key => $title) {
 
-                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' || $key=='image_1' || $key=='image_2' || $key=='image_3' || $key=='image_4' || $key=='image_texture' || $key=='longueur_scienergie')
+                    if($key=='famille' || $key=='name' || $key=='url' || $key=='actif' || $key=='image_1' || $key=='image_2' || $key=='image_3' || $key=='image_4' || $key=='image_texture' || $key=='longueur_scienergie' || $key=='ean')
                         continue;
 
                     if(!isset($caracteristiques[$key])) {

@@ -332,7 +332,7 @@ Usé,use
      
 
         if($parent) {
-           if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
+           if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp") && !stristr($code,"vzp")) {
                 $parent->setValue('name',null);
                 
             } 

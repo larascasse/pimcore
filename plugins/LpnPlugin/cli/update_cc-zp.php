@@ -112,6 +112,27 @@ Usé,use
         $longueur = $object->getLongueur();
 
         switch ($object->getEpaisseur()) {
+
+             case '10':
+                $object->setValue('support','Mulitplis');
+                if($object->getLargeur() == 160) {
+
+                }
+                $object->setEpaisseurUsure('4 mm');
+               
+               // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
+                 break;
+
+             case '11':
+                $object->setValue('support','Latté');
+                if($object->getLargeur() == 160) {
+
+                }
+                $object->setEpaisseurUsure('4 mm');
+               
+               // $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm, présence de demi-lames de début");
+                 break;
+
             case '12':
                 $object->setValue('support','cp');
                 if($object->getLargeur() == 160) {
@@ -334,7 +355,7 @@ Usé,use
      
 
         if($parent) {
-           if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp") && !stristr($code,"vzp")) {
+           if(strlen($parent->name)>0 && !$isMotif) {
                 $parent->setValue('name',null);
                 
             } 

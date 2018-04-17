@@ -196,24 +196,6 @@ Usé,use
 
              $parentSuffixeEan = "";
 
-            if(stristr($scienergie, "HUILE AQUA")) {
-                $parent->setValue('finition',"huile-aqua");
-                $parentSuffixeEan.= "huile aqua";
-            }
-            if(stristr($scienergie, "VERNIS AQUA") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
-                $parent->setValue('finition',"Verni aqua");
-                 $parentSuffixeEan.= "vernis aqua";
-
-            }
-            else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
-                $parent->setValue('finition',"huile-cire");
-                 $parentSuffixeEan.= "huile cire";
-            } 
-            else if(stristr($scienergie, "vernis aqua ultra mat") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
-                $parent->setValue('finition',"Verni aqua ultra mat");
-                 $parentSuffixeEan.= "vernis aqua ultra-mat";
-            }
-
 
               //MULTI
             if(stristr($code,"xzp")  || stristr($code,"zzp")) {
@@ -229,6 +211,33 @@ Usé,use
                     $parentSuffixeEan.= "huile cire";
                 }
             }
+            else {
+
+                 if(stristr($scienergie, "vernis aqua ultra mat")) {
+                        $parent->setValue('finition',"Verni aqua ultra mat");
+                         $parentSuffixeEan.= "vernis aqua ultra-mat";
+                    }
+                    else if(stristr($scienergie, "HUILE AQUA")) {
+                        $parent->setValue('finition',"huile-aqua");
+                        $parentSuffixeEan.= "huile aqua";
+                    }
+                    if(stristr($scienergie, "VERNIS AQUA")) {
+                        $parent->setValue('finition',"Verni aqua");
+                         $parentSuffixeEan.= "vernis aqua";
+
+                    }
+                    else if(stristr($scienergie, "HUILE CIRE")) {
+                        $parent->setValue('finition',"huile-cire");
+                         $parentSuffixeEan.= "huile cire";
+                    } 
+
+            }
+
+           
+            
+
+
+             
 
 
             //SURFACE

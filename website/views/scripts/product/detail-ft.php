@@ -108,9 +108,8 @@ $htmlDonneeTech .='</table>';
 <div class="ft">
 <div class="ft-header">
 <div class="ft-col-1">
-	<div id="logo2" style="">
-		<?php //echo $this->template("includes/logo_1l_svg.php"); 
-		?>
+	<div id="logo2" style='width:507px;height:45px'>
+		<?php echo $this->template("includes/logo_1l_svg.php"); ?>
 		 
 	</div>
 	<h4>Fiche technique</h4>

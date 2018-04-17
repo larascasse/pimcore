@@ -302,7 +302,7 @@ Usé,use
         $suffixeEan = "";
          if($isPointDeHongrie) {
 
-            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." (PàT)";
         } 
 
         else if($isbatonRompu) {

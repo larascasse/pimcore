@@ -270,7 +270,7 @@ Usé,use
                 $parent->setMotif(' pth');
                 $parent->setAngle('45°');
                 $parentSuffixeEan .=" Point de Hongrie 45°";
-                $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+                $parent->setValue('longueur_txt','Longueur pointe à talon '.$longueur." mm");
 
 
 

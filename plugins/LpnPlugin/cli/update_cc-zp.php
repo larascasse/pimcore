@@ -225,7 +225,7 @@ Usé,use
                         $parent->setValue('finition',"huile-aqua");
                         $parentSuffixeEan.= "huile aqua";
                     }
-                    if(stristr($scienergie, "VERNIS AQUA")) {
+                    else if(stristr($scienergie, "VERNIS AQUA")) {
                         $parent->setValue('finition',"Verni aqua");
                          $parentSuffixeEan.= "vernis aqua";
 

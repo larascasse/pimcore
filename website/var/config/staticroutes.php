@@ -427,5 +427,22 @@ return [
         "priority" => 0,
         "creationDate" => 1522771962,
         "modificationDate" => 1522771998
+    ],
+    28 => [
+        "id" => 28,
+        "name" => "projects-key",
+        "pattern" => "/\\/projects\\/key\\/(.*)\\//",
+        "reverse" => "/projects/key/%key",
+        "module" => NULL,
+        "controller" => "project-post",
+        "action" => "get-all",
+        "variables" => "key",
+        "defaults" => NULL,
+        "siteId" => [
+
+        ],
+        "priority" => 0,
+        "creationDate" => 1523548811,
+        "modificationDate" => 1523550390
     ]
 ];

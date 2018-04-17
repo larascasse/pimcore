@@ -208,6 +208,10 @@ Usé,use
             else if(stristr($scienergie, "HUILE CIRE") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
                 $parent->setValue('finition',"huile-cire");
                  $parentSuffixeEan.= "huile cire";
+            } 
+            else if(stristr($scienergie, "vernis aqua ultra mat") && !stristr($code,"xzp")  && !stristr($code,"zzp")) {
+                $parent->setValue('finition',"Verni aqua ultra mat");
+                 $parentSuffixeEan.= "vernis aqua ultra-mat";
             }
 
 

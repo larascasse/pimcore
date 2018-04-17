@@ -106,7 +106,7 @@ Usé,use
         $isPointDeHongrie = stripos($article, "FHCHE") === 0;
         $isbatonRompu = stripos($article, "FBCHE") === 0;
 
-        $isMotif = stristr($code,"xzp")  || stristr($code,"zzp") || $isPointDeHongrie || $isbatonRompu;
+        $isMotif = stristr($code,"xzp")  || stristr($code,"zzp") || stristr($code,"vzp") || $isPointDeHongrie || $isbatonRompu;
 
 
         $longueur = $object->getLongueur();

@@ -133,9 +133,9 @@ return [
             [
                 "method" => "cover",
                 "arguments" => [
-                    "width" => "100",
-                    "height" => "54",
-                    "positioning" => "center",
+                    "width" => 140,
+                    "height" => 100,
+                    "positioning" => "bottomcenter",
                     "forceResize" => FALSE
                 ]
             ]
@@ -150,7 +150,7 @@ return [
         "highResolution" => 0,
         "preserveColor" => FALSE,
         "preserveMetaData" => FALSE,
-        "modificationDate" => 1491520146,
+        "modificationDate" => 1522832747,
         "creationDate" => 1491520146,
         "id" => "galleryCarouselPreview"
     ],

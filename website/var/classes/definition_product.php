@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-03-26T23:14:22+02:00
+* Generated at: 2018-04-10T11:44:23+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.15.147
+* IP: 172.31.9.52
 
 
 Fields Summary: 
@@ -205,7 +205,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1522098862,
+   'modificationDate' => 1523353462,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -3878,60 +3878,65 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       20 => 
                       array (
+                        'key' => 'Vernis',
+                        'value' => 'Verni',
+                      ),
+                      21 => 
+                      array (
                         'key' => 'Vernis aqua',
                         'value' => 'Verni aqua',
                       ),
-                      21 => 
+                      22 => 
                       array (
                         'key' => 'Vernis blanchi',
                         'value' => 'Verni blanchi',
                       ),
-                      22 => 
+                      23 => 
                       array (
                         'key' => 'Vernis blanchi mat',
                         'value' => 'Verni blanchi mat',
                       ),
-                      23 => 
+                      24 => 
                       array (
                         'key' => 'Vernis satiné',
                         'value' => 'Verni satiné',
                       ),
-                      24 => 
+                      25 => 
                       array (
                         'key' => 'Vernis mat',
                         'value' => 'Verni mat',
                       ),
-                      25 => 
+                      26 => 
                       array (
                         'key' => 'Vernis cérusé mat',
                         'value' => 'vernis cérusé mat',
                       ),
-                      26 => 
+                      27 => 
                       array (
                         'key' => 'Vernis blanc',
                         'value' => 'vernis blanc',
                       ),
-                      27 => 
+                      28 => 
                       array (
                         'key' => 'Vernis taupe',
                         'value' => 'vernis taupe',
                       ),
-                      28 => 
+                      29 => 
                       array (
                         'key' => 'Vernis colonial',
                         'value' => 'vernis colonial',
                       ),
-                      29 => 
+                      30 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      30 => 
+                      31 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      31 => 
+                      32 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',

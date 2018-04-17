@@ -105,6 +105,9 @@ body {
     table {page-break-inside: avoid;}
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
 
 #logo {
 	width: 100%;
@@ -267,7 +270,7 @@ $col2Width : 470px;
 	position: absolute;
 	//background-color: #00FF00;
 	top: ($headerHeight+1);
-	//width: $pageWidth;
+	width: $pageWidth;
 	left :0;
 
 

@@ -70,6 +70,9 @@ body {
   table {
     page-break-inside: avoid; } }
 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-weight: normal; }
+
 #logo {
   width: 100%; }
   #logo svg, #logo img {
@@ -162,6 +165,7 @@ hr {
   background-image: url(images/logo_fili2.png);
   position: absolute;
   top: 251px;
+  width: 1440px;
   left: 0; }
   .ft-content .ft-col-1 {
     height: 1700px; }

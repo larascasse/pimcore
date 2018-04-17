@@ -258,6 +258,8 @@ Usé,use
                 $parent->setMotif(' baton rompu');
                 $parentSuffixeEan .=" Bâton rompu ";
             }
+
+            $parentSuffixeEan .= " ".$object->getChoixString();
         }
 
 
@@ -279,41 +281,41 @@ Usé,use
         $suffixeEan = "";
          if($isPointDeHongrie) {
 
-            $suffixeEan = $object->getChoixString()." ".$object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
         } 
 
         else if($isbatonRompu) {
 
-            $suffixeEan = $object->getChoixString()." ".$object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+            $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
         }
         else {
 
             if(stristr($object->getEan(), "614401") || stristr($object->getEan(), "214401")) {
                 $object->setValue('largeur_txt',"Largeurs panachées 71/148/182 mm");
-                $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x71/148/182x".$longueur;
+                $suffixeEan .= $object->getEpaisseur()."x71/148/182x".$longueur;
             } 
             else if(stristr($object->getEan(), "215429")) {
                 $object->setValue('largeur_txt',"Largeurs panachées 92/148/189 mm");
-                $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x92/148/189x".$longueur;
+                $suffixeEan .= $object->getEpaisseur()."x92/148/189x".$longueur;
             }
             else if(stristr($object->getEan(), "21557")) {
                 $object->setValue('largeur_txt',"Largeurs panachées 148/189/240 mm");
                 
-                $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x148/189/240x".$longueur;
+                $suffixeEan .= $object->getEpaisseur()."x148/189/240x".$longueur;
             }
             //148/182/210
             else if(stristr($object->getEan(), "214540") || stristr($object->getEan(), "614540")) {
                 $object->setValue('largeur_txt',"Largeurs panachées 148/182/210 mm");
                 
-                $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x148/182/210x".$longueur;
+                $suffixeEan .= $object->getEpaisseur()."x148/182/210x".$longueur;
             }
              else if(stristr($object->getEan(), "6193302500756")) {
               
-                 $suffixeEan .= $object->getChoixString()." "."".$object->getEpaisseur()."x400-2500";
+                 $suffixeEan .= $object->getEpaisseur()."x400-2500";
             }
             
             else {
-                $suffixeEan .= $object->getChoixString()." ".$object->getEpaisseur()."x".$object->getLargeur()."x".$longueur;
+                $suffixeEan .= $object->getEpaisseur()."x".$object->getLargeur()."x".$longueur;
             }
 
             if($object->getLongueur() == 1860) {

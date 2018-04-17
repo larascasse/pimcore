@@ -198,9 +198,13 @@ Usé,use
 
 
               //MULTI
-            if(stristr($code,"xzp")  || stristr($code,"zzp")) {
+            if($isbatonRompu || $isPointDeHongrie) {
                 echo "MULTI";
-                if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
+                if(stristr($scienergie, "vernis aqua")) {
+                     $parent->setValue('finition',"Verni aqua");
+                     $parentSuffixeEan.= "vernis aqua";
+                }
+                else if(stripos($ean,"614")===0 || stripos($ean,"214")===0) {
                     $parentSuffixeEan.= "huile cire ou vernis aqua";
                     $parent->setValue('finition',"huile-cire-ou-vernis-aqua");
                     

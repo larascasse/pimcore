@@ -108,6 +108,7 @@ Usé,use
 
         $isMotif = stristr($code,"xzp")  || stristr($code,"zzp") || stristr($code,"vzp") || $isPointDeHongrie || $isbatonRompu;
 
+        $isStock = stristr($scienergie, "chanvre") ||stristr($scienergie, "lin") || stristr($scienergie, "chesterfield") || stristr($scienergie, "Terre");
 
         $longueur = $object->getLongueur();
 
@@ -154,15 +155,21 @@ Usé,use
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
                 }
                 break;
+            
             case '15':
                 $object->setValue('support','Latté');
                 //$object->setPimonly_resistance_thermique(0.119);
                 $object->setEpaisseurUsure('4 mm');
 
-                if(!$isMotif) {
+                if($object->getLongueur() == 1860) {
+                     $object->setValue('longueur_txt',"");
+                    $longueur = "1860";
+                }
+                else if(!$isMotif) {
                     $object->setValue('longueur_txt',"Longueurs variables de 1100 à 2200 mm");
                     $longueur = "1100-2200";
                 }
+
 
                 if($object->getLargeur()==92) {
                     $object->setFixation(array('rainurelanguette-2cotes-fausses-languettes'));
@@ -352,7 +359,13 @@ Usé,use
         $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
 
        
-     
+
+        if($isStock) {
+            $object->setValue('chanfreins',"2");
+        }
+        else {
+            $object->setValue('chanfreins',"2 ou rives abîmées");
+        }
 
         if($parent) {
            if(strlen($parent->name)>0 && !$isMotif) {
@@ -361,7 +374,8 @@ Usé,use
             } 
 
             $parent->setValue('pimonly_name_suffixe',trim($parentSuffixeEan));
-            $parent->setValue('chanfreins',"2 ou rives abîmées");
+
+           $parent->setValue('chanfreins',"");
 
             echo "save ".$parent->getCode()."\n";
             $savedParent[] = $parent->getCode();

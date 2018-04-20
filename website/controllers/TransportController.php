@@ -42,14 +42,25 @@ class TransportController extends Action
 
     public function indexAction()
     {
-        $list = new Transport\Listing();
-       // $list->setCondition("parentId = ? AND type IN ('link','page')", [$this->document->getId()]);
-        //$newsList->setOrderKey("pickingDate");
-        //$newsList->setOrder("DESC");
+        $this->view->layout()->setLayout("layout-mauchamp");
+
+
+        $list = new Object\Transport\Listing();
+        $list->setUnpublished(true);
+        //$list->setCondition(implode(" AND ", $conditionFilters));
 
         $list->load();
 
-        $this->view->transports = $list;
+
+
+
+        $paginator = Zend_Paginator::factory($list);
+        $paginator->setCurrentPageNumber( $this->_getParam('page') );
+        $paginator->setItemCountPerPage(40);
+
+        $this->view->transports = $paginator;
+
+
     }
 
     //http://pimcore.florent.local/transport/detail?id=12415

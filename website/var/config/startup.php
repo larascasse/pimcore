@@ -142,6 +142,16 @@ $routeCustom = new \Zend_Controller_Router_Route(
 $router->addRoute('transport', $routeCustom);
 $front->setRouter($router);
 
+$routeCustom = new \Zend_Controller_Router_Route(
+    'transports/*', [
+       // 'module' => 't',
+        'controller' => 'transport',
+        'action' => 'index'
+    ]
+);
+$router->addRoute('transports', $routeCustom);
+$front->setRouter($router);
+
 
 
 $autoloader = Zend_Loader_Autoloader::getInstance();

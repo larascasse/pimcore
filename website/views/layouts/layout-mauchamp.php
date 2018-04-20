@@ -38,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
 <link rel="stylesheet" href="/website/static_lpn/css/bootstrap-4.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/website/static_lpn/css/bootstrap-editable.min.css" crossorigin="anonymous">
 <script   src="/website/static_lpn/js/jquery-3.1.1.min.js"></script>
 
 
@@ -93,10 +94,10 @@ var dataLayer=[];
 
 <script src="/website/static_lpn/js/pdfobject.min.js"></script>
 <script src="/website/static_lpn/js/tether.min.js"></script> 
-<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script> 
+<script src="/website/static_lpn/js/popper.min.js"></script>
    
 <script src="/website/static_lpn/js/bootstrap-4.min.js"></script>
-
+<script src="/website/static_lpn/js/bootstrap-editable.min.js"></script>
 
 
 

@@ -256,6 +256,147 @@ EOT;
     }
 
 
+    public static function getDebugFacture() {
+      $data = <<<EOT
+<?xml version="1.0" encoding="utf-8"?>
+<Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Type_Piece>Commande</Type_Piece>
+    <Code_Commande>CP180698</Code_Commande>
+    <Code_Commande_Web />
+    <Date_Livraison>2018-04-20T00:00:00</Date_Livraison>
+    <Date_Confirmation>2018-04-20T00:00:00</Date_Confirmation>
+    <Date_Expedition>2018-04-20T00:00:00</Date_Expedition>
+    <Acompte>901.780</Acompte>
+    <Remise>0.000</Remise>
+    <Type_Remise>%</Type_Remise>
+    <TotalHT>1502.97</TotalHT>
+    <TotalTTC>1803.560</TotalTTC>
+    <Site>75020</Site>
+    <Remarque><![CDATA[]]></Remarque>
+    <Mode_livraison />
+    <Moyen_Paiement />
+    <Reference_Client><![CDATA[]]></Reference_Client>
+    <Etat>1</Etat>
+    <Reglement>PAYE</Reglement>
+    <Representant />
+    <Representant_Email><![CDATA[]]></Representant_Email>
+    <Representant_Nom><![CDATA[]]></Representant_Nom>
+    <Representant_Prenom><![CDATA[]]></Representant_Prenom>
+    <Representant2>SL</Representant2>
+    <Representant2_Email><![CDATA[sophie@lp-nouvelle.fr]]></Representant2_Email>
+    <Representant2_Nom><![CDATA[Lancereau]]></Representant2_Nom>
+    <Representant2_Prenom><![CDATA[Sophie]]></Representant2_Prenom>
+    <Representant2_Portable />
+    <Representant2_Tel>0140305555</Representant2_Tel>
+    <Adresse_Facturation_Ville>PARIS</Adresse_Facturation_Ville>
+    <Adresse_Facturation_Nom><![CDATA[GREENDECOR]]></Adresse_Facturation_Nom>
+    <Adresse_Facturation_Code_Pays>FR</Adresse_Facturation_Code_Pays>
+    <Adresse_Facturation_Fax>01 53 02 95 60</Adresse_Facturation_Fax>
+    <Adresse_Facturation_Raison_Sociale><![CDATA[GREENDECOR]]></Adresse_Facturation_Raison_Sociale>
+    <Adresse_Facturation_CP>75012</Adresse_Facturation_CP>
+    <Adresse_Facturation_Adr1 />
+    <Adresse_Facturation_Telephone>01 53 02 95 65</Adresse_Facturation_Telephone>
+    <Adresse_Facturation_Email><![CDATA[dchmielewski@green-decor.fr]]></Adresse_Facturation_Email>
+    <Adresse_Livraison_Ville>PARIS</Adresse_Livraison_Ville>
+    <Adresse_Livraison_Nom><![CDATA[]]></Adresse_Livraison_Nom>
+    <Adresse_Livraison_Fax />
+    <Adresse_Livraison_Raison_Sociale><![CDATA[]]></Adresse_Livraison_Raison_Sociale>
+    <Adresse_Livraison_CP>75011</Adresse_Livraison_CP>
+    <Adresse_Livraison_Adr1>11 RUE DES COMMINES</Adresse_Livraison_Adr1>
+    <Adresse_Livraison_Adr2 />
+    <Adresse_Livraison_Email><![CDATA[]]></Adresse_Livraison_Email>
+    <Lignes>
+        <Ligne>
+            <Ordre>4</Ordre>
+            <Code_Article>TMBCOFI000GISSV</Code_Article>
+            <Code_EAN_Article>3760102972120</Code_EAN_Article>
+            <Nombre>25.000</Nombre>
+            <Quantite_Unite>13.800</Quantite_Unite>
+            <Prix_HT>61.35000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE MONOLAME BOIS COMPOSITE TEINTE GRIS IROISE PROFIL STRUCTURE FIXATION INVISIBLE  - PEFC - (Longueur fixe: 4000mm)]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>5</Ordre>
+            <Code_Article>TMBCOFI000GISSV</Code_Article>
+            <Code_EAN_Article>3760102975480</Code_EAN_Article>
+            <Nombre>2.000</Nombre>
+            <Quantite_Unite>1.440</Quantite_Unite>
+            <Prix_HT>61.33000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE MONOLAME BOIS COMPOSITE TEINTE GRIS IROISE PROFIL STRUCTURE FIXATION INVISIBLE  - PEFC - (Longueur fixe: 4000mm)]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>7</Ordre>
+            <Code_Article>TABAN00LBELCCSF</Code_Article>
+            <Code_EAN_Article>940652823000</Code_EAN_Article>
+            <Nombre>14.000</Nombre>
+            <Quantite_Unite>42.000</Quantite_Unite>
+            <Prix_HT>5.28000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE ACCESSOIRE LAMBOURDE BANKIRAI - MERBAU LAMELLE COLLE - COLLAGE D4 S4S- RABOTE 4  FACES (CONSO 3ML/M2)]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>9</Ordre>
+            <Code_Article>TABCO00VICGIRSV</Code_Article>
+            <Code_EAN_Article>3760102977422</Code_EAN_Article>
+            <Nombre>3.000</Nombre>
+            <Quantite_Unite>3.000</Quantite_Unite>
+            <Prix_HT>22.72000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE ACCESSOIRE VIS COMPOSITE GRIS IROISE / GRIS CLAIR (Boite de 150)]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>10</Ordre>
+            <Code_Article>TABCO00CLS000SV</Code_Article>
+            <Code_EAN_Article>3760102970058</Code_EAN_Article>
+            <Nombre>7.000</Nombre>
+            <Quantite_Unite>7.000</Quantite_Unite>
+            <Prix_HT>17.09000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE ACCESSOIRE CLIP COMPOSITE SIMPLE ET VIS INOX  ( CONSO 18/M2 )]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>11</Ordre>
+            <Code_Article>TABCO00CDF000SV</Code_Article>
+            <Code_EAN_Article>3760102970171</Code_EAN_Article>
+            <Nombre>1.000</Nombre>
+            <Quantite_Unite>1.000</Quantite_Unite>
+            <Prix_HT>8.47000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TERRASSE ACCESSOIRE CLIP COMPOSITE DEBUT ET FIN  ET VIS INOX BOITE DE 10.]]></Designation>
+        </Ligne>
+        <Ligne>
+            <Ordre>13</Ordre>
+            <Code_Article>TRPRPLABOULLE</Code_Article>
+            <Code_EAN_Article />
+            <Nombre>1.000</Nombre>
+            <Quantite_Unite>1.000</Quantite_Unite>
+            <Prix_HT>150.00000</Prix_HT>
+            <Pourc_Remise>0.00</Pourc_Remise>
+            <Taux_TVA>20.00</Taux_TVA>
+            <Observation><![CDATA[]]></Observation>
+            <Designation><![CDATA[TRANSPORT  PAR SEVENT COURSES EXPRESS  PARIS / REGION PARISIENNE  -      AU BAS DU CAMION      -       SANS MANUTENTION    ]]></Designation>
+        </Ligne>
+    </Lignes>
+</Scienergie_PieceCommerciale>
+EOT;
+    return $data;
+    
+    }
+
     public static function getDebugClient() {
       $data = <<<EOT
 <?xml version="1.0" encoding="UTF-8"?>
@@ -296,6 +437,98 @@ EOT;
     return $data;
     }
 
+
+
+/*
+   [codePiece] =&gt; FCA789789XXX
+    [clientName] =&gt; Berenger
+    [clientPhone] =&gt; 0661845372
+    [clientAddress] =&gt; 5 rue de Provence
+    [clientZip] =&gt; 75009
+    [clientCity] =&gt; Paris
+    [depot] =&gt; lpn75020qs
+    [vendor] =&gt; MRsqdqsdqSqs
+    [price] =&gt; 50
+    [carrierName] =&gt; LABOULLE!!!qsdsqdqsd
+    [quoteNumber] =&gt; 1212121212888
+    [trackingNumber] =&gt; qsdqsdsqdqsdq
+    [shippingDate] =&gt; Pimcore\Date Object
+    [reglement] =&gt; PAYEqsd
+    */
+    public static function buildTransportObjectFromOrderXml($xmlOrder) {
+      $order = \Website\Tool\MauchampHelper::parseOrder($xmlOrder);
+
+
+      $products = $order["allProducts"];
+      $orderDetail = $order["orderDetail"];
+
+      //print_r($order["transport"]);
+
+      $transportRowXml = $order["transport"][0];
+
+
+      $transport =  $object = new Object\Transport;
+
+      $transport->setValue('codePiece',$orderDetail["Code_Commande"]);
+
+      if(strlen($orderDetail["Adresse_Livraison_Adr1"])>0) {
+
+        $transport->setValue('clientName',$orderDetail["Adresse_Livraison_Nom"]);
+        $transport->setValue('clientAddress',$orderDetail["Adresse_Livraison_Adr1"]." / ".$orderDetail["Adresse_Livraison_Adr2"]);
+        $transport->setValue('clientZip',$orderDetail["Adresse_Livraison_CP"]);
+        $transport->setValue('clientCity',$orderDetail["Adresse_Livraison_Ville"]);
+
+        
+
+      }
+      else {
+          $transport->setValue('clientName',$orderDetail["Adresse_Facturation_Nom"]);
+          
+
+          $transport->setValue('clientAddress',$orderDetail["Adresse_Facturation_Adr1"]." / ".$orderDetail["Adresse_Facturation_Adr2"]);
+          $transport->setValue('clientZip',$orderDetail["Adresse_Facturation_CP"]);
+          $transport->setValue('clientCity',$orderDetail["Adresse_Facturation_Ville"]);
+
+      }
+
+
+       if(strlen($orderDetail["Adresse_Livraison_Portable"])>5) 
+
+        $transport->setValue('clientPhone',$orderDetail["Adresse_Livraison_Portable"]);
+
+      else if(strlen($orderDetail["Adresse_Livraison_Telephone"])>5)
+          $transport->setValue('clientPhone',$orderDetail["Adresse_Livraison_Telephone"]);
+
+        else if(strlen($orderDetail["Adresse_Facturation_Portable"])>5)
+          $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Portable"]);
+
+
+        else {
+          $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Telephone"]);
+        }
+
+         if(strlen($orderDetail["Adresse_Livraison_Email"])>5)
+          $transport->setValue('clientEmail',$orderDetail["Adresse_Livraison_Email"]);
+        else {
+          $transport->setValue('clientEmail',$orderDetail["Adresse_Facturation_Email"]);
+        }
+
+
+
+
+      $transport->setValue('depot',$orderDetail["Code_Depot"]);
+      $transport->setValue('vendor',$orderDetail["Representant2_Nom"]);
+      
+      $transport->setValue('carrierName',$transportRowXml->Code_Article);
+
+      $transport->setValue('price',$transportRowXml->Prix_HT);
+      $transport->setValue('reglement',$orderDetail["Reglement"]);
+      
+
+
+       return $transport;
+  
+    }
 
 
     public static function buildXmlClientFromOrder($xmlOrder) {

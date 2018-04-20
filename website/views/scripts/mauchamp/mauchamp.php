@@ -109,11 +109,17 @@ function sendEmail() {
   window.log("sendEmail",$("#mailform"),$("#mailform").serialize());
 
   var email = $("#input-email").val();
-  if (!validateEmail(email)) {
-    alert("Adresse email invalide !!");
-    return false;
 
+  var allEmails = email.split(";");
+
+  for (var i=0;i<allEmails.length;i++) {
+       if (!validateEmail(allEmails[i])) {
+          alert("Adresse email invalide  :(!!" +allEmails[i]);
+          return false;
+
+        }
   }
+ 
 
   $('#formEmail').modal('hide');
   showPleaseWait();

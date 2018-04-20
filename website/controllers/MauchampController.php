@@ -118,13 +118,25 @@ class MauchampController extends Action
 
         if($this->getParam('sendmail')=="true") {
            $to_email = $this->getParam("to-email");
+
+           $allEmails = explode(";",$to_email);
+
            $validator = new EmailValidator();
-           $isEmailValid = $validator->isValid($to_email, new RFCValidation());
-           if(!$isEmailValid) {
-             header('Content-Type: application/json');
-              echo json_encode(array("message"=>  "Adresse email invalide !!!!"));
-              die;
+           $valid = true;
+           if(is_array($allEmails ))  {
+              foreach ($allEmails as $email) {
+                 $isEmailValid = $validator->isValid($email, new RFCValidation());
+                 if(!$isEmailValid) {
+                    header('Content-Type: application/json');
+                    echo json_encode(array("message"=>  "Adresse email invalide !!!!". $email));
+                    die;
+                 }
+               }
            }
+           
+           
+           
+          
 
         }
        
@@ -303,7 +315,8 @@ class MauchampController extends Action
                 $mail->clearRecipients();
 
                 //$mail->addTo("florent@lesmecaniques.net",'Florent text');
-                $mail->addTo($this->getParam("to-email"));
+                $allEmails = explode(";",$this->getParam("to-email"));
+                $mail->addTo($allEmails);
 
                 $mail->addBcc("florent@lesmecaniques.net");
 

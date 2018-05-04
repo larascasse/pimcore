@@ -1,0 +1,15 @@
+a.editable {
+  color: #0305a6; }
+
+.editable-click,
+a.editable-click,
+a.editable-click:hover {
+  border-bottom: dashed 1px #0305a6; }
+
+.transport-short {
+  font-size: 12px;
+  padding: 1px; }
+  .transport-short .col {
+    background-color: white;
+    margin-right: 1px;
+    padding: 10px; }

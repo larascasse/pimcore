@@ -41,6 +41,10 @@ class TransportHelper
 		$info["type"] = "";
 
 		$shippingDate = $transport->getShippingDate();
+
+		if(is_object($shippingDate)) {
+			$shippingDate = $shippingDate->getTimestamp();
+		}
 		$now = time();
 		$secondsByDay = 60 * 60 * 24;
 		//echo "kljlmjkljkl";
@@ -51,7 +55,9 @@ class TransportHelper
 
 		switch ($transport->getStatus()) {
 			
-
+			//PAY2
+			//NUMERO DE TRACKING
+			
 			case 'processing':
 
 				//pas de ddates de livraison
@@ -60,30 +66,33 @@ class TransportHelper
 					$info["type"] = "danger";
 				}
 				//Livraison loin
-				else if($shippingDate< $now - (3 * $secondsByDay)) {
-					$info["message"] = "";
+				elseif( $now < $shippingDate - (3 * $secondsByDay)) {
+					$info["message"] = "OK";
 					$info["type"] = "success";
 				}
 				else {
-					$info["message"] = "Livraison imminente";
+					$info["message"] = "Livraison imminente!";
 					$info["type"] = "warning";
 				}
 				break;
 
 			case 'end':
-				$info["message"] = "";
+				$info["message"] = "Terminé";
 				$info["type"] = "dark";
 				break;
 
 			
 			default:
 				//Livraison loin
-				if($shippingDate > $now - (7 * $secondsByDay)) {
+				if( $now >  ($shippingDate - (7 * $secondsByDay))) {
 					$info["message"] = "A valider rapidement";
-					$info["type"] = "danger";
+					$info["type"] = "warning";
 				}
 				else {
-					$info["message"] = "";
+					if($transport->getStatus() == "" && $transport->getId()>0)
+						$info["message"] = "Bon, il va falloir<br />valider un peu tout ça ...";
+					else
+						$info["message"] = "";
 					$info["type"] = "info";
 				}
 				break;
@@ -94,8 +103,9 @@ class TransportHelper
 	public static function getJsonReadyForTransport($transport) {
 		//A mettre avant le trafert de date !!
 		$transport->classForStatus =  \Website\Tool\TransportHelper::getCssClassByState($transport);
+		$transport->messageForStatus = \Website\Tool\TransportHelper::getMessageByState($transport);
         $transport->shippingDate = is_object($transport->getShippingDate()) ? $transport->getShippingDate()->getTimestamp():null;
-        $transport->messageForStatus = \Website\Tool\TransportHelper::getMessageByState($transport);
+       
 
         return $transport;
     }

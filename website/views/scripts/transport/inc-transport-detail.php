@@ -131,60 +131,60 @@ foreach($attributes as $key=> $value) {
 */
 
 ?>
-<?php echo \Website\Tool\TransportHelper::getCssClassByState($transport); ?>
-<div class="p-3 bg-light">
 
-
-<h3>Livraison <?php echo $finalAttributesHtml["codePiece"]; ?> <span class="shippingDate-container"> - <?php echo $finalAttributesHtml["shippingDate"]; ?></span></h3>
-
-<div class="row mt-4">
+<div class="row transport-short colored">
 <div class="col">
-
-<h4>Adresse Livraison</h4>
-Nom : <?php echo $finalAttributesHtml["shippingName"];?><br />
-Adresse : <?php echo $finalAttributesHtml["shippingAddress"]; ?><br />
-CP/Ville : <?php echo $finalAttributesHtml["shippingZip"]; ?>  <?php echo $finalAttributesHtml["shippingCity"]; ?><br />
-Tél. : <?php echo $finalAttributesHtml["shippingPhone"]; ?><br />
-Email : <?php echo $finalAttributesHtml["shippingEmail"]; ?><br />
+Livraison le  <?php echo $finalAttributesHtml["shippingDate"]; ?> - <?php echo $finalAttributesHtml["status"];?>
+<br />
+par : <?php echo $finalAttributesHtml["carrierName"]; ?>
+  depuis : <?php echo $finalAttributesHtml["depot"]; ?><br />
+  Client : <?php echo $finalAttributesHtml["clientName"];?><br />
+  Pièce : <?php echo $finalAttributesHtml["codePiece"]; ?>
 </div>
 
 <div class="col">
-<h4>Facturation</h4>
-Nom : <?php echo $finalAttributesHtml["clientName"];?><br />
-Adresse : <?php echo $finalAttributesHtml["clientAddress"]; ?><br />
-CP/Ville : <?php echo $finalAttributesHtml["clientZip"]; ?>  <?php echo $finalAttributesHtml["clientCity"]; ?><br />
-Tél. : <?php echo $finalAttributesHtml["clientPhone"]; ?><br />
-Email : <?php echo $finalAttributesHtml["clientEmail"]; ?><br />
-Message : <br ><?php echo $finalAttributesHtml["shippingMessage"]; ?><br />
 
-
+Adresse de livraison :<br />
+<?php echo $finalAttributesHtml["shippingName"];?><br />
+<?php echo $finalAttributesHtml["shippingAddress"]; ?><br />
+<?php echo $finalAttributesHtml["shippingZip"]; ?>  <?php echo $finalAttributesHtml["shippingCity"]; ?>
 </div>
 
-<div class="col colored">
+<div class="col">
+  Message : <br ><?php echo $finalAttributesHtml["shippingMessage"]; ?><br />
+</div>
 
-<h4>Transport</h4>
-Dépot : <?php echo $finalAttributesHtml["depot"]; ?><br />
-Transport : <?php echo $finalAttributesHtml["carrierName"]; ?><br />
+<div class="col">
 Prix : <?php echo $finalAttributesHtml["price"]; ?><br />
 Cotation : <?php echo $finalAttributesHtml["quoteNumber"];?><br />
 Numéro de tracking : <?php echo $finalAttributesHtml["trackingNumber"]; ?><br />
-Date de livraison : <?php echo $finalAttributesHtml["shippingDate"]; ?><br />
 Règlement : <?php echo $finalAttributesHtml["reglement"]; ?><br />
 Contact LPN : <?php echo $finalAttributesHtml["vendor"]; ?>
+</div>
+
+
+
+
+
+<div class="col d-flex align-items-center flex-column"  style="background-color: white">
+
+<div class="row">
+  <input type="button" class="btn  btn-primary create-btn" value="Créer" onclick="" />
+  <input type="button" class="btn  btn-outline-primary validate-btn" value="Valider"  onclick="" />
+  <input type="button" class="btn  btn-outline-primary sendmail-btn" value="Mail" onclick="" />
+  <input type="button" class="btn  btn-outline-primary print-btn" value="Imprimer" onclick="" />
+</div>
+<br />
+<div class="row">
+<div id="msg-transport" class="p-3 al-colored" style="width: 100%"></div>
+</div>
+</div>
+
 
 </div>
 
-<div class="col colored">
-<?php echo $finalAttributesHtml["status"]; ?>
-<input type="button" class="btn  btn-primary" value="Créer" id="create-btn" onclick="" />
-<input type="button" class="btn  btn-outline-primary" value="Valider" id="validate-btn" onclick="" />
-<input type="button" class="btn  btn-outline-primary" value="Mail" id="sendmail-btn" onclick="" />
-<input type="button" class="btn  btn-outline-primary" value="Imprimer" id="print-btn" onclick="" />
-</div>
 
-</div>
 
-<div id="msg" class="p-3 m-3 mr-0"></div>
 
 
 <?php if(isset($this->notes) && 1==2) { ?>
@@ -256,29 +256,32 @@ var transportId="<?php echo $transport->getId()?>";
 var transportShippingDate="<?php echo is_object($transport->getShippingDate())?$transport->getShippingDate()->getTimestamp():"";?>";
 
 
+
 function refreshFields(transport,notes) {
 
-    $('#sendmail-btn').hide();
-    $('#create-btn').hide();
-    $('#print-btn').hide();
-    $('#validate-btn').hide();
+    $('.sendmail-btn').hide();
+    $('.create-btn').hide();
+    $('.print-btn').hide();
+    $('.validate-btn').hide();
 
     if(transport.o_id) {
 
-        if(transport.status == "new") {
-             $('#validate-btn').show();
+        if(transport.status == "new" || transport.status == "") {
+             $('.validate-btn').show();
         }
         else {
-            $('#sendmail-btn').show();
-            $('#print-btn').show();
+            $('.sendmail-btn').show();
+            $('.print-btn').show();
         }
         
-        $('.colored').addClass('bg-'+transport.classForStatus);
-        showMessage(transport.messageForStatus);
+        $('.colored').removeClassPrefix('bg-').addClass('bg-'+transport.classForStatus);
+        $('.text-colored').removeClassPrefix('text-').addClass('text-'+transport.classForStatus);
+        $('.al-colored').removeClassPrefix('alert-').addClass('alert-'+transport.classForStatus);
+        showMessageTransport(transport.messageForStatus);
       
     }
     else {
-        $('#create-btn').show();
+        $('.create-btn').show();
     }
     if(!transport.shippingDate || transport.shippingDate.length==0)
         $('.shippingDate-container').hide();
@@ -291,8 +294,9 @@ function refreshFields(transport,notes) {
     }
 }
 
-function showMessage(msg) {
-    $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+function showMessageTransport(msg) {
+    //$('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+    $('#msg-transport').html(msg).show();
 }
 
 $(document).ready(function() {
@@ -300,17 +304,28 @@ $(document).ready(function() {
     $.fn.editableform.buttons = '<div class="editable-buttons"><button type="submit" class="btn btn-sm btn-primary btn-sm editable-submit"><svg fill="#000000" height="12" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg></button><button type="button" class="btn btn-default btn-sm editable-cancel"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg></button></div>';
 
 
+    $.fn.removeClassPrefix = function(prefix) {
+    this.each(function(i, el) {
+        var classes = el.className.split(" ").filter(function(c) {
+            return c.lastIndexOf(prefix, 0) !== 0;
+        });
+        el.className = classes.join(" ");
+    });
+    return this;
+};
 
 
-    $('#create-btn').click(function() {
-        showMessage('#create-btn CLICK')
+
+
+    $('.create-btn').click(function() {
+        showMessageTransport('.create-btn CLICK')
        $('.editable').editable('submit', { 
            url: '/transport/update', 
            ajaxOptions: {
                dataType: 'json' //assuming json response
            },           
            success: function(data, config) {
-               showMessage('#create-btn SUCSESSS');
+               showMessageTransport('.create-btn');
                console.log(data);
                if(data && data.transport && data.transport.o_id) {  //record created, response like {"id": 2}
                    //set pk
@@ -319,7 +334,7 @@ $(document).ready(function() {
                    $(this).removeClass('editable-unsaved');
                    //show messages
                    var msg = 'New user created! Now editables submit individually.';
-                   $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
+                   showMessageTransport (msg);
                    $('#create-btn').hide(); 
                    $(this).off('save.newuser');   
                    refreshFields(data.transport,data.notes);
@@ -336,7 +351,7 @@ $(document).ready(function() {
                } else { //validation error (client-side or server-side)
                    $.each(errors, function(k, v) { msg += k+": "+v+"<br>"; });
                } 
-               $('#msg').removeClass('alert-success').addClass('alert-error').html(msg).show();
+               showMessageTransport(msg);
            }
        });
     });
@@ -374,15 +389,15 @@ $(document).ready(function() {
         },
         success: function(response, newValue) {
             if(!response) {
-                showMessage ('OK');
+                showMessageTransport ('OK');
             }          
             
             if(response.success === false) {
-                 showMessage("Erreur "+response.msg);
+                 showMessageTransport("Erreur "+response.msg);
             }
             else {
                 //Creation
-                showMessage(response.msg);
+                showMessageTransport(response.msg);
                 $(this).editable('option', 'pk', response.transport.o_id);
                 refreshFields(response.transport,response.notes);
             }

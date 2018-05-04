@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="/website/static_lpn/css/bootstrap-editable.min.css" crossorigin="anonymous">
 <script   src="/website/static_lpn/js/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="/website/static_lpn/css/bootstrap-vue.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/website/static_lpn/scss/build/css/mauchamp.css?t=<?php echo time()?>">
 
 
 

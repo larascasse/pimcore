@@ -11,7 +11,7 @@ $xmlClient = $this->xmlClient;
 $showCheckbox = true;
 
 
-if($this->transport) {
+if(is_object($this->transport)) {
 
 
   echo $this->template("transport/inc-transport-detail.php",array(

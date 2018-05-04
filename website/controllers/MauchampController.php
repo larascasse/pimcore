@@ -260,6 +260,7 @@ class MauchampController extends Action
                               unset($clonedPage);
                             }
                              catch (Exception $e) {
+                                 Logger::err($e);
                                   echo json_encode(array("message"=> $e->getMessage(),"message3"=>"Zend_Pdf::load(".$pdfpath.")"));
                                  die;
                             }
@@ -289,6 +290,7 @@ class MauchampController extends Action
                       file_put_contents($pdfFile, $pdfContent);
                      }
                      catch (Exception $e) {
+                          Logger::err($e);
                           echo json_encode(array("message"=> $e->getMessage(),"message2"=>"error rendering Zend"));
                          die;
                     }
@@ -301,6 +303,7 @@ class MauchampController extends Action
 
             }
             catch (Exception $e) {
+                 Logger::err($e);
                  echo json_encode(array("message"=> $e->getMessage()));
                  die;
             }
@@ -425,7 +428,7 @@ class MauchampController extends Action
 
     }
 
-     //Fiche Produit
+    //Fiche Produit
     public function coverForPieceCommercialeAction() {
         
         $this->disableBrowserCache();

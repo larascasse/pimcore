@@ -11,12 +11,17 @@ $xmlClient = $this->xmlClient;
 $showCheckbox = true;
 
 
-echo $this->template("transport/inc-transport-detail.php",array(
+if($this->transport) {
+
+
+  echo $this->template("transport/inc-transport-detail.php",array(
     "transport"=>$this->transport,
     "notes" => $this->notes,
     //"ftIncludedSkus" => $ftIncludedSkus,
 
 ));
+
+  }
 
 
 ?>

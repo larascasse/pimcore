@@ -819,5 +819,31 @@ return [
         "modificationDate" => 1509631349,
         "creationDate" => 1509631318,
         "id" => "magento_logo"
+    ],
+    "magento_header_top" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 1200,
+                    "height" => 800,
+                    "positioning" => "topcenter",
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento_header_top",
+        "description" => "",
+        "format" => "JPEG",
+        "quality" => 90,
+        "highResolution" => 0.0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1524813438,
+        "creationDate" => 1524813417,
+        "id" => "magento_header_top"
     ]
 ];

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-20T16:58:35+02:00
+* Generated at: 2018-05-04T16:50:34+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.14.113
+* IP: 172.31.2.93
 
 
 Fields Summary: 
@@ -14,8 +14,14 @@ Fields Summary:
 - clientPhone [input]
 - clientEmail [input]
 - clientAddress [input]
+- shippingAddress [input]
 - clientZip [input]
 - clientCity [input]
+- shippingName [input]
+- shippingPhone [input]
+- shippingEmail [input]
+- shippingZip [input]
+- shippingCity [input]
 - depot [input]
 - vendor [input]
 - price [input]
@@ -25,6 +31,8 @@ Fields Summary:
 - shippingDate [date]
 - reglement [input]
 - shippingMessage [textarea]
+- xmlPiece [textarea]
+- status [select]
 */ 
 
 
@@ -32,7 +40,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'transport',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1524236315,
+   'modificationDate' => 1525445434,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -90,15 +98,15 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
-             'index' => false,
+             'index' => true,
              'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
-             'visibleGridView' => false,
-             'visibleSearch' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
           )),
           1 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
@@ -134,7 +142,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'phpdocType' => 'string',
              'regex' => '',
              'name' => 'clientPhone',
-             'title' => 'clientPhone',
+             'title' => 'Télephone',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
@@ -205,6 +213,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'columnLength' => 190,
              'phpdocType' => 'string',
              'regex' => '',
+             'name' => 'shippingAddress',
+             'title' => 'Adresse (livraison)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          6 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
              'name' => 'clientZip',
              'title' => 'Code Postal',
              'tooltip' => '',
@@ -220,7 +252,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          6 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -244,7 +276,127 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          7 => 
+          8 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'shippingName',
+             'title' => 'Nom Livraison',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          9 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'shippingPhone',
+             'title' => 'Téléphone (livraison)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          10 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'shippingEmail',
+             'title' => 'Email (livraison)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          11 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'shippingZip',
+             'title' => 'Code Postal (livraison)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          12 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'shippingCity',
+             'title' => 'Ville (livraison)',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          13 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -268,7 +420,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          8 => 
+          14 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -292,7 +444,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          9 => 
+          15 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -316,7 +468,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          10 => 
+          16 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -340,7 +492,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          11 => 
+          17 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -364,7 +516,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          12 => 
+          18 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -388,7 +540,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          13 => 
+          19 => 
           Pimcore\Model\Object\ClassDefinition\Data\Date::__set_state(array(
              'fieldtype' => 'date',
              'queryColumnType' => 'bigint(20)',
@@ -411,7 +563,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          14 => 
+          20 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -435,7 +587,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          15 => 
+          21 => 
           Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
              'fieldtype' => 'textarea',
              'width' => '',
@@ -445,6 +597,70 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'phpdocType' => 'string',
              'name' => 'shippingMessage',
              'title' => 'Message',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          22 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+             'fieldtype' => 'textarea',
+             'width' => '',
+             'height' => '',
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'name' => 'xmlPiece',
+             'title' => 'xmlPiece',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          23 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Nouveau',
+                'value' => 'new',
+              ),
+              1 => 
+              array (
+                'key' => 'Validé',
+                'value' => 'processing',
+              ),
+              2 => 
+              array (
+                'key' => 'Terminé',
+                'value' => 'finished',
+              ),
+            ),
+             'width' => '',
+             'defaultValue' => 'new',
+             'queryColumnType' => 'varchar(190)',
+             'columnType' => 'varchar(190)',
+             'phpdocType' => 'string',
+             'name' => 'status',
+             'title' => 'Etat',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,

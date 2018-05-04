@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-20T16:58:35+02:00
+* Generated at: 2018-05-04T16:50:34+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.14.113
+* IP: 172.31.2.93
 
 
 Fields Summary: 
@@ -14,8 +14,14 @@ Fields Summary:
 - clientPhone [input]
 - clientEmail [input]
 - clientAddress [input]
+- shippingAddress [input]
 - clientZip [input]
 - clientCity [input]
+- shippingName [input]
+- shippingPhone [input]
+- shippingEmail [input]
+- shippingZip [input]
+- shippingCity [input]
 - depot [input]
 - vendor [input]
 - price [input]
@@ -25,6 +31,8 @@ Fields Summary:
 - shippingDate [date]
 - reglement [input]
 - shippingMessage [textarea]
+- xmlPiece [textarea]
+- status [select]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -37,8 +45,14 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Transport\Listing getByClientPhone ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByClientEmail ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByClientAddress ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingAddress ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByClientZip ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByClientCity ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingName ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingPhone ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingEmail ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingZip ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingCity ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByDepot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByVendor ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByPrice ($value, $limit = 0) 
@@ -48,6 +62,8 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Transport\Listing getByShippingDate ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByReglement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByShippingMessage ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByXmlPiece ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByStatus ($value, $limit = 0) 
 */
 
 class Transport extends Concrete {
@@ -59,8 +75,14 @@ public $clientName;
 public $clientPhone;
 public $clientEmail;
 public $clientAddress;
+public $shippingAddress;
 public $clientZip;
 public $clientCity;
+public $shippingName;
+public $shippingPhone;
+public $shippingEmail;
+public $shippingZip;
+public $shippingCity;
 public $depot;
 public $vendor;
 public $price;
@@ -70,6 +92,8 @@ public $trackingNumber;
 public $shippingDate;
 public $reglement;
 public $shippingMessage;
+public $xmlPiece;
+public $status;
 
 
 /**
@@ -129,7 +153,7 @@ public function setClientName ($clientName) {
 }
 
 /**
-* Get clientPhone - clientPhone
+* Get clientPhone - Télephone
 * @return string
 */
 public function getClientPhone () {
@@ -142,7 +166,7 @@ public function getClientPhone () {
 }
 
 /**
-* Set clientPhone - clientPhone
+* Set clientPhone - Télephone
 * @param string $clientPhone
 * @return \Pimcore\Model\Object\Transport
 */
@@ -198,6 +222,29 @@ public function setClientAddress ($clientAddress) {
 }
 
 /**
+* Get shippingAddress - Adresse (livraison)
+* @return string
+*/
+public function getShippingAddress () {
+	$preValue = $this->preGetValue("shippingAddress"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingAddress;
+	return $data;
+}
+
+/**
+* Set shippingAddress - Adresse (livraison)
+* @param string $shippingAddress
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingAddress ($shippingAddress) {
+	$this->shippingAddress = $shippingAddress;
+	return $this;
+}
+
+/**
 * Get clientZip - Code Postal
 * @return string
 */
@@ -240,6 +287,121 @@ public function getClientCity () {
 */
 public function setClientCity ($clientCity) {
 	$this->clientCity = $clientCity;
+	return $this;
+}
+
+/**
+* Get shippingName - Nom Livraison
+* @return string
+*/
+public function getShippingName () {
+	$preValue = $this->preGetValue("shippingName"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingName;
+	return $data;
+}
+
+/**
+* Set shippingName - Nom Livraison
+* @param string $shippingName
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingName ($shippingName) {
+	$this->shippingName = $shippingName;
+	return $this;
+}
+
+/**
+* Get shippingPhone - Téléphone (livraison)
+* @return string
+*/
+public function getShippingPhone () {
+	$preValue = $this->preGetValue("shippingPhone"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingPhone;
+	return $data;
+}
+
+/**
+* Set shippingPhone - Téléphone (livraison)
+* @param string $shippingPhone
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingPhone ($shippingPhone) {
+	$this->shippingPhone = $shippingPhone;
+	return $this;
+}
+
+/**
+* Get shippingEmail - Email (livraison)
+* @return string
+*/
+public function getShippingEmail () {
+	$preValue = $this->preGetValue("shippingEmail"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingEmail;
+	return $data;
+}
+
+/**
+* Set shippingEmail - Email (livraison)
+* @param string $shippingEmail
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingEmail ($shippingEmail) {
+	$this->shippingEmail = $shippingEmail;
+	return $this;
+}
+
+/**
+* Get shippingZip - Code Postal (livraison)
+* @return string
+*/
+public function getShippingZip () {
+	$preValue = $this->preGetValue("shippingZip"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingZip;
+	return $data;
+}
+
+/**
+* Set shippingZip - Code Postal (livraison)
+* @param string $shippingZip
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingZip ($shippingZip) {
+	$this->shippingZip = $shippingZip;
+	return $this;
+}
+
+/**
+* Get shippingCity - Ville (livraison)
+* @return string
+*/
+public function getShippingCity () {
+	$preValue = $this->preGetValue("shippingCity"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingCity;
+	return $data;
+}
+
+/**
+* Set shippingCity - Ville (livraison)
+* @param string $shippingCity
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingCity ($shippingCity) {
+	$this->shippingCity = $shippingCity;
 	return $this;
 }
 
@@ -447,6 +609,52 @@ public function getShippingMessage () {
 */
 public function setShippingMessage ($shippingMessage) {
 	$this->shippingMessage = $shippingMessage;
+	return $this;
+}
+
+/**
+* Get xmlPiece - xmlPiece
+* @return string
+*/
+public function getXmlPiece () {
+	$preValue = $this->preGetValue("xmlPiece"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->xmlPiece;
+	return $data;
+}
+
+/**
+* Set xmlPiece - xmlPiece
+* @param string $xmlPiece
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setXmlPiece ($xmlPiece) {
+	$this->xmlPiece = $xmlPiece;
+	return $this;
+}
+
+/**
+* Get status - Etat
+* @return string
+*/
+public function getStatus () {
+	$preValue = $this->preGetValue("status"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->status;
+	return $data;
+}
+
+/**
+* Set status - Etat
+* @param string $status
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setStatus ($status) {
+	$this->status = $status;
 	return $this;
 }
 

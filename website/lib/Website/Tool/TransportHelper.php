@@ -34,7 +34,7 @@ class TransportHelper
 
 	}
 
-	public function getInfoForStatus($transport) {
+	public static function getInfoForStatus($transport) {
 
 		$info=array();
 		$info["message"] = "";

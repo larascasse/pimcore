@@ -105,7 +105,7 @@ class TransportController extends Action
         if (!$object instanceof Object\Transport) {
             // this will trigger a 404 error response
             //throw new \Zend_Controller_Router_Exception("invalid request");
-            echo "error...";
+            //echo "error...";
             $object = new Object\Transport;
             $this->view->create = true;
         }
@@ -223,19 +223,7 @@ class TransportController extends Action
     }
 
     public function getNotesForTransport($transport) {
-        $list = new Element\Note\Listing();
-        $list->setOrderKey(["date"]);
-        $list->setOrder(["DESC", "DESC"]);
-        $conditions = array();
-        $conditions[] = "(cid = " . $list->quote($transport->getId()). ")";
-        $list->setCondition(implode(" AND ", $conditions));
-        $list->load();
-        $notes = [];
-        foreach ($list->getNotes() as $note) {
-            $note->dateString = date("d/m/Y h:i",$note->getDate());
-            $notes[] = $note;
-        }
-        return $notes;
+        return \Website\Tool\TransportHelper::getNotesForTransport($transport);
     }
 
      public function getJsonReadyForTransport($transport) {

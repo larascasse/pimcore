@@ -110,5 +110,22 @@ class TransportHelper
         return $transport;
     }
 
+     public static function getNotesForTransport($transport) {
+        $list = new \Element\Note\Listing();
+        $list->setOrderKey(["date"]);
+        $list->setOrder(["DESC", "DESC"]);
+        $conditions = array();
+        $conditions[] = "(cid = " . $list->quote($transport->getId()). ")";
+        $list->setCondition(implode(" AND ", $conditions));
+        $list->load();
+        $notes = [];
+        foreach ($list->getNotes() as $note) {
+            $note->dateString = date("d/m/Y h:i",$note->getDate());
+            $notes[] = $note;
+        }
+        return $notes;
+    }
+
+
 
 }

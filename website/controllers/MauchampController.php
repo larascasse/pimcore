@@ -51,7 +51,7 @@ class MauchampController extends Action
 
             if($this->getParam('debug')) {
                //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
-              $data = Website\Tool\MauchampHelper::getDebugOrder2();
+              $data = Website\Tool\MauchampHelper::getDebugOrder();
             }
             else {
               $data = false;
@@ -98,6 +98,36 @@ class MauchampController extends Action
               $this->view->orderDetail = $order["orderDetail"];
               $this->view->xmlOrder = $data;
               $this->view->xmlClient = \Website\Tool\MauchampHelper::buildXmlClientFromOrder($data);//Website\Tool\MagentoHelper::buildXmlClientFromOrder($data);
+
+               if($this->getParam('transport')) {
+
+                   $transportList = Object\Transport::getByCodePiece($order["orderDetail"]["Code_Commande"],['unpublished' => true]);
+                  
+
+                  if($transportList->count()>0) {
+
+                      $transport = $transportList->current();
+                  }
+                  else {
+
+                    $transport = \Website\Tool\MauchampHelper::buildTransportObjectFromOrderXml($data);
+                  }
+                  if (!$transport instanceof Object\Transport) {
+                      // this will trigger a 404 error response
+                      //throw new \Zend_Controller_Router_Exception("invalid request");
+                      echo "error.....";
+                   
+                      $transport = new Object\Transport;
+                  }
+
+
+
+                  if($transport->getId()) {
+                     $this->view->notes = \Website\Tool\TransportHelper::getNotesForTransport($transport);
+                  }
+                  $this->view->transport = $transport;
+
+               }
 
           }
         }

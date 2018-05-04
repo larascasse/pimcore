@@ -456,6 +456,8 @@ EOT;
     [reglement] =&gt; PAYEqsd
     */
     public static function buildTransportObjectFromOrderXml($xmlOrder) {
+       echo "JJJ";
+                    die;
       $order = \Website\Tool\MauchampHelper::parseOrder($xmlOrder);
 
 

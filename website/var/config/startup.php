@@ -140,7 +140,6 @@ $routeCustom = new \Zend_Controller_Router_Route(
     ]
 );
 $router->addRoute('transport', $routeCustom);
-$front->setRouter($router);
 
 $routeCustom = new \Zend_Controller_Router_Route(
     'transports/*', [
@@ -150,6 +149,17 @@ $routeCustom = new \Zend_Controller_Router_Route(
     ]
 );
 $router->addRoute('transports', $routeCustom);
+
+$routeCustom = new \Zend_Controller_Router_Route(
+    'transport/order-expedition/*', [
+       // 'module' => 't',
+        'controller' => 'transport',
+        'action' => 'order-expedition'
+    ]
+);
+//$router->addRoute('transports', $routeCustom);
+
+
 $front->setRouter($router);
 
 

@@ -27,7 +27,7 @@ class MauchampHelper
 <?xml version="1.0" encoding="UTF-8"?>
 <Scienergie_PieceCommerciale xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <Type_Piece>Commande</Type_Piece>
-   <Code_Commande>CCAKLMLMLM</Code_Commande>
+   <Code_Commande>CP180698XXX</Code_Commande>
    <Code_Commande_Web>200000905</Code_Commande_Web>
    <Code_Client>AZERTY3</Code_Client>
    <Email_Client>florent.berenger+test6crea@gmail.com</Email_Client>
@@ -248,7 +248,7 @@ EOT;
 
   public static function getDebugOrder2() {
     	$data = <<<EOT
-<?xml version="1.0" encoding="utf-8"?><Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Type_Piece>Devis</Type_Piece><Code_Commande>DCA181400</Code_Commande><Code_Commande_Web /><Date_Livraison>2018-04-12T00:00:00 02:00</Date_Livraison><Date_Confirmation xsi:nil="true" /><Date_Expedition>2018-04-12T00:00:00</Date_Expedition><Acompte>0.000</Acompte><Remise>0.000</Remise><Type_Remise>%</Type_Remise><TotalHT>11085.21</TotalHT><TotalTTC>13302.250</TotalTTC><Site>78420</Site><Remarque><![CDATA[]]></Remarque><Mode_livraison /><Moyen_Paiement /><Reference_Client><![CDATA[Projet Douglas Monaco - PRO]]></Reference_Client><Etat>31</Etat><Reglement>PAYE</Reglement><Representant>DR</Representant><Representant_Email><![CDATA[damien@lp-nouvelle.fr]]></Representant_Email><Representant_Nom><![CDATA[Romeo]]></Representant_Nom><Representant_Prenom><![CDATA[Damien]]></Representant_Prenom><Representant_Portable>0608248865</Representant_Portable><Representant_Tel>0608248865</Representant_Tel><Representant2>DR</Representant2><Representant2_Email><![CDATA[damien@lp-nouvelle.fr]]></Representant2_Email><Representant2_Nom><![CDATA[Romeo]]></Representant2_Nom><Representant2_Prenom><![CDATA[Damien]]></Representant2_Prenom><Representant2_Portable>0608248865</Representant2_Portable><Representant2_Tel>0608248865</Representant2_Tel><Adresse_Facturation_Ville>MONACO</Adresse_Facturation_Ville><Adresse_Facturation_Nom><![CDATA[ETB  MONACO]]></Adresse_Facturation_Nom><Adresse_Facturation_Code_Pays>FR</Adresse_Facturation_Code_Pays><Adresse_Facturation_Fax /><Adresse_Facturation_Raison_Sociale><![CDATA[ETB  MONACO]]></Adresse_Facturation_Raison_Sociale><Adresse_Facturation_CP>98000</Adresse_Facturation_CP><Adresse_Facturation_Adr1 /><Adresse_Facturation_Telephone /><Adresse_Facturation_Email><![CDATA[etb@monaco.mc]]></Adresse_Facturation_Email><Adresse_Livraison_Ville>MONACO</Adresse_Livraison_Ville><Adresse_Livraison_Nom><![CDATA[ETB  MONACO]]></Adresse_Livraison_Nom><Adresse_Livraison_Code_Pays>FR</Adresse_Livraison_Code_Pays><Adresse_Livraison_Fax /><Adresse_Livraison_Raison_Sociale><![CDATA[ETB  MONACO]]></Adresse_Livraison_Raison_Sociale><Adresse_Livraison_CP>98000</Adresse_Livraison_CP><Adresse_Livraison_Adr1 /><Adresse_Livraison_Adr2>12 CHEMIN DE LA TURBIE</Adresse_Livraison_Adr2><Adresse_Livraison_Email><![CDATA[etb@monaco.mc]]></Adresse_Livraison_Email><Lignes><Ligne><Ordre>3</Ordre><Code_Article>FVDGLG2SELBR0PN</Code_Article><Code_EAN_Article>0001212502000</Code_EAN_Article><Nombre>85.000</Nombre><Quantite_Unite>85.000</Quantite_Unite><Prix_HT>109.41000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[PARQUET CONTRECOLLE MONOLAME DOUGLAS G2 SELECT BRUT - FSC - LONGUEURS VARIABLES DE 2000MM A 5000MM. EPAISSEUR 21MM*LARGEUR 250MM* EPAISSEUR PAREMENT 5MM.]]></Designation></Ligne><Ligne><Ordre>5</Ordre><Code_Article>AF00000PCUWRBFL</Code_Article><Code_EAN_Article>5708055003124</Code_EAN_Article><Nombre>5.000</Nombre><Quantite_Unite>5.000</Quantite_Unite><Prix_HT>34.96000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION PRE-COUCHE ANTI-UV POUR TERRASSE ET AVANT HUILAGE POUR LE PARQUET DOUGLAS  ( CONSO 20M2 PAR BIDON )]]></Designation></Ligne><Ligne><Ordre>6</Ordre><Code_Article>AF00000HDONATFL</Code_Article><Code_EAN_Article>5708055015080</Code_EAN_Article><Nombre>3.000</Nombre><Quantite_Unite>3.000</Quantite_Unite><Prix_HT>129.28000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION HUILE NATURELLE DIAMOND OIL POUR DOUGLAS - SANS COV (APPLICATION EN UNE COUCHE A LA MONOBROSSE) - CONSOMMATION 25m²/L]]></Designation></Ligne><Ligne><Ordre>7</Ordre><Code_Article>AF00000SAVBL0FL</Code_Article><Code_EAN_Article>5708055003759</Code_EAN_Article><Nombre>1.000</Nombre><Quantite_Unite>1.000</Quantite_Unite><Prix_HT>22.72000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION ENTRETIEN SAVON BLANC POUR DOUGLAS
+<?xml version="1.0" encoding="utf-8"?><Scienergie_PieceCommerciale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Type_Piece>Devis</Type_Piece><Code_Commande>CP180698XXX</Code_Commande><Code_Commande_Web /><Date_Livraison>2018-04-12T00:00:00 02:00</Date_Livraison><Date_Confirmation xsi:nil="true" /><Date_Expedition>2018-04-12T00:00:00</Date_Expedition><Acompte>0.000</Acompte><Remise>0.000</Remise><Type_Remise>%</Type_Remise><TotalHT>11085.21</TotalHT><TotalTTC>13302.250</TotalTTC><Site>78420</Site><Remarque><![CDATA[]]></Remarque><Mode_livraison /><Moyen_Paiement /><Reference_Client><![CDATA[Projet Douglas Monaco - PRO]]></Reference_Client><Etat>31</Etat><Reglement>PAYE</Reglement><Representant>DR</Representant><Representant_Email><![CDATA[damien@lp-nouvelle.fr]]></Representant_Email><Representant_Nom><![CDATA[Romeo]]></Representant_Nom><Representant_Prenom><![CDATA[Damien]]></Representant_Prenom><Representant_Portable>0608248865</Representant_Portable><Representant_Tel>0608248865</Representant_Tel><Representant2>DR</Representant2><Representant2_Email><![CDATA[damien@lp-nouvelle.fr]]></Representant2_Email><Representant2_Nom><![CDATA[Romeo]]></Representant2_Nom><Representant2_Prenom><![CDATA[Damien]]></Representant2_Prenom><Representant2_Portable>0608248865</Representant2_Portable><Representant2_Tel>0608248865</Representant2_Tel><Adresse_Facturation_Ville>MONACO</Adresse_Facturation_Ville><Adresse_Facturation_Nom><![CDATA[ETB  MONACO]]></Adresse_Facturation_Nom><Adresse_Facturation_Code_Pays>FR</Adresse_Facturation_Code_Pays><Adresse_Facturation_Fax /><Adresse_Facturation_Raison_Sociale><![CDATA[ETB  MONACO]]></Adresse_Facturation_Raison_Sociale><Adresse_Facturation_CP>98000</Adresse_Facturation_CP><Adresse_Facturation_Adr1 /><Adresse_Facturation_Telephone /><Adresse_Facturation_Email><![CDATA[etb@monaco.mc]]></Adresse_Facturation_Email><Adresse_Livraison_Ville>MONACO</Adresse_Livraison_Ville><Adresse_Livraison_Nom><![CDATA[ETB  MONACO]]></Adresse_Livraison_Nom><Adresse_Livraison_Code_Pays>FR</Adresse_Livraison_Code_Pays><Adresse_Livraison_Fax /><Adresse_Livraison_Raison_Sociale><![CDATA[ETB  MONACO]]></Adresse_Livraison_Raison_Sociale><Adresse_Livraison_CP>98000</Adresse_Livraison_CP><Adresse_Livraison_Adr1 /><Adresse_Livraison_Adr2>12 CHEMIN DE LA TURBIE</Adresse_Livraison_Adr2><Adresse_Livraison_Email><![CDATA[etb@monaco.mc]]></Adresse_Livraison_Email><Lignes><Ligne><Ordre>3</Ordre><Code_Article>FVDGLG2SELBR0PN</Code_Article><Code_EAN_Article>0001212502000</Code_EAN_Article><Nombre>85.000</Nombre><Quantite_Unite>85.000</Quantite_Unite><Prix_HT>109.41000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[PARQUET CONTRECOLLE MONOLAME DOUGLAS G2 SELECT BRUT - FSC - LONGUEURS VARIABLES DE 2000MM A 5000MM. EPAISSEUR 21MM*LARGEUR 250MM* EPAISSEUR PAREMENT 5MM.]]></Designation></Ligne><Ligne><Ordre>5</Ordre><Code_Article>AF00000PCUWRBFL</Code_Article><Code_EAN_Article>5708055003124</Code_EAN_Article><Nombre>5.000</Nombre><Quantite_Unite>5.000</Quantite_Unite><Prix_HT>34.96000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION PRE-COUCHE ANTI-UV POUR TERRASSE ET AVANT HUILAGE POUR LE PARQUET DOUGLAS  ( CONSO 20M2 PAR BIDON )]]></Designation></Ligne><Ligne><Ordre>6</Ordre><Code_Article>AF00000HDONATFL</Code_Article><Code_EAN_Article>5708055015080</Code_EAN_Article><Nombre>3.000</Nombre><Quantite_Unite>3.000</Quantite_Unite><Prix_HT>129.28000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION HUILE NATURELLE DIAMOND OIL POUR DOUGLAS - SANS COV (APPLICATION EN UNE COUCHE A LA MONOBROSSE) - CONSOMMATION 25m²/L]]></Designation></Ligne><Ligne><Ordre>7</Ordre><Code_Article>AF00000SAVBL0FL</Code_Article><Code_EAN_Article>5708055003759</Code_EAN_Article><Nombre>1.000</Nombre><Quantite_Unite>1.000</Quantite_Unite><Prix_HT>22.72000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[ACCESSOIRE FINITION ENTRETIEN SAVON BLANC POUR DOUGLAS
 ]]></Designation></Ligne><Ligne><Ordre>9</Ordre><Code_Article>TRANSPORT</Code_Article><Code_EAN_Article /><Nombre>1.000</Nombre><Quantite_Unite>1.000</Quantite_Unite><Prix_HT>1200.00000</Prix_HT><Pourc_Remise>0.00</Pourc_Remise><Taux_TVA>20.00</Taux_TVA><Observation><![CDATA[]]></Observation><Designation><![CDATA[TRANSPORT EN DIRECT USINE - CLIENT DE 85m2 DE PARQUET DOUGLAS - LARGEUR 250MM- LONGUEURS VARIABLES 2000MM A 5000MM.]]></Designation></Ligne></Lignes></Scienergie_PieceCommerciale>
 
 EOT;
@@ -471,51 +471,79 @@ EOT;
 
       $transport->setValue('codePiece',$orderDetail["Code_Commande"]);
 
+
+      //FACTURATION
+      $transport->setValue('clientName',$orderDetail["Adresse_Facturation_Nom"]);
+
+      //adresse
+      $adresse = $orderDetail["Adresse_Facturation_Adr1"];
+      if(trim($orderDetail["Adresse_Facturation_Adr2"]) != "")
+        $adresse .= " / ".$orderDetail["Adresse_Facturation_Adr2"];
+      $transport->setValue('clientAddress',$adresse);
+
+      $transport->setValue('clientZip',$orderDetail["Adresse_Facturation_CP"]);
+      $transport->setValue('clientCity',$orderDetail["Adresse_Facturation_Ville"]);
+      
+      if(strlen($orderDetail["Adresse_Facturation_Portable"])>5)
+        $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Portable"]);
+
+      else if(strlen($orderDetail["Adresse_Facturation_Telephone"])>5)
+        $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Telephone"]);
+
+      $transport->setValue('clientEmail',$orderDetail["Adresse_Facturation_Email"]);
+
+
+
+      //SHIPPING
       if(strlen($orderDetail["Adresse_Livraison_Adr1"])>0) {
 
-        $transport->setValue('clientName',$orderDetail["Adresse_Livraison_Nom"]);
-        $transport->setValue('clientAddress',$orderDetail["Adresse_Livraison_Adr1"]." / ".$orderDetail["Adresse_Livraison_Adr2"]);
-        $transport->setValue('clientZip',$orderDetail["Adresse_Livraison_CP"]);
-        $transport->setValue('clientCity',$orderDetail["Adresse_Livraison_Ville"]);
+            //adresse
+          $adresse = $orderDetail["Adresse_Livraison_Adr1"];
+          if(trim($orderDetail["Adresse_Livraison_Adr2"]) != "")
+            $adresse .= " / ".$orderDetail["Adresse_Livraison_Adr2"];
+          $transport->setValue('shippingAddress',$adresse);
 
-        
+          $transport->setValue('shippingZip',$orderDetail["Adresse_Livraison_CP"]);
+          $transport->setValue('shippingCity',$orderDetail["Adresse_Livraison_Ville"]);
 
       }
       else {
-          $transport->setValue('clientName',$orderDetail["Adresse_Facturation_Nom"]);
+         
+          $transport->setValue('shippingtName',$orderDetail["Adresse_Facturation_Nom"]);
           
+          //adresse
+          $adresse = $orderDetail["Adresse_Facturation_Adr1"];
+          if(trim($orderDetail["Adresse_Facturation_Adr2"]) != "")
+            $adresse .= " / ".$orderDetail["Adresse_Facturation_Adr2"];
+          $transport->setValue('shippingAddress',$adresse);
 
-          $transport->setValue('clientAddress',$orderDetail["Adresse_Facturation_Adr1"]." / ".$orderDetail["Adresse_Facturation_Adr2"]);
-          $transport->setValue('clientZip',$orderDetail["Adresse_Facturation_CP"]);
-          $transport->setValue('clientCity',$orderDetail["Adresse_Facturation_Ville"]);
+          $transport->setValue('shippingZip',$orderDetail["Adresse_Facturation_CP"]);
+          $transport->setValue('shippingCity',$orderDetail["Adresse_Facturation_Ville"]);
 
       }
 
 
-       if(strlen($orderDetail["Adresse_Livraison_Portable"])>5) 
-
-        $transport->setValue('clientPhone',$orderDetail["Adresse_Livraison_Portable"]);
+      if(strlen($orderDetail["Adresse_Livraison_Portable"])>5) 
+        $transport->setValue('shippingPhone',$orderDetail["Adresse_Livraison_Portable"]);
 
       else if(strlen($orderDetail["Adresse_Livraison_Telephone"])>5)
-          $transport->setValue('clientPhone',$orderDetail["Adresse_Livraison_Telephone"]);
+        $transport->setValue('shippingPhone',$orderDetail["Adresse_Livraison_Telephone"]);
 
-        else if(strlen($orderDetail["Adresse_Facturation_Portable"])>5)
-          $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Portable"]);
+      else if(strlen($orderDetail["Adresse_Facturation_Portable"])>5)
+        $transport->setValue('shippingPhone',$orderDetail["Adresse_Facturation_Portable"]);
 
+      else {
+        $transport->setValue('shippingPhone',$orderDetail["Adresse_Facturation_Telephone"]);
+      }
 
-        else {
-          $transport->setValue('clientPhone',$orderDetail["Adresse_Facturation_Telephone"]);
-        }
-
-         if(strlen($orderDetail["Adresse_Livraison_Email"])>5)
-          $transport->setValue('clientEmail',$orderDetail["Adresse_Livraison_Email"]);
-        else {
-          $transport->setValue('clientEmail',$orderDetail["Adresse_Facturation_Email"]);
-        }
-
+      if(strlen($orderDetail["Adresse_Livraison_Email"])>5)
+        $transport->setValue('shippingEmail',$orderDetail["Adresse_Livraison_Email"]);
+      else {
+        $transport->setValue('shippingEmail',$orderDetail["Adresse_Facturation_Email"]);
+      }
 
 
-
+      //OTHER
       $transport->setValue('depot',$orderDetail["Code_Depot"]);
       $transport->setValue('vendor',$orderDetail["Representant2_Nom"]);
       
@@ -679,6 +707,7 @@ EOT;
       $products = array();
       $allProducts = array();
       $missingProducts = array();
+      $rawProducts = array();
 
 
 
@@ -784,8 +813,11 @@ EOT;
             $itemsCount = 0;
             
             for($i=0; $i<$lines->count(); $i++){
+
+
                 
                 $p = $lines[$i];
+                $rawProducts[] = $p;
 
                 $tauxTVA = floatval(self::convertFloat($p->Taux_TVA));
                 $tauxTVA = $tauxTVA<1?$tauxTVA*100:$tauxTVA;
@@ -913,7 +945,8 @@ EOT;
           "products"=> $products,
          	"allProducts"=> $allProducts,
          	"missingProducts"=> $missingProducts,
-         	"transport"=> $transportRows,
+          "transport"=> $transportRows,
+         	"rawProducts"=> $rawProducts,
          );
 
         }

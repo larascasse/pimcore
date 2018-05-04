@@ -1,9 +1,20 @@
 <?php 
 
 if(!function_exists("makeTransportInput")) {
-    function makeTransportInput($name,$value,$label="",$type="text") {
+    function makeTransportInput($name,$value,$label="",$type="text",$datasource="",$selectValue="") {
         $str ="";
-        $str .='<a href="#"" type="'.$type.'" id="'.$name.'" name="'.$name.'" class="editable" data-placeholder="'.$label.'" data-type="'.$type.'" />'.$value.'</a>';
+
+        $strSelect = "";
+        if($type=="select") {
+          $strSelect = " data-source='".$datasource."' data-value='".$selectValue."'";
+        }
+        else if ($type=="date") {
+          $strSelect = " data-format='dd/mm/yyyy'";
+        }
+
+        $str .='<a href="#"" type="'.$type.'" id="'.$name.'" name="'.$name.'" class="editable" data-placeholder="'.$label.'" data-type="'.$type.'" '.$strSelect .' />'.$value.'</a>';
+        
+
         return $str;
     }
 }
@@ -47,6 +58,9 @@ foreach($attributes as $key=> $value) {
     }
     $finalAttributes[$attributeKey] = $attributeValue;
 
+    $datasource = "";
+    $selectValue = "";
+    
     switch ($value->fieldtype) {
         case 'textarea':
              $type = "textarea";
@@ -54,6 +68,33 @@ foreach($attributes as $key=> $value) {
         
         case 'date':
              $type = "date";
+             
+             if($attributeValue > 0) {
+                $date = new DateTime($attributeValue);     
+                $attributeValue = $date->format("d/m/Y");
+             }
+             
+            break;
+
+        case 'select':
+             $type = "select";
+
+
+             $option = Object_Service::getOptionsForSelectField($transport,$attributeKey);
+              $json = \Pimcore\Tool\Serialize::removeReferenceLoops($option);
+              $json = \Zend_Json::encode($json, null, []);
+              $datasource = $json;
+
+              $selectValue = $attributeValue;
+              if(empty($selectValue)) {
+                $selectValue = $value->defaultValue;
+              }
+
+              //Select & editable
+              $attributeValue = $option[$selectValue];
+
+
+             
             break;
 
         default:
@@ -61,16 +102,8 @@ foreach($attributes as $key=> $value) {
             break;
     }
 
-    $finalAttributesHtml[$attributeKey] = makeTransportInput($attributeKey,$attributeValue,$attributeLabel,$type);
+    $finalAttributesHtml[$attributeKey] = makeTransportInput($attributeKey,$attributeValue,$attributeLabel,$type,$datasource,$selectValue="");
     
-
-    if($this->create || 1==1) {
-        //echo '<input type="text" class="editable" id="'.$attributeKey.'" name="'.$attributeKey.'" placeholder="'.$attributeLabel.'" value="'.$attributeValue.'" />';
-        //echo makeTransportInput($attributeKey,$attributeValue);
-    }
-    else {
-
-    }
     
 }
 
@@ -98,6 +131,7 @@ foreach($attributes as $key=> $value) {
 */
 
 ?>
+<?php echo \Website\Tool\TransportHelper::getCssClassByState($transport); ?>
 <div class="p-3 bg-light">
 
 
@@ -106,7 +140,16 @@ foreach($attributes as $key=> $value) {
 <div class="row mt-4">
 <div class="col">
 
-<h4>Contact</h4>
+<h4>Adresse Livraison</h4>
+Nom : <?php echo $finalAttributesHtml["shippingName"];?><br />
+Adresse : <?php echo $finalAttributesHtml["shippingAddress"]; ?><br />
+CP/Ville : <?php echo $finalAttributesHtml["shippingZip"]; ?>  <?php echo $finalAttributesHtml["shippingCity"]; ?><br />
+Tél. : <?php echo $finalAttributesHtml["shippingPhone"]; ?><br />
+Email : <?php echo $finalAttributesHtml["shippingEmail"]; ?><br />
+</div>
+
+<div class="col">
+<h4>Facturation</h4>
 Nom : <?php echo $finalAttributesHtml["clientName"];?><br />
 Adresse : <?php echo $finalAttributesHtml["clientAddress"]; ?><br />
 CP/Ville : <?php echo $finalAttributesHtml["clientZip"]; ?>  <?php echo $finalAttributesHtml["clientCity"]; ?><br />
@@ -117,9 +160,9 @@ Message : <br ><?php echo $finalAttributesHtml["shippingMessage"]; ?><br />
 
 </div>
 
-<div class="col">
+<div class="col colored">
 
-<h4>Livraison</h4>
+<h4>Transport</h4>
 Dépot : <?php echo $finalAttributesHtml["depot"]; ?><br />
 Transport : <?php echo $finalAttributesHtml["carrierName"]; ?><br />
 Prix : <?php echo $finalAttributesHtml["price"]; ?><br />
@@ -131,34 +174,120 @@ Contact LPN : <?php echo $finalAttributesHtml["vendor"]; ?>
 
 </div>
 
-<div class="col">
-<input type="button" class="btn  btn-primary" value="Créer" id="create-btn" onclick="printBook();return false;" />
-<input type="button" class="btn  btn-outline-primary" value="Mail" id="sendmail-btn" onclick="printBook();return false;" />
-<input type="button" class="btn  btn-outline-primary" value="Imprimer" id="print-btn" onclick="printBook();return false;" />
+<div class="col colored">
+<?php echo $finalAttributesHtml["status"]; ?>
+<input type="button" class="btn  btn-primary" value="Créer" id="create-btn" onclick="" />
+<input type="button" class="btn  btn-outline-primary" value="Valider" id="validate-btn" onclick="" />
+<input type="button" class="btn  btn-outline-primary" value="Mail" id="sendmail-btn" onclick="" />
+<input type="button" class="btn  btn-outline-primary" value="Imprimer" id="print-btn" onclick="" />
 </div>
 
 </div>
 
 <div id="msg" class="p-3 m-3 mr-0"></div>
 
+
+<?php if(isset($this->notes) && 1==2) { ?>
+<div>
+  <table class="table table-striped">
+     <tbody>
+    <?php 
+    foreach ($this->notes as $note) {
+      echo "<tr>";
+      echo "<td>".date("d/m/Y h:i",$note->getDate())."</td>";
+      echo "<td>".$note->getType()."</td>";
+      echo "<td>".$note->getTitle()."</td>";
+      echo "<td>".$note->getDescription()."</td>";
+       echo "</tr>";
+    }
+?>
+</tbody>
+</table>
+<?php } ?>
+
+<div id="app">
+  <b-table v-html striped hover :items="items"  :fields="fields">
+      <template slot="dateString" slot-scope="data">
+      {{data.value}}
+    </template> 
+
+    <template slot="title" slot-scope="data">
+      <span v-html="data.value"></span>
+     
+    </template>
+
+  </b-table>
+</div>
+
+
+<script>
+
+
+
+
+  var noteVue;
+  $(document).ready(function() {
+ 
+
+    noteVue = new Vue({
+        el: '#app',
+        
+        data: {
+          fields: [{key:'dateString',label:"Date",sortable:true}, {key:'type',sortable:false,label: 'Action'}, {key:'title',sortable:false,label: 'Détail'} ],
+          items: null
+        }
+    });
+    console.log(noteVue);
+    /*
+  export default {
+    data () {
+      return {
+        items: items
+      }
+    }
+  }*/
+});
+
+</script>
+
+
 <script>
 var transportId="<?php echo $transport->getId()?>";
+var transportShippingDate="<?php echo is_object($transport->getShippingDate())?$transport->getShippingDate()->getTimestamp():"";?>";
 
-function refreshFields(transport) {
+
+function refreshFields(transport,notes) {
+
+    $('#sendmail-btn').hide();
+    $('#create-btn').hide();
+    $('#print-btn').hide();
+    $('#validate-btn').hide();
+
     if(transport.o_id) {
-        $('#create-btn').hide();
-        $('#sendmail-btn').show();
-        $('#print-btn').show();
+
+        if(transport.status == "new") {
+             $('#validate-btn').show();
+        }
+        else {
+            $('#sendmail-btn').show();
+            $('#print-btn').show();
+        }
+        
+        $('.colored').addClass('bg-'+transport.classForStatus);
+        showMessage(transport.messageForStatus);
+      
     }
     else {
         $('#create-btn').show();
-        $('#sendmail-btn').hide();
-        $('#print-btn').hide();
     }
     if(!transport.shippingDate || transport.shippingDate.length==0)
         $('.shippingDate-container').hide();
     else {
         $('.shippingDate-container').show();
+    }
+    if(typeof(notes) != 'undefined') {
+      console.log("refresh notes",notes)
+      noteVue.items = notes;
     }
 }
 
@@ -193,7 +322,7 @@ $(document).ready(function() {
                    $('#msg').addClass('alert-success').removeClass('alert-error').html(msg).show();
                    $('#create-btn').hide(); 
                    $(this).off('save.newuser');   
-                   refreshFields(transport);
+                   refreshFields(data.transport,data.notes);
 
                } else if(data && data.errors){ 
                    //server-side validation error, response like {"errors": {"username": "username already exist"} }
@@ -216,11 +345,22 @@ $(document).ready(function() {
 
     //INitialise UI
     <?php 
-    $data = \Pimcore\Tool\Serialize::removeReferenceLoops($transport);
+    $data = \Pimcore\Tool\Serialize::removeReferenceLoops(\Website\Tool\TransportHelper::getJsonReadyForTransport($transport));
     $data = \Zend_Json::encode($data, null, []);
+
+    $dataNotes = \Pimcore\Tool\Serialize::removeReferenceLoops($this->notes);
+    $dataNotes = \Zend_Json::encode($dataNotes, null, []);
+
+
+
     ?>
     var transportJson = <?php echo $data ?>;
-    refreshFields(transportJson);
+    var notesJson = <?php echo $dataNotes ?>;
+    console.log(transportJson);
+
+
+
+    refreshFields(transportJson,notesJson);
 
     $('.editable').editable({
         type: 'text',
@@ -241,8 +381,10 @@ $(document).ready(function() {
                  showMessage("Erreur "+response.msg);
             }
             else {
+                //Creation
                 showMessage(response.msg);
                 $(this).editable('option', 'pk', response.transport.o_id);
+                refreshFields(response.transport,response.notes);
             }
         }        
     });

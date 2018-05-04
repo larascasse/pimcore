@@ -14,6 +14,7 @@ class TransportController extends Action
      * @var
      */
     private $encoder;
+    private $dateFormat = "d/m/Y";
 
     public function init()
     {
@@ -81,7 +82,7 @@ class TransportController extends Action
 
             $objectList = Object\Transport::getByCodePiece($this->getParam("code"),['unpublished' => true]);
             
-            if($objectList->count()==1) {
+            if($objectList->count()>0) {
                 $object = $objectList->current();
             }
 
@@ -108,6 +109,12 @@ class TransportController extends Action
             $object = new Object\Transport;
             $this->view->create = true;
         }
+
+        /* NOTES */
+ 
+        if($object->getId()) {
+           $this->view->notes = $this->getNotesForTransport($object);
+        }
         $this->view->create = false;
         $this->view->transport = $object;
     }
@@ -125,6 +132,8 @@ class TransportController extends Action
 
 
          $object = Object\Transport::getById($this->getParam("pk"),['unpublished' => true]);
+
+
        // print_r($object );
         if (!$object instanceof Object\Transport) {
            // $this->encoder->encode(["success" => false, "msg" => "Pas de transport crée"]);
@@ -133,6 +142,17 @@ class TransportController extends Action
             $object = new Object\Transport();
             $params = $this->getAllParams();
             foreach ($params as $key => $value) {
+
+                if($key == "shippingDate") {
+                    //$value = DateTime::createFromFormat($this->dateFormat,$value);
+                    //$value = new \Pimcore\Date($value,$this->dateFormat);;
+
+                    $date = DateTime::createFromFormat($this->dateFormat,$value);
+                    $value = new \Pimcore\Date();
+                    $value = $date->setTimestamp($date->getTimestamp());
+
+
+                }
                 if($key != "action" && $key !="controller") {
                     $object->setValue($key,$value);
                 }
@@ -152,17 +172,128 @@ class TransportController extends Action
 
                }
             
-            $this->encoder->encode(["success" => true, "msg" => "Création effectuée","transport"=>$object]);
+            $note = new Pimcore\Model\Element\Note();
+            $note->setElement($object);
+            $note->setDate(time());
+            $note->setType("Création");
+            $note->setTitle("Création transport");
+             
+            // you can add as much additional data to notes & events as you want
+            /*$note->addData("myText", "text", "Some Text");
+            $note->addData("myObject", "object", Object_Abstract::getById(7));
+            $note->addData("myDocument", "document", Document::getById(18));
+            $note->addData("myAsset", "asset", Asset::getById(20));
+            */
+            $note->save();
+
+            $this->encoder->encode(["success" => true, "msg" => "Création effectuée","transport"=>\Website\Tool\TransportHelper::getJsonReadyForTransport($object),"notes"=>array($note)]);
         }
         else {
-            $object->setValue($this->getParam("name"),$this->getParam("value"));
+            $oldValue = $object->getValueForFieldName($this->getParam("name"));
+
+            $value = $this->getParam("value");
+            
+            if($this->getParam("name") == "shippingDate") {
+               
+                $date = DateTime::createFromFormat($this->dateFormat,$this->getParam("value"));
+                $value = new \Pimcore\Date();
+                $value = $date->setTimestamp($date->getTimestamp());
+            }
+
+
+            $object->setValue($this->getParam("name"),$value);
             $object->save();
-            $this->encoder->encode(["success" => true, "msg" => "mise à jour effectuée","transport"=>$object]);
+
+            //print_r($object);
+
+            $note = new Pimcore\Model\Element\Note();
+            $note->setElement($object);
+            $note->setDate(time());
+            $note->setType("Mise à jour");
+            $note->setTitle($this->getParam("name"). " de <i>".$oldValue."</i> vers <i>".$this->getParam("value")."</i>");
+
+            $note->save();
+
+           $this->encoder->encode(["success" => true, "msg" => "mise à jour effectuée","transport"=>\Website\Tool\TransportHelper::getJsonReadyForTransport($object),"notes"=>$this->getNotesForTransport($object)]);
         }
 
 
           //$this->getResponse()->setHttpResponseCode(403);
           //$this->encoder->encode(["success" => true, "msg" => "mise à jour effectuée"]);
+    }
+
+    public function getNotesForTransport($transport) {
+        $list = new Element\Note\Listing();
+        $list->setOrderKey(["date"]);
+        $list->setOrder(["DESC", "DESC"]);
+        $conditions = array();
+        $conditions[] = "(cid = " . $list->quote($transport->getId()). ")";
+        $list->setCondition(implode(" AND ", $conditions));
+        $list->load();
+        $notes = [];
+        foreach ($list->getNotes() as $note) {
+            $note->dateString = date("d/m/Y h:i",$note->getDate());
+            $notes[] = $note;
+        }
+        return $notes;
+    }
+
+     public function getJsonReadyForTransport($transport) {
+        $transport->shippingDate = is_object($transport->getShippingDate()) ? $transport->getShippingDate()->getTimestamp():null;
+        return $transport;
+    }
+
+
+
+    //http://pimcore.florent.local/transport/order-expedition/
+    public function orderExpeditionAction() {
+        
+        $this->disableBrowserCache();
+        $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
+        $this->view->layout()->setLayout("layout-ft");
+
+
+        //POST from sceinergie
+        $transportId = $this->getParam('id'); 
+        //$xml = $this->getParam('xml');
+
+
+        
+        if(isset($xml))
+            $data = $xml;
+        else
+            //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+            $data = \Website\Tool\MauchampHelper::getDebugOrder2();
+        
+
+        $order = \Website\Tool\MauchampHelper::parseOrder($data);
+
+        //On va chercher le transport
+        $codePiece = $order["orderDetail"]["Code_Commande"];
+         $objectList = Object\Transport::getByCodePiece($codePiece,['unpublished' => true]);
+            
+            if($objectList->count()>0) {
+                $transport = $objectList->current();
+            }
+
+       // die;
+
+        
+
+        
+        $this->view->rawProducts = $order["rawProducts"];
+        $this->view->transport = $transport;
+        $this->view->orderDetail = $order["orderDetail"];
+        //$this->view->xmlOrder = $xml;
+        
+
+
+        
+
+
     }
 
 

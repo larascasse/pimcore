@@ -311,7 +311,7 @@ foreach ($this->missingProducts as $product) {
   ?>
   <tr class="row__">
   <td class="col__"><?php echo $product->ean ?></td>
-  <td class="col__"><?php echo $product->name?></td>
+  <td class="col__"><?php echo $product->name ?></td>
   <td colspan="4">Absent du PIM</td>  
 
   </tr>

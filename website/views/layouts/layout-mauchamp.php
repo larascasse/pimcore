@@ -40,6 +40,10 @@
 <link rel="stylesheet" href="/website/static_lpn/css/bootstrap-4.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/website/static_lpn/css/bootstrap-editable.min.css" crossorigin="anonymous">
 <script   src="/website/static_lpn/js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="/website/static_lpn/css/bootstrap-vue.css" crossorigin="anonymous">
+
+
+
 
 
 
@@ -96,8 +100,17 @@ var dataLayer=[];
 <script src="/website/static_lpn/js/tether.min.js"></script> 
 <script src="/website/static_lpn/js/popper.min.js"></script>
    
-<script src="/website/static_lpn/js/bootstrap-4.min.js"></script>
+<script src="/website/static_lpn/js/bootstrap.min.js"></script>
 <script src="/website/static_lpn/js/bootstrap-editable.min.js"></script>
+
+<!-- VUE -->
+<script src="/website/static_lpn/js/polyfill.min.js"></script>
+<script src="/website/static_lpn/js/vue.min.js"></script>
+<script src="/website/static_lpn/js/bootstrap-vue.js"></script>
+
+<!-- Fin vue -->
+
+
 
 
 

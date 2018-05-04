@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Le styles -->
- <!--<link rel="stylesheet" type="text/css" href="https://www.laparqueterienouvelle.fr/skin/frontend/lpn/default/css/main-min.css?d=<?php echo time() ?>" media="all">-->
- <!--<link href="http://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet">-->
-
-    <!--<link href="/website/static/css/global.css" rel="stylesheet">-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/website/static_lpn/css/bootstrap-3.3.7.min.css">
+<link rel="stylesheet" href="/website/static_lpn/css/bootstrap-theme-3.3.7.min.css">
 
 <link rel="stylesheet" href="/website/static_lpn/scss/build/css/ft.css?t=<?php echo time()?>">
 
@@ -45,25 +38,14 @@ var dataLayer=[];
 </style>
 
 <div id="content" class="container-pdf">
-
     <?php echo $this->layout()->content; ?>
+</div>
 
- <!--<script src="http://vjs.zencdn.net/5.4.4/video.js"></script>-->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-
+<script src="/website/static_lpn/js/jquery-3.1.1.slim.min.js"></script>
 <script src="/website/static_lpn/js/lpn.js"></script>
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
-<!-- Latest compiled and minified CSS 
-Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<script src="//cdn.jsdelivr.net/npm/balance-text@3.2.0/balancetext.min.js" crossorigin="anonymous"></script>
+<script src="/website/static_lpn/js/tether.min.js"></script>
+<script src="/website/static_lpn/js/bootstrap-3.3.7.min.js"></script>
+<script src="/website/static_lpn/js/balancetext.min.js"></script>
 <script>
     $(document).ready(function() {
 

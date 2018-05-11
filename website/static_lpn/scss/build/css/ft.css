@@ -113,6 +113,15 @@ h4 {
     min-width: initial;
     padding-right: 0;
     padding-bottom: 10px; }
+  .fiche-pdf h3 {
+    font-size: 1em;
+    margin-bottom: 18px;
+    line-height: 1.2;
+    width: auto;
+    min-width: initial;
+    padding-right: 0;
+    font-weight: bold;
+    padding-bottom: 10px; }
 
 hr {
   border-top: 20px solid #c6c6c6; }

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-05-04T16:50:34+02:00
+* Generated at: 2018-05-11T15:54:08+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.2.93
+* IP: 172.31.15.117
 
 
 Fields Summary: 
@@ -29,10 +29,12 @@ Fields Summary:
 - quoteNumber [input]
 - trackingNumber [input]
 - shippingDate [date]
+- shippingDateAmPm [select]
 - reglement [input]
 - shippingMessage [textarea]
 - xmlPiece [textarea]
 - status [select]
+- manutention [checkbox]
 */ 
 
 
@@ -40,7 +42,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'transport',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1525445434,
+   'modificationDate' => 1526046848,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -564,6 +566,47 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleSearch' => false,
           )),
           20 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Jour',
+                'value' => 'day',
+              ),
+              1 => 
+              array (
+                'key' => 'Matin',
+                'value' => 'AM',
+              ),
+              2 => 
+              array (
+                'key' => 'Après-midi',
+                'value' => 'PM',
+              ),
+            ),
+             'width' => '',
+             'defaultValue' => '',
+             'queryColumnType' => 'varchar(190)',
+             'columnType' => 'varchar(190)',
+             'phpdocType' => 'string',
+             'name' => 'shippingDateAmPm',
+             'title' => 'MAT/AP',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          21 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,
@@ -587,7 +630,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          21 => 
+          22 => 
           Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
              'fieldtype' => 'textarea',
              'width' => '',
@@ -610,7 +653,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          22 => 
+          23 => 
           Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
              'fieldtype' => 'textarea',
              'width' => '',
@@ -633,7 +676,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          23 => 
+          24 => 
           Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
              'fieldtype' => 'select',
              'options' => 
@@ -661,6 +704,28 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'phpdocType' => 'string',
              'name' => 'status',
              'title' => 'Etat',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          25 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+             'fieldtype' => 'checkbox',
+             'defaultValue' => 0,
+             'queryColumnType' => 'tinyint(1)',
+             'columnType' => 'tinyint(1)',
+             'phpdocType' => 'boolean',
+             'name' => 'manutention',
+             'title' => 'Avec manutention',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,

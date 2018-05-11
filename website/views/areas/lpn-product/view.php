@@ -4,13 +4,7 @@ $mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
 
 <?php if($this->editmode): ?>
      
-     <div class="container" style="padding-bottom: 40px">
-        Nombre de colonnes: <?= $this->select("columns", [
-            "width" => 60,
-            "reload" => false,
-            "store" => [[1,1],[2,2],[3,3],[4,4],[4,4],[6,6]]
-        ]); ?>
-    </div>
+    
 
     <div class="container" style="padding-bottom: 40px">
         Format Image: <?= $this->select("imageformat", [
@@ -21,8 +15,7 @@ $mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
     </div>
 
 
-
-    <?= $this->multihref("objectPaths",
+    <?= $this->href("product",
     [
         "types" => ["object"],
         "subtypes" => ["product"]
@@ -31,10 +24,7 @@ $mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
 <?php else: ?>
 
 <?php
-$count = $this->select("columns")->getData();
-if(!$count) {
-    $count = 6;
-}
+
 
 $imageformat = $this->select("imageformat")->getData();
 if(!$imageformat) {
@@ -44,31 +34,34 @@ if(!$imageformat) {
 
 ?>
 
-<!-- Grid -->
-<div class="container-main product-grid">
-<div class="row">
+<!-- FIN Product -->
 <?php 
 
 $index=0;
-echo '<div class="products-grid list-for-subcategory cols'.($count).'">';
-foreach($this->multihref("objectPaths") as $product) { 
+$unpublishedStatus = self::doHideUnpublished();
+self::setHideUnpublished(false);
+$product = $this->href("product")->getElement();
+self::setHideUnpublished($unpublishedStatus);
+echo '<div class="product-solo">';
+?>
 
-    
-    echo 
-    $this->template("includes/inc-product-cell.php", array(
+<?php
+
+
+if ($product instanceof Website_Product):
+echo 
+    $this->template("includes/inc-product-cell-long.php", array(
         "product" => $product,
-        "index"=>$index,
-        "cols"=>12/$count
+        "index"=>0,
+        "cols"=>1
     ));
-    $index++;
-  
-} 
+endif; 
 echo '</div>';
+
 ?>
    
-</div>
-</div>
-<!-- FIN Grid -->
+
+<!-- FIN Product -->
 
 <?php endif; ?>
 

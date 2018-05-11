@@ -134,10 +134,10 @@ foreach($attributes as $key=> $value) {
 
 <div class="row transport-short colored">
 <div class="col">
-Livraison le  <?php echo $finalAttributesHtml["shippingDate"]; ?> - <?php echo $finalAttributesHtml["status"];?>
+Date :  <b><?php echo $finalAttributesHtml["shippingDate"]; ?></b> - <?php echo $finalAttributesHtml["shippingDateAmPm"];?>
 <br />
-par : <?php echo $finalAttributesHtml["carrierName"]; ?>
-  depuis : <?php echo $finalAttributesHtml["depot"]; ?><br />
+par : <?php echo $finalAttributesHtml["carrierName"]; ?><br />
+  Dépot : <?php echo $finalAttributesHtml["depot"]; ?><br />
   Client : <?php echo $finalAttributesHtml["clientName"];?><br />
   Pièce : <?php echo $finalAttributesHtml["codePiece"]; ?>
 </div>
@@ -176,6 +176,7 @@ Contact LPN : <?php echo $finalAttributesHtml["vendor"]; ?>
 </div>
 <br />
 <div class="row">
+  <?php echo $finalAttributesHtml["status"];?>
 <div id="msg-transport" class="p-3 al-colored" style="width: 100%"></div>
 </div>
 </div>
@@ -303,6 +304,19 @@ $(document).ready(function() {
    
     $.fn.editableform.buttons = '<div class="editable-buttons"><button type="submit" class="btn btn-sm btn-primary btn-sm editable-submit"><svg fill="#000000" height="12" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg></button><button type="button" class="btn btn-default btn-sm editable-cancel"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg></button></div>';
 
+    //console.log($.fn.datepicker.options.language);
+    //$.fn.editable.types.date.datepicker.weekStart = 3;
+
+    $.fn.datepicker.dates['en'] = {
+    days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+    daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+    daysMin: ["D", "L", "Ma", "Me", "J", "V", "S", "D"],
+    months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+    monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"],
+    today: "Aujourd'hui",
+    weekStart: 1
+};
+
 
     $.fn.removeClassPrefix = function(prefix) {
     this.each(function(i, el) {
@@ -381,7 +395,8 @@ $(document).ready(function() {
         type: 'text',
         url: '/transport/update',    
         pk: transportId, 
-        emptytext : '........',  
+        emptytext : '........', 
+
         //title: 'Enter username',
         showbuttons : true,
         ajaxOptions: {

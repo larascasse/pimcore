@@ -1,4 +1,7 @@
 <?php
+
+
+$mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
 $product = $this->product;
 $cols = $this->cols>0?$this->cols:12/4;
 $index = $this->index>0?$this->index:0;
@@ -8,6 +11,11 @@ $index = $this->index>0?$this->index:0;
                 "text" => $product->getName(),
                 "prefix" => ""
                     ), "produits");
+if(!is_object($product)) {
+    echo "Pas de produit";
+    print_r($product);
+    return;
+}
 ?>
   
         <div class="col-<?php echo $cols; ?>">

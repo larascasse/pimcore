@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
   <columnElements>
-    <column_12>1 Column</column_12>
+      
+      <column_12>1 Column</column_12>
       <column_6_6>2 Columns (50%)</column_6_6>
       <column_4_4_4>3 Columns (33%)</column_4_4_4>
       <column_3_3_3_3>4 Columns (25%)</column_3_3_3_3>

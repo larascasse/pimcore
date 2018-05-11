@@ -1,8 +1,9 @@
 <?php
+$mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
 if($product = $this->product) {
 	
-	if($this->previewmode) {
-    	echo '<a href="https://eshop.laparqueterienouvelle.fr/'.$product->getName().'" title="Voir '.$product->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
+	if($this->previewmode || $mustRender) {
+    	echo '<a href="https://www.laparqueterienouvelle.fr/'.$product->getName().'" title="Voir '.$product->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
    
@@ -19,8 +20,8 @@ else if($category = $this->category) {
 	
 	$catId = $category?$category->getMage_category_id():-1;
     
-    if($this->previewmode) {
-    	echo '<a href="https://eshop.laparqueterienouvelle.fr/category/'. $catId.'" title="Voir '.$category->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
+    if($this->previewmode || $mustRender) {
+    	echo '<a href="https://www.laparqueterienouvelle.fr/category/'. $catId.'" title="Voir '.$category->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
     	$widget =  ' {{widget type="catalog/category_widget_link" template="catalog/category/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
@@ -42,7 +43,7 @@ else if($projectPost = $this->projectPost) {
 else if($document = $this->document) {
 	//echo $document->getName()." ".$document->getId();
 
-	if($this->previewmode) {
+	if($this->previewmode|| $mustRender) {
     	echo '<a href="'.$document->getKey().'" title="Voir '.$document->getTitle().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {

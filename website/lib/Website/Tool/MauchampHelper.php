@@ -545,7 +545,15 @@ EOT;
 
 
       //OTHER
-      $transport->setValue('depot',$orderDetail["Code_Depot"]);
+      if(strlen($orderDetail["Code_Depot"])>0)
+        $transport->setValue('depot',$orderDetail["Code_Depot"]);
+      elseif ($orderDetail["Site"] == 75020) {
+        $transport->setValue('depot',"PARIS");
+      }
+      else {
+        $transport->setValue('depot',"CARRIERES");
+      }
+      
       $transport->setValue('vendor',$orderDetail["Representant2_Nom"]);
       
       $transport->setValue('carrierName',$transportRowXml->Code_Article);
@@ -762,6 +770,7 @@ EOT;
           'Reference_Client' => (string)$xml->Reference_Client,
           'Etat' => (string)$xml->Etat,
           'Reglement' => (string)$xml->Reglement,
+          'Code_Depot' => (string)$xml->Code_Depot,
           
           'Representant' => (string)$xml->Representant,
           'Representant_Email' => (string)$xml->Representant_Email,

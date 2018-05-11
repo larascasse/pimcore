@@ -57,7 +57,7 @@ class Wkhtmltopdf {
         return $pdfContent;
     }*/
 
-    public static function convert($httpSource,$pdfFile=null,$postArray=null) {
+    public static function convert($httpSource,$pdfFile=null,$postArray=null,$extraConfig=array()) {
         
            
 
@@ -77,7 +77,7 @@ class Wkhtmltopdf {
 
             $tmpPdfFile = $pdfFile?$pdfFile:PIMCORE_SYSTEM_TEMP_DIRECTORY . "/" . uniqid() . ".pdf";
 
-            $localOptions= [
+            $localOptions = [
                 //"--debug-javascript" => 1,
                 "--load-error-handling" => "ignore",
                 "--dpi" => 300,
@@ -94,10 +94,15 @@ class Wkhtmltopdf {
                 //"--default-header" => "toto",
                 //"--no-header-line" => 1,
                 "--footer-html" => \Pimcore\Tool::getHostUrl()."/website/views/layouts/inc_footer_pdf.html",
+                "--custom-header" =>  "lpn-pdf 1"
                 //"--title" => $pdfFile,
                 //"--footer-title" => "title toto"
                 //"--javascript-delay" =>2000
             ];
+
+            $localOptions = array_merge($localOptions,$extraConfig); 
+
+
 
             if($pdfFile && strlen($pdfFile)>0) {
                 $localOptions["--title"] = $pdfFile;

@@ -93,6 +93,8 @@ body {
 
 }
 
+
+
 @media print {
 	@page {size: A4 portrait;max-height:100%; max-width:100%}
     body {
@@ -149,6 +151,30 @@ h4 {
 	font-family: "HelveticaNeueLight"; 
 	font-size: 30px;
 	//text-transform: uppercase;
+}
+
+.fiche-pdf {
+	
+	.product-solo {
+		
+	}
+	font-size: 15px;
+	line-height: 1.5;
+
+	h1 {
+		margin-bottom : 30px;
+		font-size: 3em;
+	}
+	h2 {
+		font-size: 1.5em;
+		margin-bottom : 36px;
+		line-height: 1.2;
+		width: auto;
+		min-width: initial;
+		padding-right: 0;
+		padding-bottom: 10px;
+		
+	}
 }
 
 hr {
@@ -589,8 +615,6 @@ $padding : 30px;
 
 
 
-
-
 @media print {
 	$pageWidthPrint: 1100px;
 	.ft-header {
@@ -614,3 +638,6 @@ $padding : 30px;
 	}
 
 }
+
+@import "_product.scss";
+

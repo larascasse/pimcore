@@ -1,0 +1,199 @@
+@mixin make-row {
+	&:before {
+		display: table;
+		content: " ";
+		
+	}
+	&:after {
+			clear: both;
+	}
+}
+@mixin unstyled-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+    display: inline-block;
+  }
+}
+
+@mixin make-col($columns) {
+  position: relative;
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
+  // Inner gutter via padding
+  padding-left:  (15 / 2);
+  padding-right: (15 / 2);
+
+   float: left;
+   width: percentage(($columns / 12));
+}
+
+//On force le double colonnage pour les fiches techniques
+.col-md-6,.col-xs,.col-sm-6 {
+	width: 50%;
+	float : left;
+}
+
+.products-grid {
+	//@include unstyled-list();
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+
+.product-block {
+		padding: 30px 0px;
+		//border : 1px solid;
+		page-break-inside: avoid;
+	}
+
+.products-grid, .product-solo {
+	@include make-row();
+	
+	margin-bottom: 0;
+
+	h3 {
+		margin-top : 0;
+		line-height: 27px;
+
+	}
+
+
+	ul.subdescription {
+
+	margin-top: 0px;
+	font-size: 0.8em;
+
+	li {
+		//border-bottom: 1px solid $grisclair;
+		border-bottom: none;
+		font-weight: normal;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	
+	}
+}
+
+
+
+	.col-2 {
+		@include make-col(2);
+	}
+	.col-3 {
+		@include make-col(3);
+	}
+	.col-4 {
+		@include make-col(4);
+	}
+
+
+	&.cols2 li {
+				
+				@include make-col(6);
+			}
+	&.cols3 li {
+		
+		@include make-col(4);
+	}
+	&.cols4 li {
+		
+		@include make-col(3);
+	}
+
+
+	img {
+
+		  max-width: 100%;
+		  height: auto;
+		  //width : 80%;
+	}
+
+
+
+	
+
+	.tabledesc {
+		
+		//padding: 0 0 15px 0;//On enleve pour les slider acessoires
+		position: relative;
+		//2018-29-03 : Piur le sroll et le zoom dans l'image, on force le blacn
+		background-color : #FFFFFF;
+		p {
+			//margin-top: 10px;
+			margin-bottom:5px;
+			color:$grisfonce;
+			//height: 40px;
+			//text-overflow: ellipsis;
+			//white-space: nowrap;
+			//overflow: hidden;
+		}
+	}
+
+	.list_img {
+		//@include make-margin-bottom();
+	}
+
+
+	.product-name {
+		
+		margin-bottom:0;
+		font-size : 18px;
+		//@include font-std-big();
+		line-height: 23px;
+		font-weight: bold;
+		//@include make-padding-top($grid-gutter-widths,0.5);
+		//@include make-padding-bottom($grid-gutter-widths,0.25);
+
+		//overflow: hidden;
+		//height: 40px;
+	    //white-space: nowrap;
+	    //text-overflow: ellipsis;
+	}
+
+	.desc {
+
+	}
+	
+
+
+	
+
+	.subtype {
+		//max-height: 24px;
+		//min-height: 44px;
+		//overflow: hidden;
+		//text-overflow: ellipsis;
+		//white-space: nowrap;
+		color:#aaaacc;
+	}
+
+
+
+	
+
+	.actions {
+		margin-top: 15px;
+	}
+	
+
+	
+	
+}
+
+
+.product-block {
+	.col-md-6, .col-xs , .col-sm-6 {
+		&:first-child {
+			width: 35%;
+			margin-right: 10%;
+			float : left;
+		}
+		&:nth-child(2) {
+			width: 55%;
+			float : left;
+		}
+	
+}
+}

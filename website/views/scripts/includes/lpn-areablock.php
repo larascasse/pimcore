@@ -3,7 +3,9 @@ $defaultBricks = array(
     'lpn-slider-product-image',
     'lpn-slider-category-product',
     'lpn-grid-product-image',
-    'lpn-inc-block'
+    'lpn-inc-block',
+    'lpn-product',
+    'content',
     /*'alert',
     'button',
     'carousel',

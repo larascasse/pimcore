@@ -11,6 +11,7 @@ $defaultBricks = array(
     'image-caption',
     'panel',
     'snippet',
+    'lpn-product'
 );
 $excludeBricks = $this->excludeBricks;
 $extraBricks = $this->extraBricks;

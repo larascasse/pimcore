@@ -7,6 +7,9 @@ $bricks = []; //Projects AreaBricks
 
 $extraBricks = array_merge($extraBricks, $bricks);
 
+$name = $this->name;
+
+
 echo $this->template('bootstrap/areablock.php', [
     'name' => $this->name,
     'excludeBricks' => $excludeBricks,

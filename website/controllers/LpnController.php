@@ -44,6 +44,12 @@ class LpnController extends Action
         $this->enableLayout();
     }
 
+     public function fichePdfAction() {
+        $this->view->layout()->setLayout("layout-fiche-pdf");
+        $this->enableLayout();
+    }
+
+
      public function algoliaAction() {
         $this->view->layout()->setLayout("layout-algolia");
         $this->enableLayout();
@@ -561,9 +567,12 @@ echo $content;
     }
 
 
+
     public function log($error,$error_type='') {
         echo $message;
     }
+
+
 
 
    

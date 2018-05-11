@@ -157,7 +157,16 @@ $routeCustom = new \Zend_Controller_Router_Route(
         'action' => 'order-expedition'
     ]
 );
-//$router->addRoute('transports', $routeCustom);
+$router->addRoute('transports', $routeCustom);
+
+$routeCustom = new \Zend_Controller_Router_Route(
+    'document-pdf/*', [
+       // 'module' => 't',
+        'controller' => 'web2print',
+        'action' => 'document-pdf'
+    ]
+);
+$router->addRoute('document-pdf', $routeCustom);
 
 
 $front->setRouter($router);

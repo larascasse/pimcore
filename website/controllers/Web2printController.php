@@ -1,6 +1,7 @@
 <?php
 
 use Website\Controller\Action;
+use Pimcore\Model;
 use Pimcore\Model\Document;
 use Pimcore\Model\Document\Page;
 use Pimcore\Model\Asset;
@@ -160,4 +161,51 @@ class Web2printController extends Action
 
         }
     }
+
+        //http://pimcore.florent.local/document-pdf/?id=357
+        public function documentPdfAction() {
+
+            $front = \Zend_Controller_Front::getInstance();
+            $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+
+       
+        $doc = Model\Document::getById($this->getParam("id"),true);
+   
+        if ($doc instanceof Model\Document) {
+
+            $httpSource = Pimcore\Tool::getHostUrl().$doc->getFullPath()."?t=".time();
+        
+            //die;
+
+            $extraConfig = [
+                "--header-html" => \Pimcore\Tool::getHostUrl()."/website/views/layouts/inc_header_fiche_pdf.html",
+               // "--header-spacing" => 10,
+                " --print-media-type" => "",
+                "--margin-top" => 25,
+            ];
+
+           $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource,null,null,$extraConfig);
+
+            $filename = "lpn-".$doc->getKey()."_laparqsueterienouvelle.pdf";
+            $filename = \Pimcore\File::getValidFilename($filename);
+        
+
+            $headers = [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $filename . '"',
+                'Cache-Control' => 'private'
+            ];
+        
+            foreach ($headers as $key => $value) {
+                 //$this->getResponse()->setHeader($key,$value);
+                 Header($key.":".$value);
+            }
+             while (@ob_end_flush()) ;
+                flush(); 
+           
+             echo $pdfContent;
+             exit;
+        }
+    }
+
 }

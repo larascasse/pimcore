@@ -112,6 +112,7 @@ class MauchampController extends Action
 
                     $transport = \Website\Tool\MauchampHelper::buildTransportObjectFromOrderXml($data);
                   }
+                  
                   if (!$transport instanceof Object\Transport) {
                       // this will trigger a 404 error response
                       //throw new \Zend_Controller_Router_Exception("invalid request");

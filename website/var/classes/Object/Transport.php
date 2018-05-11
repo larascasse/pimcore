@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-05-04T16:50:34+02:00
+* Generated at: 2018-05-11T15:54:08+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.2.93
+* IP: 172.31.15.117
 
 
 Fields Summary: 
@@ -29,10 +29,12 @@ Fields Summary:
 - quoteNumber [input]
 - trackingNumber [input]
 - shippingDate [date]
+- shippingDateAmPm [select]
 - reglement [input]
 - shippingMessage [textarea]
 - xmlPiece [textarea]
 - status [select]
+- manutention [checkbox]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -60,10 +62,12 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Transport\Listing getByQuoteNumber ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByTrackingNumber ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByShippingDate ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByShippingDateAmPm ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByReglement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByShippingMessage ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByXmlPiece ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Transport\Listing getByStatus ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Transport\Listing getByManutention ($value, $limit = 0) 
 */
 
 class Transport extends Concrete {
@@ -90,10 +94,12 @@ public $carrierName;
 public $quoteNumber;
 public $trackingNumber;
 public $shippingDate;
+public $shippingDateAmPm;
 public $reglement;
 public $shippingMessage;
 public $xmlPiece;
 public $status;
+public $manutention;
 
 
 /**
@@ -567,6 +573,29 @@ public function setShippingDate ($shippingDate) {
 }
 
 /**
+* Get shippingDateAmPm - MAT/AP
+* @return string
+*/
+public function getShippingDateAmPm () {
+	$preValue = $this->preGetValue("shippingDateAmPm"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->shippingDateAmPm;
+	return $data;
+}
+
+/**
+* Set shippingDateAmPm - MAT/AP
+* @param string $shippingDateAmPm
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setShippingDateAmPm ($shippingDateAmPm) {
+	$this->shippingDateAmPm = $shippingDateAmPm;
+	return $this;
+}
+
+/**
 * Get reglement - Réglement
 * @return string
 */
@@ -655,6 +684,29 @@ public function getStatus () {
 */
 public function setStatus ($status) {
 	$this->status = $status;
+	return $this;
+}
+
+/**
+* Get manutention - Avec manutention
+* @return boolean
+*/
+public function getManutention () {
+	$preValue = $this->preGetValue("manutention"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->manutention;
+	return $data;
+}
+
+/**
+* Set manutention - Avec manutention
+* @param boolean $manutention
+* @return \Pimcore\Model\Object\Transport
+*/
+public function setManutention ($manutention) {
+	$this->manutention = $manutention;
 	return $this;
 }
 

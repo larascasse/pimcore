@@ -5,7 +5,7 @@ endif;
 <div class="row <?= $this->input("cssClass")->getData() ?>">
 
 <div class="col-xs-12">
-    <h2><?php echo $this->input('title')?></h2>
+    <h2><?php echo $this->input('titleblock')?></h2>
 </div>
 
 

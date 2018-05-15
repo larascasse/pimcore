@@ -322,6 +322,8 @@ class Website_Product extends Object_Product {
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"traitement_surface");
 		$value = $this->geTtraitement_surface();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		if($this->isParquet() && strlen($value) == 0)
+			return "Aucun";
 		return $value;
 	}
 	
@@ -646,7 +648,7 @@ class Website_Product extends Object_Product {
 
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
-			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0) {
+			if(strpos($attribute,"mage_")===0 || strpos($attribute,"meta_")===0 || strpos($attribute,"image_")===0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0 || strpos($attribute,"String")>0) {
 				$ignoreFields[]=$attribute;
 			}
 		}
@@ -1690,7 +1692,11 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getLongueurString($suffixe = " mm") {
+		
 		if(strlen($value=$this->getLongueur_txt())>0) {
+			return $value;
+		}
+		else if(strlen($value=$this->getValueFromParent("longueur_txt"))>0) {
 			return $value;
 		}
 		else {

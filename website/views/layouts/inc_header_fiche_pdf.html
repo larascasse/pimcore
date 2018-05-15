@@ -2,6 +2,25 @@
   <html>
   <head></head>
   <body>
+  <style>
+  @font-face {
+  font-family: 'HelveticaNeueLight';
+  src: url('/website/static_lpn/scss/build/css/fonts/helveticaneue-light-webfont.eot');
+  src: url('/website/static_lpn/scss/build/css/fonts/helveticaneue-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/website/static_lpn/scss/build/css/fonts/helveticaneue-light-webfont.woff') format('woff'),
+    url('/website/static_lpn/scss/build/css/helveticaneue-light-webfont.ttf') format('truetype'),
+    url('/website/static_lpn/scss/build/css/fonts/helveticaneue-light-webfont.svg#helveticaneue-light-webfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h3{
+  font-family: "HelveticaNeueLight", Arial, sans-serif, -apple-system, system-ui, BlinkMacSystemFont; 
+  font-weight: normal;
+  padding-bottom: 0px;
+  font-size: 16px;
+}
+</style>
 <table style="border: 0px solid black; width: 100%;font-size:10px;height: 100px">
 
   
@@ -26,11 +45,49 @@
 </div>
 </td>
 
-      <td style="text-align:right" valign="top">
-
+      <td style="text-align:right;" valign="middle">
+        <h3><span class="section-pdf"></span> <span class="page-content"> - <span class="page">page</span> / <span class="topage">toto</span></span></h3>
       </td>
   </tr>
 </table>
 
 </body>
 </html>
+<script>
+ function subst() {
+  //document.write("KKKK");
+      var vars = {};
+      var query_strings_from_url = document.location.search.substring(1).split('&');
+      for (var query_string in query_strings_from_url) {
+          if (query_strings_from_url.hasOwnProperty(query_string)) {
+              var temp_var = query_strings_from_url[query_string].split('=', 2);
+              vars[temp_var[0]] = decodeURI(temp_var[1]);
+               
+          }
+      }
+
+      
+      var css_selector_classes = ['page', 'frompage', 'topage', 'webpage', 'section', 'subsection', 'date', 'isodate', 'time', 'title', 'doctitle', 'sitepage', 'sitepages'];
+      for (var css_class in css_selector_classes) {
+          if(vars["page"]>1) {
+            if (css_selector_classes.hasOwnProperty(css_class)) {
+                var element = document.getElementsByClassName(css_selector_classes[css_class]);
+                for (var j = 0; j < element.length; ++j) {
+                    element[j].textContent = vars[css_selector_classes[css_class]];
+                }
+
+                var element = document.getElementsByClassName(css_selector_classes[css_class]+"-pdf");
+                for (var j = 0; j < element.length; ++j) {
+                    element[j].textContent = vars[css_selector_classes[css_class]];
+                }
+            }
+          }
+          else {
+            document.getElementsByClassName('page-content')[0].textContent = "";
+          }
+      }
+     
+
+  }
+  subst();
+  </script>

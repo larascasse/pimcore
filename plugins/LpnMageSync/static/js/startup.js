@@ -86,7 +86,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
                 text: t('sync magento + enfants'),
                 iconCls: "pimcore_icon_publish",
                 scale: "medium",
-                handler: this.sync.bind(obj,true,false,false),
+                handler: this.syncProduct.bind(obj,true,false,false),
                 menu: [
                     {
                         text: t('sync magento seul'),

@@ -1686,6 +1686,9 @@ class Website_Product extends Object_Product {
 		if(strlen($value=$this->getEpaisseur_txt())>0) {
 			return $value;
 		}
+		else if(strlen($value=$this->getValueFromParent("epaisseur_txt"))>0) {
+			return $value;
+		}
 		else {
 			return $this->getEpaisseur().$suffixe ;
 		}
@@ -1706,6 +1709,9 @@ class Website_Product extends Object_Product {
 
 	public function getLargeurString($suffixe = " mm") {
 		if(strlen($value=$this->getlargeur_txt())>0) {
+			return $value;
+		}
+		else if(strlen($value=$this->getValueFromParent("largeur_txt"))>0) {
 			return $value;
 		}
 		else {

@@ -186,7 +186,7 @@ class Web2printController extends Action
 
            $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource,null,null,$extraConfig);
 
-            $filename = "lpn-".$doc->getKey()."_laparqsueterienouvelle.pdf";
+            $filename = "lpn-".$doc->getKey()."_laparqueterienouvelle.pdf";
             $filename = \Pimcore\File::getValidFilename($filename);
         
 

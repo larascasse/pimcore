@@ -41,7 +41,7 @@ class Website_Teinte extends Object_Teinte {
 
 				//On va chercher tous les enfants
 				$list = new Pimcore\Model\Object\Teinte\Listing();
-	            $list->setCondition("path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
+	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
 	            
 	            $childrens = $list->load();
 

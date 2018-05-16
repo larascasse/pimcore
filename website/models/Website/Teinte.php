@@ -30,6 +30,32 @@ class Website_Teinte extends Object_Teinte {
 		return $products;
 	}
 
+	public function getProduct_ids_flat() {
+		$productIds = array();
+
+		$relatedProducts = $this->getSimilarTeinteProducts();
+		
+		foreach ($relatedProducts as $relatedProduct) {
+			
+			if(strlen($relatedProduct->getEan()) == 0) {
+
+				//On va chercher tous les enfants
+				$list = new Teinte\Listing();
+	            $list->setCondition("path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
+	            
+	            $childrens = $list->load();
+
+	            foreach ($childrens as $simpleProduct) {
+	                $productIds[] = $simpleProduct->getId();
+            	}
+			}
+			else {
+				  $productIds[] = $relatedProduct->getId();
+			}
+		}
+		return implode($productIds);
+	}
+
 
 	//On ne prend que les articles (pas les ean ...)
 	public function getProductsArticle($productToExclude=null) {

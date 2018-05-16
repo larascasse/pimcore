@@ -40,7 +40,7 @@ class Website_Teinte extends Object_Teinte {
 			if(strlen($relatedProduct->getEan()) == 0) {
 
 				//On va chercher tous les enfants
-				$list = new Teinte\Listing();
+				$list = new Teinte_Listing();
 	            $list->setCondition("path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
 	            
 	            $childrens = $list->load();

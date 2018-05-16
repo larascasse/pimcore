@@ -35,17 +35,19 @@ class Website_Teinte extends Object_Teinte {
 
 		$relatedProducts = $this->getSimilarTeinteProducts();
 		
+
 		foreach ($relatedProducts as $relatedProduct) {
-			
+		
 			if(strlen($relatedProduct->getEan()) == 0) {
 
 				//On va chercher tous les enfants
-				$list = new Pimcore\Model\Object\Teinte\Listing();
+				$list = new Pimcore\Model\Object\Product\Listing();
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
 	            
 	            $childrens = $list->load();
 
 	            foreach ($childrens as $simpleProduct) {
+
 	                $productIds[] = $simpleProduct->getId();
             	}
 			}
@@ -53,7 +55,7 @@ class Website_Teinte extends Object_Teinte {
 				  $productIds[] = $relatedProduct->getId();
 			}
 		}
-		return implode($productIds);
+		return implode(",",$productIds);
 	}
 
 

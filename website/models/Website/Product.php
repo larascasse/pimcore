@@ -326,6 +326,15 @@ class Website_Product extends Object_Product {
 			return "Aucun";
 		return $value;
 	}
+
+	public function getMotifString () {
+		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"motif");
+		$value = $this->geMotif();
+		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		if($this->isParquet() && strlen($value) == 0)
+			return "Lames droites";
+		return $value;
+	}
 	
 	/**
 	* @return string

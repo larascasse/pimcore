@@ -10,15 +10,33 @@ function loadSearch(indexName) {
     search.destroy();
   }
   search = instantsearch({
-    appId: 'R7ZI25KI5A',
-    apiKey: '4d94d16a91186890589b12392cf37a3b',
-    indexName: indexName
+    appId: 'GTGYOTP3CP',
+    apiKey: '94a376c0accc342b43c077f29b4b0e7c',
+    indexName: indexName,
+    urlSync: true,
     //
     //searchFunction] A hook that will be called each time a search needs to be done, with the
      //helper as a parameter. It's your responsibility to call helper.search(). This option allows you to avoid doing
      //searches at page load for example.numberLocale
      //searchParameters] Additional parameters to pass to the Algolia API.
      //urlSync] Url synchronization configuration
+
+     searchParameters: {
+        /*hierarchicalFacetsRefinements: { // menu is implemented as a hierarchicalFacetsRefinements
+          categories: ['Cell Phones']
+        },
+        */
+        facetsRefinements: {
+          //subtype: ['teinte'],
+        },
+       //filters: ['catalogue:"parquet" OR catalogue:"collections"','subtype="teinte"'],
+       filters: 'subtype:"teinte"',
+        // Add to "facets" all attributes for which you
+        // do NOT have a widget defined
+       //facets: ['catalogue','largeur_txt']
+
+      },
+
   });
   addAllWidgets(search);
   search.start();
@@ -53,16 +71,16 @@ function addAllWidgets(search) {
   search.addWidget(
     instantsearch.widgets.hits({
       container: '#hits',
-      hitsPerPage: 16,
+      hitsPerPage: 200,
       templates: {
         empty: noResultsTemplate,
         item: hitTemplate
       },
       transformData: function(hit) {
-        hit.stars = [];
+        /*hit.stars = [];
         for (var i = 1; i <= 5; ++i) {
           hit.stars.push(i <= hit.rating);
-        }
+        }*/
         return hit;
       },
       //getConfiguration : Let the widget update the configuration of the search with new parameters
@@ -105,20 +123,21 @@ function addAllWidgets(search) {
     })
   );
 
+
   search.addWidget(
     instantsearch.widgets.refinementList({
-      container: '#materials',
+      container: '#subtype',
       attributeName: 'subtype',
       operator: 'or',
       limit: 10,
       templates: {
         item: facetTemplateCheckbox,
-        header: '<div class="facet-title">Type</div class="facet-title">'
+        header: '<div class="facet-title">Type</div>'
       }
     })
   );
 
-  search.addWidget(
+ /*search.addWidget(
     instantsearch.widgets.refinementList({
       container: '#colors',
       attributeName: 'color',
@@ -126,22 +145,45 @@ function addAllWidgets(search) {
       limit: 10,
       templates: {
         item: facetTemplateColors,
-        header: '<div class="facet-title">Couleur</div class="facet-title">'
+        header: '<div class="facet-title">Couleur</div>'
       }
     })
-  );
+  );*/
 
-  search.addWidget(
-    instantsearch.widgets.refinementList({
+
+
+  /*search.addWidget(
+    instantsearch.widgets.toggle({
       container: '#stock',
-      attributeName: 'stock_qty',
+      attributeName: 'in_stock',
       label : 'Qté en stock',
       templates: {
         item: facetTemplateCheckbox,
-        header: '<div class="facet-title">Qté. stock</div class="facet-title">'
+        header: '<div class="facet-title">Qté. stock</div>'
       }
     })
+  );*/
+
+  search.addWidget(
+    instantsearch.widgets.currentRefinedValues({
+      container: '#current-refined-values',
+      // This widget can also contain a clear all link to remove all filters,
+      // we disable it in this example since we use `clearAll` widget on its own.
+      clearAll: false
+    })
   );
+
+  // initialize clearAll
+  search.addWidget(
+    instantsearch.widgets.clearAll({
+      container: '#clear-all',
+      templates: {
+        link: 'Effacer'
+      },
+      autoHideContainer: true
+    })
+  );
+
 
 
   /*search.addWidget(
@@ -149,12 +191,12 @@ function addAllWidgets(search) {
       container: '#rating',
       attributeName: 'rating',
       templates: {
-        header: '<div class="facet-title">Ratings</div class="facet-title">'
+        header: '<div class="facet-title">Ratings</div>'
       }
     })
   );*/
 
-  search.addWidget(
+  /*search.addWidget(
     instantsearch.widgets.priceRanges({
       container: '#prices',
       attributeName: 'price.default',
@@ -165,11 +207,91 @@ function addAllWidgets(search) {
         active: 'active'
       },
       templates: {
-        header: '<div class="facet-title">Prix</div class="facet-title">',
+        header: '<div class="facet-title">Prix</div>',
         //item : ''
       }
     })
+  );*/
+
+
+    search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#largeur',
+      attributeName: 'largeur_txt',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Largeur</div>'
+      }
+    })
   );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#longueur',
+      attributeName: 'longueur_txt',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Longueur</div>'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#epaisseur',
+      attributeName: 'epaisseur_txt',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Epaisseur</div>'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#choix',
+      attributeName: 'choix_txt',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Choix</div>'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#finition',
+      attributeName: 'finition',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Finition</div>'
+      }
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#traitement_surface',
+      attributeName: 'traitement_surface',
+      operator: 'or',
+      limit: 10,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Traitement surface</div>'
+      }
+    })
+  );
+
 
   /*search.addWidget(
     instantsearch.widgets.sortBySelector({
@@ -183,7 +305,7 @@ function addAllWidgets(search) {
     })
   );*/
 
-  search.addWidget(
+ /* search.addWidget(
     instantsearch.widgets.clearAll({
       container: '#clear-all',
       templates: {
@@ -194,7 +316,7 @@ function addAllWidgets(search) {
       },
       autoHideContainer: true
     })
-  );
+  );*/
 
 
 }
@@ -205,12 +327,12 @@ var hitTemplate =
   '<article class="hit">' +
       '<div class="product-picture-wrapper">' +
 
-        '<div class="product-picture"><a href="#" onclick="showGallery(\'{{sku}}\');return false;"><img src="http://eshop.laparqueterienouvelle.fr/media/{{image_url}}" /></a></div>' +
+        '<div class="product-picture"><a href="#" onclick="showGallery(\'{{sku}}\');return false;"><img src="{{image_url}}" /></a></div>' +
       '</div>' +
       '<div class="product-desc-wrapper">' +
      
        '<div class="product-type">{{{_highlightResult.subtype.value}}}</div>' +
-        '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.short_name.value}}}{{short_name}}</a></div>' +
+        '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.name.value}}}</a></div>' +
         '<div class="product-type">{{sku}}</div>' +
         '<button type="button" class="btn btn-secondary" onclick="showStock(\'{{sku}}\');return false;">stock: {{stock_qty}} <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>' +
        '<button type="button" class="btn btn-secondary" onclick="showGallery(\'{{sku}}\');return false;">photos <span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></button>' +
@@ -228,7 +350,7 @@ var menuTemplate =
 
 var facetTemplateCheckbox =
   '<a href="javascript:void(0);" class="facet-item">' +
-    '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{name}}' +
+    '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{label}}' +
     '<span class="facet-count">({{count}})</span>' +
   '</a>';
 
@@ -236,5 +358,5 @@ var facetTemplateColors =
   '<a href="javascript:void(0);" data-facet-value="{{name}}" class="facet-color {{#isRefined}}checked{{/isRefined}}"></a>';
 
 
-loadSearch('magentoprod_terrasses_storeview_fr_products');
+loadSearch('magentolocal_lpn_storeview_fr_products');
 

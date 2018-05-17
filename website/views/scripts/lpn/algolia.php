@@ -18,21 +18,42 @@
       </div>
     </header>
 
+
     <div class="content-wrapper">
 
       <aside>
-        <div id="clear-all"></div>
+
+<section class="facet-wrapper">
+         <div class="facet-category-title" class="facet">Résultats pour</div>
+
+        <div id="current-refined-values">
+         
+  <!-- CurrentRefinedValues widget will appear here -->
+      </div>
+  <div id="clear-all"></div>
+
+</section>
         <section class="facet-wrapper">
-          <div class="facet-category-title" class="facet">Résultats pour</div>
+          <div class="facet-category-title" class="facet">Catégories</div>
           <div id="categories"></div>
         </section>
         <section class="facet-wrapper">
           <div class="facet-category-title">Filtrer par</div>
           <div id="stock" class="facet"></div>
-          <div id="materials" class="facet"></div>
-          <div id="colors" class="facet"></div>
-          <div id="rating" class="facet"></div>
 
+          <div id="choix" class="facet"></div>
+          <div id="finition" class="facet"></div>
+          <div id="traitement_surface" class="facet"></div>
+
+          <div id="subtype" class="facet"></div>
+          <div id="colors" class="facet"></div>
+          <div id="longueur" class="facet"></div>
+          <div id="largeur" class="facet"></div>
+          <div id="epaisseur" class="facet"></div>
+          
+          
+          
+          <div id="rating" class="facet"></div>
           <div id="prices" class="facet"></div>
         </section>
       

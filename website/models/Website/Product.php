@@ -332,7 +332,7 @@ class Website_Product extends Object_Product {
 		$value = $this->getMotif();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
 		if($this->isParquet() && strlen($value) == 0)
-			return "Lames droites";
+			return "Lame droite";
 		return $value;
 	}
 	

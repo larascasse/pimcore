@@ -130,6 +130,7 @@ function addAllWidgets(search) {
       attributeName: 'subtype',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Type</div>'
@@ -220,6 +221,7 @@ function addAllWidgets(search) {
       attributeName: 'largeur_txt',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Largeur</div>'
@@ -233,6 +235,7 @@ function addAllWidgets(search) {
       attributeName: 'longueur_txt',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Longueur</div>'
@@ -246,6 +249,7 @@ function addAllWidgets(search) {
       attributeName: 'epaisseur_txt',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Epaisseur</div>'
@@ -259,6 +263,7 @@ function addAllWidgets(search) {
       attributeName: 'choix_txt',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Choix</div>'
@@ -272,6 +277,7 @@ function addAllWidgets(search) {
       attributeName: 'finition',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Finition</div>'
@@ -285,6 +291,7 @@ function addAllWidgets(search) {
       attributeName: 'traitement_surface',
       operator: 'or',
       limit: 10,
+      showMore : true,
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Traitement surface</div>'

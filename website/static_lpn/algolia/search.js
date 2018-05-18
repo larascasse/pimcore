@@ -129,7 +129,7 @@ function addAllWidgets(search) {
       container: '#subtype',
       attributeName: 'subtype',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
       templates: {
         item: facetTemplateCheckbox,
@@ -214,13 +214,16 @@ function addAllWidgets(search) {
     })
   );*/
 
+ 
+
+
 
     search.addWidget(
     instantsearch.widgets.refinementList({
       container: '#largeur',
       attributeName: 'largeur_txt',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
       templates: {
         item: facetTemplateCheckbox,
@@ -234,7 +237,7 @@ function addAllWidgets(search) {
       container: '#longueur',
       attributeName: 'longueur_txt',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
       templates: {
         item: facetTemplateCheckbox,
@@ -248,7 +251,7 @@ function addAllWidgets(search) {
       container: '#epaisseur',
       attributeName: 'epaisseur_txt',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
       templates: {
         item: facetTemplateCheckbox,
@@ -261,9 +264,10 @@ function addAllWidgets(search) {
     instantsearch.widgets.refinementList({
       container: '#choix',
       attributeName: 'choix_txt',
-      operator: 'or',
-      limit: 10,
+      operator: 'and',
+      limit: 20,
       showMore : true,
+      sortBy : ['name:asc'],
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Choix</div>'
@@ -276,8 +280,9 @@ function addAllWidgets(search) {
       container: '#finition',
       attributeName: 'finition',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
+      sortBy : ['name:asc'],
       templates: {
         item: facetTemplateCheckbox,
         header: '<div class="facet-title">Finition</div>'
@@ -290,7 +295,7 @@ function addAllWidgets(search) {
       container: '#traitement_surface',
       attributeName: 'traitement_surface',
       operator: 'or',
-      limit: 10,
+      limit: 20,
       showMore : true,
       templates: {
         item: facetTemplateCheckbox,
@@ -298,6 +303,22 @@ function addAllWidgets(search) {
       }
     })
   );
+
+  search.addWidget(
+  instantsearch.widgets.toggle({
+    container: '#stock',
+    attributeName: 'in_stock',
+    label: 'En stock',
+    values: {
+      on: 1,
+      //off: 0
+    },
+    templates: {
+        header: '<div class="facet-title">En stock</div>'
+    }
+  })
+);
+
 
 
   /*search.addWidget(

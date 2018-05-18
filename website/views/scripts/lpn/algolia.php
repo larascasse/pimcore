@@ -39,7 +39,7 @@
         </section>
         <section class="facet-wrapper">
           <div class="facet-category-title">Filtrer par</div>
-          <div id="stock" class="facet"></div>
+          
 
           <div id="choix" class="facet"></div>
           <div id="finition" class="facet"></div>
@@ -50,6 +50,7 @@
           <div id="longueur" class="facet"></div>
           <div id="largeur" class="facet"></div>
           <div id="epaisseur" class="facet"></div>
+          <div id="stock" class="facet"></div>
           
           
           

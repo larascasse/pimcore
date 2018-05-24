@@ -12,7 +12,7 @@ define("PIMCORE_ADMIN", true);
 Pimcore::setAdminMode();
 Object_Abstract::setHideUnpublished(false);
 
-
+define('PIMCORE_CONSOLE',true);
 
 Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();

@@ -164,29 +164,6 @@ class ProductHelper
         return $attributesLabel;
     }
 
-    public static function getChildrenSimpleProductIdsFromProduct($relatedProduct) {
-        $list = new \Pimcore\Model\Object\Product\Listing();
-         $list->setUnpublished(true);
-         $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
-         //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
-        $list->addConditionParam("ean != ''");
-
-
-        //
-        $childrens = $list->load();
-
-        $productIds  = array();
-        foreach ($childrens as $simpleProduct) {
-            //echo $simpleProduct->getEan();
-            $productIds[] = $simpleProduct->getId();
-        }
-        //print_r($productIds);
-        return self::getConfigurableAttributesFromProductIds($productIds);
-
-    }
-
-
-
-
+    
 
 }

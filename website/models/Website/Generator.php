@@ -185,8 +185,17 @@ class Generator
                 return $product->getCalculatedSolRaffraichissant();
             } 
             elseif ($context->getFieldname() == "configurableFields") {
-                if($product->getEan()=="" && $product->getCode()!="")
-                    return $configurablesFields = Tool\ProductHelper::getChildrenSimpleProductIdsFromProduct($product);
+                if($product->getEan()=="" && $product->getCode()!="") {
+                    $childIs = $product->getChildrenSimpleProductIds();
+                    return $configurablesFields = Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIs);
+                }
+                else return "None";
+            } 
+             elseif ($context->getFieldname() == "childrenSimpleProductIds_flat") {
+                if($product->getEan()=="" && $product->getCode()!="") {
+                    $childIs = $product->getChildrenSimpleProductIds();
+                    return implode(',',$childIs);
+                }
                 else return "None";
             } 
 

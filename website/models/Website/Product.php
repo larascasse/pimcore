@@ -3196,6 +3196,30 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 	}
 
+
+	public function getChildrenSimpleProductIds() {
+
+        $list = new \Pimcore\Model\Object\Product\Listing();
+         $list->setUnpublished(true);
+         $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%'");
+         //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
+        $list->addConditionParam("ean != ''");
+
+
+        //
+        $childrens = $list->load();
+
+        $productIds  = array();
+        foreach ($childrens as $simpleProduct) {
+            //echo $simpleProduct->getEan();
+            $productIds[] = $simpleProduct->getId();
+        }
+        //print_r($productIds);
+        return $productIds;
+
+    }
+
+
 	public function getPreviewUrl() {
 		return "/id/".$this->getId();
 	}

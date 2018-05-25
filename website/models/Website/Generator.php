@@ -21,7 +21,7 @@ class Generator
         if($pimcoreConsole)
             return;
 
-         if($object instanceof Object_Product)
+         if($object->getClassName() == "product")
               $product = $object;
          else if($object->getClassName() == "teinte")
               $teinte = $object;

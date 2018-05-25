@@ -3196,6 +3196,21 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 	}
 
+	function getChildrenSimpleProductIds_flat() {
+        if($this->getEan()=="" && $this->getCode()!="") {
+            $childIs = $this->getChildrenSimpleProductIds();
+            return implode(',',$childIs);
+        }
+        else return "None";
+     }
+
+     function getConfigurableFields() {
+     	 if($product->getEan()=="" && $product->getCode()!="") {
+            $childIs = $this->getChildrenSimpleProductIds();
+            return $configurablesFields = \Website\Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIs);
+        }
+        else return "";
+     }
 
 	public function getChildrenSimpleProductIds() {
 

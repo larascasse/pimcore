@@ -44,6 +44,7 @@
           <div id="choix" class="facet"></div>
           <div id="finition" class="facet"></div>
           <div id="traitement_surface" class="facet"></div>
+          <div id="motif" class="facet"></div>
 
           <div id="subtype" class="facet"></div>
           <div id="colors" class="facet"></div>

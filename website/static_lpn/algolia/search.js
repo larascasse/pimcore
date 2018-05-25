@@ -138,6 +138,20 @@ function addAllWidgets(search) {
     })
   );
 
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#motif',
+      attributeName: 'motif',
+      operator: 'or',
+      limit: 20,
+      showMore : true,
+      templates: {
+        item: facetTemplateCheckbox,
+        header: '<div class="facet-title">Type</div>'
+      }
+    })
+  );
+
  /*search.addWidget(
     instantsearch.widgets.refinementList({
       container: '#colors',

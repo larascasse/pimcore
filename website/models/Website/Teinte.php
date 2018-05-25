@@ -65,7 +65,7 @@ class Website_Teinte extends Object_Teinte {
 
 	public function getConfigurableFields() {
 		 $childIds = $this->getProduct_ids();
-        return Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIds);
+        return \Website\Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIds);
 	}
 
 

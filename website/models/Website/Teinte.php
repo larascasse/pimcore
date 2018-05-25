@@ -63,6 +63,11 @@ class Website_Teinte extends Object_Teinte {
 		return implode(",",$productIds);
 	}
 
+	public function getConfigurableFields() {
+		 $childIds = $this->getProduct_ids();
+        return Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIds);
+	}
+
 
 	//On ne prend que les articles (pas les ean ...)
 	public function getProductsArticle($productToExclude=null) {

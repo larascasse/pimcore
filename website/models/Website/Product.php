@@ -3205,7 +3205,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
      }
 
      function getConfigurableFields() {
-     	 if($product->getEan()=="" && $product->getCode()!="") {
+     	 if($this->getEan()=="" && $this->getCode()!="") {
             $childIs = $this->getChildrenSimpleProductIds();
             return $configurablesFields = \Website\Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIs);
         }

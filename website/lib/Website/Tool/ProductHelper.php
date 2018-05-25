@@ -136,7 +136,7 @@ class ProductHelper
         }
 
         //On ordonne suivant le tableau suivant :
-        $order = array('finition','fixation','support','traitement_surfaceString', 'choixString', 'motifString','epaisseur','epaisseur_txt',);
+        $order = array('fixation','choixString','finition','support','traitement_surfaceString', 'motifString','epaisseur','epaisseur_txt',);
 
        
         $childConfigurableFields = array_merge(

@@ -19,10 +19,6 @@ class AssetHelper
         $assetsArray=array();
 
         $i=0;
-       
-
-        
-
 
         //$count=count($assetsArray);
         if($count>0) {
@@ -65,9 +61,6 @@ class AssetHelper
 
 
                  }
-                 
-                
-                
 
             }
             
@@ -126,25 +119,13 @@ class AssetHelper
                 else {
                     // print_r($imagesOrFolders[$i]);
                 }
-                
-                   
-
-                    
-
-                    /*if($includeProductName) {
+                /*if($includeProductName) {
                         //echo $assets[0]->getId()."/";
 
                         $product = _getProductFromAsset($assets[0]);
                         $returnArray->name = $product?$product->getName():"";
                         $returnArray->sku = $product?$product->getSku():"";
                     }*/
-
-
-
-                 
-                 
-                
-                
 
             }
             
@@ -155,7 +136,7 @@ class AssetHelper
     }
 
 
-    public static   function _getProductFromAsset($asset) {
+    public static function _getProductFromAsset($asset) {
         //echo $asset->getId().'/';
 
         //Ca marche,mais en fait prendre le produit courant marche bien ..

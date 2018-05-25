@@ -102,9 +102,6 @@ class Website_Product extends Object_Product {
 						$value = $this->$getter();
 					}
 			  }
-			  
-
-			
 		}
 
 		

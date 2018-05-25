@@ -30,7 +30,7 @@ class Website_Teinte extends Object_Teinte {
 		return $products;
 	}
 
-	public function getProduct_ids_flat() {
+	public function getProduct_ids() {
 		$productIds = array();
 
 		$relatedProducts = $this->getSimilarTeinteProducts();
@@ -56,6 +56,10 @@ class Website_Teinte extends Object_Teinte {
 				  $productIds[] = $relatedProduct->getId();
 			}
 		}
+		return $productIds;
+	}
+	public function getProduct_ids_flat() {
+		$productIds =  $this->getProduct_ids();
 		return implode(",",$productIds);
 	}
 

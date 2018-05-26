@@ -100,6 +100,31 @@ class Website_Teinte extends Object_Teinte {
 		return $products;
 	}
 
+	public function getMage_mediagallery() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+
+   		$return = array();
+		$articles = $this->getProductsArticle();
+		foreach ($articles as $product) {
+			$asset = $product->getImage_1();
+			$path = $asset->getThumbnail("magento_realisation")->getPath();
+
+			$assetTag = array();
+			$assetTag[] = $this->getName();
+			$assetTag[] = $product->getMotifString();
+			$assetTag[] = $product->getTraitement_surfaceString();
+			$assetTag[] = $product->getChoixString();
+
+			$assetTageString = implode('|',$assetTag);
+			
+			$return[$assetTageString] = $path."::".$assetTageString;
+		}
+		return implode(";",$return);
+		
+	}
+
 
 }
 

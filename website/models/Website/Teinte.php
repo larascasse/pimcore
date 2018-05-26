@@ -58,8 +58,34 @@ class Website_Teinte extends Object_Teinte {
 		}
 		return $productIds;
 	}
-	public function getProduct_ids_flat() {
-		$productIds =  $this->getProduct_ids();
+	public function getProduct_ids_flat() { //Utilisé pour m'import magento
+		//On ^rends les SKU !!
+		$productIds = array();
+
+		$relatedProducts = $this->getSimilarTeinteProducts();
+		
+
+		foreach ($relatedProducts as $relatedProduct) {
+		
+			if(strlen($relatedProduct->getEan()) == 0) {
+
+				//On va chercher tous les enfants
+				$list = new Pimcore\Model\Object\Product\Listing();
+	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
+	            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+	            
+	            $childrens = $list->load();
+
+	            foreach ($childrens as $simpleProduct) {
+
+	                $productIds[] = $simpleProduct->getEan();
+            	}
+			}
+			else {
+				  //$productIds[] = $relatedProduct->getId();
+			}
+		}
+
 		return implode(",",$productIds);
 	}
 

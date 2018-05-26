@@ -152,7 +152,7 @@ class ProductHelper
         $attributesLabel =str_replace("choixString","choix_txt",$attributesLabel);
         $attributesLabel =str_replace("motifString","motif",$attributesLabel);
         $attributesLabel =str_replace("supportString","motif",$attributesLabel);
-        $attributesLabel =str_replace("finitionString","motif",$attributesLabel);
+        $attributesLabel =str_replace("finitionString","finition",$attributesLabel);
 
         //On ne prends plus la largeur mais la largeur.TXT
         //if($p["subtype"] == "teinte") {

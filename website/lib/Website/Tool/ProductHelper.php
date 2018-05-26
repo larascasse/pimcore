@@ -18,7 +18,7 @@ class ProductHelper
        
     
         $childConfigurableFields = array();
-        $configurableFields =array("volume",/*"choix",*/"finition","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","longueur_txt","epaisseur_txt","largeur_txt","mage_section","quantity_min_txt","configurable_free_1","configurable_free_2","choixString","traitement_surfaceString","motifString","support");
+        $configurableFields =array("volume",/*"choix",*/"finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","longueur_txt","epaisseur_txt","largeur_txt","mage_section","quantity_min_txt","configurable_free_1","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
         $latestChild = null;
 
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
@@ -136,7 +136,7 @@ class ProductHelper
         }
 
         //On ordonne suivant le tableau suivant :
-        $order = array('fixation','choixString','finition','support','traitement_surfaceString', 'motifString','epaisseur','epaisseur_txt',);
+        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt',);
 
        
         $childConfigurableFields = array_merge(
@@ -151,6 +151,8 @@ class ProductHelper
         $attributesLabel =str_replace("traitement_surfaceString","traitement_surface",$attributesLabel);
         $attributesLabel =str_replace("choixString","choix_txt",$attributesLabel);
         $attributesLabel =str_replace("motifString","motif",$attributesLabel);
+        $attributesLabel =str_replace("supportString","motif",$attributesLabel);
+        $attributesLabel =str_replace("finitionString","motif",$attributesLabel);
 
         //On ne prends plus la largeur mais la largeur.TXT
         //if($p["subtype"] == "teinte") {

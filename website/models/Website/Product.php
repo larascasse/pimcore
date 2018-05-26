@@ -312,6 +312,8 @@ class Website_Product extends Object_Product {
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"finition");
 		$value = $this->getFinition();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		if($this->isParquet() && strlen($value) == 0)
+			return "Aucune";
 		return $value;
 		
 	}
@@ -330,6 +332,15 @@ class Website_Product extends Object_Product {
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
 		if($this->isParquet() && strlen($value) == 0)
 			return "Lame droite";
+		return $value;
+	}
+
+	public function getSupportString() {
+		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"support");
+		$value = $this->getSupport();
+		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
+		if($this->isParquetMassif() && strlen($value) == 0)
+			return "Massif";
 		return $value;
 	}
 	

@@ -189,14 +189,14 @@ class Generator
                     $childIs = $product->getChildrenSimpleProductIds();
                     return $configurablesFields = Tool\ProductHelper::getConfigurableAttributesFromProductIds($childIs);
                 }
-                else return "None";
+                else return "";
             } 
              elseif ($context->getFieldname() == "childrenSimpleProductIds_flat") {
                 if($product->getEan()=="" && $product->getCode()!="") {
                     $childIs = $product->getChildrenSimpleProductIds();
                     return implode(',',$childIs);
                 }
-                else return "None";
+                else return "";
             } 
 
 

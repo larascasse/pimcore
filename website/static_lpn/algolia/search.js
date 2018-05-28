@@ -81,6 +81,13 @@ function addAllWidgets(search) {
         for (var i = 1; i <= 5; ++i) {
           hit.stars.push(i <= hit.rating);
         }*/
+         console.log(hit);
+        console.log(hit.images_teintes);
+        if(hit.images_teintes) {
+          var imgTeintesUrl = hit.images_teintes[0];
+          console.log('imgTeintesUrl',imgTeintesUrl);
+          hit.image_url = imgTeintesUrl;
+        }
         return hit;
       },
       //getConfiguration : Let the widget update the configuration of the search with new parameters
@@ -376,10 +383,10 @@ var hitTemplate =
        '<div class="product-type">{{{_highlightResult.subtype.value}}}</div>' +
         '<div class="product-name"><a href="{{url}}" target="_blank">{{{_highlightResult.name.value}}}</a></div>' +
         '<div class="product-type">{{sku}}</div>' +
-        '<button type="button" class="btn btn-secondary" onclick="showStock(\'{{sku}}\');return false;">stock: {{stock_qty}} <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>' +
-       '<button type="button" class="btn btn-secondary" onclick="showGallery(\'{{sku}}\');return false;">photos <span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></button>' +
-        '<a href="http://pim.laparqueterienouvelle.fr/ean/{{sku}}" target="_blank">Voir plus</a>' +
-        '<div class="product-price">{{price.default_formated}}</div>' +
+      //  '<button type="button" class="btn btn-secondary" onclick="showStock(\'{{sku}}\');return false;">stock: {{stock_qty}} <span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></button>' +
+      // '<button type="button" class="btn btn-secondary" onclick="showGallery(\'{{sku}}\');return false;">photos <span class="glyphicon glyphicon glyphicon-picture" aria-hidden="true"></span></button>' +
+      //  '<a href="http://pim.laparqueterienouvelle.fr/ean/{{sku}}" target="_blank">Voir plus</a>' +
+        '<div class="product-price">{{price.EUR.default_formated}}</div>' +
         //'<div class="product-rating">{{#stars}}<span class="ais-star-rating--star{{^.}}__empty{{/.}}"></span>{{/stars}}</div>' +
       '</div>' +
   '</article>';

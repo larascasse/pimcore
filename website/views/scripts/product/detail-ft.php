@@ -179,7 +179,7 @@ echo $htmlStd;
 
 
 
-if ($hasMarquageCe && ($product->isParquet() || $product->isTerrasse())) {
+if ($hasMarquageCe) {
 	echo "<h2>Déclaration de performance</h2>";
 	echo $htmlCe;
 	if($product->isParquet()) {

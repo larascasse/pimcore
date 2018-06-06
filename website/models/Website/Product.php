@@ -653,10 +653,14 @@ class Website_Product extends Object_Product {
 
 
 		//CE
-		$performanceFields = array("classe_utilisation","classe_upec","classe_durete","masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","norme_sanitaire","resistance_thermique","conductivite_thermique_total","condition_mise_en_oeuvre","durabilite_biologique","coefficient_retractabilite");
+		$performanceFields = array("masse_volumique","classe_reaction_feu_eu","classe_reaction_feu_fr","degagement_formaldehyde","norme_sanitaire","resistance_thermique","conductivite_thermique_total","durabilite_biologique","coefficient_retractabilite","characteristics_others_perf");
+
+		if($this->isParquet() || $this->isTerrasse()) {
+			$performanceFields = array_merge($performanceFields,["classe_utilisation","classe_upec","classe_durete","condition_mise_en_oeuvre"]);
+		}
 
 		//données tech générales
-		$donnesTechGeneralesFields = array("taux_humidite","classe_upec","classe_utilisation","characteristics_others_tech","characteristics_others_perf");
+		$donnesTechGeneralesFields = array("taux_humidite","classe_upec","classe_utilisation","characteristics_others_tech");
 
 
 

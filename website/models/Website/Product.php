@@ -638,7 +638,7 @@ class Website_Product extends Object_Product {
 			'chauffantAccumulationBasseTemperature',
 			'qualite',
 			'is_lot',
-			'ChildrenSimpleProductIds_flat'
+			'childrenSimpleProductIds_flat'
 
 
 			);

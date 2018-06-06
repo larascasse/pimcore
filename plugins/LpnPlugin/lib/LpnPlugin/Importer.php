@@ -9,7 +9,7 @@
  	private $parentId = 1514;
 
  	function __construct($importerConfig=null,$overwrite=false) {
- 		echo "ok\n";
+ 		//echo "ok\n";
  		$this->config = $importerConfig;
  		$this->overwrite = $overwrite;
         if($importerConfig)
@@ -17,7 +17,7 @@
  	}
 
  	function init() {
-		echo "\nImporter Init\n";
+		//echo "\nImporter Init\n";
  	}
 
 
@@ -691,7 +691,7 @@
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
-             echo "EAN existe ".$existingEan->getFullPath()."\n";
+             //echo "EAN existe ".$existingEan->getFullPath()."\n";
              
         }
         else {
@@ -933,6 +933,8 @@
     public function importProduct($product,$importNonActifWeb=false) {
 
 
+        $returnMessage = array();
+
         $inheritedValues = Object_Abstract::doGetInheritedValues();
         Object_Abstract::setGetInheritedValues(false);
 
@@ -999,13 +1001,13 @@
         //print_r($parent);
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
-             echo $product["ean"]." existe ".$existingEan->getFullPath()."\n";
+             //$returnMessage[] =  $product["ean"]." existe ".$existingEan->getFullPath()."\n";
              
         }
         else {
            
             if(!$canCreate) {
-                 echo $product["ean"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n";
+                 $returnMessage[] =  $product["ean"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n";
                  /*if($product["ean"]=='0001162502000') {
                     print_r($product);
                     die;
@@ -1013,7 +1015,7 @@
                  return;
              }
              else
-                 echo "\n\n*********  ".$product["ean"]." n'existe pas  et sera crée ****** \n";
+                 $returnMessage[] = "\n\n*********  ".$product["ean"]." n'existe pas  et sera crée ****** \n";
         }
 
 
@@ -1079,7 +1081,7 @@
                 }
 
             } else {
-                echo $product["ean"]." ".$product["name"]." sera mis à jour\n";
+                //echo $product["ean"]." ".$product["name"]." sera mis à jour\n";
                 $isUpdating = true;
 
             }
@@ -1105,7 +1107,7 @@
             $object->setUserModification($userId);
 
            
-
+            $updatedFields = array();
 
             foreach ($class->getFieldDefinitions() as $key => $field) {
 
@@ -1171,15 +1173,21 @@
                     
 
                     if ($value !== null) {
-                        $object->setValue($key, $value);
+
+                        //gestion des champs nouveaux
+                        $oldValue = "".$object->$key;
+                        $testValue = "".$value;
+                        if( $oldValue != $testValue || !$isUpdating) {
+                            //echo $key."-".$oldValue."-".$value."-\n";
+                            $updatedFields[$key] = $oldValue."->".$value;
+                            $object->setValue($key, $value);
+                        }
+                        
                     }
 
 
                 }
             }
-
-             
-
 
             if(!$isUpdating) {
                 $object->setPublished(false);
@@ -1194,14 +1202,36 @@
             }
 
             try {
-                $object->save();
-                if ($isUpdating) {
-                     echo "row ".$job." updated ".$objectKey." / ".$object->getFullPath()."\n";
+
+                if(count($updatedFields) > 0) {
+                    $object->setUserModification(0);
+                    $object->save();
+
+                    if ($isUpdating) {
+
+                        $returnDetail = [];
+                        foreach ($updatedFields as $key => $value) {
+                            $returnDetail[] = $key.":".$value;
+                        }
+                         $returnMessage[] =  "row ".$job." UPDATED | ".$objectKey." | ".$object->getFullPath()." | ".implode("|", $returnDetail);
+
+                         $versions = $object->getVersions();
+                         if (is_array($versions) && count($versions) > 0) {
+                            $version = $versions[0];
+                            //$version->setData($this);
+                            $version->setNote("Azure Update : ".implode("|", $returnDetail));
+                            $version->save();
+                         }
+                    }
+                    else {
+                        $returnMessage[] =  "row ".$job." NEW | ".$objectKey." | ".$object->getFullPath();
+                        print_r($product);
+                    }
                 }
                 else {
-                    echo "row ".$job." inserted ".$objectKey." / ".$object->getFullPath()."\n";
-                    print_r($product);
+                     $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
                 }
+               
 
             } catch (Exception $e) {
                 echo($e);
@@ -1210,6 +1240,10 @@
             }
              Object_Abstract::setGetInheritedValues($inheritedValues);
         }
+
+        if(count( $returnMessage) > 0)
+            return $returnMessage;
+
         return true;
 
 

@@ -9,7 +9,7 @@
     private $parentId = 1514;
 
     function LpnPlugin_Exporter($importerConfig,$overwrite) {
-        echo "ok";
+        //echo "ok";
         $this->config = $importerConfig;
         $this->overwrite = $overwrite;
         //echo $this->config->export->folderId;

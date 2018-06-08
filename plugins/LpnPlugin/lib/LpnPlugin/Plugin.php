@@ -57,7 +57,11 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                     $productMessages[] = $returnMessage[0];
 
                     $product = $returnMessage["product"];
-                    //echo $product->getId();
+
+                    if(!$product)
+                        continue;
+                    
+                    $product->getId()."-";
                     $manager = Workflow\Manager\Factory::getManager($product,$user);
 
                    

@@ -491,15 +491,8 @@ class ProductController extends Action
              if(strlen($product->ean)==0) {
                 continue;
              }
-             
-            
-
-            
-
 
              $caracteristiques =  $product->getCharacteristicsArray();
-
-            
 
              $row[] = $product->getActif_web();
              $row[] = $product->getCode();
@@ -744,7 +737,7 @@ class ProductController extends Action
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
         $this->enableLayout();
-        $this->setLayout("layout-mauchamp");
+        $this->setLayout("layout-mauchamp-etiquette");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
         
@@ -753,6 +746,9 @@ class ProductController extends Action
         // "id" is the named parameters in "Static Routes"
         $productId = $this->getParam("id");
         $productEan = $this->getParam("ean");
+
+        $this->view->format =  $this->getParam("format");
+
 
         //Commande
         if(stripos($productEan,"c")===0) {
@@ -797,7 +793,7 @@ class ProductController extends Action
             $this->view->product = $product;
         }
         else if(isset($productEan)) {
-             $product = Object_Product::getByEan($productEan,1);
+             $product = Object_Product::getByEan($productEan, 1);
              if(!$product instanceof Object_Product) {
 
                 //On va chercher dans AZURE
@@ -824,13 +820,6 @@ class ProductController extends Action
             else 
                 $this->view->product = $product;
         }
-        
-        
-
-
-       
-
-        
         //$this->view->attributes = $definition;
     }
 

@@ -58,6 +58,30 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               $params["configurable"] = 1;
 	    	
 	    	  $content = \Pimcore\Tool::getHttpData($url,$params);
+
+       
+
+
+          // Pour le workflow management,
+          // On va mettre à jour tous le produits mpour dire qu'ils ont été synchronisés.
+          //TODO : on ne gere pas les erreur ...
+          $products = [$product];
+
+
+          if($withChildren) {
+            //On va chercher tous les enfants
+              $list = new Pimcore\Model\Object\Product\Listing();
+              $list->setCondition("o_path LIKE '" . $product->getRealFullPath() . "/%'");
+              //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+              $childrens = $list->load();
+
+              foreach ($childrens as $simpleProduct) {
+
+                  $products[] = $simpleProduct;
+              }
+          }
+
+          \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products);
 	    	
 	    	  $this->response = array(
 	    	  	"success" => "true", 

@@ -1202,7 +1202,7 @@
             }
 
             try {
-
+                //si il ya des champs à mettre à jour
                 if(count($updatedFields) > 0) {
                     $object->setUserModification(0);
                     $object->save();
@@ -1214,6 +1214,12 @@
                             $returnDetail[] = $key.":".$value;
                         }
                          $returnMessage[] =  "row ".$job." UPDATED | ".$objectKey." | ".$object->getFullPath()." | ".implode("|", $returnDetail);
+
+                           $returnMessage["productId"] = $object->getId();
+                           $returnMessage["productSku"] = $object->getEan();
+                           $returnMessage["product"] = $object;
+
+                          
 
                          $versions = $object->getVersions();
                          if (is_array($versions) && count($versions) > 0) {
@@ -1241,8 +1247,10 @@
              Object_Abstract::setGetInheritedValues($inheritedValues);
         }
 
-        if(count( $returnMessage) > 0)
+        if(count( $returnMessage) > 0) {
+          
             return $returnMessage;
+        }
 
         return true;
 

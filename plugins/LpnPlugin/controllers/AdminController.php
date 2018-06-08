@@ -33,8 +33,11 @@ class LpnPlugin_AdminController extends \Pimcore\Controller\Action\Admin {
 
     /*
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212
+https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?ean=8021704502128
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=315189712
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?endswith
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startswith=FMBAMG4CVCIBTMO
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startsendswith=FM%MO&nonactif=1
 */
 
     public function importFromAzureAction() {
@@ -81,6 +84,7 @@ http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=121212
         }
 
         $result = array("status"=>false, "message"=>array());
+        $returnMessages = array();
 
         try {
 
@@ -105,7 +109,13 @@ http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=121212
 
                     if(is_array($returnMessage)) {
                         $result["status"] = true;
+
+                        $returnMessages[] = $returnMessage;
+
+                        $returnMessage['product'] = null;
                         $result["message"][] = $returnMessage;
+
+
                     }
                   
                     //$importer->clearInheritedValues($p);
@@ -116,7 +126,7 @@ http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=121212
             
             while(($nextProductToken = $response->GetContinuation()) != null);
             
-            
+            \Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',$returnMessages);
             
         } 
         catch (Exception $e) {

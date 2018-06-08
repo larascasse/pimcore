@@ -113,6 +113,11 @@ Usé,use
         $object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
 
         $object->setPimonly_classe_reaction_feu_eu("Cfls1");
+
+
+        if(stristr($scienergie, "BRUT")) {
+            //$object->setFinition('brut');
+        }
        
 
 

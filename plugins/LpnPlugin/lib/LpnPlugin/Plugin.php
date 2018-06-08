@@ -130,6 +130,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         //perform the action on the element
                         try {
                             $manager->performAction($action,["newState"=>$newState,"newStatus"=>$newStatus]);
+                        
                             $data = [
                                 'success' => true,
                                 'callback' => 'reloadObject'

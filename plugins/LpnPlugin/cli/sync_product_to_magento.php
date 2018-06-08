@@ -9,6 +9,8 @@ ini_set("max_execution_time", "-1");
 
 //execute in admin mode
 define("PIMCORE_ADMIN", true);
+$userId = 6;
+\Zend_Registry::set("pimcore_admin_user", User::getById($userId));
 Pimcore::setAdminMode();
 Object_Abstract::setHideUnpublished(false);
 Object_Abstract::setGetInheritedValues(false);
@@ -18,10 +20,46 @@ Pimcore_Model_Cache::disable();
 
 
 $db = \Pimcore\Db::get();
-$sql = "SELECT o_id,ean FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state != 'needs_magento_sync'";
+$sql = "SELECT cid,ean FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync'";
 $results = $db->fetchAll($sql);
 
+$eans = [];
+$cids = [];
+
+$i=0;
 foreach ($results as $result) {
-  echo $result['ean']."\n";
+ 
+  if(strlen($result['ean'])>0) {
+    //echo $result['ean']."\n";
+    $eans[] = $result['ean'];
+    $cids[] = $result['cid'];
+    if($i++>300)
+      break;
+  }
 }
+
+echo count($eans)." à synchroniser\n";
+if(count($eans)>0) {
+   $url = "http://magento.florent.local/LPN/get_a_product_magmi.php";
+   $params = ["ean"=>implode(",", $eans)];
+   //print_r($params);
+    $content = \Pimcore\Tool::getHttpData($url,null,$params);
+    
+}
+
+$products = [];
+foreach ($cids as $productId) {
+
+  $product = Object_Product::getById($productId);
+ // echo (get_class($product));
+  if($product instanceof Website_Product) 
+    $products[] = $product;
+}
+if(count($products)>0)
+  \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products);
+
+
+
+echo $content;
+echo "END\n";
 ?>

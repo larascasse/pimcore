@@ -24,9 +24,8 @@ class Website_Product extends Object_Product {
 
 		    	$data = $this->$key;
 
-		    	
 				if(!$data) { return $this->getValueFromParent($key);}
-			 	return $data;
+			 		return $data;
 
 	   }
 	   return;

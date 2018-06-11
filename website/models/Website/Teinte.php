@@ -151,6 +151,15 @@ class Website_Teinte extends Object_Teinte {
 		
 	}
 
+	public function getMage_tags() {
+		$tags = \Pimcore\Model\Element\Tag::getTagsForElement('object', $this->getId());
+		$tagsName=[];
+		foreach ($tags as $tag) {
+			$tagsName[] = $tag->getName();
+		}
+		return implode(',',$tagsName);
+	}
+
 
 }
 

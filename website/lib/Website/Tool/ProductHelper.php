@@ -168,7 +168,7 @@ class ProductHelper
 
         //Gesion du mono sku
         if(count($childrenSkus) == 1 && $attributesLabel=="") {
-            $attributesLabel = "choixString";
+            $attributesLabel = "choix_txt";
         }
 
 

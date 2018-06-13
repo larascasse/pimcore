@@ -15,6 +15,8 @@ class ProductHelper
 
 
     public static function getConfigurableAttributesFromProductIds($childrenSkus=array()) {
+
+        //Pour les teintes, dans le cas ou il n'y a qu'un seur configurable
        
     
         $childConfigurableFields = array();
@@ -136,7 +138,9 @@ class ProductHelper
         }
 
         //On ordonne suivant le tableau suivant :
-        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt',);
+        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt');
+
+
 
        
         $childConfigurableFields = array_merge(
@@ -161,6 +165,11 @@ class ProductHelper
         $attributesLabel =str_replace("epaisseur","epaisseur_txt",$attributesLabel);
         $attributesLabel =str_replace("longueur","longueur_txt",$attributesLabel);
         $attributesLabel =str_replace("_txt_txt","_txt",$attributesLabel);
+
+        //Gesion du mono sku
+        if(count($childrenSkus) == 1 && $attributesLabel=="") {
+            $attributesLabel = "choixString";
+        }
 
 
         return $attributesLabel;

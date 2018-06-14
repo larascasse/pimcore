@@ -1565,6 +1565,11 @@ class Website_Product extends Object_Product {
 		return null;
 	}
 
+	public function getMage_tags() {
+		$teinte = $this->getTeinteObject();
+		return $teinte ? $teinte->getMage_tags():"";
+	}
+
 	public function getSimilarTeinteProducts($excludeMe=false) {
 		$teinte = $this->getTeinteObject();
 		$products = array();

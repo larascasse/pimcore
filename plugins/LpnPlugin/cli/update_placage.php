@@ -184,8 +184,11 @@ foreach ($list->getObjects() as $object) {
 
     
     $parentName = $parent->getName();
-    $parentName = str_replace("Placage", "Sol plaqué boix", $parentName);
-    $parentName = str_replace("Sol plaqué boi", "Sol plaqué bois", $parentName);
+    $parentName = str_replace("Placage", "Sol plaqué bois", $parentName);
+
+    $parentName = str_replace("Sol plaqué boisx bois", "Sol plaqué bois", $parentName);
+    $parentName = str_replace("Sol plaqué boisx", "Sol plaqué bois", $parentName);
+    $parentName = str_replace("Sol plaqué boix", "Sol plaqué bois", $parentName);
     $parent->setValue('name',$parentName);
     $parent->save();
 

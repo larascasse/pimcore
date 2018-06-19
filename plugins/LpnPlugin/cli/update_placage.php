@@ -170,6 +170,9 @@ foreach ($list->getObjects() as $object) {
     else  if(stristr($scienergie, "(SWI)")) {
         $parentSuffixeEan .= " - Swing -";
     }
+     else  if(stristr($scienergie, "(DEL)")) {
+        $parentSuffixeEan .= " - Deluxe -";
+    }
 
     $parentSuffixeEan .= ' '.$object->getChoixString();
    

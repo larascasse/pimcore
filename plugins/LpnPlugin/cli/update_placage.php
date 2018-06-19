@@ -184,7 +184,9 @@ foreach ($list->getObjects() as $object) {
 
     
     $parentName = $parent->getName();
-    $parent->setValue('name',str_replace("Placage", "Sol plaqué boix", $parentName));
+    $parentName = str_replace("Placage", "Sol plaqué boix", $parentName);
+    $parentName = str_replace("Sol plaqué boi", "Sol plaqué bois", $parentName);
+    $parent->setValue('name',$parentName);
     $parent->save();
 
     $object->setPublished(true);

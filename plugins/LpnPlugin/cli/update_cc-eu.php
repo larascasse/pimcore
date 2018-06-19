@@ -131,11 +131,11 @@ foreach ($list->getObjects() as $object) {
     }
 
     if(stristr($scienergieCourt, "BR ")) {
-        $object->setMotif(' baton rompu');
+        $object->setMotif('baton rompu');
         $save=true;
     }
     else if(stristr($scienergieCourt, "PDH ")) {
-        $object->setMotif(' pth');
+        $object->setMotif('pth');
 
     }
 

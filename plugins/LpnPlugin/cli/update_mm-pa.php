@@ -127,7 +127,7 @@ foreach ($list->getObjects() as $object) {
     $parentSuffixeEan = "";
 
     if(stristr($article, "MHCHE") && !$isBrut) {
-        $parent->setMotif(' pth');
+        $parent->setMotif('pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
         $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
@@ -136,7 +136,7 @@ foreach ($list->getObjects() as $object) {
 
     }
     elseif(stristr($article, "MBCHE") && !$isBrut) {
-        $parent->setMotif(' baton rompu');
+        $parent->setMotif('baton rompu');
         $parentSuffixeEan .=" Bâton rompu";
     }
 

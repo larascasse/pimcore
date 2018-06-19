@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
-    "/catalogue/_product_base__/03revplaca%'",
+    "'/catalogue/_product_base__/03revplaca%'",
     "ean IS NOT NULL"
 );
 

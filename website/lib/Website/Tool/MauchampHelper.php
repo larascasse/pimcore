@@ -841,14 +841,15 @@ class MauchampHelper
         "phone" => "01 30 40 55 55"
     );
 
-    $sites["78420"] = array (
-        "name" => "La Parqueterie Nouvelle - Carrières - OBD",
-        "address1" => "33 rue des Entrepreneurs",
-        "address2" => "ZA des Amandiers",
-        "zipcode" => "78420",
-        "city" => "Carrières / Seine",
-        "phone" => "01 39 13 08 73"
+    $sites["95870"] = $sites["78420"] = array (
+        "name" => "La Parqueterie Nouvelle - Bezons",
+        "address1" => "25 rue Salvador Allendé",
+        "address2" => "",
+        "zipcode" => "95870",
+        "city" => "Bezons",
+        "phone" => "01 34 11 11 35"
     );
+
 
     $sites["78240"] = array (
         "name" => "La Parqueterie Nouvelle - Chambourcy",

@@ -102,7 +102,7 @@ $orderDetail = $this->orderDetail;
   </div>
 
   <div class="col-xs-4">
-    <p>La Parqueterie Nouvelle - Carrières<br />33, rue des entrepreneurs / ZA des Amandiers<br />78240 Carrières sur Seine</p>
+    <p>La Parqueterie Nouvelle - Bezons<br />25 rue Salvador Allendé<br />95870 Bezons</p>
   </div>
 
   <div class="col-xs-4">

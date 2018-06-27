@@ -244,7 +244,7 @@ foreach ($list->getObjects() as $object) {
     $t = preg_match('/décor (.*?)\-/s', $parentName, $matches);
 
     if(count($matches)>1) {
-         $newName = trim(ucwords($matches[1]));
+         $newName = "Slo stratifié ".trim(ucwords($matches[1]));
          $parent->setValue('name',$newName);
          $parent->save();
     }

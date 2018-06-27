@@ -231,6 +231,10 @@ foreach ($list->getObjects() as $object) {
          $parent->setValue('name',$newName);
          
     }
+    else {
+        $parentName = str_ireplace("Slo ","Sol ",$parentName);
+        $parent->setValue('name',$parentName);
+    }
     $parent->save();
 
 

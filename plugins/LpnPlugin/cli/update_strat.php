@@ -233,6 +233,10 @@ foreach ($list->getObjects() as $object) {
     }
     else {
         $parentName = str_ireplace("Slo ","Sol ",$parentName);
+
+        if(stristr($parentName,'Sol') === false) {
+            $parentName = "Sol stratifié ".$parentName;
+        }
         $parent->setValue('name',$parentName);
     }
     $parent->save();

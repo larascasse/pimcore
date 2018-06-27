@@ -104,24 +104,7 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan = "";
     $longueur_txt = "";
     
-    if(!$isbatonRompu) {
-
-        $suffixeEan .= $object->pimonly_dimensions;
-        
-        
-
-       
-
-    }
-
-    if($isbatonRompu) {
-
-        $suffixeEan .= $object->pimonly_dimensions;;
-    }
-
-
-
-
+    $suffixeEan .= $object->pimonly_dimensions;;
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 

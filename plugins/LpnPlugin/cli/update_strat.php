@@ -219,7 +219,7 @@ foreach ($list->getObjects() as $object) {
         $parentSuffixeEan .= " - Ocean 8 G4 -";
     }
     else  if(stristr($scienergie, "(OCEL)")) {
-        $parentSuffixeEan .= " - Ocean Luxe 8 G4-";
+        $parentSuffixeEan .= " - Ocean Luxe 8 G4 -";
     }
     else  if(stristr($scienergie, "(SM8V4)")) {
         $parentSuffixeEan .= " - Small 8 G4 -";

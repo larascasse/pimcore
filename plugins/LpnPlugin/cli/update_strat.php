@@ -242,12 +242,16 @@ foreach ($list->getObjects() as $object) {
    
     $matches = array();
     $t = preg_match('/décor (.*?)\-/s', $parentName, $matches);
-    $newName = ucwords($matches[1]);
-    echo $newName;
 
-    $parentName = str_replace("bois bois", "bois", $parentName);
-    $parent->setValue('name',$parentName);
-    $parent->save();
+    if(count($matches)>1) {
+         $newName = trim(ucwords($matches[1]));
+         $parent->setValue('name',$newName);
+         $parent->save();
+    }
+   
+
+
+    
 
     $object->setPublished(true);
     $object->save();

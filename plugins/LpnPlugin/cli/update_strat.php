@@ -30,7 +30,7 @@ $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
 
-$list->setOrder("DESC");
+$list->setOrder("ASC");
 $list->setOrderKey("o_id");
 
 

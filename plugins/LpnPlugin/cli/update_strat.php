@@ -198,16 +198,16 @@ foreach ($list->getObjects() as $object) {
         $parentSuffixeEan .= " - Eternity 12 -";
     }
     else  if(stristr($scienergie, "(FIN)")) {
-        $parentSuffixeEan .= " - Finesse 8 G4-";
+        $parentSuffixeEan .= " - Finesse 8 G4 -";
     }
     else  if(stristr($scienergie, "(GLOLU)")) {
         $parentSuffixeEan .= " - Glorious Luxe -";
     }
     else  if(stristr($scienergie, "(GLO)")) {
-        $parentSuffixeEan .= " - Glorious 9 G4-";
+        $parentSuffixeEan .= " - Glorious 9 G4 -";
     }
     else  if(stristr($scienergie, "(GLOSM)")) {
-        $parentSuffixeEan .= " - Glorious Small 9 G4-";
+        $parentSuffixeEan .= " - Glorious Small 9 G4 -";
     }
     else  if(stristr($scienergie, "(GLOXL)")) {
         $parentSuffixeEan .= " - Glorious XL 9 G4 -";
@@ -246,9 +246,9 @@ foreach ($list->getObjects() as $object) {
     if(count($matches)>1) {
          $newName = "Slo stratifié ".trim(ucwords($matches[1]));
          $parent->setValue('name',$newName);
-         $parent->save();
+         
     }
-   
+    $parent->save();
 
 
     

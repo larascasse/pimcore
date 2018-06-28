@@ -94,7 +94,7 @@ foreach ($list->getObjects() as $teinte) {
         }
         //
        // if(stripos($productCheck["name"]," ".$teinteName." ")>0) {
-        if(strtolower($productCheck["name"]) == $teinteName) {
+        if(strtolower($productCheck["name"]) == strtolower($teinteName)) {
             
             $product = $productCheck["product"];
             echo "".$teinteName." - ".$productCheck["name"]."\n";

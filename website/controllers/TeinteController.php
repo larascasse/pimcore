@@ -83,7 +83,8 @@ class TeinteController extends Action
         $this->view->products = $teinte->getProductsArticle();
 
         $list = new Object_Teinte_List();
-        $conditionFilters = array("o_path LIKE '/teintes/teintes/_import_%' OR o_path LIKE '/teintes/teintes/bambou%' OR o_path LIKE '/teintes/teintes/placage%'");
+        $conditionFilters = array(
+            "o_path LIKE '/teintes/teintes/_import_%' OR o_path LIKE '/teintes/teintes/bambou%' OR o_path LIKE '/teintes/teintes/placage%' OR o_path LIKE '/teintes/teintes/stratifie%'");
 
         $list->setCondition(implode(" AND ", $conditionFilters));
 

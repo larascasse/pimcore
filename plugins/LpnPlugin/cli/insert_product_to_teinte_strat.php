@@ -57,7 +57,7 @@ $products  = $listProduct->getObjects();
 $productsCheck = array();
 
 foreach ($products as $product) {
-    $productsCheck[]=array("name"=>strtolower($product->getMage_name()),"product"=>$product);
+    $productsCheck[]=array("name"=>strtolower($product->getName()),"product"=>$product);
 }
 
 $productToSave = array();

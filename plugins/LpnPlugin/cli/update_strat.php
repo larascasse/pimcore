@@ -165,6 +165,12 @@ foreach ($list->getObjects() as $object) {
             $parentSuffixeEan .= " - Impulse 8 -";
         }
     }
+    else  if(stristr($scienergie, "(IMPV2)")) {
+        $parentSuffixeEan .= " - Impulse 8 G2 -";
+    }
+    else  if(stristr($scienergie, "(IMPV4)")) {
+        $parentSuffixeEan .= " - Impulse 8 G4 -";
+    }
     else  if(stristr($scienergie, "(OCE)")) {
         $parentSuffixeEan .= " - Ocean 8 -";
     }

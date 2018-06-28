@@ -38,6 +38,8 @@ http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=315189
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?endswith
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startswith=FMBAMG4CVCIBTMO
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startsendswith=FM%MO&nonactif=1
+https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?startsendswith=MMBAMCHPR0%MO&nonactif=1
+https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?startsendswith=R%EU%MO&nonactif=1
 */
 
     public function importFromAzureAction() {
@@ -59,7 +61,7 @@ http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startsends
         $svc = new LPNEntities(LPN_SERVICE_URL);    
 
 
-        $famille = $this->getParam("famille")?$this->getParam("famille"):"10TERRASSE,41TABLE,40BARDAGES,01MASSIF,05CONTRECO,45ACCESSOI,50FINITION,25ISOLANTS,15COLLE,30BETON,20STRAT,97LOTS";
+        $famille = $this->getParam("famille")?$this->getParam("famille"):"10TERRASSE,41TABLE,40BARDAGES,01MASSIF,05CONTRECO,45ACCESSOI,50FINITION,25ISOLANTS,15COLLE,30BETON,20STRAT,97LOTS,03REVPLACA";
 
         $forceCreateNonActifWeb=false;
 

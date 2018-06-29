@@ -914,6 +914,10 @@ class MauchampHelper
           $words["stratifié"] = true;
           //$words["parquet"] = true;
         }
+        else if(stristr($product->getFamille(),'revplaca')) {
+          $words["sol plaqué"] = true;
+          //$words["parquet"] = true;
+        }
         else if(stristr($product->getFamille(),'beton')) {
           $words["beton"] = true;
           //$words["parquet"] = true;

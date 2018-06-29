@@ -956,10 +956,14 @@ class MauchampHelper
         else if(stristr($product->name, "accessoire")) {
           $words["accessoires"] = true;
         }
+        else if(stristr($product->getFamille(),'revplaca')) {
+          $words["sol plaqué"] = true;
+          //$words["parquet"] = true;
+        }
   
       }
 
-      $sortedWords = array_replace(array_flip(array("parquet","terrasse","bardage","table","vinyl","stratifié","accessoires")), $words);
+      $sortedWords = array_replace(array_flip(array("parquet","terrasse","bardage","table","vinyl","sol plaqué","stratifié","accessoires")), $words);
 
       $strArray=[];
       foreach ($sortedWords as $key => $value) {

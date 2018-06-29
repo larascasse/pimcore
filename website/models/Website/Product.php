@@ -377,6 +377,9 @@ class Website_Product extends Object_Product {
 	* @return string
 	*/
 	public function getClasse_utilisationString () {
+		if($this->getPimonly_classe_utilisation()>0) {
+			return $this->getPimonly_classe_utilisation();
+		}
 		return $this->getSingleTaxonomyString('classe_utilisation');
 
 	}
@@ -2635,6 +2638,10 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 */
 	
 	public function getClasseUpec() {
+		if($this->getPimonly_classe_upec()>0) {
+			return $this->getPimonly_classe_upec();
+		}
+
 		$cu = $this->getCalculatedClasseUtilisation();
 		$pieceHumide = $this->isCompatiblePieceHumide();
 		return \Website\Tool\ParquetData::getUpecByClasseUtilisation($cu,$pieceHumide);

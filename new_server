@@ -5,9 +5,13 @@ sudo apt-get update
 sudo apt-get install libmagickwand-dev
 
 sudo wget http://pecl.php.net/get/imagick-3.1.0RC2.tgz
+sudo wget https://pecl.php.net/get/imagick-3.4.3.tgz
 sudo tar -zxvf imagick-3.1.0RC2.tgz
+sudo tar -zxvf imagick-3.4.3.tgz
+
 
  cd imagick-3.1.0RC2
+ cd sudo tar -zxvf imagick-3.4.3
 
 phpize
 
@@ -28,8 +32,45 @@ This problem occurs when ImageMagick can't convert a jpg image to a png thumbnai
 
 CODE: SELECT ALL
 curl -O http://www.ijg.org/files/jpegsrc.v8c.tar.gz
-$ tar zxvf jpegsrc.v8c.tar.gz
-$ cd jpeg-8c/
-$ ./configure
-$ make
-$ sudo make install
+sudo tar zxvf jpegsrc.v8c.tar.gz
+sudo cd jpeg-8c/
+sudo ./configure
+sudo make
+sudo sudo make install
+
+
+ sudo apt install poppler-utils
+sudo apt install exiftool
+sudo apt-get install jpegoptim
+sudo apt-get install pngcrush
+sudo apt-get install html2text
+sudo apt-get install ffmpeg
+sudo apt-get install libreoffice
+
+
+sudo wget http://static.jonof.id.au/dl/kenutils/pngout-20150319-linux.tar.gz
+sudo tar xvfz pngout-20150319-linux.tar.gz
+cd pngout-20150319-linux
+cd x86_64
+sudo cp pngout /usr/bin
+
+sudo chmod -R g+w pimcore/
+
+
+cd ~
+wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz -O ffmpeg.tar.xz
+tar -Jxf ffmpeg*.tar.xz
+rm ffmpeg*.tar.xz
+
+sudo rm -R /usr/local/ffmpeg
+sudo rm /usr/local/ffmpeg/ffmpeg
+sudo rm /usr/local/ffmpeg/ffprobe
+sudo rm /usr/local/ffmpeg/qt-faststart
+sudo rm /usr/local/ffmpeg/qt-faststart
+
+
+sudo mv ffmpeg-* /usr/local/ffmpeg
+sudo ln -s /usr/local/ffmpeg/ffmpeg /usr/local/bin/
+sudo ln -s /usr/local/ffmpeg/ffprobe /usr/local/bin/
+sudo ln -s /usr/local/ffmpeg/qt-faststart /usr/local/bin/
+sudo ln -s /usr/local/ffmpeg/qt-faststart /usr/local/bin/qtfaststart

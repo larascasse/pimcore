@@ -19,6 +19,11 @@ return [
                 "name" => "done",
                 "label" => "Terminé",
                 "color" => "#00FF00"
+            ],
+            [
+                "name" => "needs_magento_sync",
+                "label" => "Need Sync STATE",
+                "color" => "#00FFFF"
             ]
         ],
         "statuses" => [
@@ -53,6 +58,10 @@ return [
                 "name" => "content_published",
                 "label" => "content_published",
                 "objectLayout" => 0
+            ],
+            [
+                "name" => "content_needs_magento_sync",
+                "label" => "content_needs_magento_sync STATUS"
             ]
         ],
         "actions" => [
@@ -209,6 +218,58 @@ return [
                 "events" => [
 
                 ]
+            ],
+            [
+                "name" => "settomagentosync",
+                "label" => "Need Sync Action",
+                "transitionTo" => [
+                    "needs_magento_sync" => [
+                        "content_needs_magento_sync"
+                    ]
+                ],
+                "notes" => [
+                    "required" => FALSE,
+                    "title" => "",
+                    "type" => ""
+                ],
+                "additionalFields" => [
+
+                ],
+                "users" => [
+
+                ],
+                "notificationUsers" => [
+
+                ],
+                "events" => [
+
+                ]
+            ],
+            [
+                "name" => "syncmagento",
+                "label" => "Sync to magento",
+                "transitionTo" => [
+                    "done" => [
+                        "content_published"
+                    ]
+                ],
+                "notes" => [
+                    "required" => FALSE,
+                    "title" => "",
+                    "type" => ""
+                ],
+                "additionalFields" => [
+
+                ],
+                "users" => [
+
+                ],
+                "notificationUsers" => [
+
+                ],
+                "events" => [
+
+                ]
             ]
         ],
         "transitionDefinitions" => [
@@ -217,26 +278,38 @@ return [
             ],
             "new" => [
                 "validActions" => [
+                    "content_published" => NULL,
                     "contentsupdated" => NULL,
                     "contents_ready" => NULL,
                     "process" => NULL,
                     "reject" => NULL,
                     "image_missing" => NULL,
-                    "content_published" => NULL
+                    "settomagentosync" => NULL,
+                    "syncmagento" => NULL
                 ]
             ],
             "contents_validated" => [
                 "validActions" => [
+                    "content_published" => NULL,
                     "contentsupdated" => NULL,
                     "contents_ready" => NULL,
                     "process" => NULL,
-                    "content_published" => NULL
+                    "settomagentosync" => NULL,
+                    "syncmagento" => NULL
                 ]
             ],
             "update_picture" => [
                 "validActions" => [
+                    "content_published" => NULL,
                     "contents_ready" => NULL,
-                    "content_published" => NULL
+                    "settomagentosync" => NULL,
+                    "syncmagento" => NULL
+                ]
+            ],
+            "content_needs_magento_sync" => [
+                "validActions" => [
+                    "content_published" => NULL,
+                    "syncmagento" => NULL
                 ]
             ]
         ],
@@ -259,6 +332,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1519640720
+        "modificationDate" => 1528452885
     ]
 ];

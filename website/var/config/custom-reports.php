@@ -2017,5 +2017,200 @@ return [
         "modificationDate" => 1517849706,
         "creationDate" => 1517848789,
         "id" => "product-missing-media"
+    ],
+    "test2" => [
+        "name" => "test2",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "ean,mage_name",
+                "from" => "object_query_5",
+                "where" => "ean IS NOT NULL and (famille='50FINITION' or famille='15COLLE' or famille='25ISOLANTS'  or famille='45ACCESSOI')",
+                "groupby" => "",
+                "sqlText" => "SELECT ean,mage_name FROM object_query_5 WHERE ean IS NOT NULL and (famille='50FINITION' or famille='15COLLE' or famille='25ISOLANTS'  or famille='45ACCESSOI')",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel1768-1"
+            ],
+            [
+                "name" => "mage_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel1768-2"
+            ]
+        ],
+        "niceName" => "Accessoires pour étiquettes",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => FALSE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1527686216,
+        "creationDate" => 1527685947,
+        "id" => "test2"
+    ],
+    "parquet_meubles" => [
+        "name" => "parquet_meubles",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "code,ean,mage_name,mage_short_name,pimonly_dimensions",
+                "from" => "object_query_5",
+                "where" => "EAN IS NOT  NULL and famille LIKE '20STRA%'",
+                "groupby" => "",
+                "sqlText" => "SELECT code,ean,mage_name,mage_short_name,pimonly_dimensions FROM object_query_5 WHERE EAN IS NOT  NULL and famille LIKE '20STRA%'",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "mage_short_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel651-1"
+            ],
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel651-3"
+            ],
+            [
+                "name" => "code",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel651-4"
+            ],
+            [
+                "name" => "pimonly_dimensions",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel651-5"
+            ],
+            [
+                "name" => "mage_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel651-6"
+            ]
+        ],
+        "niceName" => "",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => FALSE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1530089537,
+        "creationDate" => 1527686319,
+        "id" => "parquet_meubles"
+    ],
+    "needsmagesync" => [
+        "name" => "needsmagesync",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "oo_id,ean,state,mage_short_name",
+                "from" => "element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id",
+                "where" => "state = 'needs_magento_sync'",
+                "groupby" => "",
+                "sqlText" => "SELECT oo_id,ean,state,mage_short_name FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync'",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "state",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel36706-4"
+            ],
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel36706-23"
+            ],
+            [
+                "name" => "mage_short_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel36706-82"
+            ],
+            [
+                "name" => "oo_id",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel36706-228"
+            ]
+        ],
+        "niceName" => "Produits à synchroniser ",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => TRUE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1528454174,
+        "creationDate" => 1528454000,
+        "id" => "needsmagesync"
     ]
 ];

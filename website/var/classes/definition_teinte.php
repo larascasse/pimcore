@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-03T18:13:45+02:00
+* Generated at: 2018-06-11T17:02:33+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.9.52
+* IP: 172.31.15.117
 
 
 Fields Summary: 
@@ -15,6 +15,10 @@ Fields Summary:
 - hexacolor [input]
 - products_relation [nonownerobjects]
 - teinte_type [select]
+- product_ids_flat [textarea]
+- configurableFields [input]
+- mage_mediagallery [textarea]
+- mage_tags [input]
 */ 
 
 
@@ -22,7 +26,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1522772024,
+   'modificationDate' => 1528729353,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -225,6 +229,100 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'index' => false,
              'locked' => false,
              'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          6 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+             'fieldtype' => 'textarea',
+             'width' => '',
+             'height' => '',
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'name' => 'product_ids_flat',
+             'title' => 'product_ids_flat',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => true,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          7 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => 800,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'configurableFields',
+             'title' => 'configurableFields',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => true,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          8 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+             'fieldtype' => 'textarea',
+             'width' => '',
+             'height' => '',
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'name' => 'mage_mediagallery',
+             'title' => 'mage_mediagallery',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => true,
+             'index' => false,
+             'locked' => false,
+             'style' => 'width:100%;height:300px',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          9 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+             'fieldtype' => 'input',
+             'width' => NULL,
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'regex' => '',
+             'name' => 'mage_tags',
+             'title' => 'mage_tags',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => true,
+             'index' => false,
+             'locked' => false,
+             'style' => 'width:100%',
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,

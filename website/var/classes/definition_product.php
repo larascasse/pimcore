@@ -1,16 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-10T11:44:23+02:00
+* Generated at: 2018-06-29T12:24:03+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.9.52
+* IP: 172.31.25.58
 
 
 Fields Summary: 
 - actif_web [checkbox]
 - obsolete [checkbox]
+- configurableFields [input]
+- childrenSimpleProductIds_flat [input]
 - is_lot [select]
 - code [input]
 - ean [input]
@@ -22,6 +24,7 @@ Fields Summary:
 - subtype2 [input]
 - teinte_lpn [select]
 - pimonly_teinte_rel [objects]
+- mage_tags [input]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -64,7 +67,9 @@ Fields Summary:
 - norme_sanitaire [select]
 - classe [input]
 - classe_utilisation [calculatedValue]
+- pimonly_classe_utilisation [input]
 - classe_upec [calculatedValue]
+- pimonly_classe_upec [input]
 - masse_volumique [calculatedValue]
 - pimonly_masse_volumique_moyenne [input]
 - classe_reaction_feu_eu [calculatedValue]
@@ -85,6 +90,13 @@ Fields Summary:
 - price_2 [input]
 - price_3 [input]
 - price_4 [input]
+- largeurString [input]
+- longueurString [input]
+- epaisseurString [input]
+- choixString [input]
+- traitement_surfaceString [input]
+- motifString [input]
+- finitionString [input]
 - fixation [multiselect]
 - fixation_not_configurable [checkbox]
 - pose [multiselect]
@@ -205,7 +217,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1523353462,
+   'modificationDate' => 1530267839,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -310,6 +322,54 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => false,
               )),
               2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 800,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'configurableFields',
+                 'title' => 'configurableFields',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'childrenSimpleProductIds_flat',
+                 'title' => 'childrenSimpleProductIds_flat',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -345,7 +405,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              3 => 
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -369,7 +429,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              4 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -393,7 +453,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              5 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -417,7 +477,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              6 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -441,7 +501,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              7 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -465,7 +525,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              8 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -500,6 +560,11 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                     'key' => 'Stratifié/LVT',
                     'value' => 'stratifie-lvt',
                   ),
+                  6 => 
+                  array (
+                    'key' => 'Parquet',
+                    'value' => 'parquet',
+                  ),
                 ),
                  'width' => '',
                  'defaultValue' => '',
@@ -521,7 +586,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              9 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -545,7 +610,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              10 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -569,7 +634,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              11 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -625,7 +690,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              12 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => '',
@@ -658,7 +723,31 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              13 => 
+              15 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'mage_tags',
+                 'title' => 'mage_tags',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -682,7 +771,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              14 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -706,7 +795,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              15 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -730,7 +819,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              16 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -754,7 +843,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              17 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -778,7 +867,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              18 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -802,7 +891,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              19 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -825,7 +914,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              20 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -848,7 +937,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              21 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -872,7 +961,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              22 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -895,7 +984,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              23 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -919,7 +1008,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -942,7 +1031,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -965,7 +1054,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -987,7 +1076,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              27 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => '',
@@ -1011,7 +1100,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1035,7 +1124,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              29 => 
+              32 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1081,7 +1170,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              33 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1104,7 +1193,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              31 => 
+              34 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1901,6 +1990,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleSearch' => false,
               )),
               6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 55,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_classe_utilisation',
+                 'title' => 'Classe d\'utilisation (fournisseur)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1924,7 +2037,31 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              7 => 
+              8 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_classe_upec',
+                 'title' => 'Classement UPEC  (fournisseur)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1948,7 +2085,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              8 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1972,7 +2109,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              9 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -1996,7 +2133,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => '',
@@ -2019,7 +2156,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              11 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2043,7 +2180,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              12 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => '',
@@ -2066,7 +2203,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2090,7 +2227,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2114,7 +2251,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -2138,7 +2275,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2162,7 +2299,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -2186,7 +2323,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2210,7 +2347,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -2234,7 +2371,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2258,7 +2395,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\CalculatedValue::__set_state(array(
                  'fieldtype' => 'calculatedValue',
                  'width' => 0,
@@ -2431,12 +2568,12 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'fieldtype' => 'panel',
              'labelWidth' => 150,
              'layout' => '',
-             'name' => 'caracteriqtiques',
+             'name' => 'Caractéristiques',
              'type' => NULL,
              'region' => 'east',
              'title' => 'Configurable',
-             'width' => '',
-             'height' => '',
+             'width' => NULL,
+             'height' => NULL,
              'collapsible' => false,
              'collapsed' => false,
              'bodyStyle' => '',
@@ -2445,6 +2582,194 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'childs' => 
             array (
               0 => 
+              Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
+                 'fieldtype' => 'fieldset',
+                 'labelWidth' => 100,
+                 'name' => 'NEW',
+                 'type' => NULL,
+                 'region' => NULL,
+                 'title' => '',
+                 'width' => NULL,
+                 'height' => NULL,
+                 'collapsible' => false,
+                 'collapsed' => false,
+                 'bodyStyle' => '',
+                 'datatype' => 'layout',
+                 'permissions' => NULL,
+                 'childs' => 
+                array (
+                  0 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'largeurString',
+                     'title' => 'largeurString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  1 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'longueurString',
+                     'title' => 'longueurString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  2 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'epaisseurString',
+                     'title' => 'epaisseurString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  3 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'choixString',
+                     'title' => 'choixString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  4 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'traitement_surfaceString',
+                     'title' => 'traitement_surfaceString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  5 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'motifString',
+                     'title' => 'motifString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  6 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 80,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'finitionString',
+                     'title' => 'finitionString',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => true,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                ),
+                 'locked' => false,
+              )),
+              1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Multiselect::__set_state(array(
                  'fieldtype' => 'multiselect',
                  'options' => 
@@ -2461,35 +2786,30 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   2 => 
                   array (
-                    'key' => 'Rainure & languettes',
-                    'value' => 'rainurelanguette4cotes',
-                  ),
-                  3 => 
-                  array (
                     'key' => 'Rainure & languettes en bout',
                     'value' => 'rainurelanguette-en-bout',
                   ),
-                  4 => 
+                  3 => 
                   array (
                     'key' => 'Rainure & languettes 2 cotés et bouts coupés d\'équerre',
                     'value' => 'rainurelanguette-cote-bout-equerre',
                   ),
-                  5 => 
+                  4 => 
                   array (
                     'key' => 'Rainure 2 cotés fausse languette et bouts coupés d\'équerre',
                     'value' => 'rainure-cote-bout-equerre',
                   ),
-                  6 => 
+                  5 => 
                   array (
                     'key' => 'Invisible',
                     'value' => 'invisible',
                   ),
-                  7 => 
+                  6 => 
                   array (
                     'key' => 'Flottante',
                     'value' => 'flottante',
                   ),
-                  8 => 
+                  7 => 
                   array (
                     'key' => 'Système Click',
                     'value' => 'click',
@@ -2516,7 +2836,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              1 => 
+              2 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -2538,7 +2858,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              2 => 
+              3 => 
               Pimcore\Model\Object\ClassDefinition\Data\Multiselect::__set_state(array(
                  'fieldtype' => 'multiselect',
                  'options' => 
@@ -2585,7 +2905,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              3 => 
+              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -2609,7 +2929,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              4 => 
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -2631,7 +2951,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              5 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -2721,7 +3041,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              6 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -2876,7 +3196,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3062,7 +3382,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3222,7 +3542,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              9 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3680,50 +4000,55 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       3 => 
                       array (
+                        'key' => 'Brossé veinage noir',
+                        'value' => 'brosse-veinage-noir',
+                      ),
+                      4 => 
+                      array (
                         'key' => 'Brut',
                         'value' => 'brut',
                       ),
-                      4 => 
+                      5 => 
                       array (
                         'key' => 'Brut de sciage',
                         'value' => 'brut de sciage',
                       ),
-                      5 => 
+                      6 => 
                       array (
                         'key' => 'Vieilli rives abîmées',
                         'value' => 'vieilli rives abimees',
                       ),
-                      6 => 
+                      7 => 
                       array (
                         'key' => 'Usé',
                         'value' => 'use',
                       ),
-                      7 => 
+                      8 => 
                       array (
                         'key' => 'Rives abîmées',
                         'value' => 'rives scrapees',
                       ),
-                      8 => 
+                      9 => 
                       array (
                         'key' => 'Raboté main',
                         'value' => 'rabote main',
                       ),
-                      9 => 
+                      10 => 
                       array (
                         'key' => 'Structuré',
                         'value' => 'structure',
                       ),
-                      10 => 
+                      11 => 
                       array (
                         'key' => 'Vieilli usé rives abîmées',
                         'value' => 'vieilli use rives abimees',
                       ),
-                      11 => 
+                      12 => 
                       array (
                         'key' => 'Vieilli usé et brossé rives abîmées',
                         'value' => 'vieilli use brosse rives abimees',
                       ),
-                      12 => 
+                      13 => 
                       array (
                         'key' => 'Vieilli très accentué rives abîmées',
                         'value' => 'vieilli tres accentue',
@@ -3793,150 +4118,130 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       3 => 
                       array (
-                        'key' => 'Brut de sciage',
-                        'value' => 'Brut de sciage',
-                      ),
-                      4 => 
-                      array (
-                        'key' => 'Brossé brut',
-                        'value' => 'brosse',
-                      ),
-                      5 => 
-                      array (
-                        'key' => 'Brossé accentué',
-                        'value' => 'brosse-accentue',
-                      ),
-                      6 => 
-                      array (
-                        'key' => 'Brossé Veinage Noir',
-                        'value' => 'brosse-veinage-noir',
-                      ),
-                      7 => 
-                      array (
                         'key' => 'Huilé',
                         'value' => 'huile',
                       ),
-                      8 => 
+                      4 => 
                       array (
                         'key' => 'Ciré',
                         'value' => 'cire',
                       ),
-                      9 => 
+                      5 => 
                       array (
                         'key' => 'Pré-huilé',
                         'value' => 'pre-huile',
                       ),
-                      10 => 
+                      6 => 
                       array (
                         'key' => 'Huilé mat',
                         'value' => 'huile mat',
                       ),
-                      11 => 
+                      7 => 
                       array (
                         'key' => 'Huile cire',
                         'value' => 'huile-cire',
                       ),
-                      12 => 
+                      8 => 
                       array (
                         'key' => 'Huile cire ou vernis aqua',
                         'value' => 'huile-cire-ou-vernis-aqua',
                       ),
-                      13 => 
+                      9 => 
                       array (
                         'key' => 'Huile aqua',
                         'value' => 'huile-aqua',
                       ),
-                      14 => 
+                      10 => 
                       array (
                         'key' => 'Huile UV',
                         'value' => 'huile UV',
                       ),
-                      15 => 
+                      11 => 
                       array (
                         'key' => 'Huile teinte réactive',
                         'value' => 'huile teinte reactive',
                       ),
-                      16 => 
+                      12 => 
                       array (
                         'key' => 'Peinture d\'Aujourd\'hui',
                         'value' => 'peint',
                       ),
-                      17 => 
+                      13 => 
                       array (
                         'key' => 'Peinture d\'origine',
                         'value' => 'peintorigine',
                       ),
-                      18 => 
+                      14 => 
                       array (
                         'key' => 'Peinture blanche',
-                        'value' => ' Peinture blanche',
+                        'value' => 'Peinture blanche',
                       ),
-                      19 => 
+                      15 => 
                       array (
                         'key' => 'Peinture noire',
-                        'value' => ' Peinture noire',
+                        'value' => 'Peinture noire',
                       ),
-                      20 => 
+                      16 => 
                       array (
                         'key' => 'Vernis',
                         'value' => 'Verni',
                       ),
-                      21 => 
+                      17 => 
                       array (
                         'key' => 'Vernis aqua',
                         'value' => 'Verni aqua',
                       ),
-                      22 => 
+                      18 => 
                       array (
                         'key' => 'Vernis blanchi',
                         'value' => 'Verni blanchi',
                       ),
-                      23 => 
+                      19 => 
                       array (
                         'key' => 'Vernis blanchi mat',
                         'value' => 'Verni blanchi mat',
                       ),
-                      24 => 
+                      20 => 
                       array (
                         'key' => 'Vernis satiné',
                         'value' => 'Verni satiné',
                       ),
-                      25 => 
+                      21 => 
                       array (
                         'key' => 'Vernis mat',
                         'value' => 'Verni mat',
                       ),
-                      26 => 
+                      22 => 
                       array (
                         'key' => 'Vernis cérusé mat',
                         'value' => 'vernis cérusé mat',
                       ),
-                      27 => 
+                      23 => 
                       array (
                         'key' => 'Vernis blanc',
                         'value' => 'vernis blanc',
                       ),
-                      28 => 
+                      24 => 
                       array (
                         'key' => 'Vernis taupe',
                         'value' => 'vernis taupe',
                       ),
-                      29 => 
+                      25 => 
                       array (
                         'key' => 'Vernis colonial',
                         'value' => 'vernis colonial',
                       ),
-                      30 => 
+                      26 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      31 => 
+                      27 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      32 => 
+                      28 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',
@@ -4095,7 +4400,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              10 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -4685,22 +4990,27 @@ Combien d\'unité dans 1 m2',
                   0 => 
                   array (
                     'key' => 'Point de Hongrie',
-                    'value' => ' pth',
+                    'value' => 'pth',
                   ),
                   1 => 
                   array (
                     'key' => 'Bâton rompu',
-                    'value' => ' baton rompu',
+                    'value' => 'baton rompu',
                   ),
                   2 => 
                   array (
                     'key' => 'Mosaîque damier',
-                    'value' => ' mosaique-damier',
+                    'value' => 'mosaique-damier',
                   ),
                   3 => 
                   array (
                     'key' => 'Versailles',
-                    'value' => ' dalle-versaille',
+                    'value' => 'dalle-versaille',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Sur chant',
+                    'value' => 'sur chant',
                   ),
                 ),
                  'width' => '',

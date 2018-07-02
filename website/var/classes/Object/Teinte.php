@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-03T18:13:45+02:00
+* Generated at: 2018-06-11T17:02:33+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.9.52
+* IP: 172.31.15.117
 
 
 Fields Summary: 
@@ -15,6 +15,10 @@ Fields Summary:
 - hexacolor [input]
 - products_relation [nonownerobjects]
 - teinte_type [select]
+- product_ids_flat [textarea]
+- configurableFields [input]
+- mage_mediagallery [textarea]
+- mage_tags [input]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -27,6 +31,10 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByTeinte_type ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByProduct_ids_flat ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByConfigurableFields ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByMage_mediagallery ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByMage_tags ($value, $limit = 0) 
 */
 
 class Teinte extends Concrete {
@@ -38,6 +46,10 @@ public $description;
 public $image;
 public $hexacolor;
 public $teinte_type;
+public $product_ids_flat;
+public $configurableFields;
+public $mage_mediagallery;
+public $mage_tags;
 
 
 /**
@@ -177,6 +189,110 @@ public function getTeinte_type () {
 */
 public function setTeinte_type ($teinte_type) {
 	$this->teinte_type = $teinte_type;
+	return $this;
+}
+
+/**
+* Get product_ids_flat - product_ids_flat
+* @return string
+*/
+public function getProduct_ids_flat () {
+	$preValue = $this->preGetValue("product_ids_flat"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->product_ids_flat;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("product_ids_flat")->isEmpty($data)) {
+		return $this->getValueFromParent("product_ids_flat");
+	}
+	return $data;
+}
+
+/**
+* Set product_ids_flat - product_ids_flat
+* @param string $product_ids_flat
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setProduct_ids_flat ($product_ids_flat) {
+	$this->product_ids_flat = $product_ids_flat;
+	return $this;
+}
+
+/**
+* Get configurableFields - configurableFields
+* @return string
+*/
+public function getConfigurableFields () {
+	$preValue = $this->preGetValue("configurableFields"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurableFields;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurableFields")->isEmpty($data)) {
+		return $this->getValueFromParent("configurableFields");
+	}
+	return $data;
+}
+
+/**
+* Set configurableFields - configurableFields
+* @param string $configurableFields
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setConfigurableFields ($configurableFields) {
+	$this->configurableFields = $configurableFields;
+	return $this;
+}
+
+/**
+* Get mage_mediagallery - mage_mediagallery
+* @return string
+*/
+public function getMage_mediagallery () {
+	$preValue = $this->preGetValue("mage_mediagallery"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_mediagallery;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_mediagallery")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_mediagallery");
+	}
+	return $data;
+}
+
+/**
+* Set mage_mediagallery - mage_mediagallery
+* @param string $mage_mediagallery
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setMage_mediagallery ($mage_mediagallery) {
+	$this->mage_mediagallery = $mage_mediagallery;
+	return $this;
+}
+
+/**
+* Get mage_tags - mage_tags
+* @return string
+*/
+public function getMage_tags () {
+	$preValue = $this->preGetValue("mage_tags"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_tags;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_tags")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_tags");
+	}
+	return $data;
+}
+
+/**
+* Set mage_tags - mage_tags
+* @param string $mage_tags
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setMage_tags ($mage_tags) {
+	$this->mage_tags = $mage_tags;
 	return $this;
 }
 

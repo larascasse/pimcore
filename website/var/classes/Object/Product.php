@@ -1,16 +1,18 @@
 <?php 
 
 /** 
-* Generated at: 2018-04-10T11:44:23+02:00
+* Generated at: 2018-06-29T12:24:03+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.9.52
+* IP: 172.31.25.58
 
 
 Fields Summary: 
 - actif_web [checkbox]
 - obsolete [checkbox]
+- configurableFields [input]
+- childrenSimpleProductIds_flat [input]
 - is_lot [select]
 - code [input]
 - ean [input]
@@ -22,6 +24,7 @@ Fields Summary:
 - subtype2 [input]
 - teinte_lpn [select]
 - pimonly_teinte_rel [objects]
+- mage_tags [input]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -64,7 +67,9 @@ Fields Summary:
 - norme_sanitaire [select]
 - classe [input]
 - classe_utilisation [calculatedValue]
+- pimonly_classe_utilisation [input]
 - classe_upec [calculatedValue]
+- pimonly_classe_upec [input]
 - masse_volumique [calculatedValue]
 - pimonly_masse_volumique_moyenne [input]
 - classe_reaction_feu_eu [calculatedValue]
@@ -85,6 +90,13 @@ Fields Summary:
 - price_2 [input]
 - price_3 [input]
 - price_4 [input]
+- largeurString [input]
+- longueurString [input]
+- epaisseurString [input]
+- choixString [input]
+- traitement_surfaceString [input]
+- motifString [input]
+- finitionString [input]
 - fixation [multiselect]
 - fixation_not_configurable [checkbox]
 - pose [multiselect]
@@ -207,6 +219,8 @@ namespace Pimcore\Model\Object;
 /**
 * @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConfigurableFields ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChildrenSimpleProductIds_flat ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByIs_lot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
@@ -218,6 +232,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_tags ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
@@ -260,7 +275,9 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByNorme_sanitaire ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_utilisation ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_classe_utilisation ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_upec ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_classe_upec ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMasse_volumique ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_masse_volumique_moyenne ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_reaction_feu_eu ($value, $limit = 0) 
@@ -281,6 +298,13 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLargeurString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByLongueurString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEpaisseurString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoixString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surfaceString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMotifString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinitionString ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPose ($value, $limit = 0) 
@@ -401,6 +425,8 @@ public $o_classId = 5;
 public $o_className = "product";
 public $actif_web;
 public $obsolete;
+public $configurableFields;
+public $childrenSimpleProductIds_flat;
 public $is_lot;
 public $code;
 public $ean;
@@ -412,6 +438,7 @@ public $subtype;
 public $subtype2;
 public $teinte_lpn;
 public $pimonly_teinte_rel;
+public $mage_tags;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
@@ -450,6 +477,8 @@ public $support;
 public $epaisseurUsure;
 public $norme_sanitaire;
 public $classe;
+public $pimonly_classe_utilisation;
+public $pimonly_classe_upec;
 public $pimonly_masse_volumique_moyenne;
 public $pimonly_classe_reaction_feu_eu;
 public $pimonly_classe_reaction_feu_fr;
@@ -461,6 +490,13 @@ public $price_1;
 public $price_2;
 public $price_3;
 public $price_4;
+public $largeurString;
+public $longueurString;
+public $epaisseurString;
+public $choixString;
+public $traitement_surfaceString;
+public $motifString;
+public $finitionString;
 public $fixation;
 public $fixation_not_configurable;
 public $pose;
@@ -634,6 +670,58 @@ public function getObsolete () {
 */
 public function setObsolete ($obsolete) {
 	$this->obsolete = $obsolete;
+	return $this;
+}
+
+/**
+* Get configurableFields - configurableFields
+* @return string
+*/
+public function getConfigurableFields () {
+	$preValue = $this->preGetValue("configurableFields"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurableFields;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurableFields")->isEmpty($data)) {
+		return $this->getValueFromParent("configurableFields");
+	}
+	return $data;
+}
+
+/**
+* Set configurableFields - configurableFields
+* @param string $configurableFields
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurableFields ($configurableFields) {
+	$this->configurableFields = $configurableFields;
+	return $this;
+}
+
+/**
+* Get childrenSimpleProductIds_flat - childrenSimpleProductIds_flat
+* @return string
+*/
+public function getChildrenSimpleProductIds_flat () {
+	$preValue = $this->preGetValue("childrenSimpleProductIds_flat"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->childrenSimpleProductIds_flat;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("childrenSimpleProductIds_flat")->isEmpty($data)) {
+		return $this->getValueFromParent("childrenSimpleProductIds_flat");
+	}
+	return $data;
+}
+
+/**
+* Set childrenSimpleProductIds_flat - childrenSimpleProductIds_flat
+* @param string $childrenSimpleProductIds_flat
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChildrenSimpleProductIds_flat ($childrenSimpleProductIds_flat) {
+	$this->childrenSimpleProductIds_flat = $childrenSimpleProductIds_flat;
 	return $this;
 }
 
@@ -920,6 +1008,32 @@ public function getPimonly_teinte_rel () {
 */
 public function setPimonly_teinte_rel ($pimonly_teinte_rel) {
 	$this->pimonly_teinte_rel = $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->preSetData($this, $pimonly_teinte_rel);
+	return $this;
+}
+
+/**
+* Get mage_tags - mage_tags
+* @return string
+*/
+public function getMage_tags () {
+	$preValue = $this->preGetValue("mage_tags"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_tags;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_tags")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_tags");
+	}
+	return $data;
+}
+
+/**
+* Set mage_tags - mage_tags
+* @param string $mage_tags
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_tags ($mage_tags) {
+	$this->mage_tags = $mage_tags;
 	return $this;
 }
 
@@ -1992,6 +2106,32 @@ public function setClasse_utilisation ($classe_utilisation) {
 }
 
 /**
+* Get pimonly_classe_utilisation - Classe d'utilisation (fournisseur)
+* @return string
+*/
+public function getPimonly_classe_utilisation () {
+	$preValue = $this->preGetValue("pimonly_classe_utilisation"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_classe_utilisation;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_classe_utilisation")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_classe_utilisation");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_classe_utilisation - Classe d'utilisation (fournisseur)
+* @param string $pimonly_classe_utilisation
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_classe_utilisation ($pimonly_classe_utilisation) {
+	$this->pimonly_classe_utilisation = $pimonly_classe_utilisation;
+	return $this;
+}
+
+/**
 * Get classe_upec - Classement UPEC
 * @return \Pimcore\Model\Object\Data\CalculatedValue
 */
@@ -2008,6 +2148,32 @@ public function getClasse_upec () {
 * @return \Pimcore\Model\Object\Product
 */
 public function setClasse_upec ($classe_upec) {
+	return $this;
+}
+
+/**
+* Get pimonly_classe_upec - Classement UPEC  (fournisseur)
+* @return string
+*/
+public function getPimonly_classe_upec () {
+	$preValue = $this->preGetValue("pimonly_classe_upec"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_classe_upec;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_classe_upec")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_classe_upec");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_classe_upec - Classement UPEC  (fournisseur)
+* @param string $pimonly_classe_upec
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_classe_upec ($pimonly_classe_upec) {
+	$this->pimonly_classe_upec = $pimonly_classe_upec;
 	return $this;
 }
 
@@ -2474,6 +2640,188 @@ public function getPrice_4 () {
 */
 public function setPrice_4 ($price_4) {
 	$this->price_4 = $price_4;
+	return $this;
+}
+
+/**
+* Get largeurString - largeurString
+* @return string
+*/
+public function getLargeurString () {
+	$preValue = $this->preGetValue("largeurString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->largeurString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("largeurString")->isEmpty($data)) {
+		return $this->getValueFromParent("largeurString");
+	}
+	return $data;
+}
+
+/**
+* Set largeurString - largeurString
+* @param string $largeurString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setLargeurString ($largeurString) {
+	$this->largeurString = $largeurString;
+	return $this;
+}
+
+/**
+* Get longueurString - longueurString
+* @return string
+*/
+public function getLongueurString () {
+	$preValue = $this->preGetValue("longueurString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->longueurString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("longueurString")->isEmpty($data)) {
+		return $this->getValueFromParent("longueurString");
+	}
+	return $data;
+}
+
+/**
+* Set longueurString - longueurString
+* @param string $longueurString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setLongueurString ($longueurString) {
+	$this->longueurString = $longueurString;
+	return $this;
+}
+
+/**
+* Get epaisseurString - epaisseurString
+* @return string
+*/
+public function getEpaisseurString () {
+	$preValue = $this->preGetValue("epaisseurString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->epaisseurString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("epaisseurString")->isEmpty($data)) {
+		return $this->getValueFromParent("epaisseurString");
+	}
+	return $data;
+}
+
+/**
+* Set epaisseurString - epaisseurString
+* @param string $epaisseurString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setEpaisseurString ($epaisseurString) {
+	$this->epaisseurString = $epaisseurString;
+	return $this;
+}
+
+/**
+* Get choixString - choixString
+* @return string
+*/
+public function getChoixString () {
+	$preValue = $this->preGetValue("choixString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choixString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choixString")->isEmpty($data)) {
+		return $this->getValueFromParent("choixString");
+	}
+	return $data;
+}
+
+/**
+* Set choixString - choixString
+* @param string $choixString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoixString ($choixString) {
+	$this->choixString = $choixString;
+	return $this;
+}
+
+/**
+* Get traitement_surfaceString - traitement_surfaceString
+* @return string
+*/
+public function getTraitement_surfaceString () {
+	$preValue = $this->preGetValue("traitement_surfaceString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->traitement_surfaceString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surfaceString")->isEmpty($data)) {
+		return $this->getValueFromParent("traitement_surfaceString");
+	}
+	return $data;
+}
+
+/**
+* Set traitement_surfaceString - traitement_surfaceString
+* @param string $traitement_surfaceString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTraitement_surfaceString ($traitement_surfaceString) {
+	$this->traitement_surfaceString = $traitement_surfaceString;
+	return $this;
+}
+
+/**
+* Get motifString - motifString
+* @return string
+*/
+public function getMotifString () {
+	$preValue = $this->preGetValue("motifString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->motifString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("motifString")->isEmpty($data)) {
+		return $this->getValueFromParent("motifString");
+	}
+	return $data;
+}
+
+/**
+* Set motifString - motifString
+* @param string $motifString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMotifString ($motifString) {
+	$this->motifString = $motifString;
+	return $this;
+}
+
+/**
+* Get finitionString - finitionString
+* @return string
+*/
+public function getFinitionString () {
+	$preValue = $this->preGetValue("finitionString"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->finitionString;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finitionString")->isEmpty($data)) {
+		return $this->getValueFromParent("finitionString");
+	}
+	return $data;
+}
+
+/**
+* Set finitionString - finitionString
+* @param string $finitionString
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFinitionString ($finitionString) {
+	$this->finitionString = $finitionString;
 	return $this;
 }
 

@@ -99,6 +99,14 @@ foreach ($list->getObjects() as $object) {
 
             break;
 
+
+        case 17 :
+            
+            $object->setEpaisseurUsure('7 mm');
+            $object->setPose(array('acoller'));
+
+            break;
+
          
         
         default:
@@ -111,6 +119,7 @@ foreach ($list->getObjects() as $object) {
     $suffixeEan = "";
     $longueur_txt = "";
     
+    //BRUT
     if($isBrut) {
         
         $suffixeEan .= $object->getEpaisseur()."x".$object->getlargeur();
@@ -125,8 +134,24 @@ foreach ($list->getObjects() as $object) {
 
                 //IPE
                 case '120':
-                    $longueur_txt = '1200 mm';
-                    $suffixeEan .= '1200';
+                    
+                    if ($isIpe) {
+                        $longueur_txt = '1200 mm';
+                        $suffixeEan .= '1200';
+                    }
+
+                    //Merbau
+                    else {
+                        $longueur_txt = 'Longueurs panachées de 600 à 1800 mm';
+                        $suffixeEan .= 'x600-1800';
+                    }
+                 
+                    break;
+
+                //MERBAU
+                case '140':
+                    $longueur_txt = 'Longueurs panachées de 600 à 2200 mm';
+                    $suffixeEan .= 'x600-2200';
                     break;
                
             }
@@ -136,13 +161,13 @@ foreach ($list->getObjects() as $object) {
         else  if($epaisseur == 15) {
 
             switch ($object->getLargeur()) {
-                
+                //PALISSANDRE, AFRORMOSIA
                 case '120':
                     $longueur_txt = 'Longueurs panachées de 450 à 1200 mm';
                     $suffixeEan .= 'x450-1200';
                     break;
                    
-                
+                //IPE
                 case '125':
                     $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
                     $suffixeEan .= 'x400-1600';
@@ -152,24 +177,13 @@ foreach ($list->getObjects() as $object) {
 
         }
 
-        else if($epaisseur == 19) {
-           
-            switch ($object->getLargeur()) {
 
-                case '120':
-                    
-                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
-                    $suffixeEan .= 'x500-2400';
-                    break;
-                   
-                //IPE
-                case '130':
-                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
-                    $suffixeEan .= 'x400-1600';
-                    break;
-                   
+        //EURCALYPTUS
+        else  if($epaisseur == 17) {
+
+            switch ($object->getLargeur()) {
                 
-                case '140':
+                case '75':
                     $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
                     $suffixeEan .= 'x500-2400';
                     break;
@@ -178,23 +192,103 @@ foreach ($list->getObjects() as $object) {
 
         }
 
-        //WENGE
-        else if($epaisseur == 22) {
-            
+
+        else if($epaisseur == 19) {
+           
             switch ($object->getLargeur()) {
+                
+                case '90':
+                case '100':
+                case '110':
+                case '120':
+                case '140':
+                    
+                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                    $suffixeEan .= 'x500-2400';
+                    break;
+                   
+                //IPE
+                case '130':
+
+                    if($isIpe) {
+                        $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                        $suffixeEan .= 'x400-1600';
+                    }
+                    else {
+                        $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                        $suffixeEan .= 'x500-2400';
+                    }
+                    
+                    break;
+
+                   
+                }
+
+        }
+
+
+        //MERBAU
+        else  if($epaisseur == 20) {
+
+            switch ($object->getLargeur()) {
+                
+                //MERBAU
+                case '120':
+                    $longueur_txt = 'Longueurs panachées de 600 à 2200 mm';
+                    $suffixeEan .= 'x600-2200';
+                    break;
+                case '140':
+                case '190':
+                    $longueur_txt = 'Longueurs panachées de 1000 à 1800 mm';
+                    $suffixeEan .= 'x1000-1800';
+                    break;
+                   
+            }
+
+        }
+
+
+        //EURCALYPTUS / MERISIER
+        else  if($epaisseur == 21) {
+
+            switch ($object->getLargeur()) {
+                
+                /// MERISIER
+                case '80':
+                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                    $suffixeEan .= 'x500-2400';
+                    break;
+
+                case '95':
+                    $longueur_txt = 'Longueurs panachées de 800 à 2500 mm';
+                    $suffixeEan .= 'x800-2500';
+                    break;
+
+                   
+            }
+
+        }
+
+        //WENGE
+        else  if($epaisseur == 22) {
+            switch ($object->getLargeur()) {
+
 
                 case '180':
                     
                     $longueur_txt = 'Longueurs panachées de 1900 à 2500 mm';
                     $suffixeEan .= 'x1900-2500';
                     break;
-            }    
+                   
                
 
         }
         
             
     }
+
+
+    //FINIS
     else if(!$isPointDeHongrie && !$isbatonRompu) {
 
         $suffixeEan .= $object->getEpaisseur()."x".$object->getlargeur();
@@ -215,8 +309,6 @@ foreach ($list->getObjects() as $object) {
 
 
                //IPE
-                   
-                
                 case '125':
                     $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
                     $suffixeEan .= 'x400-1600';
@@ -226,25 +318,38 @@ foreach ($list->getObjects() as $object) {
 
         }
 
-        else  if($epaisseur == 19) {
+        else if($epaisseur == 19) {
+           
             switch ($object->getLargeur()) {
 
-
-                case '115':
-                case '135':
+                //NOYER? MERISIER? MERBAU
+                case '90':
+                case '100':
+                case '110':
+                case '120':
+        
+                case '140':
                     
                     $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
                     $suffixeEan .= 'x500-2400';
                     break;
                    
-                //IPE
+      
                 case '130':
-                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
-                    $suffixeEan .= 'x400-1600';
+
+                    if($isIpe) {
+                        $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                        $suffixeEan .= 'x400-1600';
+                    }
+                    else {
+                         $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                        $suffixeEan .= 'x500-2400';
+                    }
+                    
                     break;
                    
                 
-               
+     
                    
             }
 

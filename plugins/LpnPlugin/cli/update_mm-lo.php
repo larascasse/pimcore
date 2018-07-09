@@ -210,12 +210,12 @@ foreach ($list->getObjects() as $object) {
     }
     elseif(stristr($article, "G2") && !$isBrut) {
         $parent->setValue('chanfreins','2');
-        //$object->setChoix('ELC');
+        $parentSuffixeEan .= " G02";
 
     }
     elseif(stristr($article, "G4") && !$isBrut) {
         $parent->setValue('chanfreins','4');
-       // $object->setChoix('ELC');
+        $parentSuffixeEan .= " G04";
 
     }
     
@@ -223,7 +223,7 @@ foreach ($list->getObjects() as $object) {
 
     //HUILE
     if(stripos($scienergie, "PP") >0) {
-         $parent->setValue('finition',"brut");
+         $parent->setValue('finition',"");
     }
     if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");

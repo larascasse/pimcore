@@ -221,7 +221,7 @@ foreach ($list->getObjects() as $object) {
     }
     elseif(stristr($article, "G0")) {
         $parent->setValue('chanfreins','0');
-        $parentSuffixeEan .= " G00";
+        $parentSuffixeEan .= " G0";
 
     }
     

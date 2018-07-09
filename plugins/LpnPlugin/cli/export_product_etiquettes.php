@@ -23,7 +23,7 @@ $conditionFilters = array(
 );
 
 
-$list = new Pimcore\Model\Object\Listing();
+$list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
@@ -74,7 +74,7 @@ foreach ($list->getObjects() as $object) {
                 $row[] = $fieldDefinition->getForCsvExport($object);
             }
        }
-       $row[] = 'https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+      // $row[] = 'https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
     
         $rows[] = $row;
         echo implode(";", $row)."\n";

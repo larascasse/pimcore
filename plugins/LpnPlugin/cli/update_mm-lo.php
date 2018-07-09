@@ -315,7 +315,7 @@ foreach ($list->getObjects() as $object) {
                         break;
                    
                 }
-
+            }
         }
 
         else if($epaisseur == 19) {

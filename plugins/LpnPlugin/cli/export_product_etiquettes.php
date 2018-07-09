@@ -55,6 +55,9 @@ foreach ($list->getObjects() as $object) {
 
     if(!($object instanceof Object_Product))
         continue;
+
+     $inheritance = Object_Abstract::doGetInheritedValues(); 
+    Object_Abstract::setGetInheritedValues(false); 
     
   
     $scienergieCourt = $object->name_scienergie_court;
@@ -83,9 +86,11 @@ foreach ($list->getObjects() as $object) {
     }
     
     
-
+     Object_Abstract::setGetInheritedValues($inheritance); 
 
 
 }
+
+
 
 ?>

@@ -931,7 +931,7 @@
     }
 
     public function importProduct($product,$importNonActifWeb=false) {
-        echo "importProduct ".$product["ean"];
+        //echo "importProduct ".$product["ean"];
 
         $returnMessage = array();
 

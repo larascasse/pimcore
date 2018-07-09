@@ -3271,7 +3271,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
     	$short_name = str_ireplace("  ", " ", $short_name);
 
-    	return $shortanme;
+    	return $short_name;
 
     }
 

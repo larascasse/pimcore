@@ -289,7 +289,7 @@ foreach ($list->getObjects() as $object) {
 
 
     //FINIS
-    else if(!$isPointDeHongrie && !$isbatonRompu) {
+    else {
 
         $suffixeEan .= $object->getEpaisseur()."x".$object->getlargeur();
         

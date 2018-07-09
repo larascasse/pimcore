@@ -139,6 +139,7 @@ class MauchampController extends Action
         
     }
 
+    //Send PIMPIAMPOUM via EMAIL
     public function mauchampSendmailAction() {
         $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
@@ -164,18 +165,11 @@ class MauchampController extends Action
                  }
                }
            }
-           
-           
-           
-          
 
         }
        
 
-      
-        
-
-          $ftUrls = array();
+        $ftUrls = array();
 
           $ftIncludedSkus = array();
           if (is_array($this->getParam('ft'))) {
@@ -220,16 +214,10 @@ class MauchampController extends Action
 
         
         $pdfFileUrl = "";
-  
+        
+        try {
 
-      
-
-
-         try {
-
-
-           
-            try {
+          try {
                 
                 /* V2 */
                 $coverHtmlData = \Pimcore\Tool::getHttpData(
@@ -327,10 +315,6 @@ class MauchampController extends Action
                     }
 
                  }
-
-
-            
-
 
             }
             catch (Exception $e) {
@@ -522,8 +506,6 @@ class MauchampController extends Action
 
 
 
-
-
      //Fiche Produit
     public function coverForPieceCommercialePdfAction() {
         //$this->coverForPieceCommercialeAction();
@@ -646,14 +628,6 @@ class MauchampController extends Action
     public function log($error,$error_type='') {
         echo $message;
     }
-
-
     
-
-
-   
-
-    
-
 
 }

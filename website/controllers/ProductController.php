@@ -477,12 +477,7 @@ class ProductController extends Action
         $header['image_3'] = "Image Z1";
         $header['image_4'] = "Image Z2";
         $header['image_texture'] = "Image Face";
-
-
-
-
-
-
+        
         $idx = 0;
         foreach ($products as $product) {
              $row=array();

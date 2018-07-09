@@ -478,64 +478,68 @@ echo $content;
         $this->view->success = $success;
     }
 
-    public function apiAction ()
-{
-    $sku = $this->_getParam('sku');
-    if (!$sku) {
-        throw new Zend_Controller_Router_Exception('Missing "sku" parameter from request.');
-    }
-    $products = Object_MagentoBaseProduct::getBySku($sku);
-    $product = $products->current();
-    if (!$product) {
-        throw new Zend_Controller_Router_Exception('Unable to find the product object based on the provided "sku" value.');
-    }
-            $images = array();
-            if ($product->getBase()) {
-                $images['base'] =  array(
-                    'filename' => $product->getImage_1()->getFilename(),
-                    'path' => $product->getImage_1()->getPath(),
-                    'src' => $product->getImage_1()->getThumbnail('magento_base'),
-                    'mimetype' => $product->getImage_1()->getMimetype(),
-                );
-            }
-            if ($product->getThumbnail()) {
-                $images['thumbnail'] =  array(
-                    'filename' => $product->getImage_2()->getFilename(),
-                    'path' => $product->getImage_2()->getPath(),
-                    'src' => $product->getImage_2()->getThumbnail('magento_thumbnail'),
-                    'mimetype' => $product->getImage_2()->getMimetype(),
-                );
-            }
-            if ($product->getSmall()) {
-                $images['small'] =  array(
-                    'filename' => $product->getImage_3()->getFilename(),
-                    'path' => $product->getImage_3()->getPath(),
-                    'src' => $product->getImage_3()->getThumbnail('magento_small'),
-                    'mimetype' => $product->getImage_3()->getMimetype(),
-                );
-            }
-            $galleryImages = @$product->getGallery()->getItems();
-            if ($galleryImages) {
-                foreach ($galleryImages as $imgObj) {
-                    $image = $imgObj->getImage();
-                    $images['gallery'][] = array(
-                        'filename' => $image->getFilename(),
-                        'path' => $image->getPath(),
-                        'src' => $image->getThumbnail('magento_small'),
-                        'mimetype' => $image->getMimetype(),
-                    );
-                    unset($image);
-                }
-            }
-            /* image url is like: http://pimcore.loc/website/var/assets/{path}{filename} */
-            $response = array(
-                'sku' => $sku,
-                'images' => $images,
+    public function apiAction () {
+        
+        $sku = $this->_getParam('sku');
+        
+        if (!$sku) {
+            throw new Zend_Controller_Router_Exception('Missing "sku" parameter from request.');
+        }
+        $products = Object_MagentoBaseProduct::getBySku($sku);
+        $product = $products->current();
+        
+        if (!$product) {
+            throw new Zend_Controller_Router_Exception('Unable to find the product object based on the provided "sku" value.');
+        }
+
+        $images = array();
+        if ($product->getBase()) {
+            $images['base'] =  array(
+                'filename' => $product->getImage_1()->getFilename(),
+                'path' => $product->getImage_1()->getPath(),
+                'src' => $product->getImage_1()->getThumbnail('magento_base'),
+                'mimetype' => $product->getImage_1()->getMimetype(),
             );
-    header('Content-Type: application/json');
-    echo json_encode($response);
-    exit;
-}
+        }
+        if ($product->getThumbnail()) {
+            $images['thumbnail'] =  array(
+                'filename' => $product->getImage_2()->getFilename(),
+                'path' => $product->getImage_2()->getPath(),
+                'src' => $product->getImage_2()->getThumbnail('magento_thumbnail'),
+                'mimetype' => $product->getImage_2()->getMimetype(),
+            );
+        }
+        if ($product->getSmall()) {
+            $images['small'] =  array(
+                'filename' => $product->getImage_3()->getFilename(),
+                'path' => $product->getImage_3()->getPath(),
+                'src' => $product->getImage_3()->getThumbnail('magento_small'),
+                'mimetype' => $product->getImage_3()->getMimetype(),
+            );
+        }
+        $galleryImages = @$product->getGallery()->getItems();
+
+        if ($galleryImages) {
+            foreach ($galleryImages as $imgObj) {
+                $image = $imgObj->getImage();
+                $images['gallery'][] = array(
+                    'filename' => $image->getFilename(),
+                    'path' => $image->getPath(),
+                    'src' => $image->getThumbnail('magento_small'),
+                    'mimetype' => $image->getMimetype(),
+                );
+                unset($image);
+            }
+        }
+            /* image url is like: http://pimcore.loc/website/var/assets/{path}{filename} */
+        $response = array(
+            'sku' => $sku,
+            'images' => $images,
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
 
     public function searchAction () {
         
@@ -571,13 +575,6 @@ echo $content;
     public function log($error,$error_type='') {
         echo $message;
     }
-
-
-
-
-   
-
-    
 
 
 }

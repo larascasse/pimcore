@@ -82,6 +82,7 @@ foreach ($list->getObjects() as $object) {
 
     switch ($epaisseur) {
          case 19:
+         case 22:
             
         
             $object->setEpaisseurUsure('9 mm');
@@ -111,9 +112,85 @@ foreach ($list->getObjects() as $object) {
     $longueur_txt = "";
     
     if($isBrut) {
-        $longueur_txt = 'Longueurs panachées de 400 à 2000 mm';
-        $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
-        $suffixeEan.="x400-2000";
+        
+        $suffixeEan .= $object->getEpaisseur()."x".$object->getlargeur();
+
+        if($epaisseur == 14) {
+            switch ($object->getLargeur()) {
+             case '90':
+                $longueur_txt = 'Longueurs panachées de 350 à 1200 mm';
+                $suffixeEan .= 'x350-1200';
+                break;
+
+            //IPE
+            case '120':
+                $longueur_txt = '1200 mm';
+                $suffixeEan .= '1200';
+                    break;
+               
+            }
+
+        }
+
+        else  if($epaisseur == 15) {
+            switch ($object->getLargeur()) {
+
+
+                case '120':
+                    $longueur_txt = 'Longueurs panachées de 450 à 1200 mm';
+                    $suffixeEan .= 'x450-1200';
+                        break;
+                   
+                
+                case '125':
+                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                    $suffixeEan .= 'x400-1600';
+                        break;
+                   
+                }
+
+        }
+
+        else  if($epaisseur == 19) {
+            switch ($object->getLargeur()) {
+
+
+                case '120':
+                    
+                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                    $suffixeEan .= 'x500-2400';
+                    break;
+                   
+                //IPE
+                case '130':
+                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                    $suffixeEan .= 'x400-1600';
+                    break;
+                   
+                
+                case '140':
+                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                    $suffixeEan .= 'x500-2400';
+                    break;
+                   
+                }
+
+        }
+
+        //WENGE
+        else  if($epaisseur == 22) {
+            switch ($object->getLargeur()) {
+
+
+                case '180':
+                    
+                    $longueur_txt = 'Longueurs panachées de 1900 à 2500 mm';
+                    $suffixeEan .= 'x1900-2500';
+                    break;
+                   
+               
+
+        }
         
             
     }
@@ -121,39 +198,58 @@ foreach ($list->getObjects() as $object) {
 
         $suffixeEan .= $object->getEpaisseur()."x".$object->getlargeur();
         
-        switch ($object->getLargeur()) {
+        if($epaisseur == 14) {
+            switch ($object->getLargeur()) {
              case '90':
-               $longueur_txt = 'Longueurs panachées de 350 à 1200 mm';
+                $longueur_txt = 'Longueurs panachées de 350 à 1200 mm';
                 $suffixeEan .= 'x350-1200';
                 break;
+               
+            }
 
-            case '115':
-            case '135':
-               $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
-                $suffixeEan .= 'x500-2400';
-                break;
-
-            case '125':
-            case '130':
-               $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
-                $suffixeEan .= 'x400-1600';
-                break;
-
-            case '130':
-               $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
-                $suffixeEan .= 'x400-1600';
-                break;
-
-            case '125':
-               $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
-                $suffixeEan .= 'x400-1600';
-                break;
-
-            
-            default:
-                //$suffixeEan .= 'x'.$object->getLargeur();
-                break;
         }
+
+        else  if($epaisseur == 15) {
+            switch ($object->getLargeur()) {
+
+
+               //IPE
+                   
+                
+                case '125':
+                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                    $suffixeEan .= 'x400-1600';
+                        break;
+                   
+                }
+
+        }
+
+        else  if($epaisseur == 19) {
+            switch ($object->getLargeur()) {
+
+
+                case '115':
+                case '135':
+                    
+                    $longueur_txt = 'Longueurs panachées de 500 à 2400 mm';
+                    $suffixeEan .= 'x500-2400';
+                    break;
+                   
+                //IPE
+                case '130':
+                    $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
+                    $suffixeEan .= 'x400-1600';
+                    break;
+                   
+                
+               
+                   
+                }
+
+        }
+
+       
 
         
 

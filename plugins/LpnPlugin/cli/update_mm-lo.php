@@ -218,6 +218,11 @@ foreach ($list->getObjects() as $object) {
         $parentSuffixeEan .= " G04";
 
     }
+    elseif(stristr($article, "G0") && !$isBrut) {
+        $parent->setValue('chanfreins','0');
+        $parentSuffixeEan .= " G00";
+
+    }
     
 
 

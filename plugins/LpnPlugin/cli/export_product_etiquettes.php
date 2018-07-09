@@ -1,8 +1,8 @@
 <?php
 
 
-//include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
-include(dirname(__FILE__) . "/pimcore/cli/startup.php");
+include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
+//include(dirname(__FILE__) . "/pimcore/cli/startup.php");
 
 //this is optional, memory limit could be increased further (pimcore default is 1024M)
 ini_set('memory_limit', '1024M');

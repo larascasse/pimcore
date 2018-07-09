@@ -3266,8 +3266,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = $this->getMage_short_name();
 
     	$short_name = str_ireplace("Parquet ", "", $short_name);
-    	$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
-    	$short_name = str_ireplace($this->getFinitionString(), "", $short_name);
+    	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
+    	//$short_name = str_ireplace($this->getFinitionString(), "", $short_name);
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
     	$short_name = str_ireplace("massif", "", $short_name);

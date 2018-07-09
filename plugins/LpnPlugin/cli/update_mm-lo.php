@@ -208,17 +208,18 @@ foreach ($list->getObjects() as $object) {
         //$object->setChoix('ELV');
   
     }
-    elseif(stristr($article, "G2") && !$isBrut) {
+    
+    if(stristr($article, "G2")) {
         $parent->setValue('chanfreins','2');
         $parentSuffixeEan .= " G02";
 
     }
-    elseif(stristr($article, "G4") && !$isBrut) {
+    elseif(stristr($article, "G4")) {
         $parent->setValue('chanfreins','4');
         $parentSuffixeEan .= " G04";
 
     }
-    elseif(stristr($article, "G0") && !$isBrut) {
+    elseif(stristr($article, "G0")) {
         $parent->setValue('chanfreins','0');
         $parentSuffixeEan .= " G00";
 

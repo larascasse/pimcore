@@ -312,9 +312,9 @@ foreach ($list->getObjects() as $object) {
                 case '125':
                     $longueur_txt = 'Longueurs panachées de 400 à 1600 mm';
                     $suffixeEan .= 'x400-1600';
-                        break;
+                break;
                    
-                }
+                
             }
         }
 
@@ -364,14 +364,15 @@ foreach ($list->getObjects() as $object) {
 
     }
 
-    else if($isPointDeHongrie) {
+    
+    if($isPointDeHongrie) {
 
-        $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
+        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
     } 
 
     else if($isbatonRompu) {
 
-        $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
     }
 
     $object->setValue('longueur_txt',$longueur_txt); 

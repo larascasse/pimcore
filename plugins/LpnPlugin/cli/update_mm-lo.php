@@ -280,7 +280,7 @@ foreach ($list->getObjects() as $object) {
                     $suffixeEan .= 'x1900-2500';
                     break;
                    
-               
+            } 
 
         }
         
@@ -350,17 +350,9 @@ foreach ($list->getObjects() as $object) {
                     
                     break;
                    
-                
-     
-                   
             }
 
         }
-
-       
-
-        
-
 
     }
 

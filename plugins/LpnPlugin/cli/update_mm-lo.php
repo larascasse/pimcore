@@ -325,8 +325,10 @@ foreach ($list->getObjects() as $object) {
                 //NOYER? MERISIER? MERBAU
                 case '90':
                 case '100':
+                case '115':
                 case '110':
                 case '120':
+                case '135':
         
                 case '140':
                     

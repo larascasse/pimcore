@@ -1,46 +1,0 @@
-;code;name;Famille art;Essence;Qualité;Choix;epaisseur;largeur;longueur;Unité;published (system);NBRPP
-TMELOFICOU000LO;TMELOFICOU000LO;"Lame De Terrasse Elondo Choix Courant  Fixation Invisible 2 Faces Lisses  Rainure Et Languette En Bout.";10TERRASSE;ELO;;COU;;;;M2;1;1
-TF00000DEG000BL;TF00000DEG000BL;Finition Pour Terrasses   Degriseur  ;10TERRASSE;;;DEG;;;;U;1;1
-TMTECFACOU000EB;TMTECFACOU000EB;"Lame De Terrasse Teck  Choix Courant A Visser 2 Faces Lisses. Rainure Languette En Bout";10TERRASSE;TEC;;COU;;;;M2;1;1
-TMBCOFI000ABCSV;TMBCOFI000ABCSV;Lame De Terrasse Bois Composite Teinte Brun Colorado Antiderapant Fixation Invisible   ;10TERRASSE;BCO;ABC;;;;;M2;1;1
-TABCO00JUPGILSV;TABCO00JUPGILSV;Accessoire Terrasse  Jupe De Finition  Bois Composite Teinte Gris Iroise Lisse ;10TERRASSE;BCO;GIL;JUP;;;;U;1;1
-TABCO00JUPLBCSV;TABCO00JUPLBCSV;Accessoire Terrasse  Jupe De Finition  Bois Composite Teinte Brun Colorado Lisse ;10TERRASSE;BCO;LBC;JUP;;;;U;1;1
-TMACAFACOU00BS;TMACAFACOU00BS;"Lame De Terrasse Acacia Choix Courant Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;ACJ;;COU;;;;M2;1;1
-TMPSYFACOUTACSW;TMPSYFACOUTACSW;"Lame De Terrasse Pin Sylvestre Choix Courant Traitement Autoclave Vert Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;PSY;TAC;COU;;;;M2;1;1
-TMDGLFACOU000GI;TMDGLFACOU000GI;"Lame De Terrasse Douglas Choix Courant A Visser 2 Faces Lisses.";10TERRASSE;;;COU;;;;M2;1;1
-TMFREFACOUTHBBS;TMFREFACOUTHBBS;"Lame De Terrasse Frene Thermochauffe Choix Courant Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;FRE;THB;COU;;;;M2;1;1
-TF00000SATNATBL;TF00000SATNATBL;Finition Pour Terrasses   Saturateur Environnement Naturel   ;10TERRASSE;;NAT;SAT;;;;U;1;1
-TMBCOFI000LBCSV;TMBCOFI000LBCSV;Lame De Terrasse Bois Composite Teinte Brun Colorado Lisse Fixation Invisible  ;10TERRASSE;BCO;LBC;;;;;M2;1;1
-TA00000FGE000SP;TA00000FGE000SP;Accessoire Terrasse   Fibre Geotextil  ;10TERRASSE;;;FGE;;;;U;1;1
-TF00000SATBCLBL;TF00000SATBCLBL;Finition Pour Terrasses   Saturateur Environnement Bois Clair  ;10TERRASSE;;;SAT;;;;U;1;1
-TMBCOFI000IPASV;TMBCOFI000IPASV;Lame De Terrasse Bois Composite Teinte Ipe  Antiderapant Fixation Invisible   ;10TERRASSE;BCO;IPA;;;;;M2;1;1
-TMIPEFACOU000LO;TMIPEFACOU000LO;Lame De Terrasse Ipe Choix Courant Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.;10TERRASSE;IPE;;COU;;;;M2;1;1
-TA00000KFI000BS;TA00000KFI000BS;Accessoire Terrasse  Kit Fixation Invisible  (clip +  Vis Conso 10/12/m2 ) ;10TERRASSE;BCO;;KFI;;;;U;1;1
-TF00000SATBFOBL;TF00000SATBFOBL;Finition Pour Terrasses   Saturateur Environnement Bois Fonce  ;10TERRASSE;;BFO;SAT;;;;U;1;1
-TMRES00CAV000AB;TMRES00CAV000AB;Lame De Terrasse Bois Resineux Campagne Vieilli  ;10TERRASSE;RES;;CAV;;;;M2;1;1
-TA00000VIS000AF;TA00000VIS000AF;Accessoire Terrasse  Vis Inox Torxa2 Couleur Bronze  ( Boite De 150 );10TERRASSE;;;VIS;;;;U;1;1
-TABCO00JUPIPLSV;TABCO00JUPIPLSV;Accessoire Terrasse  Jupe De Finition  Bois Composite Teinte Ipe Lisse ;10TERRASSE;BCO;IPL;JUP;;;;U;1;1
-TMBCOFI000IPLSV;TMBCOFI000IPLSV;Lame De Terrasse Bois Composite Teinte Ipe Lisse Fixation Invisible  ;10TERRASSE;BCO;IPL;;;;;M2;1;1
-TDCUM00COU000LO;TDCUM00COU000LO;dalle De Terrasse  Cumaru Courant Profil Lisse;10TERRASSE;CUM;;COU;;;;M2;1;1
-TMIPEFICOU000LO;TMIPEFICOU000LO;"Lame De Terrasse Ipe Choix Courant Fixation Invisible 1 Face Lisse ";10TERRASSE;IPE;;COU;;;;M2;1;1
-TAELO00LBERABAS;TAELO00LBERABAS;Accessoire Terrasse  Lambourde Elondo Rabote 4  Faces ;10TERRASSE;;RAB;LBE;;;;ML;1;1
-TMCHEFACOUNATBS;TMCHEFACOUNATBS;"Lame De Terrasse Chene Choix Courant Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;CHE;NAT;COU;;;;M2;1;1
-TA00000PLO000LO;TA00000PLO000LO;Accessoire Terrasse  Plot Reglable   ;10TERRASSE;;;PLO;;;;U;1;1
-TMMLZFACOU000GI;TMMLZFACOU000GI;Lame De Terrasse Meleze Choix Courant Fixation A Visser 2 Faces Lisses;10TERRASSE;MLZ;;COU;;;;M2;1;1
-TF00000NBC000BL;TF00000NBC000BL;Finition Pour Terrasses   Nettoyant Bois Composite  ;10TERRASSE;;;NBC;;;;U;1;1
-TMBCOFI000GILSV;TMBCOFI000GILSV;Lame De Terrasse Bois Composite Teinte Gris Iroise Lisse Fixation Invisible  ;10TERRASSE;BCO;GIL;;;;;M2;1;1
-TAPIN00LBETACSW;TAPIN00LBETACSW;Accessoire Terrasse  Lambourde Pin Traite Autoclave;10TERRASSE;;TAC;LBE;;;;ML;1;1
-TABCO00CLS000SV;TABCO00CLS000SV;Accessoire Terrasse  Clip Composite Simple Et Vis Inox Boite De 30. ( Conso 18/m2 )  ;10TERRASSE;BCO;;CLS;;;;U;1;1
-TMELOFACOU000LO;TMELOFACOU000LO;"Lame De Terrasse Elondo Choix Courant  Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;ELO;;COU;;;;M2;1;1
-TABCO00CLA000SV;TABCO00CLA000SV;Accessoire Terrasse  Clip Composite D' Aboutage Et Vis Inox Boite De 10.   ;10TERRASSE;BCO;;CLA;;;;U;1;1
-TF00000SATBEXBL;TF00000SATBEXBL;Finition Pour Terrasses   Saturateur Environnement Bois Exotique   ;10TERRASSE;;BEX;SAT;;;;U;1;1
-TF00000SATCHEBL;TF00000SATCHEBL;Finition Pour Terrasses   Saturateur Environnement Chene;10TERRASSE;;;SAT;;;;U;1;1
-TA00000CFI000LO;TA00000CFI000LO;Accessoire Terrasse  Clip Bois Fixation Invisible ( Conso 20/m2 ) ;10TERRASSE;BCO;;CFI;;;;U;1;1
-TF00000SATGRIBL;TF00000SATGRIBL;Finition Pour Terrasses   Saturateur Environnement Gris Vieilli  ;10TERRASSE;;GRI;SAT;;;;U;1;1
-TABCO00CDF000SV;TABCO00CDF000SV;Accessoire Terrasse  Clip Composite Debut Et Fin  Et Vis Inox Boite De 10.;10TERRASSE;BCO;;CDF;;;;U;1;1
-TMBCOFI000GAASV;TMBCOFI000GAASV;Lame De Terrasse Bois Composite Teinte Gris Anthracite Antiderapant Fixation Invisible   ;10TERRASSE;BCO;GAA;;;;;M2;1;1
-TMFREFICOUTHBBS;TMFREFICOUTHBBS;"Lame De Terrasse Frene Thermochauffe Choix Courant Fixation Invisible  Face Lisse Et Bombe Avec Fixation Et Vis";10TERRASSE;FRE;THB;COU;;;;M2;1;1
-TMBCOFI000GALSV;TMBCOFI000GALSV;Lame De Terrasse Bois Composite Teinte Gris Anthracite Lisse Fixation Invisible  ;10TERRASSE;BCO;GAL;;;;;M2;1;1
-TMBCOFI000GIASV;TMBCOFI000GIASV;Lame De Terrasse Bois Composite Teinte Gris Iroise Antiderapant Fixation Invisible   ;10TERRASSE;BCO;GIA;;;;;M2;1;1
-TMPSYFACOUTAMSW;TMPSYFACOUTAMSW;"Lame De Terrasse Pin Sylvestre Choix Courant Traitement Autoclave Marron   Fixation A Visser 1 Face Lisse / 1 Face Antiderapante Profil Peigne.";10TERRASSE;PSY;;COU;;;;M2;1;1
-TABCO00JUPGALSV;TABCO00JUPGALSV;Accessoire Terrasse  Jupe De Finition  Bois Composite Teinte Gris Anthracite  Lisse ;10TERRASSE;BCO;GAL;JUP;;;;U;1;1

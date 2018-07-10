@@ -123,8 +123,6 @@ foreach ($list->getObjects() as $object) {
                 $longueur_max = 5000;
                 break;
 
-           
-
             case 6000:
                 $longueur_min = 1000;
                 $longueur_max = 6000;
@@ -174,6 +172,105 @@ foreach ($list->getObjects() as $object) {
                 $longueur_min = 8500;
                 $longueur_max = 12000;
                 break; 
+     
+        }
+
+        if($longueur_min>0) {
+            $object->setValue("pimonly_name_suffixe",$object->getEpaisseur()."x".$object->getlargeur()."x".$longueur_min."-".$longueur_max." ".($isVariable?"variables":"fixes")."");
+            $object->setValue("longueur_txt","Longueurs ".($isVariable?"variables":"fixes")." de ".$longueur_min." à ".$longueur_max." mm");
+        }
+
+        $object->setValue('chanfreins',"2");
+
+        /*
+        $parent->setChauffantBasseTemperature("1");
+        $parent->setChauffantRadiantElectrique("1");
+        $parent->setSolRaffraichissant("0");
+
+        $object->setChauffantBasseTemperature("");
+        $object->setChauffantRadiantElectrique("");
+        $object->setSolRaffraichissant("");
+        */
+
+        $object->save();
+    
+        echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+
+   }
+   //FIN CHENE
+
+
+   else if($essence == "DGL") {
+        
+        switch ($object->getEpaisseur()) {
+            case '20':
+                
+                $object->setEpaisseurUsure('7 mm');
+                 break;
+
+            case '28':
+                
+                $object->setEpaisseurUsure('11.5 mm');
+                break;
+
+            case '35':
+                
+                $object->setEpaisseurUsure('14.5 mm');
+                break;
+           
+        }
+
+
+        $longueur_min = 0;
+        $longueur_max = 0;
+        $isVariable = false;
+        //Longeurs fixes
+        if(stristr($code,"mv")) {
+
+            $isVariable = true;
+  
+        }
+
+        switch ($longueur) {
+           
+            
+
+            case 5000:
+                $longueur_min = 2000;
+                $longueur_max = 5000;
+                
+
+                if(!$isVariable) {
+
+                    $longueur_min = 1000;
+                    $longueur_max = 5000;
+                    
+                    
+                }
+                break;
+
+            case 7000:
+                $longueur_min = 5500;
+                $longueur_max = 7000;
+                break;
+
+            case 9000:
+                $longueur_min = 7500;
+                $longueur_max = 9000;
+
+            
+
+                break;
+
+            case 12000:
+                $longueur_min = 9500;
+                $longueur_max = 12000;
+                break; 
+
+            case 15000:
+                $longueur_min = 12500;
+                $longueur_max = 15000;
+                break;
      
         }
 

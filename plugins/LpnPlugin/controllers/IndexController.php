@@ -27,7 +27,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
         $conditionFilters = array(
-		    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-ad%'",
+		    "o_path LIKE '/catalogue/_product_base__/01massif/tmp%'",
 		    "ean IS NOT NULL"
 		);
 

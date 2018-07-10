@@ -20,7 +20,7 @@ class ProductHelper
        
     
         $childConfigurableFields = array();
-        $configurableFields =array("volume",/*"choix",*/"finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","longueur_txt","epaisseur_txt","largeur_txt","mage_section","quantity_min_txt","configurable_free_1","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
+        $configurableFields =array("volume",/*"choix",*/"finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_1","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
         $latestChild = null;
 
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
@@ -138,7 +138,7 @@ class ProductHelper
         }
 
         //On ordonne suivant le tableau suivant :
-        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt');
+        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt','largeur','largeur_txt','longueur','longueur_txt');
 
 
 

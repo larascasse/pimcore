@@ -3273,10 +3273,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("massif", "", $short_name);
     	$short_name = str_ireplace("  ", " ", $short_name);
 
-    	if($this->getColisage() !=1 && $this->getColisage() !=0 )
-    		$short_name .= " colisage :".$this->getColisage();
+    	/*if($this->getColisage() !=1 && $this->getColisage() !=0 )
+    		$short_name .= " (colisage :".$this->getColisage().")";
     	else
-    		$short_name .= " non colisé";
+    		$short_name .= " (non colisé)";
+    	*/
 
     	return $short_name;
 

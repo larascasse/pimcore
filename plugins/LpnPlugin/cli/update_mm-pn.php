@@ -131,7 +131,7 @@ foreach ($list->getObjects() as $object) {
         }
 
         if($longueur_min>0) {
-            $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x".$longueur_min."-".$longueur_max." ".($isVariable?"variables":"fixes")."");
+            $object->setValue("pimonly_name_suffixe",$object->getEpaisseur()."x".$object->getlargeur()."x".$longueur_min."-".$longueur_max." ".($isVariable?"variables":"fixes")."");
             $object->setValue("longueur_txt","Longeurs ".($isVariable?"variables":"fixes")." de ".$longueur_min." à ".$longueur_max." mm");
         }
 

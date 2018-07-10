@@ -44,7 +44,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		$objects = array();
 		 //echo "objects in list ".count($list->getObjects())."\n";
 		//Logger::debug("objects in list:" . count($list->getObjects()));
-		$fieldsToExport=array("ean","name_scienergie","name_scienergie_court","pimonly_print_label");
+		$header = $fieldsToExport=array("ean","name_scienergie","name_scienergie_court","pimonly_print_label");
 
 		$rows=array();
 
@@ -90,6 +90,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		    
 		        $rows[] = $row;
 		        echo implode(";", $row)."\n";
+
 		        
 		    }
 		    
@@ -98,10 +99,34 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 
 
 		}
+
+
             
      
-        return $this->_helper->json($result);
+        $this->toCSV($header,$rows,"export");
+        die;
 
 
     }
+
+      public  function toCSV($header, $data, $filename) {
+        $sep  = "\t";
+        $eol  = "\n";
+        $csv  =  count($header) ? '"'. implode('"'.$sep.'"', $header).'"'.$eol : '';
+        foreach($data as $line) {
+          $csv .= '"'. implode('"'.$sep.'"', $line).'"'.$eol;
+        }
+        $encoded_csv = mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="'.$filename.'.csv"');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: '. strlen($encoded_csv));
+        echo chr(255) . chr(254) . $encoded_csv;
+        exit;
+      }
+
 }

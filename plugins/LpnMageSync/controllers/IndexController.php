@@ -59,9 +59,6 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 	    	
 	    	  $content = \Pimcore\Tool::getHttpData($url,$params);
 
-       
-
-
           // Pour le workflow management,
           // On va mettre à jour tous le produits mpour dire qu'ils ont été synchronisés.
           //TODO : on ne gere pas les erreur ...
@@ -92,8 +89,6 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 	    	  	"params" =>serialize($params)
 
 	    	  );
-
-	          
 
        	  }
        	  $this->_helper->json->sendJson($this->response);
@@ -135,11 +130,8 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
     	  	"params" =>serialize($params)
 
     	  );
-
-	          
-
        	  
-       	  $this->_helper->json->sendJson($this->response);
+        $this->_helper->json->sendJson($this->response);
        	  	
     	 
     }

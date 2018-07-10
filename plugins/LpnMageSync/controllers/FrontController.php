@@ -9,8 +9,6 @@ class LpnMageSync_FrontController extends \Pimcore\Controller\Action
         // reachable via http://your.domain/plugin/LpnMageSync/index/index
     }
 
-
-
     //http://pimcore.florent.local/plugin/LpnMageSync/index/load-magento-client/email/florent@lesmecaniques.net
     public function loadMagentoClientAction() {
     	 $this->disableLayout();
@@ -37,7 +35,6 @@ class LpnMageSync_FrontController extends \Pimcore\Controller\Action
     	$xml = $this->getParam("xmlclient");
 
         $data = \Website\Tool\MagentoHelper::createMagentoCustomer($xml);
-
 
     	$response = $this->getResponse();
         $response->setHeader('Content-Type', 'application/json', true);

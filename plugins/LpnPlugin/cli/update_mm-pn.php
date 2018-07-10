@@ -1,0 +1,164 @@
+<?php
+
+
+include(dirname(__FILE__) . "/../../../pimcore/cli/startup.php");
+
+//this is optional, memory limit could be increased further (pimcore default is 1024M)
+ini_set('memory_limit', '1024M');
+ini_set("max_execution_time", "-1");
+
+//execute in admin mode
+define("PIMCORE_ADMIN", true);
+Pimcore::setAdminMode();
+Object_Abstract::setHideUnpublished(false);
+Object_Abstract::setGetInheritedValues(false);
+
+
+
+Pimcore_Model_Cache::disable();
+\Pimcore\Model\Version::disable();
+
+$conditionFilters = array(
+    "o_path LIKE '/catalogue/_product_base__/01massif/tmp/mm-pn%'",
+    "ean IS NOT NULL"
+);
+
+
+$list = new Pimcore\Model\Object\Product\Listing();
+$list->setUnpublished(true);
+$list->setCondition(implode(" AND ", $conditionFilters));
+//$list->setOrder("ASC");
+//$list->setOrderKey("o_id");
+
+$list->setOrder("DESC");
+$list->setOrderKey("o_id");
+
+$list->load();
+
+$objects = array();
+ echo "objects in list ".count($list->getObjects())."\n";
+//Logger::debug("objects in list:" . count($list->getObjects()));
+
+foreach ($list->getObjects() as $object) {
+
+    if(!($object instanceof Object_Product))
+        continue;
+    
+
+    $inheritance = Object_Abstract::doGetInheritedValues(); 
+    Object_Abstract::setGetInheritedValues(false); 
+
+
+    $scienergieCourt    = $object->name_scienergie_court;
+    $scienergie         = $object->name_scienergie;
+    $code               = $article    = $object->code;
+    $ean                = $object->ean;
+    $parent             = $object->getParent();
+    $essence            = $object->getEssence();
+    $longueur            = $object->getLongueur();
+   
+
+
+   $longueur_txt = "";
+
+   //CHENE
+
+   if($essence == "CHE") {
+        switch ($object->getEpaisseur()) {
+            case '22':
+                
+                $object->setEpaisseurUsure('6 mm');
+                 break;
+
+            case '28':
+                
+                $object->setEpaisseurUsure('8 mm');
+                break;
+
+            case '30':
+                
+                $object->setEpaisseurUsure('12 mm');
+                break;
+           
+            default:
+                # code...
+                break;
+        }
+
+
+        $longueur_min = 0;
+        $longueur_max = 0;
+        $isVariable = false;
+        //Longeurs fixes
+        if(stristr($code,"mv")) {
+
+            $isVariable = true;
+  
+        }
+
+        switch ($longueur) {
+           
+            case 3300:
+                $longueur_min = 1200;
+                $longueur_max = 3300;
+                break;
+
+            case 5000:
+                $longueur_min = 2000;
+                $longueur_max = 5000;
+                break;
+
+            case 4000:
+                $longueur_min = 1000;
+                $longueur_max = 4000;
+                break;
+
+            case 6000:
+                $longueur_min = 1000;
+                $longueur_max = 6000;
+                break;
+
+            case 8000:
+                $longueur_min = 6500;
+                $longueur_max = 8000;
+                break;
+
+            case 12000:
+                $longueur_min = 8500;
+                $longueur_max = 12000;
+                break; 
+     
+        }
+
+        if($longueur_min>0) {
+            $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x".$longueur_min."-".$longueur_max." ".($isVariable?"variables":"fixes")."");
+            $object->setValue("longueur_txt","Longeurs ".($isVariable?"variables":"fixes")." de ".$longueur_min." à ".$longueur_max." mm");
+        }
+
+        $object->setValue('chanfreins',"2");
+
+        /*
+        $parent->setChauffantBasseTemperature("1");
+        $parent->setChauffantRadiantElectrique("1");
+        $parent->setSolRaffraichissant("0");
+
+        $object->setChauffantBasseTemperature("");
+        $object->setChauffantRadiantElectrique("");
+        $object->setSolRaffraichissant("");
+        */
+
+
+   }
+   //FIN CHENE
+
+    $object->save();
+    
+    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+        
+
+}
+
+
+ Object_Abstract::setGetInheritedValues($inheritance); 
+\Pimcore\Model\Version::enable();
+?>

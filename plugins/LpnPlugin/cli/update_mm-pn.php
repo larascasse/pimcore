@@ -247,6 +247,14 @@ foreach ($list->getObjects() as $object) {
                     
                     
                 }
+
+                if($object->getEpaisseur() == 20) {
+
+                    $longueur_min = 1000;
+                    $longueur_max = 5000;
+                    
+                    
+                }
                 break;
 
             case 7000:

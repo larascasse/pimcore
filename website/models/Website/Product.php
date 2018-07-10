@@ -3271,7 +3271,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
     	$short_name = str_ireplace("massif", "", $short_name);
-    	$short_name = str_ireplace("  ", " ", $short_name);
+    	$short_name = str_ireplace("chêne", "", $short_name);
+    	$short_name = str_ireplace("chene", "", $short_name);
+    	$short_name = str_ireplace("chene", "", $short_name);
+    	$short_name = trim($short_name);
+    	$short_name = ucfirst($short_name);
 
     	/*if($this->getColisage() !=1 && $this->getColisage() !=0 )
     		$short_name .= " (colisage :".$this->getColisage().")";

@@ -44,7 +44,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		$objects = array();
 		 //echo "objects in list ".count($list->getObjects())."\n";
 		//Logger::debug("objects in list:" . count($list->getObjects()));
-		$header = $fieldsToExport=array("ean","name_scienergie","name_scienergie_court","pimonly_print_label");
+		$header = $fieldsToExport=array("code","ean","pimonly_print_label","colisage","name_scienergie","name_scienergie_court");
 
 		$rows=array();
 

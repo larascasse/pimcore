@@ -98,9 +98,24 @@ foreach ($list->getObjects() as $object) {
 
         switch ($longueur) {
            
+            case 1800:
+                $longueur_min = 1000;
+                $longueur_max = 1800;
+                break;
+
             case 3300:
                 $longueur_min = 1200;
                 $longueur_max = 3300;
+                break;
+
+             case 4000:
+                $longueur_min = 1000;
+                $longueur_max = 4000;
+                break;
+
+             case 4800:
+                $longueur_min = 3600;
+                $longueur_max = 4800;
                 break;
 
             case 5000:
@@ -108,19 +123,51 @@ foreach ($list->getObjects() as $object) {
                 $longueur_max = 5000;
                 break;
 
-            case 4000:
-                $longueur_min = 1000;
-                $longueur_max = 4000;
-                break;
+           
 
             case 6000:
                 $longueur_min = 1000;
                 $longueur_max = 6000;
+
+                if(!$isVariable) {
+
+                    if($object->getEpaisseur()==22) {
+                        
+                        $longueur_min = 5100;
+                        $longueur_max = 6000;
+                    }
+                    else {
+                        
+                        $longueur_min = 4500;
+                        $longueur_max = 6000;
+                    }
+                    
+                }
+                break;
+
+            case 7000:
+                $longueur_min = 6500;
+                $longueur_max = 7000;
                 break;
 
             case 8000:
                 $longueur_min = 6500;
                 $longueur_max = 8000;
+
+                if($object->getEpaisseur()==22) {
+                        
+                        $longueur_min = 7500;
+                        $longueur_max = 8000;
+                    }
+                    else {
+                        
+                        $longueur_min = 6500;
+                        $longueur_max = 8000;
+                    }
+
+
+                
+
                 break;
 
             case 12000:

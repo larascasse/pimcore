@@ -89,7 +89,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		      // $row[] = 'https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 		    
 		        $rows[] = $row;
-		        echo implode(";", $row)."\n";
+		        //echo implode(";", $row)."\n";
 
 		        
 		    }

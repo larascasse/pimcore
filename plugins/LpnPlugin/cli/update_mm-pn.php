@@ -147,13 +147,14 @@ foreach ($list->getObjects() as $object) {
         $object->setSolRaffraichissant("");
         */
 
+        $object->save();
+    
+        echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 
    }
    //FIN CHENE
 
-    $object->save();
     
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         
 
 }

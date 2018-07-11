@@ -289,6 +289,42 @@ foreach ($list->getObjects() as $object) {
 
         $object->setValue('chanfreins',"2");
 
+        $values = array();
+    
+    $values['lesplus']='';
+    $values['catalogue']='';
+    $values['subtype']='';
+    $values['leadtime']='';
+    $values['shipping_type']='';
+    $values['characteristics_others']='';
+    $values['origine_bois']='';
+    $values['country_of_manufacture']='';
+    $values['norme_sanitaire']='';
+    $values['support']='';
+    $values['pefc']='';
+    $values['meta_title']='';
+    $values['meta_description']='';
+    $values['no_stock_delay']='';
+    $values['meta_title']='';
+    $values['meta_description']='';
+    $values['image_1']='';
+    $values['image_2']='';
+    $values['image_3']='';
+    $values['characteristics_others']='';
+    $values['characteristics_others_tech']='';
+    $values['characteristics_others_perf']='';
+    $values['associatedArticles']=array();
+    $values['pimonly_category_pose']=null;
+    $values['pimonly_category_finition']=null;
+    $values['pimonly_category_entretien']=null;
+    $values['re_skus']=null;
+    $values['cs_skus']=null;
+    $values['fiche_technique_lpn']=null;
+    $values['fiche_technique_orginale']=null;
+    $values['fiche_securite']=null;
+    $values['realisations']=null;
+    $objectToSave->setValues($values);
+
         /*
         $parent->setChauffantBasseTemperature("1");
         $parent->setChauffantRadiantElectrique("1");

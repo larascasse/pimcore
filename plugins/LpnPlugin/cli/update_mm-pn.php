@@ -323,7 +323,7 @@ foreach ($list->getObjects() as $object) {
     $values['fiche_technique_orginale']=null;
     $values['fiche_securite']=null;
     $values['realisations']=null;
-    $objectToSave->setValues($values);
+    $object->setValues($values);
 
         /*
         $parent->setChauffantBasseTemperature("1");

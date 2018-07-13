@@ -27,7 +27,6 @@ class LpnPlugin_AdminController extends \Pimcore\Controller\Action\Admin {
             'phoneNumber' => '0987654321',
             'address'     => '45 Newington Heights'
         );
-
         
     }
 
@@ -35,8 +34,10 @@ class LpnPlugin_AdminController extends \Pimcore\Controller\Action\Admin {
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212
 https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?ean=8021704502128
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=315189712
-http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?endswith
-http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startswith=FMBAMG4CVCIBTMO
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?endswith
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?ean=12121212
+http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startswith=FMBAMG4CVCIBTMO
 http://pimcore.florent.local/plugin/LpnPlugin/admin/import-from-azure?startsendswith=FM%MO&nonactif=1
 https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?startsendswith=MMBAMCHPR0%MO&nonactif=1
 https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?startsendswith=R%EU%MO&nonactif=1
@@ -55,9 +56,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
 
-        //POST from sceinergie
-        $xml = $this->getParam('xml');
-
+    
         $svc = new LPNEntities(LPN_SERVICE_URL);    
 
 
@@ -69,20 +68,25 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
           $query = getQuery($svc,"ean",$this->getParam("ean"),0,false);
           $forceCreateNonActifWeb=true;
         }
+
         else if(($this->getParam("endswith"))) {
           $query = getQuery($svc,"ean-by-endscode",array("famille"=>$famille,"code"=>$this->getParam("endswith")),0,false);
           $forceCreateNonActifWeb=($this->getParam("nonactif"))?true:false;
         }
+
         else if(($this->getParam("startswith"))) {
           $query = getQuery($svc,"ean-by-startscode",array("famille"=>$famille,"code"=>$this->getParam("startswith")),0,false);
           $forceCreateNonActifWeb=($this->getParam("nonactif"))?true:false;
         }
+
         else if(($this->getParam("startsendswith"))) {
           $query = getQuery($svc,"ean-by-endsstartscode",array("famille"=>$famille,"code"=>$this->getParam("startsendswith")),0,false);
           $forceCreateNonActifWeb=($this->getParam("nonactif"))?true:false;
         }
+
         else {
           $query = getQuery($svc,"ean-by-famille",$famille,0,false);
+          $forceCreateNonActifWeb=($this->getParam("nonactif"))?true:false;
         }
 
         $result = array("status"=>false, "message"=>array());
@@ -96,6 +100,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
 
             $importer = new LpnPlugin_Importer();
             $importer->init();
+            
             do  {
                
                 if($nextProductToken != null) {            
@@ -110,6 +115,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
                     $returnMessage = $importer->importProduct($p,$forceCreateNonActifWeb);
 
                     if(is_array($returnMessage)) {
+                        
                         $result["status"] = true;
 
                         $returnMessages[] = $returnMessage;
@@ -117,11 +123,9 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
                         $returnMessage['product'] = null;
                         $result["message"][] = $returnMessage;
 
-
                     }
                   
                     //$importer->clearInheritedValues($p);
-                  
                 }
             
             }

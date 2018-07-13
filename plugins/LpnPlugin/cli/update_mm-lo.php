@@ -87,6 +87,9 @@ foreach ($list->getObjects() as $object) {
         
             $object->setEpaisseurUsure('9 mm');
             $object->setPose(array('aclouer','acoller'));
+            if($this->getPimonly_classe_utilisation()=="") {
+                $this->setValue('pimonly_classe_utilisation',41);
+            }
 
             break;
 
@@ -96,6 +99,9 @@ foreach ($list->getObjects() as $object) {
         
             $object->setEpaisseurUsure('6 mm');
             $object->setPose(array('acoller'));
+            if($this->getPimonly_classe_utilisation()=="") {
+                $this->setValue('pimonly_classe_utilisation',34);
+            }
 
             break;
 
@@ -104,6 +110,9 @@ foreach ($list->getObjects() as $object) {
             
             $object->setEpaisseurUsure('7 mm');
             $object->setPose(array('acoller'));
+            if($this->getPimonly_classe_utilisation()=="") {
+                $this->setValue('pimonly_classe_utilisation',31);
+            }
 
             break;
 

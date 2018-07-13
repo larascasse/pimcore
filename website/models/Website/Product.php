@@ -2571,6 +2571,10 @@ Ex : Salles polyvalentes, restaurants d'entreprise, aérogares, salles de classe
 
 	public function getCalculatedClasseUtilisation() {
 
+		if($this->getPimonly_classe_utilisation()>0) {
+			return $this->getPimonly_classe_utilisation();
+		}
+
 		if(strlen($this->getClasse())>0)
 			return $this->getClasse();
 		 

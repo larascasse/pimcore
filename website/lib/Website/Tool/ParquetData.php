@@ -324,6 +324,7 @@ Conductivité thermique du bois (λ en w / m. K)
           break;
 
         case 'NOY':
+        case 'NOA':
           return "Noyer : radial=0,09 et tangentiel=0,14";
           break;
 
@@ -359,9 +360,7 @@ Conductivité thermique du bois (λ en w / m. K)
           return "Doussié : radial=0,12 et tangentiel=0,20";
           break;
 
-        case 'DOU':
-          return "Doussié : radial=0,12 et tangentiel=0,20";
-          break;
+  
 
 
 

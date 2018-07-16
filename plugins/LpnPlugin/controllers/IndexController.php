@@ -45,6 +45,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		$objects = array();
 		 //echo "objects in list ".count($list->getObjects())."\n";
 		//Logger::debug("objects in list:" . count($list->getObjects()));
+		//$header = $fieldsToExport=array("code","ean","pimonly_print_label","colisage","name_scienergie","name_scienergie_court","epaisseur","largeur","longueurs","weight");
 		$header = $fieldsToExport=array("code","ean","pimonly_print_label","colisage","name_scienergie","name_scienergie_court","epaisseur","largeur","longueurs","weight");
 
 		$rows=array();
@@ -111,7 +112,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
     }
 
       public  function toCSV($header, $data, $filename) {
-        $sep  = "\t";
+        $sep  = ";";
         $eol  = "\n";
         $csv  =  count($header) ? '"'. implode('"'.$sep.'"', $header).'"'.$eol : '';
         foreach($data as $line) {

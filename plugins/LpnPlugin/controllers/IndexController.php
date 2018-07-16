@@ -18,6 +18,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
     }
 
     //http://pimcore.florent.local/plugin/LpnPlugin/index/export-print-labels
+    //http://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/index/export-print-labels
 
     public function exportPrintLabelsAction() {
     	ini_set('memory_limit', '1024M');
@@ -44,7 +45,7 @@ class LpnPlugin_IndexController extends Pimcore_Controller_Action {
 		$objects = array();
 		 //echo "objects in list ".count($list->getObjects())."\n";
 		//Logger::debug("objects in list:" . count($list->getObjects()));
-		$header = $fieldsToExport=array("code","ean","pimonly_print_label","colisage","name_scienergie","name_scienergie_court");
+		$header = $fieldsToExport=array("code","ean","pimonly_print_label","colisage","name_scienergie","name_scienergie_court","epaisseur","largeur","longueurs","weight");
 
 		$rows=array();
 

@@ -23,6 +23,8 @@ class ProductHelper
         $configurableFields =array("volume",/*"choix",*/"finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_1","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
         $latestChild = null;
 
+        $ignoreFields = array();
+
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
 
         foreach ($childrenSkus as $childId) {
@@ -51,7 +53,10 @@ class ProductHelper
                     $value =  $child[$key];
 
 
-                    if((isset($child[$key.'_not_configurable']) && $child[$key.'_not_configurable']) || $value=="") {
+                    if(
+                        (isset($child[$key.'_not_configurable']) && $child[$key.'_not_configurable']) 
+                        || $value=="" ) {
+                        $ignoreFields[] = $key;
                         continue;
                     }
 
@@ -95,6 +100,7 @@ class ProductHelper
 
                     $mustRegisterAttributeName = $latestChild 
                                             && in_array($key, $configurableFields) 
+                                            && !in_array($key, $ignoreFields)
                                             &&  isset($child[$key]) 
                                             && ($child[$key] != $latestChild[$key]);
 
@@ -142,6 +148,8 @@ class ProductHelper
 
 
 
+        //on eneleve les elements non configurables
+        $configurableFields = array_diff( $configurableFields, $ignoreFields);
        
         $childConfigurableFields = array_merge(
             array_intersect($order, $childConfigurableFields), 

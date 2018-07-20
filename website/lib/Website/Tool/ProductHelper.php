@@ -144,7 +144,7 @@ class ProductHelper
         }
 
         //On ordonne suivant le tableau suivant :
-        $order = array('motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt','largeur','largeur_txt','longueur','longueur_txt');
+        $order = array('subtype','motifString','fixation','choixString','finitionString','supportString','traitement_surfaceString','epaisseur','epaisseur_txt','largeur','largeur_txt','longueur','longueur_txt','subtype');
 
 
 

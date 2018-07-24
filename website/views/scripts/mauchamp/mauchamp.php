@@ -13,7 +13,6 @@ $showCheckbox = true;
 
 if(is_object($this->transport)) {
 
-
   echo $this->template("transport/inc-transport-detail.php",array(
     "transport"=>$this->transport,
     "notes" => $this->notes,
@@ -209,6 +208,10 @@ function showEmbededPdf(pdfUrl) {
 <?php
 $hasOnePose = false;
 $hasOnePhoto = false;
+
+if(!is_array($this->products)) {
+  $this->products = array();
+}
 
 foreach ($this->products as $product) {
 

@@ -96,16 +96,22 @@ if($this->editmode)
     );
 
     } else { 
-        $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
+        
+        if($this->image("image") ) {
+             $urlImage =  $this->image("image")->getThumbnail("magento_selection")->getPath();
+             echo '<img src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'" class="" />';
+        }
+       
 
-        echo '<img src="'.$urlImage.'" title="'.$this->image("image")->getText().'" alt="'.$this->image("image")->getAlt().'" class="" />';
+        
     }
     ?>
                     </div>
                     <div class="roll_selection<?= $classNoRoll?> centeredcontent"><?php 
 
                     echo $name.'<br />';
-                    echo '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'"}}';
+                    if(strlen($ean)>0) 
+                        echo '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$ean.'" product_sku="'.$ean.'"}}';
                 
            ?>
                     </div>

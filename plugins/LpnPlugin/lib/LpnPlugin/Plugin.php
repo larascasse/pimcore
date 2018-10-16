@@ -201,8 +201,8 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             
             // ...
         });
-
-        $returnValueContainer->setData($data);
+        if($returnValueContainer)
+            $returnValueContainer->setData($data);
 
     }
 

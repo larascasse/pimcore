@@ -27,10 +27,12 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
        	  if(!$product instanceof Object_Product) {
        	  	 $this->response = array("message"=>"Produit inconnu");
+             return;
        	  }
        	  
        	  else {
        	  	  $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
+
 	    	  $params = array();
 
 	    	  $params["time"] = time();
@@ -78,7 +80,16 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               }
           }
 
-          \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products);
+          $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(object2array($page));
+          \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
+                "returnValueContainer" => $returnValueContainer
+            ]);
+
+          $workflowReturn = $returnValueContainer->getData();
+
+          if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+            $content += $workflowReturn["message"];
+          }
 	    	
 	    	  $this->response = array(
 	    	  	"success" => "true", 

@@ -40,7 +40,7 @@ foreach ($results as $result) {
 
 echo count($eans)." à synchroniser\n";
 if(count($eans)>0) {
-   $url = "http://magento.florent.local/LPN/get_a_product_magmi.php";
+   $url = "http://lpn.local/LPN/get_a_product_magmi.php";
    $params = ["ean"=>implode(",", $eans)];
    //print_r($params);
     $content = \Pimcore\Tool::getHttpData($url,null,$params);
@@ -55,8 +55,18 @@ foreach ($cids as $productId) {
   if($product instanceof Website_Product) 
     $products[] = $product;
 }
-if(count($products)>0)
-  \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products);
+if(count($products)>0) {
+    $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(object2array($page));
+    \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
+          "returnValueContainer" => $returnValueContainer
+      ]);
+
+    $workflowReturn = $returnValueContainer->getData();
+
+    if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+      $content += $workflowReturn["message"];
+    }
+}
 
 
 

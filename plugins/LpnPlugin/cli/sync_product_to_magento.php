@@ -56,7 +56,7 @@ foreach ($cids as $productId) {
     $products[] = $product;
 }
 if(count($products)>0) {
-    $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(object2array($page));
+    $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer();
     \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
           "returnValueContainer" => $returnValueContainer
       ]);

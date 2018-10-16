@@ -38,6 +38,7 @@ class ProductHelper
 
             foreach ($fields as $field) {
                 //echo $field->name."\n";
+                //On devrait virer les obsoletes
                 if(in_array($field->name,$configurableFields)) {
                   $child[$field->name] = $field->getForCsvExport($childProduct);
                 }

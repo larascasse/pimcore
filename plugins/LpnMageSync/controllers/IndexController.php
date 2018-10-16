@@ -80,7 +80,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               }
           }
 
-          $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(object2array($page));
+          $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer();
           \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
                 "returnValueContainer" => $returnValueContainer
             ]);

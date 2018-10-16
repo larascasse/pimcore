@@ -30,6 +30,8 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
         \Pimcore::getEventManager()->attach("lpn.azure.postUpdate", function (\Zend_EventManager_Event $e) {
             $returnMessages = $e->getTarget();
+
+            $returnValueContainer = $e->getParam('returnValueContainer');
      
 
             $productIds = [];
@@ -39,6 +41,12 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             $action = "settomagentosync";
             $newState = "needs_magento_sync";
             $newStatus = "content_needs_magento_sync";
+
+              $data = [
+                'success' => true,
+                 'message' => 'no workflow update',
+
+            ];
 
 
 
@@ -66,35 +74,45 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                    
 
-                    if ($manager->validateAction($action, $newState, $newStatus)) {
+                    try {
+                        if ($manager->validateAction($action, $newState, $newStatus)) {
 
-                        //perform the action on the element
-                        try {
-                            $manager->performAction($action,["newState"=>$newState,"newStatus"=>$newStatus]);
-                            $data = [
-                                'success' => true,
-                                'callback' => 'reloadObject'
-                            ];
-                        } catch (\Exception $e) {
+                            //perform the action on the element
+                            try {
+                                $manager->performAction($action,["newState"=>$newState,"newStatus"=>$newStatus]);
+                                $data = [
+                                    'success' => true,
+                                    'callback' => 'reloadObject'
+                                ];
+                            } catch (\Exception $e) {
+                                $data = [
+                                    'success' => false,
+                                    'message' => 'error performing action on this element',
+                                    'reason' => $e->getMessage()
+                                ];
+                            }
+
+                        } 
+                        else {
                             $data = [
                                 'success' => false,
-                                'message' => 'error performing action on this element',
-                                'reason' => $e->getMessage()
+                                'message' => 'error validating the action on this element, element cannot peform this action',
+                                'reason' => $manager->getError()
                             ];
                         }
-
-                    } 
-                    else {
+                    }
+                    catch (\Exception $e) {
                         $data = [
                             'success' => false,
-                            'message' => 'error validating the action on this element, element cannot peform this action',
-                            'reason' => $manager->getError()
+                            'message' => 'error performing validate action on this element action:'.$action." newState:".$newState." newStatus:".$newStatus,
+                            'reason' => $e->getMessage()
                         ];
                     }
-
                 }
               
             }
+
+            //$returnValueContainer->setData($data);
             print_r($data);
             //print_r($productIds);
             //print_r($productSkus);

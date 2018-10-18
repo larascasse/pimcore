@@ -386,8 +386,21 @@ class MauchampController extends Action
                 exit;
          }
 
+         $returnMessageAlert = "Mail envoyé, chouette !";
+         if($this->getParam("from-email") == 'damien@lp-nouvelle.fr') {
+            $returnMessageAlert = 'Mail envoyé. Rrrrrigolo ... Essaie de la sortir celle la.';
+         }
+         elseif($this->getParam("from-email") == 'pascal@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé. C\'est beau ça !!';
+           
+         }
+         elseif($this->getParam("from-email") == 'isabelle@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé. Bravo zezette !!';
+           
+         }
+
          header('Content-Type: application/json');
-         echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?"Mail envoyé, chouette !":"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
+         echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?$returnMessageAlert:"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));
          die;
       
 

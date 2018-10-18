@@ -398,6 +398,10 @@ class MauchampController extends Action
               $returnMessageAlert = 'Mail envoyé. Bravo zezette !!';
            
          }
+         elseif($this->getParam("from-email") == 'florent@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé. Bravo bibi !!';
+           
+         }
 
          header('Content-Type: application/json');
          echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?$returnMessageAlert:"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));

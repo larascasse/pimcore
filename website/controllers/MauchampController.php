@@ -402,6 +402,22 @@ class MauchampController extends Action
               $returnMessageAlert = 'Mail envoyé. Bravo bibi !!';
            
          }
+         elseif($this->getParam("from-email") == 'ingrid@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé. David donnera bon tarif ce soir !!';
+           
+         }
+         elseif($this->getParam("from-email") == 'nicolas@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès à Audrey des Buttes Chaumont.';
+           
+         }
+         elseif($this->getParam("from-email") == 'jose@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès. On ne tond pas un oeuf !';
+           
+         }
+         elseif($this->getParam("from-email") == 'msaidani@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès.';
+           
+         }
 
          header('Content-Type: application/json');
          echo json_encode(array("message"=>  $this->getParam('sendmail')=="true"?$returnMessageAlert:"Pdf crée.. Top!","pdfFileUrl"=>$pdfFileUrl));

@@ -1,29 +1,50 @@
 /* DYMO */
-@media print {
-  @page {
-    margin: 0;
-    padding: 0;
-    width: 252px;
-    height: 81px;
-    background-color: #FF0000;
-    size: landscape; }
-  @page {
-    size: 28mm 85mm portait;
-    margin: 0mm; }
-  html, body {
-    width: 252px;
-    height: 81px;
-    margin: 0;
-    padding: 0; }
-  .container {
-    min-width: initial !important; }
-  .btn {
-    display: none; }
-  .small_label {
-    margin: 0 !important; }
-  img, tr {
-    page-break-inside: initial; } }
+/*@media print {
+	
+	
+	
+	@page {
+		margin:0;
+		padding:0;
+		width: $etiquetteWidth;
+		height:$etiquetteHeight;
+		background-color: #FF0000;
+		size: landscape;
 
+
+	}
+
+	@page {
+      size: 28mm 85mm portait;
+      margin: 0mm;
+  }
+
+	html,body{
+		width: $etiquetteWidth;
+		height:$etiquetteHeight;
+		margin:0;
+		padding:0;
+		//min-width: initial !important; 
+	}
+
+	
+	.container {
+		 min-width: initial !important;
+	}
+	.btn {
+		display: none;
+	}
+
+	.small_label {
+		margin:0 !important;
+
+	}
+	img, tr {
+	    page-break-inside: initial;
+	}
+
+}
+*/
 a[x-apple-data-detectors] {
   color: inherit !important;
   text-decoration: none !important;

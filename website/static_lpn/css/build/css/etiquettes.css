@@ -54,26 +54,35 @@ body {
 	-moz-transform:rotate(-90deg) scale(1,1);*/ }
 
 .big_label {
-  padding: 30px; }
-  .big_label .p-name {
-    font-size: 3em;
-    padding-top: 1em;
-    line-height: 1;
-    font-weight: bold; }
+  padding: 30px;
+  height: 700px;
+  position: relative;
+  page-break-after: always; }
+  .big_label .p-name, .big_label .p-ean {
+    font-size: 5.7em;
+    padding-top: 0.2em;
+    line-height: 1.1;
+    font-weight: bold;
+    text-transform: uppercase; }
   .big_label .p-dimensions {
     padding-top: 1em;
     font-size: 3em;
     font-weight: bold; }
   .big_label .p-ean {
-    padding-top: 1em;
-    font-size: 2.5em;
-    font-weight: bold; }
+    padding-top: 0.6em;
+    font-weight: normal; }
   .big_label .p-logo {
     padding-top: 1em;
     float: right;
-    position: abolute;
+    position: absolute;
     top: 90%;
     right: 30px; }
+  .big_label .p-barcode {
+    padding-top: 1em;
+    float: left;
+    position: absolute;
+    top: 88%;
+    left: 30px; }
   .big_label .p-dimensions {
     display: none; }
 

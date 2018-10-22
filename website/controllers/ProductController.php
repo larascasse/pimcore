@@ -779,7 +779,7 @@ class ProductController extends Action
 
 
 
-        else if(isset($productId)) {
+        else if(isset($productId) && strlen($productId)>0) {
             $product = Object_Product::getById($this->getParam("id"));
              if(!$product instanceof Object_Product) {
 
@@ -793,7 +793,7 @@ class ProductController extends Action
         }
 
 
-        else if(isset($productEan)) {
+        else if(isset($productEan)  && strlen($productEan)>0 ) {
              Object\AbstractObject::setHideUnpublished(false);
              $product = Object_Product::getByEan($productEan, 1);
              

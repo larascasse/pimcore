@@ -19,7 +19,7 @@ if(isset($this->message)) {
 ?>
 
 <?php
-if (!isset($product) && !isset($order) ) {
+if (!isset($product) && !isset($order)) {
 ?>
 
 
@@ -28,6 +28,9 @@ if (!isset($product) && !isset($order) ) {
 <h2>Etiquette</h2>
 <form>
 <div class="form-group">
+<form>
+<input type="hidden" name="action" value="print-depot-label" \>
+<input type="hidden" name="controller" value="product" \>
 <input class="form-control form-control-lg" name="ean" type="text" placeholder="EAN" value="<?php echo isset($this->ean)?$this->ean:""?>">
 </div>
 <button type="submit" name="format"  value="small_label" class="btn btn-primary btn-lg">Petite etiquette</button>
@@ -49,14 +52,17 @@ elseif (isset($product)) {
 var labelContent = new Array();
 	
 </script>
-<input type="button" class="btn" onclick="printLabelSmallEtiquette(labelContent);" value="Print">
-<input type="button" class="btn" onclick="test();" value="Test.." />
 
 
+
+<script type="text/javascript">
+	var labelContent = new Array();
+</script>
+<?php for ($i=0; $i < 2; $i++) {  ?>
 
 <script>
 // first label
-var labelContent = new Array();
+
 labelContent.push({
 	texte :  "<?php echo $productName  ?>",
 	codebarre : "<?php echo $product->getEan()?>"}
@@ -64,7 +70,6 @@ labelContent.push({
 
 </script>
 
-<?php for ($i=0; $i < 1; $i++) {  ?>
 <div class="landscape <?php echo $this->format ?>">
 <div>
 <div class="p-row">
@@ -94,12 +99,13 @@ if (strlen($subtitle)>0) {
 $barcodeOptions = array(
 	'text' => $product->getEan(),
 	//'barHeight' => 100,
-	'barHeight' => 20,
+	'barHeight' => 40,
 	'fontSize' => 15,
-	'barThickWidth' => 2,
-	'barThinWidth' => 1,
+	'barThickWidth' => 4,
+	'barThinWidth' => 2,
 	'factor' => 1,
-	'stretchText' => true
+	'stretchText' => true,
+	'drawText' => false
 
 
 );
@@ -119,8 +125,9 @@ $httpFile = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],
 	<div class="p-logo">
 <?php echo $this->template("includes/logo_1l_small_svg.php"); ?>
 </div>
-
-<img src="<?php //echo $httpFile?>" />
+<div class="p-barcode">
+<img src="<?php echo $httpFile?>" />
+</div>
 </div>
 </div>
 </div>

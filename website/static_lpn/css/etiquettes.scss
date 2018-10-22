@@ -90,11 +90,14 @@ body {
 
 .big_label {
 	padding: 30px;
-	.p-name {
-		font-size: 3em;
-		padding-top: 1em;
-		line-height: 1;
+	height: 700px;
+	position: relative;
+	.p-name,.p-ean {
+		font-size: 5.7em;
+		padding-top: 0.2em;
+		line-height: 1.1;
 		font-weight: bold;
+		text-transform: uppercase;
 	}
 	.p-dimensions{
 		padding-top: 1em;
@@ -102,18 +105,31 @@ body {
 		font-weight: bold;
 	} 
 	.p-ean{
-		padding-top: 1em;
-		font-size: 2.5em;
-		font-weight: bold;
+		padding-top: 0.6em;
+		font-weight: normal;
 	} 
 	.p-logo{
 		padding-top: 1em;
 		float: right;
-		position: abolute;
+		position: absolute;
 		top: 90%;
 		right: 30px;
 
 	}
+
+	.p-barcode{
+		padding-top: 1em;
+		float: left;
+		position: absolute;
+		top: 88%;
+		left: 30px;
+
+	}
+
+	.p-dimensions {
+		display: none;
+	}
+	page-break-after: always;
 }
 
 .small_label {

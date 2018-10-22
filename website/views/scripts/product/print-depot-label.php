@@ -33,7 +33,7 @@ if (!isset($product) && !isset($order)) {
 <input type="hidden" name="controller" value="product" \>
 <input class="form-control form-control-lg" name="ean" type="text" placeholder="EAN" value="<?php echo isset($this->ean)?$this->ean:""?>">
 </div>
-<button type="submit" name="format"  value="small_label" class="btn btn-primary btn-lg">Petite etiquette</button>
+<button type="submit" name="format"  disabled value="small_label" class="btn btn-primary btn-lg">Petite etiquette</button>
 <button type="submit" name="format"  value="big_label" class="btn btn-primary btn-lg">Grosse etiquette</button>
 </form>
 </div>

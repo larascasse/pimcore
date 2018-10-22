@@ -3268,7 +3268,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
     public function getPimonly_print_label() {
     	$teinteName = $this->getMage_teinte();
-    	$short_name = $this->getMage_short_name();
+    	$short_name = $this->getMage_short_name(500);
 
     	$short_name = str_ireplace("Parquet ", "", $short_name);
     	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
@@ -3281,8 +3281,12 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("chene", "", $short_name);
 
 
-    	
-    	
+    	//Terrasse
+    	$short_name = str_ireplace("bois composite", "composite", $short_name);
+    	$short_name = str_ireplace("terrasse", "Ter.", $short_name);
+    	$short_name = str_ireplace("monolame ", "", $short_name);
+
+
     	$short_name = trim($short_name);
     	$short_name = ucfirst($short_name);
 

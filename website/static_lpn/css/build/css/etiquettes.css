@@ -80,7 +80,7 @@ a[x-apple-data-detectors] {
       display: none; } }
 
 .big_label {
-  padding: 30px;
+  padding: 0 30px;
   height: 700px;
   position: relative;
   page-break-after: always; }

@@ -8,7 +8,7 @@
     background-color: #FF0000;
     size: landscape; }
   @page {
-    size: 28mm 85mm landscape;
+    size: 28mm 85mm portait;
     margin: 0mm; }
   html, body {
     width: 252px;
@@ -55,7 +55,6 @@ body {
 
 .big_label {
   padding: 30px;
-  width: 500px;
   height: 700px;
   position: relative;
   page-break-after: always; }

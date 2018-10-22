@@ -21,7 +21,7 @@ $etiquetteHeight: 81px;
 	}
 
 	@page {
-      size: 28mm 85mm landscape;
+      size: 28mm 85mm portait;
       margin: 0mm;
   }
 
@@ -90,7 +90,7 @@ body {
 
 .big_label {
 	padding: 30px;
-	width: 500px;
+	//width: 500px;
 	height: 700px;
 	position: relative;
 	.p-name,.p-ean {

@@ -73,9 +73,9 @@ a[x-apple-data-detectors] {
 @media print {
   @page {
     size: portait;
-    margin: 0 -6cm; }
+    margin: -6cm 0; }
   html {
-    margin: 0 6cm; }
+    margin: 6cm 0; }
     html .btn {
       display: none; } }
 

@@ -87,10 +87,10 @@ a[x-apple-data-detectors] {
 	//Fausse marge pour virer les header and footer de chrome
 	@page {
 		size: portait;
-		margin:0 -6cm
+		margin:-6cm 0;
 	}
 	html {
-		margin:0 6cm;
+		margin:6cm 0;
 		.btn {
  			display: none;
  		}

@@ -794,6 +794,7 @@ class ProductController extends Action
 
 
         else if(isset($productEan)) {
+             Object\AbstractObject::setHideUnpublished(false);
              $product = Object_Product::getByEan($productEan, 1);
              
              if(!$product instanceof Object_Product) {

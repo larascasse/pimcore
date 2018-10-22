@@ -58,7 +58,7 @@ var labelContent = new Array();
 <script type="text/javascript">
 	var labelContent = new Array();
 </script>
-<?php for ($i=0; $i < 2; $i++) {  ?>
+<?php for ($i=0; $i < 1; $i++) {  ?>
 
 <script>
 // first label

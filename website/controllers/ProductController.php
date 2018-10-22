@@ -791,12 +791,14 @@ class ProductController extends Action
             }
             $this->view->product = $product;
         }
+
+
         else if(isset($productEan)) {
              $product = Object_Product::getByEan($productEan, 1);
              if(!$product instanceof Object_Product) {
 
                 //On va chercher dans AZURE
-               // echo "loadAzureProduct".$productEan;
+                echo "loadAzureProduct".$productEan;
                 $productValues = \Website\Tool\MauchampHelper::loadAzureProduct($productEan);
                 
                 

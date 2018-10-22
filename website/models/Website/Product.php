@@ -3269,7 +3269,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     public function getPimonly_print_label() {
     	$teinteName = $this->getMage_teinte();
     	
-    	$short_name = $this->getMage_short_name(500)."jj";
+    	$short_name = $this->getMage_short_name(3000)."jj";
 
     	$short_name = str_ireplace("Parquet ", "", $short_name);
     	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);

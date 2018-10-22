@@ -795,6 +795,7 @@ class ProductController extends Action
 
         else if(isset($productEan)) {
              $product = Object_Product::getByEan($productEan, 1);
+             
              if(!$product instanceof Object_Product) {
 
                 //On va chercher dans AZURE
@@ -818,8 +819,10 @@ class ProductController extends Action
 
                 
             }
-            else 
+            else {
+                echo "load Pim Product".$productEan;
                 $this->view->product = $product;
+            }
         }
         //$this->view->attributes = $definition;
 

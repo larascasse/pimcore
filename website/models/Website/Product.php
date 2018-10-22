@@ -3269,7 +3269,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     public function getPimonly_print_label() {
     	$teinteName = $this->getMage_teinte();
     	
-    	$short_name = $this->getMage_short_name(500);
+    	$short_name = $this->getMage_short_name(500)."jj";
 
     	$short_name = str_ireplace("Parquet ", "", $short_name);
     	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
@@ -3289,7 +3289,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
     	$short_name = trim($short_name);
-    	$short_name = ucfirst($short_name);
+    	$short_name = ucfirst($short_name)."uu";
 
     	/*if($this->getColisage() !=1 && $this->getColisage() !=0 )
     		$short_name .= " (colisage :".$this->getColisage().")";

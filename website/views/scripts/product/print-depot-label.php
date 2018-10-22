@@ -41,26 +41,8 @@ if (!isset($product) && !isset($order) ) {
 }
 elseif (isset($product)) {
 	
-	//$productName = $product->getMage_name(3000);
-	$productName = $product->getPimonly_print_label();
-	/*$productName = str_ireplace("parquet ", "", $productName);
-	$productName = str_ireplace("plancher ", "", $productName);
-	$productName = str_ireplace("chene ", "", $productName);
-	$productName = str_ireplace("chêne ", "", $productName);
-	$productName = str_ireplace("monolame ", "", $productName);
-	$productName = str_ireplace("RIVES ABIMEES ", "", $productName);
-	$productName = str_ireplace("PEFC", "", $productName);
-	$productName = str_ireplace("nf ", " ", $productName);
-	$productName = str_ireplace("massif ", " ", $productName);
-	$productName = str_ireplace("contrecolle ", " ", $productName);
-	$productName = str_ireplace("g2 ", " ", $productName);
-	$productName = str_ireplace("teinte ", " ", $productName);
-	$productName = str_ireplace("contemporain ", " ", $productName);
-	$productName = str_ireplace(" - ", " ", $productName);
-	$productName = str_ireplace("  ", " ", $productName);
-	$productName = str_ireplace("( ", "(", $productName);
-	$productName = str_ireplace(" )", ")", $productName);
-	$productName =ucfirst($productName);*/
+	
+	$productName = $product->getPimonly_print_label()."kk";
 ?>
 
 <script>

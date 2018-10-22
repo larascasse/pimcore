@@ -83,6 +83,8 @@ a[x-apple-data-detectors] {
 
 
 @media print{
+
+	//Fausse marge pour virer les header and footer de chrome
 	@page {
 		size: portait;
 		margin:0 -6cm

@@ -55,6 +55,7 @@ body {
 
 .big_label {
   padding: 30px;
+  width: 500px;
   height: 700px;
   position: relative;
   page-break-after: always; }

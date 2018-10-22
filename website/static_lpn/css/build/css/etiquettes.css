@@ -74,6 +74,8 @@ body {
     position: abolute;
     top: 90%;
     right: 30px; }
+  .big_label .p-dimensions {
+    display: none; }
 
 .small_label {
   border: 1px solid #FF0000;

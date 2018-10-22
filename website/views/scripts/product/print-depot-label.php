@@ -42,7 +42,7 @@ if (!isset($product) && !isset($order) ) {
 elseif (isset($product)) {
 	
 	
-	$productName = $product->getPimonly_print_label()."kk";
+	$productName = $product->getPimonly_print_label();
 ?>
 
 <script>

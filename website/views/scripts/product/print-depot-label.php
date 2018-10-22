@@ -42,7 +42,7 @@ if (!isset($product) && !isset($order) ) {
 elseif (isset($product)) {
 	
 	//$productName = $product->getMage_name(3000);
-	$productName = $product->getPimonly_print_label()."jjj";
+	$productName = $product->getPimonly_print_label();
 	/*$productName = str_ireplace("parquet ", "", $productName);
 	$productName = str_ireplace("plancher ", "", $productName);
 	$productName = str_ireplace("chene ", "", $productName);
@@ -82,14 +82,15 @@ labelContent.push({
 
 </script>
 
-<?php for ($i=0; $i < 2; $i++) {  ?>
+<?php for ($i=0; $i < 1; $i++) {  ?>
 <div class="landscape <?php echo $this->format ?>">
 <div>
 <div class="p-row">
 
 <div  class="p-name"><?php echo $productName  ?></div>
+<div  class="p-dimensions"><?php echo $product->getPimonly_dimensions() ?></div>
 <div  class="p-ean"><?php echo $product->getEan() ?></div>
-<div  class="p-dimensions"><strong><?php echo $product->getPimonly_dimensions() ?></strong></div>
+
 
  <?php
 $subtitle = "";//strlen($product->getSku())>0?$product->getSku():"";
@@ -101,7 +102,7 @@ if(strlen($product->name_scienergie_court)) {
 	$subtitle .=" - ". $product->getCode();
 }
 if (strlen($subtitle)>0) {
-	echo $subtitle = '<p class="p-subtitle">'.$subtitle.'</p>';
+	//echo $subtitle = '<p class="p-subtitle">'.$subtitle.'</p>';
 }
 
 ?>

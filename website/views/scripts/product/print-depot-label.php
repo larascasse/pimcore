@@ -144,6 +144,9 @@ $httpFile = \Pimcore\Tool::getHostUrl() . str_replace($_SERVER["DOCUMENT_ROOT"],
 elseif (isset($order)) {
 	
 ?>
+<script type="text/javascript">
+	screen.lockOrientation('portrait');
+</script>
 <style type="text/css" media="print">
 	
 /* DYMO 

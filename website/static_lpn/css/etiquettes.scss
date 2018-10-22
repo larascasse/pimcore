@@ -1,0 +1,172 @@
+/* DYMO */
+
+$etiquetteWidth : 252px;
+$etiquetteHeight: 81px;
+
+
+
+@media print {
+	
+	
+	
+	@page {
+		margin:0;
+		padding:0;
+		width: $etiquetteWidth;
+		height:$etiquetteHeight;
+		background-color: #FF0000;
+		size: landscape;
+
+
+	}
+
+	@page {
+      size: 28mm 85mm landscape;
+      margin: 0mm;
+  }
+
+	html,body{
+		width: $etiquetteWidth;
+		height:$etiquetteHeight;
+		margin:0;
+		padding:0;
+		//min-width: initial !important; 
+	}
+
+	
+	.container {
+		 min-width: initial !important;
+	}
+	.btn {
+		display: none;
+	}
+
+	.small_label {
+		margin:0 !important;
+
+	}
+	img, tr {
+	    page-break-inside: initial;
+	}
+
+}
+
+
+
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+.container {
+	max-width: initial !important;
+	min-width: initial !important;
+	padding-right: 0;
+	padding-left: 0;
+	margin-right: 0;
+	margin-left: 0;
+}  
+
+/*html, body {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    height: 290px;
+    overflow: hidden;
+    background-color: #FF0000;
+}
+*/
+
+body {
+	
+	/*-webkit-transform: rotate(-90deg) scale(1,1)  translate(0%,-200%); 
+	-moz-transform:rotate(-90deg) scale(1,1);*/
+}
+
+
+.small_label {
+	
+	//width : $etiquetteWidth;
+	border: 1px solid #FF0000;
+	//background-color : #0000FF;
+	overflow: hidden;
+	page-break-after: always;
+	page-break-inside: avoid;
+	margin-bottom: 0px;
+	padding: 0;
+	height: ($etiquetteHeight);
+	width: ($etiquetteWidth);
+	font-size: 10px;
+
+	&>div {
+		background-color: #00FF00;
+		display: table;
+		table-layout: fixed;
+		/* height: 800px; */
+		width: $etiquetteWidth;
+		//transform: rotate(90deg) translate(-82px, 0px);
+		//transform-origin: bottom left;
+		height:100%;
+	}
+
+	.p-row {
+		display: table-row;
+	}
+	.p-ean {
+
+		width : 20%;
+		display: table-cell;
+		//float:left;
+		display : none;
+		
+	} 
+	.p-name {
+		display:  table-cell;
+		width: 60%;
+
+	} 
+	.p-dimensions{
+
+		width: 5%;
+		display:  table-cell;
+		//float:left;
+		text-align: center;
+		display: none;
+	} 
+	.p-label {
+		width: 40%;
+		display:  table-cell;
+		//float:left;
+		text-align: right;
+		img {
+			padding-top: 10px;
+			width: 100%;
+    		height: auto;
+		}
+		
+	}
+	.p-logo{
+
+		display: inline-block;
+		display: none;
+
+	}
+	.p-subtitle{
+
+		display: inline-block;
+		display: none;
+
+	}
+
+	
+}
+
+
+
+.big_label {
+	text-align: center;
+}

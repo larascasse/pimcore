@@ -1,0 +1,103 @@
+/* DYMO */
+@media print {
+  @page {
+    margin: 0;
+    padding: 0;
+    width: 252px;
+    height: 81px;
+    background-color: #FF0000;
+    size: landscape; }
+  @page {
+    size: 28mm 85mm landscape;
+    margin: 0mm; }
+  html, body {
+    width: 252px;
+    height: 81px;
+    margin: 0;
+    padding: 0; }
+  .container {
+    min-width: initial !important; }
+  .btn {
+    display: none; }
+  .small_label {
+    margin: 0 !important; }
+  img, tr {
+    page-break-inside: initial; } }
+
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important; }
+
+.container {
+  max-width: initial !important;
+  min-width: initial !important;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0; }
+
+/*html, body {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    height: 290px;
+    overflow: hidden;
+    background-color: #FF0000;
+}
+*/
+body {
+  /*-webkit-transform: rotate(-90deg) scale(1,1)  translate(0%,-200%); 
+	-moz-transform:rotate(-90deg) scale(1,1);*/ }
+
+.small_label {
+  border: 1px solid #FF0000;
+  overflow: hidden;
+  page-break-after: always;
+  page-break-inside: avoid;
+  margin-bottom: 0px;
+  padding: 0;
+  height: 81px;
+  width: 252px;
+  font-size: 10px; }
+  .small_label > div {
+    background-color: #00FF00;
+    display: table;
+    table-layout: fixed;
+    /* height: 800px; */
+    width: 252px;
+    height: 100%; }
+  .small_label .p-row {
+    display: table-row; }
+  .small_label .p-ean {
+    width: 20%;
+    display: table-cell;
+    display: none; }
+  .small_label .p-name {
+    display: table-cell;
+    width: 60%; }
+  .small_label .p-dimensions {
+    width: 5%;
+    display: table-cell;
+    text-align: center;
+    display: none; }
+  .small_label .p-label {
+    width: 40%;
+    display: table-cell;
+    text-align: right; }
+    .small_label .p-label img {
+      padding-top: 10px;
+      width: 100%;
+      height: auto; }
+  .small_label .p-logo {
+    display: inline-block;
+    display: none; }
+  .small_label .p-subtitle {
+    display: inline-block;
+    display: none; }
+
+.big_label {
+  text-align: center; }

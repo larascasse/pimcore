@@ -3279,6 +3279,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("chêne", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
+
+
+    	
+    	
     	$short_name = trim($short_name);
     	$short_name = ucfirst($short_name);
 

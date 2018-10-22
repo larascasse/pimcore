@@ -25,7 +25,7 @@ if (!isset($product) && !isset($order)) {
 
 <div class="page row align-items-center justify-content-center text-center" style="height:250px">
 <div class="col-10">
-<h2>Etiquette</h2>
+<h2>Étiquette</h2>
 <form>
 <div class="form-group">
 <form>

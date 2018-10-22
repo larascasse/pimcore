@@ -71,7 +71,7 @@ labelContent.push({
 
 </script>
 
-<div class="landscape <?php echo $this->format ?>">
+<div class="portrait <?php echo $this->format ?>">
 <div>
 <div class="p-row">
 

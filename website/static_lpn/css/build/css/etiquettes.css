@@ -70,6 +70,20 @@ a[x-apple-data-detectors] {
     background-color: #FF0000;
 }
 */
+@media print {
+  @page {
+    size: portait; } }
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0; } }
+
 body {
   /*-webkit-transform: rotate(-90deg) scale(1,1)  translate(0%,-200%); 
 	-moz-transform:rotate(-90deg) scale(1,1);*/ }

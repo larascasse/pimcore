@@ -735,7 +735,7 @@ class ProductController extends Action
         $this->setLayout("layout-mauchamp-etiquette");
 
         $definition = Object_Class::getByName("Product")->getFieldDefinitions();
-        
+
         
 
         // "id" is the named parameters in "Static Routes"
@@ -782,8 +782,12 @@ class ProductController extends Action
         else if(isset($productId)) {
             $product = Object_Product::getById($this->getParam("id"));
              if(!$product instanceof Object_Product) {
+
+
+                echo "Produit inexistant";
+                die;
                 // this will trigger a 404 error response
-                throw new \Zend_Controller_Router_Exception("invalid request");
+                //throw new \Zend_Controller_Router_Exception("invalid request");
             }
             $this->view->product = $product;
         }
@@ -816,6 +820,7 @@ class ProductController extends Action
                 $this->view->product = $product;
         }
         //$this->view->attributes = $definition;
+
     }
 
     

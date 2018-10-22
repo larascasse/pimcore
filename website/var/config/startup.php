@@ -169,6 +169,16 @@ $routeCustom = new \Zend_Controller_Router_Route(
 $router->addRoute('document-pdf', $routeCustom);
 
 
+$routeCustom = new \Zend_Controller_Router_Route(
+    'depot-label/*', [
+       // 'module' => 't',
+        'controller' => 'product',
+        'action' => 'print-depot-label'
+    ]
+);
+$router->addRoute('depot-label', $routeCustom);
+
+
 $front->setRouter($router);
 
 

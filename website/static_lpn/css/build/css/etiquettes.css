@@ -95,19 +95,19 @@ a[x-apple-data-detectors] {
     font-size: 3em;
     font-weight: bold; }
   .big_label .p-ean {
-    padding-top: 0.6em;
+    padding-top: 0.55em;
     font-weight: normal; }
   .big_label .p-logo {
     padding-top: 1em;
     float: right;
     position: absolute;
-    top: 90%;
+    top: 89%;
     right: 30px; }
   .big_label .p-barcode {
     padding-top: 1em;
     float: left;
     position: absolute;
-    top: 88%;
+    top: 86%;
     left: 30px; }
   .big_label .p-dimensions {
     display: none; }

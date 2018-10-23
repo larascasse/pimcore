@@ -72,12 +72,16 @@ a[x-apple-data-detectors] {
 */
 @media print {
   @page {
-    size: portait;
-    margin: -6cm 0; }
-  html {
-    margin: 6cm 0; }
-    html .btn {
-      display: none; } }
+    size: auto;
+    /* auto is the initial value */
+    margin: 0;
+    /* this affects the margin in the printer settings */ }
+  /*@page {
+		size: portait;
+		margin: -6cm 0;
+	}*/
+  html .btn {
+    display: none; } }
 
 .big_label {
   padding: 0 30px;

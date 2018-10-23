@@ -3275,7 +3275,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	
     	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
 
-    	if(strlen($short_name)>100)
+    	if(strlen($short_name)>60)
         	$short_name = str_ireplace($this->getFinitionString(), "", $short_name);
     	
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);

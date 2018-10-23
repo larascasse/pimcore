@@ -170,7 +170,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setMotif('pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
-        $parent->setValue('longueur_txt','Longueur pointe à pointe '."600"." mm");
+        $parent->setValue('longueur_txt','Longueur pointe à talon '."600"." mm");
 
 
 

@@ -194,8 +194,8 @@ return [
                 ]
             ],
             [
-                "name" => "content_published",
-                "label" => "content_published",
+                "name" => "set_content_published",
+                "label" => "Set Content Published",
                 "transitionTo" => [
                     "done" => [
                         "content_published"
@@ -278,24 +278,24 @@ return [
             ],
             "new" => [
                 "validActions" => [
-                    "content_published" => NULL,
                     "contentsupdated" => NULL,
                     "contents_ready" => NULL,
                     "process" => NULL,
                     "reject" => NULL,
                     "image_missing" => NULL,
                     "settomagentosync" => NULL,
-                    "syncmagento" => NULL
+                    "syncmagento" => NULL,
+                    "set_content_published" => NULL
                 ]
             ],
             "contents_validated" => [
                 "validActions" => [
-                    "content_published" => NULL,
                     "contentsupdated" => NULL,
                     "contents_ready" => NULL,
                     "process" => NULL,
                     "settomagentosync" => NULL,
-                    "syncmagento" => NULL
+                    "syncmagento" => NULL,
+                    "set_content_published" => NULL
                 ]
             ],
             "update_picture" => [
@@ -310,6 +310,11 @@ return [
                 "validActions" => [
                     "content_published" => NULL,
                     "syncmagento" => NULL
+                ]
+            ],
+            "content_published" => [
+                "validActions" => [
+                    "set_content_published" => NULL
                 ]
             ]
         ],
@@ -332,6 +337,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1528452885
+        "modificationDate" => 1540472676
     ]
 ];

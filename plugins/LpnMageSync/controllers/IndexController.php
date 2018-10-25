@@ -1,5 +1,6 @@
 <?php
 
+use Pimcore\Logger;
 
 class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 {
@@ -80,11 +81,15 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               }
           }
 
+          /*Logger::debug("Start wrokflow upfate",$products);
+          echo "Start wrokflow upfate".count($products).$products[2]->getMage_name();
+          die;*/
           $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+
           \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
                 "returnValueContainer" => $returnValueContainer
             ]);
-
+          
           $workflowReturn = $returnValueContainer->getData();
 
           if(is_array($workflowReturn) && isset($workflowReturn["message"])) {

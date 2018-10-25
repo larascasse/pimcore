@@ -130,9 +130,9 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
 
 
-            $action = "content_published";
-            $newState = "done";
-            $newStatus = "content_published";
+            $action     = "set_content_published";
+            $newState   = "done";
+            $newStatus  = "content_published";
 
              $data = [
                 'success' => true,
@@ -150,7 +150,9 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                     $manager = Workflow\Manager\Factory::getManager($product,$user);
 
+
                     try {
+
                         if ($manager->validateAction($action, $newState, $newStatus)) {
 
                             //perform the action on the element
@@ -196,13 +198,11 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             //print_r($productSkus);
             //print_r($productMessages);
 
+            if(is_object($returnValueContainer))
+                $returnValueContainer->setData($data);
 
-            
-            
-            // ...
+
         });
-        if(is_object($returnValueContainer))
-            $returnValueContainer->setData($data);
 
     }
 

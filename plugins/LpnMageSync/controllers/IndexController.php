@@ -89,11 +89,11 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
           \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
                 "returnValueContainer" => $returnValueContainer
             ]);
-          
+
           $workflowReturn = $returnValueContainer->getData();
 
           if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
-            $content += $workflowReturn["message"];
+            $content .= $workflowReturn["message"];
           }
 	    	
 	    	  $this->response = array(

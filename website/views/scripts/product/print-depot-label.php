@@ -80,7 +80,7 @@ labelContent.push({
 <div class="p-row">
 
 <div  class="p-name"><?php echo $productName  ?></div>
-<div  class="p-dimensions"><?php echo $product->getPimonly_dimensions() ?></div>
+<div  class="p-dimensions"><?php echo $product->getPimonly_dimensions() ?><?php  echo ($product->getColisage() > 0 && $product->getCoisage() != 1) ? " - ".$product->getColisage():" "?></div>
 <div  class="p-ean"><?php echo $product->getEan() ?></div>
 
 

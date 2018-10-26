@@ -88,19 +88,25 @@ a[x-apple-data-detectors] {
   height: 700px;
   position: relative;
   page-break-after: always; }
-  .big_label .p-name, .big_label .p-ean {
+  .big_label .p-name, .big_label .p-ean, .big_label .p-colisage {
     font-size: 5.7em;
-    padding-top: 0.2em;
-    line-height: 1.1;
     font-weight: bold;
     text-transform: uppercase; }
   .big_label .p-dimensions {
     padding-top: 1em;
     font-size: 3em;
     font-weight: bold; }
+  .big_label .p-name {
+    line-height: 1.1; }
   .big_label .p-ean {
-    padding-top: 0.55em;
-    font-weight: normal; }
+    padding-top: 0.2em;
+    font-weight: normal;
+    text-transform: none; }
+  .big_label .p-colisage {
+    padding-top: 0;
+    padding-bottom: 0.2em;
+    font-weight: normal;
+    line-height: 0.7; }
   .big_label .p-logo {
     padding-top: 1em;
     float: right;

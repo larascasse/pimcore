@@ -101,7 +101,9 @@ a[x-apple-data-detectors] {
   .big_label .p-ean {
     padding-top: 0.2em;
     font-weight: normal;
-    text-transform: none; }
+    text-transform: none;
+    font-size: 5em;
+    line-height: 1.2; }
   .big_label .p-colisage {
     padding-top: 0;
     padding-bottom: 0.2em;

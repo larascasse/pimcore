@@ -168,6 +168,79 @@ class LpnController extends Action
         $this->_helper->json->sendJson($this->response);
     }
 
+    //http://pimcore.florent.local/?action=get-all-articles&controller=lpn
+    public function getAllArticlesAction() {
+      
+
+       /* $listing = new \Pimcore\Model\Article\Listing(); 
+
+        $key =  $this->getParam("key");
+       // $listing->setCondition("parentId = 230");
+        $listing->setCondition('o_path LIKE \'/articles/%\'');
+*/
+
+         $this->disableLayout();
+
+        $this->disableViewAutoRender();
+
+       
+
+        $conditionFilters = array(//"limit" => $items,
+            "order" => "DESC",
+            "orderKey" => "o_creationdate",
+            'unpublished' => true,
+
+        );
+        $conditionFilters[] =array('o_path LIKE \'/articles/%\'');
+
+
+         $key =trim ($this->getParam("key")) ;
+
+       if (strlen($this->getParam("key"))>0) {
+           
+            $conditionFilters[] = array("o_key LIKE '" . $this->getParam("key") . "'");
+        }
+        
+        $listing = Object\Article::getList($conditionFilters);
+      
+        $articles=array();
+   
+     
+        foreach($listing as $article) {
+            //echo $doc->getContent();
+           
+            try {
+                /*
+                [id] => 6559
+    [modificationDate] => 1485954241
+    [key] => parquet
+    [path] => /projets/
+    [meta] => 
+    [mage_identifier] => /projets/parquet.html
+    [name] => 
+    [content]
+    [posterImage]
+    [description]
+    */
+                if($article instanceOf Website_Article) {
+
+
+                    if(strlen($key)>0 && $key != $article->getKey() ) {
+                       continue;
+                    }
+                    //print_r($article);
+                    $articles[] = $article->getShortArray();
+                }
+            }
+            catch (Exception $e){
+                echo $e->getMessage();
+            }
+            
+        }
+
+       $this->response = $articles;
+        $this->_helper->json->sendJson($this->response);
+    }
 
 
 

@@ -179,11 +179,9 @@ class LpnController extends Action
         $listing->setCondition('o_path LIKE \'/articles/%\'');
 */
 
-         $this->disableLayout();
+        $this->disableLayout();
 
         $this->disableViewAutoRender();
-
-       
 
         $conditionFilters = array(//"limit" => $items,
             "order" => "DESC",
@@ -239,7 +237,7 @@ class LpnController extends Action
         }
 
        $this->response = $articles;
-        $this->_helper->json->sendJson($this->response);
+       $this->_helper->json->sendJson($this->response);
     }
 
 

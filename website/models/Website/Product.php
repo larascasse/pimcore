@@ -982,6 +982,23 @@ class Website_Product extends Object_Product {
 		return $str;
 	}
 
+	public function getMage_associated_articles() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		Object_Abstract::setGetInheritedValues(true); 
+
+
+		$articles = $this->getAssociatedArticles();
+		$articlesPath = [];
+		if($articles) {
+			foreach ($articles as $key => $article) {
+				$articlesPath[] = $article->getMageIdentifier();
+			}
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return implode(";", $articlesPath);
+	}
+
 	function getCalculatedTechnicalSheetPdfUrl() {
 		return \Pimcore\Tool::getHostUrl()."/pdf/".$this->getId();
 	}

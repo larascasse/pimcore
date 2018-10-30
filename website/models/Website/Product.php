@@ -2293,15 +2293,16 @@ class Website_Product extends Object_Product {
 	
       
         $extraImage = ["zoom2"=>$this->getImage_4(),"face"=>$this->getImage_texture()];
-
+        $return[] = "toto0.jpg"."::testr";
         foreach ($extraImage as $key => $image) {
+        	$return[] = "toto.jpg"."::".$key;
         	if($image instanceof Asset_Image) {
         		$path = $image->getThumbnail("magento_realisation")->getPath();
 				$return[] = $path."::".$key;
         	}
         }
 
-        
+
 
 		$galleryImages =$this->getGallery();
 

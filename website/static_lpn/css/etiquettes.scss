@@ -109,10 +109,9 @@ a[x-apple-data-detectors] {
 	//width: 500px;
 	height: 700px;
 	position: relative;
-	.p-name,.p-ean {
+	.p-name,.p-ean,.p-colisage {
 		font-size: 5.7em;
-		padding-top: 0.2em;
-		line-height: 1.1;
+		
 		font-weight: bold;
 		text-transform: uppercase;
 	}
@@ -121,10 +120,23 @@ a[x-apple-data-detectors] {
 		font-size: 3em;
 		font-weight: bold;
 	} 
-	.p-ean{
-		padding-top: 0.55em;
-		font-weight: normal;
+	.p-name{
+		line-height: 1.1;
+		
 	} 
+	.p-ean{
+		padding-top: 0.2em;
+		font-weight: normal;
+		text-transform: none;
+		font-size: 5em;
+		line-height: 1.2;
+	} 
+	.p-colisage {
+		padding-top: 0;
+		padding-bottom: 0.2em;
+		font-weight: normal;
+		line-height: 0.7;
+	}
 	.p-logo{
 		padding-top: 1em;
 		float: right;

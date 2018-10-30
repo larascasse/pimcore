@@ -2301,7 +2301,7 @@ class Website_Product extends Object_Product {
 				$return[] = $path."::".$key;
         	}
         }
-
+        return implode(";",$return);
 
 
 		$galleryImages =$this->getGallery();

@@ -2293,53 +2293,55 @@ class Website_Product extends Object_Product {
 	
       
         $extraImage = ["zoom2"=>$this->getImage_4(),"face"=>$this->getImage_texture()];
-        $return[] = "toto0.jpg::testr";
+      
         foreach ($extraImage as $key => $image) {
-        	$return[] = "toto.jpg"."::".$key;
         	if($image instanceof Asset_Image) {
         		$path = $image->getThumbnail("magento_realisation")->getPath();
 				$return[] = $path."::".$key;
         	}
         }
-        return implode(";",$return);
 
 
 		$galleryImages =$this->getGallery();
 
 		if(is_array($galleryImages)) {
+			
 			foreach($galleryImages as $element) {
 			
-			if($element instanceof Asset_Folder) {
-				$assets=Asset_Folder::getById($element->id)->getChilds();
-				$assetsArray[$i]=array();
-				foreach ($assets as $asset) {
-					if($asset instanceof Asset_Image) {
-						/* VERSION DRECT 
-						$fsPath = $asset->getThumbnail("magento_realisation")->getFileSystemPath(true);
-        				$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
-						*/
-        				/* VERSION CLOUD */
-        				$path = $asset->getThumbnail("magento_realisation")->getPath();
+				if($element instanceof Asset_Folder) {
+					$assets=Asset_Folder::getById($element->id)->getChilds();
+					$assetsArray[$i]=array();
+					foreach ($assets as $asset) {
+						if($asset instanceof Asset_Image) {
+							/* VERSION DRECT 
+							$fsPath = $asset->getThumbnail("magento_realisation")->getFileSystemPath(true);
+	        				$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+							*/
+	        				/* VERSION CLOUD */
+	        				$path = $asset->getThumbnail("magento_realisation")->getPath();
 
-						$return[] = $path."::realisation";
+							$return[] = $path."::realisation";
+						}
 					}
 				}
+				elseif($element instanceof Asset_Image) {
+					//VERSION ABSOLUE
+					/*$fsPath = $element->getThumbnail("magento_realisation")->getFileSystemPath(true);
+	        		$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+							$return[] = $path."::realisation";
+							*/
+					/* VERSION CLOUD */
+					$path = $element->getThumbnail("magento_realisation")->getPath();
+					$return[] = $path."::realisation";
+				}
 			}
-			elseif($element instanceof Asset_Image) {
-				//VERSION ABSOLUE
-				/*$fsPath = $element->getThumbnail("magento_realisation")->getFileSystemPath(true);
-        		$path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
-						$return[] = $path."::realisation";
-						*/
-				/* VERSION CLOUD */
-				$path = $element->getThumbnail("magento_realisation")->getPath();
-				$return[] = $path."::realisation";
-			}
+
 		}
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
-		return implode(";",$return);
-
+		if(count($return) > 0) {
+			
+			return implode(";",$return);
 		}
 		return "";
 		

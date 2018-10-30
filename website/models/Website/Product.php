@@ -3302,8 +3302,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("support ", " ", $short_name);
-    	$short_name = str_ireplace("premier ", "PR", $short_name);
-    	$short_name = str_ireplace("rustique ", "RU", $short_name);
+    	$short_name = str_ireplace("premier", "PR", $short_name);
+    	$short_name = str_ireplace("rustique", "RU", $short_name);
 
 
     	//Terrasse

@@ -2288,10 +2288,26 @@ class Website_Product extends Object_Product {
 
 		$return = array();
 
+
+		//On ajoute les zoom
+	
+      
+        $extraImage = ["zoom2"=>$this->getImage_4(),"face"=>$this->getImage_texture()];
+
+        foreach ($extraImage as $key => $image) {
+        	if($image instanceof Asset_Image) {
+        		$path = $image->getThumbnail("magento_realisation")->getPath();
+				$return[] = $path."::".$key;
+        	}
+        }
+
+        
+
 		$galleryImages =$this->getGallery();
 
 		if(is_array($galleryImages)) {
 			foreach($galleryImages as $element) {
+			
 			if($element instanceof Asset_Folder) {
 				$assets=Asset_Folder::getById($element->id)->getChilds();
 				$assetsArray[$i]=array();

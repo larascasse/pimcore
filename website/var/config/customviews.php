@@ -55,6 +55,15 @@ return [
             "rootfolder" => "/catalogue/_product_base__",
             "showroot" => "1",
             "classes" => "5"
+        ],
+        [
+            "name" => "Taxonomies",
+            "condition" => "",
+            "icon" => "",
+            "id" => "8",
+            "rootfolder" => "/taxonomies",
+            "showroot" => "0",
+            "classes" => "6"
         ]
     ]
 ];

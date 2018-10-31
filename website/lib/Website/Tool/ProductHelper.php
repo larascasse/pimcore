@@ -31,6 +31,9 @@ class ProductHelper
         $unpublishedStatus = Model\Object\AbstractObject::doHideUnpublished();
         Model\Object\AbstractObject::setHideUnpublished(false);
 
+        $inheritance = Model\Object\AbstractObject::getGetInheritedValues();
+        Model\Object\AbstractObject::setGetInheritedValues(true);
+
         
       
 
@@ -152,6 +155,7 @@ class ProductHelper
         }
 
         Model\Object\AbstractObject::setHideUnpublished($unpublishedStatus);
+        Model\Object\AbstractObject::setGetInheritedValues($inheritance);
 
         if(in_array("longueur_txt", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('longueur'));

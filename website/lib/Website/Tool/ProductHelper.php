@@ -40,7 +40,7 @@ class ProductHelper
 
             $childProduct = \Pimcore\Model\Object::getById($childId);
 
-            print_r($childProduct);
+            //print_r($childProduct);
        
            
 
@@ -53,7 +53,7 @@ class ProductHelper
                 
                 //On devrait virer les obsoletes
                 if(in_array($field->name,$configurableFields)) {
-                  echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
+                  //echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
                   $child[$field->name] = $field->getForCsvExport($childProduct);
                 }
             }
@@ -67,7 +67,7 @@ class ProductHelper
                     $key =  $field->name;
                     $value =  $child[$key];
 
-                    echo $key." ".$value."\n\n";
+                   // echo $key." ".$value."\n\n";
 
 
                     if(

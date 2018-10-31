@@ -267,11 +267,4 @@ class Select extends Model\Object\ClassDefinition\Data
     {
         $this->defaultValue = $defaultValue;
     }
-
-
-    //FB
-    public function getForWebserviceExport($object, $params = [])
-    {
-        return "TOTO";
-    }
 }

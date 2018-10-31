@@ -94,6 +94,8 @@ class ProductHelper
                     if($key == "traitement_surfaceString") {
                        //   echo "traitement_surface : ".$value."<br />";
                     } 
+
+                    echo $key;
                     if($key == "subtype") {
                           echo "subtype : ".$subtype."<br />";
                     }

@@ -53,6 +53,7 @@ class ProductHelper
                     $key =  $field->name;
                     $value =  $child[$key];
 
+                    echo $key." ".$value."\n";
 
 
                     if(
@@ -96,9 +97,9 @@ class ProductHelper
                        //   echo "traitement_surface : ".$value."<br />";
                     } 
 
-                    echo $key."\n";
+                    
                     if($key == "subtype") {
-                          echo "subtype : ".$child[$key]."\n";
+                         // echo "subtype : ".$child[$key]."\n";
                     }
 
                     //TODO PB SUR http://magento.florent.local/LPN/get_a_product_magmi.php?path=/teintes/teintes/_import_/ex/&teinte&create&showDebug=1

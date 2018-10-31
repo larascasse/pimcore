@@ -93,6 +93,9 @@ class ProductHelper
 
                     if($key == "traitement_surfaceString") {
                        //   echo "traitement_surface : ".$value."<br />";
+                    } 
+                    if($key == "subtype") {
+                          echo "subtype : ".$subtype."<br />";
                     }
 
                     //TODO PB SUR http://magento.florent.local/LPN/get_a_product_magmi.php?path=/teintes/teintes/_import_/ex/&teinte&create&showDebug=1

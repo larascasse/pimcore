@@ -28,8 +28,8 @@ class ProductHelper
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
 
         
-        $unpublishedStatus = Object_Abstract::doHideUnpublished();
-        Object_Abstract::setHideUnpublished(false);
+        $unpublishedStatus = Model\Object\AbstractObject::doHideUnpublished();
+        Model\Object\AbstractObject::setHideUnpublished(false);
 
         
       
@@ -151,7 +151,7 @@ class ProductHelper
 
         }
 
-        Object_Abstract::setHideUnpublished($unpublishedStatus);
+        Model\Object\AbstractObject::setHideUnpublished($unpublishedStatus);
 
         if(in_array("longueur_txt", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('longueur'));

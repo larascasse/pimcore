@@ -408,7 +408,7 @@ class Website_Product extends Object_Product {
 	public function getPefcLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getPefc()) {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/pefc");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/labels/pefc");
 			return $taxonomie ->getLogo();
 		}
 	}
@@ -426,7 +426,7 @@ class Website_Product extends Object_Product {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getParquet_de_france()) {
 
-			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/parquet_de_france");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/labels/parquet_de_france");
 
 			if($taxonomie)
 				return $taxonomie ->getLogo();
@@ -445,7 +445,7 @@ class Website_Product extends Object_Product {
 	public function getFscLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getFsc()) {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/fsc");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/labels/fsc");
 
 			if($taxonomie)
 				return $taxonomie ->getLogo();
@@ -462,7 +462,7 @@ class Website_Product extends Object_Product {
 	public function getNfLogo() {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getNf()) {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/labels/nf");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/labels/nf");
 			if($taxonomie)
 				return $taxonomie ->getLogo();
 		}
@@ -478,11 +478,11 @@ class Website_Product extends Object_Product {
 		$norme_sanitaire = $this->getNorme_sanitaire();
 		switch ($norme_sanitaire) {
 			case 'A+':
-				$path = "/norme_sanitaire/aplus";
+				$path = "/taxonomies/norme_sanitaire/aplus";
 				break;
 			
 			default:
-				$path = "/norme_sanitaire/".$norme_sanitaire;
+				$path = "/taxonomies/norme_sanitaire/".$norme_sanitaire;
 				break;
 		}
 		$taxonomie =  Pimcore\Model\Object::getByPath($path);
@@ -502,10 +502,10 @@ class Website_Product extends Object_Product {
 		
 		if(in_array("click",$fixation) && $pose=="flottante") {
 
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_flottante_click");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_flottante_click");
 		}
 		else {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_".$pose);
 		}
 		
 
@@ -523,10 +523,10 @@ class Website_Product extends Object_Product {
 		
 		if(is_array($fixation) && in_array("click",$fixation) && $pose=="flottante") {
 
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_flottante_click");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_flottante_click");
 		}
 		else {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_".$pose);
 		}
 		
 
@@ -540,10 +540,10 @@ class Website_Product extends Object_Product {
 		
 		$fixation = $this->getFixation();
 		if(is_array($fixation) && in_array("click",$fixation) && $pose=="flottante") {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_flottante_click");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_flottante_click");
 		}
 		else {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose_".$pose);
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose_".$pose);
 		}
 
 		if($taxonomie)
@@ -555,7 +555,7 @@ class Website_Product extends Object_Product {
 	public function getChauffantBasseTemperatureLogo() {
 		$flag = $this->getChauffantBasseTemperature()==1;
 		if($flag) {
-			$taxonomie =  Pimcore\Model\Object::getByPath("/pose/pose-sol-chauffant");
+			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/pose/pose-sol-chauffant");
 			if($taxonomie)
 				return $taxonomie ->getLogo();
 		}

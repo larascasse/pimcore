@@ -27,8 +27,8 @@ class ProductHelper
 
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
 
-        $inheritance = AbstractObject::doGetInheritedValues(); 
-        AbstractObject::setGetInheritedValues(true); 
+        $inheritance = \Pimcore\Model\Object\AbstractObject::doGetInheritedValues(); 
+        \Pimcore\Model\Object\AbstractObject::setGetInheritedValues(true); 
 
         foreach ($childrenSkus as $childId) {
 
@@ -145,7 +145,7 @@ class ProductHelper
 
         }
 
-        AbstractObject::setGetInheritedValues($inheritance); 
+        \Pimcore\Model\Object\AbstractObject::setGetInheritedValues($inheritance); 
 
         if(in_array("longueur_txt", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('longueur'));

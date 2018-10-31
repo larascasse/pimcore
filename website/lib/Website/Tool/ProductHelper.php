@@ -28,7 +28,11 @@ class ProductHelper
         $fields = \Pimcore\Model\Object\ClassDefinition::getByName("Product")->getFieldDefinitions();
 
         foreach ($childrenSkus as $childId) {
+
             $childProduct = \Pimcore\Model\Object::getById($childId);
+
+            print_r($childProduct);
+            die;
            
 
             if($childProduct instanceof Object_Product)

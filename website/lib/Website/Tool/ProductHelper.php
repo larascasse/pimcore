@@ -48,10 +48,11 @@ class ProductHelper
             
 
             foreach ($fields as $field) {
-                echo $field->name."<br />";
+                
                 if(in_array($field->name,$configurableFields)) {
                     $key =  $field->name;
                     $value =  $child[$key];
+
 
 
                     if(
@@ -95,9 +96,9 @@ class ProductHelper
                        //   echo "traitement_surface : ".$value."<br />";
                     } 
 
-                    echo $key;
+                    echo $key."\n";
                     if($key == "subtype") {
-                          echo "subtype : ".$subtype."<br />";
+                          echo "subtype : ".$child[$key]."\n";
                     }
 
                     //TODO PB SUR http://magento.florent.local/LPN/get_a_product_magmi.php?path=/teintes/teintes/_import_/ex/&teinte&create&showDebug=1

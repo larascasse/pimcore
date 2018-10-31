@@ -48,7 +48,7 @@ class ProductHelper
             
 
             foreach ($fields as $field) {
-               // echo $field->name;
+                echo $field->name."<br />";
                 if(in_array($field->name,$configurableFields)) {
                     $key =  $field->name;
                     $value =  $child[$key];

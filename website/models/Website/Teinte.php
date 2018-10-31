@@ -70,8 +70,9 @@ class Website_Teinte extends Object_Teinte {
 			if(strlen($relatedProduct->getEan()) == 0) {
 
 				//On va chercher tous les enfants
-				$list->setUnpublished(true);
+
 				$list = new Pimcore\Model\Object\Product\Listing();
+				$list->setUnpublished(true);
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
 	            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
 	            

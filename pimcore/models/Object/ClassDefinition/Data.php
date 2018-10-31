@@ -1145,7 +1145,7 @@ abstract class Data
         $getter = "get" . ucfirst($this->getName());
 
         if (method_exists($container, $getter)) { // for Object\Concrete, Object\Fieldcollection\Data\AbstractData, Object\Objectbrick\Data\AbstractData
-            echo $getter;
+            echo $getter." ".$container->$getter()."\n";
             $data = $container->$getter();
         } elseif ($object instanceof Object\Localizedfield) {
             $data = $object->getLocalizedValue($this->getName(), $params["language"], true);

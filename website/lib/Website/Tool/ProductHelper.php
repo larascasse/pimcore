@@ -37,9 +37,10 @@ class ProductHelper
              $child = array();
 
             foreach ($fields as $field) {
-                //echo $field->name."\n";
+                
                 //On devrait virer les obsoletes
                 if(in_array($field->name,$configurableFields)) {
+                  echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
                   $child[$field->name] = $field->getForCsvExport($childProduct);
                 }
             }
@@ -53,7 +54,7 @@ class ProductHelper
                     $key =  $field->name;
                     $value =  $child[$key];
 
-                    echo $key." ".$value."\n";
+                    echo $key." ".$value."\n\n";
 
 
                     if(

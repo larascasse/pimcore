@@ -3306,7 +3306,22 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	
     	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
 
-    	if(strlen($short_name)>60)
+    	//$isSimpleTeinte = 
+    	//print_r($this->getPimonly_teinte_rel());
+    	$teintesObj = $this->getPimonly_teinte_rel();
+
+    	$removeTeinte = true;
+    	$removeTeinte = strlen($short_name)>60 && $removeTeinte;
+    	//S'il y a la finition dans la teinte, on ne l'enleve pas
+    	//Ex pour le 3 frises
+    	/*3524830060432, 3524830049147, 3524830060456*/
+    	if($removeTeinte &&  is_array($teintesObj) && count($teintesObj) >0 ) {
+    		if(stristr($short_name,$this->getFinitionString())) {
+    			$removeTeinte = false;
+    		}
+    	}
+
+    	if($removeTeinte)
         	$short_name = str_ireplace($this->getFinitionString(), "", $short_name);
     	
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);

@@ -415,6 +415,18 @@ class MauchampController extends Action
            
          }
          elseif($this->getParam("from-email") == 'msaidani@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès. Arrête de bouffer la balle le dimanche.';
+           
+         }
+         elseif($this->getParam("from-email") == 'thierry@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès. Bise à ta petite chatte.';
+           
+         }
+         elseif($this->getParam("from-email") == 'sophie@lp-nouvelle.fr') {
+              $returnMessageAlert = 'Mail envoyé avec succès.';
+           
+         }
+         elseif($this->getParam("from-email") == 'remi@lp-nouvelle.fr') {
               $returnMessageAlert = 'Mail envoyé avec succès.';
            
          }

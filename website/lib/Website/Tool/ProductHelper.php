@@ -83,12 +83,15 @@ class ProductHelper
 
                     //pour les dimmesnios, on prends la valeur du TXT s'il exite
                     else if($key=="longueur_txt" && isset($child['longueur_not_configurable']) && $child['longueur_not_configurable']) {
+                        $ignoreFields[] = "longueur_txt";
                         continue;
                     }
                     else if($key=="epaisseur_txt" && isset($child['epaisseur_not_configurable']) && $child['epaisseur_not_configurable']) {
+                        $ignoreFields[] = "epaisseur_txt";
                         continue;
                     }
                     else if($key=="largeur_txt" && isset($child['largeur_not_configurable']) && $child['largeur_not_configurable']) {
+                        $ignoreFields[] = "largeur_txt";
                         continue;
                     }
 
@@ -100,7 +103,7 @@ class ProductHelper
 
                         continue;
                     }
-                    else if($key=="epaisseur" && isset($child['epaisseur']) && strlen(trim($child['epaisseur_txt']))>0) {
+                    else if($key=="epaisseur" && isset($child['epaisseur_txt']) && strlen(trim($child['epaisseur_txt']))>0) {
                         continue;
                     }
 

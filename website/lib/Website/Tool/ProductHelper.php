@@ -41,7 +41,7 @@ class ProductHelper
 
         foreach ($childrenSkus as $childId) {
 
-            $childProduct = \Pimcore\Model\Object::getById($childId);
+            $childProduct = \Pimcore\Model\Object::getById($childId,true);
 
             //print_r($childProduct);
        
@@ -51,13 +51,17 @@ class ProductHelper
                 continue;
 
              $child = array();
+             $childAllValues = array();
 
             foreach ($fields as $field) {
+
+                $value = $field->getForCsvExport($childProduct);
+                $childAllValues[$field->name] = $value;
                 
                 //On devrait virer les obsoletes
                 if(in_array($field->name,$configurableFields)) {
                   //echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
-                  $child[$field->name] = $field->getForCsvExport($childProduct);
+                  $child[$field->name] = $value;
                 }
             }
 
@@ -65,16 +69,18 @@ class ProductHelper
             
 
             foreach ($fields as $field) {
-                
-                if(in_array($field->name,$configurableFields)) {
-                    $key =  $field->name;
-                    $value =  $child[$key];
+                $key =  $field->name;
+                $value =  $child[$key];
 
-                   // echo $key." ".$value."\n\n";
+
+                if(in_array($key,$configurableFields)) {
+                    
+
+                   //echo $key." ".$value."\n\n";
 
 
                     if(
-                        (isset($child[$key.'_not_configurable']) && $child[$key.'_not_configurable']) 
+                        (isset($childAllValues[$key.'_not_configurable']) && $childAllValues[$key.'_not_configurable']) 
                         || $value=="" ) {
                         $ignoreFields[] = $key;
                         continue;
@@ -82,15 +88,15 @@ class ProductHelper
 
 
                     //pour les dimmesnios, on prends la valeur du TXT s'il exite
-                    else if($key == "longueur_txt" && isset($child['longueur_not_configurable']) && $child['longueur_not_configurable']) {
+                    else if($key == "longueur_txt" && isset($childAllValues['longueur_not_configurable']) && $childAllValues['longueur_not_configurable']) {
                         $ignoreFields[] = "longueur_txt";
                         continue;
                     }
-                    else if($key == "epaisseur_txt" && isset($child['epaisseur_not_configurable']) && $child['epaisseur_not_configurable']) {
+                    else if($key == "epaisseur_txt" && isset($childAllValues['epaisseur_not_configurable']) && $childAllValues['epaisseur_not_configurable']) {
                         $ignoreFields[] = "epaisseur_txt";
                         continue;
                     }
-                    else if($key == "largeur_txt" && isset($child['largeur_not_configurable']) && $child['largeur_not_configurable']) {
+                    else if($key == "largeur_txt" && isset($childAllValues['largeur_not_configurable']) && $childAllValues['largeur_not_configurable']) {
                         $ignoreFields[] = "largeur_txt";
                         continue;
                     }
@@ -107,7 +113,7 @@ class ProductHelper
                         continue;
                     }
 
-                    if($key=="mage_section" && (!isset($child['mage_use_section_as_configurable']) ||  !$child['mage_use_section_as_configurable'])) {
+                    if($key=="mage_section" && (!isset($childAllValues['mage_use_section_as_configurable']) ||  !$child['mage_use_section_as_configurable'])) {
                         continue;
                     }
 

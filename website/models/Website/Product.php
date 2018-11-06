@@ -3462,6 +3462,21 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 			}
 			$return[$attribute] = $attributeValue;
 		}
+		$return["className"] = "product";
+		$return["key"] = $this->getKey();
+		$return["published"] = $this->getPublished();
+
+
+		$childrensIds = [];
+		$childrens = $this->getChilds();
+
+		foreach ($childrens as $subProduct) {
+			if($subProduct instanceof Object_Folder || !$subProduct->getPublished())
+				continue;
+			$childrensIds[] = $subProduct->getId();
+		}
+		$return["childsIds"] = $childrensIds;
+
 		return $return;
 	}
 

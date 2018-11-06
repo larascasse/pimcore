@@ -409,7 +409,7 @@ class Website_Product extends Object_Product {
 		//$taxonomie =  Object_Taxonomy::getByKey('pefc');
 		if($this->getPefc()) {
 			$taxonomie =  Pimcore\Model\Object::getByPath("/taxonomies/labels/pefc");
-			return $taxonomie ->getLogo();
+			return $taxonomie?$taxonomie ->getLogo():null;
 		}
 	}
 

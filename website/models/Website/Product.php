@@ -3467,7 +3467,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$return["published"] = $this->getPublished();
 
 
-		$childrensIds = [];
+		/*$childrensIds = [];
 		$childrens = $this->getChilds();
 
 		foreach ($childrens as $subProduct) {
@@ -3476,6 +3476,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 			$childrensIds[] = $subProduct->getId();
 		}
 		$return["childsIds"] = $childrensIds;
+		*/
 
 		return $return;
 	}

@@ -3343,6 +3343,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("Lame de terrasse ", "Terrasse ", $short_name);
     	$short_name = str_ireplace("Terrasse composite", "T. composite", $short_name);
     	$short_name = str_ireplace("monolame ", "", $short_name);
+    	$short_name = str_ireplace("extérieur ", "ext. ", $short_name);
+    	$short_name = str_ireplace("exterieur ", "ext. ", $short_name);
 
 
     	$short_name = trim($short_name);

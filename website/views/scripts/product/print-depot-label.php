@@ -82,7 +82,7 @@ labelContent.push({
 <div  class="p-name"><?php echo $productName  ?></div>
 <div  class="p-dimensions"><?php echo $product->getPimonly_dimensions() ?></div>
 <!-- <div  class="p-colisage"></div>--> 
-<div  class="p-ean"><?php echo ($product->getColisage() > 0 && $product->getColisage() != 1) ? "Colis ".number_format($product->getColisage(),3).strtolower($product->getUnite()). "<br />":""; ?><?php echo $product->getEan() ?></div>
+<div  class="p-ean"><?php echo ($product->getColisage() > 0 && $product->getColisage() != 1) ? "Colis ".number_format($product->getColisage(),3)." ".strtolower($product->getUnite()). "<br />":""; ?><?php echo $product->getEan() ?></div>
 
 
  <?php

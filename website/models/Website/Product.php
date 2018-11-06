@@ -3264,7 +3264,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
             $childIs = $this->getChildrenSimpleProductIds();
             return implode(',',$childIs);
         }
-        else return "None";
+        else return "";
      }
 
      function getConfigurableFields() {
@@ -3432,6 +3432,35 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 
 		  return $isPlusValue;
+	}
+
+
+	public function getShortArray() {
+		$attributes = $this->getClass()->getFieldDefinitions();
+
+		$ignoreFields = array();
+		foreach($attributes as $key=> $value) {
+			$attribute  =  $value->getName();
+			if(strpos($attribute,"price") === 0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0 || strpos($attribute,"String")>0) {
+				$ignoreFields[]=$attribute;
+			}
+		}
+
+		$return = [];
+		foreach($attributes as $key=> $value) {
+			$attribute  =  $value->getName();
+			$attributeLabel = $value->getTitle();
+
+			$attributeKey = $attributeLabel;
+			$attributeValue = $value->getForCsvExport($this);
+			
+			if(in_array($attribute,$ignoreFields)) {
+				unset($attributeValue);
+				continue;
+			}
+			$return[$attribute] = $attributeValue;
+		}
+		return $return;
 	}
 
 }

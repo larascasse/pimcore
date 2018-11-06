@@ -829,6 +829,81 @@ class ProductController extends Action
 
     }
 
+    //http://pimcore.florent.local/?controller=product&action=get-short-ajax&id=1
+    public function getShortAjaxAction() {
+
+         $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
+        $this->disableLayout();
+        $this->disableViewAutoRender();
+        Object_Abstract::setHideUnpublished(false);
+
+   
+
+        $productId = $this->getParam("id");
+        $productEan = $this->getParam("ean");
+
+
+      
+
+        // get a list of news objects and order them by date
+        $productList = new Object_Product_List();
+        //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
+    
+
+        $conditionFilters = array(
+                "lENGTH(code)>0",
+                //"(ean = '".$productEan."' OR oo_id = '".$productId."')",
+               // "(ean IN (".$productEan.") OR oo_id = '".$productId."')",
+
+            );
+
+        $productIds = explode(",", $productId);
+        $productIds2 = [];
+        if(count($productIds) > 0) {
+            foreach ($productIds as $key => $value) {
+                if(strlen(trim($value)) > 0)
+                    $productIds2[] = "'".$value."'";
+            }
+            if(count($productIds2)> 0)
+                $conditionFilters[] = "oo_id IN (".implode(",", $productIds2).")";
+        }
+
+        $productEans = explode(",", $productEan);
+        $productEans2 = [];
+        if(count($productEans) > 0) {
+
+            foreach ($productEans as $key => $value) {
+                if(strlen(trim($value)) > 0)
+                    $productEans2[] = "'".$value."'";
+            }
+            if(count($productEans2)> 0)
+            $conditionFilters[] = "ean IN (".implode(",", $productEans2).")";
+        }
+
+
+        $condition = "(".implode(" AND ", $conditionFilters).")";
+
+      
+        $productList->setCondition($condition);
+        $productList->setLimit(15);
+
+
+
+
+        $productList->load();
+        $products=array();
+         //Object_Abstract::setGetInheritedValues(true); 
+        foreach ($productList as $product) {
+           $products[] = $product->getShortArray();
+
+        }
+        $this->response = $products;
+        $this->_helper->json->sendJson($this->response);
+    }
+
     
 
 

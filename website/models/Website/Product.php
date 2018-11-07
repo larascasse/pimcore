@@ -3467,7 +3467,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
 		}
-		die;
+	
 		$return["className"] = "product";
 		$return["key"] = $this->getKey();
 		$return["published"] = $this->getPublished();

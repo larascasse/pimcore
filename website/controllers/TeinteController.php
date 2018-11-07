@@ -177,7 +177,7 @@ class TeinteController extends Action
         $condition = "(".implode(" AND ", $conditionFilters).")";
 
         print_r($condition);
-        die;
+
 
         $teinteList->setCondition($condition);
    
@@ -188,6 +188,8 @@ class TeinteController extends Action
         $teintes=array();
          //Object_Abstract::setGetInheritedValues(true); 
         foreach ($teinteList as $teinte) {
+            //echo "jlkjlkjkl";
+            //continue;
            $teintes[] = $teinte->getShortArray();
 
         }

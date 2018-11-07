@@ -3456,14 +3456,17 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 			$attributeLabel = $value->getTitle();
 
 			$attributeKey = $attributeLabel;
-			$attributeValue = $value->getForCsvExport($this);
 
-			//echo $attribute." ".$attributeValue."\n<br/>";
-			
 			if(in_array($attribute,$ignoreFields)) {
 				//unset($attributeValue);
 				continue;
 			}
+			
+			$attributeValue = $value->getForCsvExport($this);
+
+			//echo $attribute." ".$attributeValue."\n<br/>";
+			
+			
 			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
 		}

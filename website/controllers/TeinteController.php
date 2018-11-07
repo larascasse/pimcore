@@ -99,6 +99,100 @@ class TeinteController extends Action
 
     }
 
+    //http://pimcore.florent.local/?controller=teinte&action=get-short-ajax&ean=615340927
+    public function getShortAjaxAction() {
+        ini_set('max_execution_time', 3600);
+        ini_set('max_input_time', 3600);
+        ini_set("max_execution_time", 3600);
+        set_time_limit(3600);
+
+        ini_set('mysql.connect_timeout', 300);
+        ini_set('mysql.default_socket_timeout',300);
+
+        @ini_set("memory_limit", "2024M");
+
+         $front = \Zend_Controller_Front::getInstance();
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");
+        $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Targeting");
+
+        $this->disableLayout();
+        $this->disableViewAutoRender();
+        Object_Abstract::setHideUnpublished(false);
+
+   
+
+        $teinteId = $this->getParam("id");
+
+        $teinteIds = explode(",", $teinteId);
+
+        $teintes = [];
+
+        
+        if(count($teinteIds) > 0) {
+            //S'il yn a bcp dr'IDS, on chunk la grosse requette pouir éviter le timeout
+            $idsGrouped = array_chunk($teinteIds, 50); // array
+
+            foreach ($idsGrouped as $group) {
+                 $teintes = array_merge($this->getTeinteShortByIds($group),$teintes);
+                 
+            }
+           
+        }
+      
+
+        header('Content-Type: application/json');
+        echo json_encode($teintes);
+        die;
+
+    }
+
+    public function getTeinteShortByIds($teinteIds = array()) {
+        // get a list of news objects and order them by date
+        $teinteList = new Object_Teinte_List();
+        //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
+
+     
+
+        $conditionFilters = array(
+                "lENGTH(name)>0",
+                //"(ean = '".$teinteEan."' OR oo_id = '".$teinteId."')",
+               // "(ean IN (".$teinteEan.") OR oo_id = '".$teinteId."')",
+
+            );
+
+        $teinteIds2 = [];
+        if(count($teinteIds) > 0) {
+            foreach ($teinteIds as $key => $value) {
+                if(strlen(trim($value)) > 0)
+                    $teinteIds2[] = "'".$value."'";
+            }
+            if(count($teinteIds2)> 0) {
+                $conditionFilters[] = "(oo_id IN (".implode(",", $teinteIds2)."))";
+            }
+        }
+        else {
+            return [];
+        }
+
+        $condition = "(".implode(" AND ", $conditionFilters).")";
+
+
+        $teinteList->setCondition($condition);
+   
+         
+
+        $teinteList->load();
+
+        $teintes=array();
+         //Object_Abstract::setGetInheritedValues(true); 
+        foreach ($teinteList as $teinte) {
+           $teintes[] = $teinte->getShortArray();
+
+        }
+        return $teintes;
+
+    }
+
     
 
 

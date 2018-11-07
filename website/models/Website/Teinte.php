@@ -162,6 +162,41 @@ class Website_Teinte extends Object_Teinte {
 		return implode(',',$tagsName);
 	}
 
+	public function getShortArray() {
+		$attributes = $this->getClass()->getFieldDefinitions();
+
+		$ignoreFields = array();
+		foreach($attributes as $key=> $value) {
+			$attribute  =  $value->getName();
+		}
+
+		$return = [];
+		foreach($attributes as $key=> $value) {
+
+		
+			$attribute  =  $value->getName();
+			$attributeLabel = $value->getTitle();
+
+			$attributeKey = $attributeLabel;
+			$attributeValue = $value->getForCsvExport($this);
+
+			//echo $attribute." ".$attributeValue."\n<br/>";
+			
+			if(in_array($attribute,$ignoreFields)) {
+				//unset($attributeValue);
+				continue;
+			}
+			//echo $attribute." ".$attributeValue."\n<br/>";
+			$return[$attribute] = $attributeValue;
+		}
+	
+		$return["className"] = "teinte";
+		$return["key"] = $this->getKey();
+		$return["published"] = $this->getPublished();
+
+		return $return;
+	}
+
 
 }
 

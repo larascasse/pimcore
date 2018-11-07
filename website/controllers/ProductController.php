@@ -913,6 +913,9 @@ class ProductController extends Action
                 $conditionFilters[] = "(oo_id IN (".implode(",", $productIds2).") OR ean IN (".implode(",", $productIds2)."))";
             }
         }
+         else {
+            return [];
+        }
 
 
 

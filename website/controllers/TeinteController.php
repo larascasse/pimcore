@@ -130,7 +130,7 @@ class TeinteController extends Action
         
         if(count($teinteIds) > 0) {
             //S'il yn a bcp dr'IDS, on chunk la grosse requette pouir éviter le timeout
-            $idsGrouped = array_chunk($teinteIds, 50); // array
+            $idsGrouped = array_chunk($teinteIds, 5); // array
 
             foreach ($idsGrouped as $group) {
                  $teintes = array_merge($this->getTeinteShortByIds($group),$teintes);
@@ -175,9 +175,6 @@ class TeinteController extends Action
         }
 
         $condition = "(".implode(" AND ", $conditionFilters).")";
-
-        print_r($condition);
-
 
         $teinteList->setCondition($condition);
    

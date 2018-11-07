@@ -165,7 +165,7 @@ class Website_Teinte extends Object_Teinte {
 	public function getShortArray() {
 		$attributes = $this->getClass()->getFieldDefinitions();
 
-		$ignoreFields = array();
+		$ignoreFields = array("configurable_fields");
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
 		}
@@ -178,18 +178,23 @@ class Website_Teinte extends Object_Teinte {
 			$attributeLabel = $value->getTitle();
 
 			$attributeKey = $attributeLabel;
-			$attributeValue = $value->getForCsvExport($this);
 
-			//echo $attribute." ".$attributeValue."\n<br/>";
-			
 			if(in_array($attribute,$ignoreFields)) {
 				//unset($attributeValue);
 				continue;
 			}
+
+			
+			$attributeValue = $value->getForCsvExport($this);
+
+			//echo $attribute." ".$attributeValue."\n<br/>";
+			
+			
 			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
 		}
 	
+		$return["configurable_fields"] = $this->getConfigurableFields();
 		$return["className"] = "teinte";
 		$return["key"] = $this->getKey();
 		$return["published"] = $this->getPublished();

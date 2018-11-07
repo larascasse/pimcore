@@ -913,7 +913,7 @@ class ProductController extends Action
 
         header('Content-Type: application/json');
         echo json_encode($products);
-        exit;
+        die;
 
        // $this->response = $products;
        // $this->_helper->json->sendJson($this->response);

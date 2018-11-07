@@ -879,7 +879,7 @@ class ProductController extends Action
 
             foreach ($idsGrouped as $group) {
                  $products = array_merge($this->getProductShortByIds($group),$products);
-                 
+                 break;
             }
            
         }

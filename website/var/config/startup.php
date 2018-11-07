@@ -1,5 +1,9 @@
 <?php
 
+@ini_set('max_execution_time', 120);
+@ini_set('max_input_time', 130);
+
+
 if( !isset($_SERVER['PHP_AUTH_USER']) )
 {
     if (isset($_SERVER['HTTP_AUTHORIZATION']) && (strlen($_SERVER['HTTP_AUTHORIZATION']) > 0)){

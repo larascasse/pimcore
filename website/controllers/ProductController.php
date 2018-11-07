@@ -837,7 +837,7 @@ class ProductController extends Action
         set_time_limit(3600);
 
         ini_set('mysql.connect_timeout', 300);
-        ini_set('default_socket_timeout',300);
+        ini_set('mysql.default_socket_timeout',300);
 
         @ini_set("memory_limit", "2024M");
 

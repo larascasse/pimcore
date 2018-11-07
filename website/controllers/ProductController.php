@@ -831,10 +831,12 @@ class ProductController extends Action
 
     //http://pimcore.florent.local/?controller=product&action=get-short-ajax&id=1
     public function getShortAjaxAction() {
-        @ini_set('max_execution_time', -1);
-        @ini_set('max_input_time', -1);
+        @ini_set('max_execution_time', 3600);
+        @ini_set('max_input_time', 3600);
+         @ini_set("max_execution_time", 3600);
+        @set_time_limit(3600);
+
         @ini_set("memory_limit", "2024M");
-        @ini_set("max_execution_time", 3600*60);
 
          $front = \Zend_Controller_Front::getInstance();
         $front->unregisterPlugin("Pimcore\\Controller\\Plugin\\Cache");

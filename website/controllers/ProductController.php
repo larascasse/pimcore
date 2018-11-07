@@ -910,7 +910,7 @@ class ProductController extends Action
 
         }
         // $products["condtion"] = $condition 
-        $this->response = $products;
+        //$this->response = $products;
         $this->_helper->json->sendJson($this->response);
     }
 

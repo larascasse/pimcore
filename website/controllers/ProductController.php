@@ -910,8 +910,13 @@ class ProductController extends Action
 
         }
         // $products["condtion"] = $condition 
-        //$this->response = $products;
-        $this->_helper->json->sendJson($this->response);
+
+        header('Content-Type: application/json');
+        echo json_encode($products);
+        exit;
+
+       // $this->response = $products;
+       // $this->_helper->json->sendJson($this->response);
     }
 
     

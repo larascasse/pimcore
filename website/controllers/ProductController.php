@@ -855,20 +855,6 @@ class ProductController extends Action
         $productEan = $this->getParam("ean");
 
 
-      
-
-        // get a list of news objects and order them by date
-        $productList = new Object_Product_List();
-        //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
-    
-
-        $conditionFilters = array(
-                "lENGTH(code)>0",
-                //"(ean = '".$productEan."' OR oo_id = '".$productId."')",
-               // "(ean IN (".$productEan.") OR oo_id = '".$productId."')",
-
-            );
-
         $productIds = explode(",", $productId);
         $productEans = explode(",", $productEan);
 

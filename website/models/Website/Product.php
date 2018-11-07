@@ -3443,25 +3443,31 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		$ignoreFields = array();
 		foreach($attributes as $key=> $value) {
 			$attribute  =  $value->getName();
-			if(strpos($attribute,"price") === 0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0 || strpos($attribute,"String")>0) {
+			if(strpos($attribute,"price") === 0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"_not_configurable")>0 || strpos($attribute,"pimonly_")===0) {
 				$ignoreFields[]=$attribute;
 			}
 		}
 
 		$return = [];
 		foreach($attributes as $key=> $value) {
+
+		
 			$attribute  =  $value->getName();
 			$attributeLabel = $value->getTitle();
 
 			$attributeKey = $attributeLabel;
 			$attributeValue = $value->getForCsvExport($this);
+
+			//echo $attribute." ".$attributeValue."\n<br/>";
 			
 			if(in_array($attribute,$ignoreFields)) {
-				unset($attributeValue);
+				//unset($attributeValue);
 				continue;
 			}
+			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
 		}
+		die;
 		$return["className"] = "product";
 		$return["key"] = $this->getKey();
 		$return["published"] = $this->getPublished();

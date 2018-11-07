@@ -875,16 +875,22 @@ class ProductController extends Action
         $products = [];
         if(count($productIds) > 0) {
             //S'il yn a bcp dr'IDS, on chunk la grosse requette pouir éviter le timeout
-            $idsGrouped = array_chunk($productIds, 30); // array
+            $idsGrouped = array_chunk($productIds, 50); // array
 
             foreach ($idsGrouped as $group) {
                  $products = array_merge($this->getProductShortByIds($group),$products);
-                 break;
+                 
             }
            
         }
         else  if(count($productEans) > 0) {
-             $products = $this->getProductShortByIds($productEans);
+              //S'il yn a bcp dr'IDS, on chunk la grosse requette pouir éviter le timeout
+            $idsGrouped = array_chunk($productEans, 50); // array
+
+            foreach ($idsGrouped as $group) {
+                 $products = array_merge($this->getProductShortByIds(null,$group),$products);
+                 
+            }
         }
         
        

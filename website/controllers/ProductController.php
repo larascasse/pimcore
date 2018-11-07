@@ -870,45 +870,24 @@ class ProductController extends Action
             );
 
         $productIds = explode(",", $productId);
-        $productIds2 = [];
-        if(count($productIds) > 0) {
-            foreach ($productIds as $key => $value) {
-                if(strlen(trim($value)) > 0)
-                    $productIds2[] = "'".$value."'";
-            }
-            if(count($productIds2)> 0)
-                $conditionFilters[] = "oo_id IN (".implode(",", $productIds2).")";
-        }
-
         $productEans = explode(",", $productEan);
-        $productEans2 = [];
-        if(count($productEans) > 0) {
 
-            foreach ($productEans as $key => $value) {
-                if(strlen(trim($value)) > 0)
-                    $productEans2[] = "'".$value."'";
+        $products = [];
+        if(count($productIds) > 0) {
+            //S'il yn a bcp dr'IDS, on chunk la grosse requette pouir éviter le timeout
+            $idsGrouped = array_chunk($productIds, 30); // array
+
+            foreach ($idsGrouped as $group) {
+                 $products = array_merge($this->getProductShortByIds($group),$products);
+                 
             }
-            if(count($productEans2)> 0)
-            $conditionFilters[] = "ean IN (".implode(",", $productEans2).")";
+           
         }
-
-
-        $condition = "(".implode(" AND ", $conditionFilters).")";
-
-      
-        $productList->setCondition($condition);
-        //$productList->setLimit(15);
-
-
-
-
-        $productList->load();
-        $products=array();
-         //Object_Abstract::setGetInheritedValues(true); 
-        foreach ($productList as $product) {
-           $products[] = $product->getShortArray();
-
+        else  if(count($productEans) > 0) {
+             $products = $this->getProductShortByIds($productEans);
         }
+        
+       
         // $products["condtion"] = $condition 
 
         header('Content-Type: application/json');
@@ -917,6 +896,47 @@ class ProductController extends Action
 
        // $this->response = $products;
        // $this->_helper->json->sendJson($this->response);
+    }
+
+    public function getProductShortByIds($productIds = array()) {
+        // get a list of news objects and order them by date
+        $productList = new Object_Product_List();
+        //$conditionFilters[] = array("lENGTH(code)>0","ean is NULL");
+    
+
+        $conditionFilters = array(
+                "lENGTH(code)>0",
+                //"(ean = '".$productEan."' OR oo_id = '".$productId."')",
+               // "(ean IN (".$productEan.") OR oo_id = '".$productId."')",
+
+            );
+
+        $productIds2 = [];
+        if(count($productIds) > 0) {
+            foreach ($productIds as $key => $value) {
+                if(strlen(trim($value)) > 0)
+                    $productIds2[] = "'".$value."'";
+            }
+            if(count($productIds2)> 0) {
+                $conditionFilters[] = "(oo_id IN (".implode(",", $productIds2).") OR ean IN (".implode(",", $productIds2)."))";
+            }
+        }
+
+
+
+        $condition = "(".implode(" AND ", $conditionFilters).")";
+
+      
+        $productList->setCondition($condition);
+        $productList->load();
+        $products=array();
+         //Object_Abstract::setGetInheritedValues(true); 
+        foreach ($productList as $product) {
+           $products[] = $product->getShortArray();
+
+        }
+        return $products;
+
     }
 
     

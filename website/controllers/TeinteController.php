@@ -176,6 +176,8 @@ class TeinteController extends Action
 
         $condition = "(".implode(" AND ", $conditionFilters).")";
 
+        print_r($condition);
+        die;
 
         $teinteList->setCondition($condition);
    

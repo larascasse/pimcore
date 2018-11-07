@@ -888,7 +888,7 @@ class ProductController extends Action
 
       
         $productList->setCondition($condition);
-        $productList->setLimit(15);
+        //$productList->setLimit(15);
 
 
 
@@ -900,6 +900,7 @@ class ProductController extends Action
            $products[] = $product->getShortArray();
 
         }
+        // $products["condtion"] = $condition 
         $this->response = $products;
         $this->_helper->json->sendJson($this->response);
     }

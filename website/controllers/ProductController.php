@@ -836,6 +836,9 @@ class ProductController extends Action
         ini_set("max_execution_time", 3600);
         set_time_limit(3600);
 
+        ini_set('mysql.connect_timeout', 300);
+        ini_set('default_socket_timeout',300);
+
         @ini_set("memory_limit", "2024M");
 
          $front = \Zend_Controller_Front::getInstance();

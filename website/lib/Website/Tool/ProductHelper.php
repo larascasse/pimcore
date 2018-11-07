@@ -41,7 +41,7 @@ class ProductHelper
 
         foreach ($childrenSkus as $childId) {
 
-            $childProduct = \Pimcore\Model\Object::getById($childId,true);
+            $childProduct = \Pimcore\Model\Object::getById($childId);
 
             //print_r($childProduct);
        
@@ -72,10 +72,10 @@ class ProductHelper
                 
 
 
-                if(in_array($key,$configurableFields)) {
+                if(in_array($field->name,$configurableFields)) {
                     
                     $key =  $field->name;
-                $value =  $child[$key];
+                    $value =  $child[$key];
                 
                    //echo $key." ".$value."\n\n";
 
@@ -103,18 +103,18 @@ class ProductHelper
                     }
 
 
-                    if($key=="longueur" && isset($child['longueur_txt']) && strlen(trim($child['longueur_txt']))>0) {
+                    if($key=="longueur" && isset($childAllValues['longueur_txt']) && strlen(trim($childAllValues['longueur_txt']))>0) {
                         continue;
                     }
-                    else if($key=="largeur" && isset($child['largeur_txt']) && strlen(trim($child['largeur_txt']))>0) {
+                    else if($key=="largeur" && isset($childAllValues['largeur_txt']) && strlen(trim($childAllValues['largeur_txt']))>0) {
 
                         continue;
                     }
-                    else if($key=="epaisseur" && isset($child['epaisseur_txt']) && strlen(trim($child['epaisseur_txt']))>0) {
+                    else if($key=="epaisseur" && isset($childAllValues['epaisseur_txt']) && strlen(trim($childAllValues['epaisseur_txt']))>0) {
                         continue;
                     }
 
-                    if($key=="mage_section" && (!isset($childAllValues['mage_use_section_as_configurable']) ||  !$child['mage_use_section_as_configurable'])) {
+                    if($key=="mage_section" && (!isset($childAllValues['mage_use_section_as_configurable']) ||  !$childAllValues['mage_use_section_as_configurable'])) {
                         continue;
                     }
 

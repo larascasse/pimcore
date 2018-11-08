@@ -7,6 +7,7 @@ class Website_Product extends Object_Product {
 
 	private $_teintePath;
 	private $_choixString;
+	private $_finitionString;
 	private $_characteristicsArray;
 	private $_imageAssetArray;
 	/**
@@ -170,6 +171,10 @@ class Website_Product extends Object_Product {
 
     private function getSingleTaxonomyString($field) {
 
+    	$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+
     	$taxonomies = $this->getSelfAndChildrenTaxonomyObjects($field);
 		$varationString = "";
 		$childsTaxonomie = array();
@@ -184,6 +189,8 @@ class Website_Product extends Object_Product {
 			$varationString= implode(" ou ",$childsTaxonomie);
 
 		}
+
+		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return $varationString;
 
 	}
@@ -308,38 +315,74 @@ class Website_Product extends Object_Product {
 
 	public function getFinitionString () {
 
+		//Bizzare, on perd des fois l'ignertiotan,ce ...
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+		//echo "getFinitionString ... ".$this->getEan();
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"finition");
+
+		//print_r($optionsSelect2);
 		$value = $this->getFinition();
+		//echo $value." ".$optionsSelect2[$value]." ".$this->isParquet().array_key_exists($value,$optionsSelect2)."\n";
+
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
-		if($this->isParquet() && strlen($value) == 0)
-			return "Aucune";
+		//echo $this->getId()." ".$value." ".(strlen($value) == 0)." ??\n";
+
+
+
+		if($this->isParquet() && strlen($value) == 0) {
+			//echo "BAHM \n";
+		
+			$value =  "Aucune";
+				
+		}
+		//echo  $this->getId()."-> ".$value." ".$optionsSelect2[$value]." ".$this->isParquet().array_key_exists($value,$optionsSelect2)."\n";
+
+		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return $value;
 		
 	}
 	public function getTraitement_surfaceString () {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"traitement_surface");
 		$value = $this->geTtraitement_surface();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
 		if($this->isParquet() && strlen($value) == 0)
-			return "Aucun";
+			$value = "Aucun";
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $value;
 	}
 
 	public function getMotifString () {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"motif");
 		$value = $this->getMotif();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
 		if($this->isParquet() && strlen($value) == 0)
-			return "Lame droite";
+			$value =  "Lame droite";
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $value;
 	}
 
 	public function getSupportString() {
-		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"support");
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+
+   		 $optionsSelect2 = Object_Service::getOptionsForSelectField($this,"support");
 		$value = $this->getSupport();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
 		if($this->isParquetMassif() && strlen($value) == 0)
-			return "Massif";
+			$value =  "Massif";
+
+
 		return $value;
 	}
 	
@@ -3304,11 +3347,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
     	$short_name = str_ireplace("Parquet ", "", $short_name);
     	
-    	//$short_name = str_ireplace($this->getFinitionString().".", "", $short_name);
 
     	//$isSimpleTeinte = 
     	//print_r($this->getPimonly_teinte_rel());
     	$teintesObj = $this->getPimonly_teinte_rel();
+    	$finition 	= $this->getFinitionString();
 
     	$removeTeinte = true;
     	$removeTeinte = strlen($short_name)>60 && $removeTeinte;
@@ -3316,13 +3359,13 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	//Ex pour le 3 frises
     	/*3524830060432, 3524830049147, 3524830060456*/
     	if($removeTeinte &&  is_array($teintesObj) && count($teintesObj) >0 ) {
-    		if(stristr($short_name,$this->getFinitionString())) {
+    		if(stristr($short_name,$finition)) {
     			$removeTeinte = false;
     		}
     	}
 
     	if($removeTeinte)
-        	$short_name = str_ireplace($this->getFinitionString(), "", $short_name);
+        	$short_name = str_ireplace($finition, "", $short_name);
     	
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
@@ -3461,7 +3504,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 				//unset($attributeValue);
 				continue;
 			}
-			
+
 			$attributeValue = $value->getForCsvExport($this);
 
 			//echo $attribute." ".$attributeValue."\n<br/>";

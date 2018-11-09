@@ -20,7 +20,7 @@ class ProductHelper
        
     
         $childConfigurableFields = array();
-        $configurableFields =array(,"configurable_free_1","volume","subtype","finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
+        $configurableFields =array("configurable_free_1","volume","subtype","finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
         $latestChild = null;
 
         $ignoreFields = array();

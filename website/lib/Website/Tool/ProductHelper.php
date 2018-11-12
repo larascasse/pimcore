@@ -46,6 +46,11 @@ class ProductHelper
             $childProduct = \Pimcore\Model\Object::getById($childId);
 
             //print_r($childProduct);
+
+             if($product_type == "")
+                $product_type =  $childProduct->getProduct_type();
+
+            
        
            
 
@@ -67,10 +72,7 @@ class ProductHelper
                 }
             }
 
-            if($product_type == "")
-                $product_type = $childAllValues[""];
-
-            
+           
             
 
             foreach ($fields as $field) {

@@ -38,7 +38,7 @@ class Website_Taxonomy extends Object_Taxonomy {
 
 // and optionally a related list
 
-class Website_Article_List extends Object_Article_List {
+class Website_Taxonomy_List extends Object_Taxonomy_List {
 
     
 }

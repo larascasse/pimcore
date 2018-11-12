@@ -34,8 +34,10 @@ class ProductHelper
         $inheritance = Model\Object\AbstractObject::getGetInheritedValues();
         Model\Object\AbstractObject::setGetInheritedValues(true);
 
-        
-      
+        //on va recherche le type de produit pour gérer 
+        // le configurable par defaut si un seul produit configurable
+        $product_type = "";
+
 
 
 
@@ -64,6 +66,9 @@ class ProductHelper
                   $child[$field->name] = $value;
                 }
             }
+
+            if($product_type == "")
+                $product_type = $childAllValues[""];
 
             
             
@@ -214,7 +219,20 @@ class ProductHelper
 
         //Gesion du mono sku
         if(count($childrenSkus) == 1 && $attributesLabel=="") {
-            $attributesLabel = "choix_txt";
+            switch ($product_type) {
+                case 'sol-stratifie':
+                case 'sol-plaque':
+                    //Collection
+                    $attributesLabel = "configurable_free_1";
+                    break;
+                case 'terrasse':
+                    $attributesLabel = "fixation";
+                    break;
+                default:
+                    $attributesLabel = "choix_txt";
+                    break;
+            }
+            
         }
 
 

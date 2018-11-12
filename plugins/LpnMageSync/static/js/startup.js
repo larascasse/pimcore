@@ -210,7 +210,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     syncTaxonomies : function () {
        console.log("this",this)
        //var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
-       var url = '/plugin/LpnMageSync/index/publish_taxonomies';///key='+this.data.general.o_key;
+       var url = 'http://shopdev/plugin/LpnMageSync/index/publish_taxonomies';///key='+this.data.general.o_key;
        //console.log(url,this.data,this.general)
        //console.log(url,this.data,this.key)
        //alert(url);

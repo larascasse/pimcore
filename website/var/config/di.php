@@ -10,6 +10,9 @@ return [
     'Pimcore\Model\Object\ProjectCategory' => DI\object('Website\ProjectCategory'),
     'Pimcore\Model\Object\ProjectPost\Listing' => DI\object('Website\ProjectPost\Listing'),
     //'Pimcore\Model\Asset\Image' => DI\object('Website_Image'),
-     'Pimcore\Model\Object\Article' => DI\object('Website_Article'),
+    'Pimcore\Model\Object\Article' => DI\object('Website_Article'),
     'Pimcore\Model\Object\Article\List' => DI\object('Website_Article_List'),
+    //
+    'Pimcore\Model\Object\Taxonomy' => DI\object('Website_Taxonomy'),
+    'Pimcore\Model\Object\Taxonomy\List' => DI\object('Website_Taxonomy_List'),
 ];

@@ -162,7 +162,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $key =  $this->getParam("key");
 
 
-       	  $url = 'https://shopdev.laparqueterienouvelle.fr/LPN/sync_pim_taxonomies.php';
+       	  $url = 'http://shopdev.laparqueterienouvelle.fr/LPN/sync_pim_taxonomies.php';
        	  $params = array();
 		      $params["time"] = time();
 

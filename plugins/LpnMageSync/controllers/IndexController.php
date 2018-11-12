@@ -117,22 +117,59 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
     public function publishCmsBlockAction() {
 
 
+        $this->disableLayout();
+
+          $this->disableViewAutoRender();
+
+          $key =  $this->getParam("key");
+          $real =  $this->getParam("real");
+
+
+          $url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php';
+          $params = array();
+      $params["time"] = time();
+
+        if($key && strlen($key)>0)
+          $params["key"] = $key;
+        else if($real && strlen($real)>0)
+          $params["real"] = $real;
+
+
+        $content = \Pimcore\Tool::getHttpData($url,$params);
+        
+        $this->response = array(
+          "success" => "true", 
+          "content"=>$content,
+          "message"=>$content,
+          "url" => $url,
+          //"params" =>implode(",",array_keys($params)),
+          "params" =>serialize($params)
+
+        );
+          
+        $this->_helper->json->sendJson($this->response);
+            
+       
+    }
+
+    public function publishTaxonomiesAction() {
+
+
     	  $this->disableLayout();
 
        	  $this->disableViewAutoRender();
 
        	  $key =  $this->getParam("key");
-          $real =  $this->getParam("real");
 
 
-       	  $url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php';
+       	  $url = 'https://shopdev.laparqueterienouvelle.fr/LPN/sync_pim_taxonomies.php';
        	  $params = array();
-		  $params["time"] = time();
+		      $params["time"] = time();
 
         if($key && strlen($key)>0)
 		      $params["key"] = $key;
-        else if($real && strlen($real)>0)
-          $params["real"] = $real;
+        
+
 
 
 	    	$content = \Pimcore\Tool::getHttpData($url,$params);

@@ -10,7 +10,7 @@ class Website_Taxonomy extends Object_Taxonomy {
          $itemData["id"] = $this->getId();
          $itemData["modificationDate"] = $this->o_modificationDate;
          $itemData["key"] = $this->o_key;
-         $itemData["path"] = str_replace('/taxonomies/','',$this->getPath().$this->o_key);
+         $itemData["path"] = str_replace('/taxonomies/','',$this->getPath().$this->getCode());
          $itemData["mage_identifier"] = $this->getMageIdentifier();
          $itemData["code"] = $this->getCode();
          $itemData["label"] = $this->getLabel();

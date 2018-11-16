@@ -84,7 +84,13 @@ class TeinteController extends Action
 
         $list = new Object_Teinte_List();
         $conditionFilters = array(
-            "o_path LIKE '/teintes/teintes/_import_%' OR o_path LIKE '/teintes/teintes/bambou%' OR o_path LIKE '/teintes/teintes/placage%' OR o_path LIKE '/teintes/teintes/stratifie%'");
+            "o_path LIKE '/teintes/teintes/parquet%' 
+            OR o_path LIKE '/teintes/teintes/bambou%' 
+            OR o_path LIKE '/teintes/teintes/placage%' 
+            OR o_path LIKE '/teintes/teintes/stratifie%'
+            OR o_path LIKE '/teintes/teintes/terrasse%'
+
+            ");
 
         $list->setCondition(implode(" AND ", $conditionFilters));
 

@@ -419,6 +419,7 @@
         $overwrite = true;
         $canInsert = true;
         $isUpdating = false;
+
         if ($canInsert && $objectKey && $parent) {
 
             
@@ -946,6 +947,7 @@
         $keyCol = 1;
 
         $userId = 6;
+        $job = "import";
 
         
         $class = Object_Class::getById($classId );
@@ -981,8 +983,7 @@
                 //Pad d'object Parrent, on le cree
                 $articleParent = $this->createArticle($product);
                 if(!is_object($articleParent)) {
-                    echo 'Creation article parent impossoble '.$product["ean"]."skip\n";
-                    return;
+                    return ['Creation article parent impossible '.$product["ean"]."skip\n"];
                 }
 
             }
@@ -1007,12 +1008,12 @@
         else {
            
             if(!$canCreate) {
-                 $returnMessage[] =  $product["ean"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n";
+                 return  $product["ean"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n";
                  /*if($product["ean"]=='0001162502000') {
                     print_r($product);
                     die;
                     }*/
-                 return;
+                 
              }
              else
                  $returnMessage[] = "\n\n*********  ".$product["ean"]." n'existe pas  et sera crée ****** \n";
@@ -1036,8 +1037,8 @@
                 //echo "article existe ".$articleParent->getFullPath()."\n";
             }
             else {
-                 echo "Article parent n'existe pas... SKIP\n";
-                return;
+                 return  ["Article parent n'existe pas... SKIP\n"];
+              
             }
 
            
@@ -1051,11 +1052,12 @@
                   $object = new $className();
                 }
                 else {
-                  echo $product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n";
-                  return false;
+                  return [$product["ean"]." ".$product["name"]." n'existe pas et ne sera pas crée\n"];
+               
                 }
 
-            } else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
+            } 
+            else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
                 //delete the old object it is of a different class
                 $object->delete();
 
@@ -1064,11 +1066,11 @@
                   $object = new $className();
                 }
                 else {
-                  echo $product["ean"]." ".$product["name"]." existe  sous une autre class : SKIP\n";
-                  return false;
+                  return [$product["ean"]." ".$product["name"]." existe  sous une autre class : SKIP\n"];
                 }
 
-            } else if (object instanceof Object_Folder) {
+            } 
+            else if (object instanceof Object_Folder) {
                 //delete the folder
                
                 if($canCreate) {
@@ -1076,8 +1078,7 @@
                   $object = new $className();
                 }
                 else {
-                  echo $product["ean"]." ".$product["name"]." est un dossier : SKIP\n";
-                  return false;
+                  return [$product["ean"]." ".$product["name"]." est un dossier : SKIP\n"];
                 }
 
             } else {
@@ -1240,11 +1241,14 @@
                
 
             } catch (Exception $e) {
-                echo($e);
-                echo "Error save ".$e->getMessage()." ".$objectKey." ".$object->getFullPath()."\n\n";
+                //echo($e);
+                $returnMessage[] = "Error save ".$e->getMessage()." ".$objectKey." ".$object->getFullPath()."\n\n";
                 //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
             }
              Object_Abstract::setGetInheritedValues($inheritedValues);
+        }
+        else {
+             $returnMessage[] = "row ".$job." SKIPPED  canInsert:".$canInsert. "objectKey : ".$objectKey;
         }
 
         if(count( $returnMessage) > 0) {
@@ -1252,11 +1256,16 @@
             return $returnMessage;
         }
 
-        return true;
+        return "ZARB";
 
 
         //$this->_helper->json(array("success" => $success));
     }
+
+
+
+
+
 
     public function importProductPrice($product) {
         Object_Abstract::setGetInheritedValues(false);
@@ -1316,6 +1325,10 @@
 
         //$this->_helper->json(array("success" => $success));
     }
+
+
+
+
 
     public function clearInheritedValues($product) {
         //if($product["ean"]!="3760102970126")

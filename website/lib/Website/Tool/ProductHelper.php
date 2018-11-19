@@ -65,7 +65,7 @@ class ProductHelper
        
            
 
-            if(!($childProduct instanceof Object_Product))
+            if(!($childProduct instanceof Website_Product))
                 continue;
 
 
@@ -75,6 +75,8 @@ class ProductHelper
 
              $child = array();
              $childAllValues = array();
+
+              echo "GO";
 
             foreach ($fields as $field) {
                 echo $field->name;

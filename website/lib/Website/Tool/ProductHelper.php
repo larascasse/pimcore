@@ -52,25 +52,20 @@ class ProductHelper
         print_r($childrenSkus);
         print_r($retrievableAttributes);
 
-
+        $childProducts = [];
         foreach ($childrenSkus as $childId) {
-
-            echo $childId. "//";
-
             $childProduct = \Pimcore\Model\Object::getById($childId);
+            if($childProduct instanceof Website_Product) {
+                echo "KKKKKK";
+                $childProducts[] = $childProduct;
+            }
 
-            echo get_class($childProduct);
 
-            
-       
+
+
+        foreach ($childProducts as $childProduct) {
+
            
-
-            if(!($childProduct instanceof Website_Product)) {
-                echo $childProduct->getId()." ".(($childProduct instanceof Website_Product)?"Product!!!":"not producgt")."\n";
-
-                continue;
-                 }
-
 
              if($product_type == "")
                 $product_type =  $childProduct->getProduct_type();

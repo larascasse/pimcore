@@ -21,6 +21,15 @@ class ProductHelper
     
         $childConfigurableFields = array();
         $configurableFields =array("configurable_free_1","volume","subtype","finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString");
+
+        
+        $retrievableAttributes = [];
+        foreach ($configurableFields as $key => $value) {
+            $retrievableAttributes [] = $value."_not_configurable";
+            
+        }
+        $retrievableAttributes [] = "mage_use_section_as_configurable";
+
         $latestChild = null;
 
         $ignoreFields = array();
@@ -47,9 +56,6 @@ class ProductHelper
 
             //print_r($childProduct);
 
-             if($product_type == "")
-                $product_type =  $childProduct->getProduct_type();
-
             
        
            
@@ -57,18 +63,28 @@ class ProductHelper
             if($childProduct instanceof Object_Product)
                 continue;
 
+
+             if($product_type == "")
+                $product_type =  $childProduct->getProduct_type();
+
+
              $child = array();
              $childAllValues = array();
 
             foreach ($fields as $field) {
-
-                $value = $field->getForCsvExport($childProduct);
-                $childAllValues[$field->name] = $value;
                 
-                //On devrait virer les obsoletes
-                if(in_array($field->name,$configurableFields)) {
-                  //echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
-                  $child[$field->name] = $value;
+                //MPB recusrion
+                if(in_array($field->name, $retrievableAttributes))
+                    
+
+                    $value = $field->getForCsvExport($childProduct);
+                    $childAllValues[$field->name] = $value;
+                
+                    //On devrait virer les obsoletes
+                    if(in_array($field->name,$configurableFields)) {
+                      //echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
+                      $child[$field->name] = $value;
+                    }
                 }
             }
 

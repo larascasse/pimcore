@@ -41,7 +41,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         } 
 
         //taxonomu
-        if(obj.data.general.o_classId==6) {
+        else if(obj.data.general.o_classId==6) {
 
              var menu = new Ext.SplitButton({
                 text: t('sync magento'),
@@ -53,7 +53,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
             obj.toolbar.insert(5, menu);
         }
         //withchildren,configurable,create
-        if(obj.data.general.o_classId==5) {
+        else if(obj.data.general.o_classId==5) {
 
              var menu = new Ext.SplitButton({
                 text: t('sync magento + enfants'),

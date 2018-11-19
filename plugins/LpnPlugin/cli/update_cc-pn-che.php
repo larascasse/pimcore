@@ -142,7 +142,7 @@ Usé,use
 
         $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
 
-        if(stristr($code,"fvd")) {
+        if(stristr($code,"fv")) {
 
             if($object->getLongueur() == 6000) {
                 $object->setValue("pimonly_name_suffixe",$suffixeEan."x3000-6000");
@@ -150,7 +150,7 @@ Usé,use
             }
 
             elseif($object->getLongueur() == 5000) {
-                $object->setValue("pimonly_name_suffixe",$suffixeEan."x3000-6000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x3000-5000");
                 $object->setValue('longueur_txt','Longueurs variables de 2000 à 5000 mm');
             }
         }

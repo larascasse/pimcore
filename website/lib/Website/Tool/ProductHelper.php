@@ -26,6 +26,7 @@ class ProductHelper
         $retrievableAttributes = [];
         foreach ($configurableFields as $key => $value) {
             $retrievableAttributes [] = $value."_not_configurable";
+            $retrievableAttributes [] = $value."String";
             
         }
         $retrievableAttributes [] = "mage_use_section_as_configurable";

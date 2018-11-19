@@ -119,17 +119,16 @@ Usé,use
         
 
         if(stristr($code,"fv")) {
-           $suffixe .= " brut";
+           $suffixe .= " brut ".$object->getChoixString()." longueurs variables";
            $parent->setValue('configurable_free_1',"Longueurs variables");
       
         }
         else {
-            $suffixe .= " brut";
+            $suffixe .= " brut ".$object->getChoixString()." longueurs fixes";
             $parent->setValue('configurable_free_1',"Longueurs fixes");
         }
 
-         //melange de choix dans Scienergie.. on passe par l'EAN
-        $suffixe .= " ".$object->getChoixString();
+      
 
         
         $parent->setValue('pimonly_name_suffixe',trim($suffixe));

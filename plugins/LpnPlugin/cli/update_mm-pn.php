@@ -192,6 +192,23 @@ foreach ($list->getObjects() as $object) {
         $object->setSolRaffraichissant("");
         */
 
+         $suffixe = "";
+        if(stristr($code,"mv")) {
+           $suffixe .= " brut ".$object->getChoixString()." longueurs variables";
+           $parent->setValue('configurable_free_1',"Longueurs variables");
+      
+        }
+        else {
+            $suffixe .= " brut ".$object->getChoixString()." longueurs fixes";
+            $parent->setValue('configurable_free_1',"Longueurs fixes");
+        }
+        $parent->setValue('pimonly_name_suffixe',trim($suffixe));
+        $parent->setValue('name',null);
+        $parent->setValue('short_name',null);
+         $parent->save();
+
+
+       
         $object->save();
     
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();

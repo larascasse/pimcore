@@ -66,7 +66,7 @@ class ProductHelper
            
 
             if(!($childProduct instanceof Website_Product)) {
-                echo $childProduct->getById();
+                echo $childProduct->getId();
 
                 continue;
                  }

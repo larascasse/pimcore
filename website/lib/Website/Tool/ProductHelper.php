@@ -83,7 +83,7 @@ class ProductHelper
                 
                     //On devrait virer les obsoletes
                     if(in_array($field->name,$configurableFields)) {
-                      //echo $field->name."-".$field->getForCsvExport($childProduct)."\n";
+                      echo $field->name."-".$value."\n";
                       $child[$field->name] = $value;
                     }
                 }

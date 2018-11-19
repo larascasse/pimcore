@@ -26,6 +26,7 @@ class ProductHelper
         
         $retrievableAttributes = [];
         foreach ($configurableFields as $key => $value) {
+            $retrievableAttributes [] = $value;
             $retrievableAttributes [] = $value."_not_configurable";
             $retrievableAttributes [] = $value."String";
             
@@ -76,16 +77,16 @@ class ProductHelper
 
             foreach ($fields as $field) {
                 //MPB recusrion
-                echo $field->name."- 1"."\n";
+                //echo $field->name."- 1"."\n";
                 if(in_array($field->name, $retrievableAttributes)) {
-                    echo $field->name."- 2"."\n";
+                    //echo $field->name."- 2"."\n";
                     
                     $value = $field->getForCsvExport($childProduct);
                     $childAllValues[$field->name] = $value;
                 
                     //On devrait virer les obsoletes
                     if(in_array($field->name,$configurableFields)) {
-                      echo $field->name."-".$value."\n";
+                      //echo $field->name."-".$value."\n";
                       $child[$field->name] = $value;
                     }
                 }

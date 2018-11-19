@@ -679,7 +679,10 @@ class Website_Product extends Object_Product {
 			'qualite',
 			'is_lot',
 			'childrenSimpleProductIds_flat',
-			'configurableFields'
+			'configurableFields',
+			'configurable_free_1',
+			'configurable_free_2',
+			'product_type',
 
 
 			);

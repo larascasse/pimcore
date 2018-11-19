@@ -59,7 +59,7 @@ class ProductHelper
 
             $childProduct = \Pimcore\Model\Object::getById($childId);
 
-            print_r($childProduct);
+            //print_r($childProduct);
 
             
        

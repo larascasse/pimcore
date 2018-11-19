@@ -66,7 +66,7 @@ class ProductHelper
            
 
             if(!($childProduct instanceof Website_Product)) {
-                echo $childProduct->getId()." ".($childProduct instanceof Website_Product)?"Product":"not producgt"."\n";
+                echo $childProduct->getId()." ".(($childProduct instanceof Website_Product)?"Product!!!":"not producgt")."\n";
 
                 continue;
                  }

@@ -54,7 +54,9 @@ class ProductHelper
 
         $childProducts = [];
         foreach ($childrenSkus as $childId) {
+             echo "BBB".$childId;
             $childProduct = Website_Product::getById($childId);
+            echo "AAA";
             if($childProduct instanceof Website_Product) {
                 echo "KKKKKK";
                 $childProducts[] = $childProduct;

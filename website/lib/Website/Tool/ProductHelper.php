@@ -9,7 +9,7 @@ use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
 use Website\Model\Asset\Image;
-use Website;
+
 class ProductHelper
 {
     
@@ -56,9 +56,9 @@ class ProductHelper
         $childProducts = [];
         foreach ($childrenSkus as $childId) {
              echo "BBB".$childId;
-            $childProduct = Object_Product::getById($childId);
+            $childProduct = Pimcore\Model\Object\Product::getById($childId);
             echo "AAA";
-            if($childProduct instanceof Object_Product) {
+            if($childProduct instanceof Pimcore\Model\Object\Product) {
                 echo "KKKKKK";
                 $childProducts[] = $childProduct;
             }

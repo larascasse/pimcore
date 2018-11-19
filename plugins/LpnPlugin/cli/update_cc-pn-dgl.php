@@ -141,29 +141,31 @@ Usé,use
 
         //echo "\n set suffixe ".trim($suffixe)."\n";
 
+        $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
+
         if(stristr($code,"fvd")) {
 
             if($object->getLongueur() == 7000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x5000-7000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x5000-7000");
                 $object->setValue('longueur_txt','Longueurs variables de 5000 à 7000 mm');
             }
             elseif($object->getLongueur() == 5000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x2000-5000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x2000-5000");
                 $object->setValue('longueur_txt','Longueurs variables de 2000 à 5000 mm');
             }
         }
         else  {
 
             if($object->getLongueur() == 9000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x7500-9000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x7500-9000");
                 $object->setValue('longueur_txt','Longueur fixe de 7500 à 9000 mm');
             } 
             elseif($object->getLongueur() == 7000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x5500-7000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x5500-7000");
                 $object->setValue('longueur_txt','Longueur fixe de 5500 à 7000 mm');
             }
             elseif($object->getLongueur() == 5000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x1000-5000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x1000-5000");
                 $object->setValue('longueur_txt','Longueur fixe de 1000 à 5000 mm');
             }
         }

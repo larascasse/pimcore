@@ -161,16 +161,16 @@ Usé,use
                 $object->setValue('longueur_txt','Longueur fixe de 7500 à 8000 mm');
             } 
             elseif($object->getLongueur() == 7000) {
-                $object->setValue("pimonly_name_suffixe",$suffixeEan."6500-7000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x6500-7000");
                 $object->setValue('longueur_txt','Longueur fixe de 6500 à 7000 mm');
             }
 
             elseif($object->getLongueur() == 6000) {
-                $object->setValue("pimonly_name_suffixe",$suffixeEan."5000-6000");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x5000-6000");
                 $object->setValue('longueur_txt','Longueur fixe de 5000 à 6000 mm');
             }
             elseif($object->getLongueur() == 4500) {
-                $object->setValue("pimonly_name_suffixe",$suffixeEan."3000-4500");
+                $object->setValue("pimonly_name_suffixe",$suffixeEan."x3000-4500");
                 $object->setValue('longueur_txt','Longueur fixe de 3000 à 4500 mm');
             }
             elseif($object->getLongueur() == 2500) {

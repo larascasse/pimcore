@@ -61,7 +61,7 @@ class ProductHelper
                 echo "KKKKKK";
                 $childProducts[] = $childProduct;
             }
-
+        }
 
 
 

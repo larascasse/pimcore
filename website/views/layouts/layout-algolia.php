@@ -105,6 +105,8 @@
 
 <script src="/website/static_lpn/loader/jquery.loader.fullscreen.js"></script>
 
+<link rel="stylesheet" href="/website/static_lpn/blueimp/css/blueimp-gallery.min.css">
+<script src="/website/static_lpn/blueimp/js/blueimp-gallery.min.js"></script>
 
 </body>
 </html>

@@ -65,8 +65,11 @@ class ProductHelper
        
            
 
-            if(!($childProduct instanceof Website_Product))
+            if(!($childProduct instanceof Website_Product)) {
+                echo $childProduct->getById();
+
                 continue;
+                 }
 
 
              if($product_type == "")

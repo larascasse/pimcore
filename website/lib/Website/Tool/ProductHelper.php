@@ -49,6 +49,7 @@ class ProductHelper
         // le configurable par defaut si un seul produit configurable
         $product_type = "";
 
+        print_r($childrenSkus);
         print_r($retrievableAttributes);
 
 

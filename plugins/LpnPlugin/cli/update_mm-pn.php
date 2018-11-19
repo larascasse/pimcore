@@ -61,6 +61,10 @@ foreach ($list->getObjects() as $object) {
 
    $longueur_txt = "";
 
+
+
+
+
    //CHENE
 
    if($essence == "CHE") {
@@ -182,30 +186,9 @@ foreach ($list->getObjects() as $object) {
 
         $object->setValue('chanfreins',"2");
 
-        /*
-        $parent->setChauffantBasseTemperature("1");
-        $parent->setChauffantRadiantElectrique("1");
-        $parent->setSolRaffraichissant("0");
+       
 
-        $object->setChauffantBasseTemperature("");
-        $object->setChauffantRadiantElectrique("");
-        $object->setSolRaffraichissant("");
-        */
-
-         $suffixe = "";
-        if(stristr($code,"mv")) {
-           $suffixe .= " brut ".$object->getChoixString()." longueurs variables";
-           $parent->setValue('configurable_free_1',"Longueurs variables");
-      
-        }
-        else {
-            $suffixe .= " brut ".$object->getChoixString()." longueurs fixes";
-            $parent->setValue('configurable_free_1',"Longueurs fixes");
-        }
-        $parent->setValue('pimonly_name_suffixe',trim($suffixe));
-        $parent->setValue('name',null);
-        $parent->setValue('short_name',null);
-         $parent->save();
+        
 
 
        
@@ -357,6 +340,24 @@ foreach ($list->getObjects() as $object) {
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 
    }
+
+   if(strlen($object->getEan())>0) {
+       $suffixe = "";
+        if(stristr($code,"mv")) {
+           $suffixe .= " brut ".$object->getChoixString()." longueurs variables";
+           $parent->setValue('configurable_free_1',"Longueurs variables");
+      
+        }
+        else {
+            $suffixe .= " brut ".$object->getChoixString()." longueurs fixes";
+            $parent->setValue('configurable_free_1',"Longueurs fixes");
+        }
+        $parent->setValue('pimonly_name_suffixe',trim($suffixe));
+        $parent->setValue('name',null);
+        $parent->setValue('short_name',null);
+        $parent->save();
+        echo "\Article:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$parent->getPreviewUrl();
+    }
    //FIN CHENE
 
     

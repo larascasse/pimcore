@@ -50,8 +50,6 @@ class ProductHelper
         // le configurable par defaut si un seul produit configurable
         $product_type = "";
 
-        print_r($childrenSkus);
-        print_r($retrievableAttributes);
 
         $childProducts = [];
         foreach ($childrenSkus as $childId) {
@@ -74,14 +72,12 @@ class ProductHelper
              $child = array();
              $childAllValues = array();
 
-              echo "GO";
+
 
             foreach ($fields as $field) {
-                echo $field->name;
                 //MPB recusrion
                 if(in_array($field->name, $retrievableAttributes)) {
                     
-                     echo "OK";
                     $value = $field->getForCsvExport($childProduct);
                     $childAllValues[$field->name] = $value;
                 
@@ -92,9 +88,6 @@ class ProductHelper
                     }
                 }
             }
-
-           die;
-            
 
             foreach ($fields as $field) {
                 

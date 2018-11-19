@@ -54,7 +54,7 @@ class ProductHelper
 
         $childProducts = [];
         foreach ($childrenSkus as $childId) {
-            $childProduct = \Pimcore\Model\Object::getById($childId);
+            $childProduct = Website_Product::getById($childId);
             if($childProduct instanceof Website_Product) {
                 echo "KKKKKK";
                 $childProducts[] = $childProduct;

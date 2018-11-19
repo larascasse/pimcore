@@ -30,6 +30,7 @@ class ProductHelper
         }
         $retrievableAttributes [] = "mage_use_section_as_configurable";
 
+
         $latestChild = null;
 
         $ignoreFields = array();
@@ -74,7 +75,7 @@ class ProductHelper
             foreach ($fields as $field) {
                 
                 //MPB recusrion
-                if(in_array($field->name, $retrievableAttributes))
+                if(in_array($field->name, $retrievableAttributes)) {
                     
 
                     $value = $field->getForCsvExport($childProduct);

@@ -76,7 +76,9 @@ class ProductHelper
 
             foreach ($fields as $field) {
                 //MPB recusrion
+                echo $field->name."- 1"."\n";
                 if(in_array($field->name, $retrievableAttributes)) {
+                    echo $field->name."- 2"."\n";
                     
                     $value = $field->getForCsvExport($childProduct);
                     $childAllValues[$field->name] = $value;

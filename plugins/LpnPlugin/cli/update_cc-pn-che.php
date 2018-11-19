@@ -188,6 +188,7 @@ Usé,use
             
         } 
         $parent->setValue('chanfreins',"2");
+        $object->setValue('chanfreins',null);
         
         $parent->setChauffantBasseTemperature("1");
         $parent->setChauffantRadiantElectrique("1");

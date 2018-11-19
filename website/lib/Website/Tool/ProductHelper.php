@@ -62,7 +62,7 @@ class ProductHelper
        
            
 
-            if($childProduct instanceof Object_Product)
+            if(!$childProduct instanceof Object_Product)
                 continue;
 
 

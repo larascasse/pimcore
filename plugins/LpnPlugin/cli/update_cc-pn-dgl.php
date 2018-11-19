@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-pn%'
+       o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-pn/cc-pn-douglas%'
 
     ");
 
@@ -118,15 +118,18 @@ Usé,use
         $suffixe = "";
         
 
-        //melange de choix dans Scienergie.. on passe par l'EAN
-        $suffixe .= $object->getChoixString();
-
-        if(stristr($code,"fvd")) {
+        if(stristr($code,"fv")) {
            $suffixe .= " brut";
+           $parent->setValue('configurable_free_1',"Longueurs variables");
+      
         }
         else {
             $suffixe .= " brut";
+            $parent->setValue('configurable_free_1',"Longueurs fixes");
         }
+
+         //melange de choix dans Scienergie.. on passe par l'EAN
+        $suffixe .= " ".$object->getChoixString();
 
         
         $parent->setValue('pimonly_name_suffixe',trim($suffixe));
@@ -141,22 +144,27 @@ Usé,use
         if(stristr($code,"fvd")) {
 
             if($object->getLongueur() == 7000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section.", long. variables 5 à 7 m");
+                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x5000-7000");
+                $object->setValue('longueur_txt','Longueurs variables de 5000 à 7000 mm');
             }
             elseif($object->getLongueur() == 5000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section.", long. variables 2 à 5 m");
+                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x2000-5000");
+                $object->setValue('longueur_txt','Longueurs variables de 2000 à 5000 mm');
             }
         }
         else  {
 
             if($object->getLongueur() == 9000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section.", long. fixes de 7 à 9 m");
+                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x7500-9000");
+                $object->setValue('longueur_txt','Longueur fixe de 7500 à 9000 mm');
             } 
             elseif($object->getLongueur() == 7000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section.", long. fixes de 5 à 7 m");
+                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x5500-7000");
+                $object->setValue('longueur_txt','Longueur fixe de 5500 à 7000 mm');
             }
             elseif($object->getLongueur() == 5000) {
-                $object->setValue("pimonly_name_suffixe",$object->pimonly_section.", long. fixes de 2 à 5 m");
+                $object->setValue("pimonly_name_suffixe",$object->pimonly_section."x1000-5000");
+                $object->setValue('longueur_txt','Longueur fixe de 1000 à 5000 mm');
             }
         }
 
@@ -168,7 +176,7 @@ Usé,use
             $parent->setValue('name',null);
             
         } 
-        $parent->setValue('chanfreins',"2 ou rives abîmées");
+        $parent->setValue('chanfreins',"2");
         
         $parent->setChauffantBasseTemperature("1");
         $parent->setChauffantRadiantElectrique("1");

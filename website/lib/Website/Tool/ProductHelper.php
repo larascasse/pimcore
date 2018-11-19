@@ -93,7 +93,7 @@ class ProductHelper
                 }
             }
 
-           
+           die;
             
 
             foreach ($fields as $field) {

@@ -54,9 +54,11 @@ class ProductHelper
 
         foreach ($childrenSkus as $childId) {
 
+            echo $childId. "//";
+
             $childProduct = \Pimcore\Model\Object::getById($childId);
 
-            //print_r($childProduct);
+            print_r($childProduct);
 
             
        

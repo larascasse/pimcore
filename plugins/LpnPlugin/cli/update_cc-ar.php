@@ -96,7 +96,7 @@ Usé,use
                 $suffixeEan = '21x140/180/220x2000-3000';
                 $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
             }
-            else if($object->getLargeur()==720) {
+            else if($object->getLargeur()==780) {
                 $suffixeEan = '21x220/260/300x2000-3000';
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
             }

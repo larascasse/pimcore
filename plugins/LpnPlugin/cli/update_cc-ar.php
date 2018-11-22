@@ -84,13 +84,27 @@ Usé,use
 
     $suffixeEan = $object->getEpaisseur();
 
+    //Usée b rossé
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";
          $object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
          //EAN
          if(strlen($object->getEan())>0) {
-            $suffixeEan .= 'x'.$object->getLargeur().'x'.$object->getLongueur();
+
+            if($object->getLargeur()==540) {
+                $suffixeEan = '21x140/180/220x2000-3000';
+                $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+            }
+            else if($object->getLargeur()==720) {
+                $suffixeEan = '21x220/260/300x2000-3000';
+                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+            }
+            else  {
+                $suffixeEan = '21x'.$object->getLargeur().'x'.$object->getLongueur();
+                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+            }
+            
             $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 
@@ -159,21 +173,6 @@ Usé,use
         $object->setChauffantBasseTemperature("1");
         $object->setChauffantRadiantElectrique("1");
         $object->setSolRaffraichissant("0");
-
-       
-        //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
-        /* $parent = $object->getParent();
-        //On force le titre si plusiqueurs matieres
-        if(stristr($parent->getChoixString()," ou ")) {
-            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',null);
-
-        }  
-        else {
-            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport('cp'))." ".$object->pimonly_dimensions);
-            $parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
-        }*/
-
         
         $save=true;
 
@@ -199,50 +198,10 @@ Usé,use
 
 
     continue;
-    $values = array();
-    $objectToSave = Object::getById($object->getId());
-    foreach ($fieldsToClean as $key => $fieldName) {
-        # code...
-        
-        
 
-        $value = $object->getValueForFieldName($fieldName);
-        if(!($object->getParent() instanceof Website_Product)) {
-            $parentValue = $object->getParent()->getParent()->getValueForFieldName($fieldName);
-         
-        }
-        else {
-            $parentValue = $object->getParent()->getValueForFieldName($fieldName);
-        }
-
-        
-
-        if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
-            echo "--> nullify $fieldName : ".$object->getSku()."  -----    $value <-> $parentValue\n";
-            
-            
-            $values[$fieldName]=null;
-            
-
-
-            //$objectToSave->setPublished(true);
-            
-        }
-   
-    }
-
-    if(count( $values)>0) {
-        $objectToSave->setValues($values);
-        //print_r($values);
-
-        echo "\n";
-        $objectToSave->save();
-    }
     
-    
-
-    Object_Abstract::setGetInheritedValues($inheritance); 
 
 }
+Object_Abstract::setGetInheritedValues($inheritance); 
 \Pimcore\Model\Version::enable();
 ?>

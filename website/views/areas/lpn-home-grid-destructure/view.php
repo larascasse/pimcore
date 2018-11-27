@@ -109,7 +109,8 @@ while($this->block("contentblock")->loop()) {
 
                 switch ($i) {
                     case 0:
-
+                        if($hasText) 
+                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
                         break;
                     case 1:
                         if($hasText) 

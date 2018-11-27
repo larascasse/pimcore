@@ -55,7 +55,7 @@ $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h
 }
 else {
     $hasText =false;
-    $blocText = "";
+    $blocText = "Rien...";
 }
 
 echo $blocText ;

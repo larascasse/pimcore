@@ -331,11 +331,11 @@ while($this->block("contentblock")->loop()) {
             else if (
                 //A près le 1er
                 ($i==0 && $count==2)
-                || ($i==0 && $count==3 && $isVertical && !$isInverse)
+                || ($i==0 && ($count==3 || $count==7 || $count==11) && $isVertical && !$isInverse)
                 //A près le 12e
-                || ($i==1 && $count==3 && $isVertical && $isInverse)
-                || ($i==1 && $count==3 && !$isVertical)
-                || ($i==1 && $count==4)
+                || ($i==1 && ($count==3 || $count==7 || $count==11) && $isVertical && $isInverse)
+                || ($i==1 && ($count==3 || $count==7 || $count==11) && !$isVertical)
+                || ($i==1 && ($count==4 || $count==8 || $count==12))
             ) {
                 echo "</div>";
                 echo '<div class="grid-col">';

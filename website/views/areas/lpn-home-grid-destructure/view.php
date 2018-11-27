@@ -35,7 +35,7 @@ if($this->editmode) {  ?>
 $i==0;
 foreach ($colors as $color2) {
     ?>
-    <div class="col" style="height: 25px; display: block; background-color: <?php echo $color2?>">
+    <div class="col" style="height: 25px; display: block; background-color: <?php echo $color2?>;font-size:8px">
     <?php echo $color2 ?>
     </div>
    

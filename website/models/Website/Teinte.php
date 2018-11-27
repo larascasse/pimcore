@@ -165,10 +165,10 @@ class Website_Teinte extends Object_Teinte {
 	public function getShortArray() {
 		$attributes = $this->getClass()->getFieldDefinitions();
 
+
+		//On met ca pour eviter la bouvvle dans getForCsvExport
 		$ignoreFields = array("configurable_fields");
-		foreach($attributes as $key=> $value) {
-			$attribute  =  $value->getName();
-		}
+		
 
 		$return = [];
 		foreach($attributes as $key=> $value) {
@@ -193,10 +193,38 @@ class Website_Teinte extends Object_Teinte {
 			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
 		}
-	
+
+		switch ($return["product_type"]) {
+	        case 'parquet':
+	            $return["short_name"]  = "Parquet ".$return["name"];
+	            $return["name"]  = "Parquet ".$return["name"];
+	            break;
+
+	        case 'terrasse':
+	            $return["short_name"]  = "Terrasse ".$return["name"];
+	            $return["name"]  = "Terrasse ".$return["name"];
+	            break;
+	        case 'sol-stratifie':
+	            $return["short_name"]  = "Stratifié ".$return["name"];
+	            $return["name"]  = "Stratifié ".$return["name"];
+	            break;
+	         case 'sol-plaque':
+	            $return["short_name"]  = "Sol plaqué ".$return["name"];
+	            $return["name"]  = "Sol plaqué ".$return["name"];
+	            break;
+	        
+	        default:
+	             $return["short_name"]  = $return["name"];
+	             $return["name"]  = $return["name"];
+	            break;
+    	}
+
+		$return["mage_short_name"] = $return["mage_short_name"];
 		$return["configurable_fields"] = $this->getConfigurableFields();
+		$return["subtype"] = "teinte-".$return["product_type"];
 		$return["className"] = "teinte";
 		$return["key"] = $this->getKey();
+		$return["unite"] = "M2";
 		$return["published"] = $this->getPublished();
 
 		return $return;

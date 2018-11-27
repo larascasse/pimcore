@@ -48,7 +48,7 @@ $isDoubleSize=true;
 
 $simple=false;
 
-$hasText = strlen(trim($main_titre))>0 && strlen(trim($main_description))>0;
+$hasText = strlen(trim($main_titre->getData()))>0 && strlen(trim($main_description->getData()))>0;
 $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h2><p>'.$main_description.'</p></div>';
 
 echo $blocText ;

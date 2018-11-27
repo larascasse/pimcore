@@ -59,10 +59,9 @@ $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h
 }
 else {
     $hasText =false;
-    $blocText = "Rien...";
+    $blocText = "";
 }
 
-echo $blocText ;
 
 $blocClassOffseted = 'table-bloc-thumb-small';
 

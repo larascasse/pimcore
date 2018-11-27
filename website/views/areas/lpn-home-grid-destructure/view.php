@@ -2,6 +2,7 @@
  $count = $this->block("contentblock")->getCount();
  if(!$this->editmode) {
     $defaultGridMode = $this->select("grid-mode")->getData();
+    
     if(!$defaultGridMode) {
         $defaultGridMode = 'grid-destructuree';
 }
@@ -9,7 +10,7 @@
 
 
 ?>
-    <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
+<div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
 else {
     echo "<div>";
@@ -26,8 +27,12 @@ else {
                 ]
         ]);
 
-    echo '<h2>'.$main_titre = $this->input("main_titre", ["width" => 400,'placeholder'=>'Titre']).'</h2>';
-    echo $main_description = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+    $main_titre = $this->input("main_titre", ["width" => 400,'placeholder'=>'Titre']);
+    $main_description = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+
+
+    echo '<h2>'.$main_titre .'</h2>';
+    echo $main_description;
 
     
 }
@@ -46,7 +51,7 @@ $simple=false;
 $hasText = strlen(trim($main_titre))>0 && strlen(trim($main_description))>0;
 $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h2><p>'.$main_description.'</p></div>';
 
-echo $blocText;
+echo $blocText ;
 
 $blocClassOffseted = 'table-bloc-thumb-small';
 

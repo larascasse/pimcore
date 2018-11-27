@@ -48,7 +48,7 @@ $isDoubleSize=true;
 
 $simple=false;
 
-if(!$this->editmode && $main_titre && $main_description && !$main_titre->isEmpty() && !$main_description->isEmpty()) {
+if(!$this->editmode) {
 $hasText = strlen(trim($main_titre))>0 && strlen(trim($main_description->getData()))>0;
 $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h2><p>'.$main_description->getData().'</p></div>';
 

@@ -185,7 +185,8 @@ while($this->block("contentblock")->loop()) {
 
                         if($hasText) {
                             $pimcoreThimbClass = $isInverse?"magento_h_half":"magento_equigrid_v";
-                            $blocClass = $isInverse?$blocClassOffseted : "";
+                            $blocClass = $isInverse?"" : $blocClassOffseted;
+                           
                         }
 
                         break;
@@ -197,7 +198,7 @@ while($this->block("contentblock")->loop()) {
 
                         if($hasText) {
                             $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
-                            $blocClass = $isInverse?"" : $blocClassOffseted;
+                             $blocClass = $isInverse?$blocClassOffseted : "";
                             
                         }
                         
@@ -296,7 +297,7 @@ while($this->block("contentblock")->loop()) {
         
         ?>
 
-    <div class="table-bloc-thumb<?php echo $colFirst ?> <?php echo $blocClass ?>">
+    <div class="table-bloc-thumb<?php echo $colFirst ?> <?php echo $blocClassOffseted ?>">
         <div class="rollbloc">
 
         <?php 

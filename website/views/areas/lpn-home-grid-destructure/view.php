@@ -147,7 +147,7 @@ while($this->block("contentblock")->loop()) {
                         $blocClass = !$isInverse ? $blocClassOffseted:"";
 
                         if($hasText) {
-                            $pimcoreThimbClass = "magento_h_half";
+                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
                             $blocClass = "";
                         }
 

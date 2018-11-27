@@ -1,5 +1,63 @@
 <?php
- $count = $this->block("contentblock")->getCount();
+
+$colors=[
+    "#F6F5F2",
+    "#F3F4EF",
+    "#FCEFE9",
+    "#8C8782",
+    "#E4E4D2",
+    "#E8F3F3",
+    "#D1DFE0",
+
+    "#DAD7CB",
+    "#D0D5C1",
+    "#F2BFA9",
+    "#8C8782",
+    "#93924B",
+    "#A4CFCE",
+    "#487E85",
+
+    "#48B7C9",
+    "#505050",
+    "#7994A5",
+    "#3C6297",
+    "#065446",
+    "#027683",
+    "#DD5639",
+
+];
+$color = $this->input("color",["placeholder"=>"Couleur de fond"]);
+
+if($this->editmode) {  ?>
+
+<div class="row">
+<?php
+$i==0;
+foreach ($colors as $color2) {
+    ?>
+    <div class="col" style="height: 25px; display: block; background-color: <?php echo $color2?>">
+    <?php echo $color2 ?>
+    </div>
+   
+   <?php
+   if($i==(count($colors)-1))
+        echo "</div>";
+   else if(($i%7)==6) {
+         echo "</div>";
+         echo '<div class="row">';
+   }
+   
+
+   $i++;
+}
+
+    echo $color."<br />";
+}
+
+
+
+
+$count = $this->block("contentblock")->getCount();
 
 $main_titre         = $this->input("main_titre", ["width" => 800,'placeholder'=>'Titre']);
 $main_description   = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
@@ -15,6 +73,7 @@ $main_description   = $this->textarea("main_description", ["width" => 400,"heigh
 
 
 ?>
+<div class="grid-bkg-full" style="background-color: <?php echo $color->getData()?>">
 <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
 else {
@@ -372,4 +431,4 @@ while($this->block("contentblock")->loop()) {
 <!-- Fin Loop  -->
 <!--<div class="grid-bkg"></div>-->
 </div>
-
+</div>

@@ -169,11 +169,11 @@ while($this->block("contentblock")->loop()) {
                 switch ($i) {
                     case 0:
                         if($hasText) 
-                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
+                            $pimcoreThimbClass = $isInverse?"magento_gritext_v":"magento_gridtext_h";
                         break;
                     case 1:
                         if($hasText) 
-                            $pimcoreThimbClass = $isInverse?"magento_h_half":"magento_equigrid_v";
+                            $pimcoreThimbClass = $isInverse?"magento_gridtext_h":"magento_gritext_v";
                         
                         break;
 
@@ -185,18 +185,20 @@ while($this->block("contentblock")->loop()) {
                 switch ($i) {
                     case 0:
                         $pimcoreThimbClass = $isInverse ?"magento_h_half":"magento_equigrid_v";
+                        
                         if($hasText) {
-                            $pimcoreThimbClass = "magento_equigrid_v";
+                            $pimcoreThimbClass = "magento_gritext_v";
                             $blocClass = $isInverse?$blocClassOffseted : "";
                         }
                         break;
+                   
                     case 1:
                         $pimcoreThimbClass = "magento_h_half";
 
                         $blocClass = $isInverse ? $blocClassOffseted:"";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_h_half":"magento_equigrid_v";
+                            $pimcoreThimbClass = $isInverse?"magento_gridtext_h":"magento_gritext_v";
                             $blocClass = $isInverse? "" : $blocClassOffseted;
                         }
 
@@ -207,7 +209,7 @@ while($this->block("contentblock")->loop()) {
                         $blocClass = !$isInverse ? $blocClassOffseted:"";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
+                            $pimcoreThimbClass = $isInverse?"magento_gritext_v":"magento_gridtext_h";
                             $blocClass = "";
                         }
 
@@ -225,18 +227,18 @@ while($this->block("contentblock")->loop()) {
                          $pimcoreThimbClass = ($isVertical && !$isInverse) ?"magento_equigrid_v":"magento_h_half";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
+                            $pimcoreThimbClass = $isInverse?"magento_gritext_v":"magento_gridtext_h";
                             $blocClass = $isInverse?$blocClassOffseted : "";
                         }
 
                         break;
                     
                     case 1:
-                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_h_half";
+                        $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_gritext_v":"magento_h_half";
                         $blocClass = ($isVertical && !$isInverse) ? $blocClassOffseted:"";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_h_half":"magento_equigrid_v";
+                            $pimcoreThimbClass = $isInverse?"magento_gridtext_h":"magento_gritext_v";
                             $blocClass = $isInverse?"" : $blocClassOffseted;
                         }
 
@@ -246,7 +248,7 @@ while($this->block("contentblock")->loop()) {
                         $pimcoreThimbClass = ($isVertical && $isInverse) ?"magento_equigrid_v":"magento_h_half";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_h_half":"magento_equigrid_v";
+                            $pimcoreThimbClass = $isInverse?"magento_gridtext_h":"magento_gritext_v";
                             $blocClass = $isInverse?"" : $blocClassOffseted;
                            
                         }
@@ -260,7 +262,7 @@ while($this->block("contentblock")->loop()) {
                         $blocClass = ($isVertical && !$isInverse) ? $blocClassOffseted:"";
 
                         if($hasText) {
-                            $pimcoreThimbClass = $isInverse?"magento_equigrid_v":"magento_h_half";
+                            $pimcoreThimbClass = $isInverse?"magento_gritext_v":"magento_gridtext_h";
                              $blocClass = $isInverse?$blocClassOffseted : "";
                             
                         }

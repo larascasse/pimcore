@@ -170,7 +170,7 @@ while($this->block("contentblock")->loop()) {
                     case 0:
                         if($hasText) 
                             $pimcoreThimbClass = $isInverse?"magento_gritext_v":"magento_gridtext_h";
-                            $blocClass = $isInverse? "" : $blocClassOffseted;;
+                            $blocClass = $isInverse? $blocClassOffseted : $blocClassOffseted;
                         break;
                     case 1:
                         if($hasText) 

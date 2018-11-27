@@ -1,5 +1,10 @@
 <?php
  $count = $this->block("contentblock")->getCount();
+
+$main_titre         = $this->input("main_titre", ["width" => 800,'placeholder'=>'Titre']);
+$main_description   = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+
+
  if(!$this->editmode) {
     $defaultGridMode = $this->select("grid-mode")->getData();
     
@@ -27,8 +32,7 @@ else {
                 ]
         ]);
 
-    $main_titre = $this->input("main_titre", ["width" => 400,'placeholder'=>'Titre']);
-    $main_description = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
+   
 
 
     echo '<h2>'.$main_titre .'</h2>';

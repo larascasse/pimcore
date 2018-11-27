@@ -44,6 +44,11 @@ class LpnController extends Action
         $this->enableLayout();
     }
 
+    public function magentov4Action() {
+        $this->view->layout()->setLayout("layout-lpnv4");
+        $this->enableLayout();
+    }
+
      public function fichePdfAction() {
         $this->view->layout()->setLayout("layout-fiche-pdf");
         $this->enableLayout();

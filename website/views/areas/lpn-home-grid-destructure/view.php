@@ -26,7 +26,7 @@ else {
                 ]
         ]);
 
-    echo $main_titre = $this->input("main_titre", ["width" => 400,'placeholder'=>'Titre ']);
+    echo '<h2>'.$main_titre = $this->input("main_titre", ["width" => 400,'placeholder'=>'Titre']).'</h2>';
     echo $main_description = $this->textarea("main_description", ["width" => 400,"height" => 100,'placeholder'=>'Description',"htmlspecialchars"=>false]);
 
     

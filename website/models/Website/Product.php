@@ -336,6 +336,12 @@ class Website_Product extends Object_Product {
 			$value =  "Aucune";
 				
 		}
+		if($this->isParquet() && ($value == "Brute" || $value == "brut")) {
+			//echo "BAHM \n";
+		
+			$value =  "Aucune";
+				
+		}
 		//echo  $this->getId()."-> ".$value." ".$optionsSelect2[$value]." ".$this->isParquet().array_key_exists($value,$optionsSelect2)."\n";
 
 		 Object_Abstract::setGetInheritedValues($inheritance); 

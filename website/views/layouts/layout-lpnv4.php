@@ -35,7 +35,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Le styles -->
- <link rel="stylesheet" type="text/css" href="http://lpn.local/skin/frontend/lpn/lpnv4/css/main-min.css?d=<?php echo time() ?>" media="all">
+ <link rel="stylesheet" type="text/css" href="http://shopdev.laparqueterienouvelle.fr/skin/frontend/lpn/lpnv4/css/main-min.css?d=<?php echo time() ?>" media="all">
  <!--<link href="http://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet">-->
 
     <!--<link href="/website/static/css/global.css" rel="stylesheet">-->

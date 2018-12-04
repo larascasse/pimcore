@@ -220,6 +220,9 @@ class Website_Teinte extends Object_Teinte {
     	}
 
 		$return["mage_short_name"] = $return["mage_short_name"];
+		$return["mage_name"] = $return["mage_name"];
+		$return["mage_meta_title"] = $return["name"] . " par La parqueterie Nouvelle";
+		
 		$return["configurable_fields"] = $this->getConfigurableFields();
 		$return["subtype"] = "teinte-".$return["product_type"];
 		$return["className"] = "teinte";

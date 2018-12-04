@@ -3379,7 +3379,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
     	$short_name = str_ireplace("massif", "M", $short_name);
-    	$short_name = str_ireplace("chêne", "", $short_name);
+    	if(!stristr($short_name,'panneau')) {
+    		$short_name = str_ireplace("chêne", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("support ", " ", $short_name);

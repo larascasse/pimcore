@@ -3379,14 +3379,14 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("contrecollé", "cc", $short_name);
     	$short_name = str_ireplace("contrecolle", "cc", $short_name);
 
-    	if(!stristr($short_name,'panneau')) 
+    	if(!stristr($short_name,'panneau') || $this->isAccessoire()) 
     		$short_name = str_ireplace("massif", "M", $short_name);
     	
-    	if(!stristr($short_name,'panneau')) 
+    	if(!stristr($short_name,'panneau') || $this->isAccessoire()) 
     		$short_name = str_ireplace("chêne", "", $short_name);
 
     	
-    	$short_name = str_ireplace("lamellé collé", "LC", $short_name);
+    	$short_name = str_ireplace("lamellé collé", "", $short_name);
 
     	$short_name = str_ireplace("chene", "", $short_name);
     	$short_name = str_ireplace("chene", "", $short_name);
@@ -3468,6 +3468,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		        				|| stripos($attributeType,'structure')!==false
 		        				|| stripos($scienergieName,'accessoire')!==false
 		        				|| stripos($scienergieName,'plus value')!==false
+		        				|| $this->getFamille == "45ACCESSOI"
 		        				//|| stripos($attributeType,'plinthe')!==false
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 

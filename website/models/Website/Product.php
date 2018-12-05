@@ -3469,6 +3469,15 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		        				|| stripos($scienergieName,'accessoire')!==false
 		        				|| stripos($scienergieName,'plus value')!==false
 		        				|| $this->getFamille == "45ACCESSOI"
+		        				|| $this->getFamille == "50FINITION"
+		        				|| $this->getFamille == "15COLLE"
+		        				|| $this->getFamille == "80TASSEAUX"
+		        				|| $this->getFamille == "65PANNEAUX"
+
+
+		        			
+
+
 		        				//|| stripos($attributeType,'plinthe')!==false
 		        				//|| stripos($attributeType,'pieds pour')!==false
 		        				; 

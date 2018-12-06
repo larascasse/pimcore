@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-01-03T16:05:14+01:00
+* Generated at: 2018-10-31T12:38:48+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.20.64
 
 
 Fields Summary: 
@@ -15,8 +15,8 @@ Fields Summary:
 - logo [image]
 - localizedfields [localizedfields]
 -- description [textarea]
--- help [textarea]
 -- editorial [textarea]
+-- help [textarea]
 */ 
 
 
@@ -24,7 +24,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'taxonomy',
    'description' => '',
    'creationDate' => 1380723573,
-   'modificationDate' => 1514991914,
+   'modificationDate' => 1540985928,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -179,13 +179,13 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
                  'name' => 'description',
-                 'title' => 'Description',
+                 'title' => 'Contenu FT',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -201,14 +201,14 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
-                 'name' => 'help',
-                 'title' => 'Aide',
+                 'name' => 'editorial',
+                 'title' => 'Contenu Fiche produit',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -224,14 +224,14 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
-                 'name' => 'editorial',
-                 'title' => 'Contenu Fiche produit',
+                 'name' => 'help',
+                 'title' => 'Contenu Aide',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
-                 'style' => '',
+                 'locked' => false,
+                 'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,

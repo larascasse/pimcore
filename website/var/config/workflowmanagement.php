@@ -195,7 +195,7 @@ return [
             ],
             [
                 "name" => "set_content_published",
-                "label" => "Set Content Published",
+                "label" => "set_content_published",
                 "transitionTo" => [
                     "done" => [
                         "content_published"
@@ -278,23 +278,23 @@ return [
             ],
             "new" => [
                 "validActions" => [
-                    "contentsupdated" => NULL,
+                    "syncmagento" => NULL,
+                    "settomagentosync" => NULL,
                     "contents_ready" => NULL,
+                    "contentsupdated" => NULL,
                     "process" => NULL,
                     "reject" => NULL,
                     "image_missing" => NULL,
-                    "settomagentosync" => NULL,
-                    "syncmagento" => NULL,
                     "set_content_published" => NULL
                 ]
             ],
             "contents_validated" => [
                 "validActions" => [
-                    "contentsupdated" => NULL,
-                    "contents_ready" => NULL,
-                    "process" => NULL,
-                    "settomagentosync" => NULL,
                     "syncmagento" => NULL,
+                    "settomagentosync" => NULL,
+                    "contents_ready" => NULL,
+                    "contentsupdated" => NULL,
+                    "process" => NULL,
                     "set_content_published" => NULL
                 ]
             ],
@@ -308,13 +308,20 @@ return [
             ],
             "content_needs_magento_sync" => [
                 "validActions" => [
-                    "content_published" => NULL,
-                    "syncmagento" => NULL
+                    "syncmagento" => NULL,
+                    "set_content_published" => NULL
                 ]
             ],
             "content_published" => [
                 "validActions" => [
-                    "set_content_published" => NULL
+                    "syncmagento" => NULL,
+                    "settomagentosync" => NULL,
+                    "set_content_published" => NULL,
+                    "image_missing" => NULL,
+                    "contents_ready" => NULL,
+                    "contentsupdated" => NULL,
+                    "process" => NULL,
+                    "reject" => NULL
                 ]
             ]
         ],
@@ -337,6 +344,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1540472676
+        "modificationDate" => 1540473123
     ]
 ];

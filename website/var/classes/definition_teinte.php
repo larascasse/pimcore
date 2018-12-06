@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-06-11T17:02:33+02:00
+* Generated at: 2018-11-08T10:04:59+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.15.117
+* IP: 172.31.14.94
 
 
 Fields Summary: 
@@ -15,6 +15,7 @@ Fields Summary:
 - hexacolor [input]
 - products_relation [nonownerobjects]
 - teinte_type [select]
+- product_type [select]
 - product_ids_flat [textarea]
 - configurableFields [input]
 - mage_mediagallery [textarea]
@@ -26,7 +27,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1528729353,
+   'modificationDate' => 1541667899,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -237,6 +238,87 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleSearch' => false,
           )),
           6 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Parquet',
+                'value' => 'parquet',
+              ),
+              1 => 
+              array (
+                'key' => 'Terrasse',
+                'value' => 'terrasse',
+              ),
+              2 => 
+              array (
+                'key' => 'Sol Plaqué',
+                'value' => 'sol-plaque',
+              ),
+              3 => 
+              array (
+                'key' => 'Sol Stratifié',
+                'value' => 'sol-stratifie',
+              ),
+              4 => 
+              array (
+                'key' => 'Sol Vinyl',
+                'value' => 'sol-vinyl',
+              ),
+              5 => 
+              array (
+                'key' => 'Bardage',
+                'value' => 'bardage',
+              ),
+              6 => 
+              array (
+                'key' => 'Bardage intérieur',
+                'value' => 'bardage-interieur',
+              ),
+              7 => 
+              array (
+                'key' => 'Bardage extérieur',
+                'value' => ' bardage-exterieur',
+              ),
+              8 => 
+              array (
+                'key' => 'Accessoire',
+                'value' => 'accessoire',
+              ),
+              9 => 
+              array (
+                'key' => 'Agencement',
+                'value' => 'agencement',
+              ),
+              10 => 
+              array (
+                'key' => 'Table',
+                'value' => 'table',
+              ),
+            ),
+             'width' => 300,
+             'defaultValue' => '',
+             'queryColumnType' => 'varchar(190)',
+             'columnType' => 'varchar(190)',
+             'phpdocType' => 'string',
+             'name' => 'product_type',
+             'title' => 'Type de produit',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
              'fieldtype' => 'textarea',
              'width' => '',
@@ -259,7 +341,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          7 => 
+          8 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => 800,
@@ -283,7 +365,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          8 => 
+          9 => 
           Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
              'fieldtype' => 'textarea',
              'width' => '',
@@ -306,7 +388,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'visibleGridView' => false,
              'visibleSearch' => false,
           )),
-          9 => 
+          10 => 
           Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
              'fieldtype' => 'input',
              'width' => NULL,

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-01-03T16:05:14+01:00
+* Generated at: 2018-10-31T12:38:48+01:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.232
+* IP: 172.31.20.64
 
 
 Fields Summary: 
@@ -15,8 +15,8 @@ Fields Summary:
 - logo [image]
 - localizedfields [localizedfields]
 -- description [textarea]
--- help [textarea]
 -- editorial [textarea]
+-- help [textarea]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -158,25 +158,12 @@ public function getLocalizedfields () {
 }
 
 /**
-* Get description - Description
+* Get description - Contenu FT
 * @return string
 */
 public function getDescription ($language = null) {
 	$data = $this->getLocalizedfields()->getLocalizedValue("description", $language);
 	$preValue = $this->preGetValue("description"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	 return $data;
-}
-
-/**
-* Get help - Aide
-* @return string
-*/
-public function getHelp ($language = null) {
-	$data = $this->getLocalizedfields()->getLocalizedValue("help", $language);
-	$preValue = $this->preGetValue("help"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
@@ -197,6 +184,19 @@ public function getEditorial ($language = null) {
 }
 
 /**
+* Get help - Contenu Aide
+* @return string
+*/
+public function getHelp ($language = null) {
+	$data = $this->getLocalizedfields()->getLocalizedValue("help", $language);
+	$preValue = $this->preGetValue("help"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	 return $data;
+}
+
+/**
 * Set localizedfields - 
 * @param \Pimcore\Model\Object\Localizedfield $localizedfields
 * @return \Pimcore\Model\Object\Taxonomy
@@ -207,22 +207,12 @@ public function setLocalizedfields ($localizedfields) {
 }
 
 /**
-* Set description - Description
+* Set description - Contenu FT
 * @param string $description
 * @return \Pimcore\Model\Object\Taxonomy
 */
 public function setDescription ($description, $language = null) {
 	$this->getLocalizedfields()->setLocalizedValue("description", $description, $language);
-	return $this;
-}
-
-/**
-* Set help - Aide
-* @param string $help
-* @return \Pimcore\Model\Object\Taxonomy
-*/
-public function setHelp ($help, $language = null) {
-	$this->getLocalizedfields()->setLocalizedValue("help", $help, $language);
 	return $this;
 }
 
@@ -233,6 +223,16 @@ public function setHelp ($help, $language = null) {
 */
 public function setEditorial ($editorial, $language = null) {
 	$this->getLocalizedfields()->setLocalizedValue("editorial", $editorial, $language);
+	return $this;
+}
+
+/**
+* Set help - Contenu Aide
+* @param string $help
+* @return \Pimcore\Model\Object\Taxonomy
+*/
+public function setHelp ($help, $language = null) {
+	$this->getLocalizedfields()->setLocalizedValue("help", $help, $language);
 	return $this;
 }
 

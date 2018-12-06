@@ -1928,23 +1928,24 @@ return [
         "sql" => "",
         "dataSourceConfig" => [
             [
-                "sql" => "oo_id,name,code,ean,image_1,image_2,image_3",
-                "from" => "object_query_5",
-                "where" => "image_1 = 167  AND code IS NOT NULL",
+                "sql" => "oo_id,name,mage_short_name,code,ean,image_1,image_2,image_3",
+                "from" => "object_5",
+                "where" => "image_1 = 167  AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%')",
                 "groupby" => "",
-                "sqlText" => "SELECT oo_id,name,code,ean,image_1,image_2,image_3 FROM object_query_5 WHERE image_1 = 167  AND code IS NOT NULL",
+                "sqlText" => "SELECT oo_id,name,mage_short_name,code,ean,image_1,image_2,image_3 FROM object_5 WHERE image_1 = 167  AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%')",
                 "type" => "sql"
             ]
         ],
         "columnConfiguration" => [
             [
-                "name" => "name",
+                "name" => "oo_id",
                 "display" => TRUE,
                 "export" => TRUE,
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-1"
+                "columnAction" => "openObject",
+                "id" => "extModel1826-4"
             ],
             [
                 "name" => "code",
@@ -1953,7 +1954,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-2"
+                "id" => "extModel1826-2"
             ],
             [
                 "name" => "ean",
@@ -1962,16 +1963,26 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-3"
+                "id" => "extModel1826-3"
             ],
             [
-                "name" => "oo_id",
+                "name" => "name",
                 "display" => TRUE,
                 "export" => TRUE,
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-4"
+                "columnAction" => "",
+                "id" => "extModel1826-1"
+            ],
+            [
+                "name" => "mage_short_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel1826-8"
             ],
             [
                 "name" => "image_1",
@@ -1980,7 +1991,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-5"
+                "id" => "extModel1826-5"
             ],
             [
                 "name" => "image_2",
@@ -1989,7 +2000,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-6"
+                "id" => "extModel1826-6"
             ],
             [
                 "name" => "image_3",
@@ -1998,7 +2009,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel718-7"
+                "id" => "extModel1826-7"
             ]
         ],
         "niceName" => "Produits sans média",
@@ -2014,7 +2025,7 @@ return [
         "yAxis" => [
 
         ],
-        "modificationDate" => 1517849706,
+        "modificationDate" => 1541501240,
         "creationDate" => 1517848789,
         "id" => "product-missing-media"
     ],
@@ -2075,9 +2086,9 @@ return [
             [
                 "sql" => "code,ean,mage_name,mage_short_name,pimonly_dimensions",
                 "from" => "object_query_5",
-                "where" => "EAN IS NOT  NULL and famille LIKE '20STRA%'",
+                "where" => "EAN IS NOT  NULL",
                 "groupby" => "",
-                "sqlText" => "SELECT code,ean,mage_name,mage_short_name,pimonly_dimensions FROM object_query_5 WHERE EAN IS NOT  NULL and famille LIKE '20STRA%'",
+                "sqlText" => "SELECT code,ean,mage_name,mage_short_name,pimonly_dimensions FROM object_query_5 WHERE EAN IS NOT  NULL",
                 "type" => "sql"
             ]
         ],
@@ -2089,7 +2100,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel651-1"
+                "id" => "extModel660-1"
             ],
             [
                 "name" => "ean",
@@ -2098,7 +2109,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel651-3"
+                "id" => "extModel660-2"
             ],
             [
                 "name" => "code",
@@ -2107,7 +2118,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel651-4"
+                "id" => "extModel660-3"
             ],
             [
                 "name" => "pimonly_dimensions",
@@ -2116,7 +2127,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel651-5"
+                "id" => "extModel660-4"
             ],
             [
                 "name" => "mage_name",
@@ -2125,7 +2136,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel651-6"
+                "id" => "extModel660-5"
             ]
         ],
         "niceName" => "",
@@ -2141,7 +2152,7 @@ return [
         "yAxis" => [
 
         ],
-        "modificationDate" => 1530089537,
+        "modificationDate" => 1530878476,
         "creationDate" => 1527686319,
         "id" => "parquet_meubles"
     ],
@@ -2212,5 +2223,82 @@ return [
         "modificationDate" => 1528454174,
         "creationDate" => 1528454000,
         "id" => "needsmagesync"
+    ],
+    "etiquettes_stock" => [
+        "name" => "etiquettes_stock",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "code,ean,pimonly_print_label,name_scienergie,name_scienergie_court",
+                "from" => "object_5",
+                "where" => "EAN IS NOT  NULL\nAND famille ='01MASSIF'",
+                "groupby" => "",
+                "sqlText" => "SELECT code,ean,pimonly_print_label,name_scienergie,name_scienergie_court FROM object_5 WHERE EAN IS NOT  NULL\nAND famille ='01MASSIF'",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "code",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel5103-1"
+            ],
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel5103-2"
+            ],
+            [
+                "name" => "pimonly_print_label",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel5103-3"
+            ],
+            [
+                "name" => "name_scienergie",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel5103-4"
+            ],
+            [
+                "name" => "name_scienergie_court",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel5103-5"
+            ]
+        ],
+        "niceName" => "",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => FALSE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1531147233,
+        "creationDate" => 1531146638,
+        "id" => "etiquettes_stock"
     ]
 ];

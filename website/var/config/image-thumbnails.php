@@ -845,5 +845,57 @@ return [
         "modificationDate" => 1524813438,
         "creationDate" => 1524813417,
         "id" => "magento_header_top"
+    ],
+    "magento_gritext_v" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 529,
+                    "height" => 775,
+                    "positioning" => "bottomcenter",
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento_gritext_v",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 80,
+        "highResolution" => 0.0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1543338157,
+        "creationDate" => 1543338097,
+        "id" => "magento_gritext_v"
+    ],
+    "magento_gridtext_h" => [
+        "items" => [
+            [
+                "method" => "cover",
+                "arguments" => [
+                    "width" => 645,
+                    "height" => 478,
+                    "positioning" => "center",
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento_gridtext_h",
+        "description" => "",
+        "format" => "SOURCE",
+        "quality" => 80,
+        "highResolution" => 0.0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1543338273,
+        "creationDate" => 1543338231,
+        "id" => "magento_gridtext_h"
     ]
 ];

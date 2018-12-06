@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-06-29T12:24:03+02:00
+* Generated at: 2018-12-05T17:49:49+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.25.58
+* IP: 172.31.25.189
 
 
 Fields Summary: 
@@ -13,6 +13,7 @@ Fields Summary:
 - obsolete [checkbox]
 - configurableFields [input]
 - childrenSimpleProductIds_flat [input]
+- pimonly_print_label [input]
 - is_lot [select]
 - code [input]
 - ean [input]
@@ -20,6 +21,7 @@ Fields Summary:
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
+- product_type [select]
 - subtype [input]
 - subtype2 [input]
 - teinte_lpn [select]
@@ -116,7 +118,6 @@ Fields Summary:
 - longueur_max [input]
 - longueur_colis [input]
 - longueur_not_configurable [checkbox]
-- mage_longueur [input]
 - mage_section [input]
 - pimonly_section [input]
 - mage_use_section_as_configurable [checkbox]
@@ -171,6 +172,8 @@ Fields Summary:
 - fiche_technique_orginale [href]
 - notice_pose_lpn [href]
 - fiche_securite [href]
+- fiche_entretien [href]
+- fiche_pose [href]
 - re_skus [objects]
 - cs_skus [objects]
 - pimonly_category_pose [href]
@@ -194,6 +197,7 @@ Fields Summary:
 - mage_description [textarea]
 - characteristics [textarea]
 - mage_guideline [textarea]
+- mage_associated_articles [textarea]
 - image_1_src [input]
 - image_2_src [input]
 - image_3_src [input]
@@ -217,7 +221,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1530267839,
+   'modificationDate' => 1544028588,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -370,6 +374,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => false,
               )),
               4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 255,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_print_label',
+                 'title' => 'Label pour etiquettes',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -405,7 +433,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              5 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -429,7 +457,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              6 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -453,13 +481,13 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 128,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'configurable_free_1',
@@ -477,7 +505,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -491,23 +519,23 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => true,
-                 'index' => true,
+                 'index' => false,
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
               )),
-              9 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 128,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'name_scienergie_court',
@@ -523,9 +551,9 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleSearch' => false,
               )),
-              10 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -586,7 +614,88 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              11 => 
+              12 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Parquet',
+                    'value' => 'parquet',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Terrasse',
+                    'value' => 'terrasse',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Sol Plaqué',
+                    'value' => 'sol-plaque',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Sol Stratifié',
+                    'value' => 'sol-stratifie',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Sol Vinyl',
+                    'value' => 'sol-vinyl',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Bardage',
+                    'value' => 'bardage',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Bardage intérieur',
+                    'value' => 'bardage-interieur',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Bardage extérieur',
+                    'value' => ' bardage-exterieur',
+                  ),
+                  8 => 
+                  array (
+                    'key' => 'Accessoire',
+                    'value' => 'accessoire',
+                  ),
+                  9 => 
+                  array (
+                    'key' => 'Agencement',
+                    'value' => 'agencement',
+                  ),
+                  10 => 
+                  array (
+                    'key' => 'Table',
+                    'value' => 'table',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'product_type',
+                 'title' => 'Type de produit',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -610,7 +719,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              12 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -634,7 +743,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              13 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -687,10 +796,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => '',
@@ -723,7 +832,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              15 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -747,7 +856,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -768,10 +877,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -792,10 +901,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -819,7 +928,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              19 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -843,7 +952,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              20 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -867,7 +976,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              21 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -891,11 +1000,11 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              22 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
-                 'height' => 100,
+                 'height' => 80,
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
@@ -911,14 +1020,14 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
-                 'width' => 600,
-                 'height' => '',
+                 'width' => 400,
+                 'height' => 200,
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
@@ -934,10 +1043,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -958,14 +1067,14 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
-                 'width' => 400,
-                 'height' => 200,
+                 'width' => 600,
+                 'height' => 300,
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
                  'phpdocType' => 'string',
@@ -976,15 +1085,15 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -1008,10 +1117,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
-                 'width' => 400,
+                 'width' => 600,
                  'height' => '',
                  'queryColumnType' => 'longtext',
                  'columnType' => 'longtext',
@@ -1031,7 +1140,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -1054,7 +1163,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -1074,12 +1183,12 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleSearch' => false,
               )),
-              30 => 
+              32 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 128,
@@ -1100,7 +1209,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              31 => 
+              33 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1114,7 +1223,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
-                 'index' => true,
+                 'index' => false,
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
@@ -1122,9 +1231,9 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleSearch' => false,
               )),
-              32 => 
+              34 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1170,7 +1279,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              33 => 
+              35 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1193,7 +1302,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              34 => 
+              36 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1436,15 +1545,15 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
-                 'index' => true,
+                 'index' => false,
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
               )),
               1 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
@@ -1779,10 +1888,10 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               0 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 128,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'essence',
@@ -2004,7 +2113,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -2043,7 +2152,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'pimonly_classe_upec',
@@ -2052,7 +2161,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -2091,7 +2200,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 30,
+                 'columnLength' => 16,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'pimonly_masse_volumique_moyenne',
@@ -2257,7 +2366,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'pimonly_resistance_thermique',
@@ -2305,7 +2414,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'pimonly_conductivite_thermique_total',
@@ -2353,7 +2462,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 16,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'taux_humidite',
@@ -2446,7 +2555,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 100,
+                 'columnLength' => 16,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'price',
@@ -2470,7 +2579,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 15,
+                 'columnLength' => 16,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'price_1',
@@ -2604,7 +2713,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'largeurString',
@@ -2628,7 +2737,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'longueurString',
@@ -2652,7 +2761,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'epaisseurString',
@@ -2676,7 +2785,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'choixString',
@@ -2691,7 +2800,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   4 => 
@@ -2700,7 +2809,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'traitement_surfaceString',
@@ -2715,7 +2824,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   5 => 
@@ -2724,7 +2833,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'motifString',
@@ -2739,7 +2848,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   6 => 
@@ -2748,7 +2857,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 80,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'finitionString',
@@ -2763,7 +2872,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                 ),
@@ -2911,7 +3020,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 10,
+                 'columnLength' => 8,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'choix',
@@ -2974,7 +3083,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 15,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'epaisseur',
@@ -3064,7 +3173,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 15,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'largeur',
@@ -3153,7 +3262,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => 400,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'largeur_colis',
@@ -3219,7 +3328,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 15,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'longueur',
@@ -3267,7 +3376,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 15,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'longueur_min',
@@ -3291,7 +3400,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 15,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'longueur_max',
@@ -3315,7 +3424,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => 400,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'longueur_colis',
@@ -3355,30 +3464,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
-                  6 => 
-                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                     'fieldtype' => 'input',
-                     'width' => 300,
-                     'queryColumnType' => 'varchar',
-                     'columnType' => 'varchar',
-                     'columnLength' => 100,
-                     'phpdocType' => 'string',
-                     'regex' => '',
-                     'name' => 'mage_longueur',
-                     'title' => 'Longueur Magento',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => true,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'datatype' => 'data',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                  )),
                 ),
                  'locked' => false,
               )),
@@ -3405,7 +3490,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'mage_section',
@@ -3429,7 +3514,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => 600,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'pimonly_section',
@@ -3475,7 +3560,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 100,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'hauteur',
@@ -3499,7 +3584,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => 400,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'hauteur_colis',
@@ -3868,7 +3953,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 100,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'volume',
@@ -3914,7 +3999,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 100,
+                     'columnLength' => 64,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'conditionnement',
@@ -3957,10 +4042,10 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   6 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 50,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'nbrpp',
@@ -4015,40 +4100,45 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       6 => 
                       array (
+                        'key' => 'Vieilli',
+                        'value' => 'vieilli',
+                      ),
+                      7 => 
+                      array (
                         'key' => 'Vieilli rives abîmées',
                         'value' => 'vieilli rives abimees',
                       ),
-                      7 => 
+                      8 => 
                       array (
                         'key' => 'Usé',
                         'value' => 'use',
                       ),
-                      8 => 
+                      9 => 
                       array (
                         'key' => 'Rives abîmées',
                         'value' => 'rives scrapees',
                       ),
-                      9 => 
+                      10 => 
                       array (
                         'key' => 'Raboté main',
                         'value' => 'rabote main',
                       ),
-                      10 => 
+                      11 => 
                       array (
                         'key' => 'Structuré',
                         'value' => 'structure',
                       ),
-                      11 => 
+                      12 => 
                       array (
                         'key' => 'Vieilli usé rives abîmées',
                         'value' => 'vieilli use rives abimees',
                       ),
-                      12 => 
+                      13 => 
                       array (
                         'key' => 'Vieilli usé et brossé rives abîmées',
                         'value' => 'vieilli use brosse rives abimees',
                       ),
-                      13 => 
+                      14 => 
                       array (
                         'key' => 'Vieilli très accentué rives abîmées',
                         'value' => 'vieilli tres accentue',
@@ -4113,28 +4203,28 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       2 => 
                       array (
-                        'key' => 'Brute',
-                        'value' => 'brut',
-                      ),
-                      3 => 
-                      array (
                         'key' => 'Huilé',
                         'value' => 'huile',
                       ),
-                      4 => 
+                      3 => 
                       array (
                         'key' => 'Ciré',
                         'value' => 'cire',
                       ),
-                      5 => 
+                      4 => 
                       array (
                         'key' => 'Pré-huilé',
                         'value' => 'pre-huile',
                       ),
-                      6 => 
+                      5 => 
                       array (
                         'key' => 'Huilé mat',
                         'value' => 'huile mat',
+                      ),
+                      6 => 
+                      array (
+                        'key' => 'Huilé blanchi',
+                        'value' => 'huile blanchi',
                       ),
                       7 => 
                       array (
@@ -4163,88 +4253,103 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       ),
                       12 => 
                       array (
-                        'key' => 'Peinture d\'Aujourd\'hui',
-                        'value' => 'peint',
+                        'key' => 'Métal',
+                        'value' => 'metal',
                       ),
                       13 => 
                       array (
-                        'key' => 'Peinture d\'origine',
-                        'value' => 'peintorigine',
+                        'key' => 'Peinture d\'Aujourd\'hui',
+                        'value' => 'peint',
                       ),
                       14 => 
+                      array (
+                        'key' => 'Peinture d\'origine2',
+                        'value' => 'peintorigine',
+                      ),
+                      15 => 
                       array (
                         'key' => 'Peinture blanche',
                         'value' => 'Peinture blanche',
                       ),
-                      15 => 
+                      16 => 
                       array (
                         'key' => 'Peinture noire',
                         'value' => 'Peinture noire',
                       ),
-                      16 => 
+                      17 => 
+                      array (
+                        'key' => 'Prépatiné',
+                        'value' => 'prepatine',
+                      ),
+                      18 => 
                       array (
                         'key' => 'Vernis',
                         'value' => 'Verni',
                       ),
-                      17 => 
+                      19 => 
                       array (
                         'key' => 'Vernis aqua',
                         'value' => 'Verni aqua',
                       ),
-                      18 => 
+                      20 => 
                       array (
                         'key' => 'Vernis blanchi',
                         'value' => 'Verni blanchi',
                       ),
-                      19 => 
+                      21 => 
                       array (
                         'key' => 'Vernis blanchi mat',
                         'value' => 'Verni blanchi mat',
                       ),
-                      20 => 
+                      22 => 
                       array (
                         'key' => 'Vernis satiné',
                         'value' => 'Verni satiné',
                       ),
-                      21 => 
+                      23 => 
                       array (
                         'key' => 'Vernis mat',
                         'value' => 'Verni mat',
                       ),
-                      22 => 
+                      24 => 
                       array (
                         'key' => 'Vernis cérusé mat',
                         'value' => 'vernis cérusé mat',
                       ),
-                      23 => 
+                      25 => 
                       array (
                         'key' => 'Vernis blanc',
                         'value' => 'vernis blanc',
                       ),
-                      24 => 
+                      26 => 
                       array (
                         'key' => 'Vernis taupe',
                         'value' => 'vernis taupe',
                       ),
-                      25 => 
+                      27 => 
                       array (
                         'key' => 'Vernis colonial',
                         'value' => 'vernis colonial',
                       ),
-                      26 => 
+                      28 => 
                       array (
                         'key' => 'Vieilli',
                         'value' => 'Vieilli',
                       ),
-                      27 => 
+                      29 => 
                       array (
                         'key' => 'Vieilli Brossé',
                         'value' => 'Vieilli Brossé',
                       ),
-                      28 => 
+                      30 => 
                       array (
                         'key' => 'Vieilli Brossé Veinage Noir',
                         'value' => 'vieilli-brosse-veinage-noir',
+                      ),
+                      31 => 
+                      array (
+                        'key' => 'Brute_DEPRECATED',
+                        'value' => 'brut',
                       ),
                     ),
                      'width' => '',
@@ -4254,7 +4359,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'phpdocType' => 'string',
                      'name' => 'finition',
                      'title' => 'Finition',
-                     'tooltip' => 'Finition',
+                     'tooltip' => 'Finition.',
                      'mandatory' => false,
                      'noteditable' => false,
                      'index' => false,
@@ -4376,7 +4481,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   13 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
-                     'width' => '',
+                     'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
                      'columnLength' => 255,
@@ -4423,7 +4528,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 10,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'quantity_min',
@@ -4447,7 +4552,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 10,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'quantity_max',
@@ -4471,7 +4576,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => 600,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 255,
+                     'columnLength' => 8,
                      'phpdocType' => 'string',
                      'regex' => '',
                      'name' => 'quantity_min_txt',
@@ -4679,10 +4784,10 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
               6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 128,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'rendement',
@@ -4755,7 +4860,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 8,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'classe_service',
@@ -4812,7 +4917,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'chanfreins',
@@ -4836,7 +4941,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'origine_bois',
@@ -4860,7 +4965,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'country_of_manufacture',
@@ -4881,10 +4986,10 @@ Combien d\'unité dans 1 m2',
               14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 8,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'colisage',
@@ -4908,7 +5013,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 8,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'surface',
@@ -5004,13 +5109,28 @@ Combien d\'unité dans 1 m2',
                   ),
                   3 => 
                   array (
-                    'key' => 'Versailles',
+                    'key' => 'Dalle Versailles',
                     'value' => 'dalle-versaille',
                   ),
                   4 => 
                   array (
                     'key' => 'Sur chant',
                     'value' => 'sur chant',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Coupe de Pierre',
+                    'value' => 'coupe de pierre',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Planchette',
+                    'value' => 'planchette',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Dalle',
+                    'value' => 'dalle',
                   ),
                 ),
                  'width' => '',
@@ -5039,7 +5159,7 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 190,
+                 'columnLength' => 32,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'angle',
@@ -5326,7 +5446,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'fiche_technique_lpn',
                  'title' => 'Fiche technique LPN',
                  'tooltip' => '',
@@ -5452,6 +5572,112 @@ Combien d\'unité dans 1 m2',
                  'pathFormatterClass' => '',
                  'name' => 'fiche_securite',
                  'title' => 'Fiche de sécurité',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
+                 'fieldtype' => 'href',
+                 'width' => '',
+                 'assetUploadPath' => '',
+                 'relationType' => true,
+                 'queryColumnType' => 
+                array (
+                  'id' => 'int(11)',
+                  'type' => 'enum(\'document\',\'asset\',\'object\')',
+                ),
+                 'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\Object\\AbstractObject',
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'assetTypes' => 'document',
+                  ),
+                  1 => 
+                  array (
+                    'assetTypes' => 'image',
+                  ),
+                ),
+                 'documentsAllowed' => true,
+                 'documentTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'documentTypes' => 'page',
+                  ),
+                ),
+                 'lazyLoading' => true,
+                 'classes' => 
+                array (
+                ),
+                 'pathFormatterClass' => '',
+                 'name' => 'fiche_entretien',
+                 'title' => 'Fiche d\'entretien',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
+                 'fieldtype' => 'href',
+                 'width' => '',
+                 'assetUploadPath' => '',
+                 'relationType' => true,
+                 'queryColumnType' => 
+                array (
+                  'id' => 'int(11)',
+                  'type' => 'enum(\'document\',\'asset\',\'object\')',
+                ),
+                 'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\Object\\AbstractObject',
+                 'objectsAllowed' => false,
+                 'assetsAllowed' => true,
+                 'assetTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'assetTypes' => 'document',
+                  ),
+                  1 => 
+                  array (
+                    'assetTypes' => 'image',
+                  ),
+                ),
+                 'documentsAllowed' => true,
+                 'documentTypes' => 
+                array (
+                  0 => 
+                  array (
+                    'documentTypes' => 'page',
+                  ),
+                ),
+                 'lazyLoading' => true,
+                 'classes' => 
+                array (
+                ),
+                 'pathFormatterClass' => '',
+                 'name' => 'fiche_pose',
+                 'title' => 'Fiche de pose',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
@@ -5943,7 +6169,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 255,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_accessoirepopin',
@@ -6013,7 +6239,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 65,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_meta_title',
@@ -6037,7 +6263,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 65,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_teinte',
@@ -6061,7 +6287,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 65,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_teinte_level0',
@@ -6085,7 +6311,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 65,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_teinte_level1',
@@ -6109,7 +6335,7 @@ Combien d\'unité dans 1 m2',
                  'width' => 600,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 65,
+                 'columnLength' => 64,
                  'phpdocType' => 'string',
                  'regex' => '',
                  'name' => 'mage_teinte_level2',
@@ -6243,6 +6469,29 @@ Combien d\'unité dans 1 m2',
                  'visibleSearch' => false,
               )),
               15 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
+                 'fieldtype' => 'textarea',
+                 'width' => 600,
+                 'height' => '',
+                 'queryColumnType' => 'longtext',
+                 'columnType' => 'longtext',
+                 'phpdocType' => 'string',
+                 'name' => 'mage_associated_articles',
+                 'title' => 'Associated Articles Path',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6266,7 +6515,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -6290,7 +6539,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -6314,7 +6563,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 400,
@@ -6338,7 +6587,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6362,7 +6611,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6386,7 +6635,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -6409,7 +6658,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -6432,7 +6681,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -6455,7 +6704,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -6478,7 +6727,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6502,7 +6751,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6526,7 +6775,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6550,7 +6799,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6574,7 +6823,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -6598,7 +6847,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,

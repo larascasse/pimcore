@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-06-11T17:02:33+02:00
+* Generated at: 2018-11-08T10:04:59+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.15.117
+* IP: 172.31.14.94
 
 
 Fields Summary: 
@@ -15,6 +15,7 @@ Fields Summary:
 - hexacolor [input]
 - products_relation [nonownerobjects]
 - teinte_type [select]
+- product_type [select]
 - product_ids_flat [textarea]
 - configurableFields [input]
 - mage_mediagallery [textarea]
@@ -31,6 +32,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByTeinte_type ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByProduct_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByProduct_ids_flat ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByConfigurableFields ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByMage_mediagallery ($value, $limit = 0) 
@@ -46,6 +48,7 @@ public $description;
 public $image;
 public $hexacolor;
 public $teinte_type;
+public $product_type;
 public $product_ids_flat;
 public $configurableFields;
 public $mage_mediagallery;
@@ -189,6 +192,32 @@ public function getTeinte_type () {
 */
 public function setTeinte_type ($teinte_type) {
 	$this->teinte_type = $teinte_type;
+	return $this;
+}
+
+/**
+* Get product_type - Type de produit
+* @return string
+*/
+public function getProduct_type () {
+	$preValue = $this->preGetValue("product_type"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->product_type;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("product_type")->isEmpty($data)) {
+		return $this->getValueFromParent("product_type");
+	}
+	return $data;
+}
+
+/**
+* Set product_type - Type de produit
+* @param string $product_type
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setProduct_type ($product_type) {
+	$this->product_type = $product_type;
 	return $this;
 }
 

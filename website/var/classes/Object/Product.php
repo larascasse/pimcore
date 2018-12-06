@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-06-29T12:24:03+02:00
+* Generated at: 2018-12-05T17:49:49+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.25.58
+* IP: 172.31.25.189
 
 
 Fields Summary: 
@@ -13,6 +13,7 @@ Fields Summary:
 - obsolete [checkbox]
 - configurableFields [input]
 - childrenSimpleProductIds_flat [input]
+- pimonly_print_label [input]
 - is_lot [select]
 - code [input]
 - ean [input]
@@ -20,6 +21,7 @@ Fields Summary:
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
+- product_type [select]
 - subtype [input]
 - subtype2 [input]
 - teinte_lpn [select]
@@ -116,7 +118,6 @@ Fields Summary:
 - longueur_max [input]
 - longueur_colis [input]
 - longueur_not_configurable [checkbox]
-- mage_longueur [input]
 - mage_section [input]
 - pimonly_section [input]
 - mage_use_section_as_configurable [checkbox]
@@ -171,6 +172,8 @@ Fields Summary:
 - fiche_technique_orginale [href]
 - notice_pose_lpn [href]
 - fiche_securite [href]
+- fiche_entretien [href]
+- fiche_pose [href]
 - re_skus [objects]
 - cs_skus [objects]
 - pimonly_category_pose [href]
@@ -194,6 +197,7 @@ Fields Summary:
 - mage_description [textarea]
 - characteristics [textarea]
 - mage_guideline [textarea]
+- mage_associated_articles [textarea]
 - image_1_src [input]
 - image_2_src [input]
 - image_3_src [input]
@@ -221,6 +225,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConfigurableFields ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChildrenSimpleProductIds_flat ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_print_label ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByIs_lot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
@@ -228,6 +233,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByProduct_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
@@ -324,7 +330,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByLongueur_max ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLongueur_colis ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLongueur_not_configurable ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMage_longueur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_section ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_section ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_use_section_as_configurable ($value, $limit = 0) 
@@ -379,6 +384,8 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNotice_pose_lpn ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_securite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFiche_entretien ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFiche_pose ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRe_skus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCs_skus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_pose ($value, $limit = 0) 
@@ -401,6 +408,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCharacteristics ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_guideline ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_associated_articles ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_1_src ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_2_src ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_3_src ($value, $limit = 0) 
@@ -427,6 +435,7 @@ public $actif_web;
 public $obsolete;
 public $configurableFields;
 public $childrenSimpleProductIds_flat;
+public $pimonly_print_label;
 public $is_lot;
 public $code;
 public $ean;
@@ -434,6 +443,7 @@ public $configurable_free_1;
 public $name_scienergie;
 public $name_scienergie_court;
 public $catalogue;
+public $product_type;
 public $subtype;
 public $subtype2;
 public $teinte_lpn;
@@ -516,7 +526,6 @@ public $longueur_min;
 public $longueur_max;
 public $longueur_colis;
 public $longueur_not_configurable;
-public $mage_longueur;
 public $mage_section;
 public $pimonly_section;
 public $mage_use_section_as_configurable;
@@ -571,6 +580,8 @@ public $fiche_technique_lpn;
 public $fiche_technique_orginale;
 public $notice_pose_lpn;
 public $fiche_securite;
+public $fiche_entretien;
+public $fiche_pose;
 public $re_skus;
 public $cs_skus;
 public $pimonly_category_pose;
@@ -593,6 +604,7 @@ public $mage_lesplus;
 public $mage_description;
 public $characteristics;
 public $mage_guideline;
+public $mage_associated_articles;
 public $image_1_src;
 public $image_2_src;
 public $image_3_src;
@@ -722,6 +734,32 @@ public function getChildrenSimpleProductIds_flat () {
 */
 public function setChildrenSimpleProductIds_flat ($childrenSimpleProductIds_flat) {
 	$this->childrenSimpleProductIds_flat = $childrenSimpleProductIds_flat;
+	return $this;
+}
+
+/**
+* Get pimonly_print_label - Label pour etiquettes
+* @return string
+*/
+public function getPimonly_print_label () {
+	$preValue = $this->preGetValue("pimonly_print_label"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_print_label;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_print_label")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_print_label");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_print_label - Label pour etiquettes
+* @param string $pimonly_print_label
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_print_label ($pimonly_print_label) {
+	$this->pimonly_print_label = $pimonly_print_label;
 	return $this;
 }
 
@@ -904,6 +942,32 @@ public function getCatalogue () {
 */
 public function setCatalogue ($catalogue) {
 	$this->catalogue = $catalogue;
+	return $this;
+}
+
+/**
+* Get product_type - Type de produit
+* @return string
+*/
+public function getProduct_type () {
+	$preValue = $this->preGetValue("product_type"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->product_type;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("product_type")->isEmpty($data)) {
+		return $this->getValueFromParent("product_type");
+	}
+	return $data;
+}
+
+/**
+* Set product_type - Type de produit
+* @param string $product_type
+* @return \Pimcore\Model\Object\Product
+*/
+public function setProduct_type ($product_type) {
+	$this->product_type = $product_type;
 	return $this;
 }
 
@@ -3320,32 +3384,6 @@ public function setLongueur_not_configurable ($longueur_not_configurable) {
 }
 
 /**
-* Get mage_longueur - Longueur Magento
-* @return string
-*/
-public function getMage_longueur () {
-	$preValue = $this->preGetValue("mage_longueur"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->mage_longueur;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_longueur")->isEmpty($data)) {
-		return $this->getValueFromParent("mage_longueur");
-	}
-	return $data;
-}
-
-/**
-* Set mage_longueur - Longueur Magento
-* @param string $mage_longueur
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMage_longueur ($mage_longueur) {
-	$this->mage_longueur = $mage_longueur;
-	return $this;
-}
-
-/**
 * Get mage_section - Section
 * @return string
 */
@@ -4750,6 +4788,58 @@ public function setFiche_securite ($fiche_securite) {
 }
 
 /**
+* Get fiche_entretien - Fiche d'entretien
+* @return \Pimcore\Model\Document\page | \Pimcore\Model\Asset\document | \Pimcore\Model\Asset\image
+*/
+public function getFiche_entretien () {
+	$preValue = $this->preGetValue("fiche_entretien"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("fiche_entretien")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fiche_entretien")->isEmpty($data)) {
+		return $this->getValueFromParent("fiche_entretien");
+	}
+	return $data;
+}
+
+/**
+* Set fiche_entretien - Fiche d'entretien
+* @param \Pimcore\Model\Document\page | \Pimcore\Model\Asset\document | \Pimcore\Model\Asset\image $fiche_entretien
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFiche_entretien ($fiche_entretien) {
+	$this->fiche_entretien = $this->getClass()->getFieldDefinition("fiche_entretien")->preSetData($this, $fiche_entretien);
+	return $this;
+}
+
+/**
+* Get fiche_pose - Fiche de pose
+* @return \Pimcore\Model\Document\page | \Pimcore\Model\Asset\document | \Pimcore\Model\Asset\image
+*/
+public function getFiche_pose () {
+	$preValue = $this->preGetValue("fiche_pose"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("fiche_pose")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("fiche_pose")->isEmpty($data)) {
+		return $this->getValueFromParent("fiche_pose");
+	}
+	return $data;
+}
+
+/**
+* Set fiche_pose - Fiche de pose
+* @param \Pimcore\Model\Document\page | \Pimcore\Model\Asset\document | \Pimcore\Model\Asset\image $fiche_pose
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFiche_pose ($fiche_pose) {
+	$this->fiche_pose = $this->getClass()->getFieldDefinition("fiche_pose")->preSetData($this, $fiche_pose);
+	return $this;
+}
+
+/**
 * Get re_skus - Produits associés
 * @return \Pimcore\Model\Object\product[] | \Pimcore\Model\Object\category[]
 */
@@ -5322,6 +5412,32 @@ public function setMage_guideline ($mage_guideline) {
 }
 
 /**
+* Get mage_associated_articles - Associated Articles Path
+* @return string
+*/
+public function getMage_associated_articles () {
+	$preValue = $this->preGetValue("mage_associated_articles"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_associated_articles;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_associated_articles")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_associated_articles");
+	}
+	return $data;
+}
+
+/**
+* Set mage_associated_articles - Associated Articles Path
+* @param string $mage_associated_articles
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_associated_articles ($mage_associated_articles) {
+	$this->mage_associated_articles = $mage_associated_articles;
+	return $this;
+}
+
+/**
 * Get image_1_src - Image 1 SRC
 * @return string
 */
@@ -5770,6 +5886,14 @@ protected static $_relationFields = array (
   array (
     'type' => 'href',
   ),
+  'fiche_entretien' => 
+  array (
+    'type' => 'href',
+  ),
+  'fiche_pose' => 
+  array (
+    'type' => 'href',
+  ),
   're_skus' => 
   array (
     'type' => 'objects',
@@ -5804,7 +5928,10 @@ protected static $_relationFields = array (
   ),
 );
 
-public $lazyLoadedFields = NULL;
+public $lazyLoadedFields = array (
+  0 => 'fiche_entretien',
+  1 => 'fiche_pose',
+);
 
 }
 

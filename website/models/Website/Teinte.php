@@ -225,7 +225,7 @@ class Website_Teinte extends Object_Teinte {
 		
 		$return["configurable_fields"] = $this->getConfigurableFields();
 		//$return["subtype"] = "teinte-".$return["product_type"];
-		$return["subtype"] = null;
+		$return["subtype"] = '';
 		$return["className"] = "teinte";
 		$return["key"] = $this->getKey();
 		$return["unite"] = "M2";

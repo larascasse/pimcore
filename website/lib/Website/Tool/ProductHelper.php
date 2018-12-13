@@ -56,8 +56,8 @@ class ProductHelper
         foreach ($childrenSkus as $childId) {
             $childProduct = \Pimcore\Model\Object\Product::getById($childId);
             if($childProduct instanceof \Pimcore\Model\Object\Product) {
-                if (!$childProduct->getObsolete())
-                    $childProducts[] = $childProduct;
+                    if ($childProduct->getObsolete() != 1)
+                        $childProducts[] = $childProduct;
             }
         }
 

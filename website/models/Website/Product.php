@@ -3334,6 +3334,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
          $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%'");
          //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
         $list->addConditionParam("ean != ''");
+        $list->addConditionParam("obsolete != 1");
 
 
         //
@@ -3343,7 +3344,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         foreach ($childrens as $simpleProduct) {
             //echo $simpleProduct->getEan();
             if (!$simpleProduct->getObsolete())
-            	$productIds[] = $simpleProduct->getId().$simpleProduct->getObsolete().'kk';
+            	$productIds[] = $simpleProduct->getId();
         }
         //print_r($productIds);
         return $productIds;

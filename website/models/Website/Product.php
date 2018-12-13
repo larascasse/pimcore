@@ -3342,7 +3342,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         $productIds  = array();
         foreach ($childrens as $simpleProduct) {
             //echo $simpleProduct->getEan();
-            $productIds[] = $simpleProduct->getId();
+            if (!$simpleProduct->getObsolete())
+            	$productIds[] = $simpleProduct->getId();
         }
         //print_r($productIds);
         return $productIds;

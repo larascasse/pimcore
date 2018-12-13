@@ -48,12 +48,13 @@ class Website_Teinte extends Object_Teinte {
 	            $childrens = $list->load();
 
 	            foreach ($childrens as $simpleProduct) {
-
-	                $productIds[] = $simpleProduct->getId();
+	            	if (!$simpleProduct->getObsolete())
+	                	$productIds[] = $simpleProduct->getId();
             	}
 			}
 			else {
-				  $productIds[] = $relatedProduct->getId();
+				  if (!$simpleProduct->getObsolete())
+				  	$productIds[] = $simpleProduct->getId();
 			}
 		}
 		return $productIds;

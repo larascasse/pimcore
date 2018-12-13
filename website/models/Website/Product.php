@@ -3343,7 +3343,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         foreach ($childrens as $simpleProduct) {
             //echo $simpleProduct->getEan();
             if (!$simpleProduct->getObsolete())
-            	$productIds[] = $simpleProduct->getId();
+            	$productIds[] = $simpleProduct->getId().$simpleProduct->getObsolete();
         }
         //print_r($productIds);
         return $productIds;

@@ -76,7 +76,7 @@ class Website_Teinte extends Object_Teinte {
 				$list = new Pimcore\Model\Object\Product\Listing();
 				$list->setUnpublished(true);
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
-	            $list->addConditionParam("obsolete = ?",1);
+	            $list->addConditionParam("NOT(obsolete = ?)",1);
 
 	           // \Pimcore\Log\Simple::log("bibi.log", $list);
 	            

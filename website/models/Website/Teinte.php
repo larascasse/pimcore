@@ -75,7 +75,7 @@ class Website_Teinte extends Object_Teinte {
 				$list = new Pimcore\Model\Object\Product\Listing();
 				$list->setUnpublished(true);
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
-	            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+	            $list->addConditionParam("obsolete != 1");
 	            
 	            $childrens = $list->load();
 

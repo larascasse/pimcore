@@ -65,7 +65,8 @@ class ProductHelper
 
         foreach ($childProducts as $childProduct) {
 
-           
+             if ($childProduct->getObsolete() == 1)
+                continue;
 
              if($product_type == "")
                 $product_type =  $childProduct->getProduct_type();

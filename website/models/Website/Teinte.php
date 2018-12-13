@@ -43,6 +43,7 @@ class Website_Teinte extends Object_Teinte {
 				//On va chercher tous les enfants
 				$list = new Pimcore\Model\Object\Product\Listing();
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
+	            $list->addConditionParam("obsolete != ?",1);
 	            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
 	            
 	            $childrens = $list->load();
@@ -75,7 +76,7 @@ class Website_Teinte extends Object_Teinte {
 				$list = new Pimcore\Model\Object\Product\Listing();
 				$list->setUnpublished(true);
 	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'");
-	            $list->addConditionParam("obsolete != 1");
+	            $list->addConditionParam("obsolete != ?",1);
 	            
 	            $childrens = $list->load();
 

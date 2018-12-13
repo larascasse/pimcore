@@ -3334,7 +3334,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
          $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%'");
          //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
         $list->addConditionParam("ean != ''");
-        $list->addConditionParam("obsolete != 1");
+	    $list->addConditionParam("obsolete != ?",1);
 
 
         //

@@ -3331,10 +3331,11 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
         $list = new \Pimcore\Model\Object\Product\Listing();
          $list->setUnpublished(true);
-         $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%'");
+         $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%' AND ean <> '' AND (obsolete IS NULL OR obsolete=0)");
          //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
-        $list->addConditionParam("ean != ''");
-	    $list->addConditionParam("obsolete != ?",1);
+        //$list->addConditionParam("ean != ''");
+	    //$list->addConditionParam("obsolete != ?",1);
+
 
 
         //
@@ -3343,8 +3344,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         $productIds  = array();
         foreach ($childrens as $simpleProduct) {
             //echo $simpleProduct->getEan();
-            if (!$simpleProduct->getObsolete())
-            	$productIds[] = $simpleProduct->getId();
+            //if (!$simpleProduct->getObsolete())
+            $productIds[] = $simpleProduct->getId();
         }
         //print_r($productIds);
         return $productIds;

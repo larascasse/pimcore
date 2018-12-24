@@ -20,6 +20,7 @@ Pimcore_Model_Cache::disable();
 $conditionFilters = array(
     "(o_path LIKE '/catalogue/_product_base__/01massif/tmp%' OR o_path LIKE '/catalogue/_product_base__/05contreco/tmp/%')",
     "ean IS NULL",
+    "code IS NOT NULL",
 );
 
 
@@ -42,7 +43,7 @@ $objects = array();
 foreach ($list->getObjects() as $object) {
 	$article = $object->getCode();
 
-	if (strlen($object->getChanfreins())==0) {
+	if (strlen($object->getChanfreins())==0 && strlen($object->getCode())>0) {
 		if(stristr($article, "G2")) {
 			$object->setChanfreins(2);
 		}

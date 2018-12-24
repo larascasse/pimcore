@@ -43,7 +43,7 @@ $objects = array();
 foreach ($list->getObjects() as $object) {
 	$article = $object->getCode();
 
-	if (strlen($object->getChanfreins())==0 && strlen($object->getCode())>0) {
+	if ((strlen($object->getChanfreins())==0 || $object->getChanfreins()==0) && strlen($object->getCode())>0) {
 		if(stristr($article, "G2")) {
 			$object->setChanfreins(2);
 		}
@@ -53,6 +53,10 @@ foreach ($list->getObjects() as $object) {
 		}
 		else if(stristr($article, "G0")) {
 			$object->setChanfreins(0);
+
+		}
+		else if(stristr($article, "CHERA")) {
+			$object->setChanfreins('Rives abîmées');
 
 		}
 		$object->save();

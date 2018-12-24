@@ -43,7 +43,7 @@ $objects = array();
 foreach ($list->getObjects() as $object) {
 	$article = $object->getCode();
 
-	if ((strlen($object->getChanfreins())==0 || $object->getChanfreins()==0) && strlen($object->getCode())>0) {
+	if ( (strlen($object->getChanfreins())==0 || $object->getChanfreins()==0) && strlen($object->getCode())>0) {
 		if(stristr($article, "G2")) {
 			$object->setChanfreins(2);
 		}
@@ -60,7 +60,7 @@ foreach ($list->getObjects() as $object) {
 
 		}
 		$object->save();
-		echo "\Code:".$object->getCode()." - ".$object->getMage_name(). ' CHANFREINS UPDATED)';
+		echo "\nCode:".$object->getCode()." - ".$object->getMage_name(). ' CHANFREINS UPDATED\)';
 	}
 	
     

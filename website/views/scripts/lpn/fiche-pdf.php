@@ -40,7 +40,7 @@ if (!isset($header["lpn-pdf"])) : ?>
 <?php endif; ?> 
 
 
-<h1><?php echo $this->getTitle(); ?></h1>
+<h1  class="display-1"><?php echo $this->getTitle(); ?></h1>
 <div class="content">
 <?php echo $this->areablock("content"); ?>
 </div>

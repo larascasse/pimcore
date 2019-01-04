@@ -215,7 +215,7 @@ if(!is_array($this->products)) {
 
 foreach ($this->products as $product) {
 
-
+  echo $product->getMage_notice_pose_lpn();
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
     $hasOnePose = true;
   }
@@ -286,11 +286,15 @@ foreach ($this->products as $product) {
 <?php if($hasOnePose) : ?>
 	
   <?php if ($showCheckbox) : ?>
-    <td class="col__"><input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/></td>
+    <td class="col__">
+       <?php if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) : ?>
+        <input type="checkbox"  class="check-pose"  name="pose[]" value="<?php echo $product->getSku()?>"/>
+      <?php endif; ?>
+    </td>
   <?php endif ?>
 
 	<td class="col__">
-     <?php if($hasOnePose) : ?>
+     <?php if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) : ?>
     <a href="<?php $urlFichePose ?>" class="btn-link noajaxload table-selectionner-btn__ embed-pdf" target="_blank" value="<?php echo $sku ?>">Pose</a></td>
    <?php endif; ?>
     
@@ -324,7 +328,8 @@ foreach ($this->products as $product) {
 
 
 <?php
-foreach ($this->missingProducts as $product) {
+if(is_array($this->missingProducts)) {
+  foreach ($this->missingProducts as $product) {
   ?>
   <tr class="row__">
   <td class="col__"><?php echo $product->ean ?></td>
@@ -334,6 +339,8 @@ foreach ($this->missingProducts as $product) {
   </tr>
   <?php
 }
+}
+
 
 ?>
 

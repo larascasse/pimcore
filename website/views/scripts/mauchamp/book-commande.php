@@ -106,4 +106,21 @@ foreach ($products as $product) {
 		}
 	}
 }
+
+
+/* Fiches de pose */
+/*
+foreach ($products as $product) {
+
+	if(in_array($product->getSku(),$poseIncludedSkus)) {
+
+		$pdf = $product->getNotice_pose_lpn();
+		if($pdf instanceof Document) {
+			$content = Tool::getHttpData(Pimcore\Tool::getHostUrl()."/document-pdf?id=".$pdf->getId());
+			//
+		}
+	}
+}
+*/
+
 ?>

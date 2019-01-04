@@ -1049,6 +1049,9 @@ class Website_Product extends Object_Product {
 	function getCalculatedTechnicalSheetPdfUrl() {
 		return \Pimcore\Tool::getHostUrl()."/pdf/".$this->getId();
 	}
+	function getCalculatedPoseSheetPdfUrl() {
+		return \Pimcore\Tool::getHostUrl()."/document-pdf/?id=".$this->getId();
+	}
 
 	public function getMage_fichepdf() {
 		
@@ -1068,10 +1071,26 @@ class Website_Product extends Object_Product {
 	}
 
 	public function getMage_notice_pose_lpn() {
+		
+		$pdf = $this->getNotice_pose_lpn();
+		if($pdf instanceof Document) {
+			
+			return $this->getCalculatedPoseSheetPdfUrl();
+		}
+		elseif($pdf) {
+			return LPN_ASSET_PREFIX.$this->getNotice_pose_lpn()->getFullPath();
+		}
+		
+		return null;
+	}
+
+
+
+	/*public function getMage_notice_pose_lpn() {
 		if($this->getNotice_pose_lpn())
 			return LPN_ASSET_PREFIX.$this->getNotice_pose_lpn()->getFullPath();
 		return null;
-	}
+	}*/
 
 	public function getMage_name() {
 

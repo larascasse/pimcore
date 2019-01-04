@@ -51,7 +51,9 @@ class MauchampController extends Action
 
             if($this->getParam('debug')) {
                //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+
               $data = Website\Tool\MauchampHelper::getDebugOrder();
+
             }
             else {
               $data = false;
@@ -59,7 +61,7 @@ class MauchampController extends Action
             
            
         }
-            
+        
         if($data) {
           if(\Website\Tool\MauchampHelper::isClientRequest($data)) {
             
@@ -91,6 +93,7 @@ class MauchampController extends Action
 
           //ORDER
           else {
+
               $order = \Website\Tool\MauchampHelper::parseOrder($data);
               $this->view->products = $order["products"];
               $this->view->missingProducts = $order["missingProducts"];
@@ -248,10 +251,13 @@ class MauchampController extends Action
                  
                  $pdfMerged = new Zend_Pdf();
                  $this->products = $order["products"];
+
                  if(count($this->products)>0) {
                      foreach ($this->products as $product) {
 
-
+                      if(!in_array($product->getSku(),$ftIncludedSkus)) {
+                          continue;
+                       } 
                          
                          if(in_array($product->getSku(),$ftIncludedSkus) 
                             && $product->getFiche_technique_lpn()
@@ -286,6 +292,65 @@ class MauchampController extends Action
                          }
                      }
                 }
+
+                //fiches de pose
+               //$posePdfContent = [];
+               foreach ($this->products as $product) {
+
+                   if(!in_array($product->getSku(),$poseIncludedSkus)) {
+                      continue;
+                   }  
+
+                   $doc = $product->getNotice_pose_lpn();
+                   if($doc instanceof Document && $doc->getId()>0) {
+                       
+                       $pdfContentPose = \Pimcore\Tool::getHttpData(Pimcore\Tool::getHostUrl()."/document-pdf?id=".$doc->getId());
+
+
+                      try {
+                           //$pdfContentPose = \Website\Tool\Wkhtmltopdf::fromString($fileContent);
+
+                           try {
+                             $pdfPose = Zend_Pdf::parse($pdfContentPose); 
+                             //$reversedPages = array_reverse($pdfPose->pages);
+                              $reversedPages = $pdfPose->pages;
+                              foreach($reversedPages as $page){
+
+                                $clonedPage = clone $page;
+                                $pdfMerged->pages[] = $clonedPage;
+                              }
+                              unset($clonedPage);
+
+
+                            }
+                            catch (Zend_Pdf_Exception $e) {
+                                Logger::err($e);
+                                \Pimcore\Log\Simple::log("posepdf.log",'erro parsing pdf'.$e->getMessage());
+                                //echo json_encode(array("message"=> $e->getMessage(),"message2"=>"error rendering Zend"));
+                               //die;
+                            }
+                            catch (Exception $e) {
+                                Logger::err($e);
+                                \Pimcore\Log\Simple::log("posepdf.log",'erro parsing pdf');
+                                //echo json_encode(array("message"=> $e->getMessage(),"message2"=>"error rendering Zend"));
+                               //die;
+                            }
+                      }
+                      catch (Exception $e) {
+                          Logger::err($e);
+                          \Pimcore\Log\Simple::log("posepdf.log",'erro getting pdf');
+                          //echo json_encode(array("message"=> $e->getMessage(),"message2"=>"error rendering Zend"));
+                         //die;
+                      }
+
+
+                      
+                 
+
+                   }
+
+               }
+
 
                  //OK, on a des PDF statiques, on insere avant le PDF Dynalmique
                  if(count($pdfMerged->pages)>0) {
@@ -389,6 +454,12 @@ class MauchampController extends Action
          $returnMessageAlert = "Mail envoyé, chouette !";
          if($this->getParam("from-email") == 'damien@lp-nouvelle.fr') {
             $returnMessageAlert = 'Mail envoyé. Rrrrrigolo ... Essaie de la sortir celle la.';
+            if($order["orderDetail"]["Type_Piece"] == "Commande") {
+              $returnMessageAlert = 'Mail envoyé. La vache, t\'as trouvé l\'onglet commande !!';
+            }
+            else if($order["orderDetail"]["Type_Piece"] == "Facture") {
+              $returnMessageAlert = 'Mail envoyé. Enfin une facture !! Allez, on souffle un peu';
+            }
          }
          elseif($this->getParam("from-email") == 'pascal@lp-nouvelle.fr') {
               $returnMessageAlert = 'Mail envoyé. C\'est beau ça !!';
@@ -594,6 +665,8 @@ class MauchampController extends Action
 
          }
 
+         
+
          //OK, on ajoute les fihes rtechniques si elle ne sont pas dynbamqieusw
          $order = \Website\Tool\MauchampHelper::parseOrder($data);        
          $this->products = $order["products"];
@@ -601,7 +674,15 @@ class MauchampController extends Action
          $existingPaths = array();
         
          $pdfMerged = new Zend_Pdf();
+
+
+
+
          foreach ($this->products as $product) {
+
+             if(!in_array($product->getSku(),$this->getParam('ftIncludedSkus'))) {
+                return;
+             }  
              
              if($product->getFiche_technique_lpn()) {
                 $pdfpath = $product->getFiche_technique_lpn()->getFileSystemPath();
@@ -625,6 +706,10 @@ class MauchampController extends Action
                
              }
          }
+
+
+      
+
 
          if(count($pdfMerged->pages)>0) {
 

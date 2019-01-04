@@ -106,6 +106,28 @@ body {
     	height:100%;
     }
     table {page-break-inside: avoid;}
+
+    p, blockquote {
+	  orphans: 3; /* pas de ligne seule en bas */
+	  widows: 3; /* pas de ligne seule en haut */
+	}
+	blockquote, ul, ol {
+	  page-break-inside: avoid; /* pas de coupure dans ces élements */
+	}
+	h1 {
+	  page-break-before: always; /* chaque titre commence sur une nouvelle page */
+	}
+	h1, h2, h3, caption {
+	  page-break-after: avoid; /* pas de saut après ces éléments */
+	}
+	a {
+	  color: #000!important;
+	  text-decoration: underline!important;
+	}
+	a[href]:after {
+	  content: " (" attr(href) ")"; /* affichage des URL des liens */
+	}
+
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {

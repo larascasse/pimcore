@@ -72,7 +72,7 @@ body {
     /* pas de ligne seule en bas */
     widows: 3;
     /* pas de ligne seule en haut */ }
-  blockquote, ul, ol {
+  blockquote, ul, ol, img {
     page-break-inside: avoid;
     /* pas de coupure dans ces élements */ }
   h1 {
@@ -86,7 +86,10 @@ body {
     text-decoration: underline !important; }
   a[href]:after {
     content: " (" attr(href) ")";
-    /* affichage des URL des liens */ } }
+    /* affichage des URL des liens */ }
+  p.page-break {
+    page-break-after: always;
+    /* chaque titre commence sur une nouvelle page */ } }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   font-weight: normal; }

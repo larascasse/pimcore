@@ -111,7 +111,7 @@ body {
 	  orphans: 3; /* pas de ligne seule en bas */
 	  widows: 3; /* pas de ligne seule en haut */
 	}
-	blockquote, ul, ol {
+	blockquote, ul, ol, img {
 	  page-break-inside: avoid; /* pas de coupure dans ces élements */
 	}
 	h1 {
@@ -126,6 +126,10 @@ body {
 	}
 	a[href]:after {
 	  content: " (" attr(href) ")"; /* affichage des URL des liens */
+	}
+
+	p.page-break {
+		page-break-after: always; /* chaque titre commence sur une nouvelle page */
 	}
 
 }

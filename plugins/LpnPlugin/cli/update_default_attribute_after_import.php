@@ -18,7 +18,7 @@ Pimcore_Model_Cache::disable();
 
 
 $conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-barre-jonction/ap000mebj0000bf/%'
+    o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-barre-jonction/ap000mebj0000bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-barre-jonction/ap000mebj0240bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/ap000mebs1000bf/%'
     OR o_path LIKE '/catalogue/_product_base__/20strat/strat-accessoires/strat-plinthes/ap000mepsb000bf/%'

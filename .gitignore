@@ -19,3 +19,4 @@ vendor/*
 /website/var/composer
 /website/var/config/web2print.php
 /website/var/email/*
+/.htaccess

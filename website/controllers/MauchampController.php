@@ -398,7 +398,7 @@ class MauchampController extends Action
                 $mail->clearRecipients();
 
                 //$mail->addTo("florent@lesmecaniques.net",'Florent text');
-                $allEmails = explode(";",$this->getParam("to-email"));
+                $allEmails = explode(";",trim($this->getParam("to-email")));
                 $mail->addTo($allEmails);
 
                 $mail->addBcc("florent@lesmecaniques.net");

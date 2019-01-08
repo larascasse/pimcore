@@ -3557,7 +3557,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 			$attributeValue = $value->getForCsvExport($this);
 
 
-			if($this->isParquet() && $$attributeKey=="chanfreins" && strlen($attributeValue) == 0) {
+			if($this->isParquet() && $attributeKey=="chanfreins" && strlen($attributeValue) == 0) {
 				$value =  "XXXXXXXXXX";	
 			}
 

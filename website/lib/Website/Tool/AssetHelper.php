@@ -53,7 +53,7 @@ class AssetHelper
                         //echo $assets[0]->getId()."/";
 
                         $product = _getProductFromAsset($assets[0]);
-                        $returnArray->name = $product?$product->getName():"";
+                        $returnArray->name = $product?$product->getMage_name():"";
                         $returnArray->sku = $product?$product->getSku():"";
                     }
 

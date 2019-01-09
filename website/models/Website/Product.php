@@ -1132,6 +1132,8 @@ class Website_Product extends Object_Product {
 		
 		$str = str_replace("   ", " ", $str);
 		$str = str_replace("  ", " ", $str);
+		$str = str_replace("  ", " ", $str);
+    	
     	
     	$str =trim($str);
 
@@ -2209,7 +2211,8 @@ class Website_Product extends Object_Product {
 			return $product->getCode();
 	}
 
-	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false,$includeProductThumb=false) {
+
+	public function getMage_realisationsArray($includeProductImage=false,$includeProductName=false,$includeProductThumb=false) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
@@ -2329,7 +2332,7 @@ class Website_Product extends Object_Product {
 						//echo $assets[0]->getId()."/";
 
 						$product = $this->_getProductFromAsset($assets[0]);
-						$returnArray->name = $product?$product->getName():"";
+						$returnArray->name = $product?$product->getMage_name():"";
 						$returnArray->sku = $product?$product->getSku():"";
 					}
 
@@ -2345,7 +2348,14 @@ class Website_Product extends Object_Product {
 			
 		}
 		Object_Abstract::setGetInheritedValues($inheritance); 
-		return Zend_Json::encode($return);
+		return $return;
+	}
+
+
+
+	public function getMage_realisationsJson($includeProductImage=false,$includeProductName=false,$includeProductThumb=false) {
+		
+		return Zend_Json::encode($this->getMage_realisationsArray($includeProductImage,$includeProductName,$includeProductThumb));
 	}
 
 	public function getMage_mediagallery() {

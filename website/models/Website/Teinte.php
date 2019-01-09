@@ -3,6 +3,9 @@
 // define a custom class,  for example:
 class Website_Teinte extends Object_Teinte {
 
+	protected  $_tags;
+
+
 	public function getSimilarTeinteProducts($productToExclude=null) {
 		$teinte = $this;
 		$products = array();
@@ -54,8 +57,8 @@ class Website_Teinte extends Object_Teinte {
             	}
 			}
 			else {
-				  if (!$simpleProduct->getObsolete())
-				  	$productIds[] = $simpleProduct->getId();
+				  if (!$relatedProduct->getObsolete())
+				  	$productIds[] = $relatedProduct->getId();
 			}
 		}
 		return $productIds;
@@ -152,17 +155,22 @@ class Website_Teinte extends Object_Teinte {
 			
 			$return[$assetTageString] = $path."::".$assetTageString;
 		}
+		 Object_Abstract::setGetInheritedValues($inheritance); 
 		return implode(";",$return);
 		
 	}
 
 	public function getMage_tags() {
-		$tags = \Pimcore\Model\Element\Tag::getTagsForElement('object', $this->getId());
-		$tagsName=[];
-		foreach ($tags as $tag) {
-			$tagsName[] = $tag->getName();
+
+		if(!$this->_tags) {
+			$tags = \Pimcore\Model\Element\Tag::getTagsForElement('object', $this->getId());
+			$tagsName=[];
+			foreach ($tags as $tag) {
+				$tagsName[] = $tag->getName();
+			}
+			$this->_tags = implode(',',$tagsName);
 		}
-		return implode(',',$tagsName);
+		return $this->_tags;
 	}
 
 	public function getShortArray() {
@@ -186,12 +194,8 @@ class Website_Teinte extends Object_Teinte {
 				//unset($attributeValue);
 				continue;
 			}
-
 			
 			$attributeValue = $value->getForCsvExport($this);
-
-			//echo $attribute." ".$attributeValue."\n<br/>";
-			
 			
 			//echo $attribute." ".$attributeValue."\n<br/>";
 			$return[$attribute] = $attributeValue;
@@ -228,12 +232,42 @@ class Website_Teinte extends Object_Teinte {
 		
 		$return["configurable_fields"] = $this->getConfigurableFields();
 		//$return["subtype"] = "teinte-".$return["product_type"];
-		$return["subtype"] = '';
+		$return["subtype"] = ''; //On ne met rien car cet attribut est devenu configurable
 		$return["className"] = "teinte";
 		$return["key"] = $this->getKey();
 		$return["unite"] = "M2";
 		$return["published"] = $this->getPublished();
+		//$return["mage_realisationsJson"] = $this->getAllRealisations();
+		$return["mage_realisationsJson"] = Zend_Json::encode($this->getAllRealisations());
 
+		return $return;
+	}
+
+
+	public function getAllRealisations() {
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+		Object_Abstract::setGetInheritedValues(true); 
+   		$return = array();
+		$articles = $this->getProductsArticle();
+		$realisations = [];
+		foreach ($articles as $product) {
+
+			$realisationArray  = $product->getMage_realisationsArray($includeProductImage = false,$includeProductName = true,$includeProductThumb);
+
+
+			foreach ($realisationArray as $realisation) {
+				if(is_object($realisation)) {
+					$realisation->tags = $this->getMage_tags();
+					//Pour éviter les duplicates
+					$realisations[$realisation->base] = $realisation;
+				}
+			}
+
+		}
+		foreach ($realisations as $realisation) {
+			$return[] = $realisation;
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $return;
 	}
 

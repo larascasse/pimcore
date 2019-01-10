@@ -4,6 +4,7 @@
 class Website_Teinte extends Object_Teinte {
 
 	protected  $_tags;
+	protected  $_productsArticle;
 
 
 	public function getSimilarTeinteProducts($productToExclude=null) {
@@ -105,33 +106,40 @@ class Website_Teinte extends Object_Teinte {
 
 	//On ne prend que les articles (pas les ean ...)
 	public function getProductsArticle($productToExclude=null) {
-		$teinte = $this;
-		$products = array();
 
-		if($teinte) {
-			
-			$def = $teinte->getClass()->getFieldDefinition("products_relation");
-			$refKey = $def->getOwnerFieldName();
-			$refId = $def->getOwnerClassId();
-			$nonOwnerRelations = $teinte->getRelationData($refKey,false,$refId);
-			
-		   	foreach($nonOwnerRelations as $productRelarion){
-		   		$product =  Object_Abstract::getById($productRelarion['id']);
-		   		
+		if(!$this->_productsArticle) {
 
-		   		if($product instanceof Object_Product)  {
 
-		   		
-		   			if(!$productToExclude || $product->getId()!=$productToExclude->getId()) {
+			$teinte = $this;
+			$products = array();
 
-		   				$products[] = $product;
-		   			}
-		     		
-		     	}
-		   	}
+			if($teinte) {
+				
+				$def = $teinte->getClass()->getFieldDefinition("products_relation");
+				$refKey = $def->getOwnerFieldName();
+				$refId = $def->getOwnerClassId();
+				$nonOwnerRelations = $teinte->getRelationData($refKey,false,$refId);
+				
+			   	foreach($nonOwnerRelations as $productRelarion){
+			   		$product =  Object_Abstract::getById($productRelarion['id']);
+			   		
+
+			   		if($product instanceof Object_Product)  {
+
+			   		
+			   			if(!$productToExclude || $product->getId()!=$productToExclude->getId()) {
+
+			   				$products[] = $product;
+			   			}
+			     		
+			     	}
+			   	}
+			}
+			$this->_productsArticle = $products;
 		}
+		return $this->_productsArticle;
 		
-		return $products;
+		
 	}
 
 	public function getMage_mediagallery() {
@@ -239,6 +247,13 @@ class Website_Teinte extends Object_Teinte {
 		$return["published"] = $this->getPublished();
 		//$return["mage_realisationsJson"] = $this->getAllRealisations();
 		$return["mage_realisationsJson"] = Zend_Json::encode($this->getAllRealisations());
+
+		if(count($articles = $this->getProductsArticle()) > 0 ) {
+			$firstArticle = $articles[0];
+			$return["finition"] = $firstArticle->getFinition();
+			$return["essence"] = $firstArticle->getEssence();
+		}
+		
 
 		return $return;
 	}

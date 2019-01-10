@@ -234,8 +234,18 @@ class Website_Teinte extends Object_Teinte {
 	            break;
     	}
 
-		$return["mage_short_name"] = $return["mage_short_name"];
-		$return["mage_name"] = $return["mage_name"];
+    	$return["finition"] = "";
+    	$return["essence"] = "";
+    	
+    	if(count($articles = $this->getProductsArticle()) > 0 ) {
+			$firstArticle = $articles[0];
+			$return["finition"] = $firstArticle->getFinition();
+			$return["essence"] = $firstArticle->getEssence();
+		}
+
+
+		$return["mage_short_name"] = $return["short_name"];
+		$return["mage_name"] = $return["name"];
 		$return["mage_meta_title"] = $return["name"] . " par La parqueterie Nouvelle";
 		
 		$return["configurable_fields"] = $this->getConfigurableFields();
@@ -248,11 +258,7 @@ class Website_Teinte extends Object_Teinte {
 		//$return["mage_realisationsJson"] = $this->getAllRealisations();
 		$return["mage_realisationsJson"] = Zend_Json::encode($this->getAllRealisations());
 
-		if(count($articles = $this->getProductsArticle()) > 0 ) {
-			$firstArticle = $articles[0];
-			$return["finition"] = $firstArticle->getFinition();
-			$return["essence"] = $firstArticle->getEssence();
-		}
+		
 		
 
 		return $return;

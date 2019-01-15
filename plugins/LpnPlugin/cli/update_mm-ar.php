@@ -226,6 +226,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('chanfreins','rives abîmées');
         $parent->setMotif('dalle-versailles');
         $parent->setTypeLame('dalle');
+        $parent->setValue('fixation','double-rainure');
 
     }
     else if(stristr($article, "MMCHEUB")) {
@@ -233,6 +234,9 @@ foreach ($list->getObjects() as $object) {
          $parentSuffixeEan .="vieilli usé brossé rives abîmées";
 
          $parent->setValue('epaisseur_txt','de 20 à 23 mm');
+
+         $parent->setValue('fixation','rainurelanguette-2cotes-fausses-languettes');
+
 
          $suffixeEan = '20-23';
 
@@ -253,13 +257,13 @@ foreach ($list->getObjects() as $object) {
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
         $parent->setValue('longueur_txt','Longueur pointe à pointe : '."650"." mm");
-
-
-
+        $parent->setValue('fixation','rainurelanguette');
     }
+    
     elseif(stristr($article, "MBCHE") && !$isBrut) {
         $parent->setMotif('baton rompu');
         $parentSuffixeEan .=" Bâton rompu";
+        $parent->setValue('fixation','rainurelanguette');
     }
 
 

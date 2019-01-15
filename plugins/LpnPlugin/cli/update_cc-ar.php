@@ -188,7 +188,7 @@ Usé,use
             $parent->setValue('name',null);
             
         } 
-        $parent->setValue('fixation','rainurelanguette');
+        $parent->setValue('fixation',['rainurelanguette']);
         
         $parent->save();
         

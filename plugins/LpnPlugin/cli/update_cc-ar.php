@@ -148,6 +148,13 @@ Usé,use
         
     }
 
+    if(stristr($article, "G2")) {
+        $parent->setValue('chanfreins','2');
+    }   
+    else {
+        $parent->setValue('chanfreins','rives abîmées');
+    }
+
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"huile-aqua");
     }
@@ -182,6 +189,7 @@ Usé,use
             
         } 
         $parent->setValue('fixation','rainurelanguette');
+        
         $parent->save();
         
 

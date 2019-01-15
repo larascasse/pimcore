@@ -35,6 +35,10 @@ foreach ($products as $product) {
 		if($image) {
 			echo '<img src="'.$image->getThumbnail("galleryCarouselPreview").'"/>';
 		}
+		$image = $product->{"getImage_" . 'texture'}();
+		if($image) {
+			echo '<img src="'.$image->getThumbnail("galleryCarouselPreview").'"/>';
+		}
 	}
 	
             	

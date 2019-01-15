@@ -236,6 +236,7 @@ foreach ($list->getObjects() as $object) {
          $parent->setValue('epaisseur_txt','de 20 à 23 mm');
 
          $parent->setValue('fixation',['rainurelanguette-2cotes-fausses-languettes']);
+         $object->setValue('chanfreins','rives abîmées'); 
 
 
          $suffixeEan = '20-23';

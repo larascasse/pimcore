@@ -96,6 +96,12 @@ foreach ($list->getObjects() as $object) {
 
             break;
 
+         case 12:
+            $object->setEpaisseurUsure('4 mm');
+            $object->setPose(array('acoller'));
+
+            break;
+
          
         
         default:

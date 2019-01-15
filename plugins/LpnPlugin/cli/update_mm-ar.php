@@ -287,6 +287,11 @@ foreach ($list->getObjects() as $object) {
 
     }
 
+    if(stristr($article, "MDCHEPP") && !$isBrut) {
+        $parent->setValue('chanfreins','rives abîmées'); 
+
+    }
+
     $object->setValue('longueur_txt',$longueur_txt); 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
     

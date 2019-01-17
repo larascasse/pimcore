@@ -93,7 +93,7 @@ Usé,use
     //epaisseur
 
     if(strlen($object->getEan())>0) {
-        $object->setFixation(array('rainurelanguette4cotes'));
+        $object->setFixation(array('rainurelanguette'));
 
         $longueur_txt = "";
 

@@ -352,9 +352,6 @@ Usé,use
             }
         }
 
-
-         
-
         
         $object->setValue("pimonly_name_suffixe",trim($suffixeEan));
 
@@ -362,6 +359,9 @@ Usé,use
 
         if($isStock) {
             $object->setValue('chanfreins',"2");
+        }
+        else if ($object->getChoix() == 'ELC') {
+            $object->setValue('chanfreins',"2 ou rives abîmées ou en U");
         }
         else {
             $object->setValue('chanfreins',"2 ou rives abîmées");

@@ -116,6 +116,5 @@ echo $this->template("mauchamp/inc-mauchamp-magento-client.php",array("email"=>$
 
 
   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#dddddd">
-            <textarea  cols="50" rows="20" name="xml"><?php echo $this->xmlClient ?></textarea>
+<textarea  cols="100" rows="20" name="xmldebug" style="font-size:10px; color:#dddddd"><?php echo $this->xmlClient ?></textarea>
 </div>

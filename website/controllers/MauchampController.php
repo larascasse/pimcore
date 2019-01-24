@@ -50,9 +50,9 @@ class MauchampController extends Action
         else {
 
             if($this->getParam('debug')) {
-               //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+               $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
 
-              $data = Website\Tool\MauchampHelper::getDebugOrder();
+              //$data = Website\Tool\MauchampHelper::getDebugOrder();
 
             }
             else {

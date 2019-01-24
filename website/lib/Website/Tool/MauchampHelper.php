@@ -1220,40 +1220,9 @@ EOT;
 
     public static function getDebugClient() {
       $data = <<<EOT
-<?xml version="1.0" encoding="UTF-8"?>
-<ClientXML_Azure xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   <Code_Client>PIRES</Code_Client>
-   <Nom>PIRES MANUEL</Nom>
-   <Nom_Contact>mme PIRES AU BOULOT</Nom_Contact>
-   <Prenom_Contact />
-   <Email_Contact />
-   <Indice_Code_Prix>3</Indice_Code_Prix>
-   <Code_Client_Web />
-   <ADRESSES_Livraisons>
-      <ADRESSE_Azure>
-         <Nom>PIRES SAS</Nom>
-         <Adr2>21 RUE DES MOULINS</Adr2>
-         <Cp>78290</Cp>
-         <Ville>CROISSY SUR SEINE</Ville>
-         <Telephone>01 39 18 21 46</Telephone>
-         <Portable>06.08.73.03.73</Portable>
-         <Pays>FR</Pays>
-         <Email>ets.pires@club-internet.fr</Email>
-      </ADRESSE_Azure>
-   </ADRESSES_Livraisons>
-   <ADRESSES_CLients>
-      <ADRESSE_Azure>
-         <Nom>PIRES SAS</Nom>
-         <Adr2>21 RUE DES MOULINS</Adr2>
-         <Cp>78290</Cp>
-         <Ville>CROISSY SUR SEINE</Ville>
-         <Telephone>01 39 18 21 46</Telephone>
-         <Portable>06.08.73.03.73</Portable>
-         <Pays>FR</Pays>
-         <Email>ets.pires@club-internet.fr</Email>
-      </ADRESSE_Azure>
-   </ADRESSES_CLients>
-</ClientXML_Azure>
+<?xml version="1.0" encoding="utf-8"?>
+<ClientXML_Azure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Code_Client>BERENGER</Code_Client><Nom>BERENGER</Nom><Nom_Contact>Berenger C</Nom_Contact><Prenom_Contact>Florent C</Prenom_Contact><Email_Contact>florent.berenger@gmail.com</Email_Contact><Indice_Code_Prix/><Code_Client_Web/><ADRESSES_Livraisons><ADRESSE_Azure><Nom>BERENGER </Nom><Adr2>42 rue Richer</Adr2><Cp>78800</Cp><Ville>Paris</Ville><Telephone>01435266352</Telephone><Fax>01425354563</Fax><Portable>06605658696</Portable><Pays>FR</Pays><Email>florent.berenger@gmail.com</Email></ADRESSE_Azure></ADRESSES_Livraisons><ADRESSES_CLients><ADRESSE_Azure><Nom>BERENGER </Nom><Adr2>42 rue Richer</Adr2><Cp>78800</Cp><Ville>Paris</Ville><Telephone>01435266352</Telephone><Fax>01425354563</Fax><Portable>06605658696</Portable><Pays>FR</Pays><Email>florent.berenger@gmail.com</Email></ADRESSE_Azure></ADRESSES_CLients></ClientXML_Azure>
+
 EOT;
     return $data;
     }

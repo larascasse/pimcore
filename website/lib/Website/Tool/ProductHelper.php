@@ -32,6 +32,7 @@ class ProductHelper
             
         }
         $retrievableAttributes [] = "mage_use_section_as_configurable";
+        $retrievableAttributes [] = "mage_use_chanfreins_as_configurable";
 
 
         $latestChild = null;
@@ -141,6 +142,9 @@ class ProductHelper
                     }
 
                     if($key=="mage_section" && (!isset($childAllValues['mage_use_section_as_configurable']) ||  !$childAllValues['mage_use_section_as_configurable'])) {
+                        continue;
+                    }
+                    if($key=="chanfreins" && (!isset($childAllValues['mage_use_chanfreins_as_configurable']) ||  !$childAllValues['mage_use_chanfreins_as_configurable'])) {
                         continue;
                     }
 

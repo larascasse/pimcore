@@ -122,7 +122,9 @@ function createCustomer(target) {
         if(typeof(transport.message) != "undefined")
           alert("Erreur : "+transport.message);
         else
-          alert("Erreur bizarre, connecxion inexistante")
+          alert("Erreur bizarre, connexion inexistante"+transport)
+
+        btn.disabled=false;
 
       }
 

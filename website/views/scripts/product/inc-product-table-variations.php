@@ -37,6 +37,7 @@ $childrens = $this->products;
 	   		 	
 	   		 	//$fields["Dimensions"] = "getPimonly_dimensions";
 	   		 	$fields["Classe"] = "getCalculatedClasseUtilisation";
+	   		 	$fields["Fixation"] = "getFixation";
 	   		 	$fields["EAN"] = "getEan";
 
 	   		 	//$fields["Prix Public HT<br /> au ".date('d/m/Y')] = "getPrice_4";

@@ -90,13 +90,16 @@ $childrens = $this->products;
 								case 'Dimensions':
 									$v = $subproduct->getDimensionsStringExtended();
 									break;
+
 								
 								default:
 									$v = $subproduct->$value();
 									break;
 							}
 							
-								
+							if (is_array($v))
+								$v = implode(',',$value);
+							
 							$strChildren.= '<td style="padding: 0.3em;">'.$v.'</td>';
 						}
 						?>

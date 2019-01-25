@@ -98,8 +98,8 @@ $childrens = $this->products;
 							}
 							
 							if (is_array($v))
-								$v = implode(',',$value);
-							
+								$v = implode(',',$v);
+
 							$strChildren.= '<td style="padding: 0.3em;">'.$v.'</td>';
 						}
 						?>

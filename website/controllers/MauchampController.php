@@ -155,6 +155,7 @@ class MauchampController extends Action
            $to_email = $this->getParam("to-email");
 
            $allEmails = explode(";",$to_email);
+           $allEmails = array_map('trim',$allEmails);
 
            $validator = new EmailValidator();
            $valid = true;

@@ -124,7 +124,8 @@ function sendEmail() {
   var email = $("#input-email").val();
 
   var allEmails = email.split(";");
-  $allEmails = array_map('trim',$allEmails);
+  allEmails = allEmails.map(string => string.trim())
+  //allEmails = array_map('trim',$allEmails);
 
   for (var i=0;i<allEmails.length;i++) {
        if (!validateEmail(allEmails[i])) {

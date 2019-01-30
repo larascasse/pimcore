@@ -123,6 +123,9 @@ function sendEmail() {
 
   var email = $("#input-email").val();
 
+  //on remplace
+  email = email.split(',').join(";");
+
   var allEmails = email.split(";");
 
 

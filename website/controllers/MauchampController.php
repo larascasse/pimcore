@@ -154,6 +154,8 @@ class MauchampController extends Action
         if($this->getParam('sendmail')=="true") {
            $to_email = $this->getParam("to-email");
 
+           $to_email = str_replace(",", ";", $to_email);
+
            $allEmails = explode(";",$to_email);
            $allEmails = array_map('trim',$allEmails);
 
@@ -399,7 +401,10 @@ class MauchampController extends Action
                 $mail->clearRecipients();
 
                 //$mail->addTo("florent@lesmecaniques.net",'Florent text');
-                $allEmails = explode(";",trim($this->getParam("to-email")));
+                $to_email = str_replace(",", ";", trim($this->getParam("to-email")));
+
+
+                $allEmails = explode(";",$to_email);
                 $allEmails = array_map('trim',$allEmails);
                 $mail->addTo($allEmails);
 

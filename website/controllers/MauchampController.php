@@ -399,6 +399,7 @@ class MauchampController extends Action
 
                 //$mail->addTo("florent@lesmecaniques.net",'Florent text');
                 $allEmails = explode(";",trim($this->getParam("to-email")));
+                $allEmails = array_map('trim',$allEmails);
                 $mail->addTo($allEmails);
 
                 $mail->addBcc("florent@lesmecaniques.net");

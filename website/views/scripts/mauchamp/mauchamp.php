@@ -124,12 +124,15 @@ function sendEmail() {
   var email = $("#input-email").val();
 
   var allEmails = email.split(";");
-  allEmails = allEmails.map(string => string.trim())
+
+
+  //allEmails = allEmails.map(string => string.trim())
   //allEmails = array_map('trim',$allEmails);
 
   for (var i=0;i<allEmails.length;i++) {
-       if (!validateEmail(allEmails[i])) {
-          alert("Adresse email invalide  :(!!" +allEmails[i]);
+      var email = allEmails[i].trim();
+       if (!validateEmail(email)) {
+          alert("Adresse email invalide  !! :( : " +email);
           return false;
 
         }

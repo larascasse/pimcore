@@ -221,7 +221,7 @@ foreach ($list->getObjects() as $object) {
     $parentSuffixeEan = "";
 
     if($isDalle) {
-        $parent->setTraitement_surface(("vieilli rives abimees"));
+        $parent->setTraitement_surface(("vieilli"));
         $parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
         $parent->setMotif('dalle-versailles');
@@ -278,7 +278,7 @@ foreach ($list->getObjects() as $object) {
     
     else if( (stristr($article, "MMCHERA") || stristr($article, "MBCHERA") || stristr($article, "MHCHERA")) && !$isBrut) {
 
-        $parent->setTraitement_surface(("vieilli rives abimees"));
+        $parent->setTraitement_surface(("vieilli"));
         $parentSuffixeEan .= " vieilli rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');  
     }

@@ -77,7 +77,7 @@ foreach ($list->getObjects() as $object) {
 Brossé accentué, brosse accentue
 Brut,brut
 Brut de sciage, brut de sciage
-Vieilli rives abimées, vieilli rives abimees
+Vieilli rives abimées, vieilli
 Usé,use
 */
     echo "\n$article ?";
@@ -88,6 +88,7 @@ Usé,use
     if(stristr($article, "FMCHEUB")) {
         echo "OK !\n";
          $object->setTraitement_surface(("vieilli use brosse rives abimees"));
+         //$object->setValue('chanfreins','rives abîmées'); 
 
          //EAN
          if(strlen($object->getEan())>0) {
@@ -119,7 +120,8 @@ Usé,use
          $save=true;
     }
     else if(stristr($article, "fmcher")) {
-          $object->setTraitement_surface(("vieilli rives abimees"));
+          $object->setTraitement_surface(("vieilli"));
+          //$object->setValue('chanfreins','rives abîmées'); 
 
 
          if(strlen($object->getEan())>0) {

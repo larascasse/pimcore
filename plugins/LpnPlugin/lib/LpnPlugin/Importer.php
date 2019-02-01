@@ -1235,6 +1235,23 @@
                     }
                     else {
                         $returnMessage[] =  "row ".$job." NEW | ".$objectKey." | ".$object->getFullPath();
+                        
+                        try {
+                            $version = new Model\Version();
+                            $version->setCid($object->getId());
+                            $version->setCtype("object");
+                            $version->setDate($this->getModificationDate());
+                            $version->setUserId(6);
+                            $version->setNote("Azure Create");
+                            $version->save();
+                        }
+                        catch (Exception $e) {
+                            //echo($e);
+                            $returnMessage[] = "Error save Version\n\n";
+                           
+                        }
+                        
+
                         print_r($product);
                     }
                 }

@@ -1219,9 +1219,9 @@
                         }
                          $returnMessage[] =  "row ".$job." UPDATED | ".$objectKey." | ".$object->getFullPath()." | ".implode("|", $returnDetail);
 
-                           $returnMessage["productId"] = $object->getId();
-                           $returnMessage["productSku"] = $object->getEan();
-                           $returnMessage["product"] = $object->getShortArray();
+                           //$returnMessage["productId"] = $object->getId();
+                           //$returnMessage["productSku"] = $object->getEan();
+                           //$returnMessage["product"] = $object->getShortArray();
 
                           
 

@@ -1221,7 +1221,7 @@
 
                            $returnMessage["productId"] = $object->getId();
                            $returnMessage["productSku"] = $object->getEan();
-                           $returnMessage["product"] = $object;
+                           $returnMessage["product"] = $object->getShortArray();
 
                           
 

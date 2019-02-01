@@ -192,6 +192,22 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
+        if(stristr($article, "G2")) {
+
+        }
+
+        if(stristr($article, "G2")) {
+            $parent->setChanfreins(2);
+        }
+        else if(stristr($article, "G4")) {
+            $parent->setChanfreins(4);
+
+        }
+        else if(stristr($article, "G0")) {
+            $parent->setChanfreins(0);
+
+        }
+
 
         $suffixe2 = "";
         if(stristr($scienergieCourt, "PDH ")) {

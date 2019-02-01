@@ -9,6 +9,7 @@ ini_set("max_execution_time", "-1");
 
 //execute in admin mode
 define("PIMCORE_ADMIN", true);
+define("LPN_BATCH_IMPORT", true);
 Pimcore::setAdminMode();
 Object_Abstract::setHideUnpublished(false);
 Object_Abstract::setGetInheritedValues(false);
@@ -408,7 +409,7 @@ foreach ($list->getObjects() as $object) {
     }
     else if( (stristr($article, "MMIPERA") || stristr($article, "MBCHERA") || stristr($article, "MHCHERA")) && !$isBrut) {
 
-        $parent->setTraitement_surface(("vieilli rives abimees"));
+        $parent->setTraitement_surface(("vieilli"));
         $parentSuffixeEan .= " vieilli rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
         //$object->setChoix('ELV');

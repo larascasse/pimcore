@@ -138,7 +138,7 @@ Usé,use
          }
          else {
             $object->setValue('longueur_txt',$longueur_txt);
-            $object->setTraitement_surface(("vieilli rives abimees"));
+            $object->setTraitement_surface(("vieilli"));
             $object->setValue("pimonly_name_suffixe","vieilli");
             
             $object->setValue('chanfreins','rives abîmées');

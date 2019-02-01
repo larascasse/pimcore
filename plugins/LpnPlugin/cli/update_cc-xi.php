@@ -76,7 +76,7 @@ foreach ($list->getObjects() as $object) {
 Brossé accentué, brosse accentue
 Brut,brut
 Brut de sciage, brut de sciage
-Vieilli rives abimées, vieilli rives abimees
+Vieilli rives abimées, vieilli
 Usé,use
 */
     echo "\n$article ?";
@@ -124,7 +124,7 @@ Usé,use
          $save=true;
     }
 
-    //vieilli rives abimees
+    //vieilli
     else if(stristr($article, "vbs")) {
          
 

@@ -197,14 +197,14 @@ foreach ($list->getObjects() as $object) {
         }
 
         if(stristr($article, "G2")) {
-            $parent->setChanfreins(2);
+            $object->setChanfreins(2);
         }
         else if(stristr($article, "G4")) {
-            $parent->setChanfreins(4);
+            $object->setChanfreins(4);
 
         }
         else if(stristr($article, "G0")) {
-            $parent->setChanfreins(0);
+            $object->setChanfreins(0);
 
         }
 

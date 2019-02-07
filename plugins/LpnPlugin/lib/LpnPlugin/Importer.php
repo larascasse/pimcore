@@ -1,5 +1,5 @@
  <?php
-
+use Pimcore\Model;
  class LpnPlugin_Importer {
  	
  	private  $config;

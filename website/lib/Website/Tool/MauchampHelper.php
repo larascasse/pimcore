@@ -838,7 +838,7 @@ class MauchampHelper
         "address2" => "3 rue Pelleport",
         "zipcode" => "75020",
         "city" => "Paris",
-        "phone" => "01 30 40 55 55"
+        "phone" => "01 40 30 55 55"
     );
 
     $sites["95870"] = $sites["78420"] = array (

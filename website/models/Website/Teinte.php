@@ -241,6 +241,8 @@ class Website_Teinte extends Object_Teinte {
 			$firstArticle = $articles[0];
 			$return["finition"] = $firstArticle->getFinition();
 			$return["essence"] = $firstArticle->getEssence();
+			$return["country_of_manufacture"] = $firstArticle->getCountry_of_manufacture();
+			$return["origine_bois"] = $firstArticle->getOrigine_bois();
 		}
 
 

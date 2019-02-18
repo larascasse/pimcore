@@ -15,4 +15,7 @@ return [
     //
     'Pimcore\Model\Object\Taxonomy' => DI\object('Website_Taxonomy'),
     'Pimcore\Model\Object\Taxonomy\List' => DI\object('Website_Taxonomy_List'),
+    //
+    'Pimcore\Model\Object\Category' => DI\object('Website_Category'),
+    'Pimcore\Model\Object\Category\List' => DI\object('Website_Category_List'),
 ];

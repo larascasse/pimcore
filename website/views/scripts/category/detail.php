@@ -1,4 +1,4 @@
-<?php $this->layout()->setLayout("layout-lpn"); ?>
+<?php $this->layout()->setLayout("layout-lpnv2"); ?>
 <section class="area-wysiwyg">
 
     <div class="page-header">

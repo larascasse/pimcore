@@ -1,6 +1,7 @@
 <?php 
 
 use Website\Controller\Action;
+use Website\Model;
 use Pimcore\Model\Document;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
@@ -55,6 +56,90 @@ class CategoryController extends Action
             $this->view->category = Object_Category::getById($this->getParam("id"));
         }
     }
+
+
+    //http://pimcore.florent.local/?action=get-all&controller=category
+    public function getAllAction() {
+      
+
+       /* $listing = new \Pimcore\Model\Article\Listing(); 
+
+        $key =  $this->getParam("key");
+       // $listing->setCondition("parentId = 230");
+        $listing->setCondition('o_path LIKE \'/categories/%\'');
+*/
+
+        $this->disableLayout();
+
+        $this->disableViewAutoRender();
+
+
+        $conditionFilters =array('o_path LIKE \'/categories/%\'');
+
+
+        $key =trim ($this->getParam("key")) ;
+
+       if (strlen($this->getParam("key"))>0) {
+           
+            $conditionFilters[] = "o_key = '" . $this->getParam("key") . "'";
+        }
+        
+
+
+        $condition = implode(" AND ", $conditionFilters);
+
+        //print_r($condition);
+
+        $listing = Website_Category::getList([
+            "condition" => $condition,
+            //"limit" => $limit,
+            //"offset" => $start,
+            //"orderKey" => "o_creationdate",
+            //"order" => "desc",
+            //"unpublished" => true,
+        ]);
+
+      
+        $categories=array();
+   
+      
+        foreach($listing as $category) {
+            //echo $doc->getContent();
+           // echo (get_class($category))." ".$category->getKey()." ".$category->getPath()."<br />\n";
+           
+            try {
+                /*
+                [id] => 6559
+    [modificationDate] => 1485954241
+    [key] => parquet
+    [path] => /projets/
+    [meta] => 
+    [mage_identifier] => /projets/parquet.html
+    [name] => 
+    [content]
+    [posterImage]
+    [description]
+    */
+                if($category instanceOf Website_Category) {
+
+
+                    if(strlen($key)>0 && $key != $category->getKey() ) {
+                       //continue;
+                    }
+                    //print_r($category);
+                    $categories[] = $category->getShortArray();
+                }
+            }
+            catch (Exception $e){
+                echo $e->getMessage();
+            }
+            
+        }
+
+       $this->response = $categories;
+       $this->_helper->json->sendJson($this->response);
+    }
+
 
 
 }

@@ -60,7 +60,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
         $svc = new LPNEntities(LPN_SERVICE_URL);    
 
 
-        $famille = $this->getParam("famille")?$this->getParam("famille"):"10TERRASSE,41TABLE,40BARDAGES,01MASSIF,05CONTRECO,45ACCESSOI,50FINITION,25ISOLANTS,15COLLE,30BETON,20STRAT,97LOTS,03REVPLACA";
+        $famille = $this->getParam("famille")?$this->getParam("famille"):"10TERRASSE,41TABLE,40BARDAGES,01MASSIF,05CONTRECO,45ACCESSOI,50FINITION,25ISOLANTS,15COLLE,30BETON,20STRAT,97LOTS,03REVPLACA,65PANNEAUX,80TASSEAUX";
 
         $forceCreateNonActifWeb=false;
 

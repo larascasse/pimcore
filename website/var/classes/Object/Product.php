@@ -1,32 +1,27 @@
 <?php 
 
 /** 
-* Generated at: 2018-12-05T17:49:49+01:00
+* Generated at: 2019-01-24T12:10:09+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.25.189
+* IP: 172.31.31.218
 
 
 Fields Summary: 
 - actif_web [checkbox]
 - obsolete [checkbox]
-- configurableFields [input]
-- childrenSimpleProductIds_flat [input]
+- echantillon [checkbox]
 - pimonly_print_label [input]
-- is_lot [select]
 - code [input]
 - ean [input]
-- configurable_free_1 [input]
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
 - product_type [select]
 - subtype [input]
 - subtype2 [input]
-- teinte_lpn [select]
 - pimonly_teinte_rel [objects]
-- mage_tags [input]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -40,7 +35,6 @@ Fields Summary:
 - extra_content1 [wysiwyg]
 - lesplus [textarea]
 - remarque [textarea]
-- echantillon [checkbox]
 - no_stock_delay [input]
 - leadtime [input]
 - shipping_type [select]
@@ -52,10 +46,6 @@ Fields Summary:
 - image_4 [image]
 - image_texture [image]
 - gallery [multihref]
-- meta_title [input]
-- meta_title2 [input]
-- meta_description [input]
-- meta_keywords [input]
 - chauffantBasseTemperature [select]
 - pimonly_chauffantBasseTemperature [calculatedValue]
 - chauffantRadiantElectrique [select]
@@ -99,11 +89,16 @@ Fields Summary:
 - traitement_surfaceString [input]
 - motifString [input]
 - finitionString [input]
+- choix [input]
+- choix_not_configurable [checkbox]
+- traitement_surface [select]
+- traitement_surface_not_configurable [checkbox]
+- finition [select]
+- finition_not_configurable [checkbox]
+- motif [select]
 - fixation [multiselect]
 - fixation_not_configurable [checkbox]
 - pose [multiselect]
-- choix [input]
-- choix_not_configurable [checkbox]
 - epaisseur [input]
 - epaisseur_txt [input]
 - epaisseur_not_configurable [checkbox]
@@ -130,13 +125,11 @@ Fields Summary:
 - volume_not_configurable [checkbox]
 - conditionnement [input]
 - conditionnement_not_configurable [checkbox]
-- nbrpp [input]
-- traitement_surface [select]
-- traitement_surface_not_configurable [checkbox]
-- finition [select]
-- finition_not_configurable [checkbox]
+- chanfreins [input]
+- mage_use_chanfreins_as_configurable [checkbox]
 - profil [multiselect]
 - profil_not_configurable [checkbox]
+- configurable_free_1 [input]
 - configurable_free_2 [input]
 - quantity_min [input]
 - quantity_max [input]
@@ -150,23 +143,23 @@ Fields Summary:
 - mode_calcul [input]
 - rendement [input]
 - famille [input]
-- qualite [input]
 - classe_service [input]
-- extras [objects]
-- chanfreins [input]
 - origine_bois [input]
 - country_of_manufacture [input]
 - colisage [input]
 - surface [input]
 - typeLame [select]
-- motif [select]
 - angle [input]
+- is_lot [select]
 - pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
+- nbrpp [input]
+- qualite [input]
+- extras [objects]
 - realisations [multihref]
 - fiche_technique_lpn [href]
 - fiche_technique_orginale [href]
@@ -182,6 +175,10 @@ Fields Summary:
 - associatedArticles [objects]
 - origineArticles [objects]
 - Categories [nonownerobjects]
+- meta_title [input]
+- meta_title2 [input]
+- meta_description [input]
+- meta_keywords [input]
 - mage_visibility [select]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
@@ -214,6 +211,10 @@ Fields Summary:
 - mage_produitsentretien [input]
 - mage_cs_skus [input]
 - mage_origine_arbre [textarea]
+- configurableFields [input]
+- childrenSimpleProductIds_flat [input]
+- teinte_lpn [select]
+- mage_tags [input]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -223,22 +224,17 @@ namespace Pimcore\Model\Object;
 /**
 * @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByConfigurableFields ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChildrenSimpleProductIds_flat ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_print_label ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByIs_lot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProduct_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMage_tags ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
@@ -252,7 +248,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByExtra_content1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLesplus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRemarque ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNo_stock_delay ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLeadtime ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByShipping_type ($value, $limit = 0) 
@@ -264,10 +259,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByImage_4 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByImage_texture ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByGallery ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantBasseTemperature ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_chauffantBasseTemperature ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByChauffantRadiantElectrique ($value, $limit = 0) 
@@ -311,11 +302,16 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByTraitement_surfaceString ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMotifString ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFinitionString ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMotif ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFixation_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPose ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChoix ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChoix_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_txt ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseur_not_configurable ($value, $limit = 0) 
@@ -342,13 +338,11 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByVolume_not_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConditionnement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConditionnement_not_configurable ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByTraitement_surface_not_configurable ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFinition ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByFinition_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_use_chanfreins_as_configurable ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProfil ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByProfil_not_configurable ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByConfigurable_free_2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_min ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByQuantity_max ($value, $limit = 0) 
@@ -362,23 +356,23 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMode_calcul ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRendement ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFamille ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByClasse_service ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByChanfreins ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByOrigine_bois ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCountry_of_manufacture ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByColisage ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySurface ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByTypeLame ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMotif ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAngle ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByIs_lot ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPieceHumide ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySousCoucheIntegree ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPefc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFsc ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByParquet_de_france ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByNf ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByNbrpp ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByQualite ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByExtras ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRealisations ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_lpn ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByFiche_technique_orginale ($value, $limit = 0) 
@@ -393,6 +387,10 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_category_entretien ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAssociatedArticles ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByOrigineArticles ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
@@ -425,6 +423,10 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMage_produitsentretien ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_cs_skus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_origine_arbre ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByConfigurableFields ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByChildrenSimpleProductIds_flat ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTeinte_lpn ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_tags ($value, $limit = 0) 
 */
 
 class Product extends Concrete {
@@ -433,22 +435,17 @@ public $o_classId = 5;
 public $o_className = "product";
 public $actif_web;
 public $obsolete;
-public $configurableFields;
-public $childrenSimpleProductIds_flat;
+public $echantillon;
 public $pimonly_print_label;
-public $is_lot;
 public $code;
 public $ean;
-public $configurable_free_1;
 public $name_scienergie;
 public $name_scienergie_court;
 public $catalogue;
 public $product_type;
 public $subtype;
 public $subtype2;
-public $teinte_lpn;
 public $pimonly_teinte_rel;
-public $mage_tags;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
@@ -462,7 +459,6 @@ public $description;
 public $extra_content1;
 public $lesplus;
 public $remarque;
-public $echantillon;
 public $no_stock_delay;
 public $leadtime;
 public $shipping_type;
@@ -474,10 +470,6 @@ public $image_3;
 public $image_4;
 public $image_texture;
 public $gallery;
-public $meta_title;
-public $meta_title2;
-public $meta_description;
-public $meta_keywords;
 public $chauffantBasseTemperature;
 public $chauffantRadiantElectrique;
 public $solRaffraichissant;
@@ -507,11 +499,16 @@ public $choixString;
 public $traitement_surfaceString;
 public $motifString;
 public $finitionString;
+public $choix;
+public $choix_not_configurable;
+public $traitement_surface;
+public $traitement_surface_not_configurable;
+public $finition;
+public $finition_not_configurable;
+public $motif;
 public $fixation;
 public $fixation_not_configurable;
 public $pose;
-public $choix;
-public $choix_not_configurable;
 public $epaisseur;
 public $epaisseur_txt;
 public $epaisseur_not_configurable;
@@ -538,13 +535,11 @@ public $volume;
 public $volume_not_configurable;
 public $conditionnement;
 public $conditionnement_not_configurable;
-public $nbrpp;
-public $traitement_surface;
-public $traitement_surface_not_configurable;
-public $finition;
-public $finition_not_configurable;
+public $chanfreins;
+public $mage_use_chanfreins_as_configurable;
 public $profil;
 public $profil_not_configurable;
+public $configurable_free_1;
 public $configurable_free_2;
 public $quantity_min;
 public $quantity_max;
@@ -558,23 +553,23 @@ public $weight;
 public $mode_calcul;
 public $rendement;
 public $famille;
-public $qualite;
 public $classe_service;
-public $extras;
-public $chanfreins;
 public $origine_bois;
 public $country_of_manufacture;
 public $colisage;
 public $surface;
 public $typeLame;
-public $motif;
 public $angle;
+public $is_lot;
 public $pieceHumide;
 public $sousCoucheIntegree;
 public $pefc;
 public $fsc;
 public $parquet_de_france;
 public $nf;
+public $nbrpp;
+public $qualite;
+public $extras;
 public $realisations;
 public $fiche_technique_lpn;
 public $fiche_technique_orginale;
@@ -589,6 +584,10 @@ public $pimonly_category_finition;
 public $pimonly_category_entretien;
 public $associatedArticles;
 public $origineArticles;
+public $meta_title;
+public $meta_title2;
+public $meta_description;
+public $meta_keywords;
 public $mage_visibility;
 public $accessoirepopin;
 public $mage_accessoirepopin;
@@ -621,6 +620,10 @@ public $mage_produitsfinition;
 public $mage_produitsentretien;
 public $mage_cs_skus;
 public $mage_origine_arbre;
+public $configurableFields;
+public $childrenSimpleProductIds_flat;
+public $teinte_lpn;
+public $mage_tags;
 
 
 /**
@@ -686,54 +689,28 @@ public function setObsolete ($obsolete) {
 }
 
 /**
-* Get configurableFields - configurableFields
-* @return string
+* Get echantillon - Echantillon disponible ?
+* @return boolean
 */
-public function getConfigurableFields () {
-	$preValue = $this->preGetValue("configurableFields"); 
+public function getEchantillon () {
+	$preValue = $this->preGetValue("echantillon"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->configurableFields;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurableFields")->isEmpty($data)) {
-		return $this->getValueFromParent("configurableFields");
+	$data = $this->echantillon;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("echantillon")->isEmpty($data)) {
+		return $this->getValueFromParent("echantillon");
 	}
 	return $data;
 }
 
 /**
-* Set configurableFields - configurableFields
-* @param string $configurableFields
+* Set echantillon - Echantillon disponible ?
+* @param boolean $echantillon
 * @return \Pimcore\Model\Object\Product
 */
-public function setConfigurableFields ($configurableFields) {
-	$this->configurableFields = $configurableFields;
-	return $this;
-}
-
-/**
-* Get childrenSimpleProductIds_flat - childrenSimpleProductIds_flat
-* @return string
-*/
-public function getChildrenSimpleProductIds_flat () {
-	$preValue = $this->preGetValue("childrenSimpleProductIds_flat"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->childrenSimpleProductIds_flat;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("childrenSimpleProductIds_flat")->isEmpty($data)) {
-		return $this->getValueFromParent("childrenSimpleProductIds_flat");
-	}
-	return $data;
-}
-
-/**
-* Set childrenSimpleProductIds_flat - childrenSimpleProductIds_flat
-* @param string $childrenSimpleProductIds_flat
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChildrenSimpleProductIds_flat ($childrenSimpleProductIds_flat) {
-	$this->childrenSimpleProductIds_flat = $childrenSimpleProductIds_flat;
+public function setEchantillon ($echantillon) {
+	$this->echantillon = $echantillon;
 	return $this;
 }
 
@@ -760,32 +737,6 @@ public function getPimonly_print_label () {
 */
 public function setPimonly_print_label ($pimonly_print_label) {
 	$this->pimonly_print_label = $pimonly_print_label;
-	return $this;
-}
-
-/**
-* Get is_lot - Est un lot ?
-* @return string
-*/
-public function getIs_lot () {
-	$preValue = $this->preGetValue("is_lot"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->is_lot;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("is_lot")->isEmpty($data)) {
-		return $this->getValueFromParent("is_lot");
-	}
-	return $data;
-}
-
-/**
-* Set is_lot - Est un lot ?
-* @param string $is_lot
-* @return \Pimcore\Model\Object\Product
-*/
-public function setIs_lot ($is_lot) {
-	$this->is_lot = $is_lot;
 	return $this;
 }
 
@@ -838,32 +789,6 @@ public function getEan () {
 */
 public function setEan ($ean) {
 	$this->ean = $ean;
-	return $this;
-}
-
-/**
-* Get configurable_free_1 - Option configurable
-* @return string
-*/
-public function getConfigurable_free_1 () {
-	$preValue = $this->preGetValue("configurable_free_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->configurable_free_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
-		return $this->getValueFromParent("configurable_free_1");
-	}
-	return $data;
-}
-
-/**
-* Set configurable_free_1 - Option configurable
-* @param string $configurable_free_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setConfigurable_free_1 ($configurable_free_1) {
-	$this->configurable_free_1 = $configurable_free_1;
 	return $this;
 }
 
@@ -1024,32 +949,6 @@ public function setSubtype2 ($subtype2) {
 }
 
 /**
-* Get teinte_lpn - Teinte
-* @return string
-*/
-public function getTeinte_lpn () {
-	$preValue = $this->preGetValue("teinte_lpn"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->teinte_lpn;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("teinte_lpn")->isEmpty($data)) {
-		return $this->getValueFromParent("teinte_lpn");
-	}
-	return $data;
-}
-
-/**
-* Set teinte_lpn - Teinte
-* @param string $teinte_lpn
-* @return \Pimcore\Model\Object\Product
-*/
-public function setTeinte_lpn ($teinte_lpn) {
-	$this->teinte_lpn = $teinte_lpn;
-	return $this;
-}
-
-/**
 * Get pimonly_teinte_rel - Teinte
 * @return \Pimcore\Model\Object\teinte[]
 */
@@ -1072,32 +971,6 @@ public function getPimonly_teinte_rel () {
 */
 public function setPimonly_teinte_rel ($pimonly_teinte_rel) {
 	$this->pimonly_teinte_rel = $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->preSetData($this, $pimonly_teinte_rel);
-	return $this;
-}
-
-/**
-* Get mage_tags - mage_tags
-* @return string
-*/
-public function getMage_tags () {
-	$preValue = $this->preGetValue("mage_tags"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->mage_tags;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_tags")->isEmpty($data)) {
-		return $this->getValueFromParent("mage_tags");
-	}
-	return $data;
-}
-
-/**
-* Set mage_tags - mage_tags
-* @param string $mage_tags
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMage_tags ($mage_tags) {
-	$this->mage_tags = $mage_tags;
 	return $this;
 }
 
@@ -1440,32 +1313,6 @@ public function setRemarque ($remarque) {
 }
 
 /**
-* Get echantillon - Echantillon disponible ?
-* @return boolean
-*/
-public function getEchantillon () {
-	$preValue = $this->preGetValue("echantillon"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->echantillon;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("echantillon")->isEmpty($data)) {
-		return $this->getValueFromParent("echantillon");
-	}
-	return $data;
-}
-
-/**
-* Set echantillon - Echantillon disponible ?
-* @param boolean $echantillon
-* @return \Pimcore\Model\Object\Product
-*/
-public function setEchantillon ($echantillon) {
-	$this->echantillon = $echantillon;
-	return $this;
-}
-
-/**
 * Get no_stock_delay - Délai de livraison (Display)
 * @return string
 */
@@ -1748,110 +1595,6 @@ public function getGallery () {
 */
 public function setGallery ($gallery) {
 	$this->gallery = $this->getClass()->getFieldDefinition("gallery")->preSetData($this, $gallery);
-	return $this;
-}
-
-/**
-* Get meta_title - Métas Title
-* @return string
-*/
-public function getMeta_title () {
-	$preValue = $this->preGetValue("meta_title"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_title;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_title");
-	}
-	return $data;
-}
-
-/**
-* Set meta_title - Métas Title
-* @param string $meta_title
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_title ($meta_title) {
-	$this->meta_title = $meta_title;
-	return $this;
-}
-
-/**
-* Get meta_title2 - meta_title2
-* @return string
-*/
-public function getMeta_title2 () {
-	$preValue = $this->preGetValue("meta_title2"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_title2;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title2")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_title2");
-	}
-	return $data;
-}
-
-/**
-* Set meta_title2 - meta_title2
-* @param string $meta_title2
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_title2 ($meta_title2) {
-	$this->meta_title2 = $meta_title2;
-	return $this;
-}
-
-/**
-* Get meta_description - Meta Descriptions
-* @return string
-*/
-public function getMeta_description () {
-	$preValue = $this->preGetValue("meta_description"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_description;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_description")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_description");
-	}
-	return $data;
-}
-
-/**
-* Set meta_description - Meta Descriptions
-* @param string $meta_description
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_description ($meta_description) {
-	$this->meta_description = $meta_description;
-	return $this;
-}
-
-/**
-* Get meta_keywords - Meta Keywords
-* @return string
-*/
-public function getMeta_keywords () {
-	$preValue = $this->preGetValue("meta_keywords"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->meta_keywords;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_keywords")->isEmpty($data)) {
-		return $this->getValueFromParent("meta_keywords");
-	}
-	return $data;
-}
-
-/**
-* Set meta_keywords - Meta Keywords
-* @param string $meta_keywords
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMeta_keywords ($meta_keywords) {
-	$this->meta_keywords = $meta_keywords;
 	return $this;
 }
 
@@ -2890,6 +2633,188 @@ public function setFinitionString ($finitionString) {
 }
 
 /**
+* Get choix - Choix
+* @return string
+*/
+public function getChoix () {
+	$preValue = $this->preGetValue("choix"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choix;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
+		return $this->getValueFromParent("choix");
+	}
+	return $data;
+}
+
+/**
+* Set choix - Choix
+* @param string $choix
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoix ($choix) {
+	$this->choix = $choix;
+	return $this;
+}
+
+/**
+* Get choix_not_configurable - Choix non configurable
+* @return boolean
+*/
+public function getChoix_not_configurable () {
+	$preValue = $this->preGetValue("choix_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->choix_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("choix_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set choix_not_configurable - Choix non configurable
+* @param boolean $choix_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChoix_not_configurable ($choix_not_configurable) {
+	$this->choix_not_configurable = $choix_not_configurable;
+	return $this;
+}
+
+/**
+* Get traitement_surface - Traitement de surface
+* @return string
+*/
+public function getTraitement_surface () {
+	$preValue = $this->preGetValue("traitement_surface"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->traitement_surface;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface")->isEmpty($data)) {
+		return $this->getValueFromParent("traitement_surface");
+	}
+	return $data;
+}
+
+/**
+* Set traitement_surface - Traitement de surface
+* @param string $traitement_surface
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTraitement_surface ($traitement_surface) {
+	$this->traitement_surface = $traitement_surface;
+	return $this;
+}
+
+/**
+* Get traitement_surface_not_configurable - Traitement de surface non configurable
+* @return boolean
+*/
+public function getTraitement_surface_not_configurable () {
+	$preValue = $this->preGetValue("traitement_surface_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->traitement_surface_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("traitement_surface_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set traitement_surface_not_configurable - Traitement de surface non configurable
+* @param boolean $traitement_surface_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTraitement_surface_not_configurable ($traitement_surface_not_configurable) {
+	$this->traitement_surface_not_configurable = $traitement_surface_not_configurable;
+	return $this;
+}
+
+/**
+* Get finition - Finition
+* @return string
+*/
+public function getFinition () {
+	$preValue = $this->preGetValue("finition"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->finition;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition")->isEmpty($data)) {
+		return $this->getValueFromParent("finition");
+	}
+	return $data;
+}
+
+/**
+* Set finition - Finition
+* @param string $finition
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFinition ($finition) {
+	$this->finition = $finition;
+	return $this;
+}
+
+/**
+* Get finition_not_configurable - Finition non configurable
+* @return boolean
+*/
+public function getFinition_not_configurable () {
+	$preValue = $this->preGetValue("finition_not_configurable"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->finition_not_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition_not_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("finition_not_configurable");
+	}
+	return $data;
+}
+
+/**
+* Set finition_not_configurable - Finition non configurable
+* @param boolean $finition_not_configurable
+* @return \Pimcore\Model\Object\Product
+*/
+public function setFinition_not_configurable ($finition_not_configurable) {
+	$this->finition_not_configurable = $finition_not_configurable;
+	return $this;
+}
+
+/**
+* Get motif - Motif
+* @return string
+*/
+public function getMotif () {
+	$preValue = $this->preGetValue("motif"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->motif;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("motif")->isEmpty($data)) {
+		return $this->getValueFromParent("motif");
+	}
+	return $data;
+}
+
+/**
+* Set motif - Motif
+* @param string $motif
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMotif ($motif) {
+	$this->motif = $motif;
+	return $this;
+}
+
+/**
 * Get fixation - Fixation
 * @return array
 */
@@ -2964,58 +2889,6 @@ public function getPose () {
 */
 public function setPose ($pose) {
 	$this->pose = $pose;
-	return $this;
-}
-
-/**
-* Get choix - Choix
-* @return string
-*/
-public function getChoix () {
-	$preValue = $this->preGetValue("choix"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->choix;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix")->isEmpty($data)) {
-		return $this->getValueFromParent("choix");
-	}
-	return $data;
-}
-
-/**
-* Set choix - Choix
-* @param string $choix
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChoix ($choix) {
-	$this->choix = $choix;
-	return $this;
-}
-
-/**
-* Get choix_not_configurable - Choix non configurable
-* @return boolean
-*/
-public function getChoix_not_configurable () {
-	$preValue = $this->preGetValue("choix_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->choix_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("choix_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("choix_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set choix_not_configurable - Choix non configurable
-* @param boolean $choix_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChoix_not_configurable ($choix_not_configurable) {
-	$this->choix_not_configurable = $choix_not_configurable;
 	return $this;
 }
 
@@ -3696,132 +3569,54 @@ public function setConditionnement_not_configurable ($conditionnement_not_config
 }
 
 /**
-* Get nbrpp - NBRPP
+* Get chanfreins - Chanfreins
 * @return string
 */
-public function getNbrpp () {
-	$preValue = $this->preGetValue("nbrpp"); 
+public function getChanfreins () {
+	$preValue = $this->preGetValue("chanfreins"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->nbrpp;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nbrpp")->isEmpty($data)) {
-		return $this->getValueFromParent("nbrpp");
+	$data = $this->chanfreins;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chanfreins")->isEmpty($data)) {
+		return $this->getValueFromParent("chanfreins");
 	}
 	return $data;
 }
 
 /**
-* Set nbrpp - NBRPP
-* @param string $nbrpp
+* Set chanfreins - Chanfreins
+* @param string $chanfreins
 * @return \Pimcore\Model\Object\Product
 */
-public function setNbrpp ($nbrpp) {
-	$this->nbrpp = $nbrpp;
+public function setChanfreins ($chanfreins) {
+	$this->chanfreins = $chanfreins;
 	return $this;
 }
 
 /**
-* Get traitement_surface - Traitement de surface
-* @return string
-*/
-public function getTraitement_surface () {
-	$preValue = $this->preGetValue("traitement_surface"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->traitement_surface;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface")->isEmpty($data)) {
-		return $this->getValueFromParent("traitement_surface");
-	}
-	return $data;
-}
-
-/**
-* Set traitement_surface - Traitement de surface
-* @param string $traitement_surface
-* @return \Pimcore\Model\Object\Product
-*/
-public function setTraitement_surface ($traitement_surface) {
-	$this->traitement_surface = $traitement_surface;
-	return $this;
-}
-
-/**
-* Get traitement_surface_not_configurable - Traitement de surface non configurable
+* Get mage_use_chanfreins_as_configurable - Chanfreins configurables ?
 * @return boolean
 */
-public function getTraitement_surface_not_configurable () {
-	$preValue = $this->preGetValue("traitement_surface_not_configurable"); 
+public function getMage_use_chanfreins_as_configurable () {
+	$preValue = $this->preGetValue("mage_use_chanfreins_as_configurable"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->traitement_surface_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("traitement_surface_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("traitement_surface_not_configurable");
+	$data = $this->mage_use_chanfreins_as_configurable;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_use_chanfreins_as_configurable")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_use_chanfreins_as_configurable");
 	}
 	return $data;
 }
 
 /**
-* Set traitement_surface_not_configurable - Traitement de surface non configurable
-* @param boolean $traitement_surface_not_configurable
+* Set mage_use_chanfreins_as_configurable - Chanfreins configurables ?
+* @param boolean $mage_use_chanfreins_as_configurable
 * @return \Pimcore\Model\Object\Product
 */
-public function setTraitement_surface_not_configurable ($traitement_surface_not_configurable) {
-	$this->traitement_surface_not_configurable = $traitement_surface_not_configurable;
-	return $this;
-}
-
-/**
-* Get finition - Finition
-* @return string
-*/
-public function getFinition () {
-	$preValue = $this->preGetValue("finition"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->finition;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition")->isEmpty($data)) {
-		return $this->getValueFromParent("finition");
-	}
-	return $data;
-}
-
-/**
-* Set finition - Finition
-* @param string $finition
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFinition ($finition) {
-	$this->finition = $finition;
-	return $this;
-}
-
-/**
-* Get finition_not_configurable - Finition non configurable
-* @return boolean
-*/
-public function getFinition_not_configurable () {
-	$preValue = $this->preGetValue("finition_not_configurable"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->finition_not_configurable;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("finition_not_configurable")->isEmpty($data)) {
-		return $this->getValueFromParent("finition_not_configurable");
-	}
-	return $data;
-}
-
-/**
-* Set finition_not_configurable - Finition non configurable
-* @param boolean $finition_not_configurable
-* @return \Pimcore\Model\Object\Product
-*/
-public function setFinition_not_configurable ($finition_not_configurable) {
-	$this->finition_not_configurable = $finition_not_configurable;
+public function setMage_use_chanfreins_as_configurable ($mage_use_chanfreins_as_configurable) {
+	$this->mage_use_chanfreins_as_configurable = $mage_use_chanfreins_as_configurable;
 	return $this;
 }
 
@@ -3874,6 +3669,32 @@ public function getProfil_not_configurable () {
 */
 public function setProfil_not_configurable ($profil_not_configurable) {
 	$this->profil_not_configurable = $profil_not_configurable;
+	return $this;
+}
+
+/**
+* Get configurable_free_1 - Option configurable
+* @return string
+*/
+public function getConfigurable_free_1 () {
+	$preValue = $this->preGetValue("configurable_free_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurable_free_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurable_free_1")->isEmpty($data)) {
+		return $this->getValueFromParent("configurable_free_1");
+	}
+	return $data;
+}
+
+/**
+* Set configurable_free_1 - Option configurable
+* @param string $configurable_free_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurable_free_1 ($configurable_free_1) {
+	$this->configurable_free_1 = $configurable_free_1;
 	return $this;
 }
 
@@ -4216,32 +4037,6 @@ public function setFamille ($famille) {
 }
 
 /**
-* Get qualite - Qualité
-* @return string
-*/
-public function getQualite () {
-	$preValue = $this->preGetValue("qualite"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->qualite;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("qualite")->isEmpty($data)) {
-		return $this->getValueFromParent("qualite");
-	}
-	return $data;
-}
-
-/**
-* Set qualite - Qualité
-* @param string $qualite
-* @return \Pimcore\Model\Object\Product
-*/
-public function setQualite ($qualite) {
-	$this->qualite = $qualite;
-	return $this;
-}
-
-/**
 * Get classe_service - Classe de service
 * @return string
 */
@@ -4264,58 +4059,6 @@ public function getClasse_service () {
 */
 public function setClasse_service ($classe_service) {
 	$this->classe_service = $classe_service;
-	return $this;
-}
-
-/**
-* Get extras - Autre
-* @return \Pimcore\Model\Object\productExtra[]
-*/
-public function getExtras () {
-	$preValue = $this->preGetValue("extras"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->getClass()->getFieldDefinition("extras")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("extras")->isEmpty($data)) {
-		return $this->getValueFromParent("extras");
-	}
-	return $data;
-}
-
-/**
-* Set extras - Autre
-* @param \Pimcore\Model\Object\productExtra[] $extras
-* @return \Pimcore\Model\Object\Product
-*/
-public function setExtras ($extras) {
-	$this->extras = $this->getClass()->getFieldDefinition("extras")->preSetData($this, $extras);
-	return $this;
-}
-
-/**
-* Get chanfreins - Chanfreins
-* @return string
-*/
-public function getChanfreins () {
-	$preValue = $this->preGetValue("chanfreins"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->chanfreins;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("chanfreins")->isEmpty($data)) {
-		return $this->getValueFromParent("chanfreins");
-	}
-	return $data;
-}
-
-/**
-* Set chanfreins - Chanfreins
-* @param string $chanfreins
-* @return \Pimcore\Model\Object\Product
-*/
-public function setChanfreins ($chanfreins) {
-	$this->chanfreins = $chanfreins;
 	return $this;
 }
 
@@ -4450,32 +4193,6 @@ public function setTypeLame ($typeLame) {
 }
 
 /**
-* Get motif - Motif
-* @return string
-*/
-public function getMotif () {
-	$preValue = $this->preGetValue("motif"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->motif;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("motif")->isEmpty($data)) {
-		return $this->getValueFromParent("motif");
-	}
-	return $data;
-}
-
-/**
-* Set motif - Motif
-* @param string $motif
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMotif ($motif) {
-	$this->motif = $motif;
-	return $this;
-}
-
-/**
 * Get angle - Angle
 * @return string
 */
@@ -4498,6 +4215,32 @@ public function getAngle () {
 */
 public function setAngle ($angle) {
 	$this->angle = $angle;
+	return $this;
+}
+
+/**
+* Get is_lot - Est un lot ?
+* @return string
+*/
+public function getIs_lot () {
+	$preValue = $this->preGetValue("is_lot"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->is_lot;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("is_lot")->isEmpty($data)) {
+		return $this->getValueFromParent("is_lot");
+	}
+	return $data;
+}
+
+/**
+* Set is_lot - Est un lot ?
+* @param string $is_lot
+* @return \Pimcore\Model\Object\Product
+*/
+public function setIs_lot ($is_lot) {
+	$this->is_lot = $is_lot;
 	return $this;
 }
 
@@ -4658,6 +4401,84 @@ public function setNf ($nf) {
 }
 
 /**
+* Get nbrpp - NBRPP
+* @return string
+*/
+public function getNbrpp () {
+	$preValue = $this->preGetValue("nbrpp"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->nbrpp;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("nbrpp")->isEmpty($data)) {
+		return $this->getValueFromParent("nbrpp");
+	}
+	return $data;
+}
+
+/**
+* Set nbrpp - NBRPP
+* @param string $nbrpp
+* @return \Pimcore\Model\Object\Product
+*/
+public function setNbrpp ($nbrpp) {
+	$this->nbrpp = $nbrpp;
+	return $this;
+}
+
+/**
+* Get qualite - Qualité
+* @return string
+*/
+public function getQualite () {
+	$preValue = $this->preGetValue("qualite"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->qualite;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("qualite")->isEmpty($data)) {
+		return $this->getValueFromParent("qualite");
+	}
+	return $data;
+}
+
+/**
+* Set qualite - Qualité
+* @param string $qualite
+* @return \Pimcore\Model\Object\Product
+*/
+public function setQualite ($qualite) {
+	$this->qualite = $qualite;
+	return $this;
+}
+
+/**
+* Get extras - Autre
+* @return \Pimcore\Model\Object\productExtra[]
+*/
+public function getExtras () {
+	$preValue = $this->preGetValue("extras"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("extras")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("extras")->isEmpty($data)) {
+		return $this->getValueFromParent("extras");
+	}
+	return $data;
+}
+
+/**
+* Set extras - Autre
+* @param \Pimcore\Model\Object\productExtra[] $extras
+* @return \Pimcore\Model\Object\Product
+*/
+public function setExtras ($extras) {
+	$this->extras = $this->getClass()->getFieldDefinition("extras")->preSetData($this, $extras);
+	return $this;
+}
+
+/**
 * Get realisations - Réalisations (Gallery)
 * @return \Pimcore\Model\Asset\folder[]
 */
@@ -4737,7 +4558,7 @@ public function setFiche_technique_orginale ($fiche_technique_orginale) {
 
 /**
 * Get notice_pose_lpn - Notice de pose
-* @return \Pimcore\Model\Asset
+* @return \Pimcore\Model\Document\page | \Pimcore\Model\Asset
 */
 public function getNotice_pose_lpn () {
 	$preValue = $this->preGetValue("notice_pose_lpn"); 
@@ -4753,7 +4574,7 @@ public function getNotice_pose_lpn () {
 
 /**
 * Set notice_pose_lpn - Notice de pose
-* @param \Pimcore\Model\Asset $notice_pose_lpn
+* @param \Pimcore\Model\Document\page | \Pimcore\Model\Asset $notice_pose_lpn
 * @return \Pimcore\Model\Object\Product
 */
 public function setNotice_pose_lpn ($notice_pose_lpn) {
@@ -5018,6 +4839,110 @@ public function getOrigineArticles () {
 */
 public function setOrigineArticles ($origineArticles) {
 	$this->origineArticles = $this->getClass()->getFieldDefinition("origineArticles")->preSetData($this, $origineArticles);
+	return $this;
+}
+
+/**
+* Get meta_title - Métas Title
+* @return string
+*/
+public function getMeta_title () {
+	$preValue = $this->preGetValue("meta_title"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_title;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_title");
+	}
+	return $data;
+}
+
+/**
+* Set meta_title - Métas Title
+* @param string $meta_title
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_title ($meta_title) {
+	$this->meta_title = $meta_title;
+	return $this;
+}
+
+/**
+* Get meta_title2 - meta_title2
+* @return string
+*/
+public function getMeta_title2 () {
+	$preValue = $this->preGetValue("meta_title2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_title2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_title2")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_title2");
+	}
+	return $data;
+}
+
+/**
+* Set meta_title2 - meta_title2
+* @param string $meta_title2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_title2 ($meta_title2) {
+	$this->meta_title2 = $meta_title2;
+	return $this;
+}
+
+/**
+* Get meta_description - Meta Descriptions
+* @return string
+*/
+public function getMeta_description () {
+	$preValue = $this->preGetValue("meta_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_description")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_description");
+	}
+	return $data;
+}
+
+/**
+* Set meta_description - Meta Descriptions
+* @param string $meta_description
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_description ($meta_description) {
+	$this->meta_description = $meta_description;
+	return $this;
+}
+
+/**
+* Get meta_keywords - Meta Keywords
+* @return string
+*/
+public function getMeta_keywords () {
+	$preValue = $this->preGetValue("meta_keywords"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->meta_keywords;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("meta_keywords")->isEmpty($data)) {
+		return $this->getValueFromParent("meta_keywords");
+	}
+	return $data;
+}
+
+/**
+* Set meta_keywords - Meta Keywords
+* @param string $meta_keywords
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMeta_keywords ($meta_keywords) {
+	$this->meta_keywords = $meta_keywords;
 	return $this;
 }
 
@@ -5850,6 +5775,110 @@ public function getMage_origine_arbre () {
 */
 public function setMage_origine_arbre ($mage_origine_arbre) {
 	$this->mage_origine_arbre = $mage_origine_arbre;
+	return $this;
+}
+
+/**
+* Get configurableFields - Champs configurables
+* @return string
+*/
+public function getConfigurableFields () {
+	$preValue = $this->preGetValue("configurableFields"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->configurableFields;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("configurableFields")->isEmpty($data)) {
+		return $this->getValueFromParent("configurableFields");
+	}
+	return $data;
+}
+
+/**
+* Set configurableFields - Champs configurables
+* @param string $configurableFields
+* @return \Pimcore\Model\Object\Product
+*/
+public function setConfigurableFields ($configurableFields) {
+	$this->configurableFields = $configurableFields;
+	return $this;
+}
+
+/**
+* Get childrenSimpleProductIds_flat - Sous produits
+* @return string
+*/
+public function getChildrenSimpleProductIds_flat () {
+	$preValue = $this->preGetValue("childrenSimpleProductIds_flat"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->childrenSimpleProductIds_flat;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("childrenSimpleProductIds_flat")->isEmpty($data)) {
+		return $this->getValueFromParent("childrenSimpleProductIds_flat");
+	}
+	return $data;
+}
+
+/**
+* Set childrenSimpleProductIds_flat - Sous produits
+* @param string $childrenSimpleProductIds_flat
+* @return \Pimcore\Model\Object\Product
+*/
+public function setChildrenSimpleProductIds_flat ($childrenSimpleProductIds_flat) {
+	$this->childrenSimpleProductIds_flat = $childrenSimpleProductIds_flat;
+	return $this;
+}
+
+/**
+* Get teinte_lpn - Teinte
+* @return string
+*/
+public function getTeinte_lpn () {
+	$preValue = $this->preGetValue("teinte_lpn"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->teinte_lpn;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("teinte_lpn")->isEmpty($data)) {
+		return $this->getValueFromParent("teinte_lpn");
+	}
+	return $data;
+}
+
+/**
+* Set teinte_lpn - Teinte
+* @param string $teinte_lpn
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTeinte_lpn ($teinte_lpn) {
+	$this->teinte_lpn = $teinte_lpn;
+	return $this;
+}
+
+/**
+* Get mage_tags - Tags
+* @return string
+*/
+public function getMage_tags () {
+	$preValue = $this->preGetValue("mage_tags"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_tags;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_tags")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_tags");
+	}
+	return $data;
+}
+
+/**
+* Set mage_tags - Tags
+* @param string $mage_tags
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_tags ($mage_tags) {
+	$this->mage_tags = $mage_tags;
 	return $this;
 }
 

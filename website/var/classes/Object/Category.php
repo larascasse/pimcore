@@ -1,23 +1,24 @@
 <?php 
 
 /** 
-* Generated at: 2016-11-28T17:18:55+01:00
+* Generated at: 2019-02-18T10:05:43+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 92.154.6.232
+* IP: 172.31.11.119
 
 
 Fields Summary: 
 - name [input]
 - mage_category_id [input]
-- products [objects]
-- title [input]
 - description [textarea]
+- sub_description [textarea]
 - person [href]
+- products [objects]
 - Date [datetime]
 - test [objectsMetadata]
 - test2 [multihref]
+- title [input]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -25,15 +26,16 @@ namespace Pimcore\Model\Object;
 
 
 /**
-* @method static \Pimcore\Model\Object\Category\Listing getByName ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByMage_category_id ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByProducts ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByTitle ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByDescription ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByDate ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByTest ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\Category\Listing getByTest2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByName ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByMage_category_id ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByDescription ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getBySub_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByProducts ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByDate ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByTest ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByTest2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByTitle ($value, $limit = 0) 
 */
 
 class Category extends Concrete {
@@ -42,13 +44,14 @@ public $o_classId = 8;
 public $o_className = "category";
 public $name;
 public $mage_category_id;
-public $products;
-public $title;
 public $description;
+public $sub_description;
 public $person;
+public $products;
 public $Date;
 public $test;
 public $test2;
+public $title;
 
 
 /**
@@ -114,58 +117,6 @@ public function setMage_category_id ($mage_category_id) {
 }
 
 /**
-* Get products - Produits
-* @return \Pimcore\Model\Object\product[]
-*/
-public function getProducts () {
-	$preValue = $this->preGetValue("products"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("products")->isEmpty($data)) {
-		return $this->getValueFromParent("products");
-	}
-	return $data;
-}
-
-/**
-* Set products - Produits
-* @param \Pimcore\Model\Object\product[] $products
-* @return \Pimcore\Model\Object\Category
-*/
-public function setProducts ($products) {
-	$this->products = $this->getClass()->getFieldDefinition("products")->preSetData($this, $products);
-	return $this;
-}
-
-/**
-* Get title - Titre
-* @return string
-*/
-public function getTitle () {
-	$preValue = $this->preGetValue("title"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->title;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("title")->isEmpty($data)) {
-		return $this->getValueFromParent("title");
-	}
-	return $data;
-}
-
-/**
-* Set title - Titre
-* @param string $title
-* @return \Pimcore\Model\Object\Category
-*/
-public function setTitle ($title) {
-	$this->title = $title;
-	return $this;
-}
-
-/**
 * Get description - Description
 * @return string
 */
@@ -188,6 +139,32 @@ public function getDescription () {
 */
 public function setDescription ($description) {
 	$this->description = $description;
+	return $this;
+}
+
+/**
+* Get sub_description - Caractéristiques
+* @return string
+*/
+public function getSub_description () {
+	$preValue = $this->preGetValue("sub_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->sub_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("sub_description")->isEmpty($data)) {
+		return $this->getValueFromParent("sub_description");
+	}
+	return $data;
+}
+
+/**
+* Set sub_description - Caractéristiques
+* @param string $sub_description
+* @return \Pimcore\Model\Object\Category
+*/
+public function setSub_description ($sub_description) {
+	$this->sub_description = $sub_description;
 	return $this;
 }
 
@@ -218,8 +195,34 @@ public function setPerson ($person) {
 }
 
 /**
+* Get products - Produits
+* @return \Pimcore\Model\Object\product[]
+*/
+public function getProducts () {
+	$preValue = $this->preGetValue("products"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("products")->isEmpty($data)) {
+		return $this->getValueFromParent("products");
+	}
+	return $data;
+}
+
+/**
+* Set products - Produits
+* @param \Pimcore\Model\Object\product[] $products
+* @return \Pimcore\Model\Object\Category
+*/
+public function setProducts ($products) {
+	$this->products = $this->getClass()->getFieldDefinition("products")->preSetData($this, $products);
+	return $this;
+}
+
+/**
 * Get Date - date
-* @return \Pimcore\Date
+* @return \Carbon\Carbon
 */
 public function getDate () {
 	$preValue = $this->preGetValue("Date"); 
@@ -235,7 +238,7 @@ public function getDate () {
 
 /**
 * Set Date - date
-* @param \Pimcore\Date $Date
+* @param \Carbon\Carbon $Date
 * @return \Pimcore\Model\Object\Category
 */
 public function setDate ($Date) {
@@ -295,14 +298,40 @@ public function setTest2 ($test2) {
 	return $this;
 }
 
+/**
+* Get title - Titre
+* @return string
+*/
+public function getTitle () {
+	$preValue = $this->preGetValue("title"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->title;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("title")->isEmpty($data)) {
+		return $this->getValueFromParent("title");
+	}
+	return $data;
+}
+
+/**
+* Set title - Titre
+* @param string $title
+* @return \Pimcore\Model\Object\Category
+*/
+public function setTitle ($title) {
+	$this->title = $title;
+	return $this;
+}
+
 protected static $_relationFields = array (
-  'products' => 
-  array (
-    'type' => 'objects',
-  ),
   'person' => 
   array (
     'type' => 'href',
+  ),
+  'products' => 
+  array (
+    'type' => 'objects',
   ),
   'test' => 
   array (

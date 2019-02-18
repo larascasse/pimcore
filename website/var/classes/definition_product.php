@@ -1,32 +1,27 @@
 <?php 
 
 /** 
-* Generated at: 2018-12-05T17:49:49+01:00
+* Generated at: 2019-01-24T12:10:09+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.25.189
+* IP: 172.31.31.218
 
 
 Fields Summary: 
 - actif_web [checkbox]
 - obsolete [checkbox]
-- configurableFields [input]
-- childrenSimpleProductIds_flat [input]
+- echantillon [checkbox]
 - pimonly_print_label [input]
-- is_lot [select]
 - code [input]
 - ean [input]
-- configurable_free_1 [input]
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
 - product_type [select]
 - subtype [input]
 - subtype2 [input]
-- teinte_lpn [select]
 - pimonly_teinte_rel [objects]
-- mage_tags [input]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -40,7 +35,6 @@ Fields Summary:
 - extra_content1 [wysiwyg]
 - lesplus [textarea]
 - remarque [textarea]
-- echantillon [checkbox]
 - no_stock_delay [input]
 - leadtime [input]
 - shipping_type [select]
@@ -52,10 +46,6 @@ Fields Summary:
 - image_4 [image]
 - image_texture [image]
 - gallery [multihref]
-- meta_title [input]
-- meta_title2 [input]
-- meta_description [input]
-- meta_keywords [input]
 - chauffantBasseTemperature [select]
 - pimonly_chauffantBasseTemperature [calculatedValue]
 - chauffantRadiantElectrique [select]
@@ -99,11 +89,16 @@ Fields Summary:
 - traitement_surfaceString [input]
 - motifString [input]
 - finitionString [input]
+- choix [input]
+- choix_not_configurable [checkbox]
+- traitement_surface [select]
+- traitement_surface_not_configurable [checkbox]
+- finition [select]
+- finition_not_configurable [checkbox]
+- motif [select]
 - fixation [multiselect]
 - fixation_not_configurable [checkbox]
 - pose [multiselect]
-- choix [input]
-- choix_not_configurable [checkbox]
 - epaisseur [input]
 - epaisseur_txt [input]
 - epaisseur_not_configurable [checkbox]
@@ -130,13 +125,11 @@ Fields Summary:
 - volume_not_configurable [checkbox]
 - conditionnement [input]
 - conditionnement_not_configurable [checkbox]
-- nbrpp [input]
-- traitement_surface [select]
-- traitement_surface_not_configurable [checkbox]
-- finition [select]
-- finition_not_configurable [checkbox]
+- chanfreins [input]
+- mage_use_chanfreins_as_configurable [checkbox]
 - profil [multiselect]
 - profil_not_configurable [checkbox]
+- configurable_free_1 [input]
 - configurable_free_2 [input]
 - quantity_min [input]
 - quantity_max [input]
@@ -150,23 +143,23 @@ Fields Summary:
 - mode_calcul [input]
 - rendement [input]
 - famille [input]
-- qualite [input]
 - classe_service [input]
-- extras [objects]
-- chanfreins [input]
 - origine_bois [input]
 - country_of_manufacture [input]
 - colisage [input]
 - surface [input]
 - typeLame [select]
-- motif [select]
 - angle [input]
+- is_lot [select]
 - pieceHumide [select]
 - sousCoucheIntegree [checkbox]
 - pefc [checkbox]
 - fsc [checkbox]
 - parquet_de_france [checkbox]
 - nf [checkbox]
+- nbrpp [input]
+- qualite [input]
+- extras [objects]
 - realisations [multihref]
 - fiche_technique_lpn [href]
 - fiche_technique_orginale [href]
@@ -182,6 +175,10 @@ Fields Summary:
 - associatedArticles [objects]
 - origineArticles [objects]
 - Categories [nonownerobjects]
+- meta_title [input]
+- meta_title2 [input]
+- meta_description [input]
+- meta_keywords [input]
 - mage_visibility [select]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
@@ -214,6 +211,10 @@ Fields Summary:
 - mage_produitsentretien [input]
 - mage_cs_skus [input]
 - mage_origine_arbre [textarea]
+- configurableFields [input]
+- childrenSimpleProductIds_flat [input]
+- teinte_lpn [select]
+- mage_tags [input]
 */ 
 
 
@@ -221,7 +222,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1544028588,
+   'modificationDate' => 1548328209,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -295,7 +296,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'noteditable' => true,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width: 150px; float: left;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -314,7 +315,29 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'title' => 'Obsolete ?',
                  'tooltip' => '',
                  'mandatory' => false,
-                 'noteditable' => true,
+                 'noteditable' => false,
+                 'index' => true,
+                 'locked' => false,
+                 'style' => 'width: 180px; float: left;',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'fieldtype' => 'checkbox',
+                 'defaultValue' => 0,
+                 'queryColumnType' => 'tinyint(1)',
+                 'columnType' => 'tinyint(1)',
+                 'phpdocType' => 'boolean',
+                 'name' => 'echantillon',
+                 'title' => 'Echantillon disponible ?',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
                  'index' => false,
                  'locked' => false,
                  'style' => '',
@@ -325,55 +348,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              2 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => 800,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'configurableFields',
-                 'title' => 'configurableFields',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => true,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
               3 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'childrenSimpleProductIds_flat',
-                 'title' => 'childrenSimpleProductIds_flat',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => true,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -397,46 +372,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              5 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Oui',
-                    'value' => '1',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Non',
-                    'value' => '0',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '0',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'is_lot',
-                 'title' => 'Est un lot ?',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              6 => 
+              4 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => 600,
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 32,
@@ -457,7 +396,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              7 => 
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -481,31 +420,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              8 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 128,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'configurable_free_1',
-                 'title' => 'Option configurable',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
-              )),
-              9 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -529,7 +444,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -542,7 +457,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'title' => 'Nom scienergie Court',
                  'tooltip' => '',
                  'mandatory' => false,
-                 'noteditable' => false,
+                 'noteditable' => true,
                  'index' => false,
                  'locked' => false,
                  'style' => '',
@@ -553,7 +468,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              11 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -614,7 +529,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              12 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -695,7 +610,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              13 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -719,7 +634,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              14 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -743,63 +658,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              15 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Canaries',
-                    'value' => 'Canaries',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Cayo',
-                    'value' => 'Cayo',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'Cozumal',
-                    'value' => 'Cozumal',
-                  ),
-                  3 => 
-                  array (
-                    'key' => 'Elethera',
-                    'value' => 'Elethera',
-                  ),
-                  4 => 
-                  array (
-                    'key' => 'Gonave',
-                    'value' => 'Gonave',
-                  ),
-                  5 => 
-                  array (
-                    'key' => 'Thassos',
-                    'value' => 'Thassos',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(255)',
-                 'columnType' => 'varchar(255)',
-                 'phpdocType' => 'string',
-                 'name' => 'teinte_lpn',
-                 'title' => 'Teinte',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              16 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => '',
@@ -832,31 +691,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              17 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'mage_tags',
-                 'title' => 'mage_tags',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => true,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => 'width:100%',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              18 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -880,7 +715,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -904,7 +739,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -928,7 +763,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              21 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -942,7 +777,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => 'Affiché dans la fiche produit et dans les listes',
                  'mandatory' => false,
                  'noteditable' => false,
-                 'index' => false,
+                 'index' => true,
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
@@ -950,9 +785,9 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => false,
+                 'visibleSearch' => true,
               )),
-              22 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -976,7 +811,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              23 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -1000,7 +835,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              24 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -1023,7 +858,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -1046,7 +881,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -1070,7 +905,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1093,7 +928,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -1117,7 +952,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1140,7 +975,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -1163,29 +998,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              31 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
-                 'name' => 'echantillon',
-                 'title' => 'Echantillon disponible ?',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => false,
-              )),
-              32 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1209,7 +1022,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              33 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1233,7 +1046,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              34 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1279,7 +1092,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              35 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1302,7 +1115,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              36 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1514,123 +1327,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
              'locked' => false,
           )),
           2 => 
-          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
-             'fieldtype' => 'panel',
-             'labelWidth' => 100,
-             'layout' => '',
-             'name' => 'meta_web',
-             'type' => NULL,
-             'region' => '',
-             'title' => 'Métas',
-             'width' => 0,
-             'height' => NULL,
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'permissions' => NULL,
-             'childs' => 
-            array (
-              0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => 600,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 55,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'meta_title',
-                 'title' => 'Métas Title',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              1 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 190,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'meta_title2',
-                 'title' => 'meta_title2',
-                 'tooltip' => 'Utilisé pour débuter les meta.. car si on change ka place de l\'onglet, ca permet d\'av voir l\'ihneritance, sinon, ca copie au save !!',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => true,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              2 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => 800,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 155,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'meta_description',
-                 'title' => 'Meta Descriptions',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              3 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => 600,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 255,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'meta_keywords',
-                 'title' => 'Meta Keywords',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-            ),
-             'locked' => false,
-          )),
-          3 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -1867,7 +1563,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          4 => 
+          3 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -1943,6 +1639,16 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   array (
                     'key' => 'Contreplaqué peuplier',
                     'value' => 'cp peuplier',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Structure 3 plis massif support sapin',
+                    'value' => ' structure-3plis-sapin',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Structure 3 plis massif support chêne',
+                    'value' => ' structure-3plis-chene',
                   ),
                 ),
                  'width' => 600,
@@ -2531,7 +2237,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          5 => 
+          4 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -2672,7 +2378,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          6 => 
+          5 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 150,
@@ -2879,6 +2585,459 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'locked' => false,
               )),
               1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 8,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'choix',
+                 'title' => 'Choix',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'fieldtype' => 'checkbox',
+                 'defaultValue' => 0,
+                 'queryColumnType' => 'tinyint(1)',
+                 'columnType' => 'tinyint(1)',
+                 'phpdocType' => 'boolean',
+                 'name' => 'choix_not_configurable',
+                 'title' => 'Choix non configurable',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Brossé',
+                    'value' => 'brosse',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Brossé accentué',
+                    'value' => 'brosse accentue',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Brossé rives abîmées',
+                    'value' => 'brosse rives abimees',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Brossé vieilli',
+                    'value' => 'brosse-vieilli',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Brossé veinage noir',
+                    'value' => 'brosse-veinage-noir',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Brossé veinage noir vieilli',
+                    'value' => 'brosse-veinage-noir-vieilli',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Brut',
+                    'value' => 'brut',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Brut de sciage',
+                    'value' => 'brut de sciage',
+                  ),
+                  8 => 
+                  array (
+                    'key' => 'Vieilli',
+                    'value' => 'vieilli',
+                  ),
+                  9 => 
+                  array (
+                    'key' => 'Vieilli rives abîmées',
+                    'value' => 'vieilli rives abimees',
+                  ),
+                  10 => 
+                  array (
+                    'key' => 'Usé',
+                    'value' => 'use',
+                  ),
+                  11 => 
+                  array (
+                    'key' => 'Rives abîmées',
+                    'value' => 'rives scrapees',
+                  ),
+                  12 => 
+                  array (
+                    'key' => 'Raboté main',
+                    'value' => 'rabote main',
+                  ),
+                  13 => 
+                  array (
+                    'key' => 'Structuré',
+                    'value' => 'structure',
+                  ),
+                  14 => 
+                  array (
+                    'key' => 'Vieilli usé rives abîmées',
+                    'value' => 'vieilli use rives abimees',
+                  ),
+                  15 => 
+                  array (
+                    'key' => 'Vieilli usé et brossé rives abîmées',
+                    'value' => 'vieilli use brosse rives abimees',
+                  ),
+                  16 => 
+                  array (
+                    'key' => 'Vieilli très accentué rives abîmées',
+                    'value' => 'vieilli tres accentue',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'traitement_surface',
+                 'title' => 'Traitement de surface',
+                 'tooltip' => 'Traitement de surface',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'fieldtype' => 'checkbox',
+                 'defaultValue' => 0,
+                 'queryColumnType' => 'tinyint(1)',
+                 'columnType' => 'tinyint(1)',
+                 'phpdocType' => 'boolean',
+                 'name' => 'traitement_surface_not_configurable',
+                 'title' => 'Traitement de surface non configurable',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              5 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Café',
+                    'value' => 'Café',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Naturel',
+                    'value' => 'Naturel',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Huilé',
+                    'value' => 'huile',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Ciré',
+                    'value' => 'cire',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Pré-huilé',
+                    'value' => 'pre-huile',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Huilé mat',
+                    'value' => 'huile mat',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Huilé blanchi',
+                    'value' => 'huile blanchi',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Huile cire',
+                    'value' => 'huile-cire',
+                  ),
+                  8 => 
+                  array (
+                    'key' => 'Huile cire ou vernis aqua',
+                    'value' => 'huile-cire-ou-vernis-aqua',
+                  ),
+                  9 => 
+                  array (
+                    'key' => 'Huile aqua',
+                    'value' => 'huile-aqua',
+                  ),
+                  10 => 
+                  array (
+                    'key' => 'Huile UV',
+                    'value' => 'huile UV',
+                  ),
+                  11 => 
+                  array (
+                    'key' => 'Huile teinte réactive',
+                    'value' => 'huile teinte reactive',
+                  ),
+                  12 => 
+                  array (
+                    'key' => 'Métal',
+                    'value' => 'metal',
+                  ),
+                  13 => 
+                  array (
+                    'key' => 'Peinture d\'Aujourd\'hui',
+                    'value' => 'peint',
+                  ),
+                  14 => 
+                  array (
+                    'key' => 'Peinture d\'origine2',
+                    'value' => 'peintorigine',
+                  ),
+                  15 => 
+                  array (
+                    'key' => 'Peinture blanche',
+                    'value' => 'Peinture blanche',
+                  ),
+                  16 => 
+                  array (
+                    'key' => 'Peinture noire',
+                    'value' => 'Peinture noire',
+                  ),
+                  17 => 
+                  array (
+                    'key' => 'Prépatiné',
+                    'value' => 'prepatine',
+                  ),
+                  18 => 
+                  array (
+                    'key' => 'Vernis',
+                    'value' => 'Verni',
+                  ),
+                  19 => 
+                  array (
+                    'key' => 'Vernis aqua',
+                    'value' => 'Verni aqua',
+                  ),
+                  20 => 
+                  array (
+                    'key' => 'Vernis blanchi',
+                    'value' => 'Verni blanchi',
+                  ),
+                  21 => 
+                  array (
+                    'key' => 'Vernis blanchi mat',
+                    'value' => 'Verni blanchi mat',
+                  ),
+                  22 => 
+                  array (
+                    'key' => 'Vernis satiné',
+                    'value' => 'Verni satiné',
+                  ),
+                  23 => 
+                  array (
+                    'key' => 'Vernis mat',
+                    'value' => 'Verni mat',
+                  ),
+                  24 => 
+                  array (
+                    'key' => 'Vernis cérusé mat',
+                    'value' => 'vernis cérusé mat',
+                  ),
+                  25 => 
+                  array (
+                    'key' => 'Vernis blanc',
+                    'value' => 'vernis blanc',
+                  ),
+                  26 => 
+                  array (
+                    'key' => 'Vernis taupe',
+                    'value' => 'vernis taupe',
+                  ),
+                  27 => 
+                  array (
+                    'key' => 'Vernis colonial',
+                    'value' => 'vernis colonial',
+                  ),
+                  28 => 
+                  array (
+                    'key' => 'Vieilli',
+                    'value' => 'Vieilli',
+                  ),
+                  29 => 
+                  array (
+                    'key' => 'Vieilli Brossé',
+                    'value' => 'Vieilli Brossé',
+                  ),
+                  30 => 
+                  array (
+                    'key' => 'Vieilli Brossé Veinage Noir',
+                    'value' => 'vieilli-brosse-veinage-noir',
+                  ),
+                  31 => 
+                  array (
+                    'key' => 'Brute_DEPRECATED',
+                    'value' => 'brut',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(255)',
+                 'columnType' => 'varchar(255)',
+                 'phpdocType' => 'string',
+                 'name' => 'finition',
+                 'title' => 'Finition',
+                 'tooltip' => 'Finition.',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                 'fieldtype' => 'checkbox',
+                 'defaultValue' => 0,
+                 'queryColumnType' => 'tinyint(1)',
+                 'columnType' => 'tinyint(1)',
+                 'phpdocType' => 'boolean',
+                 'name' => 'finition_not_configurable',
+                 'title' => 'Finition non configurable',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              7 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Point de Hongrie',
+                    'value' => 'pth',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Bâton rompu',
+                    'value' => 'baton rompu',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Mosaîque damier',
+                    'value' => 'mosaique-damier',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Dalle Versailles',
+                    'value' => 'dalle-versaille',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Sur chant',
+                    'value' => 'sur chant',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Coupe de Pierre',
+                    'value' => 'coupe de pierre',
+                  ),
+                  6 => 
+                  array (
+                    'key' => 'Planchette',
+                    'value' => 'planchette',
+                  ),
+                  7 => 
+                  array (
+                    'key' => 'Dalle',
+                    'value' => 'dalle',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'motif',
+                 'title' => 'Motif',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Multiselect::__set_state(array(
                  'fieldtype' => 'multiselect',
                  'options' => 
@@ -2910,15 +3069,20 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   5 => 
                   array (
+                    'key' => 'Double rainure fausses languettes',
+                    'value' => ' double-rainure',
+                  ),
+                  6 => 
+                  array (
                     'key' => 'Invisible',
                     'value' => 'invisible',
                   ),
-                  6 => 
+                  7 => 
                   array (
                     'key' => 'Flottante',
                     'value' => 'flottante',
                   ),
-                  7 => 
+                  8 => 
                   array (
                     'key' => 'Système Click',
                     'value' => 'click',
@@ -2945,7 +3109,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              2 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -2967,7 +3131,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              3 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Multiselect::__set_state(array(
                  'fieldtype' => 'multiselect',
                  'options' => 
@@ -3014,53 +3178,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              4 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 8,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'choix',
-                 'title' => 'Choix',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => false,
-              )),
-              5 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                 'fieldtype' => 'checkbox',
-                 'defaultValue' => 0,
-                 'queryColumnType' => 'tinyint(1)',
-                 'columnType' => 'tinyint(1)',
-                 'phpdocType' => 'boolean',
-                 'name' => 'choix_not_configurable',
-                 'title' => 'Choix non configurable',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              6 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3150,7 +3268,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              7 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3305,7 +3423,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              8 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3467,7 +3585,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              9 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -3627,7 +3745,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              10 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -4045,14 +4163,14 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'width' => NULL,
                      'queryColumnType' => 'varchar',
                      'columnType' => 'varchar',
-                     'columnLength' => 8,
+                     'columnLength' => 32,
                      'phpdocType' => 'string',
                      'regex' => '',
-                     'name' => 'nbrpp',
-                     'title' => 'NBRPP',
-                     'tooltip' => 'Nombre de pièces par paquet',
+                     'name' => 'chanfreins',
+                     'title' => 'Chanfreins',
+                     'tooltip' => '',
                      'mandatory' => false,
-                     'noteditable' => true,
+                     'noteditable' => false,
                      'index' => false,
                      'locked' => false,
                      'style' => '',
@@ -4064,94 +4182,15 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                   7 => 
-                  Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                     'fieldtype' => 'select',
-                     'options' => 
-                    array (
-                      0 => 
-                      array (
-                        'key' => 'Brossé',
-                        'value' => 'brosse',
-                      ),
-                      1 => 
-                      array (
-                        'key' => 'Brossé accentué',
-                        'value' => 'brosse accentue',
-                      ),
-                      2 => 
-                      array (
-                        'key' => 'Brossé rives abîmées',
-                        'value' => 'brosse rives abimees',
-                      ),
-                      3 => 
-                      array (
-                        'key' => 'Brossé veinage noir',
-                        'value' => 'brosse-veinage-noir',
-                      ),
-                      4 => 
-                      array (
-                        'key' => 'Brut',
-                        'value' => 'brut',
-                      ),
-                      5 => 
-                      array (
-                        'key' => 'Brut de sciage',
-                        'value' => 'brut de sciage',
-                      ),
-                      6 => 
-                      array (
-                        'key' => 'Vieilli',
-                        'value' => 'vieilli',
-                      ),
-                      7 => 
-                      array (
-                        'key' => 'Vieilli rives abîmées',
-                        'value' => 'vieilli rives abimees',
-                      ),
-                      8 => 
-                      array (
-                        'key' => 'Usé',
-                        'value' => 'use',
-                      ),
-                      9 => 
-                      array (
-                        'key' => 'Rives abîmées',
-                        'value' => 'rives scrapees',
-                      ),
-                      10 => 
-                      array (
-                        'key' => 'Raboté main',
-                        'value' => 'rabote main',
-                      ),
-                      11 => 
-                      array (
-                        'key' => 'Structuré',
-                        'value' => 'structure',
-                      ),
-                      12 => 
-                      array (
-                        'key' => 'Vieilli usé rives abîmées',
-                        'value' => 'vieilli use rives abimees',
-                      ),
-                      13 => 
-                      array (
-                        'key' => 'Vieilli usé et brossé rives abîmées',
-                        'value' => 'vieilli use brosse rives abimees',
-                      ),
-                      14 => 
-                      array (
-                        'key' => 'Vieilli très accentué rives abîmées',
-                        'value' => 'vieilli tres accentue',
-                      ),
-                    ),
-                     'width' => '',
-                     'defaultValue' => '',
-                     'queryColumnType' => 'varchar(190)',
-                     'columnType' => 'varchar(190)',
-                     'phpdocType' => 'string',
-                     'name' => 'traitement_surface',
-                     'title' => 'Traitement de surface',
-                     'tooltip' => 'Traitement de surface',
+                  Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
+                     'fieldtype' => 'checkbox',
+                     'defaultValue' => 0,
+                     'queryColumnType' => 'tinyint(1)',
+                     'columnType' => 'tinyint(1)',
+                     'phpdocType' => 'boolean',
+                     'name' => 'mage_use_chanfreins_as_configurable',
+                     'title' => 'Chanfreins configurables ?',
+                     'tooltip' => '',
                      'mandatory' => false,
                      'noteditable' => false,
                      'index' => false,
@@ -4165,236 +4204,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleSearch' => false,
                   )),
                   8 => 
-                  Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                     'fieldtype' => 'checkbox',
-                     'defaultValue' => 0,
-                     'queryColumnType' => 'tinyint(1)',
-                     'columnType' => 'tinyint(1)',
-                     'phpdocType' => 'boolean',
-                     'name' => 'traitement_surface_not_configurable',
-                     'title' => 'Traitement de surface non configurable',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'datatype' => 'data',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                  )),
-                  9 => 
-                  Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                     'fieldtype' => 'select',
-                     'options' => 
-                    array (
-                      0 => 
-                      array (
-                        'key' => 'Café',
-                        'value' => 'Café',
-                      ),
-                      1 => 
-                      array (
-                        'key' => 'Naturel',
-                        'value' => 'Naturel',
-                      ),
-                      2 => 
-                      array (
-                        'key' => 'Huilé',
-                        'value' => 'huile',
-                      ),
-                      3 => 
-                      array (
-                        'key' => 'Ciré',
-                        'value' => 'cire',
-                      ),
-                      4 => 
-                      array (
-                        'key' => 'Pré-huilé',
-                        'value' => 'pre-huile',
-                      ),
-                      5 => 
-                      array (
-                        'key' => 'Huilé mat',
-                        'value' => 'huile mat',
-                      ),
-                      6 => 
-                      array (
-                        'key' => 'Huilé blanchi',
-                        'value' => 'huile blanchi',
-                      ),
-                      7 => 
-                      array (
-                        'key' => 'Huile cire',
-                        'value' => 'huile-cire',
-                      ),
-                      8 => 
-                      array (
-                        'key' => 'Huile cire ou vernis aqua',
-                        'value' => 'huile-cire-ou-vernis-aqua',
-                      ),
-                      9 => 
-                      array (
-                        'key' => 'Huile aqua',
-                        'value' => 'huile-aqua',
-                      ),
-                      10 => 
-                      array (
-                        'key' => 'Huile UV',
-                        'value' => 'huile UV',
-                      ),
-                      11 => 
-                      array (
-                        'key' => 'Huile teinte réactive',
-                        'value' => 'huile teinte reactive',
-                      ),
-                      12 => 
-                      array (
-                        'key' => 'Métal',
-                        'value' => 'metal',
-                      ),
-                      13 => 
-                      array (
-                        'key' => 'Peinture d\'Aujourd\'hui',
-                        'value' => 'peint',
-                      ),
-                      14 => 
-                      array (
-                        'key' => 'Peinture d\'origine2',
-                        'value' => 'peintorigine',
-                      ),
-                      15 => 
-                      array (
-                        'key' => 'Peinture blanche',
-                        'value' => 'Peinture blanche',
-                      ),
-                      16 => 
-                      array (
-                        'key' => 'Peinture noire',
-                        'value' => 'Peinture noire',
-                      ),
-                      17 => 
-                      array (
-                        'key' => 'Prépatiné',
-                        'value' => 'prepatine',
-                      ),
-                      18 => 
-                      array (
-                        'key' => 'Vernis',
-                        'value' => 'Verni',
-                      ),
-                      19 => 
-                      array (
-                        'key' => 'Vernis aqua',
-                        'value' => 'Verni aqua',
-                      ),
-                      20 => 
-                      array (
-                        'key' => 'Vernis blanchi',
-                        'value' => 'Verni blanchi',
-                      ),
-                      21 => 
-                      array (
-                        'key' => 'Vernis blanchi mat',
-                        'value' => 'Verni blanchi mat',
-                      ),
-                      22 => 
-                      array (
-                        'key' => 'Vernis satiné',
-                        'value' => 'Verni satiné',
-                      ),
-                      23 => 
-                      array (
-                        'key' => 'Vernis mat',
-                        'value' => 'Verni mat',
-                      ),
-                      24 => 
-                      array (
-                        'key' => 'Vernis cérusé mat',
-                        'value' => 'vernis cérusé mat',
-                      ),
-                      25 => 
-                      array (
-                        'key' => 'Vernis blanc',
-                        'value' => 'vernis blanc',
-                      ),
-                      26 => 
-                      array (
-                        'key' => 'Vernis taupe',
-                        'value' => 'vernis taupe',
-                      ),
-                      27 => 
-                      array (
-                        'key' => 'Vernis colonial',
-                        'value' => 'vernis colonial',
-                      ),
-                      28 => 
-                      array (
-                        'key' => 'Vieilli',
-                        'value' => 'Vieilli',
-                      ),
-                      29 => 
-                      array (
-                        'key' => 'Vieilli Brossé',
-                        'value' => 'Vieilli Brossé',
-                      ),
-                      30 => 
-                      array (
-                        'key' => 'Vieilli Brossé Veinage Noir',
-                        'value' => 'vieilli-brosse-veinage-noir',
-                      ),
-                      31 => 
-                      array (
-                        'key' => 'Brute_DEPRECATED',
-                        'value' => 'brut',
-                      ),
-                    ),
-                     'width' => '',
-                     'defaultValue' => '',
-                     'queryColumnType' => 'varchar(255)',
-                     'columnType' => 'varchar(255)',
-                     'phpdocType' => 'string',
-                     'name' => 'finition',
-                     'title' => 'Finition',
-                     'tooltip' => 'Finition.',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'datatype' => 'data',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                  )),
-                  10 => 
-                  Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
-                     'fieldtype' => 'checkbox',
-                     'defaultValue' => 0,
-                     'queryColumnType' => 'tinyint(1)',
-                     'columnType' => 'tinyint(1)',
-                     'phpdocType' => 'boolean',
-                     'name' => 'finition_not_configurable',
-                     'title' => 'Finition non configurable',
-                     'tooltip' => '',
-                     'mandatory' => false,
-                     'noteditable' => false,
-                     'index' => false,
-                     'locked' => false,
-                     'style' => '',
-                     'permissions' => NULL,
-                     'datatype' => 'data',
-                     'relationType' => false,
-                     'invisible' => false,
-                     'visibleGridView' => false,
-                     'visibleSearch' => false,
-                  )),
-                  11 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Multiselect::__set_state(array(
                      'fieldtype' => 'multiselect',
                      'options' => 
@@ -4456,7 +4265,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
-                  12 => 
+                  9 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                      'fieldtype' => 'checkbox',
                      'defaultValue' => 0,
@@ -4478,7 +4287,31 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
-                  13 => 
+                  10 => 
+                  Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                     'fieldtype' => 'input',
+                     'width' => NULL,
+                     'queryColumnType' => 'varchar',
+                     'columnType' => 'varchar',
+                     'columnLength' => 128,
+                     'phpdocType' => 'string',
+                     'regex' => '',
+                     'name' => 'configurable_free_1',
+                     'title' => 'Option configurable',
+                     'tooltip' => '',
+                     'mandatory' => false,
+                     'noteditable' => false,
+                     'index' => false,
+                     'locked' => false,
+                     'style' => '',
+                     'permissions' => NULL,
+                     'datatype' => 'data',
+                     'relationType' => false,
+                     'invisible' => false,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
+                  )),
+                  11 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                      'fieldtype' => 'input',
                      'width' => NULL,
@@ -4505,7 +4338,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                 ),
                  'locked' => false,
               )),
-              11 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Layout\Fieldset::__set_state(array(
                  'fieldtype' => 'fieldset',
                  'labelWidth' => 100,
@@ -4622,7 +4455,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          7 => 
+          6 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -4836,30 +4669,6 @@ Combien d\'unité dans 1 m2',
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
-                 'columnLength' => 10,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'qualite',
-                 'title' => 'Qualité',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              9 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
                  'columnLength' => 8,
                  'phpdocType' => 'string',
                  'regex' => '',
@@ -4878,64 +4687,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              10 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
-                 'fieldtype' => 'objects',
-                 'width' => 300,
-                 'height' => '',
-                 'maxItems' => '',
-                 'queryColumnType' => 'text',
-                 'phpdocType' => 'array',
-                 'relationType' => true,
-                 'lazyLoading' => false,
-                 'classes' => 
-                array (
-                  0 => 
-                  array (
-                    'classes' => 'productExtra',
-                  ),
-                ),
-                 'pathFormatterClass' => NULL,
-                 'name' => 'extras',
-                 'title' => 'Autre',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'columnType' => NULL,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              11 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 32,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'chanfreins',
-                 'title' => 'Chanfreins',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              12 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4959,7 +4711,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              13 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -4983,7 +4735,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -5007,7 +4759,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              15 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -5031,7 +4783,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              16 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -5087,73 +4839,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
-                 'fieldtype' => 'select',
-                 'options' => 
-                array (
-                  0 => 
-                  array (
-                    'key' => 'Point de Hongrie',
-                    'value' => 'pth',
-                  ),
-                  1 => 
-                  array (
-                    'key' => 'Bâton rompu',
-                    'value' => 'baton rompu',
-                  ),
-                  2 => 
-                  array (
-                    'key' => 'Mosaîque damier',
-                    'value' => 'mosaique-damier',
-                  ),
-                  3 => 
-                  array (
-                    'key' => 'Dalle Versailles',
-                    'value' => 'dalle-versaille',
-                  ),
-                  4 => 
-                  array (
-                    'key' => 'Sur chant',
-                    'value' => 'sur chant',
-                  ),
-                  5 => 
-                  array (
-                    'key' => 'Coupe de Pierre',
-                    'value' => 'coupe de pierre',
-                  ),
-                  6 => 
-                  array (
-                    'key' => 'Planchette',
-                    'value' => 'planchette',
-                  ),
-                  7 => 
-                  array (
-                    'key' => 'Dalle',
-                    'value' => 'dalle',
-                  ),
-                ),
-                 'width' => '',
-                 'defaultValue' => '',
-                 'queryColumnType' => 'varchar(190)',
-                 'columnType' => 'varchar(190)',
-                 'phpdocType' => 'string',
-                 'name' => 'motif',
-                 'title' => 'Motif',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              18 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -5177,7 +4863,43 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              19 => 
+              15 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Oui',
+                    'value' => '1',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Non',
+                    'value' => '0',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '0',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'is_lot',
+                 'title' => 'Est un lot ?',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -5218,7 +4940,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -5240,7 +4962,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -5254,7 +4976,7 @@ Combien d\'unité dans 1 m2',
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width: 150px; float: left;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -5262,7 +4984,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              22 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -5276,7 +4998,7 @@ Combien d\'unité dans 1 m2',
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width: 150px; float: left;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -5284,7 +5006,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              23 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -5298,7 +5020,7 @@ Combien d\'unité dans 1 m2',
                  'noteditable' => false,
                  'index' => false,
                  'locked' => false,
-                 'style' => '',
+                 'style' => 'width: 150px; float: left;',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
@@ -5306,7 +5028,7 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
                  'fieldtype' => 'checkbox',
                  'defaultValue' => 0,
@@ -5328,10 +5050,91 @@ Combien d\'unité dans 1 m2',
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
+              22 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 8,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'nbrpp',
+                 'title' => 'NBRPP',
+                 'tooltip' => 'Nombre de pièces par paquet',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              23 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 10,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'qualite',
+                 'title' => 'Qualité',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              24 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
+                 'fieldtype' => 'objects',
+                 'width' => 300,
+                 'height' => '',
+                 'maxItems' => '',
+                 'queryColumnType' => 'text',
+                 'phpdocType' => 'array',
+                 'relationType' => true,
+                 'lazyLoading' => false,
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'productExtra',
+                  ),
+                ),
+                 'pathFormatterClass' => NULL,
+                 'name' => 'extras',
+                 'title' => 'Autre',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
             ),
              'locked' => false,
           )),
-          8 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5395,7 +5198,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          9 => 
+          8 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5487,7 +5290,7 @@ Combien d\'unité dans 1 m2',
                  'classes' => 
                 array (
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'fiche_technique_orginale',
                  'title' => 'Fiche technique originale',
                  'tooltip' => '',
@@ -5520,15 +5323,19 @@ Combien d\'unité dans 1 m2',
                  'assetTypes' => 
                 array (
                 ),
-                 'documentsAllowed' => false,
+                 'documentsAllowed' => true,
                  'documentTypes' => 
                 array (
+                  0 => 
+                  array (
+                    'documentTypes' => 'page',
+                  ),
                 ),
                  'lazyLoading' => false,
                  'classes' => 
                 array (
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'notice_pose_lpn',
                  'title' => 'Notice de pose',
                  'tooltip' => '',
@@ -5694,7 +5501,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          10 => 
+          9 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5924,7 +5731,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          11 => 
+          10 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -6011,7 +5818,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          12 => 
+          11 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -6055,6 +5862,123 @@ Combien d\'unité dans 1 m2',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'locked' => false,
+          )),
+          12 => 
+          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+             'fieldtype' => 'panel',
+             'labelWidth' => 100,
+             'layout' => '',
+             'name' => 'meta_web',
+             'type' => NULL,
+             'region' => '',
+             'title' => 'Métas',
+             'width' => 0,
+             'height' => NULL,
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'permissions' => NULL,
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 600,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 55,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'meta_title',
+                 'title' => 'Métas Title',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'meta_title2',
+                 'title' => 'meta_title2',
+                 'tooltip' => 'Utilisé pour débuter les meta.. car si on change ka place de l\'onglet, ca permet d\'av voir l\'ihneritance, sinon, ca copie au save !!',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 800,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 155,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'meta_description',
+                 'title' => 'Meta Descriptions',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 600,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 255,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'meta_keywords',
+                 'title' => 'Meta Keywords',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => false,
                  'visibleSearch' => false,
@@ -6863,6 +6787,134 @@ Combien d\'unité dans 1 m2',
                  'index' => false,
                  'locked' => false,
                  'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              32 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => 800,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'configurableFields',
+                 'title' => 'Champs configurables',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              33 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'childrenSimpleProductIds_flat',
+                 'title' => 'Sous produits',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              34 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Canaries',
+                    'value' => 'Canaries',
+                  ),
+                  1 => 
+                  array (
+                    'key' => 'Cayo',
+                    'value' => 'Cayo',
+                  ),
+                  2 => 
+                  array (
+                    'key' => 'Cozumal',
+                    'value' => 'Cozumal',
+                  ),
+                  3 => 
+                  array (
+                    'key' => 'Elethera',
+                    'value' => 'Elethera',
+                  ),
+                  4 => 
+                  array (
+                    'key' => 'Gonave',
+                    'value' => 'Gonave',
+                  ),
+                  5 => 
+                  array (
+                    'key' => 'Thassos',
+                    'value' => 'Thassos',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(255)',
+                 'columnType' => 'varchar(255)',
+                 'phpdocType' => 'string',
+                 'name' => 'teinte_lpn',
+                 'title' => 'Teinte',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              35 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 190,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'mage_tags',
+                 'title' => 'Tags',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => true,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,

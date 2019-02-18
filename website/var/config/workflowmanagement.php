@@ -42,8 +42,8 @@ return [
             [
                 "name" => "update_picture",
                 "label" => "Mise à jour des images",
-                "objectLayout" => 3,
-                "elementPublished" => FALSE
+                "objectLayout" => NULL,
+                "elementPublished" => TRUE
             ],
             [
                 "name" => "contents_to_review",
@@ -52,12 +52,12 @@ return [
             [
                 "name" => "contents_validated",
                 "label" => "Content ready to publish",
-                "objectLayout" => 0
+                "objectLayout" => NULL
             ],
             [
                 "name" => "content_published",
                 "label" => "content_published",
-                "objectLayout" => 0
+                "objectLayout" => NULL
             ],
             [
                 "name" => "content_needs_magento_sync",
@@ -344,6 +344,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1540473123
+        "modificationDate" => 1548426522
     ]
 ];

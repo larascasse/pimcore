@@ -67,7 +67,10 @@ class CategoryController extends Action
         $key =  $this->getParam("key");
        // $listing->setCondition("parentId = 230");
         $listing->setCondition('o_path LIKE \'/categories/%\'');
+
 */
+        //$inheritance = Object\AbstractObject::getGetInheritedValues();
+       // Object\AbstractObject::setGetInheritedValues(false);
 
         $this->disableLayout();
 
@@ -137,6 +140,7 @@ class CategoryController extends Action
         }
 
        $this->response = $categories;
+       //Model\Object\AbstractObject::setGetInheritedValues($inheritance);
        $this->_helper->json->sendJson($this->response);
     }
 

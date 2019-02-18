@@ -32,7 +32,7 @@ class Website_Category extends Object_Category {
     }
 
     public function getMageIdentifier() {
-    	return $this->$this->o_key;
+    	return $this->o_key;
     }
 
 	

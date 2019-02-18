@@ -148,9 +148,46 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
         );
           
         $this->_helper->json->sendJson($this->response);
+
+    }
+
+    public function publishCategoryAction() {
+
+
+        $this->disableLayout();
+
+          $this->disableViewAutoRender();
+
+          $key =  $this->getParam("key");
+
+
+          $url = 'http://shopdev.laparqueterienouvelle.fr/LPN/get_all_categories.php';
+          $params = array();
+          $params["time"] = time();
+
+        if($key && strlen($key)>0)
+          $params["key"] = $key;
+        
+
+
+
+        $content = \Pimcore\Tool::getHttpData($url,$params);
+        
+        $this->response = array(
+          "success" => "true", 
+          "content"=>$content,
+          "message"=>$content,
+          "url" => $url,
+          //"params" =>implode(",",array_keys($params)),
+          "params" =>serialize($params)
+
+        );
+          
+        $this->_helper->json->sendJson($this->response);
             
        
     }
+
 
     public function publishTaxonomiesAction() {
 

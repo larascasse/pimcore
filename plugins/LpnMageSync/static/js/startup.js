@@ -38,7 +38,21 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
                 
             });
             obj.toolbar.insert(5, menu);
+        }
+
+        //realisations
+        if(obj.data.general.o_classId==8) {
+
+             var menu = new Ext.SplitButton({
+                text: t('sync magento'),
+                iconCls: "pimcore_icon_publish",
+                scale: "medium",
+                handler: this.syncCategory.bind(obj),
+                
+            });
+            obj.toolbar.insert(5, menu);
         } 
+
 
         //taxonomu
         else if(obj.data.general.o_classId==6) {
@@ -166,7 +180,51 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     syncRealisation : function () {
        console.log("this",this)
        //var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
-       var url = '/plugin/LpnMageSync/index/publish-cms-block/real/'+this.data.general.o_key;
+       var url = '/plugin/LpnMageSync/index/publish-cms-block/key/'+this.data.general.o_key;
+       //console.log(url,this.data,this.general)
+       //console.log(url,this.data,this.key)
+       //alert(url);
+
+        Ext.Ajax.request({
+            //url: '/plugin/LpnMageSync/index/download/id/' +this.id,
+            url: url,
+            method: "get",
+            success: function (response) {
+                try{
+                   // pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+
+                    var rdata = Ext.decode(response.responseText);
+                    if (rdata && rdata.success) {
+                        pimcore.helpers.showNotification(t("save"), t("successful_sync")+rdata.message, "success");
+                       // this.resetChanges();
+                        //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
+                    }
+                    else {
+                        pimcore.helpers.showPrettyError(rdata.type, t("error"), t("error_sync"),
+                            rdata.message, rdata.stack, rdata.code);
+                    }
+                } catch(e){
+                    pimcore.helpers.showNotification(t("error"), t("error_sync"), "error");
+                }
+                
+
+
+                if(typeof callback == "function") {
+                    callback();
+                }
+            }.bind(this),
+            failure: function () {
+                this.tab.unmask();
+            },
+        });
+     
+    },
+
+
+    syncCategory : function () {
+       console.log("this",this)
+       //var url = 'https://www.laparqueterienouvelle.fr/LPN/sync_pim_document.php?path=' +this.data.key+'&t='+(new Date());
+       var url = '/plugin/LpnMageSync/index/publish-category/key/'+this.data.general.o_key;
        //console.log(url,this.data,this.general)
        //console.log(url,this.data,this.key)
        //alert(url);

@@ -41,7 +41,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         }
 
         //realisations
-        if(obj.data.general.o_classId==8) {
+        else if(obj.data.general.o_classId==8) {
 
              var menu = new Ext.SplitButton({
                 text: t('sync magento'),

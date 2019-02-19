@@ -5,7 +5,7 @@
     <?php
      if($this->category->getImage_header()) : 
 
-        echo $this->category->getImage_header()->getHtml();
+        echo $this->category->getImage_header()->getThumbnail("magento-header")->getHtml();
 
         else :
 

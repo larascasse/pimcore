@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-02-18T10:05:43+01:00
+* Generated at: 2019-02-19T14:35:18+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.11.119
+* IP: 172.31.8.140
 
 
 Fields Summary: 
@@ -13,8 +13,10 @@ Fields Summary:
 - mage_category_id [input]
 - description [textarea]
 - sub_description [textarea]
-- person [href]
+- image_header [image]
+- short_name [input]
 - products [objects]
+- person [href]
 - Date [datetime]
 - test [objectsMetadata]
 - test2 [multihref]
@@ -30,8 +32,10 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Category\Listing getByMage_category_id ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByDescription ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getBySub_description ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByImage_header ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByShort_name ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByProducts ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByDate ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByTest ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByTest2 ($value, $limit = 0) 
@@ -46,8 +50,10 @@ public $name;
 public $mage_category_id;
 public $description;
 public $sub_description;
-public $person;
+public $image_header;
+public $short_name;
 public $products;
+public $person;
 public $Date;
 public $test;
 public $test2;
@@ -169,28 +175,54 @@ public function setSub_description ($sub_description) {
 }
 
 /**
-* Get person - Client
-* @return \Pimcore\Model\Object\person
+* Get image_header - Image
+* @return \Pimcore\Model\Asset\Image
 */
-public function getPerson () {
-	$preValue = $this->preGetValue("person"); 
+public function getImage_header () {
+	$preValue = $this->preGetValue("image_header"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->getClass()->getFieldDefinition("person")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("person")->isEmpty($data)) {
-		return $this->getValueFromParent("person");
+	$data = $this->image_header;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_header")->isEmpty($data)) {
+		return $this->getValueFromParent("image_header");
 	}
 	return $data;
 }
 
 /**
-* Set person - Client
-* @param \Pimcore\Model\Object\person $person
+* Set image_header - Image
+* @param \Pimcore\Model\Asset\Image $image_header
 * @return \Pimcore\Model\Object\Category
 */
-public function setPerson ($person) {
-	$this->person = $this->getClass()->getFieldDefinition("person")->preSetData($this, $person);
+public function setImage_header ($image_header) {
+	$this->image_header = $image_header;
+	return $this;
+}
+
+/**
+* Get short_name - Nom court
+* @return string
+*/
+public function getShort_name () {
+	$preValue = $this->preGetValue("short_name"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->short_name;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
+		return $this->getValueFromParent("short_name");
+	}
+	return $data;
+}
+
+/**
+* Set short_name - Nom court
+* @param string $short_name
+* @return \Pimcore\Model\Object\Category
+*/
+public function setShort_name ($short_name) {
+	$this->short_name = $short_name;
 	return $this;
 }
 
@@ -217,6 +249,32 @@ public function getProducts () {
 */
 public function setProducts ($products) {
 	$this->products = $this->getClass()->getFieldDefinition("products")->preSetData($this, $products);
+	return $this;
+}
+
+/**
+* Get person - Client
+* @return \Pimcore\Model\Object\person
+*/
+public function getPerson () {
+	$preValue = $this->preGetValue("person"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("person")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("person")->isEmpty($data)) {
+		return $this->getValueFromParent("person");
+	}
+	return $data;
+}
+
+/**
+* Set person - Client
+* @param \Pimcore\Model\Object\person $person
+* @return \Pimcore\Model\Object\Category
+*/
+public function setPerson ($person) {
+	$this->person = $this->getClass()->getFieldDefinition("person")->preSetData($this, $person);
 	return $this;
 }
 
@@ -325,13 +383,13 @@ public function setTitle ($title) {
 }
 
 protected static $_relationFields = array (
-  'person' => 
-  array (
-    'type' => 'href',
-  ),
   'products' => 
   array (
     'type' => 'objects',
+  ),
+  'person' => 
+  array (
+    'type' => 'href',
   ),
   'test' => 
   array (

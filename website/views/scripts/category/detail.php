@@ -3,9 +3,9 @@
 
 <div class="category-image-hero">
     <?php
-     if($this->getImage_header()) : 
+     if($this->category->getImage_header()) : 
 
-        echo $this->getImage_header()->getHtml();
+        echo $this->category->getImage_header()->getHtml();
 
         else :
 

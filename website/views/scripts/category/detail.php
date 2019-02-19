@@ -35,7 +35,7 @@
                 
                 <div class="col-12 col-md-6 subdescription text-left">
                     <ul><?php
-                        $sub = explode('\n',$this->category->getSub_description());
+                        $sub = explode('\\n',$this->category->getSub_description());
                         foreach ($sub as $row) {
                            echo '<li>'.$row.'</i>';
                         }

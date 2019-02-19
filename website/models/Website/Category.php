@@ -19,6 +19,23 @@ class Website_Category extends Object_Category {
          //$itemData["mage_category_id"] =  $this->getMage_category_id();
          $itemData["mage_category_id"] =  $this->mage_category_id;
          $itemData["mage_parent_category_id"] =  $this->getParent()->mage_category_id;
+         $itemData["short_name"] =  $this->short_name;
+
+         // get an asset
+        //$asset = Asset::getById($this->getImage_1()->id);
+         $image_header_url = "";
+        if($this->getImage_header()) {
+            /*
+            $fsPath = $this->getImage_1()->getThumbnail("magento_small")->getFileSystemPath(true);
+            $path = "http://".$_SERVER["HTTP_HOST"].urlencode_ignore_slash(str_replace(PIMCORE_DOCUMENT_ROOT, "", $fsPath));
+            */
+
+            /* VERSION CLOUD */
+            $image_header_url = $this->getImage_header()->getThumbnail("magento-header")->getPath();
+
+            $itemData["image_header_url"] = $image_header_url; 
+        }
+
          //$itemData["full_path"] =  $this->getFullPath();
  
 

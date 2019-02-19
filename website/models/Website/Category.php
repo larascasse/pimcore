@@ -31,10 +31,11 @@ class Website_Category extends Object_Category {
             */
 
             /* VERSION CLOUD */
-            $image_header_url = $this->getImage_header()->getThumbnail("magento-header")->getFullPath();
+            $image_header_url = $this->getImage_header()->getThumbnail("magento-header")->getPath();
 
-            $itemData["image_header_url"] = $image_header_url; 
+            
         }
+        $itemData["image_header_url"] = $image_header_url; 
 
          //$itemData["full_path"] =  $this->getFullPath();
  

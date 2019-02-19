@@ -1,4 +1,4 @@
-<?php $this->layout()->setLayout("layout-lpnv2"); ?>
+<?php $this->layout()->setLayout("layout-lpnv4"); ?>
 
 
 <div class="category-image-hero">
@@ -29,13 +29,13 @@
             <div class="row">
                 <div class="col-12 col-md-6 text-left category-name">
                     <h1><?php echo $this->category->getName(); ?></h1>
-                    <p class="description"><?php echo $products->getDescription(); ?></p>
+                    <p class="description"><?php echo $this->category->getDescription(); ?></p>
                     
                 </div>
                 
                 <div class="col-12 col-md-6 subdescription text-left">
                     <ul><?php
-                        $sub = split('\n',$products->getSub_description());
+                        $sub = split('\n',$this->category->getSub_description());
                         foreach ($sub as $row) {
                            echo '<li>'.$row.'</i>';
                         }

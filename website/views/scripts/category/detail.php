@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 text-left category-name">
                     <h1><?php echo $this->category->getName(); ?></h1>
-                    <p class="description"><?php echo $this->category->getDescription(); ?></p>
+                    <p class="description"><?php echo nl2br($this->category->getDescription()); ?></p>
                     
                 </div>
                 

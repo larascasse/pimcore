@@ -1,10 +1,62 @@
 <?php $this->layout()->setLayout("layout-lpnv2"); ?>
+
+
+<div class="category-image-hero">
+           <img src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg" alt="Parquet clairs" title="Parquet clairs" class=" lazyloaded" data-src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg"><div class="image-hero-degrade"></div>
+        </div>
+        <div class="breadcrumb_cnt breadcrumb-left">    
+
+    
+<div class="container-main text-center">
+    <ul class="breadcrumb breadcrumb-category"><li class="home crumb-level-0">
+                            <a href="http://shopdev.laparqueterienouvelle.fr/" title="Aller à la page d'accueil">Accueil</a>
+                        </li>
+                                <li class="category151 crumb-level-1">
+                            <a href="http://shopdev.laparqueterienouvelle.fr/parquet.html" title="">Parquets</a>
+                        </li>
+                                <li class="category198 crumb-level-2">
+                            <a href="http://shopdev.laparqueterienouvelle.fr/parquet/choisir-son-parquet.html" title="">Découvrir</a>
+                        </li>
+                        </ul></div>
+
+
+
+                    </div>
+
+
+
+                    <div class="container-main category-header-container noimg category-auto">
+            <div class="row">
+                <div class="col-12 col-md-6 text-left category-name">
+                    <h1><?php echo $this->category->getName(); ?></h1>
+                    <p class="description"><?php echo $products->getDescription(); ?></p>
+                    
+                </div>
+                
+                <div class="col-12 col-md-6 subdescription text-left">
+                    <ul><?php
+                        $sub = split('\n',$products->getSub_description());
+                        foreach ($sub as $row) {
+                           echo '<li>'.$row.'</i>';
+                        }
+                        ?>
+                    </ul>
+
+</div>
+
+<?php
+if(!is_array($this->category->products))
+    return;
+?>
+
+
 <section class="area-wysiwyg">
 
-    <div class="page-header">
-        <h1><?php echo $this->category->getName(); ?></h1>
-    </div>
-   	<?php foreach ($this->category->products as $products) { 
+ 
+
+   	<?php 
+
+    foreach ($this->category->products as $products) { 
  
 
     ?>

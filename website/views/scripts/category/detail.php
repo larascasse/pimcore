@@ -2,7 +2,18 @@
 
 
 <div class="category-image-hero">
-           <img src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg" alt="Parquet clairs" title="Parquet clairs" class=" lazyloaded" data-src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg"><div class="image-hero-degrade"></div>
+    <?php
+     if($this->getImage_header()) : 
+
+        echo $this->getImage_header()->getHtml();
+
+        else :
+
+        ?>
+           <img src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg" alt="Parquet clairs" title="Parquet clairs" class=" lazyloaded" data-src="http://shopdev.laparqueterienouvelle.fr/media/catalog/category/cache/1200x720/parquet-massif-chene-matiere-huile-structure-junot-23x100-180-still_laparqueterienouvelle_2800.jpg">
+
+        <?php endif; ?>
+        <div class="image-hero-degrade"></div>
         </div>
         <div class="breadcrumb_cnt breadcrumb-left">    
 

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-11-08T10:04:59+01:00
+* Generated at: 2019-02-21T15:43:02+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.14.94
+* IP: 172.31.26.91
 
 
 Fields Summary: 
@@ -20,6 +20,7 @@ Fields Summary:
 - configurableFields [input]
 - mage_mediagallery [textarea]
 - mage_tags [input]
+- associatedArticles [objects]
 */ 
 
 
@@ -27,7 +28,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1541667899,
+   'modificationDate' => 1550760182,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -408,6 +409,39 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          11 => 
+          Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
+             'fieldtype' => 'objects',
+             'width' => '',
+             'height' => '',
+             'maxItems' => '',
+             'queryColumnType' => 'text',
+             'phpdocType' => 'array',
+             'relationType' => true,
+             'lazyLoading' => false,
+             'classes' => 
+            array (
+              0 => 
+              array (
+                'classes' => 'article',
+              ),
+            ),
+             'pathFormatterClass' => '',
+             'name' => 'associatedArticles',
+             'title' => 'Articles associés',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'columnType' => NULL,
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,

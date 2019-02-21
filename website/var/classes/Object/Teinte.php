@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2018-11-08T10:04:59+01:00
+* Generated at: 2019-02-21T15:43:02+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.14.94
+* IP: 172.31.26.91
 
 
 Fields Summary: 
@@ -20,6 +20,7 @@ Fields Summary:
 - configurableFields [input]
 - mage_mediagallery [textarea]
 - mage_tags [input]
+- associatedArticles [objects]
 */ 
 
 namespace Pimcore\Model\Object;
@@ -37,6 +38,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Teinte\Listing getByConfigurableFields ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByMage_mediagallery ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByMage_tags ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByAssociatedArticles ($value, $limit = 0) 
 */
 
 class Teinte extends Concrete {
@@ -53,6 +55,7 @@ public $product_ids_flat;
 public $configurableFields;
 public $mage_mediagallery;
 public $mage_tags;
+public $associatedArticles;
 
 
 /**
@@ -325,7 +328,37 @@ public function setMage_tags ($mage_tags) {
 	return $this;
 }
 
+/**
+* Get associatedArticles - Articles associés
+* @return \Pimcore\Model\Object\article[]
+*/
+public function getAssociatedArticles () {
+	$preValue = $this->preGetValue("associatedArticles"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("associatedArticles")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("associatedArticles")->isEmpty($data)) {
+		return $this->getValueFromParent("associatedArticles");
+	}
+	return $data;
+}
+
+/**
+* Set associatedArticles - Articles associés
+* @param \Pimcore\Model\Object\article[] $associatedArticles
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setAssociatedArticles ($associatedArticles) {
+	$this->associatedArticles = $this->getClass()->getFieldDefinition("associatedArticles")->preSetData($this, $associatedArticles);
+	return $this;
+}
+
 protected static $_relationFields = array (
+  'associatedArticles' => 
+  array (
+    'type' => 'objects',
+  ),
 );
 
 public $lazyLoadedFields = NULL;

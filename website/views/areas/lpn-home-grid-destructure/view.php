@@ -26,7 +26,7 @@ $colors=[
     "#DD5639",
 
 ];
-$color = $this->input("color",["placeholder"=>"Couleur de fond","htmlspecialchars"=>false]);
+$color = $this->input("color",["placeholder"=>"Couleur de fond ?","htmlspecialchars"=>false]);
 
 if($this->editmode) {  ?>
 

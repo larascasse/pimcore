@@ -3,7 +3,7 @@
   	$doc = $this->href("doc", [
         //"height" => 500
     ]); 
-    $cssClass = $this->input("cssClass",["placeholder"=>"Classe css"]);
+    $cssClass = $this->input("cssClass",["placeholder"=>"Classe css","htmlspecialchars"=>false]);
 //print_r(Pimcore\Tool::isFrontentRequestByAdmin());
   	if ($this->editmode) {
       echo $cssClass;

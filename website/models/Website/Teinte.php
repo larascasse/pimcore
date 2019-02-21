@@ -181,6 +181,25 @@ class Website_Teinte extends Object_Teinte {
 		return $this->_tags;
 	}
 
+
+	public function getMage_associated_articles() {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		Object_Abstract::setGetInheritedValues(true); 
+
+
+		$articles = $this->getAssociatedArticles();
+		$articlesPath = [];
+		if($articles) {
+			foreach ($articles as $key => $article) {
+				$articlesPath[] = $article->getMageIdentifier();
+			}
+		}
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return implode(";", $articlesPath);
+	}
+
+
 	public function getShortArray() {
 		$attributes = $this->getClass()->getFieldDefinitions();
 
@@ -259,6 +278,7 @@ class Website_Teinte extends Object_Teinte {
 		$return["published"] = $this->getPublished();
 		//$return["mage_realisationsJson"] = $this->getAllRealisations();
 		$return["mage_realisationsJson"] = Zend_Json::encode($this->getAllRealisations());
+		$return["mage_associated_articles"] = $this->getMage_associated_articles();
 
 		
 		

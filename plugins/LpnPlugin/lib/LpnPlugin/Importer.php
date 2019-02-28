@@ -895,7 +895,7 @@ use Pimcore\Model;
 
                 }
 
-                if($key=="longueur" || $key=="largeur" || $key=="epaisseur"  || $key=="ean") {
+                if($key=="longueur" || $key=="largeur" || $key=="epaisseur"  || $key=="ean" || $key=="actif_web" || $key=="obsolete") {
                     continue;
                 }
                  

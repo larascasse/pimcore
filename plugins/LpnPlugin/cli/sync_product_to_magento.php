@@ -40,7 +40,7 @@ foreach ($results as $result) {
 
 echo count($eans)." à synchroniser\n";
 if(count($eans)>0) {
-   $url = "http://lpn.local/LPN/get_a_product_magmi.php";
+   $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
    $params = ["ean"=>implode(",", $eans)];
    //print_r($params);
     $content = \Pimcore\Tool::getHttpData($url,null,$params);

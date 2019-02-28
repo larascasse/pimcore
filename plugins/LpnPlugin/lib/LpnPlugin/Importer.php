@@ -1240,7 +1240,7 @@ use Pimcore\Model;
                             $version = new Model\Version();
                             $version->setCid($object->getId());
                             $version->setCtype("object");
-                            $version->setDate($this->getModificationDate());
+                            $version->setDate(time());
                             $version->setUserId(6);
                             $version->setNote("Azure Create");
                             $version->save();

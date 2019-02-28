@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-01-24T12:10:09+01:00
+* Generated at: 2019-02-27T01:27:11+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.31.218
+* IP: 172.31.3.241
 
 
 Fields Summary: 
@@ -222,7 +222,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1548328209,
+   'modificationDate' => 1551227230,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -2682,7 +2682,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   9 => 
                   array (
-                    'key' => 'Vieilli rives abîmées',
+                    'key' => 'Vieilli',
                     'value' => 'vieilli rives abimees',
                   ),
                   10 => 
@@ -2707,17 +2707,17 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   14 => 
                   array (
-                    'key' => 'Vieilli usé rives abîmées',
+                    'key' => 'Vieilli usé',
                     'value' => 'vieilli use rives abimees',
                   ),
                   15 => 
                   array (
-                    'key' => 'Vieilli usé et brossé rives abîmées',
+                    'key' => 'Vieilli usé et brossé',
                     'value' => 'vieilli use brosse rives abimees',
                   ),
                   16 => 
                   array (
-                    'key' => 'Vieilli très accentué rives abîmées',
+                    'key' => 'Vieilli très accentué',
                     'value' => 'vieilli tres accentue',
                   ),
                 ),

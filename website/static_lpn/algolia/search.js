@@ -30,7 +30,7 @@ function loadSearch(indexName) {
           //subtype: ['teinte'],
         },
        //filters: ['catalogue:"parquet" OR catalogue:"collections"','subtype="teinte"'],
-       filters: 'subtype:"teinte"',
+       //filters: 'NOT subtype:"teinte"',
         // Add to "facets" all attributes for which you
         // do NOT have a widget defined
        //facets: ['catalogue','largeur_txt']

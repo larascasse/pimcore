@@ -228,6 +228,8 @@ class Website_Teinte extends Object_Teinte {
 			$return[$attribute] = $attributeValue;
 		}
 
+		$return["color"] = $return["name"];
+
 		switch ($return["product_type"]) {
 	        case 'parquet':
 	            $return["short_name"]  = "Parquet ".$return["name"];
@@ -267,6 +269,10 @@ class Website_Teinte extends Object_Teinte {
 
 		$return["mage_short_name"] = $return["short_name"];
 		$return["mage_name"] = $return["name"];
+		$return["mage_description"] = $return["description"];
+		//$return["short_description"] = $return["short_description"];
+		//$return["sub_description"] = $return["sub_description"];
+		
 		$return["mage_meta_title"] = $return["name"] . " par La parqueterie Nouvelle";
 		
 		$return["configurable_fields"] = $this->getConfigurableFields();

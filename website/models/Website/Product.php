@@ -2431,6 +2431,7 @@ class Website_Product extends Object_Product {
 		//On en a plus besoin !!
 		return "";
 
+		
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 

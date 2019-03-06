@@ -3343,7 +3343,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 	function getChildrenSimpleProductIds_flat() {
         if($this->getEan()=="" && $this->getCode()!="") {
-            $childIs = $this->getChildrenSimpleProductIds();
+            $childIs = $this->getChildrenSimpleProductSkus();
             return implode(',',$childIs);
         }
         else return "";
@@ -3381,6 +3381,33 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         return $productIds;
 
     }
+
+
+    public function getChildrenSimpleProductSkus() {
+
+        $list = new \Pimcore\Model\Object\Product\Listing();
+         $list->setUnpublished(true);
+         $list->setCondition("o_path LIKE '" . $this->getRealFullPath() . "/%' AND ean <> '' AND (obsolete IS NULL OR obsolete=0)");
+         //$list->addConditionParam("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'", "");
+        //$list->addConditionParam("ean != ''");
+	    //$list->addConditionParam("obsolete != ?",1);
+
+
+
+        //
+        $childrens = $list->load();
+
+        $productIds  = array();
+        foreach ($childrens as $simpleProduct) {
+            //echo $simpleProduct->getEan();
+            //if (!$simpleProduct->getObsolete())
+            $productIds[] = $simpleProduct->getEan();
+        }
+        //print_r($productIds);
+        return $productIds;
+
+    }
+
 
     public function getPimonly_print_label() {
     	$teinteName = $this->getMage_teinte();

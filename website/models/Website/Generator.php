@@ -193,7 +193,7 @@ class Generator
             } 
              elseif ($context->getFieldname() == "childrenSimpleProductIds_flat") {
                 if($product->getEan()=="" && $product->getCode()!="") {
-                    $childIs = $product->getChildrenSimpleProductIds();
+                    $childIs = $product->getChildrenSimpleProductSkus();
                     return implode(',',$childIs);
                 }
                 else return "";

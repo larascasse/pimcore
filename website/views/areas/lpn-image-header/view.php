@@ -55,15 +55,50 @@ echo $this->image("image", [
         "placeholder" => "Sous-titre",
         "class" => "editmode" //Edit mode
     ]);
+
+
+     $btn_title = $this->input("btn_title", ["width" => 400, "placeholder"=>"Titre du bouton"]);
+
+    $link = $this->renderlet("link", array(
+                                "width" => 400,
+                                "types"=>array("object"),
+                                "controller" => "content",
+                                "action" => "link-eshop-renderlet",
+                                "title" => "Glisser un doc, un produit, une categorie",
+                                "editmode" => $this->editmode,
+                                "previewmode" => $this->previewmode,
+                                "btn_title" => $btn_title
+                    )
+    );
+
+
       if ($this->editmode) :
         ?>
-      <p><?= $textarea; ?></p>
+          <p><?= $textarea; ?></p>
+          <div>
+          <?= $btn_title; ?>
+        </div>
+        <div>
+          <?= $link; ?>
+        </div>
+
+
 
       <?php
       else : 
+        
         if(strlen($textarea->getData())>0) :
             echo '<p>'.$textarea->getData().'</p>';
+
+
         endif;
+
+        if(strlen($link)>0) :
+            echo $link;
+            
+
+        endif;
+
       endif;
       ?>
     </div>

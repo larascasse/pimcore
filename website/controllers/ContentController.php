@@ -70,6 +70,9 @@ class ContentController extends Action
             if($object instanceOf Object\Category) {
                 $this->view->category = Object\Category::getById($this->getParam("id"));
             }
+            if($object instanceOf Object\Teinte) {
+                $this->view->teinte = Object\Teinte::getById($this->getParam("id"));
+            }
             if($object instanceOf Object\Product) {
                 $this->view->product = Object\Product::getById($this->getParam("id"));
             }

@@ -285,11 +285,16 @@ class Website_Teinte extends Object_Teinte {
 		//$return["mage_realisationsJson"] = $this->getAllRealisations();
 		$return["mage_realisationsJson"] = Zend_Json::encode($this->getAllRealisations());
 		$return["mage_associated_articles"] = $this->getMage_associated_articles();
+		$return["mage_identifier"] = $this->getMageIdentifier();
 
 		
 		
 
 		return $return;
+	}
+
+	public function getMageIdentifier() {
+		return $this->getProduct_type()."-".$this->getKey();
 	}
 
 

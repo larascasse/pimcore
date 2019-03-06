@@ -15,6 +15,20 @@ if($product = $this->product) {
 
 }
 
+else if($teinte = $this->teinte) {
+    
+    if($this->previewmode || $mustRender) {
+        echo '<a href="https://www.laparqueterienouvelle.fr/'.$teinte->getName().'" title="Voir '.$teinte->getName().'" class="btn table-selectionner-btn">'.$this->btn_title.'</a>';
+    }
+    else {
+   
+        $widget =  '{{block type="core/template" template="lpn/lpn_product_link.phtml" name="givemetheprice_'.$teinte->getMageIdentifier().'" product_sku="'.$teinte->getMageIdentifier().'" class="btn" anchor_text="'.$this->btn_title.'"}}';
+        echo $widget;
+
+
+    }
+
+}
 else if($category = $this->category) {
 	
 	

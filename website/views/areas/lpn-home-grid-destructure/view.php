@@ -78,6 +78,7 @@ $main_description   = $this->textarea("main_description", ["width" => 400,"heigh
 <?php } 
 else {
     echo "<div>";
+    echo "<div>";
 
 
     echo $this->select("grid-mode", [

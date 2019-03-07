@@ -72,8 +72,10 @@ $main_description   = $this->textarea("main_description", ["width" => 400,"heigh
 
 
 
+
+$style = strlen($color->getData())>0 ? 'style="background-color:'.$color->getData().'"':'';
 ?>
-<div class="grid-bkg-full" style="background-color: <?php echo $color->getData()?>">
+<div class="grid-bkg-full" <?php echo $style ?>>
 <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
 else {

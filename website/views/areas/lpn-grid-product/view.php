@@ -76,7 +76,7 @@ foreach($this->multihref("objectPaths")->getElements() as $object) {
             ));
     }
     else if(isset($category)) {
-        echo '{{block type="catalog/product_list" name="home.catalog.product.list" alias="'.$category->mage_category_id.'" category_id="'.$category->mage_category_id.'" template="catalog/product/list_for_home.phtml" column_count="3"}}';
+        echo '{{block type="catalog/product_list" name="preview.catalog.product.list" alias="preview_category_'.$category->mage_category_id.'" category_id="'.$category->mage_category_id.'" template="catalog/product/grid_preview_category.phtml" column_count="3"  row_count="1"}}';
     }
    
     $index++;

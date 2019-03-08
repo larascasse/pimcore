@@ -25,7 +25,7 @@ $mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
     <?= $this->multihref("objectPaths",
     [
         "types" => ["object"],
-        //"subtypes" => ["product","category","teinte"],
+        "subtypes" => ["product","category","teinte"],
         "classes" => ["product","category","teinte"]
 
 

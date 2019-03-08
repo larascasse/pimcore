@@ -81,24 +81,18 @@ if($this->select("viewType")->getData() == 'products-grid') {
 
 <?php else: ?>
 
-       <!-- Carousel Item -->
-            <div class="<?php echo $this->select("viewType")->getData() ?>">
-            
+ <!-- Carousel Item -->
 <?php 
 
 $category = $this->href("objectPaths")->getElement();
 if($category) { 
     $showPrice = $this->select("show_price")->getData();
     $hideTitle = $this->select("hide_title")->getData();
-    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_subcategory.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'" hide_title="'.$hideTitle.'"}}';
+    $carouselType = $this->select("viewType")->getData();
+    $str = '{{block type="catalog/product_list" name="home.catalog.product.list" alias="category-bloc-'.$category->getMage_category_id().'" category_id="'.$category->getMage_category_id().'" template="catalog/product/list_for_home.phtml" column_count="'.$this->select("columns")->getData().'" show_price="'.$showPrice.'" hide_title="'.$hideTitle.'" carousel_class="'.$carouselType.'}}';
     echo  $str;
 }
 
 ?>
-   
-            </div>
-            
-  
-
 <?php endif; ?>
 

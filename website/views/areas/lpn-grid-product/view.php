@@ -25,7 +25,9 @@ $mustRender = $this->layout()->getLayout() == "layout-fiche-pdf";
     <?= $this->multihref("objectPaths",
     [
         "types" => ["object"],
-        "subtypes" => ["product"]
+        //"subtypes" => ["product","category","teinte"],
+        "classes" => ["product","category","teinte"]
+
 
     ]); ?>
 <?php else: ?>
@@ -51,15 +53,32 @@ if(!$imageformat) {
 
 $index=0;
 echo '<div class="products-grid list-for-subcategory cols'.($count).'">';
-foreach($this->multihref("objectPaths") as $product) { 
 
-    
-    echo 
-    $this->template("includes/inc-product-cell.php", array(
-        "product" => $product,
-        "index"=>$index,
-        "cols"=>12/$count
-    ));
+foreach($this->multihref("objectPaths")->getElements() as $object) { 
+
+    if($object instanceOf Website_Category) {
+        $category = $object;
+
+    }
+    if($object instanceOf Website_Teinte) {
+        $teinte = $object;
+    }
+    if($object instanceOf Website_Product) {
+        $product = $object;
+       // $product = Object\Product::getById($object->getId());
+    }
+
+    if(isset($product)) {
+         echo  $this->template("includes/inc-product-cell.php", array(
+                "product" => $product,
+                "index"=>$index,
+                "cols"=>12/$count
+            ));
+    }
+    else if(isset($category)) {
+        echo '{{block type="catalog/product_list" name="home.catalog.product.list" alias="'.$category->mage_category_id.'" category_id="'.$category->mage_category_id.'" template="catalog/product/list_for_home.phtml" column_count="3"}}';
+    }
+   
     $index++;
   
 } 

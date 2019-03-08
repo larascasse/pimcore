@@ -85,6 +85,7 @@ if($this->select("viewType")->getData() == 'products-grid') {
 <?php 
 
 $category = $this->href("objectPaths")->getElement();
+
 if($category) { 
     $showPrice = $this->select("show_price")->getData();
     $hideTitle = $this->select("hide_title")->getData();

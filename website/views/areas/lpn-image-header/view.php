@@ -110,8 +110,8 @@ else :
     echo '<div class="category-header category-header___level2">';
       
       echo '<div class="category-image-hero">';
-        echo $image; 
-        echo '<div class="image-hero-degrade"></div>';
+      echo '<img src="'.$image->getThumbnail('magento-header').'"/>';
+       echo '<div class="image-hero-degrade"></div>';
       echo '</div>';
 
       echo '<div class="container-main category-header___text category-auto">';

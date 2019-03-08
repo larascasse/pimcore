@@ -1,18 +1,5 @@
 <?php
 
-$cssClass= (!$this->image("image")->getSrc())?" noimg":"";
-
-$bkg = null;
-
-if($this->image("image")->getSrc()) {
-  $bkg= "style=\"background-image:url('".$this->image("image")->getThumbnail('magento_header')."')\"";
-  $cssClass .= " lpn-covered";
-}
-
-
-?>
-
-<?php
 
 $isHeroCheckbox = $this->select("isHero",["store" => [
                 ['empty','--'],
@@ -26,7 +13,7 @@ $isHero = $isHeroCheckbox->getData() == 'hero';
 
 $image = $this->image("image", [
                             "class" => "img-responsive",
-                            "thumbnail" => "magento_header",
+                            "thumbnail" => "magento-header",
                             "placeholder" =>  "Image",
                              //"width" => 200,
                              //"height" => 200,
@@ -64,6 +51,25 @@ $link = $this->renderlet("link", array(
                           "btn_title" => $btn_title
               )
 );
+
+
+
+
+
+$cssClass= (!$image->getSrc())?" noimg":"";
+
+$bkg = null;
+
+if($image->getSrc()) {
+  $bkg= "style=\"background-image:url('".$image->getThumbnail('magento-header')."')\"";
+  $cssClass .= " lpn-covered";
+}
+
+
+?>
+
+<?php
+
 
 
 

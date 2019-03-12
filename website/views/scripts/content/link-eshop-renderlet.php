@@ -38,7 +38,7 @@ else if($category = $this->category) {
     	echo '<a href="https://www.laparqueterienouvelle.fr/category/'. $catId.'" title="Voir '.$category->getName().'" class="table-selectionner-btn">'.$this->btn_title.'</a>';
    	}
     else {
-    	$widget =  ' {{widget type="catalog/category_widget_link" template="catalog/category/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn table-selectionner-btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
+    	$widget =  ' {{widget type="catalog/category_widget_link" template="catalog/category/widget/link/link_block.phtml" id_path="category/'. $catId.'" class="btn" anchor_text="'.$this->btn_title.'" title="'.$category->getName().'"}}';
     	echo $widget;
 
 

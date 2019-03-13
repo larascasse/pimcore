@@ -47,6 +47,9 @@ if(count($eans)>0) {
     
 }
 
+echo $content;
+flush(); 
+echo 'Upadate QWirkflow';
 $products = [];
 foreach ($cids as $productId) {
 

@@ -33,7 +33,7 @@ foreach ($results as $result) {
     //echo $result['ean']."\n";
     $eans[] = $result['ean'];
     $cids[] = $result['cid'];
-    if($i++>100)
+    if($i++>10)
       break;
   }
 }

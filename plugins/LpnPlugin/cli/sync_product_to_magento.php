@@ -64,7 +64,7 @@ if(count($products)>0) {
     $workflowReturn = $returnValueContainer->getData();
 
     if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
-      $content += $workflowReturn["message"];
+      $content .= $workflowReturn["message"]."/n";
     }
 }
 

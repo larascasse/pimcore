@@ -42,8 +42,8 @@ echo count($eans)." à synchroniser\n";
 if(count($eans)>0) {
    $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
    $params = ["ean"=>implode(",", $eans)];
-   //print_r($params);
-    $content = \Pimcore\Tool::getHttpData($url,null,$params);
+   print_r($params);
+   $content = \Pimcore\Tool::getHttpData($url,null,$params);
     
 }
 

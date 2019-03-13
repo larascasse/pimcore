@@ -38,7 +38,7 @@ foreach ($results as $result) {
   }
 }
 
-echo count($eans)." à synchroniser\n";
+echo count($eans)." à synchroniser ------- \n";
 if(count($eans)>0) {
    $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
    $params = ["ean"=>implode(",", $eans)];
@@ -47,9 +47,9 @@ if(count($eans)>0) {
     
 }
 
-echo $content;
+echo str_replace("<br />","\n",$content);
 flush(); 
-echo 'Upadate QWirkflow';
+echo "\nStart Upadate Workflow  -------\n";
 $products = [];
 foreach ($cids as $productId) {
 
@@ -67,12 +67,12 @@ if(count($products)>0) {
     $workflowReturn = $returnValueContainer->getData();
 
     if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
-      $content .= $workflowReturn["message"]."/n";
+      $content .= $workflowReturn["message"]."\n";
     }
 }
 
 
 
-echo $content;
+echo str_replace("<br />","\n",$content);
 echo "END\n";
 ?>

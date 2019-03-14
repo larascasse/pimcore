@@ -28,7 +28,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $create = $this->getParam("create");
 
        	  if(!$product instanceof Object_Product) {
-       	  	 $this->response = array("message"=>"Produit inconnu");
+       	  	  $this->_helper->json->sendJson($this->response = array("message"=>"Produit inconnu"));
              return;
        	  }
        	  

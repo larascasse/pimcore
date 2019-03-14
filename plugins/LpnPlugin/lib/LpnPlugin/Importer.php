@@ -1194,7 +1194,8 @@ use Pimcore\Model;
             }
 
             if(!$isUpdating) {
-                $object->setPublished(false);
+                //$object->setPublished(false);
+                 $object->setPublished($product["published"]);
             
             }
             else {

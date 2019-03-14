@@ -75,7 +75,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
           $products = [$product];
 
 
-          if($withChildren) {
+          if($withChildren && !$teinte) {
             //On va chercher tous les enfants
               $list = new Pimcore\Model\Object\Product\Listing();
               $list->setCondition("o_path LIKE '" . $product->getRealFullPath() . "/%'");

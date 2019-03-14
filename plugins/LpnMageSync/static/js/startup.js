@@ -339,7 +339,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         console.log("syncProduct",this);
         if(!this.data)
             return;
-       var url = '/plugin/LpnMageSync/index/publish-to-Magento/id/' +this.id;
+       var url = '/plugin/LpnMageSync/index/publish-to-magento/id/' +this.id;
        if(withChildren)
         url+="/withChildren/1";
        if(configurable)
@@ -392,7 +392,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         console.log("syncProduct",this);
         if(!this.data)
             return;
-       var url = '/plugin/LpnMageSync/index/publish-to-Magento/id/' +this.id;
+       var url = '/plugin/LpnMageSync/index/publish-to-magento/id/' +this.id;
        
 
        

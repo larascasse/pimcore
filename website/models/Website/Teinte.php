@@ -5,65 +5,127 @@ class Website_Teinte extends Object_Teinte {
 
 	protected  $_tags;
 	protected  $_productsArticle;
+	protected  $_allArticles;
+	protected  $_allProductsIds;
+	protected  $_allProducts;
 
 
 	public function getSimilarTeinteProducts($productToExclude=null) {
-		$teinte = $this;
-		$products = array();
-		if($teinte) {
 
-			$def = $teinte->getClass()->getFieldDefinition("products_relation");
-			$refKey = $def->getOwnerFieldName();
-			$refId = $def->getOwnerClassId();
-			$nonOwnerRelations = $teinte->getRelationData($refKey,false,$refId);
-			
-		   	foreach($nonOwnerRelations as $productRelarion){
-		   		$product =  Object_Abstract::getById($productRelarion['id']);
-		   		
+		if(!$this->_allArticles) {
 
-		   		if($product instanceof Object_Product)  {
-		   		
-		   			if(!$productToExclude || $product->getId()!=$productToExclude->getId()) {
+			$teinte = $this;
+			$products = array();
+			if($teinte) {
 
-		   				$products[] = $product;
-		   			}
-		     		
-		     	}
-		   	}
+				$def = $teinte->getClass()->getFieldDefinition("products_relation");
+				$refKey = $def->getOwnerFieldName();
+				$refId = $def->getOwnerClassId();
+				
+				$nonOwnerRelations = $teinte->getRelationData($refKey,false,$refId);
+				
+			   	foreach($nonOwnerRelations as $productRelarion){
+			   		$product =  Object_Abstract::getById($productRelarion['id']);
+			   		
+
+			   		if($product instanceof Object_Product)  {
+			   		
+			   			if(!$productToExclude || $product->getId()!=$productToExclude->getId()) {
+
+			   				$products[] = $product;
+			   			}
+			     		
+			     	}
+			   	}
+			}
+			$this->_allArticles = $products;
+
 		}
-		return $products;
+		return $this->_allArticles;
+		
 	}
+
+
+
+
 
 	public function getProduct_ids() {
-		$productIds = array();
 
-		$relatedProducts = $this->getSimilarTeinteProducts();
-		
+		if(!$this->_allProductsIds) {
 
-		foreach ($relatedProducts as $relatedProduct) {
-		
-			if(strlen($relatedProduct->getEan()) == 0) {
 
-				//On va chercher tous les enfants
-				$list = new Pimcore\Model\Object\Product\Listing();
-	            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%' AND (obsolete IS NULL OR obsolete=0)");
-	            //$list->addConditionParam("obsolete != ?",1);
-	            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
-	            
-	            $childrens = $list->load();
+			$productIds = array();
 
-	            foreach ($childrens as $simpleProduct) {
-	            	if (!$simpleProduct->getObsolete())
-	                	$productIds[] = $simpleProduct->getId();
-            	}
+			$relatedProducts = $this->getSimilarTeinteProducts();
+			
+
+			foreach ($relatedProducts as $relatedProduct) {
+			
+				if(strlen($relatedProduct->getEan()) == 0) {
+
+					//On va chercher tous les enfants
+					$list = new Pimcore\Model\Object\Product\Listing();
+		            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%' AND (obsolete IS NULL OR obsolete=0)");
+		            //$list->addConditionParam("obsolete != ?",1);
+		            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+		            
+		            $childrens = $list->load();
+
+		            foreach ($childrens as $simpleProduct) {
+		            	if (!$simpleProduct->getObsolete())
+		                	$productIds[] = $simpleProduct->getId();
+	            	}
+				}
+				else {
+					  if (!$relatedProduct->getObsolete())
+					  	$productIds[] = $relatedProduct->getId();
+				}
 			}
-			else {
-				  if (!$relatedProduct->getObsolete())
-				  	$productIds[] = $relatedProduct->getId();
-			}
+			$this->_allProductsIds = $productIds;
 		}
-		return $productIds;
+		return $this->_allProductsIds;
 	}
+
+
+	public function getChildrenProducts() {
+
+		if(!$this->_allProducts) {
+
+
+			$products = array();
+
+			$relatedProducts = $this->getSimilarTeinteProducts();
+			
+
+			foreach ($relatedProducts as $relatedProduct) {
+			
+				if(strlen($relatedProduct->getEan()) == 0) {
+
+					//On va chercher tous les enfants
+					$list = new Pimcore\Model\Object\Product\Listing();
+		            $list->setCondition("o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%' AND (obsolete IS NULL OR obsolete=0)");
+		            //$list->addConditionParam("obsolete != ?",1);
+		            //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+		            
+		            $childrens = $list->load();
+
+		            foreach ($childrens as $simpleProduct) {
+		            	if (!$simpleProduct->getObsolete())
+		                	$products[] = $simpleProduct;
+	            	}
+				}
+				else {
+					  if (!$relatedProduct->getObsolete())
+					  	$products[] = $relatedProduct;
+				}
+			}
+			$this->_allProducts = $products;
+		}
+		return $this->_allProducts;
+	}
+
+
+
 	public function getProduct_ids_flat() { //Utilisé pour m'import magento
 		//On ^rends les SKU !!
 		$productIds = array();
@@ -234,19 +296,23 @@ class Website_Teinte extends Object_Teinte {
 	        case 'parquet':
 	            $return["short_name"]  = "Parquet ".$return["name"];
 	            $return["name"]  = "Parquet ".$return["name"];
+	            $return["pose"]  = $this->getPose();
 	            break;
 
 	        case 'terrasse':
 	            $return["short_name"]  = "Terrasse ".$return["name"];
 	            $return["name"]  = "Terrasse ".$return["name"];
+	            $return["pose"]  = $this->getPose();
 	            break;
 	        case 'sol-stratifie':
 	            $return["short_name"]  = "Stratifié ".$return["name"];
 	            $return["name"]  = "Stratifié ".$return["name"];
+	            $return["pose"]  = $this->getPose();
 	            break;
 	         case 'sol-plaque':
 	            $return["short_name"]  = "Sol plaqué ".$return["name"];
 	            $return["name"]  = "Sol plaqué ".$return["name"];
+	            $return["pose"]  = $this->getPose();
 	            break;
 	        
 	        default:
@@ -323,6 +389,30 @@ class Website_Teinte extends Object_Teinte {
 		}
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $return;
+	}
+
+
+	public function getPose() {
+	
+		$products = $this->getChildrenProducts();
+		$pose = [];
+
+		foreach ($products as $product) {
+
+			$singlesPose = [];
+
+			$productPose = explode(',',$product->getPose());
+
+			foreach ($productPose as $value) {
+				$singlesPose[$value] = $value;
+			}
+
+			$pose = array_merge($pose,$singlesPose);
+
+		}
+		
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return implode(',',$pose);
 	}
 
 

@@ -396,12 +396,15 @@ class Website_Teinte extends Object_Teinte {
 	
 		$products = $this->getChildrenProducts();
 		
-
+		$pose=[];
 		foreach ($products as $product) {
 
 
 
 			$productPose = $product->getPose();
+
+			
+			//die;
 
 			$pose = array_merge($pose,$productPose);
 			

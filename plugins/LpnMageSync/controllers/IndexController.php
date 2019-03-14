@@ -23,6 +23,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
        	  $withChildren = $this->getParam("withChildren");
        	  $configurable = $this->getParam("configurable");
+          $teinte = $this->getParam("teinte");
 
        	  $create = $this->getParam("create");
 
@@ -41,7 +42,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
 	    	  $params["time"] = time();
 
-	    	  if($withChildren) {
+	    	  if($withChildren || $teinte) {
 	    	  	$params["path"] = $product->getFullPath();
 
 	    	  	
@@ -62,6 +63,9 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
           if($configurable)
               $params["configurable"] = 1;
+
+            if($teinte)
+              $params["teinte"] = 1;
 	    	
 	    	  $content = \Pimcore\Tool::getHttpData($url,$params);
 

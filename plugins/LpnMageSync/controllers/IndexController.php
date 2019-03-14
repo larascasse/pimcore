@@ -36,7 +36,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               $this->_helper->json->sendJson($this->response = array("message"=>"Produit inconnu"));
              return;
             }
-            
+
 
           }
        	  
@@ -111,20 +111,23 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
                 }
             }
 
-            /*Logger::debug("Start wrokflow upfate",$products);
-            echo "Start wrokflow upfate".count($products).$products[2]->getMage_name();
-            die;*/
-            $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+            if(!$teinte) {
+                 /*Logger::debug("Start wrokflow upfate",$products);
+                echo "Start wrokflow upfate".count($products).$products[2]->getMage_name();
+                die;*/
+                $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
 
-            \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
-                  "returnValueContainer" => $returnValueContainer
-              ]);
+                \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
+                      "returnValueContainer" => $returnValueContainer
+                  ]);
 
-            $workflowReturn = $returnValueContainer->getData();
+                $workflowReturn = $returnValueContainer->getData();
 
-            if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
-              $content .= $workflowReturn["message"];
+                if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+                  $content .= $workflowReturn["message"];
+                }
             }
+           
   	    	
   	    	  $this->response = array(
   	    	  	"success" => "true", 

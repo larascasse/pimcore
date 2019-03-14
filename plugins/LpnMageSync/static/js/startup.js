@@ -118,6 +118,32 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
             });
             obj.toolbar.insert(5, menu);
         }
+
+         //Teinte
+        else if(obj.data.general.o_classId==13) {
+
+             var menu = new Ext.SplitButton({
+                text: t('sync magento + enfants'),
+                iconCls: "pimcore_icon_publish",
+                scale: "medium",
+                handler: this.syncTeinte.bind(obj,true),
+                menu: [
+                    
+                    {
+                        text: t('create magento + enfants'),
+                        iconCls: "pimcore_icon_save",
+                        //withchildren,configurable,create
+                        handler: this.syncTeinte.bind(obj,true)
+                    },
+                    {
+                        text: t('Effacer le cache'),
+                        iconCls: "pimcore_icon_save",
+                        handler: this.syncTeinte.bind(obj)
+                    }
+                ]
+            });
+            obj.toolbar.insert(5, menu);
+        }
            
 
 
@@ -360,6 +386,63 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
 
      
     },
+
+
+    syncTeinte : function (create) {
+        console.log("syncProduct",this);
+        if(!this.data)
+            return;
+       var url = '/plugin/LpnMageSync/index/publish-to-Magento/id/' +this.id;
+       if(withChildren)
+        url+="/withChildren/1";
+       if(create)
+        url+="/create/1";
+
+       if(create)
+        url+="/teinte/1";
+
+       console.log(url)
+       //return;
+       //return;
+         // pimcore.plugin.broker.fireEvent("preSaveAsset", this.id);
+
+        Ext.Ajax.request({
+            //url: '/plugin/LpnMageSync/index/download/id/' +this.id,
+            url: url,
+            method: "get",
+            success: function (response) {
+                try{
+                   // pimcore.helpers.showNotification(t("save"), t("successful_sync"), "success");
+
+                    var rdata = Ext.decode(response.responseText);
+                    if (rdata && rdata.success) {
+                        pimcore.helpers.showNotification(t("save"), t("successful_sync")+rdata.message, "success");
+                       // this.resetChanges();
+                        //pimcore.plugin.broker.fireEvent("postSaveAsset", this.id);
+                    }
+                    else {
+                        pimcore.helpers.showPrettyError(rdata.type, t("error"), t("error_sync"),
+                            rdata.message, rdata.stack, rdata.code);
+                    }
+                } catch(e){
+                    pimcore.helpers.showNotification(t("error"), t("error_sync"), "error");
+                }
+                
+
+
+                if(typeof callback == "function") {
+                    callback();
+                }
+            }.bind(this),
+            failure: function () {
+                this.tab.unmask();
+            },
+        });
+
+     
+    },
+
+
 });
 
 var lpnmagesyncPlugin = new pimcore.plugin.lpnmagesync();

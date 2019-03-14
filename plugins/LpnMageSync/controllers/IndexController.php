@@ -34,7 +34,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  else {
               $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
        	  
-          
+          //DEV
           $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
 
 	    	  $params = array();

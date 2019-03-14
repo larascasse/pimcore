@@ -22,19 +22,21 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
           $teinte = $this->getParam("teinte");
 
           if($teinte) {
-            $product = Object_Product::getById($this->getParam("id"));
-             if(!$product instanceof Object_Product) {
-              $this->_helper->json->sendJson($this->response = array("message"=>"Produit inconnu"));
-             return;
-            }
-          }
-          else {
-
+            
             $product = Object_Teinte::getById($this->getParam("id"));
              if(!$product instanceof Object_Teinte) {
               $this->_helper->json->sendJson($this->response = array("message"=>"Teinte inconnue"));
              return;
             }
+          }
+          else {
+
+            $product = Object_Product::getById($this->getParam("id"));
+             if(!$product instanceof Object_Product) {
+              $this->_helper->json->sendJson($this->response = array("message"=>"Produit inconnu"));
+             return;
+            }
+            
 
           }
        	  

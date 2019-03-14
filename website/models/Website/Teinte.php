@@ -395,23 +395,19 @@ class Website_Teinte extends Object_Teinte {
 	public function getPose() {
 	
 		$products = $this->getChildrenProducts();
-		$pose = [];
+		
 
 		foreach ($products as $product) {
 
-			$singlesPose = [];
 
-			$productPose = explode(',',$product->getPose());
 
-			foreach ($productPose as $value) {
-				$singlesPose[$value] = $value;
-			}
+			$productPose = $product->getPose();
 
-			$pose = array_merge($pose,$singlesPose);
+			$pose = array_merge($pose,$productPose);
+			
 
 		}
-		
-		Object_Abstract::setGetInheritedValues($inheritance); 
+		$pose = array_unique($pose);
 		return implode(',',$pose);
 	}
 

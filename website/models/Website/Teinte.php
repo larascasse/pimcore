@@ -405,8 +405,8 @@ class Website_Teinte extends Object_Teinte {
 
 			
 			//die;
-
-			$pose = array_merge($pose,$productPose);
+			if(is_array($productPose))
+				$pose = array_merge($pose,$productPose);
 			
 
 		}

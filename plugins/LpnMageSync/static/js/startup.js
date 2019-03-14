@@ -393,13 +393,14 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         if(!this.data)
             return;
        var url = '/plugin/LpnMageSync/index/publish-to-Magento/id/' +this.id;
-       if(withChildren)
-        url+="/withChildren/1";
+       
+
+       
        if(create)
         url+="/create/1";
 
-       if(create)
-        url+="/teinte/1";
+   
+      url+="/teinte/1";
 
        console.log(url)
        //return;

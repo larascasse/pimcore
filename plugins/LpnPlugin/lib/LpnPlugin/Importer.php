@@ -971,8 +971,8 @@ use Pimcore\Model;
         //on ne cree pas des produits non actif et obsolete
         $canCreate = !$product["obsolete"] && ($product["actif_web"] || $importNonActifWeb);
 
-        if($product["obsolete"])
-            $product["published"] = false;
+        
+        $product["published"] = !$product["obsolete"] && $product["actif_web"];
 
 
 

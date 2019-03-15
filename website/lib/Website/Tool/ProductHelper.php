@@ -44,6 +44,8 @@ class ProductHelper
         $retrievableAttributes [] = "choix_not_configurable";
         $retrievableAttributes [] = "traitement_surface_not_configurable";
         $retrievableAttributes [] = "finition_not_configurable";
+        $retrievableAttributes [] = "motif_not_configurable";
+        $retrievableAttributes [] = "support_not_configurable";
 
 
         $latestChild = null;
@@ -144,7 +146,29 @@ class ProductHelper
                         $ignoreFields[] = "choix";
                         $ignoreFields[] = "choixString";
                         continue;
+                    } 
+                    else if($key == "traitement_surface_String" && isset($childAllValues['traitement_surface_not_configurable']) && $childAllValues['traitement_surface_not_configurable']) {
+                        $ignoreFields[] = "traitement_surface";
+                        $ignoreFields[] = "traitement_surfaceString";
+                        continue;
+                    } 
+                    else if($key == "finitionString" && isset($childAllValues['finition_not_configurable']) && $childAllValues['finition_not_configurable']) {
+                        $ignoreFields[] = "finition";
+                        $ignoreFields[] = "finitionString";
+                        continue;
+                    } 
+                    else if($key == "motifString" && isset($childAllValues['motif_not_configurable']) && $childAllValues['motif_not_configurable']) {
+                        $ignoreFields[] = "motif";
+                        $ignoreFields[] = "motifString";
+                        continue;
                     }
+                    else if($key == "supportString" && isset($childAllValues['support_not_configurable']) && $childAllValues['support_not_configurable']) {
+                        $ignoreFields[] = "support";
+                        $ignoreFields[] = "supportString";
+                        continue;
+                    }
+
+                    
 
 
                     if($key=="longueur" && isset($childAllValues['longueur_txt']) && strlen(trim($childAllValues['longueur_txt']))>0) {
@@ -224,9 +248,7 @@ class ProductHelper
         if(in_array("epaisseur_txt", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('epaisseur'));
         }
-        if(in_array("choixString", $childConfigurableFields)) {
-            $childConfigurableFields = array_diff($childConfigurableFields, array('choix'));
-        }
+        
 
         if(in_array("mage_section", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('epaisseur','largeur','epaisseur_txt','largeur_txt'));

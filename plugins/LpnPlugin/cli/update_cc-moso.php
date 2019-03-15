@@ -239,9 +239,6 @@ Usé,use
                 $parent->setValue('chanfreins','O');
         } 
 
-
-
-
         $techTech[] = "Contribution LEED BD+C - v4 : EQ2 / v2009: MR 6, IEQ 4.3";
         $techTech[] = "Contribution HQE : 2.4.1, 2.4.2, 2.4.3";
 
@@ -250,11 +247,6 @@ Usé,use
         $object->setCharacteristics_others_perf(implode("\n", $techCe));
 
     
-
-
-        
-
-
 
         switch ($object->getEpaisseur()) {
             case '10':
@@ -327,8 +319,8 @@ Usé,use
         $save=true;
 
        
-        if(strlen($parent->name)>0 && !stristr($code,"zzp")  && !stristr($code,"xzp")) {
-            $parent->setValue('name',null);
+        if(strlen($parent->name)>0) {
+            //$parent->setValue('name',null);
             
         } 
         $parent->save();
@@ -345,51 +337,6 @@ Usé,use
    
     if($save)
         $object->save();
-
-
-    continue;
-    $values = array();
-    $objectToSave = Object::getById($object->getId());
-    foreach ($fieldsToClean as $key => $fieldName) {
-        # code...
-        
-        
-
-        $value = $object->getValueForFieldName($fieldName);
-        if(!($object->getParent() instanceof Website_Product)) {
-            $parentValue = $object->getParent()->getParent()->getValueForFieldName($fieldName);
-         
-        }
-        else {
-            $parentValue = $object->getParent()->getValueForFieldName($fieldName);
-        }
-
-        
-
-        if(($value == $parentValue || $value=="Terrasses en bois par La Parqueterie Nouvelle") && strlen($value)>0 ) {
-            echo "--> nullify $fieldName : ".$object->getSku()."  -----    $value <-> $parentValue\n";
-            
-            
-            $values[$fieldName]=null;
-            
-
-
-            //$objectToSave->setPublished(true);
-            
-        }
-   
-    }
-
-    if(count( $values)>0) {
-        $objectToSave->setValues($values);
-        //print_r($values);
-
-        echo "\n";
-        $objectToSave->save();
-    }
-    
-    
-
     
 
 }

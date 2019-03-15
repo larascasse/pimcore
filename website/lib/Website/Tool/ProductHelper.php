@@ -77,7 +77,8 @@ class ProductHelper
              $childAllValues = array();
 
 
-
+             //On mete toutes les valeurs dont on a besoin dans
+             // un chuild
             foreach ($fields as $field) {
                 //MPB recusrion
                 //echo $field->name."- 1"."\n";
@@ -128,7 +129,8 @@ class ProductHelper
                         $ignoreFields[] = "largeur_txt";
                         continue;
                     }
-                    else if($key == "choixString" && isset($childAllValues['choix_not_configurable']) && $childAllValues['choix_not_configurable']) {
+                    else if($key == "choix" && isset($childAllValues['choix_not_configurable']) && $childAllValues['choix_not_configurable']) {
+                        $ignoreFields[] = "choix";
                         $ignoreFields[] = "choixString";
                         continue;
                     }

@@ -21,10 +21,13 @@ class ProductHelper
        
     
         $childConfigurableFields = array();
+
+
+        //Liste des champs copnfiogurables
+        //les doublons sont traités ensuite
         $configurableFields =array("configurable_free_1","volume","subtype","finitionString","hauteur","profil","fixation","color","epaisseur","largeur","longueur","conditionnement","epaisseur_txt","largeur_txt","longueur_txt","mage_section","quantity_min_txt","configurable_free_2","choixString","traitement_surfaceString","motifString","supportString","chanfreins");
 
-        //Ajout pour gérer le choix non configureage
-        $configurableFields["choix"];
+       
 
         
         $retrievableAttributes = [];
@@ -36,6 +39,11 @@ class ProductHelper
         }
         $retrievableAttributes [] = "mage_use_section_as_configurable";
         $retrievableAttributes [] = "mage_use_chanfreins_as_configurable";
+
+         //Ajout pour gérer le choix non configureage
+        $retrievableAttributes [] = "choix_not_configurable";
+        $retrievableAttributes [] = "traitement_surface_not_configurable";
+        $retrievableAttributes [] = "finition_not_configurable";
 
 
         $latestChild = null;
@@ -132,7 +140,7 @@ class ProductHelper
                         $ignoreFields[] = "largeur_txt";
                         continue;
                     }
-                    else if($key == "choix" && isset($childAllValues['choix_not_configurable']) && $childAllValues['choix_not_configurable']) {
+                    else if($key == "choixString" && isset($childAllValues['choix_not_configurable']) && $childAllValues['choix_not_configurable']) {
                         $ignoreFields[] = "choix";
                         $ignoreFields[] = "choixString";
                         continue;
@@ -149,9 +157,7 @@ class ProductHelper
                     else if($key=="epaisseur" && isset($childAllValues['epaisseur_txt']) && strlen(trim($childAllValues['epaisseur_txt']))>0) {
                         continue;
                     }
-                     else if($key=="choix" && isset($childAllValues['choixString']) && strlen(trim($childAllValues['choixString']))>0) {
-                        continue;
-                    }
+                     
 
                     if($key=="mage_section" && (!isset($childAllValues['mage_use_section_as_configurable']) ||  !$childAllValues['mage_use_section_as_configurable'])) {
                         continue;

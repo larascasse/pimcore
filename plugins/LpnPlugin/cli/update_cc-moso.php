@@ -229,6 +229,17 @@ Usé,use
         }
 
 
+        if(stristr($article, "G2")) {
+                $parent->setValue('chanfreins','2');
+        }   
+        else if(stristr($article, "G4")) {
+                $parent->setValue('chanfreins','4');
+        } 
+        else if(stristr($article, "G0")) {
+                $parent->setValue('chanfreins','O');
+        } 
+
+
 
 
         $techTech[] = "Contribution LEED BD+C - v4 : EQ2 / v2009: MR 6, IEQ 4.3";

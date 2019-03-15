@@ -230,6 +230,19 @@ Usé,use
         $object->setCharacteristics_others_tech(implode("\n", $techTech));
         $object->setCharacteristics_others_perf(implode("\n", $techCe));
 
+
+
+
+        if(stristr($article, "G2")) {
+            $parent->setValue('chanfreins','2');
+        }   
+        else if(stristr($article, "G4")) {
+            $parent->setValue('chanfreins','4');
+        } 
+        else if(stristr($article, "G0")) {
+            $parent->setValue('chanfreins','O');
+        } 
+
     
 
 

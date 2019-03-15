@@ -128,6 +128,10 @@ class ProductHelper
                         $ignoreFields[] = "largeur_txt";
                         continue;
                     }
+                    else if($key == "choixString" && isset($childAllValues['choix_not_configurable']) && $childAllValues['choix_not_configurable']) {
+                        $ignoreFields[] = "choixString";
+                        continue;
+                    }
 
 
                     if($key=="longueur" && isset($childAllValues['longueur_txt']) && strlen(trim($childAllValues['longueur_txt']))>0) {
@@ -138,6 +142,9 @@ class ProductHelper
                         continue;
                     }
                     else if($key=="epaisseur" && isset($childAllValues['epaisseur_txt']) && strlen(trim($childAllValues['epaisseur_txt']))>0) {
+                        continue;
+                    }
+                     else if($key=="choix" && isset($childAllValues['choixString']) && strlen(trim($childAllValues['choixString']))>0) {
                         continue;
                     }
 
@@ -205,6 +212,9 @@ class ProductHelper
         }
         if(in_array("epaisseur_txt", $childConfigurableFields)) {
             $childConfigurableFields = array_diff($childConfigurableFields, array('epaisseur'));
+        }
+        if(in_array("choixString", $childConfigurableFields)) {
+            $childConfigurableFields = array_diff($childConfigurableFields, array('choix'));
         }
 
         if(in_array("mage_section", $childConfigurableFields)) {

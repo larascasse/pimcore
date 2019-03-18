@@ -1,7 +1,5 @@
 /* DYMO */
 
-$etiquetteWidth : 252px;
-$etiquetteHeight: 81px;
 
 
 
@@ -86,9 +84,9 @@ a[x-apple-data-detectors] {
 
 	//Fausse marge pour virer les header and footer de chrome
 	@page {
-    size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
-}
+	    size: auto;   /* auto is the initial value */
+	    margin: 0mm;  /* this affects the margin in the printer settings */
+	}
 
 /*@page {
 		size: portait;
@@ -103,12 +101,24 @@ a[x-apple-data-detectors] {
 }
 
 
+body 
+{
+    background-color:#FFFFFF; 
+    //border: solid 1px black ;
+    margin: 0;  /* this affects the margin on the content before sending to   printer */
+    padding: 0;  /* this affects the margin on the content before sending to   printer */
+}
+
+
+
 
 .big_label {
 	padding: 0 30px;
 	//width: 500px;
 	height: 700px;
 	position: relative;
+	text-align: center;
+
 	.p-name,.p-ean,.p-colisage {
 		font-size: 5.7em;
 		
@@ -161,47 +171,103 @@ a[x-apple-data-detectors] {
 	page-break-after: always;
 }
 
+
+
+
+$etiquetteWidth : 150px;
+$etiquetteHeight: 490px;
+
 .small_label {
 	
 	//width : $etiquetteWidth;
-	border: 1px solid #FF0000;
+	
+	//border: 1px solid #FF0000;
 	//background-color : #0000FF;
-	overflow: hidden;
+	//overflow: hidden;
 	page-break-after: always;
 	page-break-inside: avoid;
-	margin-bottom: 0px;
 	padding: 0;
-	height: ($etiquetteHeight);
-	width: ($etiquetteWidth);
-	font-size: 10px;
+	margin: 0;
+	//height: ($etiquetteHeight);
+	//width: ($etiquetteWidth);
+	//font-size: 10px;
+	font-size: 1.4em;
+	height: $etiquetteHeight;
+	width: $etiquetteWidth;
+
+	//overflow: hidden;
 
 	&>div {
-		background-color: #00FF00;
-		display: table;
-		table-layout: fixed;
-		/* height: 800px; */
-		width: $etiquetteWidth;
-		//transform: rotate(90deg) translate(-82px, 0px);
-		//transform-origin: bottom left;
-		height:100%;
+		
+		//background-color: #00FF00;
+		//display: table;
+		//table-layout: fixed;
+		
+		transform: rotate(90deg) translate(-$etiquetteWidth, 0px);
+		transform-origin: bottom left;
+		height:$etiquetteWidth;
+		width:$etiquetteHeight;
+		min-height:$etiquetteWidth;
+		min-width:$etiquetteHeight;
+
+		display: block;
+		
 	}
 
 	.p-row {
-		display: table-row;
+		display: flex;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		align-items:center;
+		justify-content: center;
+		
+		position: relative;
+
+		height:$etiquetteWidth;
+		width:$etiquetteHeight;
+		min-height:$etiquetteWidth;
+		min-width:$etiquetteHeight;
+
+		
+
 	}
 	.p-ean {
 
-		width : 20%;
-		display: table-cell;
-		//float:left;
-		display : none;
+		position: absolute;
+		bottom:0;
+		right: 0;
 		
 	} 
 	.p-name {
-		display:  table-cell;
-		width: 60%;
+		
 
+		text-align: center;
+		font-weight: bold;
+		text-transform: uppercase;
+		//background-color: #0000FF;
+		padding: 20px;
+		margin:0;
+		width: 100%;
+		
 	} 
+
+	.p-label {
+		
+		display: none;
+		
+		text-align: center;
+		img {
+			padding-top: 10px;
+			width: 100%;
+    		height: auto;
+		}
+		
+	}
+
+
 	.p-dimensions{
 
 		width: 5%;
@@ -210,18 +276,7 @@ a[x-apple-data-detectors] {
 		text-align: center;
 		display: none;
 	} 
-	.p-label {
-		width: 40%;
-		display:  table-cell;
-		//float:left;
-		text-align: right;
-		img {
-			padding-top: 10px;
-			width: 100%;
-    		height: auto;
-		}
-		
-	}
+
 	.p-logo{
 
 		display: inline-block;
@@ -236,10 +291,4 @@ a[x-apple-data-detectors] {
 	}
 
 	
-}
-
-
-
-.big_label {
-	text-align: center;
 }

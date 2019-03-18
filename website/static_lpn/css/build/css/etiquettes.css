@@ -74,7 +74,7 @@ a[x-apple-data-detectors] {
   @page {
     size: auto;
     /* auto is the initial value */
-    margin: 0;
+    margin: 0mm;
     /* this affects the margin in the printer settings */ }
   /*@page {
 		size: portait;
@@ -83,10 +83,18 @@ a[x-apple-data-detectors] {
   html .btn {
     display: none; } }
 
+body {
+  background-color: #FFFFFF;
+  margin: 0;
+  /* this affects the margin on the content before sending to   printer */
+  padding: 0;
+  /* this affects the margin on the content before sending to   printer */ }
+
 .big_label {
   padding: 0 30px;
   height: 700px;
   position: relative;
+  text-align: center;
   page-break-after: always; }
   .big_label .p-name, .big_label .p-ean, .big_label .p-colisage {
     font-size: 5.7em;
@@ -125,50 +133,61 @@ a[x-apple-data-detectors] {
     display: none; }
 
 .small_label {
-  border: 1px solid #FF0000;
-  overflow: hidden;
   page-break-after: always;
   page-break-inside: avoid;
-  margin-bottom: 0px;
   padding: 0;
-  height: 81px;
-  width: 252px;
-  font-size: 10px; }
+  margin: 0;
+  font-size: 1.4em;
+  height: 490px;
+  width: 150px; }
   .small_label > div {
-    background-color: #00FF00;
-    display: table;
-    table-layout: fixed;
-    /* height: 800px; */
-    width: 252px;
-    height: 100%; }
+    transform: rotate(90deg) translate(-150px, 0px);
+    transform-origin: bottom left;
+    height: 150px;
+    width: 490px;
+    min-height: 150px;
+    min-width: 490px;
+    display: block; }
   .small_label .p-row {
-    display: table-row; }
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 150px;
+    width: 490px;
+    min-height: 150px;
+    min-width: 490px; }
   .small_label .p-ean {
-    width: 20%;
-    display: table-cell;
-    display: none; }
+    position: absolute;
+    bottom: 0;
+    right: 0; }
   .small_label .p-name {
-    display: table-cell;
-    width: 60%; }
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px;
+    margin: 0;
+    width: 100%; }
+  .small_label .p-label {
+    display: none;
+    text-align: center; }
+    .small_label .p-label img {
+      padding-top: 10px;
+      width: 100%;
+      height: auto; }
   .small_label .p-dimensions {
     width: 5%;
     display: table-cell;
     text-align: center;
     display: none; }
-  .small_label .p-label {
-    width: 40%;
-    display: table-cell;
-    text-align: right; }
-    .small_label .p-label img {
-      padding-top: 10px;
-      width: 100%;
-      height: auto; }
   .small_label .p-logo {
     display: inline-block;
     display: none; }
   .small_label .p-subtitle {
     display: inline-block;
     display: none; }
-
-.big_label {
-  text-align: center; }

@@ -52,17 +52,11 @@ elseif (isset($product)) {
 	$productName = $product->getPimonly_print_label();
 ?>
 
-<script>
-var labelContent = new Array();
-	
-</script>
+
 <div align="center">
 <button type="button" onclick="window.print();"  value="big_label" class="btn btn-primary btn-lg">Imprimer</button>
 </div>
 
-<script type="text/javascript">
-	var labelContent = new Array();
-</script>
 <?php for ($i=0; $i < 1; $i++) {  ?>
 
 <script>
@@ -74,7 +68,6 @@ labelContent.push({
 	);
 
 </script>
-
 <div class="portrait <?php echo $this->format ?>">
 <div>
 <div class="p-row">
@@ -84,21 +77,6 @@ labelContent.push({
 <!-- <div  class="p-colisage"></div>--> 
 <div  class="p-ean"><?php echo ($product->getColisage() > 0 && $product->getColisage() != 1) ? "Colis ".number_format($product->getColisage(),3)." ".strtolower($product->getUnite()). "<br />":""; ?><?php echo $product->getEan() ?></div>
 
-
- <?php
-$subtitle = "";//strlen($product->getSku())>0?$product->getSku():"";
-if(strlen($product->name_scienergie_court)) {
-	if(strlen($subtitle)>0) 
-		$subtitle .=" - ";
-	
-	$subtitle .=$product->name_scienergie_court;
-	$subtitle .=" - ". $product->getCode();
-}
-if (strlen($subtitle)>0) {
-	//echo $subtitle = '<p class="p-subtitle">'.$subtitle.'</p>';
-}
-
-?>
 
 <?php
 // Seul le texte à écrire est obligatoire

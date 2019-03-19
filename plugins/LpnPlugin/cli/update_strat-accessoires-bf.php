@@ -73,7 +73,7 @@ foreach ($list->getObjects() as $object) {
 
     $object->setValue('configurable_free_1',$scienergieCourt);
     
-    $object->setValue('pimonly_name_suffixe',$scienergieCourt);
+    $object->setValue('pimonly_name_suffixe',$scienergieCourt." ".$object->pimonly_dimensions);
   
 
     //echo $scienergieCourt." ".$object->getEan()."\n";

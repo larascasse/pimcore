@@ -66,27 +66,19 @@ foreach ($list->getObjects() as $object) {
     $qualite = $object->getQualite();
 
 
-    $scienergieCourt = str_ireplace("ch ", "Chêne", $scienergieCourt);
-    $scienergieCourt = str_ireplace("nat  ", "Naturel", $scienergieCourt);
+    $scienergieCourt = str_ireplace("ch ", "Chêne ", $scienergieCourt);
+    $scienergieCourt = str_ireplace("nat  ", "Naturel ", $scienergieCourt);
     $scienergieCourt = ucwords($scienergieCourt);
-
-
+    
     $object->setValue('configurable_free_1',$scienergieCourt);
-    
+
     $object->setValue('pimonly_name_suffixe',$scienergieCourt." ".$object->pimonly_dimensions);
-  
+    $save = true;
 
-    //echo $scienergieCourt." ".$object->getEan()."\n";
-
-    $save=true;
-
-    echo "\n$article ?";
-
-    
-    //$object->setPublished(true);
     $object->save();
 
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\n\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\n".$object->getMage_short_name();
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

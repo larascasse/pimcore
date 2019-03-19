@@ -298,7 +298,11 @@ class Website_Product extends Object_Product {
 	*/
 	public function getChoixString () {
 		if(!$this->_choixString) {
-			$this->_choixString = $this->getSingleTaxonomyString('choix');
+
+			if(!$this->isAccessoire())
+				$this->_choixString = $this->getSingleTaxonomyString('choix');
+			else
+				return "";
 
 		}
 		return $this->_choixString;
@@ -3465,6 +3469,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     	$short_name = str_ireplace("monolame ", "", $short_name);
     	$short_name = str_ireplace("extérieur ", "ext. ", $short_name);
     	$short_name = str_ireplace("exterieur ", "ext. ", $short_name);
+    	$short_name = str_ireplace("stratifié ", "strat. ", $short_name);
 
 
     	$short_name = trim($short_name);
@@ -3521,7 +3526,9 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		 $attributeType = strtolower($this->getSubtype());
 		 $scienergieName = strtolower($this->getName_scienergie());
 		 //echo $attributeType." ".$scienergieName."<br />";
-		 $isAccessoire =    stripos($attributeType,'accessoire')!==false 
+		 $isAccessoire =    !$this-> isPlusValue()
+
+		 					|| (stripos($attributeType,'accessoire')!==false 
 		        				|| stripos($attributeType,'colle')!==false 
 		        				|| stripos($attributeType,'couche')!==false
 		        				|| stripos($attributeType,'finition')!==false
@@ -3533,13 +3540,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		        				|| $this->getFamille() == "15COLLE"
 		        				|| $this->getFamille() == "80TASSEAUX"
 		        				|| $this->getFamille() == "65PANNEAUX"
-
-
-		        			
-
-
-		        				//|| stripos($attributeType,'plinthe')!==false
-		        				//|| stripos($attributeType,'pieds pour')!==false
+		        			)
 		        				; 
 		  return $isAccessoire;
 	}

@@ -69,9 +69,11 @@ foreach ($list->getObjects() as $object) {
     $scienergieCourt = str_ireplace("ch ", "Chêne", $scienergieCourt);
     $scienergieCourt = str_ireplace("nat  ", "Naturel", $scienergieCourt);
     $scienergieCourt = ucwords($scienergieCourt);
-    
+
 
     $object->setValue('configurable_free_1',$scienergieCourt);
+    
+    $object->setValue('pimonly_name_suffixe',$scienergieCourt);
   
 
     //echo $scienergieCourt." ".$object->getEan()."\n";

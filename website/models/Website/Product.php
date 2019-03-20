@@ -299,7 +299,7 @@ class Website_Product extends Object_Product {
 	public function getChoixString () {
 		if(!$this->_choixString) {
 
-			if(!$this->isAccessoire() && !$product->isPlusValue())
+			if(!$this->isAccessoire() && !$this->isPlusValue())
 				$this->_choixString = $this->getSingleTaxonomyString('choix');
 			else
 				return "";

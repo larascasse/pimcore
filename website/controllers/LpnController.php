@@ -95,6 +95,9 @@ class LpnController extends Action
                        continue;
                     }
 
+                    $image_header_asset = $doc->getProperty("image_header_url");
+                    $image_header_url = $image_header_asset?$image_header_asset->getThumbnail("magento_realisation")->getPath():"";
+
                     $page = array (
                         "content" => Document\Service::render($doc),
                         "description" => $doc->getDescription(),
@@ -103,6 +106,7 @@ class LpnController extends Action
                         "key"            => $doc->getKey(),
                         "url"            => $doc->getPrettyUrl(),
                         "title"            => $doc->getTitle(),
+                        "image_header_url" => $image_header_url
                     );
                      $pages[] = $page;
                 }

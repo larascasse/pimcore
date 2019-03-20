@@ -50,9 +50,9 @@ class MauchampController extends Action
         else {
 
             if($this->getParam('debug')) {
-               $xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
+              //$xml = $data = \Website\Tool\MauchampHelper::getDebugClient();
 
-              //$data = Website\Tool\MauchampHelper::getDebugOrder();
+              $xml = $data = Website\Tool\MauchampHelper::getDebugOrder();
 
             }
             else {
@@ -261,6 +261,8 @@ class MauchampController extends Action
                       if(!in_array($product->getSku(),$ftIncludedSkus)) {
                           continue;
                        } 
+
+              
                          
                          if(in_array($product->getSku(),$ftIncludedSkus) 
                             && $product->getFiche_technique_lpn()

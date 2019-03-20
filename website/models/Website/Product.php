@@ -299,7 +299,7 @@ class Website_Product extends Object_Product {
 	public function getChoixString () {
 		if(!$this->_choixString) {
 
-			if(!$this->isAccessoire())
+			if(!$this->isAccessoire() && !$product->isPlusValue())
 				$this->_choixString = $this->getSingleTaxonomyString('choix');
 			else
 				return "";
@@ -3527,9 +3527,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		 $attributeType = strtolower($this->getSubtype());
 		 $scienergieName = strtolower($this->getName_scienergie());
 		 //echo $attributeType." ".$scienergieName."<br />";
-		 $isAccessoire =    !$this-> isPlusValue()
-
-		 					|| (stripos($attributeType,'accessoire')!==false 
+		 $isAccessoire =    (stripos($attributeType,'accessoire')!==false 
 		        				|| stripos($attributeType,'colle')!==false 
 		        				|| stripos($attributeType,'couche')!==false
 		        				|| stripos($attributeType,'finition')!==false

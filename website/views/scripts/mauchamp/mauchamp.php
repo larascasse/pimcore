@@ -221,7 +221,13 @@ if(!is_array($this->products)) {
   $this->products = array();
 }
 
+
+
 foreach ($this->products as $product) {
+
+
+//  print_r($product->getImageAssetArray());
+
 
   echo $product->getMage_notice_pose_lpn();
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
@@ -230,6 +236,7 @@ foreach ($this->products as $product) {
 
  if (!$product->isAccessoire() && count($product->getImageAssetArray())>0) {
     $hasOnePhoto = true;
+
  }
 
 }

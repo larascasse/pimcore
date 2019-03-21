@@ -250,8 +250,14 @@ foreach ($list->getObjects() as $object) {
             $parent->setValue('name',null);
             
         } 
+
         $parent->save();
         
+
+        //soucics: 
+
+        $parent->setValue('fixation_non_configurable',null);
+        $object->setValue('fixation_non_configurable',null);
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         

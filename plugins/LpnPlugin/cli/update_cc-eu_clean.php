@@ -49,13 +49,13 @@ foreach ($list->getObjects() as $object) {
         continue;
 
 
-    $object->fixation_non_configurable = null;
+    $object->fixation_not_configurable = null;
     $object->origine_bois = null;
 
-    $object->setValue('fixation_non_configurable',null);
+    $object->setValue('fixation_not_configurable',null);
     $object->setValue('origine_bois',null);
 
-    $object->setFixation_non_configurable(null);
+    $object->setFixation_not_configurable(null);
     $object->setOrigine_bois(null);
 
 

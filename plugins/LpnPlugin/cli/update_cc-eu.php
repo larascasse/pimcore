@@ -243,8 +243,8 @@ foreach ($list->getObjects() as $object) {
 
             //soucics: 
 
-        $parent->setValue('fixation_non_configurable',null);
-        $object->setValue('fixation_non_configurable',null);
+        $parent->setValue('fixation_not_configurable',null);
+        $object->setValue('fixation_not_configurable',null);
 
         
         $save=true;

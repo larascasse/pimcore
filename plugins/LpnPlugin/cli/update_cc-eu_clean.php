@@ -33,7 +33,7 @@ $list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 
-$list->setOrder("DESC");
+$list->setOrder("ASC");
 $list->setOrderKey("o_id");
 
 
@@ -54,15 +54,17 @@ foreach ($list->getObjects() as $object) {
    
     $object->save();
 
+    echo "\nEan:".$object->getEan()." - ".$object->getMage_name();
+
+
     unset($object);
 
-    continue;
     
-    
-    
+        
 
-    Object_Abstract::setGetInheritedValues($inheritance); 
+    
 
 }
+Object_Abstract::setGetInheritedValues($inheritance); 
 \Pimcore\Model\Version::enable();
 ?>

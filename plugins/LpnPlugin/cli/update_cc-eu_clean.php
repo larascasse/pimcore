@@ -48,7 +48,7 @@ foreach ($list->getObjects() as $object) {
     if(!($object instanceof Object_Product))
         continue;
 
-    $object->setFixation_not_configurable(null);
+    /*$object->setFixation_not_configurable(null);
     $object->setOrigine_bois('');
     $object->setPefc(null);
 
@@ -56,7 +56,7 @@ foreach ($list->getObjects() as $object) {
     $object->fixation_not_configurable = '';
     $object->origine_bois = '';
     $object->pefc = '';
-
+    */
 
     $object->setValue('fixation_not_configurable',null);
     $object->setValue('origine_bois','');

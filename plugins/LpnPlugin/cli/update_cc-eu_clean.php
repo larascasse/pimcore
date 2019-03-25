@@ -23,8 +23,8 @@ Pimcore_Model_Cache::disable();
 
 $conditionFilters = array(
        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
-       "o_id >10000",
-        "ean IS NULL",
+      // "o_id >10000",
+        //"ean IS NULL",
 
     );
 

@@ -18,7 +18,7 @@ Object_Abstract::setGetInheritedValues(false);
 
 //
 
-//Pimcore_Model_Cache::disable();
+Pimcore_Model_Cache::disable();
 //\Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
@@ -48,9 +48,9 @@ foreach ($list->getObjects() as $object) {
     if(!($object instanceof Object_Product))
         continue;
 
-    $object->setFixation_not_configurable('');
+    $object->setFixation_not_configurable(null);
     $object->setOrigine_bois('');
-    $object->setPefc('');
+    $object->setPefc(null);
 
 
     $object->fixation_not_configurable = '';
@@ -58,16 +58,16 @@ foreach ($list->getObjects() as $object) {
     $object->pefc = '';
 
 
-    $object->setValue('fixation_not_configurable','');
+    $object->setValue('fixation_not_configurable',null);
     $object->setValue('origine_bois','');
-    $object->setValue('pefc','');
+    $object->setValue('pefc',null);
 
 
 
    
     $object->save();
 
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name();
+    echo "\nEan:".$object->getId()." - ".$object->getCode()." - ".$object->getEan()." - ".$object->getMage_name();
 
 
     unset($object);
@@ -79,5 +79,5 @@ foreach ($list->getObjects() as $object) {
 
 }
 Object_Abstract::setGetInheritedValues($inheritance); 
-//\Pimcore\Model\Version::enable();
+
 ?>

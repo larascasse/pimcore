@@ -18,8 +18,8 @@ Object_Abstract::setGetInheritedValues(false);
 
 //
 
-Pimcore_Model_Cache::disable();
-\Pimcore\Model\Version::disable();
+//Pimcore_Model_Cache::disable();
+//\Pimcore\Model\Version::disable();
 
 $conditionFilters = array(
        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
@@ -51,6 +51,14 @@ foreach ($list->getObjects() as $object) {
 
     $object->fixation_non_configurable = null;
     $object->origine_bois = null;
+
+    $object->setValue('fixation_non_configurable',null);
+    $object->setValue('origine_bois',null);
+
+    $object->setFixation_non_configurable(null);
+    $object->setOrigine_bois(null);
+
+
    
     $object->save();
 
@@ -66,5 +74,5 @@ foreach ($list->getObjects() as $object) {
 
 }
 Object_Abstract::setGetInheritedValues($inheritance); 
-\Pimcore\Model\Version::enable();
+//\Pimcore\Model\Version::enable();
 ?>

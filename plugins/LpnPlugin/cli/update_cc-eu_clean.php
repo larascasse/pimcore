@@ -58,9 +58,9 @@ foreach ($list->getObjects() as $object) {
     $object->pefc = '';
     */
 
-    $object->setValue('fixation_not_configurable',null);
-    $object->setValue('origine_bois','');
-    $object->setValue('pefc',null);
+    $object->setValue('fixation_not_configurable',0);
+    $object->setValue('origine_bois',null);
+    $object->setValue('pefc',0);
 
 
 

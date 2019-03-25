@@ -245,6 +245,7 @@ foreach ($list->getObjects() as $object) {
 
         $parent->setValue('fixation_not_configurable',null);
         $object->setValue('fixation_not_configurable',null);
+        $object->setValue('pefc',null);
 
         
         $save=true;

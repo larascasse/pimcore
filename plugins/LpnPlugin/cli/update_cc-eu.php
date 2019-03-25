@@ -241,6 +241,10 @@ foreach ($list->getObjects() as $object) {
         }
 
 
+            //soucics: 
+
+        $parent->setValue('fixation_non_configurable',null);
+        $object->setValue('fixation_non_configurable',null);
 
         
         $save=true;
@@ -254,10 +258,8 @@ foreach ($list->getObjects() as $object) {
         $parent->save();
         
 
-        //soucics: 
+    
 
-        $parent->setValue('fixation_non_configurable',null);
-        $object->setValue('fixation_non_configurable',null);
 
         echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
         

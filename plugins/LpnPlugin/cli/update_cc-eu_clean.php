@@ -34,7 +34,7 @@ $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 
 $list->setOrder("ASC");
-$list->setOrderKey("o_id");
+$list->setOrderKey("ean");
 
 
 $list->load();

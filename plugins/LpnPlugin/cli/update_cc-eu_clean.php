@@ -49,8 +49,8 @@ foreach ($list->getObjects() as $object) {
         continue;
 
 
-    $object->setValue('fixation_non_configurable',null);
-    $object->setValue('origine_bois',null);
+    $object->fixation_non_configurable = null;
+    $object->origine_bois = null;
    
     $object->save();
 

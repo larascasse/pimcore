@@ -48,19 +48,19 @@ foreach ($list->getObjects() as $object) {
     if(!($object instanceof Object_Product))
         continue;
 
-    $object->setFixation_not_configurable(null);
-    $object->setOrigine_bois(null);
-    $object->setPefc(null);
+    $object->setFixation_not_configurable('');
+    $object->setOrigine_bois('');
+    $object->setPefc('');
 
 
-    $object->fixation_not_configurable = null;
-    $object->origine_bois = null;
-    $object->pefc = null;
+    $object->fixation_not_configurable = '';
+    $object->origine_bois = '';
+    $object->pefc = '';
 
 
-    $object->setValue('fixation_not_configurable',null);
-    $object->setValue('origine_bois',null);
-    $object->setValue('pefc',null);
+    $object->setValue('fixation_not_configurable','');
+    $object->setValue('origine_bois','');
+    $object->setValue('pefc','');
 
 
 

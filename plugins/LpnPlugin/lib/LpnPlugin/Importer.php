@@ -1252,13 +1252,19 @@ use Pimcore\Model;
                         
 
                         print_r($product);
+
+                        if($product["actif_web"] && !$product["obsolete"]) {
+                            $object->setValue('is_new',true);
+                            $needUpdateWorkflow = true;
+                        }
+
                     }
                 }
                 else {
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
                      
-                     if($product["actif_web"] && !$product["obsolete"])
-                            $needUpdateWorkflow = true;
+                     //if($product["actif_web"] && !$product["obsolete"])
+                     //       $needUpdateWorkflow = true;
                 }
                
 

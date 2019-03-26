@@ -35,9 +35,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
      
 
            
-            $action = "settomagentosync";
-            $newState = "needs_magento_sync";
-            $newStatus = "content_needs_magento_sync";
+           
 
               $data = [
                 'success' => true,
@@ -66,6 +64,18 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                     if(!$product)
                         continue;
+
+
+                    $action = "settomagentosync";
+                    $newState = "needs_magento_sync";
+                    $newStatus = "content_needs_magento_sync";
+
+                    //Ajouter
+                    if($product->getValue('is_new')) {
+                        $action = "settomagentosync_new";
+                        $newState = "needs_magento_sync";
+                        $newStatus = "new";
+                    }
                     
                     //$product->getId()."-";
                     $manager = Workflow\Manager\Factory::getManager($product,$user);

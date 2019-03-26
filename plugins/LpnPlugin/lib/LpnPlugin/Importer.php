@@ -1206,6 +1206,7 @@ use Pimcore\Model;
                 }
             }
             $needUpdateWorkflow = false;
+            
             try {
                 //si il ya des champs à mettre à jour
                 if(count($updatedFields) > 0) {
@@ -1254,7 +1255,7 @@ use Pimcore\Model;
                         print_r($product);
 
                         if($product["actif_web"] && !$product["obsolete"]) {
-                            $object->setData('is_new',true);
+                            $object->is_new = true; //iutlisé dans le wrorflow
                             $needUpdateWorkflow = true;
                         }
 

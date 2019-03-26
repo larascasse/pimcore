@@ -16,8 +16,7 @@
     ]); ?>
     
 <?php else: ?>
-<div class="row section-content <?php echo $this->input("cssClass") ?>">
-<div class="col">
+<div class="section-content <?php echo $this->input("cssClass") ?> container-main">
        <!-- Carousel Item -->
             <div class="sliderproductimage" data-ride="carousel">
                 <div class="owl-carousel image-list">
@@ -35,7 +34,6 @@ foreach ($assets as $asset) {
                 </div>
             </div>
   
-</div>
 </div>
 <?php endif; ?>
 

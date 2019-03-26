@@ -59,7 +59,7 @@
 		?>
 
 	    
-
+		<div class="container-main">
 	    <div class="table-container realisations <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 
 	    <?php
@@ -244,6 +244,7 @@
 	   
 	    	$i++;
 	    } ?>
+	    </div>
 	    </div>
     <?php
 	}

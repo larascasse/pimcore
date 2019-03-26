@@ -1205,7 +1205,7 @@ use Pimcore\Model;
                     $object->setPublished(false);
                 }
             }
-
+            $needUpdateWorkflow = false;
             try {
                 //si il ya des champs à mettre à jour
                 if(count($updatedFields) > 0) {
@@ -1220,10 +1220,8 @@ use Pimcore\Model;
                         }
                          $returnMessage[] =  "row ".$job." UPDATED | ".$objectKey." | ".$object->getFullPath()." | ".implode("|", $returnDetail);
 
-                           //$returnMessage["productId"] = $object->getId();
-                           //$returnMessage["productSku"] = $object->getEan();
-                           //$returnMessage["product"] = $object->getShortArray();
-
+                        if($product["actif_web"] && !$product["obsolete"])
+                            $needUpdateWorkflow = true;
                           
 
                          $versions = $object->getVersions();
@@ -1258,6 +1256,9 @@ use Pimcore\Model;
                 }
                 else {
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
+                     
+                     if($product["actif_web"] && !$product["obsolete"])
+                            $needUpdateWorkflow = true;
                 }
                
 
@@ -1270,6 +1271,23 @@ use Pimcore\Model;
         }
         else {
              $returnMessage[] = "row ".$job." SKIPPED  canInsert:".$canInsert. "objectKey : ".$objectKey;
+        }
+
+        if ($needUpdateWorkflow) {
+             try {
+                $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+
+                \Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',[$object],[
+                            "returnValueContainer" => $returnValueContainer
+                        ]);
+                $workflowReturn = $returnValueContainer->getData();
+                $returnMessage[] =  "row ".$job." WORFOW UPDATED | ".$objectKey;
+
+
+             }
+             catch (Exception $e) {
+                $returnMessage[] = "Error Workflow ".$e->getMessage()."\n\n";
+             }
         }
 
         if(count( $returnMessage) > 0) {

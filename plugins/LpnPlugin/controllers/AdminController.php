@@ -90,7 +90,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
         }
 
         $result = array("status"=>false, "message"=>array());
-        $returnMessages = array();
+       // $returnMessages = array();
 
         try {
 
@@ -118,7 +118,7 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
                         
                         $result["status"] = true;
 
-                        $returnMessages[] = $returnMessage;
+                       // $returnMessages[] = $returnMessage['product'];
 
                         $returnMessage['product'] = null;
                         $result["message"][] = $returnMessage;
@@ -132,7 +132,8 @@ https://pim.laparqueterienouvelle.fr/plugin/LpnPlugin/admin/import-from-azure?st
             
             while(($nextProductToken = $response->GetContinuation()) != null);
             
-            \Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',$returnMessages);
+            //MIS DANS L4IMPORTER
+            //\Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',$returnMessages);
             
         } 
         catch (Exception $e) {

@@ -29,15 +29,12 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
 
         \Pimcore::getEventManager()->attach("lpn.azure.postUpdate", function (\Zend_EventManager_Event $e) {
-            $returnMessages = $e->getTarget();
+            $products = $e->getTarget();
 
             $returnValueContainer = $e->getParam('returnValueContainer');
      
 
-            $productIds = [];
-            $productSkus = [];
-            $productMessages = [];
-
+           
             $action = "settomagentosync";
             $newState = "needs_magento_sync";
             $newStatus = "content_needs_magento_sync";
@@ -50,29 +47,29 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
 
 
-            if(is_array($returnMessages)) {
+            if(is_array($products)) {
 
                 $userId = 6;
+
+
                 $user = User::getById($userId);
 
-                foreach ($returnMessages  as $returnMessage) {
+                $oldUser =  \Pimcore\Tool\Admin::getCurrentUser();
+                \Zend_Registry::set("pimcore_admin_user", $user);
 
-                    //print_r($returnMessage["product"]);
+                //print_r($user->isAdmin());
+                //die;
 
+                foreach ($products  as $product) {
 
-                    $productIds[]  = $returnMessage["productId"];
-                    $productSkus[] = $returnMessage["productSku"];
-                    $productMessages[] = $returnMessage[0];
-
-                    $product = $returnMessage["product"];
+            
 
                     if(!$product)
                         continue;
                     
-                    $product->getId()."-";
+                    //$product->getId()."-";
                     $manager = Workflow\Manager\Factory::getManager($product,$user);
 
-                   
 
                     try {
                         if ($manager->validateAction($action, $newState, $newStatus)) {
@@ -109,11 +106,14 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         ];
                     }
                 }
+
+                \Zend_Registry::set("pimcore_admin_user", $oldUser);
               
             }
 
-            //$returnValueContainer->setData($data);
-            print_r($data);
+            if(is_object($returnValueContainer))
+                $returnValueContainer->setData($data);
+            //print_r($data);
             //print_r($productIds);
             //print_r($productSkus);
             //print_r($productMessages);
@@ -145,6 +145,9 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                 $userId = 6;
                 $user = User::getById($userId);
+
+                 $oldUser =  \Pimcore\Tool\Admin::getCurrentUser();
+                \Zend_Registry::set("pimcore_admin_user", $user);
 
                 foreach ($products  as $product) {
 
@@ -191,6 +194,8 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                     }
 
                 }
+
+                \Zend_Registry::set("pimcore_admin_user", $oldUser);
               
             }
             //print_r($data);

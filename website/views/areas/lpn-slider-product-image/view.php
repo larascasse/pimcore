@@ -19,7 +19,7 @@
 <div class="row section-content <?php echo $this->input("cssClass") ?>">
 <div class="col">
        <!-- Carousel Item -->
-            <div class="sliderimage" data-ride="carousel">
+            <div class="sliderproductimage" data-ride="carousel">
                 <div class="owl-carousel image-list">
 <?php 
 

@@ -76,6 +76,8 @@ $main_description   = $this->textarea("main_description", ["width" => 400,"heigh
 $style = strlen($color->getData())>0 ? 'style="background-color:'.$color->getData().'"':'';
 $gridClass = strlen($color->getData())>0 ? 'grid-bkg-full':'grid-bkg-full grid-bkg-full___nocolor';
 ?>
+<!-- V4 -->
+<div class="container-main">
 <div class="<?php echo $gridClass ?>" <?php echo $style ?>>
 <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 <?php } 
@@ -438,5 +440,6 @@ while($this->block("contentblock")->loop()) {
 <?php } ?>
 <!-- Fin Loop  -->
 <!--<div class="grid-bkg"></div>-->
+</div>
 </div>
 </div>

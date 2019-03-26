@@ -114,7 +114,7 @@ else :
        echo '<div class="image-hero-degrade"></div>';
       echo '</div>';
 
-      echo '<div class="container-main category-header___text category-auto">';
+      echo '<div class="category-header___text category-auto">';
       echo '<div class="row">';
             
             echo '<div class="category-name">';

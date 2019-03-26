@@ -71,7 +71,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                     $newStatus = "content_needs_magento_sync";
 
                     //Ajouter
-                    if($product->getValue('is_new')) {
+                    if($product->getData('is_new')) {
                         $action = "settomagentosync_new";
                         $newState = "needs_magento_sync";
                         $newStatus = "new";

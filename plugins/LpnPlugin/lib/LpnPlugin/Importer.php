@@ -1254,7 +1254,7 @@ use Pimcore\Model;
                         print_r($product);
 
                         if($product["actif_web"] && !$product["obsolete"]) {
-                            $object->setValue('is_new',true);
+                            $object->setData('is_new',true);
                             $needUpdateWorkflow = true;
                         }
 

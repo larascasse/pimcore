@@ -1265,8 +1265,10 @@ use Pimcore\Model;
                 }
                 else {
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
-                     
+                    
+                    if($product["actif_web"] && !$product["obsolete"]) {
                       $needUpdateWorkflow = true;
+                    }
                 }
                
 

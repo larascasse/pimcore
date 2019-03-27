@@ -1256,9 +1256,20 @@ use Pimcore\Model;
 
                         if($product["actif_web"] && !$product["obsolete"]) {
                 
-                            $object->is_new = true; //iutlisé dans le wrorflow
-    
-                            $needUpdateWorkflow = true;
+                             try {
+                                    $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+
+                                    \Pimcore::getEventManager()->trigger('lpn.azure.postAdd',[$object],[
+                                                "returnValueContainer" => $returnValueContainer
+                                            ]);
+                                    $workflowReturn = $returnValueContainer->getData();
+                                    $returnMessage[] =  "row ".$job." WORFOW ADDED | ".$objectKey;
+
+
+                                 }
+                                 catch (Exception $e) {
+                                    $returnMessage[] = "Error Workflow ".$e->getMessage()."\n\n";
+                                 }
                         }
 
                     }

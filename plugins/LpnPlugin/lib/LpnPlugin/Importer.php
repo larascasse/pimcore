@@ -1182,11 +1182,12 @@ use Pimcore\Model;
 
                         $oldValue = "".$object->$key;
 
-                        if($key == 'obsolete')
+                        /*if($key == 'obsolete')
                             $oldValue = $oldValue != 1?"false":"true";
 
                         if($key == 'actif_web')
                             $oldValue = $oldValue != 1?"false":"true";
+                        */
 
 
                         $testValue = "".$value;

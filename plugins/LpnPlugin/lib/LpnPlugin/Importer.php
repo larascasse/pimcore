@@ -1119,6 +1119,7 @@ use Pimcore\Model;
                 
                 if (isset($product[$key])) {
                     $value = $product[$key];
+                    
                     if($key=="name") {
                         $splitedName = $this->splitNameType($value);
                         
@@ -1172,6 +1173,8 @@ use Pimcore\Model;
                         $value = $this->convertScienergieName($value);
                     }
                     else {
+                        //On vonverti la value dans le même format
+                        //que le champ
                        $value = $field->getFromCsvImport($value); 
                     }
                     
@@ -1180,17 +1183,22 @@ use Pimcore\Model;
 
                         //gestion des champs nouveaux
 
-                        $oldValue = "".$object->$key;
+                        
 
-                        if($key == 'obsolete')
-                            $oldValue = $oldValue != "1"?"false":"true";
-
-                        if($key == 'actif_web')
-                            $oldValue = $oldValue != "1"?"false":"true";
+                        if($key == 'obsolete' || $key == 'actif_web') {
+                           $oldValue = $object->$key;
+                           $testValue = $value;
+                        }
+                        else {
+                            //On converti en chaine de cairo_pattern_create_radial
+                            $oldValue = "".$object->$key;
+                            $testValue = "".$value;
+                        }   
+                
                         
 
 
-                        $testValue = "".$value;
+                     
 
 
                         if( $oldValue != $testValue || !$isUpdating) {

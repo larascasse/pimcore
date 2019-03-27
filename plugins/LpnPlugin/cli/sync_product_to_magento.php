@@ -20,7 +20,7 @@ Pimcore_Model_Cache::disable();
 
 
 $db = \Pimcore\Db::get();
-$sql = "SELECT cid,ean FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync'";
+$sql = "SELECT cid,ean FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync' AND status!='new'";
 $results = $db->fetchAll($sql);
 
 $eans = [];

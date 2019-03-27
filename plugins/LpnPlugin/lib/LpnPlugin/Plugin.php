@@ -131,18 +131,12 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             $products = $e->getTarget();
 
             $returnValueContainer = $e->getParam('returnValueContainer');
-     
-
-           
-           
 
               $data = [
                 'success' => true,
                  'message' => 'no workflow update',
 
             ];
-
-
 
             if(is_array($products)) {
 
@@ -165,14 +159,102 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         continue;
 
 
-                    $action = "settomagentosync";
-                    $newState = "needs_magento_sync";
-                    $newStatus = "content_needs_magento_sync";
-
                     //Ajouter
                    $action = "settomagentosync_new";
                    $newState = "needs_magento_sync";
                    $newStatus = "new";
+                    
+                    
+                    //$product->getId()."-";
+                    $manager = Workflow\Manager\Factory::getManager($product,$user);
+
+
+                    try {
+                        if ($manager->validateAction($action, $newState, $newStatus)) {
+
+                            //perform the action on the element
+                            try {
+                                $manager->performAction($action,["newState"=>$newState,"newStatus"=>$newStatus]);
+                                $data = [
+                                    'success' => true,
+                                    'callback' => 'reloadObject'
+                                ];
+                            } catch (\Exception $e) {
+                                $data = [
+                                    'success' => false,
+                                    'message' => 'error performing action on this element',
+                                    'reason' => $e->getMessage()
+                                ];
+                            }
+
+                        } 
+                        else {
+                            $data = [
+                                'success' => false,
+                                'message' => 'error validating the action on this element, element cannot peform this action',
+                                'reason' => $manager->getError()
+                            ];
+                        }
+                    }
+                    catch (\Exception $e) {
+                        $data = [
+                            'success' => false,
+                            'message' => 'error performing validate action on this element action:'.$action." newState:".$newState." newStatus:".$newStatus,
+                            'reason' => $e->getMessage()
+                        ];
+                    }
+                }
+
+                \Zend_Registry::set("pimcore_admin_user", $oldUser);
+              
+            }
+
+            if(is_object($returnValueContainer))
+                $returnValueContainer->setData($data);
+            //print_r($data);
+            //print_r($productIds);
+            //print_r($productSkus);
+            //print_r($productMessages);
+
+        }); 
+
+
+        \Pimcore::getEventManager()->attach("lpn.azure.postUpdateObsolete", function (\Zend_EventManager_Event $e) {
+            $products = $e->getTarget();
+
+            $returnValueContainer = $e->getParam('returnValueContainer');
+
+              $data = [
+                'success' => true,
+                 'message' => 'no workflow update',
+
+            ];
+
+            if(is_array($products)) {
+
+                $userId = 6;
+
+
+                $user = User::getById($userId);
+
+                $oldUser =  \Pimcore\Tool\Admin::getCurrentUser();
+                \Zend_Registry::set("pimcore_admin_user", $user);
+
+                //print_r($user->isAdmin());
+                //die;
+
+                foreach ($products  as $product) {
+
+            
+
+                    if(!$product)
+                        continue;
+
+
+                    //Ajouter
+                   $action = "set_to_obsolete";
+                   $newState = "done";
+                   $newStatus = "content_obsolete";
                     
                     
                     //$product->getId()."-";

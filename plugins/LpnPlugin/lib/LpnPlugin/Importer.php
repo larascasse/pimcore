@@ -1206,6 +1206,7 @@ use Pimcore\Model;
                 }
             }
             $needUpdateWorkflow = false;
+            $needUpdateWorkflowObsolete = false;
             
             try {
                 //si il ya des champs à mettre à jour
@@ -1223,6 +1224,9 @@ use Pimcore\Model;
 
                         if($product["actif_web"] && !$product["obsolete"])
                             $needUpdateWorkflow = true;
+                        else if(!$product["actif_web"] || $product["obsolete"]) {
+                            $needUpdateWorkflowObsolete= true;
+                        }
                           
 
                          $versions = $object->getVersions();
@@ -1271,14 +1275,20 @@ use Pimcore\Model;
                                     $returnMessage[] = "Error Workflow ".$e->getMessage()."\n\n";
                                  }
                         }
+                        else if(!$product["actif_web"] || $product["obsolete"]) {
+                            $needUpdateWorkflowObsolete= true;
+                        }
 
                     }
                 }
                 else {
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
                     
-                    if($product["actif_web"] && !$product["obsolete"]) {
-                      ///$needUpdateWorkflow = true;
+                    if(!$product["actif_web"] || $product["obsolete"]) {
+                            $needUpdateWorkflowObsolete= true;
+                    }
+                    else if(!$product["actif_web"] || $product["obsolete"]) {
+                            $needUpdateWorkflowObsolete= true;
                     }
                 }
                
@@ -1303,6 +1313,21 @@ use Pimcore\Model;
                         ]);
                 $workflowReturn = $returnValueContainer->getData();
                 $returnMessage[] =  "row ".$job." WORFOW UPDATED | ".$objectKey;
+
+
+             }
+             catch (Exception $e) {
+                $returnMessage[] = "Error Workflow ".$e->getMessage()."\n\n";
+             }
+        } else if ($needUpdateWorkflowObsolete) {
+             try {
+                $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+
+                \Pimcore::getEventManager()->trigger('lpn.azure.postUpdateObsolete',[$object],[
+                            "returnValueContainer" => $returnValueContainer
+                        ]);
+                $workflowReturn = $returnValueContainer->getData();
+                $returnMessage[] =  "row ".$job." WORFOW OBSOLETE | ".$objectKey;
 
 
              }

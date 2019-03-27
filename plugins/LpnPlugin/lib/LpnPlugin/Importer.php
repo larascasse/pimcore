@@ -1244,7 +1244,7 @@ use Pimcore\Model;
 
                         if($product["actif_web"] && !$product["obsolete"])
                             $needUpdateWorkflow = true;
-                        else if(!$product["actif_web"] || $product["obsolete"]) {
+                        else if($product["obsolete"]) {
                             $needUpdateWorkflowObsolete= true;
                         }
                           
@@ -1309,7 +1309,7 @@ use Pimcore\Model;
                     if($product["actif_web"] && !$product["obsolete"]) {
                             $needUpdateWorkflow= true;
                     }
-                    else if(!$product["actif_web"] || $product["obsolete"]) {
+                    else if(!$product["obsolete"]) {
                             $needUpdateWorkflowObsolete= true;
                     }
                 }

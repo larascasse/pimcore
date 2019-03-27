@@ -1031,8 +1031,8 @@ class MauchampHelper
            $data[11]=$p["name_scienergie_court"] = $Product->Libelle_Court_Ean;
            $data[12]=$p["published"] = $Product->Obsolete=="false" && $Product->Actif=="true";
 
-           $p["actif_web"] = $Product->Actif=="true"?1:0;
-           $p["obsolete"]  = $Product->Obsolete=="true"?1:0;
+           $p["actif_web"] = $Product->Actif=="true"?true:false;
+           $p["obsolete"] = $Product->Obsolete=="true"?true:false;
 
 
             if($p['ean']=='3760102973141') {

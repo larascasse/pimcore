@@ -1179,8 +1179,19 @@ use Pimcore\Model;
                     if ($value !== null) {
 
                         //gestion des champs nouveaux
+
                         $oldValue = "".$object->$key;
+
+                        if($key == 'obsolete' && $oldValue != 1)
+                            $oldValue = "0";
+
+                        if($key == 'actif_web' && $oldValue != 1)
+                            $oldValue = "0";
+
+
                         $testValue = "".$value;
+
+
                         if( $oldValue != $testValue || !$isUpdating) {
                             //echo $key."-".$oldValue."-".$value."-\n";
                             $updatedFields[$key] = $oldValue."->".$value;
@@ -1285,7 +1296,7 @@ use Pimcore\Model;
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
                     
                     if($product["actif_web"] && !$product["obsolete"]) {
-                            $needUpdateWorkflow= true;
+                            $needUpdateWorkflowObsolete= true;
                     }
                     else if(!$product["actif_web"] || $product["obsolete"]) {
                             $needUpdateWorkflowObsolete= true;

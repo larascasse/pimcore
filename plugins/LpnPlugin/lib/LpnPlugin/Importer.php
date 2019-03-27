@@ -1182,19 +1182,19 @@ use Pimcore\Model;
 
                         $oldValue = "".$object->$key;
 
-                        /*if($key == 'obsolete')
-                            $oldValue = $oldValue != 1?"false":"true";
+                        if($key == 'obsolete')
+                            $oldValue = $oldValue != "1"?"false":"true";
 
                         if($key == 'actif_web')
-                            $oldValue = $oldValue != 1?"false":"true";
-                        */
+                            $oldValue = $oldValue != "1"?"false":"true";
+                        
 
 
                         $testValue = "".$value;
 
 
                         if( $oldValue != $testValue || !$isUpdating) {
-                            //echo $key."-".$oldValue."-".$value."-\n";
+                            echo $key."-".$oldValue."-".$value."-\n";
                             $updatedFields[$key] = $oldValue."->".$value;
                             $object->setValue($key, $value);
                         }

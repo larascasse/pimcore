@@ -72,7 +72,6 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                     //Ajouter
                     if(property_exists($product, "is_new") && $product->is_new) {
-                        echo "klmklklm";
                         $action = "settomagentosync_new";
                         $newState = "needs_magento_sync";
                         $newStatus = "new";

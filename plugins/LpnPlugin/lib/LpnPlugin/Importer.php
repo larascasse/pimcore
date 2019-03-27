@@ -1255,9 +1255,9 @@ use Pimcore\Model;
                         print_r($product);
 
                         if($product["actif_web"] && !$product["obsolete"]) {
-                            echo "KKKKKKKK";
+                
                             $object->is_new = true; //iutlisé dans le wrorflow
-                            echo "klmklklkm";
+    
                             $needUpdateWorkflow = true;
                         }
 
@@ -1266,9 +1266,7 @@ use Pimcore\Model;
                 else {
                      $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$objectKey." | ".$object->getFullPath();
                      
-                      $object->is_new = true; //iutlisé dans le wrorflow
-                            
-                            $needUpdateWorkflow = true;
+                      $needUpdateWorkflow = true;
                 }
                
 

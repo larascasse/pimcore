@@ -115,11 +115,12 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
       
               $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
 
-              \Pimcore::getEventManager()->trigger('lpn.magento.postUpdate',$products,[
+              \Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',$products,[
                     "returnValueContainer" => $returnValueContainer
                 ]);
 
                $workflowReturn = $returnValueContainer->getData();
+               
               if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
                   $content .= $workflowReturn["message"];
                 }

@@ -120,36 +120,42 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
                 ]);
 
                $workflowReturn = $returnValueContainer->getData();
-               
+
+               //print_r($workflowReturn);
+
               if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+                  //echo "T".$workflowReturn["message"]."\n";
                   $content .= $workflowReturn["message"];
                 }
                 else {
-                  print_r($workflowReturn);
+                  //print_r($workflowReturn);
                 }
 
             }
             else {
               $content = \Pimcore\Tool::getHttpData($url,$params);
-            }
 
 
-            if(!$teinte) {
-                 /*Logger::debug("Start wrokflow upfate",$products);
-                echo "Start wrokflow upfate".count($products).$products[2]->getMage_name();
-                die;*/
-                $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+                if(!$teinte) {
+                     /*Logger::debug("Start wrokflow upfate",$products);
+                    echo "Start wrokflow upfate".count($products).$products[2]->getMage_name();
+                    die;*/
+                    $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
 
-                \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
-                      "returnValueContainer" => $returnValueContainer
-                  ]);
+                    \Pimcore::getEventManager()->trigger('lpn.magento.postSynchro',$products,[
+                          "returnValueContainer" => $returnValueContainer
+                      ]);
 
-               
+                   
 
-                if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
-                  $content .= $workflowReturn["message"];
+                    if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+                      $content .= $workflowReturn["message"];
+                    }
                 }
+
             }
+
+
            
   	    	
   	    	  $this->response = array(

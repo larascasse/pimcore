@@ -62,7 +62,13 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                     }
 
 
+                    if(isset($data)) {
+                        $oldDataMessage = $data["message"];
+                    }
+                    //echo "Z".$oldDataMessage."\n";
                     $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus);
+                    //echo "Y".$data["message"]."\n";
+                    $data["message"] = $oldDataMessage."\n".$data["message"];
 
                 }
 
@@ -110,8 +116,15 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         //echo "OBOSLETE";
                     }
 
-
+                    // echo "X"."\n";
+                    if(isset($data)) {
+                        $oldDataMessage = $data["message"];
+                    }
+                    //echo "Z".$oldDataMessage."\n";
                     $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus);
+                    //echo "Y".$data["message"]."\n";
+                    $data["message"] = $oldDataMessage."\n".$data["message"];
+
 
                 }
 
@@ -187,14 +200,22 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                 \Zend_Registry::set("pimcore_admin_user", $user);
 
                 foreach ($products  as $product) {
+
+                   // echo "X"."\n";
+                    if(isset($data)) {
+                        $oldDataMessage = $data["message"];
+                    }
+                    //echo "Z".$oldDataMessage."\n";
                     $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus);
+                    //echo "Y".$data["message"]."\n";
+                    $data["message"] = $oldDataMessage."\n".$data["message"];
 
                 }
 
                 \Zend_Registry::set("pimcore_admin_user", $oldUser);
               
             }
-
+            //echo "N".$data["message"]."\n";
              if(is_object($returnValueContainer))
                  $returnValueContainer->setData($data);
             //print_r($data);
@@ -228,14 +249,14 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                 
                     $data = [
                         'success' => true,
-                        'message' => 'Wotkflow Updated',
+                        'message' => 'Wotkflow Updated '.$product->getSku(),
                         'callback' => 'reloadObject'
                     ];
                 } 
                 catch (\Exception $e) {
                     $data = [
                         'success' => false,
-                        'message' => 'error performing action on this element',
+                        'message' => 'error performing action on this element '.$product->getSku(),
                         'reason' => $e->getMessage()
                     ];
                 }
@@ -244,7 +265,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             else {
                 $data = [
                     'success' => false,
-                    'message' => 'error validating the action '.$action.':'.$newState.':'.$newStatus.' on this element, element cannot peform this action',
+                    'message' => 'error validating the action '.$action.':'.$newState.':'.$newStatus.' on this element, element cannot peform this action :'.$product->getSku(),
                     'reason' => $manager->getError()
                 ];
             }
@@ -252,10 +273,11 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
         catch (\Exception $e) {
             $data = [
                 'success' => false,
-                'message' => 'error performing validate action on this element action:'.$action." newState:".$newState." newStatus:".$newStatus,
+                'message' => 'error performing validate action on this element action:'.$action." newState:".$newState." newStatus:".$newStatus." ".$product->getSku(),
                 'reason' => $e->getMessage()
             ];
         }
+
         return $data;
       
     }

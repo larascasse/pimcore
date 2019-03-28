@@ -1305,12 +1305,12 @@ use Pimcore\Model;
 
                      //print_r($product);
                     
-                    if($product["actif_web"] && !$product["obsolete"]) {
+                    /*if($product["actif_web"] && !$product["obsolete"]) {
                             $needUpdateWorkflow= true;
                     }
                     else if(!$product["obsolete"]) {
                             $needUpdateWorkflowObsolete= true;
-                    }
+                    }*/
                 }
                
 

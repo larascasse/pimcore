@@ -20,6 +20,10 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
        	  $this->disableViewAutoRender();
 
           $teinte = $this->getParam("teinte");
+          $withChildren = $this->getParam("withChildren");
+          $configurable = $this->getParam("configurable");
+          $queueMode = $this->getParam("queueMode");
+          $create = $this->getParam("create");
 
           if($teinte) {
             
@@ -47,10 +51,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
           $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
 
 
-            $withChildren = $this->getParam("withChildren");
-            $configurable = $this->getParam("configurable");
-            $queueMode = $this->getParam("queueMode");
-            $create = $this->getParam("create");
+            
             $content = "";
 
 
@@ -105,10 +106,11 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
               $params["teinte"] = 1;
 
        
-              $params["queueMode"] = $queueMode;
+            $params["queueMode"] = $queueMode;
 
             print_r($params);
 
+            echo (!$teinte && ($queueMode || count($products)) > 30)?"QUEUE":"NON QUEU";
             //si plus de XXX prodiots, pour empecher le timeout
             if(!$teinte && ($queueMode || count($products)) > 30) {
               $content .= "***** QUEUE MODE ****** ";

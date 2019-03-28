@@ -22,7 +22,7 @@ return [
             ],
             [
                 "name" => "needs_magento_sync",
-                "label" => "Need Sync STATE",
+                "label" => "needs_magento_sync STATE",
                 "color" => "#00FFFF"
             ]
         ],
@@ -62,6 +62,10 @@ return [
             [
                 "name" => "content_needs_magento_sync",
                 "label" => "content_needs_magento_sync STATUS"
+            ],
+            [
+                "name" => "content_obsolete",
+                "label" => "content_obsolete STATUS"
             ]
         ],
         "actions" => [
@@ -270,6 +274,58 @@ return [
                 "events" => [
 
                 ]
+            ],
+            [
+                "name" => "settomagentosync_new",
+                "label" => "NEW - Need Sync Action",
+                "transitionTo" => [
+                    "needs_magento_sync" => [
+                        "new"
+                    ]
+                ],
+                "notes" => [
+                    "required" => FALSE,
+                    "title" => "",
+                    "type" => ""
+                ],
+                "additionalFields" => [
+
+                ],
+                "users" => [
+
+                ],
+                "notificationUsers" => [
+
+                ],
+                "events" => [
+
+                ]
+            ],
+            [
+                "name" => "set_to_obsolete",
+                "label" => "set_to_obsolete ACTION",
+                "transitionTo" => [
+                    "done" => [
+                        "content_obsolete"
+                    ]
+                ],
+                "notes" => [
+                    "required" => FALSE,
+                    "title" => "",
+                    "type" => ""
+                ],
+                "additionalFields" => [
+
+                ],
+                "users" => [
+
+                ],
+                "notificationUsers" => [
+
+                ],
+                "events" => [
+
+                ]
             ]
         ],
         "transitionDefinitions" => [
@@ -279,49 +335,72 @@ return [
             "new" => [
                 "validActions" => [
                     "syncmagento" => NULL,
+                    "set_content_published" => NULL,
+                    "settomagentosync" => NULL,
+                    "contents_ready" => NULL,
+                    "contentsupdated" => NULL,
+                    "process" => NULL,
+                    "settomagentosync_new" => NULL,
+                    "reject" => NULL,
+                    "image_missing" => NULL,
+                    "set_to_obsolete" => NULL
+                ]
+            ],
+            "contents_validated" => [
+                "validActions" => [
+                    "syncmagento" => NULL,
+                    "set_content_published" => NULL,
+                    "settomagentosync" => NULL,
+                    "contents_ready" => NULL,
+                    "contentsupdated" => NULL,
+                    "process" => NULL,
+                    "settomagentosync_new" => NULL,
+                    "set_to_obsolete" => NULL,
+                    "image_missing" => NULL
+                ]
+            ],
+            "update_picture" => [
+                "validActions" => [
+                    "syncmagento" => NULL,
+                    "settomagentosync" => NULL,
+                    "contents_ready" => NULL,
+                    "set_to_obsolete" => NULL,
+                    "settomagentosync_new" => NULL
+                ]
+            ],
+            "content_needs_magento_sync" => [
+                "validActions" => [
+                    "syncmagento" => NULL,
+                    "settomagentosync_new" => NULL,
+                    "set_content_published" => NULL,
+                    "set_to_obsolete" => NULL
+                ]
+            ],
+            "content_published" => [
+                "validActions" => [
+                    "syncmagento" => NULL,
+                    "settomagentosync_new" => NULL,
+                    "set_content_published" => NULL,
                     "settomagentosync" => NULL,
                     "contents_ready" => NULL,
                     "contentsupdated" => NULL,
                     "process" => NULL,
                     "reject" => NULL,
                     "image_missing" => NULL,
-                    "set_content_published" => NULL
+                    "set_to_obsolete" => NULL
                 ]
             ],
-            "contents_validated" => [
+            "content_obsolete" => [
                 "validActions" => [
-                    "syncmagento" => NULL,
-                    "settomagentosync" => NULL,
+                    "reject" => NULL,
+                    "process" => NULL,
                     "contents_ready" => NULL,
                     "contentsupdated" => NULL,
-                    "process" => NULL,
-                    "set_content_published" => NULL
-                ]
-            ],
-            "update_picture" => [
-                "validActions" => [
-                    "content_published" => NULL,
-                    "contents_ready" => NULL,
-                    "settomagentosync" => NULL,
-                    "syncmagento" => NULL
-                ]
-            ],
-            "content_needs_magento_sync" => [
-                "validActions" => [
-                    "syncmagento" => NULL,
-                    "set_content_published" => NULL
-                ]
-            ],
-            "content_published" => [
-                "validActions" => [
-                    "syncmagento" => NULL,
-                    "settomagentosync" => NULL,
-                    "set_content_published" => NULL,
                     "image_missing" => NULL,
-                    "contents_ready" => NULL,
-                    "contentsupdated" => NULL,
-                    "process" => NULL,
-                    "reject" => NULL
+                    "set_content_published" => NULL,
+                    "settomagentosync" => NULL,
+                    "syncmagento" => NULL,
+                    "settomagentosync_new" => NULL
                 ]
             ]
         ],
@@ -344,6 +423,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1548426522
+        "modificationDate" => 1553681345
     ]
 ];

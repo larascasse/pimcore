@@ -130,5 +130,18 @@ return [
         "inheritable" => TRUE,
         "creationDate" => 1481729391,
         "modificationDate" => 1481729469
+    ],
+    11 => [
+        "id" => 11,
+        "name" => "Image de partage",
+        "description" => NULL,
+        "key" => "image_header_url",
+        "type" => "asset",
+        "data" => NULL,
+        "config" => NULL,
+        "ctype" => "document",
+        "inheritable" => FALSE,
+        "creationDate" => 1553095354,
+        "modificationDate" => 1553095392
     ]
 ];

@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-02-27T01:27:11+01:00
+* Generated at: 2019-03-27T09:11:21+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.3.241
+* IP: 172.31.23.106
 
 
 Fields Summary: 
@@ -22,6 +22,7 @@ Fields Summary:
 - subtype [input]
 - subtype2 [input]
 - pimonly_teinte_rel [objects]
+- teinte_type [select]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -235,6 +236,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getBySubtype2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_teinte_rel ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByTeinte_type ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_converti ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName ($value, $limit = 0) 
@@ -446,6 +448,7 @@ public $product_type;
 public $subtype;
 public $subtype2;
 public $pimonly_teinte_rel;
+public $teinte_type;
 public $name_scienergie_converti;
 public $name_scienergie2;
 public $name;
@@ -971,6 +974,32 @@ public function getPimonly_teinte_rel () {
 */
 public function setPimonly_teinte_rel ($pimonly_teinte_rel) {
 	$this->pimonly_teinte_rel = $this->getClass()->getFieldDefinition("pimonly_teinte_rel")->preSetData($this, $pimonly_teinte_rel);
+	return $this;
+}
+
+/**
+* Get teinte_type - Type de teinte
+* @return string
+*/
+public function getTeinte_type () {
+	$preValue = $this->preGetValue("teinte_type"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->teinte_type;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("teinte_type")->isEmpty($data)) {
+		return $this->getValueFromParent("teinte_type");
+	}
+	return $data;
+}
+
+/**
+* Set teinte_type - Type de teinte
+* @param string $teinte_type
+* @return \Pimcore\Model\Object\Product
+*/
+public function setTeinte_type ($teinte_type) {
+	$this->teinte_type = $teinte_type;
 	return $this;
 }
 

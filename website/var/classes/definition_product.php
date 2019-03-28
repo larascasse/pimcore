@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-02-27T01:27:11+01:00
+* Generated at: 2019-03-27T09:11:21+01:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.3.241
+* IP: 172.31.23.106
 
 
 Fields Summary: 
@@ -22,6 +22,7 @@ Fields Summary:
 - subtype [input]
 - subtype2 [input]
 - pimonly_teinte_rel [objects]
+- teinte_type [select]
 - name_scienergie_converti [input]
 - name_scienergie2 [input]
 - name [input]
@@ -222,7 +223,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1551227230,
+   'modificationDate' => 1553674281,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -536,48 +537,48 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                 array (
                   0 => 
                   array (
+                    'key' => 'Accessoire',
+                    'value' => 'accessoire',
+                  ),
+                  1 => 
+                  array (
                     'key' => 'Parquet',
                     'value' => 'parquet',
                   ),
-                  1 => 
+                  2 => 
                   array (
                     'key' => 'Terrasse',
                     'value' => 'terrasse',
                   ),
-                  2 => 
+                  3 => 
                   array (
                     'key' => 'Sol Plaqué',
                     'value' => 'sol-plaque',
                   ),
-                  3 => 
+                  4 => 
                   array (
                     'key' => 'Sol Stratifié',
                     'value' => 'sol-stratifie',
                   ),
-                  4 => 
+                  5 => 
                   array (
                     'key' => 'Sol Vinyl',
                     'value' => 'sol-vinyl',
                   ),
-                  5 => 
+                  6 => 
                   array (
-                    'key' => 'Bardage',
+                    'key' => 'Bardage intérieur et extérieur',
                     'value' => 'bardage',
                   ),
-                  6 => 
+                  7 => 
                   array (
                     'key' => 'Bardage intérieur',
                     'value' => 'bardage-interieur',
                   ),
-                  7 => 
+                  8 => 
                   array (
                     'key' => 'Bardage extérieur',
                     'value' => ' bardage-exterieur',
-                  ),
-                  8 => 
-                  array (
-                    'key' => 'Accessoire',
-                    'value' => 'accessoire',
                   ),
                   9 => 
                   array (
@@ -608,7 +609,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => false,
+                 'visibleSearch' => true,
               )),
               10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
@@ -632,7 +633,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'relationType' => false,
                  'invisible' => false,
                  'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleSearch' => false,
               )),
               11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
@@ -692,6 +693,37 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => true,
               )),
               13 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
+                 'fieldtype' => 'select',
+                 'options' => 
+                array (
+                  0 => 
+                  array (
+                    'key' => 'Teinte réactive',
+                    'value' => 'teinte-reactive',
+                  ),
+                ),
+                 'width' => '',
+                 'defaultValue' => '',
+                 'queryColumnType' => 'varchar(190)',
+                 'columnType' => 'varchar(190)',
+                 'phpdocType' => 'string',
+                 'name' => 'teinte_type',
+                 'title' => 'Type de teinte',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => true,
+                 'visibleSearch' => false,
+              )),
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -715,7 +747,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              14 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -739,7 +771,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -763,7 +795,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              16 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -787,7 +819,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              17 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -811,7 +843,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -835,7 +867,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -858,7 +890,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -881,7 +913,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -905,7 +937,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -928,7 +960,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -952,7 +984,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -975,7 +1007,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -998,7 +1030,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1022,7 +1054,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1046,7 +1078,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              28 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1092,7 +1124,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1115,7 +1147,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -2652,70 +2684,75 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   3 => 
                   array (
+                    'key' => 'Brossé usé déformé',
+                    'value' => 'brosse-use-deforme',
+                  ),
+                  4 => 
+                  array (
                     'key' => 'Brossé vieilli',
                     'value' => 'brosse-vieilli',
                   ),
-                  4 => 
+                  5 => 
                   array (
                     'key' => 'Brossé veinage noir',
                     'value' => 'brosse-veinage-noir',
                   ),
-                  5 => 
+                  6 => 
                   array (
                     'key' => 'Brossé veinage noir vieilli',
                     'value' => 'brosse-veinage-noir-vieilli',
                   ),
-                  6 => 
+                  7 => 
                   array (
                     'key' => 'Brut',
                     'value' => 'brut',
                   ),
-                  7 => 
+                  8 => 
                   array (
                     'key' => 'Brut de sciage',
                     'value' => 'brut de sciage',
                   ),
-                  8 => 
+                  9 => 
                   array (
                     'key' => 'Vieilli',
                     'value' => 'vieilli',
                   ),
-                  9 => 
+                  10 => 
                   array (
                     'key' => 'Vieilli',
                     'value' => 'vieilli rives abimees',
                   ),
-                  10 => 
+                  11 => 
                   array (
                     'key' => 'Usé',
                     'value' => 'use',
                   ),
-                  11 => 
+                  12 => 
                   array (
                     'key' => 'Rives abîmées',
                     'value' => 'rives scrapees',
                   ),
-                  12 => 
+                  13 => 
                   array (
                     'key' => 'Raboté main',
                     'value' => 'rabote main',
                   ),
-                  13 => 
+                  14 => 
                   array (
                     'key' => 'Structuré',
                     'value' => 'structure',
                   ),
-                  14 => 
+                  15 => 
                   array (
                     'key' => 'Vieilli usé',
                     'value' => 'vieilli use rives abimees',
                   ),
-                  15 => 
+                  16 => 
                   array (
                     'key' => 'Vieilli usé et brossé',
                     'value' => 'vieilli use brosse rives abimees',
                   ),
-                  16 => 
+                  17 => 
                   array (
                     'key' => 'Vieilli très accentué',
                     'value' => 'vieilli tres accentue',
@@ -2860,70 +2897,75 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   18 => 
                   array (
+                    'key' => 'Pré-peint',
+                    'value' => 'prepeint',
+                  ),
+                  19 => 
+                  array (
                     'key' => 'Vernis',
                     'value' => 'Verni',
                   ),
-                  19 => 
+                  20 => 
                   array (
                     'key' => 'Vernis aqua',
                     'value' => 'Verni aqua',
                   ),
-                  20 => 
+                  21 => 
                   array (
                     'key' => 'Vernis blanchi',
                     'value' => 'Verni blanchi',
                   ),
-                  21 => 
+                  22 => 
                   array (
                     'key' => 'Vernis blanchi mat',
                     'value' => 'Verni blanchi mat',
                   ),
-                  22 => 
+                  23 => 
                   array (
                     'key' => 'Vernis satiné',
                     'value' => 'Verni satiné',
                   ),
-                  23 => 
+                  24 => 
                   array (
                     'key' => 'Vernis mat',
                     'value' => 'Verni mat',
                   ),
-                  24 => 
+                  25 => 
                   array (
                     'key' => 'Vernis cérusé mat',
                     'value' => 'vernis cérusé mat',
                   ),
-                  25 => 
+                  26 => 
                   array (
                     'key' => 'Vernis blanc',
                     'value' => 'vernis blanc',
                   ),
-                  26 => 
+                  27 => 
                   array (
                     'key' => 'Vernis taupe',
                     'value' => 'vernis taupe',
                   ),
-                  27 => 
+                  28 => 
                   array (
                     'key' => 'Vernis colonial',
                     'value' => 'vernis colonial',
                   ),
-                  28 => 
+                  29 => 
                   array (
                     'key' => 'Vieilli',
                     'value' => 'Vieilli',
                   ),
-                  29 => 
+                  30 => 
                   array (
                     'key' => 'Vieilli Brossé',
                     'value' => 'Vieilli Brossé',
                   ),
-                  30 => 
+                  31 => 
                   array (
                     'key' => 'Vieilli Brossé Veinage Noir',
                     'value' => 'vieilli-brosse-veinage-noir',
                   ),
-                  31 => 
+                  32 => 
                   array (
                     'key' => 'Brute_DEPRECATED',
                     'value' => 'brut',
@@ -4212,36 +4254,43 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       array (
                         'key' => 'Profile Peigné',
                         'value' => 'peigne',
+                        'id' => 'extModel19078-1',
                       ),
                       1 => 
                       array (
                         'key' => 'Face bombée',
                         'value' => 'bombee',
+                        'id' => 'extModel19078-2',
                       ),
                       2 => 
                       array (
                         'key' => 'Face Lisse',
                         'value' => 'lisse',
+                        'id' => 'extModel19078-3',
                       ),
                       3 => 
                       array (
                         'key' => 'Rainuré',
                         'value' => 'antiderapant',
+                        'id' => 'extModel19078-4',
                       ),
                       4 => 
                       array (
                         'key' => 'Profil structuré',
                         'value' => 'structure',
+                        'id' => 'extModel19078-5',
                       ),
                       5 => 
                       array (
                         'key' => 'Chants Anciens',
                         'value' => 'chant_anciens',
+                        'id' => 'extModel19078-6',
                       ),
                       6 => 
                       array (
                         'key' => 'Déligné',
                         'value' => 'deligne',
+                        'id' => 'extModel19078-7',
                       ),
                     ),
                      'width' => '',

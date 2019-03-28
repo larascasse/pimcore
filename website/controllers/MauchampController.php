@@ -262,7 +262,7 @@ class MauchampController extends Action
                           continue;
                        } 
 
-              
+                      
                          
                          if(in_array($product->getSku(),$ftIncludedSkus) 
                             && $product->getFiche_technique_lpn()

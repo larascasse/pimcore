@@ -70,21 +70,27 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         else if(obj.data.general.o_classId==5) {
 
              var menu = new Ext.SplitButton({
-                text: t('sync magento + enfants'),
+                text: t('sync magento + enfants (BATCH)'),
                 iconCls: "pimcore_icon_publish",
                 scale: "medium",
-                handler: this.syncProduct.bind(obj,true,false,false),
+                handler: this.syncProduct.bind(obj,true,false,false,true),
                 menu: [
                     {
+                        text: t('sync magento + enfants'),
+                        iconCls: "pimcore_icon_publish",
+                        scale: "medium",
+                        handler: this.syncProduct.bind(obj,true,false,false,false),
+                    },
+                     {
                         text: t('sync magento seul'),
                         iconCls: "pimcore_icon_save",
                         //withchildren,configurable,create
-                        handler: this.syncProduct.bind(obj,false,false,false)
+                        handler: this.syncProduct.bind(obj,false,false,false,false)
                     },
                     {
                         text: t('sync configurable'),
                         iconCls: "pimcore_icon_save",
-                        handler: this.syncProduct.bind(obj,true,true,false)
+                        handler: this.syncProduct.bind(obj,true,true,false,false)
                     },
                     {
                         xtype: 'menuseparator'
@@ -93,18 +99,18 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
                         text: t('create magento + enfants'),
                         iconCls: "pimcore_icon_save",
                         //withchildren,configurable,create
-                        handler: this.syncProduct.bind(obj,true,false,true)
+                        handler: this.syncProduct.bind(obj,true,false,true,false)
                     },
                     {
                         text: t('create seul'),
                         iconCls: "pimcore_icon_save",
-                        handler: this.syncProduct.bind(obj,false,false,true)
+                        handler: this.syncProduct.bind(obj,false,false,true,false)
                     },
                     
                     {
                         text: t('create configurable'),
                         iconCls: "pimcore_icon_save",
-                        handler: this.syncProduct.bind(obj,true,true,true)
+                        handler: this.syncProduct.bind(obj,true,true,true,false)
                     },
                     {
                         xtype: 'menuseparator'
@@ -335,7 +341,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
     },
 
 
-     syncProduct : function (withChildren,configurable,create) {
+     syncProduct : function (withChildren,configurable,create,queueMode) {
         console.log("syncProduct",this);
         if(!this.data)
             return;
@@ -346,6 +352,8 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
         url+="/configurable/1";
        if(create)
         url+="/create/1";
+        if(queueMode)
+         url+="/queueMode/1";
        console.log(url)
        //return;
        //return;

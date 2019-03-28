@@ -39,24 +39,41 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
 
           }
-       	  
-
-       	 
-
-       	 
-       	  
 
 
-            $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
-       	  
-            //DEV
-            $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
+          $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
+     	  
+          //DEV
+          $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
 
 
             $withChildren = $this->getParam("withChildren");
             $configurable = $this->getParam("configurable");
+            $queueMode = $this->getParam("queueMode");
             
             $create = $this->getParam("create");
+            $content = "";
+
+
+              // Pour le workflow management,
+            // On va mettre à jour tous le produits mpour dire qu'ils ont été synchronisés.
+            //TODO : on ne gere pas les erreur ...
+            $products = [$product];
+
+
+            if($withChildren && !$teinte) {
+              //On va chercher tous les enfants
+                $list = new Pimcore\Model\Object\Product\Listing();
+                $list->setCondition("o_path LIKE '" . $product->getRealFullPath() . "/%'");
+                //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
+                $childrens = $list->load();
+
+                foreach ($childrens as $simpleProduct) {
+
+                    $products[] = $simpleProduct;
+                }
+            }
+
 
 
   	    	  $params = array();
@@ -88,28 +105,24 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
             if($teinte)
               $params["teinte"] = 1;
 
+            //si plus de XXX prodiots, pour empecher le timeout
+            if(!$teinte && ($queueMode || count($products)) > 30) {
+              
+              $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
+              \Pimcore::getEventManager()->trigger('lpn.magento.postUpdate',$products,[
+                    "returnValueContainer" => $returnValueContainer
+                ]);
 
-  	    	
-  	    	  $content = \Pimcore\Tool::getHttpData($url,$params);
-
-            // Pour le workflow management,
-            // On va mettre à jour tous le produits mpour dire qu'ils ont été synchronisés.
-            //TODO : on ne gere pas les erreur ...
-            $products = [$product];
-
-
-            if($withChildren && !$teinte) {
-              //On va chercher tous les enfants
-                $list = new Pimcore\Model\Object\Product\Listing();
-                $list->setCondition("o_path LIKE '" . $product->getRealFullPath() . "/%'");
-                //$productIds[] = "o_path LIKE '" . $relatedProduct->getRealFullPath() . "/%'";
-                $childrens = $list->load();
-
-                foreach ($childrens as $simpleProduct) {
-
-                    $products[] = $simpleProduct;
+               $workflowReturn = $returnValueContainer->getData();
+              if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
+                  $content .= $workflowReturn["message"];
                 }
+
             }
+            else {
+              $content = \Pimcore\Tool::getHttpData($url,$params);
+            }
+
 
             if(!$teinte) {
                  /*Logger::debug("Start wrokflow upfate",$products);
@@ -121,7 +134,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
                       "returnValueContainer" => $returnValueContainer
                   ]);
 
-                $workflowReturn = $returnValueContainer->getData();
+               
 
                 if(is_array($workflowReturn) && isset($workflowReturn["message"])) {
                   $content .= $workflowReturn["message"];

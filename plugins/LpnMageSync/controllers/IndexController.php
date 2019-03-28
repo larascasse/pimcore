@@ -105,9 +105,11 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
             if($teinte)
               $params["teinte"] = 1;
 
+            print_r($params);
+
             //si plus de XXX prodiots, pour empecher le timeout
             if(!$teinte && ($queueMode || count($products)) > 30) {
-              
+              $content .= "***** QUEUE MODE ****** ";
               $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
               \Pimcore::getEventManager()->trigger('lpn.magento.postUpdate',$products,[
                     "returnValueContainer" => $returnValueContainer

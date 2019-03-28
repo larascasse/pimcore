@@ -124,7 +124,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
                   $content .= $workflowReturn["message"];
                 }
                 else {
-                  print_r($workflowReturn["message"]);
+                  print_r($workflowReturn);
                 }
 
             }

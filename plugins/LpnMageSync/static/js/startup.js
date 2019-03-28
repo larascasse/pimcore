@@ -72,7 +72,7 @@ pimcore.plugin.lpnmagesync = Class.create(pimcore.plugin.admin, {
              var menu = new Ext.SplitButton({
                 text: t('sync magento + enfants (BATCH)'),
                 iconCls: "pimcore_icon_publish",
-                scale: "medium",
+                scale: "small",
                 handler: this.syncProduct.bind(obj,true,false,false,true),
                 menu: [
                     {

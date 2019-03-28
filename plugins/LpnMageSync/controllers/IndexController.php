@@ -110,7 +110,10 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
             print_r($params);
 
-            echo (!$teinte && ($queueMode || count($products)) > 30)?"QUEUE":"NON QUEU";
+            echo (!$teinte)?"QUEUE":"NON QUEU";
+            echo ($queueMode || count($products) > 30)?"QUEUE":"NON QUEU";
+            echo ($queueMode)?"QUEUE":"NON QUEU";
+            echo (count($products) > 30)?"QUEUE":"NON QUEU";
             //si plus de XXX prodiots, pour empecher le timeout
             if(!$teinte && ($queueMode || count($products)) > 30) {
               $content .= "***** QUEUE MODE ****** ";

@@ -209,7 +209,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     }
 
 
-    public static function updateProductWorkflow($product,$user,$action, $state,$status) {
+    public static function updateProductWorkflow($product,$user,$action, $newState,$newStatus) {
          
          $data = [
                 'success' => true,

@@ -47,9 +47,9 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
 
                 foreach ($products  as $product) {
 
-                        $action = "settomagentosync";
-                        $newState = "needs_magento_sync";
-                        $newStatus = "content_needs_magento_sync";
+                    $action = "settomagentosync";
+                    $newState = "needs_magento_sync";
+                    $newStatus = "content_needs_magento_sync";
 
                      if($product->getObsolete()) {
                         $action = "set_to_obsolete";
@@ -244,7 +244,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             else {
                 $data = [
                     'success' => false,
-                    'message' => 'error validating the action '.$action.' / '.$newState.' / '.$newStatus.' on this element, element cannot peform this action',
+                    'message' => 'error validating the action '.$action.':'.$newState.':'.$newStatus.' on this element, element cannot peform this action',
                     'reason' => $manager->getError()
                 ];
             }

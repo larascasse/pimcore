@@ -265,7 +265,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             else {
                 $data = [
                     'success' => false,
-                    'message' => 'error validating the action '.$action.':'.$newState.':'.$newStatus.' on this element, element cannot peform this action :'.$product->getSku(),
+                    'message' => 'no validating the action '.$action.':'.$newState.':'.$newStatus.' on this element, maybe same state :'.$product->getSku(),
                     'reason' => $manager->getError()
                 ];
             }

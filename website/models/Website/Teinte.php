@@ -330,7 +330,7 @@ class Website_Teinte extends Object_Teinte {
 			$return["essence"] = $firstArticle->getEssence();
 			$return["country_of_manufacture"] = $firstArticle->getCountry_of_manufacture();
 			$return["origine_bois"] = $firstArticle->getOrigine_bois();
-			$return["teinte_type"] = $firstArticle->geTeinte_type();
+			$return["teinte_type"] = $firstArticle->getTeinte_type();
 		}
 
 

@@ -50,7 +50,6 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
             $withChildren = $this->getParam("withChildren");
             $configurable = $this->getParam("configurable");
             $queueMode = $this->getParam("queueMode");
-            
             $create = $this->getParam("create");
             $content = "";
 
@@ -104,6 +103,9 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
             if($teinte)
               $params["teinte"] = 1;
+
+       
+              $params["queueMode"] = $queueMode;
 
             print_r($params);
 

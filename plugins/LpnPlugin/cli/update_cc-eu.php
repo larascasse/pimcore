@@ -184,11 +184,11 @@ foreach ($list->getObjects() as $object) {
            $suffixe.=' Click';
         }
 
-        if(stristr($scienergieCourt, "BR ")) {
+        if(stristr($scienergieCourt, "BR ") || stristr($article, "FBCHE") ) {
             $prefixe = "Bâton Rompu ";
         }
 
-        if(stristr($scienergieCourt, "PDH ")) {
+        if(stristr($scienergieCourt, "PDH ") || stristr($article, "FMCHE") ) {
             $prefixe = "Point de Hongrie ";
         }
 
@@ -210,7 +210,7 @@ foreach ($list->getObjects() as $object) {
 
 
         $suffixe2 = "";
-        if(stristr($scienergieCourt, "PDH ")) {
+        if(stristr($scienergieCourt, "PDH ")  || stristr($article, "FMCHE") ) {
             if($object->getLargeur()==92) {
                 $suffixe2 .= " angle 45°";
                // $techDescription[] = "Angle : 45°";

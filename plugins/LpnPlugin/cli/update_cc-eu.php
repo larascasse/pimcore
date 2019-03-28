@@ -64,6 +64,28 @@ foreach ($list->getObjects() as $object) {
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
 
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->name_scienergie;
+    $code = $article = $object->code;
+    $ean  = $object->ean;
+    $article = $object->getCode();
+    $parent = $object->getParent();
+    $famille = $object->getFamille();
+    $epaisseur = $object->getEpaisseur();
+    $largeur = $object->getLargeur();
+    $longueur = $object->getLongueur();
+    $qualite = $object->getQualite();
+
+    $isPointDeHongrie = stripos($article, "MHCHE") === 0;
+    $isbatonRompu = stripos($article, "MBCHE") === 0;
+
+    $isThermo = stripos($scienergie, "THERMO")>0;
+    $isBrut = $object->isParquetBrut() && !$isThermo ;
+    $isChene = $object->getEssence()=="CHE";
+    $isDalle = stripos($scienergie, "VERSAILLES")>0;;
+
+    
+
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
     $save=false;
@@ -192,9 +214,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
-        if(stristr($article, "G2")) {
-
-        }
+       
 
         if(stristr($article, "G2")) {
             $object->setChanfreins(2);

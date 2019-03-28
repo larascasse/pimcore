@@ -1311,6 +1311,7 @@ use Pimcore\Model;
                     else if(!$product["obsolete"]) {
                             $needUpdateWorkflowObsolete= true;
                     }*/
+                    
                 }
                
 

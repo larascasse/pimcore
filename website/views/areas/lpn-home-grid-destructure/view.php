@@ -93,7 +93,8 @@ else {
                 ['grid-destructuree',"Normal (grand à gauche)"],
                 ['grid-destructuree grid-inverse','Inverse'],
                 ['grid-destructuree grid-vertical','Vertical'],
-                ['grid-destructuree grid-vertical grid-inverse','Vertical Inverse']
+                ['grid-destructuree grid-vertical grid-inverse','Vertical Inverse'],
+                ['grid-classique','Grille classique']
                 ]
         ]);
 

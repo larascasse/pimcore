@@ -109,6 +109,8 @@ else {
 
  $isInverse = strpos($defaultGridMode,'grid-inverse')>0;
  $isVertical = strpos($defaultGridMode,'grid-vertical')>0 || $count==3;
+ $isGrilleClassique = strpos($defaultGridMode,'grid-classique') >= 0;
+ 
 
 ?>
 
@@ -159,6 +161,23 @@ while($this->block("contentblock")->loop()) {
         }
         else {
             $sameSizeCount++;
+        }
+    }
+    elseif($isGrilleClassique) {
+         switch ($count) {
+             case 1:
+             case 3:
+             case 5:
+             case 7:
+             case 9:
+                if($i%3 == 0)
+                    $pimcoreThimbClass = "magento_equigrid_h";
+                else
+                    $pimcoreThimbClass = "magento_equigrid_v";
+                break;
+            default:
+                $pimcoreThimbClass = "magento_equigrid_v";
+
         }
     }
     else {

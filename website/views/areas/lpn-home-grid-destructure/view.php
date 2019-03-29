@@ -163,7 +163,7 @@ while($this->block("contentblock")->loop()) {
             $sameSizeCount++;
         }
     }
-    elseif($isGrilleClassique) {
+    else if($isGrilleClassique) {
          switch ($count) {
              case 1:
              case 3:

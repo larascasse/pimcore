@@ -80,6 +80,7 @@ $gridClass = strlen($color->getData())>0 ? 'grid-bkg-full':'grid-bkg-full grid-b
 <div class="container-main">
 <div class="<?php echo $gridClass ?>" <?php echo $style ?>>
 <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
+
 <?php } 
 else {
     echo "<div>";
@@ -429,7 +430,7 @@ while($this->block("contentblock")->loop()) {
 
 
 
-
+    </div>
     </div>
     <!-- fin item -->
     <?php 

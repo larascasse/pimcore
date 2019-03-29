@@ -85,6 +85,7 @@ $gridClass = strlen($color->getData())>0 ? 'grid-bkg-full':'grid-bkg-full grid-b
 else {
     echo "<div>";
     echo "<div>";
+    echo "<div>";
 
 
     echo $this->select("grid-mode", [
@@ -113,18 +114,15 @@ else {
  $isGrilleClassique = strpos($defaultGridMode,'grid-classique') >= 0;
  
 
-?>
 
-<?php 
 $sameSizeCount=1;
 $isDoubleSize=true;
 
 $simple=false;
 
 if(!$this->editmode && $main_titre && $main_description) {
-$hasText = strlen(trim($main_titre))>0 && strlen(trim($main_description))>0;
-$blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h2><p>'.$main_description.'</p></div>';
-
+    $hasText = strlen(trim($main_titre))>0 && strlen(trim($main_description))>0;
+    $blocText = '<div class="table-bloc-thumb grid-bloc-text"><h2>'.$main_titre.'</h2><p>'.$main_description.'</p></div>';
 }
 else {
     $hasText =false;
@@ -364,10 +362,7 @@ while($this->block("contentblock")->loop()) {
          echo '</div></div><hr />';
     }
     else {
-    ?> 
-    <!--  item -->
-
-    <?php
+    
     $colFirst = "";
     if(
         $i==0
@@ -390,51 +385,44 @@ while($this->block("contentblock")->loop()) {
 
         
         ?>
+         <!--  item -->
+        <div class="table-bloc-thumb<?php echo $colFirst ?> <?php echo $blocClass ?>">
+           
+            <div class="rollbloc">
+                <?php   
+                echo $image;
+                $htmlStr = trim($html->getData());
+                if(strlen($htmlStr)>10) {
+                    echo $htmlStr;
+                }
+                else {
+                ?>
 
-    <div class="table-bloc-thumb<?php echo $colFirst ?> <?php echo $blocClass ?>">
-        <div class="rollbloc">
-
-        <?php 
-            echo $image;
-        
-        ?>
-
-        <?php
-        $htmlStr = trim($html->getData());
-        if(strlen($htmlStr)>10) {
-            echo $htmlStr;
-        }
-        else {
-            ?>
-
-            <div class="table-bloc-thumb-text">
+                    <div class="table-bloc-thumb-text">
+                    
+                        <p><?= $surtitre; ?></p>
+                        <h2><?= $titre; ?></h2>
+                        
+                        <div class="rollbloc_txt_over">
+                            <div class="rollbloc_txt_over_cnt">
+                                <div class="rollbloc_txt"><?= $description; ?></div>    
+                            </div>
+                        </div>
+                        <?php  echo $link; ?>
+                    </div>
             
-            <p><?= $surtitre; ?></p>
-            <h2><?= $titre; ?></h2>
-            
-            <div class="rollbloc_txt_over">
-                <div class="rollbloc_txt_over_cnt">
-                    <div class="rollbloc_txt"><?= $description; ?></div>    
-                </div>
+                <?php
+                }
+                ?>
             </div>
-            <?php  echo $link; ?>
-        </div>
-        
-        <?php
-        }
-        ?>
-        
-         
-        
-        </div>
+             
+        </div>    
+        <!-- fin item -->   
 
 
 
-    </div>
-    </div>
-    <!-- fin item -->
     <?php 
-
+            //On fini la grille
             if($i== ($count-1)) {
                 echo "</div>";
                 

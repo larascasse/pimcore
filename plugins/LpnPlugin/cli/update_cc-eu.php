@@ -76,15 +76,15 @@ foreach ($list->getObjects() as $object) {
     $longueur = $object->getLongueur();
     $qualite = $object->getQualite();
 
-    $isPointDeHongrie = stripos($article, "MHCHE") === 0;
-    $isbatonRompu = stripos($article, "MBCHE") === 0;
+    $isPointDeHongrie = stripos($article, "FHCHE") === 0;
+    $isbatonRompu = stripos($article, "FBCHE") === 0;
 
     $isThermo = stripos($scienergie, "THERMO")>0;
     $isBrut = $object->isParquetBrut() && !$isThermo ;
     $isChene = $object->getEssence()=="CHE";
     $isDalle = stripos($scienergie, "VERSAILLES")>0;;
 
-    
+
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
@@ -210,7 +210,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Bâton Rompu ";
         }
 
-        if(stristr($scienergieCourt, "PDH ") || stristr($article, "FMCHE") ) {
+        if(stristr($scienergieCourt, "PDH ") || stristr($article, "FHCHE") ) {
             $prefixe = "Point de Hongrie ";
         }
 
@@ -230,7 +230,7 @@ foreach ($list->getObjects() as $object) {
 
 
         $suffixe2 = "";
-        if(stristr($scienergieCourt, "PDH ")  || stristr($article, "FMCHE") ) {
+        if(stristr($scienergieCourt, "PDH ")  || stristr($article, "FHCHE") ) {
             if($object->getLargeur()==92) {
                 $suffixe2 .= " angle 45°";
                // $techDescription[] = "Angle : 45°";

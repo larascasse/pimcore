@@ -76,8 +76,8 @@ $main_description   = $this->textarea("main_description", ["width" => 400,"heigh
 $style = strlen($color->getData())>0 ? 'style="background-color:'.$color->getData().'"':'';
 $gridClass = strlen($color->getData())>0 ? 'grid-bkg-full':'grid-bkg-full grid-bkg-full___nocolor';
 ?>
-<!-- V4 -->
-<div class="container-main">
+<!-- V4 pas de container main, c'est dans le table-congtainer-->
+<div class="">
 <div class="<?php echo $gridClass ?>" <?php echo $style ?>>
 <div class="table-container <?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
 

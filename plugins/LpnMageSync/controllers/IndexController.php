@@ -69,7 +69,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
                 $childrens = $list->load();
 
                 foreach ($childrens as $simpleProduct) {
-
+                    if(strlen($simpleProduct->getSku())>0)
                     $products[] = $simpleProduct;
                 }
             }

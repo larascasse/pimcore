@@ -163,6 +163,8 @@ while($this->block("contentblock")->loop()) {
         }
     }
     else if($isGrilleClassique) {
+        $colClass="";
+        $blocClass = "notroll";
          switch ($count) {
              case 1:
              case 3:

@@ -128,11 +128,11 @@ Usé,use
 
         if(stristr($scienergie, "DEFORME")) {
             $object->setTraitement_surface(("vieilli-use-deforme"));
-            $parentSuffixeEan .= "vielli usé déformé";
+            $parentSuffixeEan .= "vieilli usé déformé";
         }
         else {
              $object->setTraitement_surface(("vieilli"));
-             $parentSuffixeEan .= "vielli";
+             $parentSuffixeEan .= "vieilli";
 
         }
          

@@ -278,9 +278,19 @@ foreach ($list->getObjects() as $object) {
     
     else if( (stristr($article, "MMCHERA") || stristr($article, "MBCHERA") || stristr($article, "MHCHERA")) && !$isBrut) {
         //vieilli-use-deforme
+
+
         if(stristr($scienergie, "DEFORME")) {
-            $parent->setTraitement_surface(("vieilli-use-deforme"));
-            $parentSuffixeEan .= " vieilli usé déformé";
+
+            if(stristr($scienergie, "INTENSE")) {
+                $object->setTraitement_surface(("use-deforme-brosse-intense"));
+                $parentSuffixeEan .= " brossé intense usé déformé";
+
+            }
+            else {
+                $object->setTraitement_surface(("vieilli-use-deforme"));
+                $parentSuffixeEan .= " vieilli usé déformé";
+            }
             $parent->setValue('chanfreins','rives abîmées'); 
         }
         else {

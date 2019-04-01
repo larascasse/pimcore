@@ -127,8 +127,17 @@ Usé,use
     else if(stristr($article, "fmcher")) {
 
         if(stristr($scienergie, "DEFORME")) {
-            $object->setTraitement_surface(("vieilli-use-deforme"));
-            $parentSuffixeEan .= "vieilli usé déformé";
+
+            if(stristr($scienergie, "INTENSE")) {
+                $object->setTraitement_surface(("use-deforme-brosse-intense"));
+                $parentSuffixeEan .= " brossé intense usé déformé";
+
+            }
+            else {
+                $object->setTraitement_surface(("use-vieilli-use-deforme-brosse"));
+                $parentSuffixeEan .= "vieilli usé déformé";
+            }
+            
         }
         else {
              $object->setTraitement_surface(("vieilli"));

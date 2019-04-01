@@ -117,7 +117,7 @@ Usé,use
          }
          //Article
          else  {
-            $object->setValue("pimonly_name_suffixe","vieilli usé brossé rives abîmées");
+            $object->setValue("pimonly_name_suffixe","vieilli usé brossé");
             $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
             $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
          }

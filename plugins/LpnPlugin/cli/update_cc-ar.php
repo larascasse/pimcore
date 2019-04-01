@@ -84,7 +84,10 @@ Usé,use
 */
     echo "\n$article ?";
 
+    $parentSuffixeEan = "";
+
     $suffixeEan = $object->getEpaisseur();
+
 
     //Usée b rossé
     if(stristr($article, "FMCHEUB")) {
@@ -122,7 +125,17 @@ Usé,use
          $save=true;
     }
     else if(stristr($article, "fmcher")) {
-          $object->setTraitement_surface(("vieilli"));
+
+        if(stristr($scienergie, "DEFORME")) {
+            $object->setTraitement_surface(("vieilli-use-deforme"));
+            $parentSuffixeEan .= "vielli usé déformé";
+        }
+        else {
+             $object->setTraitement_surface(("vieilli"));
+             $parentSuffixeEan .= "vielli";
+
+        }
+         
           //$object->setValue('chanfreins','rives abîmées'); 
 
 
@@ -145,7 +158,7 @@ Usé,use
 
          }
          else {
-            $object->setValue("pimonly_name_suffixe","vieilli rives abîmées");
+            $object->setValue("pimonly_name_suffixe",$parentSuffixeEan);
          }
 
 
@@ -161,6 +174,10 @@ Usé,use
 
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"huile-aqua");
+    }
+    else if(stristr($scienergie, "PRE HUIL")) {
+        $parent->setValue('finition',"pre-huile");
+        $parentSuffixeEan .= " pré-huilé";
     }
     else if(stristr($scienergie, "HUILE CIRE") ||  stristr($scienergie_converti, "huilé cire")) {
         $object->setValue('finition',"huile-cire");

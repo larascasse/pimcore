@@ -277,10 +277,18 @@ foreach ($list->getObjects() as $object) {
     }
     
     else if( (stristr($article, "MMCHERA") || stristr($article, "MBCHERA") || stristr($article, "MHCHERA")) && !$isBrut) {
+        //vieilli-use-deforme
+        if(stristr($scienergie, "DEFORME")) {
+            $parent->setTraitement_surface(("vieilli-use-deforme"));
+            $parentSuffixeEan .= " vielli usé déformé";
+            $parent->setValue('chanfreins','rives abîmées'); 
+        }
+        else {
+            $parent->setTraitement_surface(("vieilli"));
+            $parentSuffixeEan .= " vieilli rives abîmées";
+            $parent->setValue('chanfreins','rives abîmées'); 
+        }
 
-        $parent->setTraitement_surface(("vieilli"));
-        $parentSuffixeEan .= " vieilli rives abîmées";
-        $parent->setValue('chanfreins','rives abîmées');  
     }
 
     elseif(stristr($article, "MMCHEG2") && !$isBrut) {
@@ -305,6 +313,10 @@ foreach ($list->getObjects() as $object) {
     if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
         $parentSuffixeEan .= " huile aqua";
+    }
+    else if(stristr($scienergie, "PRE HUIL")) {
+        $parent->setValue('finition',"pre-huile");
+        $parentSuffixeEan .= " pré-huilé";
     }
     else if(stristr($scienergie, "HUILE CIRE")) {
         $parent->setValue('finition',"huile-cire");

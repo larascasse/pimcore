@@ -33,6 +33,10 @@ $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrderKey("o_id");
 
 
+$list->setOrder("DESC");
+$list->setOrderKey("o_id");
+
+
 $list->load();
 
 $objects = array();

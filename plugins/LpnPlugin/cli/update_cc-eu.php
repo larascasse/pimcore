@@ -84,7 +84,7 @@ foreach ($list->getObjects() as $object) {
     $isChene = $object->getEssence()=="CHE";
     $isDalle = stripos($scienergie, "VERSAILLES")>0;;
 
-    $isVieilli= stripos($scienergie, "VIELLI ")>0;;
+    $isVieilli= stripos($scienergie, "VIEILLI ")>0;;
 
 
 
@@ -135,7 +135,7 @@ foreach ($list->getObjects() as $object) {
      $object->setTraitement_surface(("brosse"));
     }
 
-    
+        
     if(stristr($object->getName(), "vernis mat")) {
      $object->setFinition(("Verni mat"));
     }

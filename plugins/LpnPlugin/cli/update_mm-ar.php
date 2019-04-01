@@ -280,7 +280,7 @@ foreach ($list->getObjects() as $object) {
         //vieilli-use-deforme
         if(stristr($scienergie, "DEFORME")) {
             $parent->setTraitement_surface(("vieilli-use-deforme"));
-            $parentSuffixeEan .= " vielli usé déformé";
+            $parentSuffixeEan .= " vieilli usé déformé";
             $parent->setValue('chanfreins','rives abîmées'); 
         }
         else {

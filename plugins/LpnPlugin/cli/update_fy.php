@@ -19,7 +19,7 @@ Pimcore_Model_Cache::disable();
 
 $conditionFilters = array(
     "o_path LIKE '/catalogue/_product_base__/85vinylsol/01vinyl-rigide-fy%'",
-    "o_path NOT LIKE '/catalogue/_product_base__/85vinylsol/01vinyl-rigide-fy/accessoires-vr-fy%'",
+   // "o_path NOT LIKE '/catalogue/_product_base__/85vinylsol/01vinyl-rigide-fy/accessoires-vr-fy%'",
     "ean IS NOT NULL"
 );
 
@@ -197,12 +197,8 @@ foreach ($list->getObjects() as $object) {
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 
-    $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));
-
     $parent->save();
 
-
-    
 
     $object->setPublished(true);
     $object->save();

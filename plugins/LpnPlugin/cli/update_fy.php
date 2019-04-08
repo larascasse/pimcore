@@ -162,7 +162,7 @@ foreach ($list->getObjects() as $object) {
             $typeName = "Plinthe composite";
     }
     else {
-            $article = "Vinyle rigide";
+            $typeName = "Vinyle rigide";
             $isLame = true;
     }
 
@@ -193,7 +193,7 @@ foreach ($list->getObjects() as $object) {
     $parent->setValue("name",$parentName);
     $parent->setValue("short_name",$parentShortName);
    
-    $suffixeEan .= $object->pimonly_dimensions;;
+    $suffixeEan = $object->pimonly_dimensions;;
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 

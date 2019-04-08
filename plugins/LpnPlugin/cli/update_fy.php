@@ -199,6 +199,18 @@ foreach ($list->getObjects() as $object) {
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
 
 
+
+    $object->setValue("characteristics_others","");
+    $object->setValue("characteristics_others_tech","");
+    $object->setValue("characteristics_others_tech","");
+    $object->setValue("country_of_manufacture","");
+
+    $parent->setValue("characteristics_others","");
+    $parent->setValue("characteristics_others_tech","");
+    $parent->setValue("characteristics_others_tech","");
+    $parent->setValue("country_of_manufacture","");
+
+
     $parent->save();
 
 

@@ -151,17 +151,17 @@ foreach ($list->getObjects() as $object) {
     $isLame     = false;
 
     if(stristr($article, "adcp")) {
-            $typeName = "Profil d'adaptation";
+            $typeName = "Profil d'adaptation pour vinyle rigide";
     }
     elseif(stristr($article, "excp")) {
-            $typeName = "Profil d'extrémité";
+            $typeName = "Profil d'extrémité pour vinyle rigide";
     }
     elseif(stristr($article, "spcp")) {
-            $typeName = "Profil Strip à coller";
+            $typeName = "Profil Strip à coller pour vinyle rigide";
     }
     
     elseif(stristr($article, "plcp")) {
-            $typeName = "Plinthe composite";
+            $typeName = "Plinthe composite pour vinyle rigide";
     }
     else {
             $typeName = "Vinyle rigide";

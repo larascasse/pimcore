@@ -137,7 +137,9 @@ foreach ($list->getObjects() as $object) {
         "055" => "Chêne Apple Crumble",    
         "023" => "Verona",    
         "024" => "Terrazzo",
-        "101" => "Sabayon"
+        "100" => "Chêne Seychelles",
+        "101" => "Chêne Sabayon",
+        "102" => "Chêne Teddy Bear"
     ];
 
     foreach($teinteFlorify as $code=>$name) {

@@ -108,7 +108,7 @@ foreach ($list->getObjects() as $object) {
     $teinteName = "";
 
     $teinteFlorify = [
-        "OO1" => "Chêne Tinte Parisienne",
+        "001" => "Chêne Tinte Parisienne",
         "002" => "Chêne Galettes au Beurre",    
         "003" => "Chêne Withsundays",    
         "004" => "Chêne Laine",    

@@ -109,7 +109,7 @@ foreach ($list->getObjects() as $object) {
 
     $teinteFlorify = [
         "OO1" => "Chêne Tinte Parisienne",
-        "002" => "Chêne Galette au Beurre",    
+        "002" => "Chêne Galettes au Beurre",    
         "003" => "Chêne Withsundays",    
         "004" => "Chêne Laine",    
         "005" => "Chêne Brunette",    
@@ -141,8 +141,9 @@ foreach ($list->getObjects() as $object) {
     ];
 
     foreach($teinteFlorify as $code=>$name) {
-        if(stristr($scienergieCourt, $code)) {
+        if(stristr($scienergieCourt, $code) !== FALSE ) {
             $teinteName = $name;
+            break;
         }
     }
 

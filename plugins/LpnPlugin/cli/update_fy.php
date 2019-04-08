@@ -127,16 +127,17 @@ foreach ($list->getObjects() as $object) {
         "017" => "Chêne Champagne",    
         "018" => "Chêne Cider",    
         "019" => "Chêne Cognac",    
-        "020" => "Chêne Cohiba",    
-        "021" => "Chêne Black Beauty",    
-        "022" => "Chêne Crémant",    
-        "023" => "Chêne Coconut",    
-        "024" => "Chêne Husky",    
-        "025" => "Chêne Stonehenge",    
-        "026" => "Chêne Truffle",    
-        "027" => "Chêne Apple Crumble",    
-        "028" => "Verona",    
-        "029" => "Terrazzo"
+        "021" => "Chêne Cohiba",    
+        "022" => "Chêne Black Beauty",    
+        "050" => "Chêne Crémant",    
+        "051" => "Chêne Coconut",    
+        "052" => "Chêne Husky",    
+        "053" => "Chêne Stonehenge",    
+        "054" => "Chêne Truffle",    
+        "055" => "Chêne Apple Crumble",    
+        "023" => "Verona",    
+        "024" => "Terrazzo",
+        "101" => "Sabayon"
     ];
 
     foreach($teinteFlorify as $code=>$name) {

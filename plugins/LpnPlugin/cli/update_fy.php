@@ -206,6 +206,12 @@ foreach ($list->getObjects() as $object) {
     $object->setValue("country_of_manufacture","");
     $object->setValue("subtype","");
     $object->setValue("essence","VIR");
+    $object->setValue("short_description","");
+    $object->setValue("short_description_title","");
+    $object->setValue("description","");
+    $object->setValue("extra_content1","");
+    $object->setValue("lesplus","");
+    $object->setValue("remarque","");
 
 
     $parent->setValue("characteristics_others","");
@@ -215,6 +221,12 @@ foreach ($list->getObjects() as $object) {
     $parent->setValue("subtype","");
     $parent->setValue("subtype2","");
     $parent->setValue("essence","VIR");
+    $parent->setValue("short_description","");
+    $parent->setValue("short_description_title","");
+    $parent->setValue("description","");
+    $parent->setValue("extra_content1","");
+    $parent->setValue("lesplus","");
+    $parent->setValue("remarque","");
 
 
 

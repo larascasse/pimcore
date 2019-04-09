@@ -548,7 +548,7 @@ class AbstractObject extends Model\Element\AbstractElement
         $isUpdate = false;
 
         echo $this->getDescription()."|";
-        echo $this->description;
+        echo $this->description."|";;
 
         if ($this->getId()) {
             $isUpdate = true;
@@ -557,7 +557,8 @@ class AbstractObject extends Model\Element\AbstractElement
             \Pimcore::getEventManager()->trigger("object.preAdd", $this);
         }
 
-        echo $this->getValue('description');
+         echo $this->getDescription()."|";
+        echo $this->description;
         $this->correctPath();
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails

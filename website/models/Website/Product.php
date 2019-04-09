@@ -3625,6 +3625,124 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		return $return;
 	}
 
+
+	//appelé depui startup.php
+	public function preSave($withParent=true) {
+
+		$this->clearInheritedValues();
+
+		//pour eviter les récusrion, on force l4ean pour lesparents
+		//TODO, voir si on fait les enfants
+		if($withParent && strlen($this->getEan())>0) {
+			
+			//echo "\n\n\n\nSave ".$this->getEan()."\n";
+
+
+			$objectParent 			= $this->getParent();
+			$objectParentparent 	= $objectParent->getParent();
+
+			if($objectParentparent instanceof Website_Product) {
+				//echo "\n\n\n\nParent Parent Save ".$objectParentparent->getId()."\n";
+				$objectParentparent->clearInheritedValues(true);
+			}
+
+			if($objectParent instanceof Website_Product) {
+				//echo "\n\n\n\nParent  Save".$objectParent->getId()."\n";
+				$objectParent->clearInheritedValues(true);
+			}
+
+		}
+		
+	}
+
+
+	 public function clearInheritedValues($save=false) {
+       
+        echo "\n\n\n***** clearInheritedValues ".$this->getId()."\n";
+
+        $inheritedValues = Object_Abstract::doGetInheritedValues();
+        Object_Abstract::setGetInheritedValues(true);
+       
+
+        $objectParent = $this->getParent();
+
+        if(!($objectParent instanceof Website_Product)) 
+				  return;
+
+
+        $fields = $this->getClass()->getFieldDefinitions();
+
+        $ignoreFields = ["code","ean","essence","choix","famille","qualité","colisage","characteristics","unite","name_scienergie_court","qualite","name_scienergie","actif_web","published","obsolete","childrenSimpleProductIds_flat","configurableFields"];
+
+        foreach ($fields as $key => $field) {
+            //echo "try ".$key." ".$field->fieldtype."\n";
+
+            if (
+            	stristr($key, "mage_") 
+            	//|| stristr($key, "pimonly_") 
+            	|| strstr($key, "String") 
+            	|| in_array($key, $ignoreFields))
+            	continue;
+
+            $getter = "get" . ucfirst($key);
+            
+
+            if( $field->fieldtype!="nonownerobjects") {
+
+            	$valueToCheck = $objectParent->$getter();
+            	$objectValue  = $this->$key;
+
+            	//echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."\n";
+
+            	$isSelect = false;
+            	if(is_array($valueToCheck)) {
+            		$valueToCheck = $field->getForCsvExport($objectParent);
+            		$objectValue = $field->getForCsvExport($this);
+            		$isSelect = true;
+            	}
+
+            	//if($field->fieldtype!="objects") {
+
+
+	            	
+	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."|New:".$objectValue."|Old:".$valueToCheck."\n";	
+
+		            if ($valueToCheck
+		            	&& $objectValue == $valueToCheck
+		           
+		            ) {
+
+		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
+		            	if($isSelect)
+		                	$this->setValue($key,[]);
+		                else
+		                	$this->setValue($key,null);
+		            }
+		        //}
+		        //else {
+		       	// 	echo "skip ".$key." ".$field->fieldtype."\n";
+		       // }
+	          }
+	          else {
+
+	          	   echo "skip ".$key." ".$field->fieldtype."\n";	
+
+	          }
+        
+       }
+       Object_Abstract::setGetInheritedValues($inheritedValues);
+       //On ne save pas pour eviter le postSave
+       // ca a l'air d ne rien changer si on ne odifie pas le Path
+       if($save)
+       		$this->update();
+       	//$this->save();
+
+
+   
+    }
+
+
+
 }
 
 

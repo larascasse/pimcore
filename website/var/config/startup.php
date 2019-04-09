@@ -119,6 +119,19 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     return $key;
 });
 
+
+\Pimcore::getEventManager()->attach(["object.preUpdate"], function (\Zend_EventManager_Event $e) {
+    $object = $e->getTarget();
+    //echo $object->getClassName();
+
+    if($object instanceof Website_Product) {
+        echo "object.preUpdate";
+        
+        $object->preSave();
+    }
+    // ...
+});
+
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/framework/'. PATH_SEPARATOR . dirname(__FILE__).'/../../../plugins/LpnPlugin/odata/lpnservices/');
 require_once 'urldef.php';
 require_once 'functions.php';

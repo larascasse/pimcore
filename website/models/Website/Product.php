@@ -3705,7 +3705,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 	            	
-	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."|New:".$objectValue."|Old:".$valueToCheck."\n";	
+	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key." ".$field->fieldtype."|New:".$objectValue."|Old:".$valueToCheck."\n";	
 
 		            if ($valueToCheck
 		            	&& $objectValue == $valueToCheck
@@ -3715,6 +3715,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
 		            	if($isSelect)
 		                	$this->setValue($key,[]);
+		                if($field->fieldtype == "input" || $field->fieldtype == "textareat")
+		                	$this->setValue($key,'');
 		                else
 		                	$this->setValue($key,null);
 		            }
@@ -3736,6 +3738,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
        if($save) {
        		$inheritedValues = Object_Abstract::doGetInheritedValues();
         	Object_Abstract::setGetInheritedValues(false);
+        	$this->clearDependentCache();
        		$this->update();
        		 Object_Abstract::setGetInheritedValues($inheritedValues);
        }

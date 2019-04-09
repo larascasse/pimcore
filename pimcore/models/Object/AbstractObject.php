@@ -547,8 +547,9 @@ class AbstractObject extends Model\Element\AbstractElement
     {
         $isUpdate = false;
 
-        echo $this->getValue('description');
-        
+        echo $this->getDescription()."|";
+        echo $this->description;
+
         if ($this->getId()) {
             $isUpdate = true;
             \Pimcore::getEventManager()->trigger("object.preUpdate", $this);

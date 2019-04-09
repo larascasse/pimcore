@@ -165,6 +165,9 @@ foreach ($list->getObjects() as $object) {
     elseif(stristr($article, "plcp")) {
             $typeName = "Plinthe composite pour vinyle rigide";
     }
+    elseif(stristr($article, "trcp")) {
+            $typeName = "Profil de transition pour vinyle rigide";
+    }
     else {
             $typeName = "Vinyle rigide";
             $isLame = true;

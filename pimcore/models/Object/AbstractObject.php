@@ -548,7 +548,7 @@ class AbstractObject extends Model\Element\AbstractElement
         $isUpdate = false;
 
         echo $this->getDescription()."|";
-        echo $this->description."|";;
+        echo $this->description."\n\n\n";;
 
         if ($this->getId()) {
             $isUpdate = true;
@@ -558,7 +558,7 @@ class AbstractObject extends Model\Element\AbstractElement
         }
 
          echo $this->getDescription()."|";
-        echo $this->description;
+         echo $this->description."\n\n\n";;
         $this->correctPath();
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails

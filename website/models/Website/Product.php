@@ -3667,7 +3667,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         $objectParent = $this->getParent();
 
         if(!($objectParent instanceof Website_Product)) 
-				  return;
+			return;
 
 
         $fields = $this->getClass()->getFieldDefinitions();
@@ -3733,8 +3733,12 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
        Object_Abstract::setGetInheritedValues($inheritedValues);
        //On ne save pas pour eviter le postSave
        // ca a l'air d ne rien changer si on ne odifie pas le Path
-       if($save)
+       if($save) {
+       		$inheritedValues = Object_Abstract::doGetInheritedValues();
+        	Object_Abstract::setGetInheritedValues(false);
        		$this->update();
+       		 Object_Abstract::setGetInheritedValues($inheritedValues);
+       }
        	//$this->save();
 
 

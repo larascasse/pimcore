@@ -3685,6 +3685,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
             	continue;
 
             $getter = "get" . ucfirst($key);
+            $setter = "set" . ucfirst($key);
             
 
             if( $field->fieldtype!="nonownerobjects") {
@@ -3713,12 +3714,19 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		            ) {
 
 		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
-		            	if($isSelect)
+		            	if($isSelect) {
 		                	$this->setValue($key,[]);
-		                if($field->fieldtype == "input" || $field->fieldtype == "textareat")
+		                	$this->$setter([]);
+		            	}
+		                if($field->fieldtype == "input" || $field->fieldtype == "textarea") {
+
 		                	$this->setValue($key,'');
-		                else
+		                	$this->$setter('');
+		                }
+		                else {
+		                	$this->$setter(null);
 		                	$this->setValue($key,null);
+		                }
 		            }
 		        //}
 		        //else {

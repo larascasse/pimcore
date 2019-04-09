@@ -3714,19 +3714,13 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		            ) {
 
 		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
-		            	if($isSelect) {
+		            	if($isSelect)
 		                	$this->setValue($key,[]);
-		                	$this->$setter([]);
-		            	}
 		                if($field->fieldtype == "input" || $field->fieldtype == "textarea") {
-
 		                	$this->setValue($key,'');
-		                	$this->$setter('');
 		                }
-		                else {
-		                	$this->$setter(null);
+		                else
 		                	$this->setValue($key,null);
-		                }
 		            }
 		        //}
 		        //else {

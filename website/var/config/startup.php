@@ -125,8 +125,8 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     //echo $object->getClassName();
 
     if($object instanceof Website_Product) {
-        echo "object.preUpdate";
-        
+        //echo "object.preUpdate";
+
         $object->preSave();
     }
     // ...

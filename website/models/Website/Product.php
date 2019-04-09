@@ -3658,7 +3658,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 	 public function clearInheritedValues($save=false) {
        
-        echo "\n\n\n***** clearInheritedValues ".$this->getId()."\n";
+        //echo "\n\n\n***** clearInheritedValues ".$this->getId()."\n";
 
         $inheritedValues = Object_Abstract::doGetInheritedValues();
         Object_Abstract::setGetInheritedValues(true);
@@ -3705,14 +3705,14 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 
 	            	
-	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."|New:".$objectValue."|Old:".$valueToCheck."\n";	
+	            //echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."|New:".$objectValue."|Old:".$valueToCheck."\n";	
 
 		            if ($valueToCheck
 		            	&& $objectValue == $valueToCheck
 		           
 		            ) {
 
-		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
+		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
 		            	if($isSelect)
 		                	$this->setValue($key,[]);
 		                else
@@ -3725,7 +3725,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	          }
 	          else {
 
-	          	   echo "skip ".$key." ".$field->fieldtype."\n";	
+	          	   //echo "skip ".$key." ".$field->fieldtype."\n";	
 
 	          }
         

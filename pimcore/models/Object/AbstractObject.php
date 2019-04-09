@@ -546,6 +546,9 @@ class AbstractObject extends Model\Element\AbstractElement
     public function save()
     {
         $isUpdate = false;
+
+        echo $this->getValue('description');
+        
         if ($this->getId()) {
             $isUpdate = true;
             \Pimcore::getEventManager()->trigger("object.preUpdate", $this);
@@ -553,6 +556,7 @@ class AbstractObject extends Model\Element\AbstractElement
             \Pimcore::getEventManager()->trigger("object.preAdd", $this);
         }
 
+        echo $this->getValue('description');
         $this->correctPath();
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails

@@ -79,7 +79,7 @@ for($i=0; $i<$count; $i++) {
         case 5:
            $pimcoreThimbClass = "magento_equigrid_h";
            $smallClass="col-12 col-sm-12 col-md-4";
-           $cardClass="card";
+           //$cardClass="card";
             break;
         
         default:

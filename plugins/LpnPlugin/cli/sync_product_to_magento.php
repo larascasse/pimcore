@@ -46,7 +46,7 @@ if(count($eans)>0) {
    $params = ["ean"=>implode(",", $eans),"create"=>1];
 
    //PROD
-   $url = "httpw://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
+   $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
    $params = ["ean"=>implode(",", $eans)];
 
    print_r($params);

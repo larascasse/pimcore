@@ -109,15 +109,36 @@ class Image extends Asset\Image {
     }
 
      public function getRelatedDescription() {
+
+        $str = "";
         if($realisation_description = $this->getProperty("realisation_description")) {
-               return $realisation_description;
+               $str  = $realisation_description;
         }
-        else if($product = $this->getRelatedProduct()) {
-            return $product->getShort_description();
+        if($product = $this->getRelatedProduct()) {
+
+            if($realisation_description)
+                $str =  $product->getShort_description();
+
+            //Ajout prix
+            $price = $product->getPrice_4();
+            $priceTTC = 0;
+
+            $priceStr = "";
+            if($price > 0 ) {
+                $price = floatval($price);
+                $priceStr = " | ";
+                $priceStr .= number_format($price,2);
+                $priceStr .= "€ HT";
+                $priceStr .= "/";
+                $priceStr .= number_format($price*1.2,2);
+                $priceStr .= "€ HT";
+                $str .= $priceStr;
+            }
+            
         }
-        else {
-            return "";
-        }
+        
+
+        return $str;
     }
 
      public function getRelatedChoix() {

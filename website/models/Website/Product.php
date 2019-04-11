@@ -3672,7 +3672,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
         $fields = $this->getClass()->getFieldDefinitions();
 
-        $ignoreFields = ["code","ean","essence","choix","famille","qualité","colisage","characteristics","unite","name_scienergie_court","qualite","name_scienergie","actif_web","published","obsolete","childrenSimpleProductIds_flat","configurableFields"];
+        $ignoreFields = ["code","ean","essence","choix","famille","qualité","colisage","characteristics","unite","name_scienergie_court","qualite","name_scienergie","actif_web","published","o_published","obsolete","childrenSimpleProductIds_flat","configurableFields"];
 
         foreach ($fields as $key => $field) {
             //echo "try ".$key." ".$field->fieldtype."\n";

@@ -3734,6 +3734,20 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	          }
         
        }
+
+       if($this->actif_web && !$this->getObsolete() && !empty($this->ean)) {
+       		$this->setPublished(true);
+       		
+       		if(!$objectParent->getPublished()) {
+       			$parent->setPublished(true);
+       			$parent->save();
+       		}
+       	}
+       	elseif(!empty($this->ean)) {
+       		$this->setPublished(false);
+       	}
+
+
        Object_Abstract::setGetInheritedValues($inheritedValues);
        //On ne save pas pour eviter le postSave
        // ca a l'air d ne rien changer si on ne odifie pas le Path

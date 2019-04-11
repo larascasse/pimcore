@@ -112,11 +112,12 @@ class Image extends Asset\Image {
 
         $str = "";
         if($realisation_description = $this->getProperty("realisation_description")) {
-               $str  = $realisation_description;
+               $str  .= $realisation_description;
         }
+
         if($product = $this->getRelatedProduct()) {
 
-            if($realisation_description)
+            if(strlen($realisation_description)>0)
                 $str =  $product->getShort_description();
 
             //Ajout prix
@@ -126,12 +127,12 @@ class Image extends Asset\Image {
             $priceStr = "";
             if($price > 0 ) {
                 $price = floatval($price);
-                $priceStr = " | ";
+                $priceStr = " | Prix: ";
                 $priceStr .= number_format($price,2);
-                $priceStr .= "€ HT";
-                $priceStr .= "/";
+                $priceStr .= "€ HT/".$product->getUnite();
+                $priceStr .= " - ";
                 $priceStr .= number_format($price*1.2,2);
-                $priceStr .= "€ HT";
+                $priceStr .= "€ TTC/".$product->getUnite();
                 $str .= $priceStr;
             }
             

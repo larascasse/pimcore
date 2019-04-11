@@ -3739,8 +3739,8 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
        		$this->setPublished(true);
        		
        		if(!$objectParent->getPublished()) {
-       			$parent->setPublished(true);
-       			$parent->save();
+       			$objectParent->setPublished(true);
+       			$objectParent->save();
        		}
        	}
        	elseif(!empty($this->ean)) {

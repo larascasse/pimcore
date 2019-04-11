@@ -117,7 +117,7 @@ class Image extends Asset\Image {
 
         if($product = $this->getRelatedProduct()) {
 
-            if(strlen($realisation_description)>0)
+            if(strlen($product->getShort_description())>2)
                 $str =  $product->getShort_description();
 
             //Ajout prix
@@ -129,10 +129,10 @@ class Image extends Asset\Image {
                 $price = floatval($price);
                 $priceStr = " | Prix: ";
                 $priceStr .= number_format($price,2);
-                $priceStr .= "€ HT/".$product->getUnite();
+                $priceStr .= "€ HT/".strtolower($product->getUnite());
                 $priceStr .= " - ";
                 $priceStr .= number_format($price*1.2,2);
-                $priceStr .= "€ TTC/".$product->getUnite();
+                $priceStr .= "€ TTC/".strtolower($product->getUnite());
                 $str .= $priceStr;
             }
             

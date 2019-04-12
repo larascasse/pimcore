@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <?php if($this->editmode): ?>
      
      <div class="container" style="padding-bottom: 40px">
@@ -65,10 +61,9 @@ foreach($this->multihref("objectPaths") as $element) {
 foreach ($assets as $element) {
     echo '<div class="col-'.(12/$count).'">';
     if($element instanceof Pimcore\Model\Object)
-        $this->template("/snippets/lpn-slider-product-image-item.php",array('product'=>$element,'imageformat'=> $imageformat));
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>null,'product'=>$element,'imageformat'=> $imageformat));
     else
-        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'imageformat'=> $imageformat));
-    echo '</div>';
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'product'=>null,'imageformat'=> $imageformat));
 } 
 ?>
    

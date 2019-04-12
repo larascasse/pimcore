@@ -1,6 +1,3 @@
-<?php
-
-?>
 
 <?php if($this->editmode): ?>
     <?= $this->input("cssClass",

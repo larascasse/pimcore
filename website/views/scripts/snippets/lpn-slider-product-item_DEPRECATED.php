@@ -38,5 +38,5 @@ else
 
 
 </div>
-<?php  echo $this->template("/content/link-eshop-renderlet.php",array('product'=>$product,'btn_title'=>$product->getSubtype()." - ".$product->getShort_name())); ?>
+<?php  echo $this->template("/snippets/link-eshop-renderlet.php",array('product'=>$product,'btn_title'=>$product->getSubtype()." - ".$product->getShort_name())); ?>
 </div>

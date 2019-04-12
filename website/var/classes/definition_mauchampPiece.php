@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-04-05T17:01:41+02:00
+* Generated at: 2019-04-12T09:24:25+02:00
 * Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 127.0.0.1
+* IP: 172.31.4.114
 
 
 Fields Summary: 
@@ -47,7 +47,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'mauchampPiece',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1554476500,
+   'modificationDate' => 1555053865,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -298,7 +298,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -346,7 +346,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -394,7 +394,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -824,7 +824,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',

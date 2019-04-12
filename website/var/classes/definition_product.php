@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-03-27T09:11:21+01:00
+* Generated at: 2019-04-09T09:12:03+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.23.106
+* IP: 172.31.4.114
 
 
 Fields Summary: 
@@ -78,11 +78,6 @@ Fields Summary:
 - taux_humidite [input]
 - coefficient_retractabilite [calculatedValue]
 - durabilite_ecologique [calculatedValue]
-- price [input]
-- price_1 [input]
-- price_2 [input]
-- price_3 [input]
-- price_4 [input]
 - largeurString [input]
 - longueurString [input]
 - epaisseurString [input]
@@ -180,6 +175,11 @@ Fields Summary:
 - meta_title2 [input]
 - meta_description [input]
 - meta_keywords [input]
+- price [input]
+- price_1 [input]
+- price_2 [input]
+- price_3 [input]
+- price_4 [input]
 - mage_visibility [select]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
@@ -223,7 +223,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1553674281,
+   'modificationDate' => 1554793922,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -501,7 +501,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                   ),
                   5 => 
                   array (
-                    'key' => 'Stratifié/LVT',
+                    'key' => 'Revêtements de sol',
                     'value' => 'stratifie-lvt',
                   ),
                   6 => 
@@ -567,25 +567,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                   ),
                   6 => 
                   array (
+                    'key' => 'Sol Vinyle rigide',
+                    'value' => 'sol-vinyl-rigide',
+                  ),
+                  7 => 
+                  array (
                     'key' => 'Bardage intérieur et extérieur',
                     'value' => 'bardage',
                   ),
-                  7 => 
+                  8 => 
                   array (
                     'key' => 'Bardage intérieur',
                     'value' => 'bardage-interieur',
                   ),
-                  8 => 
+                  9 => 
                   array (
                     'key' => 'Bardage extérieur',
                     'value' => ' bardage-exterieur',
                   ),
-                  9 => 
+                  10 => 
                   array (
                     'key' => 'Agencement',
                     'value' => 'agencement',
                   ),
-                  10 => 
+                  11 => 
                   array (
                     'key' => 'Table',
                     'value' => 'table',
@@ -1682,6 +1687,11 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                     'key' => 'Structure 3 plis massif support chêne',
                     'value' => ' structure-3plis-chene',
                   ),
+                  8 => 
+                  array (
+                    'key' => 'Vinyle Rigide',
+                    'value' => 'vinyle-rigide',
+                  ),
                 ),
                  'width' => 600,
                  'defaultValue' => '',
@@ -2272,147 +2282,6 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
           4 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
-             'labelWidth' => 100,
-             'layout' => '',
-             'name' => 'Prix',
-             'type' => NULL,
-             'region' => '',
-             'title' => 'Prix',
-             'width' => NULL,
-             'height' => NULL,
-             'collapsible' => false,
-             'collapsed' => false,
-             'bodyStyle' => '',
-             'datatype' => 'layout',
-             'permissions' => NULL,
-             'childs' => 
-            array (
-              0 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 16,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'price',
-                 'title' => 'Prix Public HT',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              1 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 16,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'price_1',
-                 'title' => 'Négoce (1)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              2 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 15,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'price_2',
-                 'title' => 'Gros poseur (2)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              3 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => '',
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 15,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'price_3',
-                 'title' => 'Pro (3)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-              4 => 
-              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
-                 'fieldtype' => 'input',
-                 'width' => NULL,
-                 'queryColumnType' => 'varchar',
-                 'columnType' => 'varchar',
-                 'columnLength' => 15,
-                 'phpdocType' => 'string',
-                 'regex' => '',
-                 'name' => 'price_4',
-                 'title' => 'Public (4)',
-                 'tooltip' => '',
-                 'mandatory' => false,
-                 'noteditable' => false,
-                 'index' => false,
-                 'locked' => false,
-                 'style' => '',
-                 'permissions' => NULL,
-                 'datatype' => 'data',
-                 'relationType' => false,
-                 'invisible' => false,
-                 'visibleGridView' => false,
-                 'visibleSearch' => false,
-              )),
-            ),
-             'locked' => false,
-          )),
-          5 => 
-          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
-             'fieldtype' => 'panel',
              'labelWidth' => 150,
              'layout' => '',
              'name' => 'Caractéristiques',
@@ -2756,6 +2625,16 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   array (
                     'key' => 'Vieilli très accentué',
                     'value' => 'vieilli tres accentue',
+                  ),
+                  18 => 
+                  array (
+                    'key' => 'Vieilli usé déformé brossé',
+                    'value' => 'vieilli-use-deforme-brosse',
+                  ),
+                  19 => 
+                  array (
+                    'key' => 'Usé déformé brossé intense',
+                    'value' => 'use-deforme-brosse-intense',
                   ),
                 ),
                  'width' => '',
@@ -4504,7 +4383,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
             ),
              'locked' => false,
           )),
-          6 => 
+          5 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5183,7 +5062,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          7 => 
+          6 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5247,7 +5126,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          8 => 
+          7 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5550,7 +5429,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          9 => 
+          8 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5780,7 +5659,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          10 => 
+          9 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5867,7 +5746,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          11 => 
+          10 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -5918,7 +5797,7 @@ Combien d\'unité dans 1 m2',
             ),
              'locked' => false,
           )),
-          12 => 
+          11 => 
           Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
              'fieldtype' => 'panel',
              'labelWidth' => 100,
@@ -6019,6 +5898,147 @@ Combien d\'unité dans 1 m2',
                  'regex' => '',
                  'name' => 'meta_keywords',
                  'title' => 'Meta Keywords',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+            ),
+             'locked' => false,
+          )),
+          12 => 
+          Pimcore\Model\Object\ClassDefinition\Layout\Panel::__set_state(array(
+             'fieldtype' => 'panel',
+             'labelWidth' => 100,
+             'layout' => '',
+             'name' => 'Prix',
+             'type' => NULL,
+             'region' => '',
+             'title' => 'Prix',
+             'width' => NULL,
+             'height' => NULL,
+             'collapsible' => false,
+             'collapsed' => false,
+             'bodyStyle' => '',
+             'datatype' => 'layout',
+             'permissions' => NULL,
+             'childs' => 
+            array (
+              0 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 16,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'price',
+                 'title' => 'Prix Public HT',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              1 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 16,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'price_1',
+                 'title' => 'Négoce (1)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              2 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 15,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'price_2',
+                 'title' => 'Gros poseur (2)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              3 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => '',
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 15,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'price_3',
+                 'title' => 'Pro (3)',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => false,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
+                 'columnLength' => 15,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'price_4',
+                 'title' => 'Public (4)',
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,

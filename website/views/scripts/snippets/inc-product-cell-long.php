@@ -61,7 +61,7 @@ if(is_array($subDescArray) && count($subDescArray)>0) {
     <div class="col-xs-12">
          <?php echo $subdesc  ?>
          <?php  
-         /*echo $this->template("/snippets/link-eshop-renderlet.php",array('product'=>$product,
+         /*echo $this->template("/content/link-eshop-renderlet.php",array('product'=>$product,
                 'btn_title'=>"XXX" //ne rien mettre pour avoir le prix
                 )); */
        // echo '<a href="https://www.laparqueterienouvelle.fr/ean/'.$product->getSku().'" title="Voir '.$product->getName().'" class="" style="font-size: 0.5em;" target="_blank">https://www.laparqueterienouvelle.fr/ean/'.$product->getSku().'</a>';?>

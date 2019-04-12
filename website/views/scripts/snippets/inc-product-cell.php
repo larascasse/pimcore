@@ -32,7 +32,7 @@ if(!is_object($product)) {
 
          <!--<p><a href="<?php echo $detailLink; ?>" class="btn btn-primary" role="button">Voir</a></p>-->
              <div class="actions">
-             <?php  echo $this->template("/snippets/link-eshop-renderlet.php",array('product'=>$product,
+             <?php  echo $this->template("/content/link-eshop-renderlet.php",array('product'=>$product,
                 'btn_title'=>"" //ne rien mettre pour avoir le prix
              )); ?>
              </div>

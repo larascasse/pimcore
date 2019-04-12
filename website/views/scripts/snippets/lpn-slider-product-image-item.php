@@ -8,7 +8,7 @@ Affiche un asset, et le produit associé en légende
 
 $asset = $this->asset;
 $product = $this->product;
-
+t
 
 if(!$asset && $product) {
 	$asset = $product -> getImage_1();
@@ -73,6 +73,6 @@ echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getP
 </div>
 <?php  
 if ($product)
-	echo $this->template("/snippets/link-eshop-renderlet.php",array('product'=>$product,'btn_title'=>$product->getShort_name())); ?>
+	echo $this->template("/content/link-eshop-renderlet.php",array('product'=>$product,'btn_title'=>$product->getShort_name())); ?>
 
 </div>

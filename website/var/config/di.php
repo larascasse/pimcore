@@ -5,6 +5,8 @@ return [
     'Pimcore\Model\Object\Product\List' => DI\object('Website_Product_List'),
     'Pimcore\Model\Object\Teinte' => DI\object('Website_Teinte'),
     'Pimcore\Model\Object\Teinte\List' => DI\object('Website_Teinte_List'),
+    'Pimcore\Model\Object\MauchampPiece' => DI\object('Website_MauchampPiece'),
+    'Pimcore\Model\Object\MauchampPiece\List' => DI\object('Website_MauchampPiece_List'),
     'Pimcore\Model\Asset\Image' => DI\object('Website\Model\Asset\Image'),
     'Pimcore\Model\Object\ProjectPost' => DI\object('Website\ProjectPost'),
     'Pimcore\Model\Object\ProjectCategory' => DI\object('Website\ProjectCategory'),

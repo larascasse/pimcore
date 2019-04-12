@@ -1436,26 +1436,39 @@ use Pimcore\Model;
         //$this->_helper->json(array("success" => $success));
     }
 
+    public function importDevis($order) {
+        return $this->importMauchampPiece($order);
+    }
+
+    public function importOrder($order) {
+        return $this->importMauchampPiece($order);
+    }
+    public function importInvoice($order) {
+        return $this->importMauchampPiece($order);
+    }
 
 
+    
 
+    public function importMauchampPiece($order) {
+        //echo "importPiece ".$order["Code_Piece"];
 
-    public function clearInheritedValues($product) {
-        //if($product["ean"]!="3760102970126")
-        //    return;
-        
+        $returnMessage = array();
+
         $inheritedValues = Object_Abstract::doGetInheritedValues();
         Object_Abstract::setGetInheritedValues(false);
 
       
-        $o_className = "product";
+        $o_className = "mauchampPiece";
         $className=$o_className;
-        $parentId = 2019;
-        $classId = 5;
+        $parentId = 16269;
+        $classId = 19;
         $keyCol = 1;
 
         $userId = 6;
+        $job = "import";
 
+        
         $class = Object_Class::getById($classId );
         $fields = $class->getFieldDefinitions();
        
@@ -1464,44 +1477,331 @@ use Pimcore\Model;
         $className = "Object_" . ucfirst($className);
 
         $className = Pimcore_Tool::getModelClassMapping($className);
-        
 
         $parent = Object_Abstract::getById($parentId);
 
-        $articleParent = Object_Abstract::getByPath($parent->getFullPath() . "/" . strtolower($product["famille"])."/".$product["code"]);
+        Object_Abstract::setGetInheritedValues(false);
+
+
+        $overwrite = true;
+        $canInsert = true;
+        $isUpdating = false;
+
+        //on ne cree pas des produits non actif et obsolete
+        $canCreate = true;
+
+        
+        $order["published"] = true;
+
+
+
+        if($canCreate) {
+            //On check si le parent existe, sinon on le crée
+            $pPath = '/mauchamp/pieces/'.$order["Code_Depot"].'/'.strtolower($order["Type_Piece"]);
+            $pieceParentList = Object_Abstract::getByPath($pPath);
+
+            if($pieceParentList!=1) {
+               
+                    return ["xxxxx  !!!!  ERROR  pas de pieceParent : ".$pPath];
+
+            }
+            else {
+                $pieceParent =  $pieceParentList;
+            }
+        }
+        
         
 
-        $objectKey = Pimcore_File::getValidFilename($product["ean"]);
-        
+        $objectKey = Pimcore_File::getValidFilename($order["Code_Piece"]);
 
-        $existingEan=null;
-        $existingProductList = Object_Product::getByEan($product["ean"]);
+        $existingPieceList=null;
+        $existingPieceList = Object_MauchampPiece::getByCode_Piece($order["Code_Piece"],['limit' => 1,'unpublished' => true]);
+
         //print_r($parent);
-        if($existingProductList->count()==1) {
-            $existingEan = $existingProductList->current();
-             echo "EAN existe ".$existingEan->getFullPath()."\n";
+        if ($existingPieceList) {
+            $existingPiece = $existingPieceList;
+             //$returnMessage[] =  $order["Code_Piece"]." existe ".$existingPiece->getFullPath()."\n";
              
         }
-        Object_Abstract::setGetInheritedValues(true); 
+        else {
+           
+            if(!$canCreate) {
+                 return  [$order["Code_Piece"]." n'existe pas et ne sera pas crée (non actif) : SKIP\n"];
 
-        if($existingEan) {
-            $objectParent = $existingEan->getParent();
-            foreach ($class->getFieldDefinitions() as $key => $field) {
-                //echo "try ".$key." ".$field->fieldtype."\n";
-                $getter = "get" . ucfirst($key);
-                if($field->fieldtype!="nonownerobjects" && $field->fieldtype!="objects" && $existingEan->$key==$objectParent->$getter()) {
-                   // echo "clear ".$key." ".$field->fieldtype."\n";
-                    $existingEan->setValue($key,null);
-                }
-            
-           }
-           echo 'clear'.$product["ean"].'/n';
-           $existingEan->save();
+                
+                 
+             }
+             else
+                 $returnMessage[] = "\n\n*********  ".$order["Code_Piece"]." n'existe pas  et sera crée ****** \n";
         }
+
+
+
+        if ($canInsert && $objectKey) {
+
+            /* PARENT */
+            $objectParentId = $parentId;
+            $intendedPath = $parent->getFullPath() . "/" . $objectKey;
+
+            if($existingPiece) {
+                $intendedPath = $existingPiece->getFullPath();
+                $objectParentId = $existingPiece->getParent()->getId();
+            }
+            else if($pieceParent) {
+                $intendedPath = $pieceParent->getFullPath() . "/" . $objectKey;
+                $objectParentId = $pieceParent->getId();
+                //echo "article existe ".$pieceParent->getFullPath()."\n";
+            }
+            else {
+                 return  ["Article parent n'existe pas... SKIP\n"];
+              
+            }
+
+           
+            
+            Object_Abstract::setGetInheritedValues(false);
+            $object = Object_Abstract::getByPath($intendedPath);
+            
+            if (!$object instanceof Object_Concrete) {
+                //create new object
+                if($canCreate) {
+                  $object = new $className();
+                }
+                else {
+                  return [$order["Code_Piece"]." ".$order["Code_Piece"]." n'existe pas et ne sera pas crée\n"];
+               
+                }
+
+            } 
+            else if (object instanceof Object_Concrete and $object->getO_className() !== $className) {
+                //delete the old object it is of a different class
+                $object->delete();
+
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else {
+                  return [$order["Code_Piece"]." ".$order["Code_Piece"]." existe  sous une autre class : SKIP\n"];
+                }
+
+            } 
+            else if (object instanceof Object_Folder) {
+                //delete the folder
+               
+                if($canCreate) {
+                  $object->delete();
+                  $object = new $className();
+                }
+                else {
+                  return [$order["Code_Piece"]." ".$order["Code_Piece"]." est un dossier : SKIP\n"];
+                }
+
+            } else {
+                //echo $order["Code_Piece"]." ".$order["Code_Piece"]." sera mis à jour\n";
+                $isUpdating = true;
+
+            }
+            
+
+            
+
+            
+            $object->setParentId($objectParentId);
+            
+            if(!$isUpdating && $canCreate){
+                $object->setClassId($classId);
+                $object->setClassName($o_className);
+                $object->setCreationDate(time());
+                $object->setKey($objectKey);
+                $object->setUserOwner($userId);
+            }
+            
+            if($isUpdating)
+                $object->setModificationDate(time());
+
+           
+            $object->setUserModification($userId);
+
+           
+            $updatedFields = array();
+
+            foreach ($class->getFieldDefinitions() as $key => $field) {
+                
+                if (isset($order[$key])) {
+                    $value = $order[$key];
+
+                    //TODO gérer les clients et les lignes
+                    if(is_array($value)) {
+
+                        $value = json_encode($value, TRUE);
+                    }
+                    else {
+                        //On vonverti la value dans le même format
+                        //que le champ
+                        $value = $field->getFromCsvImport($value); 
+                    }
+
+                    if ($value !== null) {
+
+                        //gestion des champs nouveaux
+                        $oldValue = "".$object->$key;
+                        $testValue = "".$value;
+
+
+                        if( $oldValue != $testValue || !$isUpdating) {
+                            //echo $key."-".$oldValue."-".$value."-\n";
+                            $updatedFields[$key] = $oldValue."->".$value;
+                            $object->setValue($key, $value);
+                        }
+                        
+                    }
+                }
+            }
+
+            if(!$isUpdating) {
+                //$object->setPublished(false);
+                 $object->setPublished($order["published"]);
+            
+            }
+            else {
+                if ($order["published"]) {
+                    $object->setPublished(true);
+                } else {
+                    $object->setPublished(false);
+                }
+            }
+            $needUpdateWorkflow = false;
+            //$needUpdateWorkflowObsolete = false;
+            
+            try {
+                //si il ya des champs à mettre à jour
+                if(count($updatedFields) > 0) {
+
+                    $object->setUserModification(0);
+                    $object->save();
+
+                    if ($isUpdating) {
+
+                        $returnDetail = [];
+                        foreach ($updatedFields as $key => $value) {
+                            $returnDetail[] = $key.":".$value;
+                        }
+                         $returnMessage[] =  "row ".$job." UPDATED | ".$order['Code_Piece']." | ".$object->getFullPath()." | ".implode("|", $returnDetail);
+
+                       
+                          
+
+                         $versions = $object->getVersions();
+                         if (is_array($versions) && count($versions) > 0) {
+                            $version = $versions[0];
+                            //$version->setData($this);
+                            $version->setNote("Azure Update : ".implode("|", $returnDetail));
+                            $version->save();
+                         }
+                    }
+                    else {
+                        $returnMessage[] =  "row ".$job." NEW | ".$order['Code_Piece']." | ".$object->getFullPath();
+                        
+                        try {
+                            $version = new Model\Version();
+                            $version->setCid($object->getId());
+                            $version->setCtype("object");
+                            $version->setDate(time());
+                            $version->setUserId(6);
+                            $version->setNote("Azure Create");
+                            $version->save();
+                        }
+                        catch (Exception $e) {
+                            //echo($e);
+                            $returnMessage[] = "Error save Version\n\n";
+                           
+                        }
+                        
+
+            
+
+                    }
+                }
+                else {
+                     $returnMessage[] = "row ".$job." SKIPPED (no update) | ".$order['Code_Piece']." | ".$object->getFullPath();
+
+                     
+                    
+                }
+
+
+                //ON s'occupe des pieces lies
+         
+                if($order['Commandes_Liees']) {
+
+                    $commandesLies = explode(";", $order['Commandes_Liees']);
+                    
+                    foreach ($commandesLies as $codeCommandeLiee) {
+                        $existingOrder = Object_MauchampPiece::getByCode_Piece($codeCommandeLiee,['limit' => 1,'unpublished' => true]);
+
+
+                        if($existingOrder) {
+                               switch ($order["Type_Piece"]) {
+                                    case 'Facture':
+                                        $existingOrder->setValue('Factures_Liees',$order['Code_Piece']);
+                                        break;
+                                    case 'Devis':
+                                        $existingOrder->setValue('Devis_Lies',$order['Code_Piece']);
+                                        break;
+                                     case 'Bl':
+                                        $existingOrder->setValue('Bl_Lies',$order['Code_Piece']);
+                                        break;
+                                    
+                                    default:
+                                        # code...
+                                        break;
+                                }
+                                 $returnMessage[] = "row  ".$order["Type_Piece"].'_Lies UPDATED in Commande '.$existingOrder->Code_Piece;
+                                $existingOrder->save();
+                        }
+                        else {
+                            $returnMessage[] = "row  ".$order["Type_Piece"].'_Lies WARNING in Commande '.$codeCommandeLiee. 'inexistante';
+
+                        }
+                     
+                    }
+                   
+                }
+               
+
+            } catch (Exception $e) {
+                //echo($e);
+                $returnMessage[] = "Error save ".$e->getMessage()." ".$objectKey." ".$object->getFullPath()."\n\n";
+                //$this->_helper->json(array("success" => false, "message" => $object->getKey() . " - " . $e->getMessage()));
+            }
+             Object_Abstract::setGetInheritedValues($inheritedValues);
+        }
+        else {
+             $returnMessage[] = "row ".$job." SKIPPED  canInsert:".$canInsert. "objectKey : ".$objectKey;
+        }
+
+       
+
+        if(count( $returnMessage) > 0) {
+          
+            return $returnMessage;
+        }
+
+        return "ZARB";
 
 
         //$this->_helper->json(array("success" => $success));
     }
+
+
+
+
+
+
+
+
+   
 
 
  }

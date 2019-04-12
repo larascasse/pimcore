@@ -3633,6 +3633,17 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
 		//pour eviter les récusrion, on force l4ean pour lesparents
 		//TODO, voir si on fait les enfants
+
+		//TODO, on a un bug sur l'import des prix
+		/*
+		N existe /catalogue/_product_base__/01massif/tmp/mm-ar/0_versailles/mm-thasos/mdcheppelvtsbar/420700700706-
+PHP Fatal error:  Nesting level too deep - recursive dependency? in /opt/bitnami/apps/pimcore/htdocs/website/models/Website/Product.php on line 3715
+PHP Stack trace:
+PHP   1. {main}() /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin/odata/pimcore/import_price_to_pimcore.php:0
+PHP   2. LpnPlugin_Importer->importProductPrice() /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin/odata/pimcore/import_price_to_pimcore.php:86
+PHP   3. Pimcore\Model\Object\AbstractObject->save() /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin
+*/
+		$withParent = false;
 		if($withParent && strlen($this->getEan())>0) {
 			
 			//echo "\n\n\n\nSave ".$this->getEan()."\n";
@@ -3759,7 +3770,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
         	Object_Abstract::setGetInheritedValues(false);
         	$this->clearDependentCache();
        		$this->update();
-       		 Object_Abstract::setGetInheritedValues($inheritedValues);
+       		Object_Abstract::setGetInheritedValues($inheritedValues);
        }
        	//$this->save();
 

@@ -3720,14 +3720,14 @@ PHP   3. Pimcore\Model\Object\AbstractObject->save() /opt/bitnami/apps/pimcore/h
 
 
 	            	
-	            //echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key." ".$field->fieldtype."|New:".$objectValue."|Old:".$valueToCheck."|\n";	
+	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key." ".$field->fieldtype."|New:".$objectValue."|Old:".$valueToCheck."|\n";	
 
 		            if ($valueToCheck
-		            	&& $objectValue == $valueToCheck
+		            	&& "".$objectValue == "".$valueToCheck
 		           
 		            ) {
 
-		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
+		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
 		            	if($isSelect)
 		                	$this->setValue($key,[]);
 		                if($field->fieldtype == "input" || $field->fieldtype == "textarea") {

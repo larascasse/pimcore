@@ -69,7 +69,7 @@ foreach($this->multihref("objectPaths")->getElements() as $object) {
     }
 
     if(isset($product)) {
-         echo  $this->template("includes/inc-product-cell.php", array(
+         echo  $this->template("snpippets/inc-product-cell.php", array(
                 "product" => $product,
                 "index"=>$index,
                 "cols"=>12/$count

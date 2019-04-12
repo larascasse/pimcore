@@ -9,7 +9,7 @@
                 foreach ($children as $product) { ?>
                     <?php 
                              echo $product;
-                             $this->template("includes/inc-product-cell.php", array(
+                             $this->template("snippets/inc-product-cell.php", array(
     "product" => $product));
                     ?>
 

@@ -9,7 +9,7 @@ $index=0;
 $cols = 3;
 foreach ($this->products as $product) { 
  
-        $this->template("includes/inc-product-row.php", array(
+        $this->template("snippets/inc-product-row.php", array(
     "product" => $product,"index"=>$index, "cols"=>$cols)); 
 }      
     ?>

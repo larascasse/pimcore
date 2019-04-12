@@ -2,9 +2,7 @@
 /*
 Affiche un produit en link
 */
-?>
 
-<?php
 
 $product = $this->product;
 $image = $product -> getImage_1();
@@ -16,6 +14,16 @@ if(!$image)
 
 $imageformat = isset($this->imageformat)?$this->imageformat:'magento_realisation';
 $cardformat = isset($this->cardformat)?' '.$this->cardformat:'';
+
+$widgetPrice =  '{{block type="core/template" template="lpn/give_me_the_price.phtml" name="givemetheprice_'.$product->getSku().'" product_sku="'.$product->getSku().'"}}';
+
+
+$title 	= 	$product->getShort_name();
+//$title 	=	$product->getSubtype()."<br />".$product->getShort_name();
+if(!empty($product->getShort_description()))
+	$desc 	=  	trim($product->getShort_description()." ".$widgetPrice);
+else
+	$desc 	=  	trim($product->getSku()." ".$widgetPrice);
 ?>
 
 <div class="card <?php echo $cardformat ?>">         
@@ -26,7 +34,7 @@ $cardformat = isset($this->cardformat)?' '.$this->cardformat:'';
 <div class="caption">
 
   <p class="legendtitle"><?php echo  $product->getSubtype()."<br />".$product->getShort_name() ?></p>
-  <p class="legendimage"><?php echo $product->getShort_description()?></p>
+  <p class="legendimage"><?php echo $desc ?></p>
 
 
 </div>

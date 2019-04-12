@@ -24,8 +24,8 @@
 
     <?= $this->multihref("objectPaths",
     [
-        "types" => ["asset"],
-        "subtypes" => ["image","folder"]
+        "types" => ["asset","object"],
+        "subtypes" => ["image","folder","product","teinte"]
 
     ]); ?>
 <?php else: ?>
@@ -54,12 +54,20 @@ if($count>1 && $imageformat=="magento_equigrid_h") {
 <?php 
 
 $assets = array();
-foreach($this->multihref("objectPaths") as $asset) { 
-    $assets = array_merge($assets,Website\Tool\AssetHelper::getAssetArray(array($asset),true)->assets);
+foreach($this->multihref("objectPaths") as $element) {
+    if($element instanceof \Pimcore\Model\Asset\Image || $element instanceof \Pimcore\Model\Asset\Folder)
+        $assets = array_merge($assets,Website\Tool\AssetHelper::getAssetArray(array($element),true)->assets);
+    elseif($element instanceof Pimcore\Model\Object) {
+        $assets = array_merge($assets,array($element));
+
+    }
 }
-foreach ($assets as $asset) {
+foreach ($assets as $element) {
     echo '<div class="col-'.(12/$count).'">';
-    $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$asset,'imageformat'=> $imageformat));
+    if($element instanceof Pimcore\Model\Object)
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('product'=>$element,'imageformat'=> $imageformat));
+    else
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'imageformat'=> $imageformat));
     echo '</div>';
 } 
 ?>

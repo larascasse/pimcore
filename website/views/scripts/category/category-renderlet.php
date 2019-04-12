@@ -5,7 +5,7 @@
             <?php
             foreach ($this->category->products as $product) { 
  
-                         $this->template("includes/inc-product-cell.php", array(
+                         $this->template("snippets/inc-product-cell.php", array(
     "product" => $product));
                     
             } 

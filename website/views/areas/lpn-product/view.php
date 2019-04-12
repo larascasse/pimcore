@@ -50,7 +50,7 @@ echo '<div class="product-solo">';
 
 if ($product instanceof Website_Product):
 echo 
-    $this->template("includes/inc-product-cell-long.php", array(
+    $this->template("snippets/inc-product-cell-long.php", array(
         "product" => $product,
         "index"=>0,
         "cols"=>1

@@ -142,7 +142,7 @@ foreach ($imagesArray->assets as $asset) {
         <div class="col realisation-related">
 
         <?php if ($product) { 
-                $this->template("/snippets/lpn-slider-product-item.php",array('product'=>$product,'cardformat'=>'card-horizontal clickable'));
+                $this->template("/snippets/lpn-slider-product-image-item.php",array('product'=>$product,'cardformat'=>'card-horizontal clickable'));
 
         }
         else {?>

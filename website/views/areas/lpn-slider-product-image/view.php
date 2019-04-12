@@ -10,8 +10,8 @@
 
     <?= $this->multihref("objectPaths",
     [
-        "types" => ["asset"],
-        "subtypes" => ["image","folder"]
+        "types" => ["asset","object"],
+        "subtypes" => ["image","folder","product","teinte"]
 
     ]); ?>
     
@@ -20,16 +20,32 @@
        <!-- Carousel Item -->
             <div class="sliderproductimage" data-ride="carousel">
                 <div class="owl-carousel image-list">
+
 <?php 
 
 $assets = array();
-foreach($this->multihref("objectPaths") as $asset) { 
-    $assets = array_merge($assets,Website\Tool\AssetHelper::getAssetArray(array($asset),true)->assets);
+foreach($this->multihref("objectPaths") as $element) {
+    if($element instanceof \Pimcore\Model\Asset\Image || $element instanceof \Pimcore\Model\Asset\Folder)
+        $assets = array_merge($assets,Website\Tool\AssetHelper::getAssetArray(array($element),true)->assets);
+    elseif($element instanceof Pimcore\Model\Object) {
+        $assets = array_merge($assets,array($element));
+
+    }
+
 }
-foreach ($assets as $asset) {
-    $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$asset));
+foreach ($assets as $element) {
+
+    if($element instanceof Pimcore\Model\Object) {
+
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>null,'product'=>$element,'imageformat'=> $imageformat));
+    }
+    else {
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'product'=>null,'imageformat'=> $imageformat));
+    }
+
 } 
 ?>
+
    
                 </div>
             </div>

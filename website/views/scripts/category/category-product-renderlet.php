@@ -8,7 +8,7 @@
                 foreach ($products as $product) {
                     if(($index%$cols)==0)
                     echo "\n<div class=\"row\">\n";
-                    $this->template("includes/inc-product-cell.php", array(
+                    $this->template("snpippets/inc-product-cell.php", array(
     "product" => $product,"index"=>$index,"cols"=>12/$cols
 
 ));

@@ -3655,6 +3655,9 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 		
 	}
 
+	public function isSalable() {
+		return (($this->actif_web && !$this->getObsolete()) || empty($this->getEan()));
+	}
 
 	 public function clearInheritedValues($save=false) {
        

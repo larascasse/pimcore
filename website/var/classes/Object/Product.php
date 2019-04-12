@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-03-27T09:11:21+01:00
+* Generated at: 2019-04-09T09:12:03+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.23.106
+* IP: 172.31.4.114
 
 
 Fields Summary: 
@@ -78,11 +78,6 @@ Fields Summary:
 - taux_humidite [input]
 - coefficient_retractabilite [calculatedValue]
 - durabilite_ecologique [calculatedValue]
-- price [input]
-- price_1 [input]
-- price_2 [input]
-- price_3 [input]
-- price_4 [input]
 - largeurString [input]
 - longueurString [input]
 - epaisseurString [input]
@@ -180,6 +175,11 @@ Fields Summary:
 - meta_title2 [input]
 - meta_description [input]
 - meta_keywords [input]
+- price [input]
+- price_1 [input]
+- price_2 [input]
+- price_3 [input]
+- price_4 [input]
 - mage_visibility [select]
 - accessoirepopin [objects]
 - mage_accessoirepopin [input]
@@ -292,11 +292,6 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByTaux_humidite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCoefficient_retractabilite ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByDurabilite_ecologique ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLargeurString ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLongueurString ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEpaisseurString ($value, $limit = 0) 
@@ -393,6 +388,11 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_title2 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMeta_keywords ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_1 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_2 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_3 ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPrice_4 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_visibility ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByAccessoirepopin ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_accessoirepopin ($value, $limit = 0) 
@@ -490,11 +490,6 @@ public $pimonly_classe_reaction_feu_fr;
 public $pimonly_resistance_thermique;
 public $pimonly_conductivite_thermique_total;
 public $taux_humidite;
-public $price;
-public $price_1;
-public $price_2;
-public $price_3;
-public $price_4;
 public $largeurString;
 public $longueurString;
 public $epaisseurString;
@@ -591,6 +586,11 @@ public $meta_title;
 public $meta_title2;
 public $meta_description;
 public $meta_keywords;
+public $price;
+public $price_1;
+public $price_2;
+public $price_3;
+public $price_4;
 public $mage_visibility;
 public $accessoirepopin;
 public $mage_accessoirepopin;
@@ -2346,136 +2346,6 @@ public function getDurabilite_ecologique () {
 * @return \Pimcore\Model\Object\Product
 */
 public function setDurabilite_ecologique ($durabilite_ecologique) {
-	return $this;
-}
-
-/**
-* Get price - Prix Public HT
-* @return string
-*/
-public function getPrice () {
-	$preValue = $this->preGetValue("price"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price")->isEmpty($data)) {
-		return $this->getValueFromParent("price");
-	}
-	return $data;
-}
-
-/**
-* Set price - Prix Public HT
-* @param string $price
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice ($price) {
-	$this->price = $price;
-	return $this;
-}
-
-/**
-* Get price_1 - Négoce (1)
-* @return string
-*/
-public function getPrice_1 () {
-	$preValue = $this->preGetValue("price_1"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price_1;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_1")->isEmpty($data)) {
-		return $this->getValueFromParent("price_1");
-	}
-	return $data;
-}
-
-/**
-* Set price_1 - Négoce (1)
-* @param string $price_1
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice_1 ($price_1) {
-	$this->price_1 = $price_1;
-	return $this;
-}
-
-/**
-* Get price_2 - Gros poseur (2)
-* @return string
-*/
-public function getPrice_2 () {
-	$preValue = $this->preGetValue("price_2"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price_2;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_2")->isEmpty($data)) {
-		return $this->getValueFromParent("price_2");
-	}
-	return $data;
-}
-
-/**
-* Set price_2 - Gros poseur (2)
-* @param string $price_2
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice_2 ($price_2) {
-	$this->price_2 = $price_2;
-	return $this;
-}
-
-/**
-* Get price_3 - Pro (3)
-* @return string
-*/
-public function getPrice_3 () {
-	$preValue = $this->preGetValue("price_3"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price_3;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_3")->isEmpty($data)) {
-		return $this->getValueFromParent("price_3");
-	}
-	return $data;
-}
-
-/**
-* Set price_3 - Pro (3)
-* @param string $price_3
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice_3 ($price_3) {
-	$this->price_3 = $price_3;
-	return $this;
-}
-
-/**
-* Get price_4 - Public (4)
-* @return string
-*/
-public function getPrice_4 () {
-	$preValue = $this->preGetValue("price_4"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->price_4;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_4")->isEmpty($data)) {
-		return $this->getValueFromParent("price_4");
-	}
-	return $data;
-}
-
-/**
-* Set price_4 - Public (4)
-* @param string $price_4
-* @return \Pimcore\Model\Object\Product
-*/
-public function setPrice_4 ($price_4) {
-	$this->price_4 = $price_4;
 	return $this;
 }
 
@@ -4972,6 +4842,136 @@ public function getMeta_keywords () {
 */
 public function setMeta_keywords ($meta_keywords) {
 	$this->meta_keywords = $meta_keywords;
+	return $this;
+}
+
+/**
+* Get price - Prix Public HT
+* @return string
+*/
+public function getPrice () {
+	$preValue = $this->preGetValue("price"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price")->isEmpty($data)) {
+		return $this->getValueFromParent("price");
+	}
+	return $data;
+}
+
+/**
+* Set price - Prix Public HT
+* @param string $price
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice ($price) {
+	$this->price = $price;
+	return $this;
+}
+
+/**
+* Get price_1 - Négoce (1)
+* @return string
+*/
+public function getPrice_1 () {
+	$preValue = $this->preGetValue("price_1"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price_1;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_1")->isEmpty($data)) {
+		return $this->getValueFromParent("price_1");
+	}
+	return $data;
+}
+
+/**
+* Set price_1 - Négoce (1)
+* @param string $price_1
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice_1 ($price_1) {
+	$this->price_1 = $price_1;
+	return $this;
+}
+
+/**
+* Get price_2 - Gros poseur (2)
+* @return string
+*/
+public function getPrice_2 () {
+	$preValue = $this->preGetValue("price_2"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price_2;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_2")->isEmpty($data)) {
+		return $this->getValueFromParent("price_2");
+	}
+	return $data;
+}
+
+/**
+* Set price_2 - Gros poseur (2)
+* @param string $price_2
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice_2 ($price_2) {
+	$this->price_2 = $price_2;
+	return $this;
+}
+
+/**
+* Get price_3 - Pro (3)
+* @return string
+*/
+public function getPrice_3 () {
+	$preValue = $this->preGetValue("price_3"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price_3;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_3")->isEmpty($data)) {
+		return $this->getValueFromParent("price_3");
+	}
+	return $data;
+}
+
+/**
+* Set price_3 - Pro (3)
+* @param string $price_3
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice_3 ($price_3) {
+	$this->price_3 = $price_3;
+	return $this;
+}
+
+/**
+* Get price_4 - Public (4)
+* @return string
+*/
+public function getPrice_4 () {
+	$preValue = $this->preGetValue("price_4"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->price_4;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("price_4")->isEmpty($data)) {
+		return $this->getValueFromParent("price_4");
+	}
+	return $data;
+}
+
+/**
+* Set price_4 - Public (4)
+* @param string $price_4
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPrice_4 ($price_4) {
+	$this->price_4 = $price_4;
 	return $this;
 }
 

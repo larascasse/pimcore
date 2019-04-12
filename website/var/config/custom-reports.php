@@ -1945,7 +1945,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "columnAction" => "openObject",
-                "id" => "extModel717-1"
+                "id" => "extModel66882-1"
             ],
             [
                 "name" => "code",
@@ -1954,7 +1954,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-2"
+                "id" => "extModel66882-2"
             ],
             [
                 "name" => "ean",
@@ -1963,7 +1963,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-3"
+                "id" => "extModel66882-3"
             ],
             [
                 "name" => "name",
@@ -1973,7 +1973,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "columnAction" => "",
-                "id" => "extModel717-4"
+                "id" => "extModel66882-4"
             ],
             [
                 "name" => "mage_short_name",
@@ -1982,7 +1982,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-5"
+                "id" => "extModel66882-5"
             ],
             [
                 "name" => "image_1",
@@ -1991,7 +1991,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-6"
+                "id" => "extModel66882-6"
             ],
             [
                 "name" => "image_2",
@@ -2000,7 +2000,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-7"
+                "id" => "extModel66882-7"
             ],
             [
                 "name" => "image_3",
@@ -2009,7 +2009,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-8"
+                "id" => "extModel66882-8"
             ],
             [
                 "name" => "actif_web",
@@ -2018,7 +2018,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-9"
+                "id" => "extModel66882-9"
             ],
             [
                 "name" => "obsolete",
@@ -2027,7 +2027,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel717-10"
+                "id" => "extModel66882-10"
             ]
         ],
         "niceName" => "Produits sans média",
@@ -2043,7 +2043,7 @@ return [
         "yAxis" => [
 
         ],
-        "modificationDate" => 1552403267,
+        "modificationDate" => 1554123393,
         "creationDate" => 1517848789,
         "id" => "product-missing-media"
     ],
@@ -2181,9 +2181,9 @@ return [
             [
                 "sql" => "oo_id,ean,state,status,mage_short_name,actif_web,obsolete,weight,epaisseur,longueur,largeur,colisage,unite,o_modificationDate",
                 "from" => "element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id",
-                "where" => "state = 'needs_magento_sync'",
+                "where" => "state = 'needs_magento_sync' and ean IS NOT NULL",
                 "groupby" => "",
-                "sqlText" => "SELECT oo_id,ean,state,status,mage_short_name,actif_web,obsolete,weight,epaisseur,longueur,largeur,colisage,unite,o_modificationDate FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync'",
+                "sqlText" => "SELECT oo_id,ean,state,status,mage_short_name,actif_web,obsolete,weight,epaisseur,longueur,largeur,colisage,unite,o_modificationDate FROM element_workflow_state LEFT JOIN object_5 ON element_workflow_state.cid = object_5.oo_id WHERE state = 'needs_magento_sync' and ean IS NOT NULL",
                 "type" => "sql"
             ]
         ],
@@ -2196,7 +2196,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "columnAction" => "openObject",
-                "id" => "extModel2015-1"
+                "id" => "extModel42501-1"
             ],
             [
                 "name" => "state",
@@ -2205,7 +2205,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-2"
+                "id" => "extModel42501-2"
             ],
             [
                 "name" => "ean",
@@ -2214,7 +2214,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-3"
+                "id" => "extModel42501-3"
             ],
             [
                 "name" => "status",
@@ -2223,7 +2223,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-4"
+                "id" => "extModel42501-4"
             ],
             [
                 "name" => "mage_short_name",
@@ -2232,7 +2232,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-5"
+                "id" => "extModel42501-5"
             ],
             [
                 "name" => "actif_web",
@@ -2241,7 +2241,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-6"
+                "id" => "extModel42501-6"
             ],
             [
                 "name" => "obsolete",
@@ -2250,7 +2250,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-7"
+                "id" => "extModel42501-7"
             ],
             [
                 "name" => "weight",
@@ -2259,7 +2259,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-8"
+                "id" => "extModel42501-8"
             ],
             [
                 "name" => "epaisseur",
@@ -2268,7 +2268,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-9"
+                "id" => "extModel42501-9"
             ],
             [
                 "name" => "longueur",
@@ -2277,7 +2277,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-10"
+                "id" => "extModel42501-10"
             ],
             [
                 "name" => "largeur",
@@ -2286,7 +2286,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-11"
+                "id" => "extModel42501-11"
             ],
             [
                 "name" => "colisage",
@@ -2295,7 +2295,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-12"
+                "id" => "extModel42501-12"
             ],
             [
                 "name" => "unite",
@@ -2304,7 +2304,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel2015-13"
+                "id" => "extModel42501-13"
             ],
             [
                 "name" => "o_modificationDate",
@@ -2314,7 +2314,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "displayType" => "date",
-                "id" => "extModel2015-14"
+                "id" => "extModel42501-14"
             ]
         ],
         "niceName" => "Produits à synchroniser ",
@@ -2330,7 +2330,7 @@ return [
         "yAxis" => [
 
         ],
-        "modificationDate" => 1553672752,
+        "modificationDate" => 1554126375,
         "creationDate" => 1528454000,
         "id" => "needsmagesync"
     ],
@@ -2613,5 +2613,146 @@ return [
         "modificationDate" => 1553690899,
         "creationDate" => 1553682233,
         "id" => "products_obsoletes"
+    ],
+    "products_problemes" => [
+        "name" => "products_problemes",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "oo_id,ean,mage_short_name,actif_web,obsolete,weight,epaisseur,longueur,largeur,colisage,unite,o_modificationDate\n",
+                "from" => "object_5",
+                "where" => "actif_web = 1 and obsolete IS NULL and (longueur='' \nOR longueur IS NULL\nOR largeur = '' \nOR largeur IS NULL\nOR epaisseur = '' \nOR epaisseur IS NULL\nOR weight = ''\nOR weight IS NULL\nOR colisage = '' OR colisage IS NULL)",
+                "groupby" => "",
+                "sqlText" => "SELECT oo_id,ean,mage_short_name,actif_web,obsolete,weight,epaisseur,longueur,largeur,colisage,unite,o_modificationDate\n FROM object_5 WHERE actif_web = 1 and obsolete IS NULL and (longueur='' \nOR longueur IS NULL\nOR largeur = '' \nOR largeur IS NULL\nOR epaisseur = '' \nOR epaisseur IS NULL\nOR weight = ''\nOR weight IS NULL\nOR colisage = '' OR colisage IS NULL)",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "oo_id",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "columnAction" => "openObject",
+                "id" => "extModel840-1"
+            ],
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-2"
+            ],
+            [
+                "name" => "mage_short_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-3"
+            ],
+            [
+                "name" => "actif_web",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-4"
+            ],
+            [
+                "name" => "obsolete",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-5"
+            ],
+            [
+                "name" => "weight",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-6"
+            ],
+            [
+                "name" => "epaisseur",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-7"
+            ],
+            [
+                "name" => "longueur",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-8"
+            ],
+            [
+                "name" => "largeur",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-9"
+            ],
+            [
+                "name" => "colisage",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-10"
+            ],
+            [
+                "name" => "unite",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-11"
+            ],
+            [
+                "name" => "o_modificationDate",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel840-12"
+            ]
+        ],
+        "niceName" => "Produits à problème",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => FALSE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1553789944,
+        "creationDate" => 1553785816,
+        "id" => "products_problemes"
     ]
 ];

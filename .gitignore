@@ -20,3 +20,5 @@ vendor/*
 /website/var/config/web2print.php
 /website/var/email/*
 /.htaccess
+/website/cli/test.php
+/plugins/LpnPlugin/cli/_old_

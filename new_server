@@ -74,3 +74,13 @@ sudo ln -s /usr/local/ffmpeg/ffmpeg /usr/local/bin/
 sudo ln -s /usr/local/ffmpeg/ffprobe /usr/local/bin/
 sudo ln -s /usr/local/ffmpeg/qt-faststart /usr/local/bin/
 sudo ln -s /usr/local/ffmpeg/qt-faststart /usr/local/bin/qtfaststart
+
+
+sudo crontab -u bitnami -e
+
+0 8 * * *  sudo su daemon -s /bin/bash -- /opt/bitnami/php/bin/php /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin/odata/pimcore/import_ean_to_pimcore.php
+
+
+
+*/5 * * * *  sudo su daemon -s /bin/bash -- /opt/bitnami/php/bin/php /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin/cli/sync_product_to_magento.php
+

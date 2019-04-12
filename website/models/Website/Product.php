@@ -3722,14 +3722,14 @@ Ca a lm'air de marche, PB de comparaisd d'un HREF avec un PDF ...
 
 
 	            	
-	            echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key." ".$field->fieldtype."|New:".$objectValue."|Old:".$valueToCheck."|\n";	
+	            //echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key." ".$field->fieldtype."|New:".$objectValue."|Old:".$valueToCheck."|\n";	
 
 		            if ($valueToCheck
 		            	&& "".$objectValue == "".$valueToCheck
 		           
 		            ) {
 
-		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
+		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
 		            	if($isSelect)
 		                	$this->setValue($key,[]);
 		                if($field->fieldtype == "input" || $field->fieldtype == "textarea") {

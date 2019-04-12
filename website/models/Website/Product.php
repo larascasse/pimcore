@@ -3644,8 +3644,10 @@ PHP   2. LpnPlugin_Importer->importProductPrice() /opt/bitnami/apps/pimcore/htdo
 PHP   3. Pimcore\Model\Object\AbstractObject->save() /opt/bitnami/apps/pimcore/htdocs/plugins/LpnPlugin
 
 Ca a lm'air de marche, PB de comparaisd d'un HREF avec un PDF ...
+mias bon, c'est un peu lon,g ....
+A la,ncer un autre jour
 */
-		//$withParent = false;
+		$withParent = true;
 		if($withParent && strlen($this->getEan())>0) {
 			
 			//echo "\n\n\n\nSave ".$this->getEan()."\n";

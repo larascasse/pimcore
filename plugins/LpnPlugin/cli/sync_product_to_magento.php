@@ -46,8 +46,8 @@ if(count($eans)>0) {
    $params = ["ean"=>implode(",", $eans),"create"=>1];
 
    //PROD
-   $url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
-   $params = ["ean"=>implode(",", $eans)];
+   //$url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
+   //$params = ["ean"=>implode(",", $eans)];
 
    print_r($params);
    $content = \Pimcore\Tool::getHttpData($url,null,$params);

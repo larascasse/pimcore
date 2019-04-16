@@ -18,10 +18,6 @@ Pimcore_Model_Cache::disable();
 
 
  $conditionFilters = array(
-    "( 
-         o_path LIKE '/catalogue/_product_base__/05contreco/tmp/%'
-        OR o_path LIKE '/catalogue/_product_base__/01massif/tmp/%'
-    )",
     "ean IS NULL",
     "code IS NOT NULL",
     //"LOWER(name) like '% ".strtolower($teinteName)." %'"
@@ -51,7 +47,7 @@ $objects = array();
         echo $object->actif_web?"Actif\n":"--\n";
 
         if($object->actif_web) {
-            $object->actif_web = 0;
+            $object->setActif_web(false);
             $object->save();
         }
     

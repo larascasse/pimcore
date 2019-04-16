@@ -19,7 +19,7 @@ Pimcore_Model_Cache::disable();
 
  $conditionFilters = array(
     "ean IS NULL",
-    "code IS NOT NULL",
+   // "code IS NOT NULL",
     //"LOWER(name) like '% ".strtolower($teinteName)." %'"
     );
 

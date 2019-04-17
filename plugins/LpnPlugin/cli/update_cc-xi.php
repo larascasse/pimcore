@@ -99,7 +99,8 @@ Usé,use
                 break;
         }*/
         //pimonly_section
-        $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
+        //$object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
+        $object->setValue("pimonly_name_suffixe",$object->getEpaisseur().'x'.$object->getLargeur()."x1000-2400");
         $object->setValue('traitement_surface',"brosse");
     }
     else {
@@ -132,7 +133,7 @@ Usé,use
          //Article
          else  {
             $object->setValue("finition","vernis-semi-mat");
-            $object->setValue("pimonly_name_suffixe","brossé vernis semi-mat");
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."brossé vernis semi-mat");
            // $parent->save();
             
          }
@@ -154,7 +155,7 @@ Usé,use
          //Article
          else  {
             $object->setValue("finition","Verni mat");
-            $object->setValue("pimonly_name_suffixe","vernis mat");
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."vernis mat");
            // $parent->save();
             
          }
@@ -172,7 +173,7 @@ Usé,use
          }
          else {
             $object->setValue("finition","Verni satiné");
-            $object->setValue("pimonly_name_suffixe","vernis satiné");
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."vernis satiné");
            // $parent->save();
          }
 

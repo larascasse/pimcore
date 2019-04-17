@@ -99,9 +99,44 @@ Usé,use
         $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$object->getPimonly_section());
         $object->setValue('traitement_surface',"brosse");
     }
+    else {
+        
+        if(stristr($article, "G2")) {
+            $object->setChanfreins(2);
+        }
+        else if(stristr($article, "G4")) {
+            $object->setChanfreins(4);
+
+        }
+        else if(stristr($article, "G0")) {
+            $object->setChanfreins(0);
+
+        }
+    }
     //CONTEMPORAIN
-    if(stristr($article, "vbm") || stristr($article, "bic")) {
-        echo "OK !\n";
+    if(stristr($scienergieCourt, "smat")) {
+         //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
+
+
+        
+
+         //EAN
+         if(strlen($object->getEan())>0) {
+            //$object->setValue("pimonly_name_suffixe",$object->pimonly_dimensions);
+
+
+         }
+         //Article
+         else  {
+            $object->setValue("finition","vernis-semi-mat");
+            $object->setValue("pimonly_name_suffixe","vernis semi-mat");
+           // $parent->save();
+            
+         }
+         
+         $save=true;
+    } 
+    elseif(stristr($article, "vbm") || stristr($article, "bic")) {
          //$object->setTraitement_surface(("vieilli use brosse rives abimees"));
 
 
@@ -141,6 +176,9 @@ Usé,use
 
         
     }
+
+
+
 
     
     //$object->setValue('origine_bois','France');

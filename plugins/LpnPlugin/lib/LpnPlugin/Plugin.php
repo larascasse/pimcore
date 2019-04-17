@@ -120,7 +120,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         $oldDataMessage = $data["message"];
                     }
                     //echo "Z".$oldDataMessage."\n";
-                    $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus);
+                    $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus,true);
                     //echo "Y".$data["message"]."\n";
                     $data["message"] = $oldDataMessage."\n".$data["message"];
 

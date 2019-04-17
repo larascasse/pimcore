@@ -126,7 +126,7 @@ foreach ($list->getObjects() as $object) {
     
    if($isPointDeHongrie) {
 
-        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."- PAT ".$object->getLongueur()." 45°";
+        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()."(PàT) 45°";
         $longueur_txt = 'Longueurs pointe à talon 510 mm';
     } 
 

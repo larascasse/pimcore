@@ -103,7 +103,7 @@ Usé,use
         $object->setValue('traitement_surface',"brosse");
     }
     else {
-        
+
         if(stristr($article, "G2")) {
             $object->setChanfreins(2);
         }
@@ -132,7 +132,7 @@ Usé,use
          //Article
          else  {
             $object->setValue("finition","vernis-semi-mat");
-            $object->setValue("pimonly_name_suffixe","vernis semi-mat");
+            $object->setValue("pimonly_name_suffixe","brossé vernis semi-mat");
            // $parent->save();
             
          }

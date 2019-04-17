@@ -126,12 +126,12 @@ foreach ($list->getObjects() as $object) {
     
    if($isPointDeHongrie) {
 
-        $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
+        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur()." 45°";
     } 
 
     else if($isbatonRompu) {
 
-        $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
+        $suffixeEan = $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
     }
 
     $object->setValue('longueur_txt',$longueur_txt); 

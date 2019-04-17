@@ -32,10 +32,9 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
             $products = $e->getTarget();
 
             $returnValueContainer = $e->getParam('returnValueContainer');
-     
-           
 
-
+            //On fait un SQL direct pour aller plus vite, surtout pour le batch
+            $tryQuickMode = $e->getParam('tryQuickMode');
 
             if(is_array($products)) {
 
@@ -66,7 +65,7 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
                         $oldDataMessage = $data["message"];
                     }
                     //echo "Z".$oldDataMessage."\n";
-                    $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus);
+                    $data = self::updateProductWorkflow($product,$user,$action,$newState,$newStatus,$tryQuickMode);
                     //echo "Y".$data["message"]."\n";
                     $data["message"] = $oldDataMessage."\n".$data["message"];
 
@@ -230,14 +229,39 @@ class Plugin extends PluginLib\AbstractPlugin implements PluginLib\PluginInterfa
     }
 
 
-    public static function updateProductWorkflow($product,$user,$action, $newState,$newStatus) {
+    public static function updateProductWorkflow($product,$user,$action, $newState,$newStatus,$tryQuickMode = false) {
          
          $data = [
                 'success' => true,
                  'message' => 'no workflow update',
 
             ];
-        
+
+
+        //On fait un SQL direct pour aller plus vite, surtout pour le batch
+        if ($tryQuickMode) {
+
+            $db = \Pimcore\Db::get();
+            //$sql = "UPDATE element_workflow_state SET state = '".$newState."', status = '".$newStatus."'  WHERE cid=".$product->getId() ." AND workflowId=1 AND ctype='object'";
+            $sql = "REPLACE INTO element_workflow_state (state,status,cid,workflowId,ctype) VALUES ('".$newState."','".$newStatus."',".$product->getId().",1,'object')";
+            //echo $sql;
+            $result = $db->query($sql);
+
+            if($result) {
+
+                  $data = [
+                        'success' => true,
+                        'message' => 'Wotkflow Updated QUIRK '.$product->getSku(),
+                        //'callback' => 'reloadObject'
+                    ];
+
+                return $data;
+            }
+
+
+        }
+
+
         $manager = Workflow\Manager\Factory::getManager($product,$user);
         try {
 

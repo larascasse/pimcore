@@ -70,7 +70,7 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
 
                 foreach ($childrens as $simpleProduct) {
                     if(strlen($simpleProduct->getSku())>0)
-                     $products[] = $simpleProduct;
+                      $products[] = $simpleProduct;
                 }
             }
 
@@ -115,8 +115,13 @@ class LpnMageSync_IndexController extends \Pimcore\Controller\Action\Admin
       
               $returnValueContainer = new \Pimcore\Model\Tool\Admin\EventDataContainer(array());
 
+
+               //On fait un SQL direct pour aller plus vite, surtout pour le batch
+              $tryQuickMode = true;
+
               \Pimcore::getEventManager()->trigger('lpn.azure.postUpdate',$products,[
-                    "returnValueContainer" => $returnValueContainer
+                    "returnValueContainer" => $returnValueContainer,
+                    "tryQuickMode" => $tryQuickMode
                 ]);
 
                $workflowReturn = $returnValueContainer->getData();

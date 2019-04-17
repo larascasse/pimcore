@@ -23,11 +23,14 @@ $conditionFilters = array("
     ");
 
 
-$list = new Pimcore\Model\Object\Listing();
+$list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrder("ASC");
 //$list->setOrderKey("o_id");
+
+$list->setOrder("DESC");
+$list->setOrderKey("o_id");
 
 
 $list->load();

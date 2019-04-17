@@ -44,15 +44,13 @@ $objects = array();
 
  foreach ($list->getObjects() as $object) {
         
-        echo $object->actif_web?"Actif\n":"--\n";
+    echo $object->actif_web?"Actif ".$object->get."\n":"--\n";
 
-        if($object->actif_web) {
-            $object->setActif_web(false);
-            $object->save();
-        }
+    if($object->actif_web) {
+        $object->setActif_web(false);
+        $object->save();
+    }
     
-
-
 
 }
 

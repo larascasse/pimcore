@@ -28,7 +28,7 @@ $cids = [];
 
 $i=0;
 
-//echo count($results)." à synchroniser ------- \n";
+echo count($results)." sélectionnés ------- \n";
 foreach ($results as $result) {
  
   if(strlen($result['ean'])>0) {

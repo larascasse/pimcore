@@ -27,14 +27,16 @@ $eans = [];
 $cids = [];
 
 $i=0;
+
+//echo count($results)." à synchroniser ------- \n";
 foreach ($results as $result) {
  
   if(strlen($result['ean'])>0) {
     //echo $result['ean']."\n";
     $eans[] = $result['ean'];
     $cids[] = $result['cid'];
-    if($i++>30)
-      break;
+    //if($i++>30)
+    //  break;
   }
 }
 

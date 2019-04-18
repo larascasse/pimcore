@@ -313,6 +313,11 @@ class Website_Teinte extends Object_Teinte {
 	            $return["short_name"]  = "Sol plaqué ".$return["name"];
 	            $return["name"]  = "Sol plaqué ".$return["name"];
 	            $return["pose"]  = $this->getPose();
+
+	           case 'sol-vinyl-rigide':
+	            $return["short_name"]  = "Sol vinyle rigide ".$return["name"];
+	            $return["name"]  = "Sol vinyle rigide ".$return["name"];
+	            $return["pose"]  = $this->getPose();
 	            break;
 	        
 	        default:

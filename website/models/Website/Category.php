@@ -5,7 +5,10 @@ class Website_Category extends Object_Category {
 
 	 public function getShortArray() {
 
-    
+         $inheritance = Object_Abstract::doGetInheritedValues(); 
+         Object_Abstract::setGetInheritedValues(false); 
+
+
     	 $itemData= array();
          $itemData["id"] = $this->getId();
          $itemData["modificationDate"] = $this->o_modificationDate;
@@ -45,6 +48,8 @@ class Website_Category extends Object_Category {
          if($parent->code && $parent->o_key != "taxonomies") {
             $itemData["code"] = $parent->getPath()."/".$itemData["code"];
          }*/
+
+           Object_Abstract::setGetInheritedValues($inheritance); 
 
          return $itemData;
     }

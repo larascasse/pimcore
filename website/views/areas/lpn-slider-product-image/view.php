@@ -30,6 +30,8 @@ foreach($this->multihref("objectPaths") as $element) {
     }
 
 }
+$imageformat = 'magento_slider';
+
 foreach ($assets as $element) {
 
     if($element instanceof Pimcore\Model\Object) {

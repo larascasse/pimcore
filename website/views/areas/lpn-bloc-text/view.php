@@ -11,7 +11,7 @@ if($this->editmode) {
             "store" => [['bloctext','Aligné à gauche'],
             			['table-intersticiel','Centré Fond blanc'],
                         ['table-intersticiel first','Centré Fond blanc, premeir bloc'],
-            			['introcategory','Centré Fond noir'],
+            			['introcategory','Intro Category, Centré Fond Gris'],
             			['subcategory','Sous-catégorie']
             		 ]
         ]); ?>

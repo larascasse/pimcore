@@ -36,10 +36,10 @@ foreach ($assets as $element) {
 
     if($element instanceof Pimcore\Model\Object) {
 
-        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>null,'product'=>$element,'imageformat'=> $imageformat));
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>null,'product'=>$element,'imageformat'=> $imageformat,'cardformat'=>'clickable'));
     }
     else {
-        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'product'=>null,'imageformat'=> $imageformat));
+        $this->template("/snippets/lpn-slider-product-image-item.php",array('asset'=>$element,'product'=>null,'imageformat'=> $imageformat,'cardformat'=>'clickable'));
     }
 
 } 

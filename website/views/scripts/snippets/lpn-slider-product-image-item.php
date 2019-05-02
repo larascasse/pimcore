@@ -87,7 +87,14 @@ if($product) {
 ?>       
 <div class="card <?php echo $cardformat ?>">    
 <?php 
-echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getPath().'">'.$asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]).'</a>'; ?>
+
+//Plus de zoom now.. on click !!
+if (!$product || ! $product->isSalable())
+echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getPath().'">'.$asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]).'</a>'; 
+else
+echo $asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]); 
+
+?>
 
 <div class="card-block caption">
   <p class="card-title legendtitle"><?php echo $title ?></p>

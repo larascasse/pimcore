@@ -89,9 +89,9 @@ if($product) {
 <?php 
 
 //Plus de zoom now.. on click !!
-if (!$product || ! $product->isSalable())
-echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getPath().'">'.$asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]).'</a>'; 
-else
+
+//echo '<a href="#" data-zoom="'.$asset->getThumbnail('magento_realisation')->getPath().'">'.$asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]).'</a>'; 
+
 echo $asset->getThumbnail($imageformat)->getHTML(["class" => "img-fluid",/*"attributes"=>["data-zoom"=>$asset->getThumbnail('magento_realisation')->getPath()]*/]); 
 
 ?>

@@ -9,13 +9,23 @@ Affiche un asset, et le produit associé en légende
 $asset = $this->asset;
 $product = $this->product;
 
+if($product && $product instanceof Object_Teinte) {
+    $teinte = $product->getTeinteObject();
+    $products = $teinte->getSimilarTeinteProducts();
+    if(count($products)>0) {
+    	$products = $products[0];
+    }
+}
+
 
 if(!$asset && $product) {
-	$asset = $product -> getImage_1();
-	if(!$asset)
-		$asset = $product -> getImage_2();
-	if(!$asset)
-		$asset = $product -> getImage_3();
+
+    	$asset = $product -> getImage_1();
+		if(!$asset)
+			$asset = $product -> getImage_2();
+		if(!$asset)
+			$asset = $product -> getImage_3();
+	
 }
 
 if($asset && !$product) {

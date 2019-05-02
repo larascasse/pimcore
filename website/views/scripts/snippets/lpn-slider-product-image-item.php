@@ -8,7 +8,8 @@ Affiche un asset, et le produit associé en légende
 
 $asset = $this->asset;
 $product = $this->product;
-
+echo $product;
+die;
 if($product && $product instanceof Object_Teinte) {
     $products = $product->getSimilarTeinteProducts();
     if(count($products)>0) {

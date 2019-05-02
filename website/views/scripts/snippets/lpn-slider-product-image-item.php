@@ -10,8 +10,7 @@ $asset = $this->asset;
 $product = $this->product;
 
 if($product && $product instanceof Object_Teinte) {
-    $teinte = $product->getTeinteObject();
-    $products = $teinte->getSimilarTeinteProducts();
+    $products = $product->getSimilarTeinteProducts();
     if(count($products)>0) {
     	$products = $products[0];
     }

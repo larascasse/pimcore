@@ -329,8 +329,8 @@ class Website_Teinte extends Object_Teinte {
 	            break;
 
 	          case 'bardage-vieux-bois':
-	            $return["short_name"]  = "Bardage vieux bois".$return["name"];
-	            $return["name"]  = "Bardage vieux bois".$return["name"];
+	            $return["short_name"]  = "Bardage vieux bois ".$return["name"];
+	            $return["name"]  = "Bardage vieux bois ".$return["name"];
 	            $return["pose"]  = $this->getPose();
 	            break;
 	        

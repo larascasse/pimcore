@@ -9,14 +9,18 @@ Affiche un asset, et le produit associé en légende
 $asset = $this->asset;
 $product = $this->product;
 echo $product;
-die;
+
 if($product && $product instanceof Object_Teinte) {
+
+	echo $product;
+
+
     $products = $product->getSimilarTeinteProducts();
     if(count($products)>0) {
     	$products = $products[0];
     }
 }
-
+echo "klllmklm";
 
 if(!$asset && $product) {
 

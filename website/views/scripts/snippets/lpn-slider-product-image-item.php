@@ -9,6 +9,7 @@ Affiche un asset, et le produit associé en légende
 $asset = $this->asset;
 $product = $this->product;
 echo $product;
+echo $product->getPath();
 
 if($product && $product instanceof Object_Teinte) {
 

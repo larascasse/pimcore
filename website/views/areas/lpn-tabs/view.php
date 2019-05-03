@@ -98,7 +98,7 @@ else {
 
     <?php 
     if (strlen(trim($title)) > 0 ) : ?>
-    <div class="section-title">
+    <div class="section-title container-main">
        <h2><?php echo $title ?></h2> 
     </div> 
   <?php endif; ?>

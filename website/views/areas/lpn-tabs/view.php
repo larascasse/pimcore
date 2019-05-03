@@ -2,15 +2,19 @@
 $i=0;
 
 $isV4 = $this->layout()->getLayout() == "layout-lpnv4";
+
+$title = $this->input("title",
+  [
+      "placeholder"=>"Titre"
+  ]); 
+
+
 ?>
 <?php if($this->editmode) {
     echo '<hr><h2>Tabulation</h2><div class="tab-title">';
 
     echo "<div>";
-    $title = $this->input("title",
-    [
-        "placeholder"=>"Titre"
-    ]); 
+    echo  $title;
      echo "</div>";
 
      echo "<div>";
@@ -87,10 +91,12 @@ else {
   <!-- Tab -->
   <div class="<?php echo $cssClass?>">
 
+    <?php 
+    if (strlen(trim($title)) > 0 ) : ?>
     <div class="section-title">
-       <h2>Accessoires</h2> 
+       <h2><?php echo $title ?></h2> 
     </div> 
-
+  <?php endif; ?>
 
     <div class="nav nav-pills" role="tablist">
 

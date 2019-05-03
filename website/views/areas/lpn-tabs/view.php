@@ -5,7 +5,8 @@ $isV4 = $this->layout()->getLayout() == "layout-lpnv4";
 
 $title = $this->input("title",
   [
-      "placeholder"=>"Titre"
+      "placeholder"=>"Titre",
+      "width" => 600,
   ]); 
 
 

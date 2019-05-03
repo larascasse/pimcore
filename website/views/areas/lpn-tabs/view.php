@@ -12,8 +12,10 @@ $title = $this->input("title",
 
 ?>
 <?php if($this->editmode) {
-    echo '<hr><h2>Tabulation</h2><div class="tab-title">';
+    echo '<hr><h2>Tabulation</h2>';
 
+    echo "<div>";
+    
     echo "<div>";
     echo  $title;
      echo "</div>";

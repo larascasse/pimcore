@@ -6,6 +6,27 @@ $isV4 = $this->layout()->getLayout() == "layout-lpnv4";
 <?php if($this->editmode) {
     echo '<hr><h2>Tabulation</h2><div class="tab-title">';
 
+    echo "<div>";
+    $title = $this->input("title",
+    [
+        "placeholder"=>"Titre"
+    ]); 
+     echo "</div>";
+
+     echo "<div>";
+     echo $this->select("cssClass", [
+            "width" => 300,
+            "reload" => false,
+            "store" => [
+                ['section-tab',"Titre centré"],
+                ['section-tab-inline','Titre et boutons alignés'],
+                ]
+        ]);
+     echo "</div>";
+
+
+
+
     while($this->block("contentblock")->loop()) { ?>
         <h3><?= $this->input("title", ["placeholder" => "Titre", "width"=>400]); ?></h3>
         <?= $this->template("helper/lpn-areablock.php", array("name" => "name".$i++, "excludeBricks" => array("lpn-tabs"))) ?>
@@ -53,7 +74,24 @@ else {
 
 <?php else : ?>
 
-  <div class="section-tab">
+  <?php 
+     $cssClass = $this->select("cssClass")->getData();
+        
+        if(!$cssClass) {
+            $cssClass = 'section-tab';
+    }
+
+
+  ?>
+
+  <!-- Tab -->
+  <div class="<?php echo $cssClass?>">
+
+    <div class="section-title">
+       <h2>Accessoires</h2> 
+    </div> 
+
+
     <div class="nav nav-pills" role="tablist">
 
      <?php 
@@ -74,7 +112,7 @@ else {
     </div>
  
 
-
+    <!-- Tab content -->
     <div class="tab-content">
       <?php
 
@@ -95,16 +133,9 @@ else {
             } ?>
       
     </div>
-
-
-
+    <!-- / Tab content -->
   </div>
-
-
-              
-
-
-
+  <!-- / Tab -->
   <?php endif; ?>
 <?php } ?>
 

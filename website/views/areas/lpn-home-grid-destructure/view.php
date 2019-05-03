@@ -77,7 +77,7 @@ $style = strlen($color->getData())>0 ? 'style="background-color:'.$color->getDat
 $gridClass = strlen($color->getData())>0 ? 'grid-bkg-full':'grid-bkg-full grid-bkg-full___nocolor';
 ?>
 <!-- V4 pas de container main, c'est dans le table-congtainer-->
-<div class="">
+
 <div class="<?php echo $gridClass ?>" <?php echo $style ?>>
 <div class="table-container">
 <div class="<?php echo $defaultGridMode?> <?php echo 'grid-destructuree-'.$count?>">
@@ -452,7 +452,6 @@ while($this->block("contentblock")->loop()) {
 <?php } ?>
 <!-- Fin Loop  -->
 <!--<div class="grid-bkg"></div>-->
-</div>
 </div>
 </div>
 </div>

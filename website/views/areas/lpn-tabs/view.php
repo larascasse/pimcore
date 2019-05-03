@@ -15,7 +15,7 @@ $title = $this->input("title",
     echo '<hr><h2>Tabulation</h2>';
 
     echo "<div>";
-    
+
     echo "<div>";
     echo  $title;
      echo "</div>";
@@ -92,6 +92,8 @@ else {
   ?>
 
   <!-- Tab -->
+  <div>
+
   <div class="<?php echo $cssClass?>">
 
     <?php 
@@ -119,7 +121,7 @@ else {
               $i++;
             } ?>
     </div>
- 
+  </div>
 
     <!-- Tab content -->
     <div class="tab-content">

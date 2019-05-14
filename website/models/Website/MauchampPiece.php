@@ -71,7 +71,7 @@ class Website_MauchampPiece extends Object_MauchampPiece {
 
 // and optionally a related list
 
-class Website_MauchampPiece_list extends Object_MauchampPiece_List {
+class Website_MauchampPiece_List extends Object_MauchampPiece_List {
 
     
 }

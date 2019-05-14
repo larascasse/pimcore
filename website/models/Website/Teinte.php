@@ -440,7 +440,7 @@ class Website_Teinte extends Object_Teinte {
 
 // and optionally a related list
 
-class Website_Teinte_list extends Object_Teinte_List {
+class Website_Teinte_List extends Object_Teinte_List {
 
     
 }

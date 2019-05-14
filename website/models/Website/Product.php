@@ -33,6 +33,15 @@ class Website_Product extends Object_Product {
 	   
     }
 
+    public function getEan() {
+    	if($plusValue = $this->getPlusValue()) {
+    		$this->ean = $this->getParent()->getEan().'|'.$plusValue->getEan();
+    		return $this->ean;
+    	}
+    	else {
+    		return parent::getEan();
+    	}
+    }
 
 
     private function getTaxonomyObject($field,$value=null,$path=null) {
@@ -3790,7 +3799,7 @@ A la,ncer un autre jour
 
 // and optionally a related list
 
-class Website_Product_list extends Object_Product_List {
+class Website_Product_List extends Object_Product_List {
 
     
 }

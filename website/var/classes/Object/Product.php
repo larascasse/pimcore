@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-04-17T17:38:45+02:00
+* Generated at: 2019-05-14T11:27:14+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.184
+* IP: 127.0.0.1
 
 
 Fields Summary: 
@@ -15,6 +15,7 @@ Fields Summary:
 - pimonly_print_label [input]
 - code [input]
 - ean [input]
+- plusValue [href]
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
@@ -229,6 +230,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_print_label ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPlusValue ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByName_scienergie_court ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCatalogue ($value, $limit = 0) 
@@ -441,6 +443,7 @@ public $echantillon;
 public $pimonly_print_label;
 public $code;
 public $ean;
+public $plusValue;
 public $name_scienergie;
 public $name_scienergie_court;
 public $catalogue;
@@ -792,6 +795,32 @@ public function getEan () {
 */
 public function setEan ($ean) {
 	$this->ean = $ean;
+	return $this;
+}
+
+/**
+* Get plusValue - Plus Value
+* @return \Pimcore\Model\Object\product
+*/
+public function getPlusValue () {
+	$preValue = $this->preGetValue("plusValue"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->getClass()->getFieldDefinition("plusValue")->preGetData($this);
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("plusValue")->isEmpty($data)) {
+		return $this->getValueFromParent("plusValue");
+	}
+	return $data;
+}
+
+/**
+* Set plusValue - Plus Value
+* @param \Pimcore\Model\Object\product $plusValue
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPlusValue ($plusValue) {
+	$this->plusValue = $this->getClass()->getFieldDefinition("plusValue")->preSetData($this, $plusValue);
 	return $this;
 }
 
@@ -5912,6 +5941,10 @@ public function setMage_tags ($mage_tags) {
 }
 
 protected static $_relationFields = array (
+  'plusValue' => 
+  array (
+    'type' => 'href',
+  ),
   'pimonly_teinte_rel' => 
   array (
     'type' => 'objects',
@@ -5987,8 +6020,9 @@ protected static $_relationFields = array (
 );
 
 public $lazyLoadedFields = array (
-  0 => 'fiche_entretien',
-  1 => 'fiche_pose',
+  0 => 'plusValue',
+  1 => 'fiche_entretien',
+  2 => 'fiche_pose',
 );
 
 }

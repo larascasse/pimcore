@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-04-17T17:38:45+02:00
+* Generated at: 2019-05-14T11:27:14+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.30.184
+* IP: 127.0.0.1
 
 
 Fields Summary: 
@@ -15,6 +15,7 @@ Fields Summary:
 - pimonly_print_label [input]
 - code [input]
 - ean [input]
+- plusValue [href]
 - name_scienergie [input]
 - name_scienergie_court [input]
 - catalogue [select]
@@ -223,7 +224,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1555515525,
+   'modificationDate' => 1557826027,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -422,6 +423,51 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleSearch' => true,
               )),
               6 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
+                 'fieldtype' => 'href',
+                 'width' => '',
+                 'assetUploadPath' => '',
+                 'relationType' => true,
+                 'queryColumnType' => 
+                array (
+                  'id' => 'int(11)',
+                  'type' => 'enum(\'document\',\'asset\',\'object\')',
+                ),
+                 'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\Object\\AbstractObject',
+                 'objectsAllowed' => true,
+                 'assetsAllowed' => false,
+                 'assetTypes' => 
+                array (
+                ),
+                 'documentsAllowed' => false,
+                 'documentTypes' => 
+                array (
+                ),
+                 'lazyLoading' => true,
+                 'classes' => 
+                array (
+                  0 => 
+                  array (
+                    'classes' => 'product',
+                  ),
+                ),
+                 'pathFormatterClass' => '',
+                 'name' => 'plusValue',
+                 'title' => 'Plus Value',
+                 'tooltip' => 'Si on met un produit dans la plus value, ca créer un nouveau produit, avec EAN|EAN PLUS VALUE',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => '',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'columnType' => NULL,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -445,7 +491,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -469,7 +515,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -530,7 +576,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              9 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -616,7 +662,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              10 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -640,7 +686,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              11 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -664,7 +710,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              12 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => '',
@@ -697,7 +743,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              13 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -728,7 +774,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              14 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -752,7 +798,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              15 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -776,7 +822,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -800,7 +846,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              17 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -824,7 +870,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -848,7 +894,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -872,7 +918,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -895,7 +941,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -918,7 +964,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -942,7 +988,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -965,7 +1011,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -989,7 +1035,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1012,7 +1058,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -1035,7 +1081,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1059,7 +1105,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1083,7 +1129,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              29 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1129,7 +1175,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1152,7 +1198,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              31 => 
+              32 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,

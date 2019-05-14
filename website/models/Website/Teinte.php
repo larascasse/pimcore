@@ -153,7 +153,7 @@ class Website_Teinte extends Object_Teinte {
             	}
 			}
 			else {
-				  //$productIds[] = $relatedProduct->getId();
+				  $productIds[] = $relatedProduct->getId();
 			}
 		}
 

@@ -147,7 +147,7 @@ class ProductHelper
                         $ignoreFields[] = "choixString";
                         continue;
                     } 
-                    else if($key == "traitement_surface_String" && isset($childAllValues['traitement_surface_not_configurable']) && $childAllValues['traitement_surface_not_configurable']) {
+                    else if($key == "traitement_surfaceString" && isset($childAllValues['traitement_surface_not_configurable']) && $childAllValues['traitement_surface_not_configurable']) {
                         $ignoreFields[] = "traitement_surface";
                         $ignoreFields[] = "traitement_surfaceString";
                         continue;

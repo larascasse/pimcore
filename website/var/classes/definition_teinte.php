@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-02-21T15:43:02+01:00
+* Generated at: 2019-05-02T12:08:30+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.26.91
+* IP: 172.31.4.114
 
 
 Fields Summary: 
@@ -28,7 +28,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'teinte',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1550760182,
+   'modificationDate' => 1556791710,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -270,30 +270,40 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
               ),
               5 => 
               array (
+                'key' => 'Sol vinyle rigide',
+                'value' => 'sol-vinyl-rigide',
+              ),
+              6 => 
+              array (
                 'key' => 'Bardage',
                 'value' => 'bardage',
               ),
-              6 => 
+              7 => 
               array (
                 'key' => 'Bardage intérieur',
                 'value' => 'bardage-interieur',
               ),
-              7 => 
+              8 => 
               array (
                 'key' => 'Bardage extérieur',
                 'value' => ' bardage-exterieur',
               ),
-              8 => 
+              9 => 
+              array (
+                'key' => 'Bardage vieux bois',
+                'value' => 'bardage-vieux-bois',
+              ),
+              10 => 
               array (
                 'key' => 'Accessoire',
                 'value' => 'accessoire',
               ),
-              9 => 
+              11 => 
               array (
                 'key' => 'Agencement',
                 'value' => 'agencement',
               ),
-              10 => 
+              12 => 
               array (
                 'key' => 'Table',
                 'value' => 'table',

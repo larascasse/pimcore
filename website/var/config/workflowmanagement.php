@@ -47,25 +47,30 @@ return [
             ],
             [
                 "name" => "contents_to_review",
-                "label" => "Contents ready to review"
+                "label" => "Contents ready to review",
+                "elementPublished" => TRUE
             ],
             [
                 "name" => "contents_validated",
                 "label" => "Content ready to publish",
-                "objectLayout" => NULL
+                "objectLayout" => NULL,
+                "elementPublished" => TRUE
             ],
             [
                 "name" => "content_published",
                 "label" => "content_published",
-                "objectLayout" => NULL
+                "objectLayout" => NULL,
+                "elementPublished" => TRUE
             ],
             [
                 "name" => "content_needs_magento_sync",
-                "label" => "content_needs_magento_sync STATUS"
+                "label" => "content_needs_magento_sync STATUS",
+                "elementPublished" => TRUE
             ],
             [
                 "name" => "content_obsolete",
-                "label" => "content_obsolete STATUS"
+                "label" => "content_obsolete STATUS",
+                "elementPublished" => TRUE
             ]
         ],
         "actions" => [
@@ -423,6 +428,6 @@ return [
         ],
         "enabled" => TRUE,
         "creationDate" => 1517845984,
-        "modificationDate" => 1553681345
+        "modificationDate" => 1555343316
     ]
 ];

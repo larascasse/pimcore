@@ -897,5 +897,29 @@ return [
         "modificationDate" => 1543338273,
         "creationDate" => 1543338231,
         "id" => "magento_gridtext_h"
+    ],
+    "magento_slider" => [
+        "items" => [
+            [
+                "method" => "scaleByHeight",
+                "arguments" => [
+                    "height" => 600,
+                    "forceResize" => FALSE
+                ]
+            ]
+        ],
+        "medias" => [
+
+        ],
+        "name" => "magento_slider",
+        "description" => "Utilisé pour les slider avec les height fixes, et les largeurs non fixes",
+        "format" => "SOURCE",
+        "quality" => 90,
+        "highResolution" => 0.0,
+        "preserveColor" => FALSE,
+        "preserveMetaData" => FALSE,
+        "modificationDate" => 1556826907,
+        "creationDate" => 1556826824,
+        "id" => "magento_slider"
     ]
 ];

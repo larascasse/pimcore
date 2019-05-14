@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-02-19T14:35:18+01:00
+* Generated at: 2019-04-19T14:56:20+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.8.140
+* IP: 172.31.4.114
 
 
 Fields Summary: 
@@ -28,7 +28,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'category',
    'description' => '',
    'creationDate' => 1382360944,
-   'modificationDate' => 1550583318,
+   'modificationDate' => 1555678579,
    'userOwner' => 6,
    'userModification' => 6,
    'parentClass' => '',
@@ -128,7 +128,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => false,
-                 'index' => false,
+                 'index' => true,
                  'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
@@ -199,7 +199,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -223,7 +223,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => '',
                  'permissions' => NULL,
                  'datatype' => 'data',

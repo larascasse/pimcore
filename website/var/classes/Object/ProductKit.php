@@ -1,22 +1,29 @@
 <?php 
 
-/** Generated at 2016-07-26T10:22:33+02:00 */
-
-/**
+/** 
+* Generated at: 2019-05-14T10:52:43+02:00
 * Inheritance: no
-* Variants   : no
-* Changed by : florent (6)
-* IP:          92.154.6.232
-*/
+* Variants: no
+* Changed by: florent (6)
+* IP: 172.31.30.184
 
+
+Fields Summary: 
+- ean [input]
+- block [block]
+-- title [input]
+-- option_type [select]
+-- option_required [checkbox]
+-- associatedProducts [objectsMetadata]
+*/ 
 
 namespace Pimcore\Model\Object;
 
 
 
 /**
-* @method static \Pimcore\Model\Object\ProductKit\Listing getByEan ($value, $limit = 0) 
-* @method static \Pimcore\Model\Object\ProductKit\Listing getByProducts ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\ProductKit\Listing getByEan ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\ProductKit\Listing getByBlock ($value, $limit = 0) 
 */
 
 class ProductKit extends Concrete {
@@ -24,7 +31,7 @@ class ProductKit extends Concrete {
 public $o_classId = 10;
 public $o_className = "productKit";
 public $ean;
-public $products;
+public $block;
 
 
 /**
@@ -38,7 +45,7 @@ public static function create($values = array()) {
 }
 
 /**
-* Get ean - EAN
+* Get ean - Ean
 * @return string
 */
 public function getEan () {
@@ -51,7 +58,7 @@ public function getEan () {
 }
 
 /**
-* Set ean - EAN
+* Set ean - Ean
 * @param string $ean
 * @return \Pimcore\Model\Object\ProductKit
 */
@@ -61,33 +68,29 @@ public function setEan ($ean) {
 }
 
 /**
-* Get products - Produits
-* @return \Pimcore\Model\Object\AbstractObject[]
+* Get block - block
+* @return \Pimcore\Model\Object\Data\Block
 */
-public function getProducts () {
-	$preValue = $this->preGetValue("products"); 
+public function getBlock () {
+	$preValue = $this->preGetValue("block"); 
 	if($preValue !== null && !\Pimcore::inAdmin()) { 
 		return $preValue;
 	}
-	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
+	$data = $this->block;
 	return $data;
 }
 
 /**
-* Set products - Produits
-* @param \Pimcore\Model\Object\AbstractObject[] $products
+* Set block - block
+* @param \Pimcore\Model\Object\Data\Block $block
 * @return \Pimcore\Model\Object\ProductKit
 */
-public function setProducts ($products) {
-	$this->products = $this->getClass()->getFieldDefinition("products")->preSetData($this, $products);
+public function setBlock ($block) {
+	$this->block = $block;
 	return $this;
 }
 
 protected static $_relationFields = array (
-  'products' => 
-  array (
-    'type' => 'objectsMetadata',
-  ),
 );
 
 public $lazyLoadedFields = NULL;

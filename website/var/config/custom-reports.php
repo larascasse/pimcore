@@ -2754,5 +2754,110 @@ return [
         "modificationDate" => 1553789944,
         "creationDate" => 1553785816,
         "id" => "products_problemes"
+    ],
+    "product_sans_prix" => [
+        "name" => "product_sans_prix",
+        "sql" => "",
+        "dataSourceConfig" => [
+            [
+                "sql" => "oo_id,obsolete,actif_web,code,ean,price_4,name,mage_short_name",
+                "from" => "object_5",
+                "where" => "actif_web = 1 and obsolete IS NULL and price_4 IS NULL and ean IS NOT NULL",
+                "groupby" => "",
+                "sqlText" => "SELECT oo_id,obsolete,actif_web,code,ean,price_4,name,mage_short_name FROM object_5 WHERE actif_web = 1 and obsolete IS NULL and price_4 IS NULL and ean IS NOT NULL",
+                "type" => "sql"
+            ]
+        ],
+        "columnConfiguration" => [
+            [
+                "name" => "oo_id",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "columnAction" => "openObject",
+                "id" => "extModel12531-1"
+            ],
+            [
+                "name" => "obsolete",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-2"
+            ],
+            [
+                "name" => "actif_web",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-4"
+            ],
+            [
+                "name" => "name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-5"
+            ],
+            [
+                "name" => "mage_short_name",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-6"
+            ],
+            [
+                "name" => "ean",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-8"
+            ],
+            [
+                "name" => "price_4",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-9"
+            ],
+            [
+                "name" => "code",
+                "display" => TRUE,
+                "export" => TRUE,
+                "order" => TRUE,
+                "width" => "",
+                "label" => "",
+                "id" => "extModel12531-10"
+            ]
+        ],
+        "niceName" => "",
+        "group" => "",
+        "groupIconClass" => "",
+        "iconClass" => "",
+        "menuShortcut" => FALSE,
+        "reportClass" => "",
+        "chartType" => NULL,
+        "pieColumn" => NULL,
+        "pieLabelColumn" => NULL,
+        "xAxis" => NULL,
+        "yAxis" => [
+
+        ],
+        "modificationDate" => 1555085134,
+        "creationDate" => 1555078142,
+        "id" => "product_sans_prix"
     ]
 ];

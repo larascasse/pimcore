@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-04-09T09:12:03+02:00
+* Generated at: 2019-04-17T17:38:45+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.4.114
+* IP: 172.31.30.184
 
 
 Fields Summary: 
@@ -223,7 +223,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1554793922,
+   'modificationDate' => 1555515525,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -2831,20 +2831,25 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                   ),
                   29 => 
                   array (
+                    'key' => 'Vernis semi-mat',
+                    'value' => 'vernis-semi-mat',
+                  ),
+                  30 => 
+                  array (
                     'key' => 'Vieilli',
                     'value' => 'Vieilli',
                   ),
-                  30 => 
+                  31 => 
                   array (
                     'key' => 'Vieilli Brossé',
                     'value' => 'Vieilli Brossé',
                   ),
-                  31 => 
+                  32 => 
                   array (
                     'key' => 'Vieilli Brossé Veinage Noir',
                     'value' => 'vieilli-brosse-veinage-noir',
                   ),
-                  32 => 
+                  33 => 
                   array (
                     'key' => 'Brute_DEPRECATED',
                     'value' => 'brut',

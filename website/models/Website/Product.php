@@ -1163,13 +1163,26 @@ class Website_Product extends Object_Product {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
+
+   		 //NEW 2019
+   		 //
+   		 if(strlen($this->short_name) > 0) {
+   		 	
+   		 	$str = $this->short_name;
+    	
+
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+    		return $this->cleanString($str);
+   		 }
+
    		 //Ajout shortanme parent et parentparent
    		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
    		 try {
 
    		 	if($this->getParent() instanceof Object_Product) {
-
 
    		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
    		 		if($this->getParent()->getParent() instanceof Object_Product) {
@@ -1194,9 +1207,7 @@ class Website_Product extends Object_Product {
     		if(strlen($this->getPimonly_name_suffixe())>0) {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
-    		$str = str_replace("   ", " ", $str);
-			$str = str_replace("  ", " ", $str);
-    		$str =trim($str);
+    		$str =$this->cleanString($str);
 
     		Object_Abstract::setGetInheritedValues($inheritance); 
     		return $str;
@@ -1206,22 +1217,25 @@ class Website_Product extends Object_Product {
     		$str = $this->getName();
     		$str = str_replace($this->getSubtype(), "", $str);
     		$str = str_replace("monolame ", "", $str);
-    		$str = str_replace("  ", " ", $str);
-    		$str =trim($str);
+    	
 
     		if(strlen($this->getPimonly_name_suffixe())>0) {
     			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
     		}
     		
-    		$str = str_replace("   ", " ", $str);
-			$str = str_replace("  ", " ", $str);
-
-    		$str =trim($str);
+    		$str =$this->cleanString($str);
     		$str = substr($str,0,$stringlength);
     		Object_Abstract::setGetInheritedValues($inheritance); 
     		return $str;
     	}
 
+	}
+
+	protected function cleanString($str) {
+		
+    	$str = str_replace("  ", " ", $str);
+    	$str = str_replace("\n", " ", $str);
+    	$str =trim($str);
 	}
 
 	public function getMage_sub_descrition() {

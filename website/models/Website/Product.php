@@ -953,7 +953,7 @@ class Website_Product extends Object_Product {
 					
 					if(isset($caracteristiques[$attributeKey]["content"])) {
 						if(in_array($caracteristiques[$attributeKey]["key"],array("weight"))) {
-							$caracteristiques[$attributeKey]["content"] = number_format($caracteristiques[$attributeKey]["content"],2);
+							$caracteristiques[$attributeKey]["content"] = number_format((float)$caracteristiques[$attributeKey]["content"],2);
 							continue;
 						}
 					}
@@ -3451,7 +3451,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
     }
 
 
-    public function getPimonly_print_label() {
+    public function getPimonly_print_labelString() {
     	$teinteName = $this->getMage_teinte();
     	
     	$short_name = $this->getMage_short_name(500);
@@ -3744,7 +3744,7 @@ A la,ncer un autre jour
             $setter = "set" . ucfirst($key);
             
 
-            if( $field->fieldtype!="nonownerobjects") {
+            if( $field->fieldtype != "nonownerobjects") {
 
             	$valueToCheck = $objectParent->$getter();
             	$objectValue  = $this->$key;
@@ -3752,6 +3752,7 @@ A la,ncer un autre jour
             	//echo "try ".($inheritedValues?'inherited':'non inherit')." ".$key."\n";
 
             	$isSelect = false;
+
             	if(is_array($valueToCheck)) {
             		$valueToCheck = $field->getForCsvExport($objectParent);
             		$objectValue = $field->getForCsvExport($this);
@@ -3794,27 +3795,30 @@ A la,ncer un autre jour
        if($this->getActif_web() && !$this->getObsolete() && !empty($this->ean)) {
        		$this->setPublished(true);
        		
-       		if(!$objectParent->getPublished()) {
+       		/*if(!$objectParent->getPublished()) {
        			$objectParent->setPublished(true);
        			$objectParent->save();
-       		}
+       		}*/
        	}
        	elseif(!empty($this->ean)) {
        		$this->setPublished(false);
        	}
 
 
-       Object_Abstract::setGetInheritedValues($inheritedValues);
+      
        //On ne save pas pour eviter le postSave
        // ca a l'air d ne rien changer si on ne odifie pas le Path
-       if($save) {
+       /*if($save) {
+       		$this->saveVersion();
        		$inheritedValues = Object_Abstract::doGetInheritedValues();
         	Object_Abstract::setGetInheritedValues(false);
         	$this->clearDependentCache();
        		$this->update();
        		Object_Abstract::setGetInheritedValues($inheritedValues);
-       }
+       }*/
        	//$this->save();
+
+        Object_Abstract::setGetInheritedValues($inheritedValues);
 
 
    

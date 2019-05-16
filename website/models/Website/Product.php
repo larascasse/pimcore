@@ -1115,6 +1115,20 @@ class Website_Product extends Object_Product {
    		 //Pas beoin pour le titre...
    		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
+
+
+   		 //NEW 2019
+   		 //
+   		 if(strlen($this->name) > 0) {
+   		 	
+   		 	$str = $this->name;
+  
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+    		return $this->cleanString($str);
+   		 }
+
    		
 
    		 try {
@@ -1236,6 +1250,7 @@ class Website_Product extends Object_Product {
     	$str = str_replace("  ", " ", $str);
     	$str = str_replace("\n", " ", $str);
     	$str =trim($str);
+    	return $str;
 	}
 
 	public function getMage_sub_descrition() {
@@ -3694,7 +3709,7 @@ A la,ncer un autre jour
 	}
 
 	public function isSalable() {
-		return (($this->actif_web && !$this->getObsolete()) || empty($this->getEan()));
+		return (($this->getActif_web() && !$this->getObsolete()) || empty($this->getEan()));
 	}
 
 	 public function clearInheritedValues($save=false) {
@@ -3776,7 +3791,7 @@ A la,ncer un autre jour
         
        }
 
-       if($this->actif_web && !$this->getObsolete() && !empty($this->ean)) {
+       if($this->getActif_web() && !$this->getObsolete() && !empty($this->ean)) {
        		$this->setPublished(true);
        		
        		if(!$objectParent->getPublished()) {

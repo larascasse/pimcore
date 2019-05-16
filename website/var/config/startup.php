@@ -124,7 +124,11 @@ if (!\Pimcore::inAdmin() || \Pimcore\Tool::isFrontentRequestByAdmin()  ) {
     $object = $e->getTarget();
     //echo $object->getClassName();
 
-    if($object instanceof Website_Product) {
+    //$saveVersionOnly = $e->getParams('saveVersionOnly');
+    $saveVersionOnly = $false;
+
+
+    if($object instanceof Website_Product && !$saveVersionOnly) {
       
         $object->preSave();
     }

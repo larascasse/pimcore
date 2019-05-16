@@ -3769,7 +3769,7 @@ A la,ncer un autre jour
 		           
 		            ) {
 
-		            	echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
+		            	//echo "remove  ".$key."|".$objectValue."|".$valueToCheck."\n";
 		            	if($isSelect)
 		                	$this->setValue($key,[]);
 		                if($field->fieldtype == "input" || $field->fieldtype == "textarea") {

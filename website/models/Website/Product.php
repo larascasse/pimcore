@@ -3524,6 +3524,15 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 
     }
 
+    public function getMage_sub_description () {
+	 $str = $this->getPimonly_sub_description();
+	 if(strlen(trim($this->pimonly_sub_description_prefixe)) > 0) {
+	 	$str  = trim($this->pimonly_sub_description_prefixe)."\n".$str;
+	 }
+	return $str;
+}
+
+
 
 	public function getPreviewUrl() {
 		return "/id/".$this->getId();

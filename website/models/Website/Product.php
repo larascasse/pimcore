@@ -1125,7 +1125,6 @@ class Website_Product extends Object_Product {
    		 $parentSuffixe = "";
    		 $parentParentSuffixe = "";
 
-
    		 //NEW 2019
    		 //
    		 if(strlen($this->name) > 0) {

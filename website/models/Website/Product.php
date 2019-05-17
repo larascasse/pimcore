@@ -43,7 +43,7 @@ class Website_Product extends Object_Product {
 
     			if(strlen($parent->getParent()->ean)>0)
     				$this->ean = $parent->getParent()->getEan().'|'.$plusValue->getEan();
-    			
+
     		}
     		return $this->ean;
     	}
@@ -3566,6 +3566,9 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	 $str = $this->getPimonly_sub_description();
 	 if(strlen(trim($this->pimonly_sub_description_prefixe)) > 0) {
 	 	$str  = trim($this->pimonly_sub_description_prefixe)."\n".$str;
+	 }
+	 else if(strlen(trim($this->getParent()->pimonly_sub_description_prefixe)) > 0) {
+	 	$str  = trim($this->getParent()->pimonly_sub_description_prefixe)."\n".$str;
 	 }
 	return $str;
 }

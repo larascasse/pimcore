@@ -1118,7 +1118,7 @@ class Website_Product extends Object_Product {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
-
+   		 $parent = $this->getParent();
 
    		  //Ajout shortanme parent et parentparent
    		 //Pas beoin pour le titre...

@@ -35,7 +35,16 @@ class Website_Product extends Object_Product {
 
     public function getEan() {
     	if($plusValue = $this->getPlusValue()) {
-    		$this->ean = $this->getParent()->getEan().'|'.$plusValue->getEan();
+    		//Ca de sous priot pour classe (retain)
+    		$parent = $this->getParent();
+    		if(strlen($parent->ean)>0)
+    			$this->ean = $parent->getEan().'|'.$plusValue->getEan();
+    		else {
+
+    			if(strlen($parent->getParent()->ean)>0)
+    				$this->ean = $parent->getParent()->getEan().'|'.$plusValue->getEan();
+    			
+    		}
     		return $this->ean;
     	}
     	else {

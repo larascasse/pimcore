@@ -1128,6 +1128,20 @@ class Website_Product extends Object_Product {
     		}
     		return $this->cleanString($str);
    		 }
+   		  else if($parent instanceof Object_Product && strlen($parent->name) > 0) {
+   		 	
+   		 	$str = $parent->name;
+    	
+
+    		if(strlen($parent->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$parent->pimonly_name_suffixe;
+    		}
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+
+    		return $this->cleanString($str);
+   		 }
 
    		
 
@@ -1175,7 +1189,8 @@ class Website_Product extends Object_Product {
 	public function getMage_short_name($stringlength = 500) {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
-   		 Object_Abstract::setGetInheritedValues(true); 
+   		Object_Abstract::setGetInheritedValues(true); 
+   		$parent = $this->getParent();
 
 
    		 //NEW 2019
@@ -1188,6 +1203,20 @@ class Website_Product extends Object_Product {
     		if(strlen($this->pimonly_name_suffixe) > 0) {
     			$str .=" ".$this->pimonly_name_suffixe;
     		}
+    		return $this->cleanString($str);
+   		 }
+   		 else if($parent instanceof Object_Product && strlen($parent->short_name) > 0) {
+   		 	
+   		 	$str = $parent->short_name;
+    	
+
+    		if(strlen($parent->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$parent->pimonly_name_suffixe;
+    		}
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+
     		return $this->cleanString($str);
    		 }
 

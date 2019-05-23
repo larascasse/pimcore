@@ -5,6 +5,10 @@ class Website_Category extends Object_Category {
 
 	 public function getShortArray() {
 
+        if(strlen($this->getName()) == 0) {
+            return [];
+        }
+
          $inheritance = Object_Abstract::doGetInheritedValues(); 
          Object_Abstract::setGetInheritedValues(false); 
 
@@ -16,13 +20,14 @@ class Website_Category extends Object_Category {
          $itemData["full_path"] = str_replace('/categories/','',$this->getFullPath());
          $itemData["mage_identifier"] = $this->getMageIdentifier();
          
-         $itemData["name"] = $this->getName();
+         $itemData["name"] = trim($this->getName());
          $itemData["sub_description"] = $this->sub_description;
          $itemData["description"] =  $this->description;
-         //$itemData["mage_category_id"] =  $this->getMage_category_id();
          $itemData["mage_category_id"] =  $this->mage_category_id;
          $itemData["mage_parent_category_id"] =  $this->getParent()->mage_category_id;
          $itemData["short_name"] =  $this->short_name;
+         $itemData["mage_custom_layout"] =  $this->mage_custom_layout;
+         //$itemData["mage_dynamic_products_conds"] =  $this->mage_dynamic_products_conds;
 
          // get an asset
         //$asset = Asset::getById($this->getImage_1()->id);
@@ -40,18 +45,9 @@ class Website_Category extends Object_Category {
         }
         $itemData["image_header_url"] = $image_header_url; 
 
-         //$itemData["full_path"] =  $this->getFullPath();
- 
+        Object_Abstract::setGetInheritedValues($inheritance); 
 
-
-         /*$parent = $this->getParent();
-         if($parent->code && $parent->o_key != "taxonomies") {
-            $itemData["code"] = $parent->getPath()."/".$itemData["code"];
-         }*/
-
-           Object_Abstract::setGetInheritedValues($inheritance); 
-
-         return $itemData;
+        return $itemData;
     }
 
     public function getMageIdentifier() {

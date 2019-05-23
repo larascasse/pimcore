@@ -40,11 +40,34 @@ class Web2printController extends Action
 
 	        if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
 	            
-	           
-	            //throw new \Zend_Controller_Router_Exception("invalid request");
-	            echo "wrong id";
-	            die;
+                $product = Object_Product::getByEan($this->getParam("id"));
+                
 	        }
+
+            if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
+                
+                Object\AbstractObject::setHideUnpublished(false);
+                $product = Object_Product::getByEan($this->getParam("id"), 1);
+                
+            }
+
+             if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
+                
+                Object\AbstractObject::setHideUnpublished(false);
+                $product = Object_Product::getByEan($this->getParam("ean"), 1);
+                
+            }
+
+
+            if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
+              
+                //throw new \Zend_Controller_Router_Exception("invalid request");
+                echo "wrong id";
+                die;
+            }
+
+            $id =  $product -> getId();
+
 	        //$httpSource = $product->getDefinition()->getPreviewUrl();
 
 	        $httpSource = Pimcore\Tool::getHostUrl()."/id/".$id;//."?t=".$time();

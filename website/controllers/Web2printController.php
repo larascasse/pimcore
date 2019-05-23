@@ -32,22 +32,20 @@ class Web2printController extends Action
 
         
     	$id = $this->getParam("id");
+        $suffixe = $id;
     	//$id=8706;
 
     	if($id>0) {
 
     		 $product = Object_Product::getById($this->getParam("id"));
 
-	        if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
-	            
-                $product = Object_Product::getByEan($this->getParam("id"));
-                
-	        }
+	       
 
             if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
                 
                 Object\AbstractObject::setHideUnpublished(false);
                 $product = Object_Product::getByEan($this->getParam("id"), 1);
+                 $suffixe = $this->getParam("id");
                 
             }
 
@@ -55,6 +53,7 @@ class Web2printController extends Action
                 
                 Object\AbstractObject::setHideUnpublished(false);
                 $product = Object_Product::getByEan($this->getParam("ean"), 1);
+                 $suffixe = $this->getParam("ean");
                 
             }
 
@@ -75,7 +74,7 @@ class Web2printController extends Action
          
 	        $pdfContent = \Website\Tool\Wkhtmltopdf::convert($httpSource);
 
-        	$filename = "lpn-ft-".$product->getMage_short_name(3000)."_".$id.".pdf";
+        	$filename = "lpn-ft-".$product->getMage_short_name(3000)."_".$suffixe.".pdf";
 	           
             $filename = \Pimcore\File::getValidFilename($filename);
 

@@ -213,6 +213,13 @@ class Website_Teinte extends Object_Teinte {
 		$articles = $this->getProductsArticle();
 		foreach ($articles as $product) {
 			$asset = $product->getImage_1();
+			if(!$asset)
+				$asset = $product->getImage_2();
+			if(!$asset)
+				$asset = $product->getImage_3();
+			if(!$asset)
+				continue;
+
 			$path = $asset->getThumbnail("magento_realisation")->getPath();
 
 			$assetTag = array();

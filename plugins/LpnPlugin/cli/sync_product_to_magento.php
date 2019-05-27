@@ -45,7 +45,7 @@ if(count($eans)>0) {
 
   //DEV
    $url = "http://shopdev.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
-   $params = ["ean"=>implode(",", $eans),"create"=>1,"showDebug"=>1];
+   $params = ["ean"=>implode(",", $eans),"create"=>1];
 
    //PROD
    //$url = "https://www.laparqueterienouvelle.fr/LPN/get_a_product_magmi.php";
@@ -53,7 +53,6 @@ if(count($eans)>0) {
 
    print_r($params);
    $content = \Pimcore\Tool::getHttpData($url,null,$params);
-   echo $content;
     
 }
 

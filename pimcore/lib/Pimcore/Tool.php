@@ -612,7 +612,8 @@ class Tool
             echo "getHttpData";
             $response = $client->request($requestType);
 
-            echo $reponse;
+            echo $reponse."kkkk";
+            print_r($reponse);
 
             if ($response->isSuccessful()) {
                 return $response->getBody();

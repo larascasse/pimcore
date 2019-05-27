@@ -609,6 +609,7 @@ class Tool
         }
 
         try {
+            echo "getHttpData";
             $response = $client->request($requestType);
 
             echo $reponse;

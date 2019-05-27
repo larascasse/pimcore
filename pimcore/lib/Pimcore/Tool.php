@@ -611,6 +611,8 @@ class Tool
         try {
             $response = $client->request($requestType);
 
+            echo $reponse;
+
             if ($response->isSuccessful()) {
                 return $response->getBody();
             }

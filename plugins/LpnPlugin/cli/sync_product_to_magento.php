@@ -53,6 +53,7 @@ if(count($eans)>0) {
 
    print_r($params);
    $content = \Pimcore\Tool::getHttpData($url,null,$params);
+   echo $content;
     
 }
 

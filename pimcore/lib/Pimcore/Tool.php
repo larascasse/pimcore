@@ -609,19 +609,14 @@ class Tool
         }
 
         try {
-            echo "getHttpData";
             $response = $client->request($requestType);
-
-            echo $reponse."kkkk";
-            print_r($reponse);
 
             if ($response->isSuccessful()) {
                 return $response->getBody();
             }
         } catch (\Exception $e) {
-            print_r($e);
         }
-        echo "false;";
+
         return false;
     }
 

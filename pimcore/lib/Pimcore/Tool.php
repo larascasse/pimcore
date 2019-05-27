@@ -618,8 +618,9 @@ class Tool
                 return $response->getBody();
             }
         } catch (\Exception $e) {
+            print_r($e);
         }
-
+        echo "false;";
         return false;
     }
 

@@ -3,7 +3,7 @@
   	$doc = $this->href("doc", [
         //"height" => 500
     ]); 
-    $cssClass = $this->input("cssClass",["placeholder"=>"Classe css","htmlspecialchars"=>false]);
+    $cssClass = $this->textarea("cssClass",["placeholder"=>"Classe css","htmlspecialchars"=>false,"height"=>20]);
 
       $cl = $cssClass->getData();
       $cl = preg_replace('/\s+/', ' ', $cl);

@@ -7,6 +7,7 @@
 
     $cl = $cssClass->getData();
       $cl = str_replace("&nbsp;", " ", $cl);
+      $cl = str_replace(" ", " ", $cl);
       $cl = str_replace("&#160;", " ", $cl);
 
 

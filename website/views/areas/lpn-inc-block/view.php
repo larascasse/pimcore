@@ -9,6 +9,8 @@
       $cl = str_replace("&nbsp;", " ", $cl);
       $cl = str_replace(" ", " ", $cl);
       $cl = str_replace("&#160;", " ", $cl);
+      $cl = preg_replace('/\s+/', ' ', $cl);
+      
 
 
 //print_r(Pimcore\Tool::isFrontentRequestByAdmin());

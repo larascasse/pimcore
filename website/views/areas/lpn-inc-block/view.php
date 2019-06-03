@@ -23,7 +23,8 @@
   	}
   	else if (Pimcore\Tool::isFrontentRequestByAdmin()) {
       echo '<div id="pimbloc'.$doc->getElement()->getId().'" class="'.$cl.'">';
-  		echo Document\Service::render($doc->getElement());
+  		//echo Document\Service::render($doc->getElement());
+      echo "TATA";
       echo '</div>';
 
   	}	

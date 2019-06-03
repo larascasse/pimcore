@@ -19,7 +19,7 @@
   	else {
       $cl = $cssClass->getData();
       $cl = str_replace("&nbsp;", " ", $cl);
-      echo '<div id="pimbloc'.$doc->getElement()->getId().'" class="'.$cssClass->getData().'">';
+      echo '<div id="pimbloc'.$doc->getElement()->getId().'" class="'.$cl.'">';
   		echo '{{widget type="cms/widget_block" template="cms/widget/static_block/default.phtml" block_id="'.$doc->getElement()->getKey().'"}}';
       echo '</div>';
   	}

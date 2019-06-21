@@ -1215,7 +1215,7 @@ use Pimcore\Model;
 
 
                         if( $oldValue != $testValue || !$isUpdating) {
-                            echo $product['ean']." ".$key." - Old:".$oldValue." - New:".$value."\n";
+                            echo $product['ean']." ".$key." - Old:".$oldValue." - test:".$testValue." - New:".$value."\n";
                             $updatedFields[$key] = $oldValue."->".$value;
                             $object->setValue($key, $value);
                         }

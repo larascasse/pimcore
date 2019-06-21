@@ -1190,8 +1190,9 @@ use Pimcore\Model;
                         else {
                             $oldValue = $object->$key;
                         }*/
-
+                        Object_Abstract::setGetInheritedValues(true);
                         $oldValue = $field->getForCsvExport($object);
+                        Object_Abstract::setGetInheritedValues(false);
 
                         
 

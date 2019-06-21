@@ -1198,8 +1198,6 @@ use Pimcore\Model;
                         }   
                 
                         
-
-
                      
 
 

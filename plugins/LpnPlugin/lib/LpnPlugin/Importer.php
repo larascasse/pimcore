@@ -1114,6 +1114,9 @@ use Pimcore\Model;
             foreach ($class->getFieldDefinitions() as $key => $field) {
 
 
+
+
+
                 
                 if (isset($product[$key])) {
                     $value = $product[$key];
@@ -1180,6 +1183,15 @@ use Pimcore\Model;
                     if ($value !== null) {
 
                         //gestion des champs nouveaux
+                        /*$getter = "get" . ucfirst($key);
+                        if (!method_exists($object, $getter)) {
+                            $oldValue = $field->getForCsvExport($object);
+                        }
+                        else {
+                            $oldValue = $object->$key;
+                        }*/
+
+                        $oldValue = $field->getForCsvExport($object);
 
                         
 
@@ -1188,12 +1200,12 @@ use Pimcore\Model;
                            $testValue = $value;
                         }
                         elseif ($key == 'weight'  || $key == 'largeur'  || $key == 'longueur'  || $key == 'largeur') {
-                           $oldValue = floatval($object->$key);
+                           $oldValue = floatval($oldValue);
                            $testValue = floatval($value);
                         }
                         else {
                             //On converti en chaine de cairo_pattern_create_radial
-                            $oldValue = "".$object->$key;
+                            $oldValue = "".$oldValue ;
                             $testValue = "".$value;
                         }   
                 

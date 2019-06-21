@@ -1183,9 +1183,13 @@ use Pimcore\Model;
 
                         
 
-                        if($key == 'obsolete' || $key == 'actif_web') {
+                        if ($key == 'obsolete' || $key == 'actif_web') {
                            $oldValue = $object->$key;
                            $testValue = $value;
+                        }
+                        elseif ($key == 'weight'  || $key == 'largeur'  || $key == 'longueur'  || $key == 'largeur') {
+                           $oldValue = floatval($object->$key);
+                           $testValue = floatval($value);
                         }
                         else {
                             //On converti en chaine de cairo_pattern_create_radial
@@ -1200,7 +1204,7 @@ use Pimcore\Model;
 
 
                         if( $oldValue != $testValue || !$isUpdating) {
-                            echo $key."-".$oldValue."-".$value."-\n";
+                            echo $key." - Old:".$oldValue." - New:".$value."\n";
                             $updatedFields[$key] = $oldValue."->".$value;
                             $object->setValue($key, $value);
                         }

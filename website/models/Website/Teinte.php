@@ -358,6 +358,7 @@ class Website_Teinte extends Object_Teinte {
 			$return["origine_bois"] = $firstArticle->getOrigine_bois();
 			$return["teinte_type"] = $firstArticle->getTeinte_type();
 			$return["catalogue"] = $firstArticle->getCatalogue();
+			$return["subtype2"] = $firstArticle->getSubtype2();
 		}
 
 

@@ -229,7 +229,7 @@ foreach ($this->products as $product) {
 //  print_r($product->getImageAssetArray());
 
 
-  echo $product->getMage_notice_pose_lpn();
+  //echo $product->getMage_notice_pose_lpn();
   if(strlen($urlFichePose = $product->getMage_notice_pose_lpn())>0) {
     $hasOnePose = true;
   }

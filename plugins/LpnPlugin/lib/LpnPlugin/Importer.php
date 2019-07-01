@@ -1195,7 +1195,7 @@ use Pimcore\Model;
 
 
                         //Pour lme choix on modifier le parent si ce n'est pas le bon !!
-                        if($isUpdating) {
+                        if($isUpdating && $parent) {
                             if($key == "essence" || $key == "choix") {
                                 $parentValue = $field->getForCsvExport($parent);
                                 //echo "checking Parent".$parentValue." child:".$value•"\n";

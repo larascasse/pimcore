@@ -449,7 +449,7 @@ class MauchampHelper
 
                                 
 
-                                if($existingProduct->Ean == $sku) {
+                                if($existingProduct->ean == $sku) {
                                     $_product = $existingProduct;
                                     break;
                                 }

@@ -1102,8 +1102,10 @@ use Pimcore\Model;
                 $object->setUserOwner($userId);
             }
             
-            if($isUpdating)
+            if($isUpdating) {
                 $object->setModificationDate(time());
+                $parent = $object->getParent();
+            }
 
            
             $object->setUserModification($userId);
@@ -1111,13 +1113,13 @@ use Pimcore\Model;
            
             $updatedFields = array();
 
+            
+
+
+           
+
+
             foreach ($class->getFieldDefinitions() as $key => $field) {
-
-
-
-
-
-                
                 if (isset($product[$key])) {
                     $value = $product[$key];
                     
@@ -1190,9 +1192,29 @@ use Pimcore\Model;
                         else {
                             $oldValue = $object->$key;
                         }*/
+
+
+                        //Pour lme choix on modifier le parent si ce n'est pas le bon !!
+                        if($isUpdating) {
+                            if($key == "essence" || $key == "choix") {
+                                $parentValue = $field->getForCsvExport($parent);
+                                //echo "checking Parent".$parentValue." child:".$value•"\n";
+                                if($parentValue != $value) {
+                                    echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue." ".$value;
+                                    $parent->setValue($key, $value);
+                                    $parent->save();
+                                }
+                                
+                            }
+                        }
+
+
                         Object_Abstract::setGetInheritedValues(true);
                         $oldValue = $field->getForCsvExport($object);
                         Object_Abstract::setGetInheritedValues(false);
+
+
+                        
 
                         
 
@@ -1209,13 +1231,23 @@ use Pimcore\Model;
                             $oldValue = "".$oldValue ;
                             $testValue = "".$value;
                         }   
-                
+
+
+                        
                         
                      
 
 
                         if( $oldValue != $testValue || !$isUpdating) {
-                            echo $product['ean']." ".$key." - Old:".$oldValue." - test:".$testValue." - New:".$value."\n";
+
+                            
+
+                            
+                           
+                            if($isUpdating) {
+                                echo $product['ean']." ".$key." - Old:".$oldValue." - test:".$testValue." - New:".$value." isUpdating?".$isUpdating."\n";
+                            }
+
                             $updatedFields[$key] = $oldValue."->".$value;
                             $object->setValue($key, $value);
                         }

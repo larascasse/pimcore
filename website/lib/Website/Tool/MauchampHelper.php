@@ -440,8 +440,19 @@ class MauchampHelper
                             $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
 
                             //print_r($parent);
-                            if($existingProductList->count()==1) {
-                                $_product = $existingProductList->current();
+                            //OOIUPS, gestion des sous produits
+                            //if($existingProductList->count()>1) {
+                            if($existingProductList->count()>1) {
+                              foreach ($existingProductList as $existingProduct) {
+                                # code...
+                              }
+
+                                
+
+                                if($existingProduct->Ean == $sku) {
+                                    $_product = $existingProduct;
+                                    break;
+                                }
                                  //echo "EAN existe ".$_product->getFullPath()."<br />\n";
                                  
                             }

@@ -442,17 +442,18 @@ class MauchampHelper
                             //print_r($parent);
                             //OOIUPS, gestion des sous produits
                             //if($existingProductList->count()>1) {
-                            if($existingProductList->count()>1) {
+                            if($existingProductList->count()>=1) {
                               foreach ($existingProductList as $existingProduct) {
+                                if($existingProduct->ean == $sku) {
+                                    $_product = $existingProduct;
+                                    break;
+                                }
                                 # code...
                               }
 
                                 
 
-                                if($existingProduct->ean == $sku) {
-                                    $_product = $existingProduct;
-                                    break;
-                                }
+                                
                                  //echo "EAN existe ".$_product->getFullPath()."<br />\n";
                                  
                             }

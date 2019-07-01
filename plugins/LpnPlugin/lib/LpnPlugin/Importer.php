@@ -1200,7 +1200,7 @@ use Pimcore\Model;
                                 $parentValue = $field->getForCsvExport($parent);
                                 //echo "checking Parent".$parentValue." child:".$value•"\n";
                                 if($parentValue != $value) {
-                                    echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue." ".$value;
+                                    echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."/n";
                                     $parent->setValue($key, $value);
                                     $parent->save();
                                 }

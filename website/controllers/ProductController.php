@@ -795,7 +795,19 @@ class ProductController extends Action
 
         else if(isset($productEan)  && strlen($productEan)>0 ) {
              Object\AbstractObject::setHideUnpublished(false);
-             $product = Object_Product::getByEan($productEan, 1);
+             $existingProductList = Object_Product::getByEan($productEan,['unpublished' => true]);
+
+             if($existingProductList->count()>=1) {
+              $existingProducts = $existingProductList->getObjects();
+              foreach ($existingProducts as $existingProduct) {
+                if($existingProduct->ean == $sku) {
+                  $product   = $existingProduct;
+                  break;
+                }
+              }
+            }
+
+
              
              if(!$product instanceof Object_Product) {
 

@@ -57,8 +57,20 @@ class Image extends Asset\Image {
                 
                  $ean = $image->getMetadata("product");
                  if($ean) {
-                     if(!$product) {
-                     $product = Object\Product::getByEan($ean)->objects[0];
+                    if(!$product) {
+                     $existingProductList = Object\Product::getByEan($ean,['unpublished' => true]);
+
+                     if($existingProductList->count()>=1) {
+                      $existingProducts = $existingProductList->getObjects();
+                      foreach ($existingProducts as $existingProduct) {
+                        if($existingProduct->ean == $sku) {
+                           $product   = $existingProduct;
+                          break;
+                        }
+                      }
+                    }
+
+
                     }
 
                     if(!$product) {

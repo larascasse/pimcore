@@ -182,12 +182,28 @@ class MauchampController extends Action
             foreach ($this->getParam('ft') as $key => $sku) {
                 
                 $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
-                if($existingProductList->count()>=1) {
+                
+                /*if($existingProductList->count()>=1) {
                     
                     $product = $existingProductList->current();
                     $ftUrls[] = Pimcore\Tool::getHostUrl().'/pdf/'.$product->getId();
                     $ftIncludedSkus[] = $sku;
+                }*/
+
+                if($existingProductList->count()>=1) {
+                  $existingProducts = $existingProductList->getObjects();
+                  foreach ($existingProducts as $existingProduct) {
+                    if($existingProduct->ean == $sku) {
+                       $product   = $existingProduct;
+                       $ftUrls[]  = Pimcore\Tool::getHostUrl().'/pdf/'.$product->getId();
+                       $ftIncludedSkus[] = $sku;
+                      break;
+                    }
+                  }
                 }
+                
+
+
             }
          }
 
@@ -195,10 +211,16 @@ class MauchampController extends Action
           if (is_array($this->getParam('photos'))) {
             foreach ($this->getParam('photos') as $key => $sku) {
                 $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
-                if($existingProductList->count()>=1) {
-                  $product = $existingProductList->current();
-                  $photosIncludedSkus[] = $sku;
 
+                if($existingProductList->count()>=1) {
+                  $existingProducts = $existingProductList->getObjects();
+                  foreach ($existingProducts as $existingProduct) {
+                    if($existingProduct->ean == $sku) {
+                       $product   = $existingProduct;
+                       $photosIncludedSkus[] = $sku;
+                      break;
+                    }
+                  }
                 }
                 
             }
@@ -209,10 +231,14 @@ class MauchampController extends Action
             foreach ($this->getParam('pose') as $key => $sku) {
                 $existingProductList = Object\Product::getByEan($sku,['unpublished' => true]);
                 if($existingProductList->count()>=1) {
-
-                  $product = $existingProductList->current();
-                  $poseIncludedSkus[] = $sku;
-
+                  $existingProducts = $existingProductList->getObjects();
+                  foreach ($existingProducts as $existingProduct) {
+                    if($existingProduct->ean == $sku) {
+                       $product   = $existingProduct;
+                       $poseIncludedSkus[] = $sku;
+                      break;
+                    }
+                  }
                 }
                 
             }

@@ -52,7 +52,19 @@ class Web2printController extends Action
              if(!$product instanceof Object_Product/*|| !$product->isPublished()*/) {
                 
                 Object\AbstractObject::setHideUnpublished(false);
-                $product = Object_Product::getByEan($this->getParam("ean"), 1);
+                $existingProductList = Object_Product::getByEan($this->getParam("ean"),['unpublished' => true]);
+
+                if($existingProductList->count()>=1) {
+                  $existingProducts = $existingProductList->getObjects();
+                  foreach ($existingProducts as $existingProduct) {
+                    if($existingProduct->ean == $sku) {
+                      $product   = $existingProduct;
+                      break;
+                    }
+                  }
+                }
+
+
                  $suffixe = $this->getParam("ean");
                 
             }

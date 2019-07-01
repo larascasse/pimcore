@@ -689,7 +689,24 @@ use Pimcore\Model;
 
         $existingEan=null;
         $existingProductList = Object_Product::getByEan($data[$keyCol]);
+
+        if($existingProductList->count()>=1) {
+          $existingProducts = $existingProductList->getObjects();
+          foreach ($existingProducts as $existingProduct) {
+            if($existingProduct->ean == $sku) {
+                $existingEan = $existingProduct;
+                break;
+            }
+            # code...
+          }
+        }
+        else {
+            echo "n'existe pas\n";
+        }
+
+
         //print_r($parent);
+        /*
         if($existingProductList->count()==1) {
             $existingEan = $existingProductList->current();
              //echo "EAN existe ".$existingEan->getFullPath()."\n";
@@ -698,6 +715,8 @@ use Pimcore\Model;
         else {
             echo "n'existe pas\n";
         }
+        */
+
 
         if ($canInsert && $objectKey) {
 
@@ -998,13 +1017,17 @@ use Pimcore\Model;
         $objectKey = Pimcore_File::getValidFilename($product["ean"]);
 
         $existingEan=null;
-        $existingProductList = Object_Product::getByEan($product["ean"]);
+        $existingProductList = Object_Product::getByEan($product["ean"],['unpublished' => true]);
 
-        //print_r($parent);
-        if($existingProductList->count()==1) {
-            $existingEan = $existingProductList->current();
-             //$returnMessage[] =  $product["ean"]." existe ".$existingEan->getFullPath()."\n";
-             
+       if($existingProductList->count()>=1) {
+          $existingProducts = $existingProductList->getObjects();
+          foreach ($existingProducts as $existingProduct) {
+            if($existingProduct->ean == $sku) {
+                $existingEan = $existingProduct;
+                break;
+            }
+            # code...
+          }
         }
         else {
            

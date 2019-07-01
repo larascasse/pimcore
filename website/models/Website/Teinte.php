@@ -212,6 +212,7 @@ class Website_Teinte extends Object_Teinte {
    		$return = array();
 		$articles = $this->getProductsArticle();
 		foreach ($articles as $product) {
+			
 			$asset = $product->getImage_1();
 			if(!$asset)
 				$asset = $product->getImage_2();
@@ -368,7 +369,7 @@ class Website_Teinte extends Object_Teinte {
 		//$return["short_description"] = $return["short_description"];
 		//$return["sub_description"] = $return["sub_description"];
 		
-		$return["mage_meta_title"] = $return["name"] . " par La parqueterie Nouvelle";
+		$return["mage_meta_title"] = $return["name"] . " par La Parqueterie Nouvelle";
 		
 		$return["configurable_fields"] = $this->getConfigurableFields();
 		//$return["subtype"] = "teinte-".$return["product_type"];

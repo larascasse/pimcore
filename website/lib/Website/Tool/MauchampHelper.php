@@ -443,7 +443,8 @@ class MauchampHelper
                             //OOIUPS, gestion des sous produits
                             //if($existingProductList->count()>1) {
                             if($existingProductList->count()>=1) {
-                              foreach ($existingProductList as $existingProduct) {
+                              $existingProducts = $existingProductList->getObjects();
+                              foreach ($existingProducts as $existingProduct) {
                                 if($existingProduct->ean == $sku) {
                                     $_product = $existingProduct;
                                     break;

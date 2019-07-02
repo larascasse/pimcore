@@ -642,9 +642,9 @@ class Concrete extends AbstractObject
                 //FB
                 //$listConfig['condition'] = $defaultCondition . $limit['condition'];
                 if(isset($limit['condition']))
-                    $listConfig['condition'] = $defaultCondition;
-                else
                     $listConfig['condition'] = $defaultCondition . $limit['condition'];
+                else
+                    $listConfig['condition'] = $defaultCondition;
             }
 
             $list = static::getList($listConfig);

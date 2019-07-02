@@ -800,7 +800,7 @@ class ProductController extends Action
              if($existingProductList->count()>=1) {
               $existingProducts = $existingProductList->getObjects();
               foreach ($existingProducts as $existingProduct) {
-                if($existingProduct->ean == $sku) {
+                if($existingProduct->ean == $productEan) {
                   $product   = $existingProduct;
                   break;
                 }

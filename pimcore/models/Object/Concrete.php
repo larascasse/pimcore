@@ -629,7 +629,7 @@ class Concrete extends AbstractObject
                     "condition" => $defaultCondition
                 ];
             }
-
+            print_r($listConfig);
             if (!is_array($limit)) {
                 if ($limit) {
                     $listConfig["limit"] = $limit;

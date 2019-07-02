@@ -630,6 +630,7 @@ class Concrete extends AbstractObject
                 ];
             }
             print_r($listConfig);
+            
             if (!is_array($limit)) {
                 if ($limit) {
                     $listConfig["limit"] = $limit;
@@ -639,6 +640,7 @@ class Concrete extends AbstractObject
                 }
             } else {
                 $listConfig = array_merge($listConfig, $limit);
+                print_r($limit);
                 $listConfig['condition'] = $defaultCondition . $limit['condition'];
             }
 

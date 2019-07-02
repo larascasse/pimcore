@@ -55,7 +55,8 @@ else {
           <?php 
           $i=0;
           while($this->block("contentblock")->loop()) { ?>
-          <h3 class="<?php echo $i==0?"selected":""?>" rel="<?php echo $i ?>"><?= $this->input("title"); ?></h3>
+
+          <h3 class="<?php echo $i==0?"selected":""?>" rel="<?php echo $i ?>"><?= $this->input("title"); ?> </h3>
           <?php 
             $i++;
           } ?>
@@ -108,8 +109,10 @@ else {
      <?php 
             $i=0;
             while($this->block("contentblock")->loop()) {
+               $block = $this->block("contentblock")->getElements()[$i];
 
-                $panId = 'pimpane-'.$this->getId().'-'.$i;
+
+                $panId = 'pimpane-'.\Pimcore\File::getValidFilename((string) $this->input("title")).'-'.$i;
 
                  ?>
                  <div class="nav-item">
@@ -130,7 +133,7 @@ else {
       $i=0;
             while($this->block("contentblock")->loop()) {
 
-                $panId = 'pimpane-'.$this->getId().'-'.$i;
+                $panId = 'pimpane-'.\Pimcore\File::getValidFilename((string)$this->input("title")).'-'.$i;
 
               ?>
 

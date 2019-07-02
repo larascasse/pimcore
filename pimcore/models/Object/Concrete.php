@@ -629,7 +629,6 @@ class Concrete extends AbstractObject
                     "condition" => $defaultCondition
                 ];
             }
-            print_r($listConfig);
             
             if (!is_array($limit)) {
                 if ($limit) {
@@ -640,8 +639,12 @@ class Concrete extends AbstractObject
                 }
             } else {
                 $listConfig = array_merge($listConfig, $limit);
-                print_r($limit);
-                $listConfig['condition'] = $defaultCondition . $limit['condition'];
+                //FB
+                //$listConfig['condition'] = $defaultCondition . $limit['condition'];
+                if(isset($limit['condition']))
+                    $listConfig['condition'] = $defaultCondition;
+                else
+                    $listConfig['condition'] = $defaultCondition . $limit['condition'];
             }
 
             $list = static::getList($listConfig);

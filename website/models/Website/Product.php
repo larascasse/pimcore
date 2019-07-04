@@ -319,7 +319,7 @@ class Website_Product extends Object_Product {
 
 			
 			//pour le strat et le vinyle
-			if(stripos($this->getMage_name(),"stratifie") !== false) {
+			if(stripos($this->getMage_name(),"stratifie") !== false || stripos($this->getMage_name(),"stratifié") !== false) {
 				$this->_choixString = "";
 			}
 			else if(stripos($this->getMage_name(),"vinyle") !== false) {

@@ -317,10 +317,18 @@ class Website_Product extends Object_Product {
 	public function getChoixString () {
 		if(!$this->_choixString) {
 
-			if(!$this->isAccessoire() && !$this->isPlusValue())
+			
+			//pour le strat et le vinyle
+			if(stripos($this->getMage_name(),"stratifie") !== false) {
+				$this->_choixString = "";
+			}
+			else if(stripos($this->getMage_name(),"vinyle") !== false) {
+				$this->_choixString = "";
+			}
+			else if(!$this->isAccessoire() && !$this->isPlusValue())
 				$this->_choixString = $this->getSingleTaxonomyString('choix');
 			else
-				return "";
+				$this->_choixString = "";
 
 		}
 		return $this->_choixString;
@@ -330,6 +338,8 @@ class Website_Product extends Object_Product {
 
 
 	public function getChoixDescription () {
+		if($this->isAccessoire() || $this->isPlusValue())
+			return "";
 		return $this->getTaxonomyDescription('choix');
 		
 	}

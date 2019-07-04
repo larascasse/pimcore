@@ -319,10 +319,17 @@ class Website_Product extends Object_Product {
 
 			
 			//pour le strat et le vinyle
-			if(stripos($this->getMage_name(),"stratifie") !== false || stripos($this->getMage_name(),"stratifié") !== false) {
+			if(stripos($this->getMage_name(),"stratifie") !== false 
+				|| stripos($this->getMage_name(),"stratifié") !== false 
+				|| $this->getFamille()=="20STRAT"
+
+			) {
 				$this->_choixString = "";
 			}
-			else if(stripos($this->getMage_name(),"vinyle") !== false) {
+			else if(stripos($this->getMage_name(),"vinyle") !== false
+					|| $this->getFamille()=="85VINYLSOL"
+
+				) {
 				$this->_choixString = "";
 			}
 			else if(!$this->isAccessoire() && !$this->isPlusValue())

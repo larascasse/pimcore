@@ -313,8 +313,8 @@ class Website_Teinte extends Object_Teinte {
 	            $return["pose"]  = $this->getPose();
 	            break;
 	        case 'sol-stratifie':
-	            $return["short_name"]  = "Stratifié ".$return["name"];
-	            $return["name"]  = "Stratifié ".$return["name"];
+	            $return["short_name"]  = $return["name"];
+	            $return["name"]  = $return["name"];
 	            $return["pose"]  = $this->getPose();
 	            break;
 	         case 'sol-plaque':

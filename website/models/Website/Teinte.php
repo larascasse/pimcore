@@ -312,6 +312,7 @@ class Website_Teinte extends Object_Teinte {
 	            $return["name"]  = "Terrasse ".$return["name"];
 	            $return["pose"]  = $this->getPose();
 	            break;
+	        
 	        case 'sol-stratifie':
 	            $return["short_name"]  = $return["name"];
 	            $return["name"]  = $return["name"];
@@ -321,6 +322,7 @@ class Website_Teinte extends Object_Teinte {
 	            $return["short_name"]  = "Sol plaqué ".$return["name"];
 	            $return["name"]  = "Sol plaqué ".$return["name"];
 	            $return["pose"]  = $this->getPose();
+	            break;
 
 	           case 'sol-vinyl-rigide':
 	            $return["short_name"]  = "Sol vinyle rigide ".$return["name"];

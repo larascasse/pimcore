@@ -80,6 +80,15 @@ foreach ($list->getObjects() as $object) {
                  $object->setChauffantBasseTemperature("1");
                  $object->setChauffantRadiantElectrique("1");
                  $object->setSolRaffraichissant("0");
+                 $object->setPimonly_resistance_thermique(0.108);
+
+            case '13':
+                 $object->setChauffantBasseTemperature("1");
+                 $object->setChauffantRadiantElectrique("1");
+                 $object->setSolRaffraichissant("1");
+                 $object->setPimonly_resistance_thermique(0.087);
+
+                 
                  break;
 
           

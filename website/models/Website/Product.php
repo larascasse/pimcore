@@ -3623,7 +3623,7 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 
 	public function isSolPlaque() {
-		return stristr($this->getName_scienergie(),"PLACAGE BOIS MONOLAME");
+		return stristr($this->getName_scienergie(),"PLACAGE BOIS MONOLAME") !== FALSE;
 	}
 
 	public function isParquetBrut() {

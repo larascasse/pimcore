@@ -410,7 +410,7 @@ class Website_Product extends Object_Product {
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"motif");
 		$value = $this->getMotif();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
-		if($this->isParquet() && strlen($value) == 0)
+		if(($this->isParquet() || $this->isSolPlaque()) && strlen($value) == 0)
 			$value =  "Lame droite";
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
@@ -3620,6 +3620,10 @@ Autrement dit, hors des cas particuliers cités, tous les parquets conviennent q
 	}
 	public function isParquet() {
 		return $this->isParquetMassif() || $this->isParquetContrecolle();
+	}
+
+	public function isSolPlaque() {
+		return stristr($this->getName_scienergie(),"PLACAGE BOIS MONOLAME");
 	}
 
 	public function isParquetBrut() {

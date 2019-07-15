@@ -1210,29 +1210,27 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getPimonly_equivalence_auto () {
+
+	public function getPimonly_equivalence_auto($stringlength = 1000) {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
-   		 Object_Abstract::setGetInheritedValues(true); 
-   		 $parent = $this->getParent();
+   		Object_Abstract::setGetInheritedValues(true); 
+   		$parent = $this->getParent();
 
-   		  //Ajout shortanme parent et parentparent
-   		 //Pas beoin pour le titre...
-   		 $parentSuffixe = "";
-   		 $parentParentSuffixe = "";
 
    		 //NEW 2019
    		 //
    		 if(strlen($this->pimonly_equivalence) > 0) {
    		 	
    		 	$str = $this->pimonly_equivalence;
-  
+    	
+
     		if(strlen($this->pimonly_name_suffixe) > 0) {
     			$str .=" ".$this->pimonly_name_suffixe;
     		}
     		return $this->cleanString($str);
    		 }
-   		  else if($parent instanceof Object_Product && strlen($parent->pimonly_equivalence) > 0) {
+   		 else if($parent instanceof Object_Product && strlen($parent->pimonly_equivalence) > 0) {
    		 	
    		 	$str = $parent->pimonly_equivalence;
     	
@@ -1247,12 +1245,12 @@ class Website_Product extends Object_Product {
     		return $this->cleanString($str);
    		 }
 
-   		
-
+   		 //Ajout shortanme parent et parentparent
+   		 $parentSuffixe = "";
+   		 $parentParentSuffixe = "";
    		 try {
 
    		 	if($this->getParent() instanceof Object_Product) {
-
 
    		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
    		 		if($this->getParent()->getParent() instanceof Object_Product) {
@@ -1265,26 +1263,39 @@ class Website_Product extends Object_Product {
    		 } catch (\Exception $e) {
             //
          }
-         
 
+   		
+		//pimonly_equivalence
+    	if(strlen($this->getPimonly_equivalence())>0) {
+    		
 
-		//Shortname
-		$str = $this->getPimonly_equivalence();
-		$str =trim($str);
-		if(strlen($this->getPimonly_name_suffixe())>0) {
-			$str .= " ".$parentParentSuffixe." ".$parentSuffixe." ".$this->getPimonly_name_suffixe();
-		}
-		
-		$str = str_replace("   ", " ", $str);
-		$str = str_replace("  ", " ", $str);
-		$str = str_replace("  ", " ", $str);
+    		$str = $this->getPimonly_equivalence();
+    		$str =trim($str);
+
+    		if(strlen($this->getPimonly_name_suffixe())>0) {
+    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
+    		}
+    		$str =$this->cleanString($str);
+
+    		Object_Abstract::setGetInheritedValues($inheritance); 
+    		return $str;
+    	}
+    	//No shorname
+    	/*else if($this->getName()) {
+    		$str = $this->getName();
+    		$str = str_replace($this->getSubtype(), "", $str);
+    		$str = str_replace("monolame ", "", $str);
     	
-    	
-    	$str =trim($str);
 
-
-		Object_Abstract::setGetInheritedValues($inheritance); 
-		return $str;
+    		if(strlen($this->getPimonly_name_suffixe())>0) {
+    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
+    		}
+    		
+    		$str =$this->cleanString($str);
+    		$str = substr($str,0,$stringlength);
+    		Object_Abstract::setGetInheritedValues($inheritance); 
+    		return $str;
+    	}*/
 
 	}
 

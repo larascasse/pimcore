@@ -1206,7 +1206,85 @@ class Website_Product extends Object_Product {
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $str;
+
+	}
+
+
+	public function getPimonly_equivalence_auto () {
+
+		$inheritance = Object_Abstract::doGetInheritedValues(); 
+   		 Object_Abstract::setGetInheritedValues(true); 
+   		 $parent = $this->getParent();
+
+   		  //Ajout shortanme parent et parentparent
+   		 //Pas beoin pour le titre...
+   		 $parentSuffixe = "";
+   		 $parentParentSuffixe = "";
+
+   		 //NEW 2019
+   		 //
+   		 if(strlen($this->pimonly_equivalence) > 0) {
+   		 	
+   		 	$str = $this->pimonly_equivalence;
+  
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+    		return $this->cleanString($str);
+   		 }
+   		  else if($parent instanceof Object_Product && strlen($parent->pimonly_equivalence) > 0) {
+   		 	
+   		 	$str = $parent->pimonly_equivalence;
     	
+
+    		if(strlen($parent->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$parent->pimonly_name_suffixe;
+    		}
+    		if(strlen($this->pimonly_name_suffixe) > 0) {
+    			$str .=" ".$this->pimonly_name_suffixe;
+    		}
+
+    		return $this->cleanString($str);
+   		 }
+
+   		
+
+   		 try {
+
+   		 	if($this->getParent() instanceof Object_Product) {
+
+
+   		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
+   		 		if($this->getParent()->getParent() instanceof Object_Product) {
+					$parentParentSuffixe = $this->getParent()->getParent()->pimonly_name_suffixe." ";
+				}
+
+   		 	}
+   		 	
+
+   		 } catch (\Exception $e) {
+            //
+         }
+         
+
+
+		//Shortname
+		$str = $this->getPimonly_equivalence();
+		$str =trim($str);
+		if(strlen($this->getPimonly_name_suffixe())>0) {
+			$str .= " ".$parentParentSuffixe." ".$parentSuffixe." ".$this->getPimonly_name_suffixe();
+		}
+		
+		$str = str_replace("   ", " ", $str);
+		$str = str_replace("  ", " ", $str);
+		$str = str_replace("  ", " ", $str);
+    	
+    	
+    	$str =trim($str);
+
+
+		Object_Abstract::setGetInheritedValues($inheritance); 
+		return $str;
 
 	}
 

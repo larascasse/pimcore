@@ -1210,12 +1210,8 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function setPimonly_equivalence_auto($pimonly_equivalence_auto) {
-		return parent::setPimonly_equivalence_auto('');
-	
-	}
 
-	public function getPimonly_equivalence_autoString() {
+	public function getPimonly_equivalence_auto() {
 
 		//$inheritance = Object_Abstract::doGetInheritedValues(); 
    		//Object_Abstract::setGetInheritedValues(true); 

@@ -1215,7 +1215,7 @@ class Website_Product extends Object_Product {
 	
 	}
 
-	public function getPimonly_equivalence_auto() {
+	public function getPimonly_equivalence_autoString() {
 
 		//$inheritance = Object_Abstract::doGetInheritedValues(); 
    		//Object_Abstract::setGetInheritedValues(true); 

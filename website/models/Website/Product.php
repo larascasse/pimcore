@@ -1210,11 +1210,16 @@ class Website_Product extends Object_Product {
 	}
 
 
+	public function setPimonly_equivalence_auto() {
+		return parent::setPimonly_equivalence_auto('');
+	
+	}
 
-	public function getPimonly_equivalence_auto($stringlength = 1000) {
+	public function getPimonly_equivalence_auto() {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		Object_Abstract::setGetInheritedValues(true); 
+   		
    		$parent = $this->getParent();
 
 
@@ -1280,6 +1285,7 @@ class Website_Product extends Object_Product {
     		Object_Abstract::setGetInheritedValues($inheritance); 
     		return $str;
     	}
+    	return "";
     	//No shorname
     	/*else if($this->getName()) {
     		$str = $this->getName();

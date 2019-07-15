@@ -266,8 +266,11 @@ foreach ($list->getObjects() as $object) {
     
     
     $parent->setValue('name',null);
+    $parent->setValue('pimonly_equivalence',null);
     $parent->save();
 
+    
+    $object->setValue('pimonly_equivalence',null);
     $object->setPublished(true);
     $object->save();
 

@@ -1928,11 +1928,11 @@ return [
         "sql" => "",
         "dataSourceConfig" => [
             [
-                "sql" => "oo_id,obsolete,actif_web,name,mage_short_name,code,ean,image_1,image_2,image_3",
+                "sql" => "oo_id,obsolete,actif_web,mage_short_name,code,ean,image_1,image_2,image_3, name",
                 "from" => "object_5",
-                "where" => "image_1 = 167  AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%')",
+                "where" => "image_1 = 167  AND (image_2 = 167 OR image_2 IS NULL) AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%') AND obsolete  IS NULL",
                 "groupby" => "",
-                "sqlText" => "SELECT oo_id,obsolete,actif_web,name,mage_short_name,code,ean,image_1,image_2,image_3 FROM object_5 WHERE image_1 = 167  AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%')",
+                "sqlText" => "SELECT oo_id,obsolete,actif_web,mage_short_name,code,ean,image_1,image_2,image_3, name FROM object_5 WHERE image_1 = 167  AND (image_2 = 167 OR image_2 IS NULL) AND code IS NOT NULL AND ean IS NULL and (o_path LIKE '/catalogue/_product_base__/01massif/tmp/%' OR o_path LIKE '/catalogue/_product_base__/05CONTRECO/tmp/%') AND obsolete  IS NULL",
                 "type" => "sql"
             ]
         ],
@@ -1945,7 +1945,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "columnAction" => "openObject",
-                "id" => "extModel66882-1"
+                "id" => "extModel88373-1"
             ],
             [
                 "name" => "code",
@@ -1954,7 +1954,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-2"
+                "id" => "extModel88373-2"
             ],
             [
                 "name" => "ean",
@@ -1963,7 +1963,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-3"
+                "id" => "extModel88373-3"
             ],
             [
                 "name" => "name",
@@ -1973,7 +1973,7 @@ return [
                 "width" => "",
                 "label" => "",
                 "columnAction" => "",
-                "id" => "extModel66882-4"
+                "id" => "extModel88373-4"
             ],
             [
                 "name" => "mage_short_name",
@@ -1982,7 +1982,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-5"
+                "id" => "extModel88373-5"
             ],
             [
                 "name" => "image_1",
@@ -1991,7 +1991,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-6"
+                "id" => "extModel88373-6"
             ],
             [
                 "name" => "image_2",
@@ -2000,7 +2000,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-7"
+                "id" => "extModel88373-7"
             ],
             [
                 "name" => "image_3",
@@ -2009,7 +2009,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-8"
+                "id" => "extModel88373-8"
             ],
             [
                 "name" => "actif_web",
@@ -2018,7 +2018,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-9"
+                "id" => "extModel88373-9"
             ],
             [
                 "name" => "obsolete",
@@ -2027,7 +2027,7 @@ return [
                 "order" => TRUE,
                 "width" => "",
                 "label" => "",
-                "id" => "extModel66882-10"
+                "id" => "extModel88373-10"
             ]
         ],
         "niceName" => "Produits sans média",
@@ -2043,7 +2043,7 @@ return [
         "yAxis" => [
 
         ],
-        "modificationDate" => 1554123393,
+        "modificationDate" => 1561989223,
         "creationDate" => 1517848789,
         "id" => "product-missing-media"
     ],

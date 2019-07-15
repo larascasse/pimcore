@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-05-14T11:27:14+02:00
+* Generated at: 2019-07-15T11:16:48+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 127.0.0.1
+* IP: 172.31.29.60
 
 
 Fields Summary: 
@@ -13,6 +13,8 @@ Fields Summary:
 - obsolete [checkbox]
 - echantillon [checkbox]
 - pimonly_print_label [input]
+- pimonly_equivalence_auto [input]
+- pimonly_equivalence [input]
 - code [input]
 - ean [input]
 - plusValue [href]
@@ -31,9 +33,10 @@ Fields Summary:
 - pimonly_name_suffixe [input]
 - pimonly_dimensions [input]
 - short_description [textarea]
-- mage_sub_description [textarea]
 - short_description_title [input]
 - description [textarea]
+- pimonly_sub_description_prefixe [textarea]
+- pimonly_sub_description [textarea]
 - extra_content1 [wysiwyg]
 - lesplus [textarea]
 - remarque [textarea]
@@ -194,6 +197,7 @@ Fields Summary:
 - mage_meta_description [textarea]
 - mage_lesplus [textarea]
 - mage_description [textarea]
+- mage_sub_description [textarea]
 - characteristics [textarea]
 - mage_guideline [textarea]
 - mage_associated_articles [textarea]
@@ -228,6 +232,8 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_print_label ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_equivalence_auto ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_equivalence ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCode ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEan ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPlusValue ($value, $limit = 0) 
@@ -246,9 +252,10 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_name_suffixe ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_dimensions ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByShort_description ($value, $limit = 0) 
-* @method \Pimcore\Model\Object\Product\Listing getByMage_sub_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByShort_description_title ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByDescription ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_sub_description_prefixe ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_sub_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByExtra_content1 ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByLesplus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByRemarque ($value, $limit = 0) 
@@ -408,6 +415,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByMage_meta_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_lesplus ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_description ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByMage_sub_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByCharacteristics ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_guideline ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByMage_associated_articles ($value, $limit = 0) 
@@ -441,6 +449,8 @@ public $actif_web;
 public $obsolete;
 public $echantillon;
 public $pimonly_print_label;
+public $pimonly_equivalence_auto;
+public $pimonly_equivalence;
 public $code;
 public $ean;
 public $plusValue;
@@ -459,9 +469,10 @@ public $short_name;
 public $pimonly_name_suffixe;
 public $pimonly_dimensions;
 public $short_description;
-public $mage_sub_description;
 public $short_description_title;
 public $description;
+public $pimonly_sub_description_prefixe;
+public $pimonly_sub_description;
 public $extra_content1;
 public $lesplus;
 public $remarque;
@@ -607,6 +618,7 @@ public $mage_teinte_level2;
 public $mage_meta_description;
 public $mage_lesplus;
 public $mage_description;
+public $mage_sub_description;
 public $characteristics;
 public $mage_guideline;
 public $mage_associated_articles;
@@ -743,6 +755,58 @@ public function getPimonly_print_label () {
 */
 public function setPimonly_print_label ($pimonly_print_label) {
 	$this->pimonly_print_label = $pimonly_print_label;
+	return $this;
+}
+
+/**
+* Get pimonly_equivalence_auto - Equivalence Autom.
+* @return string
+*/
+public function getPimonly_equivalence_auto () {
+	$preValue = $this->preGetValue("pimonly_equivalence_auto"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_equivalence_auto;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_equivalence_auto")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_equivalence_auto");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_equivalence_auto - Equivalence Autom.
+* @param string $pimonly_equivalence_auto
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_equivalence_auto ($pimonly_equivalence_auto) {
+	$this->pimonly_equivalence_auto = $pimonly_equivalence_auto;
+	return $this;
+}
+
+/**
+* Get pimonly_equivalence - Equivalence
+* @return string
+*/
+public function getPimonly_equivalence () {
+	$preValue = $this->preGetValue("pimonly_equivalence"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_equivalence;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_equivalence")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_equivalence");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_equivalence - Equivalence
+* @param string $pimonly_equivalence
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_equivalence ($pimonly_equivalence) {
+	$this->pimonly_equivalence = $pimonly_equivalence;
 	return $this;
 }
 
@@ -1215,32 +1279,6 @@ public function setShort_description ($short_description) {
 }
 
 /**
-* Get mage_sub_description - Sous description / Liste de caract.
-* @return string
-*/
-public function getMage_sub_description () {
-	$preValue = $this->preGetValue("mage_sub_description"); 
-	if($preValue !== null && !\Pimcore::inAdmin()) { 
-		return $preValue;
-	}
-	$data = $this->mage_sub_description;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_sub_description")->isEmpty($data)) {
-		return $this->getValueFromParent("mage_sub_description");
-	}
-	return $data;
-}
-
-/**
-* Set mage_sub_description - Sous description / Liste de caract.
-* @param string $mage_sub_description
-* @return \Pimcore\Model\Object\Product
-*/
-public function setMage_sub_description ($mage_sub_description) {
-	$this->mage_sub_description = $mage_sub_description;
-	return $this;
-}
-
-/**
 * Get short_description_title - Description titre
 * @return string
 */
@@ -1289,6 +1327,58 @@ public function getDescription () {
 */
 public function setDescription ($description) {
 	$this->description = $description;
+	return $this;
+}
+
+/**
+* Get pimonly_sub_description_prefixe - Dimensions et autre caracteristiques EAN
+* @return string
+*/
+public function getPimonly_sub_description_prefixe () {
+	$preValue = $this->preGetValue("pimonly_sub_description_prefixe"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_sub_description_prefixe;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_sub_description_prefixe")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_sub_description_prefixe");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_sub_description_prefixe - Dimensions et autre caracteristiques EAN
+* @param string $pimonly_sub_description_prefixe
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_sub_description_prefixe ($pimonly_sub_description_prefixe) {
+	$this->pimonly_sub_description_prefixe = $pimonly_sub_description_prefixe;
+	return $this;
+}
+
+/**
+* Get pimonly_sub_description - Sous description / Liste de caract. commune
+* @return string
+*/
+public function getPimonly_sub_description () {
+	$preValue = $this->preGetValue("pimonly_sub_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_sub_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_sub_description")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_sub_description");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_sub_description - Sous description / Liste de caract. commune
+* @param string $pimonly_sub_description
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_sub_description ($pimonly_sub_description) {
+	$this->pimonly_sub_description = $pimonly_sub_description;
 	return $this;
 }
 
@@ -5339,6 +5429,32 @@ public function getMage_description () {
 */
 public function setMage_description ($mage_description) {
 	$this->mage_description = $mage_description;
+	return $this;
+}
+
+/**
+* Get mage_sub_description - Sous description / Liste de caract.
+* @return string
+*/
+public function getMage_sub_description () {
+	$preValue = $this->preGetValue("mage_sub_description"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_sub_description;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_sub_description")->isEmpty($data)) {
+		return $this->getValueFromParent("mage_sub_description");
+	}
+	return $data;
+}
+
+/**
+* Set mage_sub_description - Sous description / Liste de caract.
+* @param string $mage_sub_description
+* @return \Pimcore\Model\Object\Product
+*/
+public function setMage_sub_description ($mage_sub_description) {
+	$this->mage_sub_description = $mage_sub_description;
 	return $this;
 }
 

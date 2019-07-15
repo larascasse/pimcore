@@ -1,11 +1,11 @@
 <?php 
 
 /** 
-* Generated at: 2019-04-19T14:56:20+02:00
-* Inheritance: yes
+* Generated at: 2019-05-23T09:31:04+02:00
+* Inheritance: no
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.4.114
+* IP: 172.31.26.145
 
 
 Fields Summary: 
@@ -15,6 +15,8 @@ Fields Summary:
 - sub_description [textarea]
 - image_header [image]
 - short_name [input]
+- mage_custom_layout [textarea]
+- mage_dynamic_products_conds [textarea]
 - products [objects]
 - person [href]
 - Date [datetime]
@@ -34,6 +36,8 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Category\Listing getBySub_description ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByImage_header ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByShort_name ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByMage_custom_layout ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Category\Listing getByMage_dynamic_products_conds ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByProducts ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByPerson ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Category\Listing getByDate ($value, $limit = 0) 
@@ -52,6 +56,8 @@ public $description;
 public $sub_description;
 public $image_header;
 public $short_name;
+public $mage_custom_layout;
+public $mage_dynamic_products_conds;
 public $products;
 public $person;
 public $Date;
@@ -80,9 +86,6 @@ public function getName () {
 		return $preValue;
 	}
 	$data = $this->name;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("name")->isEmpty($data)) {
-		return $this->getValueFromParent("name");
-	}
 	return $data;
 }
 
@@ -106,9 +109,6 @@ public function getMage_category_id () {
 		return $preValue;
 	}
 	$data = $this->mage_category_id;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("mage_category_id")->isEmpty($data)) {
-		return $this->getValueFromParent("mage_category_id");
-	}
 	return $data;
 }
 
@@ -132,9 +132,6 @@ public function getDescription () {
 		return $preValue;
 	}
 	$data = $this->description;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("description")->isEmpty($data)) {
-		return $this->getValueFromParent("description");
-	}
 	return $data;
 }
 
@@ -158,9 +155,6 @@ public function getSub_description () {
 		return $preValue;
 	}
 	$data = $this->sub_description;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("sub_description")->isEmpty($data)) {
-		return $this->getValueFromParent("sub_description");
-	}
 	return $data;
 }
 
@@ -184,9 +178,6 @@ public function getImage_header () {
 		return $preValue;
 	}
 	$data = $this->image_header;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("image_header")->isEmpty($data)) {
-		return $this->getValueFromParent("image_header");
-	}
 	return $data;
 }
 
@@ -210,9 +201,6 @@ public function getShort_name () {
 		return $preValue;
 	}
 	$data = $this->short_name;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("short_name")->isEmpty($data)) {
-		return $this->getValueFromParent("short_name");
-	}
 	return $data;
 }
 
@@ -227,6 +215,52 @@ public function setShort_name ($short_name) {
 }
 
 /**
+* Get mage_custom_layout - mage_custom_layout
+* @return string
+*/
+public function getMage_custom_layout () {
+	$preValue = $this->preGetValue("mage_custom_layout"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_custom_layout;
+	return $data;
+}
+
+/**
+* Set mage_custom_layout - mage_custom_layout
+* @param string $mage_custom_layout
+* @return \Pimcore\Model\Object\Category
+*/
+public function setMage_custom_layout ($mage_custom_layout) {
+	$this->mage_custom_layout = $mage_custom_layout;
+	return $this;
+}
+
+/**
+* Get mage_dynamic_products_conds - mage_dynamic_products_conds
+* @return string
+*/
+public function getMage_dynamic_products_conds () {
+	$preValue = $this->preGetValue("mage_dynamic_products_conds"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->mage_dynamic_products_conds;
+	return $data;
+}
+
+/**
+* Set mage_dynamic_products_conds - mage_dynamic_products_conds
+* @param string $mage_dynamic_products_conds
+* @return \Pimcore\Model\Object\Category
+*/
+public function setMage_dynamic_products_conds ($mage_dynamic_products_conds) {
+	$this->mage_dynamic_products_conds = $mage_dynamic_products_conds;
+	return $this;
+}
+
+/**
 * Get products - Produits
 * @return \Pimcore\Model\Object\product[]
 */
@@ -236,9 +270,6 @@ public function getProducts () {
 		return $preValue;
 	}
 	$data = $this->getClass()->getFieldDefinition("products")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("products")->isEmpty($data)) {
-		return $this->getValueFromParent("products");
-	}
 	return $data;
 }
 
@@ -262,9 +293,6 @@ public function getPerson () {
 		return $preValue;
 	}
 	$data = $this->getClass()->getFieldDefinition("person")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("person")->isEmpty($data)) {
-		return $this->getValueFromParent("person");
-	}
 	return $data;
 }
 
@@ -288,9 +316,6 @@ public function getDate () {
 		return $preValue;
 	}
 	$data = $this->Date;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("Date")->isEmpty($data)) {
-		return $this->getValueFromParent("Date");
-	}
 	return $data;
 }
 
@@ -314,9 +339,6 @@ public function getTest () {
 		return $preValue;
 	}
 	$data = $this->getClass()->getFieldDefinition("test")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("test")->isEmpty($data)) {
-		return $this->getValueFromParent("test");
-	}
 	return $data;
 }
 
@@ -340,9 +362,6 @@ public function getTest2 () {
 		return $preValue;
 	}
 	$data = $this->getClass()->getFieldDefinition("test2")->preGetData($this);
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("test2")->isEmpty($data)) {
-		return $this->getValueFromParent("test2");
-	}
 	return $data;
 }
 
@@ -366,9 +385,6 @@ public function getTitle () {
 		return $preValue;
 	}
 	$data = $this->title;
-	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("title")->isEmpty($data)) {
-		return $this->getValueFromParent("title");
-	}
 	return $data;
 }
 

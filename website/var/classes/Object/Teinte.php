@@ -1,16 +1,17 @@
 <?php 
 
 /** 
-* Generated at: 2019-05-02T12:08:30+02:00
+* Generated at: 2019-06-25T18:13:43+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
-* IP: 172.31.4.114
+* IP: 172.31.26.145
 
 
 Fields Summary: 
 - name [input]
 - description [textarea]
+- brouillon [textarea]
 - image [image]
 - hexacolor [input]
 - products_relation [nonownerobjects]
@@ -30,6 +31,7 @@ namespace Pimcore\Model\Object;
 /**
 * @method \Pimcore\Model\Object\Teinte\Listing getByName ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByDescription ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Teinte\Listing getByBrouillon ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByImage ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByHexacolor ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Teinte\Listing getByTeinte_type ($value, $limit = 0) 
@@ -47,6 +49,7 @@ public $o_classId = 13;
 public $o_className = "teinte";
 public $name;
 public $description;
+public $brouillon;
 public $image;
 public $hexacolor;
 public $teinte_type;
@@ -117,6 +120,32 @@ public function getDescription () {
 */
 public function setDescription ($description) {
 	$this->description = $description;
+	return $this;
+}
+
+/**
+* Get brouillon - Brouillon
+* @return string
+*/
+public function getBrouillon () {
+	$preValue = $this->preGetValue("brouillon"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->brouillon;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("brouillon")->isEmpty($data)) {
+		return $this->getValueFromParent("brouillon");
+	}
+	return $data;
+}
+
+/**
+* Set brouillon - Brouillon
+* @param string $brouillon
+* @return \Pimcore\Model\Object\Teinte
+*/
+public function setBrouillon ($brouillon) {
+	$this->brouillon = $brouillon;
 	return $this;
 }
 

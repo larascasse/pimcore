@@ -554,8 +554,6 @@ class AbstractObject extends Model\Element\AbstractElement
         }
 
         $this->correctPath();
-        echo "klmklmklm";
-        print_r($this->getObjectVars());
 
         // we wrap the save actions in a loop here, so that we can restart the database transactions in the case it fails
         // if a transaction fails it gets restarted $maxRetries times, then the exception is thrown out

@@ -809,7 +809,7 @@ class ProductController extends Action
 
 
              
-             if(!($product instanceof Object_Product)) {
+             if(!isset($product) || !($product instanceof Object_Product)) {
 
                 //On va chercher dans AZURE
                 //echo "loadAzureProduct".$productEan;

@@ -1210,7 +1210,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function setPimonly_equivalence_auto() {
+	public function setPimonly_equivalence_auto($pimonly_equivalence_auto) {
 		return parent::setPimonly_equivalence_auto('');
 	
 	}

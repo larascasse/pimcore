@@ -239,7 +239,7 @@ foreach ($list->getObjects() as $object) {
 
                 case '1020':
                      $object->setValue('largeur_txt','');
-                     $suffixeEan .= $object->getEpaisseur().'x1020x1020';
+                     $suffixeEan = $object->getEpaisseur().'x1020x1020';
                 break;
             }
 

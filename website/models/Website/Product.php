@@ -1205,6 +1205,32 @@ class Website_Product extends Object_Product {
 
 
 
+	 public function replaceEquivalenceChoix($phrase) {
+
+        $equivalence = array(
+            "Panaget" = [
+                "lpn"           => ["Prbis",'Elégance','Matière'],
+                'fournisseur'   =>  ["Nature",'Authentique','Zenitude']
+            ],
+            "Arbony" = [
+                "lpn"           => [],
+                'fournisseur'   =>[]
+            ],
+
+        );
+
+        $choixLpn = $this->getChoixString();
+        $fournisseur = $this->getPimonly_fournisseur();
+
+        $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]:false;
+
+         $newhPhrase = $phrase;
+        if($equivalenceByFounissseur)
+            $newhPhrase = str_replace($choixLpn, $equivalenceByFounissseur, $phrase);
+       
+        return $newhPhrase;
+    }
+
 
 	public function getPimonly_equivalence_auto() {
 
@@ -1213,19 +1239,19 @@ class Website_Product extends Object_Product {
    		
    		$parent = $this->getParent();
 
+   		$str = "";
 
    		 //NEW 2019
    		 //
    		 if(strlen($this->pimonly_equivalence) > 0) {
    		 	
-   		 	$str = $this->pimonly_equivalence;
+   		 	$str .= $this->pimonly_equivalence;
     	
 
     		if(strlen($this->pimonly_name_suffixe) > 0) {
     			$str .=" ".$this->pimonly_name_suffixe;
     		}
-    		Object_Abstract::setGetInheritedValues($inheritance); 
-    		return $this->cleanString($str);
+    	
    		 }
    		 else if($parent instanceof Object_Product && strlen($parent->pimonly_equivalence) > 0) {
    		 	
@@ -1238,65 +1264,57 @@ class Website_Product extends Object_Product {
     		if(strlen($this->pimonly_name_suffixe) > 0) {
     			$str .=" ".$this->pimonly_name_suffixe;
     		}
-    		Object_Abstract::setGetInheritedValues($inheritance); 
-    		return $this->cleanString($str);
+    
+   		 }
+   		 else {
+   		 	 //Ajout shortanme parent et parentparent
+	   		 $parentSuffixe = "";
+	   		 $parentParentSuffixe = "";
+	   		 try {
+
+	   		 	if($this->getParent() instanceof Object_Product) {
+
+	   		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
+	   		 		
+	   		 		if($this->getParent()->getParent() instanceof Object_Product) {
+						$parentParentSuffixe = $this->getParent()->getParent()->pimonly_name_suffixe." ";
+
+						/*if($this->getParent()->getParent()->getParent() instanceof Object_Product) {
+							$parentParentParentSuffixe = $this->getParent()->getParent()->getParent()->pimonly_name_suffixe." ";
+						}*/
+
+
+					}
+
+	   		 	}
+	   		 	
+
+	   		 } catch (\Exception $e) {
+	            //
+	         }
+
+			//pimonly_equivalence
+	    	if(strlen($this->getPimonly_equivalence())>0) {
+	    	
+	    		$str .= $this->getPimonly_equivalence();
+
+	    		if(strlen($this->getPimonly_name_suffixe())>0) {
+	    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
+	    		}
+
+	    	}
+
    		 }
 
-   		 //Ajout shortanme parent et parentparent
-   		 $parentSuffixe = "";
-   		 $parentParentSuffixe = "";
-   		 try {
-
-   		 	if($this->getParent() instanceof Object_Product) {
-
-   		 		$parentSuffixe = $this->getParent()->pimonly_name_suffixe." ";
-   		 		if($this->getParent()->getParent() instanceof Object_Product) {
-					$parentParentSuffixe = $this->getParent()->getParent()->pimonly_name_suffixe." ";
-				}
-
-   		 	}
-   		 	
-
-   		 } catch (\Exception $e) {
-            //
-         }
-
-   		
-		//pimonly_equivalence
-    	if(strlen($this->getPimonly_equivalence())>0) {
-    		
-
-    		$str = $this->getPimonly_equivalence();
-    		$str =trim($str);
-
-    		if(strlen($this->getPimonly_name_suffixe())>0) {
-    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
-    		}
-    		$str =$this->cleanString($str);
-
-    		Object_Abstract::setGetInheritedValues($inheritance); 
-    		return $str;
-    	}
-
+   	
     	Object_Abstract::setGetInheritedValues($inheritance); 
-    	return "";
-    	//No shorname
-    	/*else if($this->getName()) {
-    		$str = $this->getName();
-    		$str = str_replace($this->getSubtype(), "", $str);
-    		$str = str_replace("monolame ", "", $str);
     	
-
-    		if(strlen($this->getPimonly_name_suffixe())>0) {
-    			$str .=" ".$parentParentSuffixe.$parentSuffixe.$this->pimonly_name_suffixe;
-    		}
-    		
-    		$str =$this->cleanString($str);
-    		$str = substr($str,0,$stringlength);
-    		Object_Abstract::setGetInheritedValues($inheritance); 
-    		return $str;
-    	}*/
-
+    	//On va remplace les choix founirsseur
+    	$str = $this->replaceEquivalenceChoix($str);
+    	$str = $this->cleanString($str);
+    	
+    	return $str;
+    	
 	}
 
 

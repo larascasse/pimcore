@@ -1210,7 +1210,9 @@ class Website_Product extends Object_Product {
         $equivalence = array(
             "Panaget" => [
                 "lpn"           => ["Prbis",'Elégance','Matière'],
-                'fournisseur'   =>  ["Nature",'Authentique','Zenitude']
+                'fournisseur'   =>  ["Nature",'Authentique','Zenitude'],
+                'removeFinition'   =>  true,
+                'removeTraitementSurface'   =>  true,
             ],
             "Arbony" => [
                 "lpn"           => [],
@@ -1226,7 +1228,18 @@ class Website_Product extends Object_Product {
 
         $newPhrase = $phrase;
         if($equivalenceByFounissseur) {
+            
             $newPhrase = str_ireplace($equivalence[$fournisseur]['lpn'], $equivalence[$fournisseur]['fournisseur'], $newPhrase);
+
+            if($equivalence[$fournisseur]['removeFinition'])  {
+            	$value 	= $this->getFinitionString();
+            	$newPhrase = str_ireplace($value , " ", $newPhrase);
+            }
+
+            if($equivalence[$fournisseur]['removeTraitementSurface'])  {
+            	$value 	= $this->getTraitement_surfaceString();
+            	$newPhrase = str_ireplace($value , " ", $newPhrase);
+            }
 
         }
        

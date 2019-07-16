@@ -1208,11 +1208,11 @@ class Website_Product extends Object_Product {
 	 public function replaceEquivalenceChoix($phrase) {
 
         $equivalence = array(
-            "Panaget" = [
+            "Panaget" => [
                 "lpn"           => ["Prbis",'Elégance','Matière'],
                 'fournisseur'   =>  ["Nature",'Authentique','Zenitude']
             ],
-            "Arbony" = [
+            "Arbony" => [
                 "lpn"           => [],
                 'fournisseur'   =>[]
             ],

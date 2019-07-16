@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2019-07-15T11:16:48+02:00
+* Generated at: 2019-07-16T07:56:16+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -12,6 +12,7 @@ Fields Summary:
 - actif_web [checkbox]
 - obsolete [checkbox]
 - echantillon [checkbox]
+- pimonly_fournisseur [input]
 - pimonly_print_label [input]
 - pimonly_equivalence_auto [input]
 - pimonly_equivalence [input]
@@ -228,7 +229,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
    'name' => 'product',
    'description' => '',
    'creationDate' => 1380722746,
-   'modificationDate' => 1563182194,
+   'modificationDate' => 1563256570,
    'userOwner' => 2,
    'userModification' => 6,
    'parentClass' => '',
@@ -300,7 +301,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'tooltip' => '',
                  'mandatory' => false,
                  'noteditable' => true,
-                 'index' => false,
+                 'index' => true,
                  'locked' => false,
                  'style' => 'width: 150px; float: left;',
                  'permissions' => NULL,
@@ -360,6 +361,30 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
+                 'columnLength' => 60,
+                 'phpdocType' => 'string',
+                 'regex' => '',
+                 'name' => 'pimonly_fournisseur',
+                 'title' => 'Fournisseur',
+                 'tooltip' => '',
+                 'mandatory' => false,
+                 'noteditable' => false,
+                 'index' => false,
+                 'locked' => NULL,
+                 'style' => 'width:100%',
+                 'permissions' => NULL,
+                 'datatype' => 'data',
+                 'relationType' => false,
+                 'invisible' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
+              )),
+              4 => 
+              Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
+                 'fieldtype' => 'input',
+                 'width' => NULL,
+                 'queryColumnType' => 'varchar',
+                 'columnType' => 'varchar',
                  'columnLength' => 255,
                  'phpdocType' => 'string',
                  'regex' => '',
@@ -378,7 +403,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              4 => 
+              5 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -393,16 +418,16 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => true,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => false,
+                 'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              5 => 
+              6 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -417,7 +442,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'mandatory' => false,
                  'noteditable' => false,
                  'index' => false,
-                 'locked' => NULL,
+                 'locked' => false,
                  'style' => 'width:100%',
                  'permissions' => NULL,
                  'datatype' => 'data',
@@ -426,7 +451,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              6 => 
+              7 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -450,7 +475,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              7 => 
+              8 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -474,7 +499,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => true,
               )),
-              8 => 
+              9 => 
               Pimcore\Model\Object\ClassDefinition\Data\Href::__set_state(array(
                  'fieldtype' => 'href',
                  'width' => '',
@@ -519,7 +544,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              9 => 
+              10 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -540,10 +565,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => false,
+                 'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              10 => 
+              11 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -567,7 +592,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => true,
                  'visibleSearch' => false,
               )),
-              11 => 
+              12 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -628,7 +653,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              12 => 
+              13 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -711,10 +736,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => true,
               )),
-              13 => 
+              14 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -735,10 +760,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => false,
+                 'visibleGridView' => false,
+                 'visibleSearch' => true,
               )),
-              14 => 
+              15 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -759,10 +784,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => true,
               )),
-              15 => 
+              16 => 
               Pimcore\Model\Object\ClassDefinition\Data\Objects::__set_state(array(
                  'fieldtype' => 'objects',
                  'width' => '',
@@ -795,7 +820,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              16 => 
+              17 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -826,7 +851,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              17 => 
+              18 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -850,7 +875,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              18 => 
+              19 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -874,7 +899,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              19 => 
+              20 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -895,10 +920,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
               )),
-              20 => 
+              21 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -919,10 +944,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
-                 'visibleSearch' => true,
+                 'visibleGridView' => false,
+                 'visibleSearch' => false,
               )),
-              21 => 
+              22 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -943,10 +968,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              22 => 
+              23 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -967,10 +992,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              23 => 
+              24 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 400,
@@ -993,7 +1018,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              24 => 
+              25 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => 600,
@@ -1017,7 +1042,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              25 => 
+              26 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1040,7 +1065,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              26 => 
+              27 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1063,7 +1088,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              27 => 
+              28 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1086,7 +1111,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              28 => 
+              29 => 
               Pimcore\Model\Object\ClassDefinition\Data\Wysiwyg::__set_state(array(
                  'fieldtype' => 'wysiwyg',
                  'width' => 900,
@@ -1110,7 +1135,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              29 => 
+              30 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1133,7 +1158,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              30 => 
+              31 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1156,7 +1181,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              31 => 
+              32 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1180,7 +1205,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              32 => 
+              33 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
                  'width' => NULL,
@@ -1201,10 +1226,10 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              33 => 
+              34 => 
               Pimcore\Model\Object\ClassDefinition\Data\Select::__set_state(array(
                  'fieldtype' => 'select',
                  'options' => 
@@ -1250,7 +1275,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              34 => 
+              35 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1273,7 +1298,7 @@ return Pimcore\Model\Object\ClassDefinition::__set_state(array(
                  'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
-              35 => 
+              36 => 
               Pimcore\Model\Object\ClassDefinition\Data\Textarea::__set_state(array(
                  'fieldtype' => 'textarea',
                  'width' => 600,
@@ -1760,7 +1785,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               1 => 
@@ -2456,7 +2481,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   1 => 
@@ -2480,7 +2505,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   2 => 
@@ -2504,7 +2529,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => false,
+                     'visibleGridView' => true,
                      'visibleSearch' => false,
                   )),
                   3 => 
@@ -2627,7 +2652,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               2 => 
@@ -3158,7 +3183,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               9 => 
@@ -3227,7 +3252,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               11 => 
@@ -3268,7 +3293,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   1 => 
@@ -3292,7 +3317,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   2 => 
@@ -3358,7 +3383,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   1 => 
@@ -3382,7 +3407,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   2 => 
@@ -3423,7 +3448,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   3 => 
@@ -3447,7 +3472,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   4 => 
@@ -3513,7 +3538,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   1 => 
@@ -3537,7 +3562,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   2 => 
@@ -3561,7 +3586,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   3 => 
@@ -3585,7 +3610,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   4 => 
@@ -3609,7 +3634,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   5 => 
@@ -3675,7 +3700,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   1 => 
@@ -3699,7 +3724,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   2 => 
@@ -3745,7 +3770,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   4 => 
@@ -3769,7 +3794,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   5 => 
@@ -4138,8 +4163,8 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
-                     'visibleSearch' => true,
+                     'visibleGridView' => false,
+                     'visibleSearch' => false,
                   )),
                   3 => 
                   Pimcore\Model\Object\ClassDefinition\Data\Checkbox::__set_state(array(
@@ -4184,7 +4209,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   5 => 
@@ -4264,43 +4289,36 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                       array (
                         'key' => 'Profile Peigné',
                         'value' => 'peigne',
-                        'id' => 'extModel19078-1',
                       ),
                       1 => 
                       array (
                         'key' => 'Face bombée',
                         'value' => 'bombee',
-                        'id' => 'extModel19078-2',
                       ),
                       2 => 
                       array (
                         'key' => 'Face Lisse',
                         'value' => 'lisse',
-                        'id' => 'extModel19078-3',
                       ),
                       3 => 
                       array (
                         'key' => 'Rainuré',
                         'value' => 'antiderapant',
-                        'id' => 'extModel19078-4',
                       ),
                       4 => 
                       array (
                         'key' => 'Profil structuré',
                         'value' => 'structure',
-                        'id' => 'extModel19078-5',
                       ),
                       5 => 
                       array (
                         'key' => 'Chants Anciens',
                         'value' => 'chant_anciens',
-                        'id' => 'extModel19078-6',
                       ),
                       6 => 
                       array (
                         'key' => 'Déligné',
                         'value' => 'deligne',
-                        'id' => 'extModel19078-7',
                       ),
                     ),
                      'width' => '',
@@ -4321,7 +4339,7 @@ ex: Indiquez la longueur des lames:fixed:0:longueursfixe_MIN_MAX_INCREMENT:',
                      'datatype' => 'data',
                      'relationType' => false,
                      'invisible' => false,
-                     'visibleGridView' => true,
+                     'visibleGridView' => false,
                      'visibleSearch' => false,
                   )),
                   9 => 
@@ -4839,7 +4857,7 @@ Combien d\'unité dans 1 m2',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               13 => 
@@ -4919,7 +4937,7 @@ Combien d\'unité dans 1 m2',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               15 => 
@@ -5040,7 +5058,7 @@ Combien d\'unité dans 1 m2',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               19 => 
@@ -5062,7 +5080,7 @@ Combien d\'unité dans 1 m2',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               20 => 
@@ -5174,7 +5192,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'productExtra',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'extras',
                  'title' => 'Autre',
                  'tooltip' => '',
@@ -5599,7 +5617,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 're_skus',
                  'title' => 'Produits associés',
                  'tooltip' => '',
@@ -5636,7 +5654,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'product',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'cs_skus',
                  'title' => 'Crossels (tarif)',
                  'tooltip' => '',
@@ -5681,7 +5699,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'pimonly_category_pose',
                  'title' => 'Catégorie Accessoire Pose',
                  'tooltip' => '',
@@ -5726,7 +5744,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'pimonly_category_finition',
                  'title' => 'Catégorie Accessoire Finition',
                  'tooltip' => '',
@@ -5771,7 +5789,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'category',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'pimonly_category_entretien',
                  'title' => 'Catégorie Accessoires Entretien',
                  'tooltip' => '',
@@ -5825,7 +5843,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'article',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'associatedArticles',
                  'title' => 'Articles associés',
                  'tooltip' => '',
@@ -5858,7 +5876,7 @@ Combien d\'unité dans 1 m2',
                     'classes' => 'article',
                   ),
                 ),
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'origineArticles',
                  'title' => 'Articles associés (Origine)',
                  'tooltip' => '',
@@ -5909,7 +5927,7 @@ Combien d\'unité dans 1 m2',
                  'phpdocType' => 'array',
                  'relationType' => true,
                  'classes' => NULL,
-                 'pathFormatterClass' => NULL,
+                 'pathFormatterClass' => '',
                  'name' => 'Categories',
                  'title' => 'Catégories',
                  'tooltip' => '',
@@ -6138,7 +6156,7 @@ Combien d\'unité dans 1 m2',
               3 => 
               Pimcore\Model\Object\ClassDefinition\Data\Input::__set_state(array(
                  'fieldtype' => 'input',
-                 'width' => '',
+                 'width' => NULL,
                  'queryColumnType' => 'varchar',
                  'columnType' => 'varchar',
                  'columnLength' => 15,
@@ -6378,7 +6396,7 @@ Combien d\'unité dans 1 m2',
                  'datatype' => 'data',
                  'relationType' => false,
                  'invisible' => false,
-                 'visibleGridView' => true,
+                 'visibleGridView' => false,
                  'visibleSearch' => false,
               )),
               6 => 

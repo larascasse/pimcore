@@ -1,7 +1,7 @@
 <?php 
 
 /** 
-* Generated at: 2019-07-15T11:16:48+02:00
+* Generated at: 2019-07-16T07:56:16+02:00
 * Inheritance: yes
 * Variants: no
 * Changed by: florent (6)
@@ -12,6 +12,7 @@ Fields Summary:
 - actif_web [checkbox]
 - obsolete [checkbox]
 - echantillon [checkbox]
+- pimonly_fournisseur [input]
 - pimonly_print_label [input]
 - pimonly_equivalence_auto [input]
 - pimonly_equivalence [input]
@@ -231,6 +232,7 @@ namespace Pimcore\Model\Object;
 * @method \Pimcore\Model\Object\Product\Listing getByActif_web ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByObsolete ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByEchantillon ($value, $limit = 0) 
+* @method \Pimcore\Model\Object\Product\Listing getByPimonly_fournisseur ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_print_label ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_equivalence_auto ($value, $limit = 0) 
 * @method \Pimcore\Model\Object\Product\Listing getByPimonly_equivalence ($value, $limit = 0) 
@@ -448,6 +450,7 @@ public $o_className = "product";
 public $actif_web;
 public $obsolete;
 public $echantillon;
+public $pimonly_fournisseur;
 public $pimonly_print_label;
 public $pimonly_equivalence_auto;
 public $pimonly_equivalence;
@@ -729,6 +732,32 @@ public function getEchantillon () {
 */
 public function setEchantillon ($echantillon) {
 	$this->echantillon = $echantillon;
+	return $this;
+}
+
+/**
+* Get pimonly_fournisseur - Fournisseur
+* @return string
+*/
+public function getPimonly_fournisseur () {
+	$preValue = $this->preGetValue("pimonly_fournisseur"); 
+	if($preValue !== null && !\Pimcore::inAdmin()) { 
+		return $preValue;
+	}
+	$data = $this->pimonly_fournisseur;
+	if(\Pimcore\Model\Object::doGetInheritedValues() && $this->getClass()->getFieldDefinition("pimonly_fournisseur")->isEmpty($data)) {
+		return $this->getValueFromParent("pimonly_fournisseur");
+	}
+	return $data;
+}
+
+/**
+* Set pimonly_fournisseur - Fournisseur
+* @param string $pimonly_fournisseur
+* @return \Pimcore\Model\Object\Product
+*/
+public function setPimonly_fournisseur ($pimonly_fournisseur) {
+	$this->pimonly_fournisseur = $pimonly_fournisseur;
 	return $this;
 }
 

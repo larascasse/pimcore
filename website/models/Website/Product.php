@@ -1227,6 +1227,7 @@ class Website_Product extends Object_Product {
          $newhPhrase = $phrase;
         if($equivalenceByFounissseur) {
             $newhPhrase = str_replace($equivalence[$fournisseur]['lpn'], $equivalenceByFounissseur, $phrase);
+            $newhPhrase.="NEW";
         }
        
         return $newhPhrase;

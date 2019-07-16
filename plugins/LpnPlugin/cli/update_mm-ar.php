@@ -191,7 +191,7 @@ foreach ($list->getObjects() as $object) {
                 $suffixeEan .= 'x140-220';
                 
                 $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
-                $suffixeEan .= 'x2000-3000'
+                $suffixeEan .= 'x2000-3000';
              }
 
         }

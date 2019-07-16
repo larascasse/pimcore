@@ -1208,18 +1208,27 @@ class Website_Product extends Object_Product {
 	 public function replaceEquivalenceChoix($phrase) {
 
         $equivalence = array(
-            "Panaget" => [
+            "PA" => [
                 "lpn"           => ["Prbis",'Elégance','Matière'],
                 'fournisseur'   =>  ["Nature",'Authentique','Zenitude'],
                 'removeFinition'   =>  true,
                 'removeTraitementSurface'   =>  true,
             ],
-            "Arbony" => [
+            "AR" => [
                 "lpn"           => [],
                 'fournisseur'   =>[]
             ],
+            "ZP" => [
+                "lpn"           => ["Prbis",'Elégance','Campagne','Mélange 50% Premier, 50% Rustique','Mélange PR/CAMP/AN'],
+                'fournisseur'   =>['1BIS','Classique','Rustique','Mélange 1Bis/Rustique','Rustique']
+            ],
 
         );
+
+        //CAs particulier
+        if($fournisseur == "ZP" && $this->getEpaisseur() == '21') {
+        	$equivalence["ZP"]["fournisseur"]["Campagne"] = "Mélange Rustique/Antique";
+        }
 
         $choixLpn = $this->getChoixString();
         $fournisseur = $this->getPimonly_fournisseur();

@@ -183,7 +183,7 @@ foreach ($list->getObjects() as $object) {
             $parent->setValue('epaisseur_txt','');
             $object->setValue('epaisseur_txt','Epaisseur variable de 20 à 23 mm');
 
-            
+
              if(stripos($scienergieCourt, 'xl')) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $suffixeEan .= 'x220-300';
@@ -271,7 +271,7 @@ foreach ($list->getObjects() as $object) {
 
     if($isDalle) {
         $parent->setTraitement_surface(("vieilli"));
-        $parentSuffixeEan .= " rives abîmées";
+        //$parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
         $parent->setMotif('dalle-versaille');
         $parent->setTypeLame('dalle');
@@ -291,7 +291,7 @@ foreach ($list->getObjects() as $object) {
     //USEE BROSS2
     else if(stristr($article, "MMCHEUB")) {
          $parent->setTraitement_surface(("vieilli use brosse rives abimees"));
-         $parentSuffixeEan .="vieilli usé brossé rives abîmées";
+         $parentSuffixeEan .="vieilli usé brossé";
 
          $parent->setValue('fixation',['rainurelanguette-2cotes-fausses-languettes']);
          $object->setValue('chanfreins','rives abîmées'); 
@@ -340,7 +340,7 @@ foreach ($list->getObjects() as $object) {
         }
         else {
             $parent->setTraitement_surface(("vieilli"));
-            $parentSuffixeEan .= " vieilli rives abîmées";
+            $parentSuffixeEan .= " vieilli";
             $parent->setValue('chanfreins','rives abîmées'); 
         }
 

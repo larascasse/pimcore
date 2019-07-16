@@ -179,6 +179,11 @@ foreach ($list->getObjects() as $object) {
         //USEE BROSS2
         else if(stristr($article, "MMCHEUB")) {
 
+             $suffixeEan = '20-23';
+            $parent->setValue('epaisseur_txt','');
+            $object->setValue('epaisseur_txt','Epaisseur variable de 20 à 23 mm');
+
+            
              if(stripos($scienergieCourt, 'xl')) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $suffixeEan .= 'x220-300';

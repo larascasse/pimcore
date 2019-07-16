@@ -1219,8 +1219,8 @@ class Website_Product extends Object_Product {
                 'fournisseur'   =>[]
             ],
             "ZP" => [
-                "lpn"           => ["Prbis",'Elégance','Campagne','Mélange 50% Premier, 50% Rustique','Mélange PR/CAMP/AN'],
-                'fournisseur'   =>['1BIS','Classique','Rustique','Mélange 1Bis/Rustique','Rustique']
+                "lpn"           => ["Prbis",'Elégance','Campagne','Mélange 50% Premier, 50% Rustique','Mélange PR/CAMP/AN','Matière'],
+                'fournisseur'   =>['1BIS','Classique','Rustique','Mélange 1Bis/Rustique','Rustique','Antique']
             ],
 
         );

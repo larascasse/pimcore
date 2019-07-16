@@ -1308,11 +1308,14 @@ class Website_Product extends Object_Product {
 
    		 }
 
-   	
+   		//On va remplace les choix founirsseur
+   		 //A mettre avzec lihneritance
+    	$str = $this->replaceEquivalenceChoix($str);
+
+
     	Object_Abstract::setGetInheritedValues($inheritance); 
     	
-    	//On va remplace les choix founirsseur
-    	$str = $this->replaceEquivalenceChoix($str);
+    	
     	$str = $this->cleanString($str);
     	
     	return $str;

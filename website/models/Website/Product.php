@@ -1233,12 +1233,12 @@ class Website_Product extends Object_Product {
 
             if($equivalence[$fournisseur]['removeFinition'])  {
             	$value 	= $this->getFinitionString();
-            	$newPhrase = str_ireplace($value , " ", $newPhrase);
+            	$newPhrase = str_ireplace($value , "", $newPhrase);
             }
 
             if($equivalence[$fournisseur]['removeTraitementSurface'])  {
             	$value 	= $this->getTraitement_surfaceString();
-            	$newPhrase = str_ireplace($value , " ", $newPhrase);
+            	$newPhrase = str_ireplace($value , "", $newPhrase);
             }
 
         }

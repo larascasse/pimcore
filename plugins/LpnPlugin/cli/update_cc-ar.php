@@ -163,7 +163,7 @@ Usé,use
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"");
         $parent->setValue('finition',"huile-aqua");
-        $parentSuffixeEan .= " huile aqua";
+        //$parentSuffixeEan .= " huile aqua";
     }
     else if(stristr($scienergie, "PRE HUIL")) {
         $object->setValue('finition',"");
@@ -173,7 +173,7 @@ Usé,use
     else if(stristr($scienergie, "HUILE CIRE") ||  stristr($scienergie_converti, "huilé cire")) {
         $object->setValue('finition',"");
         $parent->setValue('finition',"huile-cire");
-        $parentSuffixeEan .= " huile cire";
+        //$parentSuffixeEan .= " huile cire";
 
     }
 

@@ -1224,13 +1224,13 @@ class Website_Product extends Object_Product {
 
         $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]['fournisseur']:false;
 
-         $newPhrase = $phrase . $fournisseur;
+        $newPhrase = $phrase;
         if($equivalenceByFounissseur) {
-            $newhPhrase = str_ireplace($equivalence[$fournisseur]['lpn'], $equivalence[$fournisseur]['fournisseur'], $newPhrase);
-            $newhPhrase.="NEW";
+            $newPhrase = str_ireplace($equivalence[$fournisseur]['lpn'], $equivalence[$fournisseur]['fournisseur'], $newPhrase);
+
         }
        
-        return $newhPhrase;
+        return $newPhrase;
     }
 
 

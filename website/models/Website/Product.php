@@ -1222,11 +1222,12 @@ class Website_Product extends Object_Product {
         $choixLpn = $this->getChoixString();
         $fournisseur = $this->getPimonly_fournisseur();
 
-        $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]:false;
+        $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]['fournisseur']:false;
 
          $newhPhrase = $phrase;
-        if($equivalenceByFounissseur)
-            $newhPhrase = str_replace($choixLpn, $equivalenceByFounissseur, $phrase);
+        if($equivalenceByFounissseur) {
+            $newhPhrase = str_replace($equivalence[$fournisseur]['lpn'], $equivalenceByFounissseur, $phrase);
+        }
        
         return $newhPhrase;
     }

@@ -24,10 +24,9 @@ $conditionFilters = array(
  );
 
 
-$list = new Pimcore\Model\Object\Listing();
+$list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
-
 
 $list->setOrder("DESC");
 $list->setOrderKey("o_id");
@@ -36,7 +35,7 @@ $list->setOrderKey("o_id");
 $list->load();
 
 $objects = array();
- echo "objects in list ".count($list->getObjects())."\n";
+echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
 
 foreach ($list->getObjects() as $object) {
@@ -52,7 +51,6 @@ foreach ($list->getObjects() as $object) {
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
-
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
     $scienergie_converti = $object->name_scienergie_converti; //huilé cire
@@ -61,10 +59,9 @@ foreach ($list->getObjects() as $object) {
 
     //echo $scienergieCourt." ".$object->getEan()."\n";
 
-    $save=true;
 
-    $object->setSupport('cp');
-    $save=true;
+
+
 
    
 
@@ -80,6 +77,8 @@ Usé,use
     echo "\n$article ?";
 
     $parentSuffixeEan = "";
+
+        $object->setSupport('cp');
 
     $suffixeEan = $object->getEpaisseur();
 
@@ -113,10 +112,7 @@ Usé,use
         $parent->setValue('epaisseur_txt','');
         $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
 
-
-
-
-         $object->setTraitement_surface(('');
+         $object->setTraitement_surface('');
          $parent->setTraitement_surface("vieilli use brosse rives abimees");
 
 
@@ -125,7 +121,7 @@ Usé,use
 
 
     }
-    else if(stristr($article, "fmcher")) {
+    else if (stristr($article, "fmcher")) {
 
         if(stristr($scienergie, "DEFORME")) {
 
@@ -136,14 +132,14 @@ Usé,use
 
             }
             else {
-                $parent->setTraitement_surface(("use-vieilli-use-deforme"));
+                $parent->setTraitement_surface("use-vieilli-use-deforme");
                 $object->setTraitement_surface('');
                 $parentSuffixeEan .= "vieilli usé déformé";
             }
             
         }
         else {
-             $parent->setTraitement_surface(("vieilli"));
+             $parent->setTraitement_surface("vieilli");
              $object->setTraitement_surface('');
              $parentSuffixeEan .= "vieilli";
 
@@ -152,11 +148,6 @@ Usé,use
         $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
         $object->setValue('longueur_txt','Longueurs panachées de 1800 à 2700 mm');
         $suffixeEan.="x140/180/220x1800-2700";
-
-       
-
-
-     }
         
     }
 
@@ -166,6 +157,8 @@ Usé,use
     else {
         $parent->setValue('chanfreins','rives abîmées');
     }
+
+
 
     if(stristr($scienergie, "HUILE AQUA")) {
         $object->setValue('finition',"");
@@ -202,12 +195,15 @@ Usé,use
     $object->setChauffantBasseTemperature("1");
     $object->setChauffantRadiantElectrique("1");
     $object->setSolRaffraichissant("0");
+
+    $parent->setValue('fixation',['rainurelanguette']);
     
-    if(strlen($parent->name)>0) {
-        $parent->setValue('name',null);
+    if(strlen($object->name)>0) {
+        $object->setValue('name',null);
         
     } 
-    $parent->setValue('fixation',['rainurelanguette']);
+
+    
     $parent->save();
 
     $object->save();

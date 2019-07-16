@@ -266,12 +266,12 @@ foreach ($list->getObjects() as $object) {
     
     
     $parent->setValue('name',null);
-    $parent->setValue('pimonly_equivalence',null);
+   // $parent->setValue('pimonly_equivalence',null);
     $parent->save();
 
-    
-    $object->setValue('pimonly_equivalence',null);
-    $object->setPublished(true);
+
+   // $object->setValue('pimonly_equivalence',null);
+    //$object->setPublished(true);
     $object->save();
 
     echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();

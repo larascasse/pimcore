@@ -17,10 +17,11 @@ Object_Abstract::setGetInheritedValues(false);
 Pimcore_Model_Cache::disable();
 \Pimcore\Model\Version::disable();
 
-$conditionFilters = array("
-       o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'
+$conditionFilters = array(
+    "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-ar%'",
+    "ean IS NOT NULL"
 
-    ");
+ );
 
 
 $list = new Pimcore\Model\Object\Listing();
@@ -62,14 +63,8 @@ foreach ($list->getObjects() as $object) {
 
     $save=true;
 
-    /*if(stristr($scienergieCourt, "hd")) {
-        $object->setSupport('HDF');
-         $save=true;
-    }
-    else if(stristr($scienergieCourt, "cp")) {*/
-        $object->setSupport('cp');
-        $save=true;
-    //}
+    $object->setSupport('cp');
+    $save=true;
 
    
 
@@ -91,86 +86,77 @@ Usé,use
 
     //Usée b rossé
     if(stristr($article, "FMCHEUB")) {
-        echo "OK !\n";
-         $object->setTraitement_surface(("vieilli use brosse rives abimees"));
-         //$object->setValue('chanfreins','rives abîmées'); 
+        //echo "OK !\n";
+        
 
-         //EAN
-         if(strlen($object->getEan())>0) {
+        $parent->setValue('longueur_txt','');
+        $object->setValue('longueur_txt','Longueurs panachées 1800 à 2700 mm');
 
-            if($object->getLargeur()==540) {
-                $suffixeEan = '21x140/180/220x2000-3000';
-                $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
-            }
-            else if($object->getLargeur()==780) {
-                $suffixeEan = '21x220/260/300x2000-3000';
-                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-            }
-            else  {
-                $suffixeEan = '21x'.$object->getLargeur().'x'.$object->getLongueur();
-                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-            }
+
+        if($object->getLargeur()==540) {
+            $suffixeEan = '20-22x140/180/220x1800-2700';
+            $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+        }
+        else if($object->getLargeur()==780) {
+            $suffixeEan = '20-22x220/260/300x2000-3000';
+            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
             
-            $object->setValue("pimonly_name_suffixe",$suffixeEan);
-
-
-         }
-         //Article
-         else  {
-            $object->setValue("pimonly_name_suffixe","vieilli usé brossé");
-            $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
+            $parent->setValue('longueur_txt','');
             $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
-         }
-         
-         $save=true;
+        }
+        else  {
+            $suffixeEan = '20-22x'.$object->getLargeur().'x'.$object->getLongueur();
+            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+        }
+
+       
+        $parent->setValue('epaisseur_txt','');
+        $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
+
+
+
+
+         $object->setTraitement_surface(('');
+         $parent->setTraitement_surface("vieilli use brosse rives abimees");
+
+
+        $parentSuffixeEan  .= "vieilli usé brossé";
+
+
+
     }
     else if(stristr($article, "fmcher")) {
 
         if(stristr($scienergie, "DEFORME")) {
 
             if(stristr($scienergie, "INTENSE")) {
-                $object->setTraitement_surface(("use-deforme-brosse-intense"));
+                $parent->setTraitement_surface("use-deforme-brosse-intense");
+                $object->setTraitement_surface("");
                 $parentSuffixeEan .= " brossé intense usé déformé";
 
             }
             else {
-                $object->setTraitement_surface(("use-vieilli-use-deforme-brosse"));
+                $parent->setTraitement_surface(("use-vieilli-use-deforme"));
+                $object->setTraitement_surface('');
                 $parentSuffixeEan .= "vieilli usé déformé";
             }
             
         }
         else {
-             $object->setTraitement_surface(("vieilli"));
+             $parent->setTraitement_surface(("vieilli"));
+             $object->setTraitement_surface('');
              $parentSuffixeEan .= "vieilli";
 
-        }
-         
-          //$object->setValue('chanfreins','rives abîmées'); 
+        }   
+
+        $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+        $object->setValue('longueur_txt','Longueurs panachées de 1800 à 2700 mm');
+        $suffixeEan.="x140/180/220x1800-2700";
+
+       
 
 
-         if(strlen($object->getEan())>0) {
-            
-
-            if(stristr($scienergieCourt, "xl")) {
-                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-                $object->setValue('longueur_txt','Longueurs panachées 2000 à 3000 mm');
-                $suffixeEan.="x220/260/300x2000-3000";
-
-            }
-            else {
-                $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
-                $object->setValue('longueur_txt','Longueurs panachées 1800 à 2700 mm');
-                $suffixeEan.="x140/180/220x1800-2700";
-            }
-           
-            $object->setValue("pimonly_name_suffixe",$suffixeEan);
-
-         }
-         else {
-            $object->setValue("pimonly_name_suffixe",$parentSuffixeEan);
-         }
-
-
+     }
         
     }
 
@@ -182,61 +168,51 @@ Usé,use
     }
 
     if(stristr($scienergie, "HUILE AQUA")) {
-        $object->setValue('finition',"huile-aqua");
+        $object->setValue('finition',"");
+        $parent->setValue('finition',"huile-aqua");
+        $parentSuffixeEan .= " huile aqua";
     }
     else if(stristr($scienergie, "PRE HUIL")) {
+        $object->setValue('finition',"");
         $parent->setValue('finition',"pre-huile");
         $parentSuffixeEan .= " pré-huilé";
     }
     else if(stristr($scienergie, "HUILE CIRE") ||  stristr($scienergie_converti, "huilé cire")) {
-        $object->setValue('finition',"huile-cire");
+        $object->setValue('finition',"");
+        $parent->setValue('finition',"huile-cire");
+        $parentSuffixeEan .= " huile cire";
+
     }
 
-    //$object->setValue('origine_bois','France');
-   // $object->setValue('country_of_manufacture','Belgique');
+    $object->setValue("pimonly_name_suffixe",$suffixeEan);
+    $parent->setValue("pimonly_name_suffixe",$parentSuffixeEan);
+
+
 
     if($object->getEpaisseur()==15) {
         $object->setEpaisseurUsure('4 mm');
-        $save=true;
+
     }
-    else if($object->getEpaisseur()==20) {
+    else  {
         $object->setEpaisseurUsure('6 mm');
-        $save=true;
+
     }
    
 
-    if(strlen($object->getEan())>0) {
-
-        $object->setChauffantBasseTemperature("1");
-        $object->setChauffantRadiantElectrique("1");
-        $object->setSolRaffraichissant("0");
+    $object->setChauffantBasseTemperature("1");
+    $object->setChauffantRadiantElectrique("1");
+    $object->setSolRaffraichissant("0");
+    
+    if(strlen($parent->name)>0) {
+        $parent->setValue('name',null);
         
-        $save=true;
+    } 
+    $parent->setValue('fixation',['rainurelanguette']);
+    $parent->save();
 
-       
-        if(strlen($parent->name)>0) {
-            $parent->setValue('name',null);
-            
-        } 
-        $parent->setValue('fixation',['rainurelanguette']);
-        
-        $parent->save();
-        
+    $object->save();
 
-        echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
-        
-    }
-    else {
-        echo "\nArticle:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
-    }
-   // continue;
-
-   
-    if($save)
-        $object->save();
-
-
-    continue;
+    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 
     
 

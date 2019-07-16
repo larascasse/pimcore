@@ -64,6 +64,7 @@ foreach ($list->getObjects() as $object) {
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
     $qualite = $object->getQualite();
+    $equivalence = $object->getPimonly_equivalence();
 
     $isPointDeHongrie = stripos($article, "MHCHE") === 0;
     $isbatonRompu = stripos($article, "MBCHE") === 0;
@@ -109,77 +110,120 @@ foreach ($list->getObjects() as $object) {
 
     $suffixeEan = "";
     $longueur_txt = "";
+
+
     
     if($isBrut) {
+
         $longueur_txt = 'Longueurs panachées de 400 à 2000 mm';
         $suffixeEan = $object->getEpaisseur()."x".$object->getLargeur();
         $suffixeEan.="x400-2000";
-        
-            
+          
     }
     else if(!$isPointDeHongrie && !$isbatonRompu) {
 
         $suffixeEan .= $object->getEpaisseur();
 
-        switch ($epaisseur) {
-            case '15':
-                $object->setValue('largeur_txt','Largeurs panachées : 120/140/180/200 mm');
-                $suffixeEan .= 'x120-200';
-                break;
-            case '20':
+        //USEZ DEFORME
+        if(stristr($equivalence, "bohème")) {
+             $parent->setValue('epaisseur_txt','');
+             $object->setValue('epaisseur_txt','');
+             $object->setValue('largeur_txt','');
+
+             $longueur_txt = 'Longueurs panachées de 500 à 1500 mm';
+             $suffixeEan .= 'x500-1500';
+
+        }
+
+        //USEZ DEFORME
+        elseif(stristr($scienergie, "DEFORME")) {
+            $suffixeEan = '20-23';
+            $parent->setValue('epaisseur_txt','');
+            $object->setValue('epaisseur_txt','Epaisseur variable de 20 à 23 mm');
+
+            if(stristr($scienergie, "INTENSE")) {
+
+                switch ($largeur) {
+                    case 340:
+                        $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
+                        $suffixeEan .= 'x140-220';
+
+                        $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+                        $suffixeEan .= 'x1800-2700';
+
+
+                        break;
+                    
+                    case 760:
+                        $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+                        $suffixeEan .= 'x220-300';
+
+                        $longueur_txt = 'Longueurs panachées de 1800 à 3000 mm';
+                        $suffixeEan .= 'x1800-3000';
+
+                        break;
+                }
+                
+
+            }
+            //Wax/Sonar
+            else {
                 $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
                 $suffixeEan .= 'x140-220';
-                break;
+
+                $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+                $suffixeEan .= 'x1800-2700';
+            }
         }
+
+        //USEE BROSS2
+        else if(stristr($article, "MMCHEUB")) {
+
+             if(stripos($scienergieCourt, 'xl')) {
+                $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
+                $suffixeEan .= 'x220-300';
+                
+                $longueur_txt = 'Longueurs panachées de 1800 à 3000 mm';
+                $suffixeEan .= 'x2000-3000';
+             }
+             else {
+                $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
+                $suffixeEan .= 'x140-220';
+                
+                $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
+                $suffixeEan .= 'x2000-3000'
+             }
+
+        }
+
+        else {
+            switch ($epaisseur) {
+                case '15':
+                    $object->setValue('largeur_txt','Largeurs panachées : 120/140/160/180/200 mm');
+                    $suffixeEan .= 'x120-200';
+                    
+                    $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+                    $suffixeEan .= 'x1800-2700';
+
+                    break;
+
+                case '20':
+                   
+                    $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
+                    $suffixeEan .= 'x140-220';
+
+                    $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+                    $suffixeEan .= 'x1800-2700';
+
+                    break;
+          
+            }
+
+        }
+
         
-       /* switch ($object->getLargeur()) {
-             case '390':
-                $object->setValue('largeur_txt','Largeurs panachées : 110/130/150 mm');
-                $suffixeEan .= 'x110-150';
-                break;
-
-            case '460':
-                $object->setValue('largeur_txt','Largeurs panachées : 130/150/180 mm');
-                $suffixeEan .= 'x130-180';
-                break;
-
-            case '530':
-                $object->setValue('largeur_txt','Largeurs panachées : 140/180/220 mm');
-                $suffixeEan .= 'x140-220';
-                break;
-
-            case '540':
-                $object->setValue('largeur_txt','Largeurs panachées : 160/180/220 mm');
-                $suffixeEan .= 'x160-220';
-                break;
-
-            case '600':
-                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x180-220';
-            case '720 XXXXX':
-                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120-200';
-                break;
-             
-             case '760':
-                $object->setValue('largeur_txt','Largeurs panachées : 220/260/300 mm');
-                 $suffixeEan .= 'x220-300';
-                break;
-
-             case '800':
-                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120-200 ';
-                break;
-            case '1020XXX':
-                $object->setValue('largeur_txt','Largeurs panachées : 180/200/220 mm');
-                 $suffixeEan .= 'x120-200 ';
-                break;
-            default:
-                $suffixeEan .= 'x'.$object->getLargeur();
-                break;
-        }
-    */
- 
+        
+       
 
         if($isDalle) {
             switch ($object->getLargeur()) {
@@ -196,10 +240,7 @@ foreach ($list->getObjects() as $object) {
 
             
         }
-        else {
-            $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
-            $suffixeEan .= 'x1800-2700';
-        }
+       
 
 
     }
@@ -214,43 +255,42 @@ foreach ($list->getObjects() as $object) {
         $suffixeEan .= $object->getEpaisseur().'x'.$object->getLargeur()."x".$object->getLongueur();
     }
 
- 
+    
+     $object->setEpaisseurUsure('7 mm');
 
 
     //SURFACE
     $parentSuffixeEan = "";
 
+
+
     if($isDalle) {
         $parent->setTraitement_surface(("vieilli"));
         $parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
-        $parent->setMotif('dalle-versailles');
+        $parent->setMotif('dalle-versaille');
         $parent->setTypeLame('dalle');
         $parent->setValue('fixation',['double-rainure']);
 
+        //gere le conos
+        $parent->setValue('finition','prepatine');
+
+        //SONAR
+        if(stristr($scienergie, "SONAR")) {
+            $parent->setValue('finition','pre-huile');
+            $parent->setTraitement_surface(("vieilli-use-deforme"));
+        }
+
     }
+
+    //USEE BROSS2
     else if(stristr($article, "MMCHEUB")) {
          $parent->setTraitement_surface(("vieilli use brosse rives abimees"));
          $parentSuffixeEan .="vieilli usé brossé rives abîmées";
 
-         $parent->setValue('epaisseur_txt','de 20 à 23 mm');
-
          $parent->setValue('fixation',['rainurelanguette-2cotes-fausses-languettes']);
          $object->setValue('chanfreins','rives abîmées'); 
 
-
-         $suffixeEan = '20-23';
-
-         if(stripos($scienergieCourt, 'xl')) {
-            $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
-            $suffixeEan .= 'x220-300';
-         }
-         else {
-            $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
-            $suffixeEan .= 'x140-220';
-         }
-         $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
-         $suffixeEan .= 'x2000-3000';
 
     }
     else if(stristr($article, "MHCHE") && !$isBrut) {

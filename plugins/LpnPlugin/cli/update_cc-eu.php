@@ -140,7 +140,7 @@ foreach ($list->getObjects() as $object) {
     }
 
         
-    if(stristr($object->getName(), "huile uv")) {
+    if(stristr($scienergie, "huile uv")) {
      $object->setFinition(("Huile UV"));
     }
     else if(stristr($object->getName(), "vernis mat")) {

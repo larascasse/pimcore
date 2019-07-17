@@ -1264,11 +1264,12 @@ class Website_Product extends Object_Product {
         	
 
         	//
-        	if($this->getSupport() == "HDF") {
-        		$addBeforeChoix .= 'H';
-        	}
-        	else if($this->getSupport() == "cp") {
+        	
+        	if($this->getSupport() == "cp") {
         		$addBeforeChoix .= 'P';
+        	}
+        	else {
+        		$addBeforeChoix .= 'H';
         	}
 
         

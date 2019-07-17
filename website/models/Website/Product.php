@@ -1230,7 +1230,9 @@ class Website_Product extends Object_Product {
 
             "EU" => [
                 "lpn"           => ["Select",'Elégance','Matière','MatièreMix'], //Ne pas changer l'ordre (vois,plus bas)
-                'fournisseur'   =>['Select','RU Light','RU Nature','RU Mix']
+                'fournisseur'   =>['Select','RU Light','RU Nature','RU Mix'],
+                'removeFinition'   =>  false,
+                'removeTraitementSurface'   =>  true,
             ],
 
         );

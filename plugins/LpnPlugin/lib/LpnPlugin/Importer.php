@@ -1153,15 +1153,17 @@ use Pimcore\Model;
 
                         //Mise à jour du parent pour le scierngie
                         if($isUpdating && $parent) {
-                        
-                                $parentValue = $parent->getName_scienergie();
-                                echo "checking Parent".$parentValue." child:".$value."\n";
-                                if($parentValue != $value) {
-                                    echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
-                                    $parent->setValue('name_scienergie', $value);
-                                    $parent->setValue('name_scienergie_converti', $name_converti);
-                                    $parent->save();
-                                }
+                            $object->setValue("name_scienergie",'');
+                            $object->setValue("name_scienergie_converti",'');
+
+                            $parentValue = $parent->getName_scienergie();
+                            //echo "checking Parent".$parentValue." child:".$value."\n";
+                            if($parentValue != $value) {
+                                echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
+                                $parent->setValue('name_scienergie', $value);
+                                $parent->setValue('name_scienergie_converti', $name_converti);
+                                $parent->save();
+                            }
                                 
                           
                         }

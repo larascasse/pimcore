@@ -228,7 +228,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
-        $prefixe .= " ".$object->getFinitionString();
+        $prefixe .= " ".lcfirst($object->getFinitionString());
 
        
 

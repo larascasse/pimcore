@@ -1155,7 +1155,7 @@ use Pimcore\Model;
                         if($isUpdating && $parent) {
                         
                                 $parentValue = $parent->getName_scienergie();
-                                //echo "checking Parent".$parentValue." child:".$value."\n";
+                                echo "checking Parent".$parentValue." child:".$value."\n";
                                 if($parentValue != $value) {
                                     echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
                                     $parent->setValue('name_scienergie', $value);

@@ -1218,7 +1218,8 @@ class Website_Product extends Object_Product {
 
             "AR" => [
                 "lpn"           => [],
-                'fournisseur'   =>[]
+                'fournisseur'   =>[],
+                'removeFinition'   =>  true,
             ],
 
             "ZP" => [

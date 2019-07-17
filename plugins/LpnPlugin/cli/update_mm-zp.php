@@ -60,6 +60,13 @@ foreach ($list->getObjects() as $object) {
     $ean  = $object->ean;
     $article = $object->getCode();
     $parent = $object->getParent();
+
+    if($parent && !$scienergie) {
+        $scienergieCourt = $parent->name_scienergie_court;
+        $scienergie = $parent->name_scienergie;
+        $code = $article = $parent->code;
+
+    }
     $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();

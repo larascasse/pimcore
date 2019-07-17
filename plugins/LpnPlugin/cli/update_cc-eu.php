@@ -57,18 +57,16 @@ foreach ($list->getObjects() as $object) {
     //COPIE DE SCIERGNER COURT
     //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
 
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->name_scienergie;
+    $code = $article  = $object->getCode();
+
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
-    $scienergieCourt = $object->name_scienergie_court;
-    $scienergie = $object->name_scienergie;
-
-    $scienergieCourt = $object->name_scienergie_court;
-    $scienergie = $object->name_scienergie;
-    $code = $article = $object->code;
     $ean  = $object->ean;
-    $article = $object->getCode();
+
     $parent = $object->getParent();
     $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
@@ -141,18 +139,18 @@ foreach ($list->getObjects() as $object) {
 
         
     if(stristr($scienergie, "huile uv")) {
-     $object->setFinition(("Huile UV"));
+        $object->setFinition(("Huile UV"));
     }
-    else if(stristr($object->getName(), "vernis mat")) {
+    else if(stristr($scienergie, "vernis mat")) {
      $object->setFinition(("Verni mat"));
     }
     elseif(stristr($object->getName(), "huile teinte réactive")) {
      $object->setFinition(("huile teinte reactive"));
     }
-    elseif(stristr($object->getName(), "vernis mat")) {
+    elseif(stristr($scienergie, "vernis mat")) {
      $object->setFinition(("vernis cérusé mat"));
     }
-    elseif(stristr($object->getName(), "huilé")) {
+    elseif(stristr($scienergie, "huilé")) {
      $object->setFinition(("huile"));
     }
 
@@ -228,7 +226,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
-        $prefixe .= " ".lcfirst($object->getFinitionString());
+        $prefixe .= lcfirst($object->getFinitionString())." ";
 
        
 

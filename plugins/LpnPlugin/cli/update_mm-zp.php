@@ -49,21 +49,18 @@ foreach ($list->getObjects() as $object) {
     if(!($object instanceof Object_Product))
         continue;
     
-    $inheritance = Object_Abstract::doGetInheritedValues(); 
-
-    $scienergieCourt = $object->getName_scienergie_court();
-    $scienergie = $object->getName_scienergie();
-    $famille = $object->getFamille();
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->name_scienergie;
     $code = $article = $object->code;
 
+
+    $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
-
-
-    $code = $article = $object->code;
     $ean  = $object->ean;
     $article = $object->getCode();
     $parent = $object->getParent();
+    $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();

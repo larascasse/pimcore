@@ -1208,34 +1208,94 @@ class Website_Product extends Object_Product {
 	 public function replaceEquivalenceChoix($phrase) {
 
         $equivalence = array(
+           
             "PA" => [
                 "lpn"           => ["Prbis",'Elégance','Matière'],
                 'fournisseur'   =>  ["Nature",'Authentique','Zenitude'],
                 'removeFinition'   =>  true,
                 'removeTraitementSurface'   =>  true,
             ],
+
             "AR" => [
                 "lpn"           => [],
                 'fournisseur'   =>[]
             ],
+
             "ZP" => [
-                "lpn"           => ["Prbis",'Elégance','Campagne','Mélange 50% Premier, 50% Rustique','Mélange PR/CAMP/AN','Matière'],
+                "lpn"           => ["Prbis",'Elégance','Campagne','Mélange 50% Premier, 50% Rustique','Mélange PR/CAMP/AN','Matière'], //Ne pas changer l'ordre (vois,plus bas)
                 'fournisseur'   =>['1BIS','Classique','Rustique','Mélange 1Bis/Rustique','Rustique','Antique']
+            ],
+
+            "EU" => [
+                "lpn"           => ["Select",'Elégance','Matière','MatièreMix'], //Ne pas changer l'ordre (vois,plus bas)
+                'fournisseur'   =>['Select','RU Light','RU Nature','RU Mix']
             ],
 
         );
 
-        //CAs particulier
-        if($fournisseur == "ZP" && $this->getEpaisseur() == '21') {
-        	$equivalence["ZP"]["fournisseur"]["Campagne"] = "Mélange Rustique/Antique";
-        }
-
+        $newPhrase = $phrase;
         $choixLpn = $this->getChoixString();
         $fournisseur = $this->getPimonly_fournisseur();
 
+
+        //CAs particulier
+        if($fournisseur == "ZP" && $this->getEpaisseur() == '21') {
+      
+        	$equivalence["ZP"]["fournisseur"][2] = "Mélange Rustique/Antique";
+        }
+        elseif($fournisseur == "EU") {
+        	
+        	//On elenve les dimensions
+        	$newPhrase = str_ireplace($this->pimonly_name_suffixe,"", $newPhrase);
+
+        	//On met le type avant le choix
+        	$addBeforeChoix = "";
+        	if($this->getLargeur() == 194) {
+        		$addBeforeChoix .= 'DESIGNER';
+        	}
+        	elseif($this->getLargeur() == 150) {
+        		$addBeforeChoix .= 'ELITE';
+        	}
+        	elseif($this->getLargeur() == 92) {
+        		$addBeforeChoix .= 'RISTRETTO';
+        	}
+
+        	$addBeforeChoix .= ' '.$this->getEpaisseur();
+        	
+
+        	//
+        	if($this->getSupport() == "HDF") {
+        		$addBeforeChoix .= 'H';
+        	}
+        	else if($this->getSupport() == "cp") {
+        		$addBeforeChoix .= 'P';
+        	}
+
+        
+
+        	if(stristr($this->getTraitement_surface(),'vieilli')) {
+        		$equivalence["EU"]["fournisseur"][2] = 'Aged '.$equivalence["EU"]["fournisseur"][3];
+        	}
+
+        	else if($this->getLongueur() == 1940) {
+        		$equivalence["EU"]["fournisseur"][2] = $equivalence["EU"]["fournisseur"][3];
+        	}
+
+
+        	foreach ($equivalence["EU"]["fournisseur"] as $k=>$choixF) {
+        		$equivalence["EU"]["fournisseur"][$k] = $addBeforeChoix." ".$choixF;
+        	}
+
+        }
+
+
+        //$traitementSurface= $this->geTtraitement_surface();
+
+        
+
         $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]['fournisseur']:false;
 
-        $newPhrase = $phrase;
+      
         if($equivalenceByFounissseur) {
             
             $newPhrase = str_ireplace($equivalence[$fournisseur]['lpn'], $equivalence[$fournisseur]['fournisseur'], $newPhrase);

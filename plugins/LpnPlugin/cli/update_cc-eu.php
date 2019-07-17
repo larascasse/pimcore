@@ -228,6 +228,8 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
+        $prefixe .= " ".$object->getFinitionString();
+
        
 
         if(stristr($article, "G2")) {

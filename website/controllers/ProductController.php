@@ -746,7 +746,7 @@ class ProductController extends Action
 
 
         //Commande
-        if(stripos($productEan,"c")===0) {
+        if(stripos($productEan,"CP")===0 || stripos($productEan,"CCH")===0 || stripos($productEan,"CCA")===0) {
              $order = \Website\Tool\MauchampHelper::loadAzureOrder($productEan);
              //print_r($order);
              //die;
@@ -758,7 +758,8 @@ class ProductController extends Action
             }
 
         }
-        else if (stripos($productEan,"f")===0) {
+        if(stripos($productEan,"FP")===0 || stripos($productEan,"FCH")===0 || stripos($productEan,"FCA")===0) {
+
             
             $order = \Website\Tool\MauchampHelper::loadAzureInvoice($productEan);
              //print_r($order);

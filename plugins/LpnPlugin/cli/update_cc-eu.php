@@ -92,8 +92,11 @@ foreach ($list->getObjects() as $object) {
 
     $save=false;
 
+    $suportString = "";
+
     if(stristr($scienergieCourt, " hd") || stristr($scienergieCourt, " hrl") || stristr($scienergieCourt, " H ") || stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
         $object->setSupport('HDF');
+        $suportString = "support HDF";
         $object->setPimonly_masse_volumique_moyenne(850);
 
         if($object->getEpaisseur()==10) {
@@ -109,6 +112,7 @@ foreach ($list->getObjects() as $object) {
     }
     else if(stristr($scienergieCourt, "cp") || stristr($scienergieCourt, " P ")) {
         $object->setSupport('cp');
+        $suportString = "support CP";
         $object->setPimonly_masse_volumique_moyenne(780);
 
         if($object->getEpaisseur()==10) {
@@ -136,7 +140,10 @@ foreach ($list->getObjects() as $object) {
     }
 
         
-    if(stristr($object->getName(), "vernis mat")) {
+    if(stristr($object->getName(), "huile uv")) {
+     $object->setFinition(("Huile UV"));
+    }
+    else if(stristr($object->getName(), "vernis mat")) {
      $object->setFinition(("Verni mat"));
     }
     elseif(stristr($object->getName(), "huile teinte réactive")) {
@@ -258,7 +265,7 @@ foreach ($list->getObjects() as $object) {
 
         //On force le titre si plusiqueurs matieres
         if(stristr($parent->getChoixString()," ou ")) {
-            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." "."support ".strtoupper($object->getSupport()).$suffixe2." ".$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$object->getChoixString()." ".$suportString.$suffixe2." ".$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$suffixe);
 
         }  

@@ -1221,7 +1221,7 @@ use Pimcore\Model;
                         if($isUpdating && $parent) {
                             if($key == "essence" || $key == "choix" || $key == "name_scienergie") {
                                 $parentValue = $field->getForCsvExport($parent);
-                                echo "checking Parent".$parentValue." child:".$value•"\n";
+                                echo "checking Parent".$parentValue." child:".$value."\n";
                                 if($parentValue != $value) {
                                     echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
                                     $parent->setValue($key, $value);

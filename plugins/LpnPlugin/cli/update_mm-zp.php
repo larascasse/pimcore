@@ -177,6 +177,7 @@ foreach ($list->getObjects() as $object) {
         $parentSuffixeEan .=" Bâton rompu";
     }
 
+    $parentSuffixeEan .= " ".$object->getChoixString();
 
 
 
@@ -250,17 +251,6 @@ foreach ($list->getObjects() as $object) {
         }
           
 
-
-    
-    //$parent->setValue('pimonly_name_suffixe',$parent->getChoixString());
-
-       
-    
-      
-        
-    
-
-    
     
     $parent->setValue('name',null);
     $parent->save();

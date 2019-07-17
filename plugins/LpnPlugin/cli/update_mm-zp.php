@@ -50,16 +50,20 @@ foreach ($list->getObjects() as $object) {
         continue;
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
+
+    $scienergieCourt = $object->getName_scienergie_court();
+    $scienergie = $object->getName_scienergie();
+    $famille = $object->getFamille();
+    $code = $article = $object->code;
+
     Object_Abstract::setGetInheritedValues(false); 
 
 
-    $scienergieCourt = $object->name_scienergie_court;
-    $scienergie = $object->name_scienergie;
+
     $code = $article = $object->code;
     $ean  = $object->ean;
     $article = $object->getCode();
     $parent = $object->getParent();
-    $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
@@ -210,7 +214,12 @@ foreach ($list->getObjects() as $object) {
          $parent->setValue('finition',"brut");
     }
 
-    if(stristr($scienergie, "HUILE AQUA")) {
+    //On met le vernis au dessus, car on ajoute
+    if(stristr($scienergie, "VERNIS AQUA")) {
+        $parent->setValue('finition',"Verni aqua");
+        $parentSuffixeEan .= " vernis aqua";      
+    }
+    else if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
         $parentSuffixeEan .= " huile aqua";
     }
@@ -218,10 +227,7 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('finition',"huile-cire");
         $parentSuffixeEan .= " huile cire";      
     }
-    else if(stristr($scienergie, "VERNIS AQUA")) {
-        $parent->setValue('finition',"Verni aqua");
-        $parentSuffixeEan .= " vernis aqua";      
-    }
+    
 
 
     $parent->setValue("pimonly_name_suffixe",trim($parentSuffixeEan));

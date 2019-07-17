@@ -187,19 +187,19 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('traitement_surface',"vieilli tres accentue");
         $parentSuffixeEan .= " vieilli très accentué";
         $object->setValue('chanfreins','rives abîmées'); 
-        $object->setChoix('ELV');
+        //$object->setChoix('ELV');
     }
     else if(stristr($article, "MMCHERA") && !$isBrut) {
 
         $parent->setTraitement_surface(("vieilli"));
         $parentSuffixeEan .= " rives abîmées";
         $parent->setValue('chanfreins','rives abîmées');
-        $object->setChoix('ELV');
+        //$object->setChoix('ELV');
   
     }
     elseif(stristr($article, "MMCHEG2") && !$isBrut) {
         $parent->setValue('chanfreins','2');
-        $object->setChoix('ELC');
+        //$object->setChoix('ELC');
 
     }
     

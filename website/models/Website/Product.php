@@ -1220,6 +1220,7 @@ class Website_Product extends Object_Product {
                 "lpn"           => [],
                 'fournisseur'   =>[],
                 'removeFinition'   =>  false,
+                'removeTraitementSurface'   =>  true,
             ],
 
             "ZP" => [

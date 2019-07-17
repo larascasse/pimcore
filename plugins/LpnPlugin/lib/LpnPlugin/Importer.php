@@ -1136,22 +1136,36 @@ use Pimcore\Model;
            
             $updatedFields = array();
 
-            
-
-
-           
-
 
             foreach ($class->getFieldDefinitions() as $key => $field) {
                 if (isset($product[$key])) {
                     $value = $product[$key];
                     
+                    //Name Scieniergie vans dans Name Produit Azure
                     if($key=="name") {
                         $splitedName = $this->splitNameType($value);
                         
                         $object->setValue("name_scienergie",$value);
 
-                        $object->setValue("name_scienergie_converti",$this->convertScienergieName($value));
+                        $name_converti = $this->convertScienergieName($value);
+
+                        $object->setValue("name_scienergie_converti",$name_converti );
+
+                        //Mise à jour du parent pour le scierngie
+                        if($isUpdating && $parent) {
+                        
+                                $parentValue = $parent->getName_scienergie();
+                                //echo "checking Parent".$parentValue." child:".$value."\n";
+                                if($parentValue != $value) {
+                                    echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
+                                    $parent->setValue('name_scienergie', $value);
+                                    $parent->setValue('name_scienergie_converti', $name_converti);
+                                    $parent->save();
+                                }
+                                
+                          
+                        }
+
 
                         //Mis dans l'article
                         /*if(!$isUpdating) {
@@ -1219,9 +1233,9 @@ use Pimcore\Model;
 
                         //Pour lme choix on modifier le parent si ce n'est pas le bon !!
                         if($isUpdating && $parent) {
-                            if($key == "essence" || $key == "choix" || $key == "name_scienergie") {
+                            if($key == "essence" || $key == "choix") {
                                 $parentValue = $field->getForCsvExport($parent);
-                                echo "checking Parent".$parentValue." child:".$value."\n";
+                                //echo "checking Parent".$parentValue." child:".$value."\n";
                                 if($parentValue != $value) {
                                     echo "UPDATING PARENT ".$parent->getSku()." ".$parentValue."->".$value."\nn";
                                     $parent->setValue($key, $value);

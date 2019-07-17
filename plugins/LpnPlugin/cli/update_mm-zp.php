@@ -209,6 +209,7 @@ foreach ($list->getObjects() as $object) {
     if(stripos($scienergie, "PP") >0) {
          $parent->setValue('finition',"brut");
     }
+
     if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
         $parentSuffixeEan .= " huile aqua";
@@ -258,7 +259,7 @@ foreach ($list->getObjects() as $object) {
     $object->setPublished(true);
     $object->save();
 
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\nEan:".$object->getEan()." - ".$object->getMage_name()." - ".$scienergie. ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

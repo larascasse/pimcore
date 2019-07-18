@@ -155,22 +155,28 @@ foreach ($list->getObjects() as $object) {
 
         
     if(stristr($scienergie, "huile uv")) {
-        $object->setFinition(("Huile UV"));
+        $parent->setFinition(("Huile UV"));
+        $object->setFinition('');
     }
     else if(stristr($scienergie, "vernis mat")) {
-     $object->setFinition(("Verni mat"));
+        $parent->setFinition(("Verni mat"));
+        $object->setFinition('');
     }
     elseif(stristr($object->getName(), "huile teinte réactive")) {
-     $object->setFinition(("huile teinte reactive"));
+        $parent->setFinition(("huile teinte reactive"));
+        $object->setFinition('');
     }
     elseif(stristr($scienergie, "vernis ceruse mat")) {
-     $object->setFinition(("vernis cérusé mat"));
+        $parent->setFinition(("vernis cérusé mat"));
+        $object->setFinition('');
     }
     elseif(stristr($scienergie, "vernis")) {
-     $object->setFinition(("Verni"));
+        $parent->setFinition(("Verni"));
+        $object->setFinition('');
     }
     elseif(stristr($scienergie, "huilé")) {
-     $object->setFinition(("huile"));
+        $parent->setFinition(("huile"));
+        $object->setFinition('');
     }
 
 
@@ -314,9 +320,13 @@ foreach ($list->getObjects() as $object) {
             if(($parentParent = $parent->getParent()) instanceof Object_Product) {
                 $oldName = $parentParent->name;
                 $newName = str_replace(" ".$object->getFinitionString($raw = true),"" , $oldName);
+
+                //On vire les finitions sur l'object parent
+                $oldFinition = $parentParent->finition;
                 
-                if($newName != $oldName) {
+                if($newName != $oldName || $oldFinition!= "") {
                     $parentParent->setValue('name',$newName);
+                    $parentParent->setValue('fintion','');
                     $parentParent->save();
                     echo "\nParent Article : ".$newName. ' -> '.$oldName;
                 }

@@ -1267,7 +1267,7 @@ class Website_Product extends Object_Product {
         	elseif($this->getLongueur() == 600) {
         		$addBeforeChoix .= 'CHEVRON S';
         	}
-        	elseif($this->getLongueur() == 610) {
+        	elseif($this->getLongueur() == 700) {
         		$addBeforeChoix .= 'CHEVRON L';
         	}
         	elseif($this->getLargeur() == 194) {

@@ -328,9 +328,9 @@ foreach ($list->getObjects() as $object) {
                 //On vire les finitions sur l'object parent
                 $oldFinition = $parentParent->finition;
                 
-                if($newName != $oldName || $oldFinition!= "") {
+                if($newName != $oldName || $oldFinition != "") {
                     $parentParent->setValue('name',$newName);
-                    $parentParent->setValue('fintion','');
+                    $parentParent->setValue('finition','');
                     $parentParent->save();
                     echo "\nParent Article : ".$newName. ' -> '.$oldName;
                 }

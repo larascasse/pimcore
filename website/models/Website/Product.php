@@ -1265,6 +1265,18 @@ class Website_Product extends Object_Product {
         	elseif($this->getLargeur() == 92) {
         		$addBeforeChoix .= 'RISTRETTO';
         	}
+        	elseif($this->getLongueur() == 610) {
+        		$addBeforeChoix .= 'BATON S';
+        	}
+        	elseif($this->getLongueur() == 710) {
+        		$addBeforeChoix .= 'BATON L';
+        	}
+        	elseif($this->getLongueur() == 600) {
+        		$addBeforeChoix .= 'CHEVRON S';
+        	}
+        	elseif($this->getLongueur() == 610) {
+        		$addBeforeChoix .= 'CHEVRON L';
+        	}
 
         	$addBeforeChoix .= ' '.$this->getEpaisseur();
         	

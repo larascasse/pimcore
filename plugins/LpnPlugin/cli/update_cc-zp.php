@@ -274,7 +274,7 @@ Usé,use
 
             //SURFACE
             if($isPointDeHongrie && !$isBrut) {
-                $parent->setMotif(' pth');
+                $parent->setMotif('pth');
                 $parent->setAngle('45°');
                 $parentSuffixeEan .=" Point de Hongrie 45°";
                 $parent->setValue('longueur_txt','Longueur pointe à talon '.$longueur." mm");
@@ -283,7 +283,7 @@ Usé,use
 
             }
             elseif($isbatonRompu&& !$isBrut) {
-                $parent->setMotif(' baton rompu');
+                $parent->setMotif('baton rompu');
                 $parentSuffixeEan .=" Bâton rompu ";
             }
 

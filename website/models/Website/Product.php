@@ -1236,6 +1236,7 @@ class Website_Product extends Object_Product {
                 'fournisseur'   =>['Select','RU Light','RU Nature','RU Mix'],
                 'removeFinition'   =>  true,
                 'removeTraitementSurface'   =>  true,
+                'removeMotif'   =>  true,
             ],
 
         );
@@ -1323,12 +1324,17 @@ class Website_Product extends Object_Product {
             $newPhrase = str_ireplace($equivalence[$fournisseur]['lpn'], $equivalence[$fournisseur]['fournisseur'], $newPhrase);
 
             if($equivalence[$fournisseur]['removeFinition'])  {
-            	$value 	= $this->getFinitionString();
+            	$value 	= $this->getFinitionString($raw=true);
             	$newPhrase = str_ireplace($value , "", $newPhrase);
             }
 
             if($equivalence[$fournisseur]['removeTraitementSurface'])  {
-            	$value 	= $this->getTraitement_surfaceString();
+            	$value 	= $this->getTraitement_surfaceString($raw=true);
+            	$newPhrase = str_ireplace($value , "", $newPhrase);
+            }
+
+            if($equivalence[$fournisseur]['removeMotif'])  {
+            	$value 	= " ".$this->getMotifString($raw=true);
             	$newPhrase = str_ireplace($value , "", $newPhrase);
             }
 

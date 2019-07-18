@@ -13,7 +13,7 @@ ini_set("max_execution_time", "-1");
 define("PIMCORE_ADMIN", true);
 Pimcore::setAdminMode();
 Object_Abstract::setHideUnpublished(false);
-Object_Abstract::setGetInheritedValues(false);
+//Object_Abstract::setGetInheritedValues(false);
 
 
 //
@@ -23,17 +23,18 @@ Pimcore_Model_Cache::disable();
 
 $conditionFilters = array(
        "o_path LIKE '/catalogue/_product_base__/05contreco/tmp/cc-eu%'",
-       "o_id >10000",
+       "ean IS NOT NULL",
+       "famille not like '97LOTS'",
 
     );
 
 
-$list = new Pimcore\Model\Object\Listing();
+$list = new Pimcore\Model\Object\Product\Listing();
 $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 
 $list->setOrder("DESC");
-$list->setOrderKey("o_id");
+$list->setOrderKey("code");
 
 
 $list->load();
@@ -41,6 +42,7 @@ $list->load();
 $objects = array();
  echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
+$previousParent = null;
 
 foreach ($list->getObjects() as $object) {
 
@@ -60,6 +62,17 @@ foreach ($list->getObjects() as $object) {
     $scienergieCourt = $object->name_scienergie_court;
     $scienergie = $object->name_scienergie;
     $code = $article  = $object->getCode();
+    $famille = $object->getFamille();
+
+    $parent = $object->getParent();
+    if(isset($previousParent) && $previousParent->getId() == $parent->getId()) {
+        $sameParentAsPrevious = true;
+    }
+    else {
+         $sameParentAsPrevious = false;
+    }
+    $previousParent = $parent;
+
 
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
@@ -67,8 +80,8 @@ foreach ($list->getObjects() as $object) {
 
     $ean  = $object->ean;
 
-    $parent = $object->getParent();
-    $famille = $object->getFamille();
+    
+   
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
@@ -207,8 +220,8 @@ foreach ($list->getObjects() as $object) {
         $save=true;
     }
 
-    if(strlen($object->getEan())>0) {
-         $parent = $object->getParent();
+   
+
          $parent->setChoix($object->getChoix());
 
          $suffixe = "";
@@ -226,7 +239,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
-        $prefixe .= lcfirst($object->getFinitionString())." ";
+        $prefixe .= lcfirst($object->getFinitionString($raw = true))." ";
 
        
 
@@ -285,36 +298,39 @@ foreach ($list->getObjects() as $object) {
         $save=true;
 
        
-        if(strlen($parent->name)>0) {
-            $parent->setValue('name',null);
+        $object->setValue('name',null);
             
-        } 
 
-        $parent->save();
+        if(!$sameParentAsPrevious) {
+
+            //Petit truc a clean, dans le nom du parent / parent, on vire la finition
+
+            if(($parentParent = $parent->getParent()) instanceof Object_Product) {
+                $oldName = $parentParent->name;
+                $newName = str_replace(" ".$object->getFinitionString($raw = true),"" , $oldName);
+                
+                if($newName != $oldName) {
+                    $parentParent->setValue('name',$newName);
+                    $parentParent->save();
+                    echo "\nParent Article : ".$newName. ' -> '.$oldName;
+                }
+            }
+              
+
+            $parent->save();
+            echo "\nArticle :".$parent->getCode()." - ".$parent->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$parent->getPreviewUrl();
+        }
         
+        if($save) {
+             echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+            $object->save();
+        }
 
-    
-
-
-        echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
-        
-    }
-    else {
-        echo "\nArticle:".$object->getCode()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
-    }
-   // continue;
-
-   
-    if($save)
-        $object->save();
+       
 
     unset($object);
     unset($parent);
-    continue;
     
-    
-    
-
     Object_Abstract::setGetInheritedValues($inheritance); 
 
 }

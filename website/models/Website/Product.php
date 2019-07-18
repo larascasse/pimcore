@@ -341,7 +341,7 @@ class Website_Product extends Object_Product {
 	}
 
 
-	public function getFinitionString () {
+	public function getFinitionString ($raw=false) {
 
 		//Bizzare, on perd des fois l'ignertiotan,ce ...
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
@@ -357,19 +357,21 @@ class Website_Product extends Object_Product {
 		//echo $this->getId()." ".$value." ".(strlen($value) == 0)." ??\n";
 
 
-
-		if($this->isParquet() && strlen($value) == 0) {
+		if(!$raw) {
+			if($this->isParquet() && strlen($value) == 0) {
 			//echo "BAHM \n";
 		
-			$value =  "Aucune";
-				
+				$value =  "Aucune";
+					
+			}
+			if($this->isParquet() && ($value == "Brute" || $value == "brut")) {
+				//echo "BAHM \n";
+			
+				$value =  "Aucune";
+					
+			}
 		}
-		if($this->isParquet() && ($value == "Brute" || $value == "brut")) {
-			//echo "BAHM \n";
 		
-			$value =  "Aucune";
-				
-		}
 		//echo  $this->getId()."-> ".$value." ".$optionsSelect2[$value]." ".$this->isParquet().array_key_exists($value,$optionsSelect2)."\n";
 
 		 Object_Abstract::setGetInheritedValues($inheritance); 

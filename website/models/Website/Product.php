@@ -378,7 +378,7 @@ class Website_Product extends Object_Product {
 		return $value;
 		
 	}
-	public function getTraitement_surfaceString () {
+	public function getTraitement_surfaceString ($raw=false) {
 
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
@@ -386,14 +386,15 @@ class Website_Product extends Object_Product {
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"traitement_surface");
 		$value = $this->geTtraitement_surface();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
-		if($this->isParquet() && strlen($value) == 0)
+		
+		if(!$raw && $this->isParquet() && strlen($value) == 0)
 			$value = "Aucun";
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $value;
 	}
 
-	public function getMotifString () {
+	public function getMotifString ($raw=false) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		 Object_Abstract::setGetInheritedValues(true); 
 
@@ -401,21 +402,21 @@ class Website_Product extends Object_Product {
 		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"motif");
 		$value = $this->getMotif();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
-		if(($this->isParquet() || $this->isSolPlaque()) && strlen($value) == 0)
+		if(!$raw && ($this->isParquet() || $this->isSolPlaque()) && strlen($value) == 0)
 			$value =  "Lame droite";
 
 		Object_Abstract::setGetInheritedValues($inheritance); 
 		return $value;
 	}
 
-	public function getSupportString() {
+	public function getSupportString($raw=false) {
 		$inheritance = Object_Abstract::doGetInheritedValues(); 
    		Object_Abstract::setGetInheritedValues(true); 
 
    		$optionsSelect2 = Object_Service::getOptionsForSelectField($this,"support");
 		$value = $this->getSupport();
 		$value = array_key_exists($value,$optionsSelect2)?$optionsSelect2[$value]:$value;
-		if($this->isParquetMassif() && strlen($value) == 0)
+		if(!$raw && $this->isParquetMassif() && strlen($value) == 0)
 			$value =  "Massif";
 
 		Object_Abstract::setGetInheritedValues($inheritance); 

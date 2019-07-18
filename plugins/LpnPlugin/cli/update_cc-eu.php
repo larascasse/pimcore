@@ -255,6 +255,7 @@ foreach ($list->getObjects() as $object) {
             $prefixe = "Point de Hongrie ";
         }
 
+        $prefixe .= lcfirst($object->getTraitement_surfaceString($raw = true))." ";
         $prefixe .= lcfirst($object->getFinitionString($raw = true))." ";
 
        

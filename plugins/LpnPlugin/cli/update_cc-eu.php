@@ -48,7 +48,7 @@ $listObject = $list->getObjects();
 $total = count($listObject);
 $idx=0;
 foreach ($list->getObjects() as $object) {
-    $++;
+    $idx++;
     if(!($object instanceof Object_Product))
         continue;
 

@@ -335,7 +335,6 @@ foreach ($list->getObjects() as $object) {
                     $parentParent->setValue('name',$newName);
                     $parentParent->setValue('finition','');
                     $parentParent->setValue('traitement_surface','');
-                    $parentParent
                     $parentParent->save();
                     echo "\nParent Article : ".$newName. ' -> '.$oldName;
                 }

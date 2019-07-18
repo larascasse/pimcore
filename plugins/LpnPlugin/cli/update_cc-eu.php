@@ -44,8 +44,11 @@ $objects = array();
 //Logger::debug("objects in list:" . count($list->getObjects()));
 $previousParent = null;
 
+$listObject = $list->getObjects();
+$total = count($listObject);
+$idx=0;
 foreach ($list->getObjects() as $object) {
-
+    $++;
     if(!($object instanceof Object_Product))
         continue;
 
@@ -160,8 +163,11 @@ foreach ($list->getObjects() as $object) {
     elseif(stristr($object->getName(), "huile teinte réactive")) {
      $object->setFinition(("huile teinte reactive"));
     }
-    elseif(stristr($scienergie, "vernis mat")) {
+    elseif(stristr($scienergie, "vernis ceruse mat")) {
      $object->setFinition(("vernis cérusé mat"));
+    }
+    elseif(stristr($scienergie, "vernis")) {
+     $object->setFinition(("Verni"));
     }
     elseif(stristr($scienergie, "huilé")) {
      $object->setFinition(("huile"));
@@ -283,7 +289,7 @@ foreach ($list->getObjects() as $object) {
 
         }  
         else {
-            $object->setValue("pimonly_name_suffixe","support ".strtoupper($object->getSupport()).$suffixe2." ".$object->pimonly_dimensions);
+            $object->setValue("pimonly_name_suffixe",$suportString.$suffixe2." ".$object->pimonly_dimensions);
             $parent->setValue('pimonly_name_suffixe',$prefixe.$parent->getChoixString().$suffixe);
         }
 
@@ -322,7 +328,7 @@ foreach ($list->getObjects() as $object) {
         }
         
         if($save) {
-             echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+             echo "\nEan ($count/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
             $object->save();
         }
 

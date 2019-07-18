@@ -162,6 +162,10 @@ foreach ($list->getObjects() as $object) {
         $parent->setFinition(("Verni mat"));
         $object->setFinition('');
     }
+    else if(stristr($scienergie, "vernis brosse mat")) {
+        $parent->setFinition(("Verni mat"));
+        $object->setFinition('');
+    }
     elseif(stristr($object->getName(), "huile teinte réactive")) {
         $parent->setFinition(("huile teinte reactive"));
         $object->setFinition('');

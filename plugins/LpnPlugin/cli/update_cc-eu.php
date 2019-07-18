@@ -238,19 +238,6 @@ foreach ($list->getObjects() as $object) {
 
 
 
-if($isPointDeHongrie && !$isBrut) {
-                $parent->setMotif(' pth');
-                $parent->setAngle('45°');
-                $parentSuffixeEan .=" Point de Hongrie 45°";
-                $parent->setValue('longueur_txt','Longueur pointe à talon '.$longueur." mm");
-
-
-
-            }
-            elseif($isbatonRompu&& !$isBrut) {
-                $parent->setMotif(' baton rompu');
-                $parentSuffixeEan .=" Bâton rompu ";
-            }
    
 
          $parent->setChoix($object->getChoix());
@@ -270,6 +257,8 @@ if($isPointDeHongrie && !$isBrut) {
 
         if(stristr($scienergieCourt, "PDH ") || stristr($article, "FHCHE") ) {
             $prefixe = "Point de Hongrie ";
+            $object->setValue('longueur_txt','Longueur pointe à talon '.$object->getLongueur()." mm");
+            $parent->setAngle('45°');
             $parent->setMotif('pth');
         }
 

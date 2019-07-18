@@ -258,6 +258,7 @@ if($isPointDeHongrie && !$isBrut) {
          $suffixe = "";
          $prefixe = "";
 
+
          if(stristr($scienergieCourt, "click") || stristr($scienergie, "click")) {
            $suffixe.=' Click';
         }

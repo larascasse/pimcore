@@ -338,7 +338,7 @@ foreach ($list->getObjects() as $object) {
         }
         
         if($save) {
-             echo "\nEan ($count/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+             echo "\nEan ($idx/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
             $object->save();
         }
 

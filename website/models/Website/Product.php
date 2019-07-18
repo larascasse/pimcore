@@ -1334,7 +1334,7 @@ class Website_Product extends Object_Product {
             }
 
             if($equivalence[$fournisseur]['removeMotif'])  {
-            	$value 	= " ".$this->getMotifString($raw=true);
+            	$value 	= $this->getMotifString($raw=true);
             	$newPhrase = str_ireplace($value , "", $newPhrase);
             }
 

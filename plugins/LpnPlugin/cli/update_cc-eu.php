@@ -178,7 +178,11 @@ foreach ($list->getObjects() as $object) {
         $parent->setFinition(("Verni"));
         $object->setFinition('');
     }
-    elseif(stristr($scienergie, "huilé")) {
+    elseif(stristr($scienergie, "huile") && stristr($scienergie, "mat")) {
+        $parent->setFinition(("huile mat"));
+        $object->setFinition('');
+    }
+    elseif(stristr($scienergie, "huile")) {
         $parent->setFinition(("huile"));
         $object->setFinition('');
     }
@@ -193,14 +197,7 @@ foreach ($list->getObjects() as $object) {
         $save=true;
     }
 
-    if(stristr($scienergieCourt, "BR ")) {
-        $object->setMotif('baton rompu');
-        $save=true;
-    }
-    else if(stristr($scienergieCourt, "PDH ")) {
-        $object->setMotif('pth');
-
-    }
+    
 
     if($object->getEpaisseur()==19) {
         $object->setEpaisseurUsure('5.5 mm');
@@ -250,15 +247,21 @@ foreach ($list->getObjects() as $object) {
            $suffixe.=' Click';
         }
 
+
+      
+
         if(stristr($scienergieCourt, "BR ") || stristr($article, "FBCHE") ) {
             $prefixe = "Bâton Rompu ";
+            $object->setMotif('');
             $parent->setMotif('baton rompu');
         }
 
         if(stristr($scienergieCourt, "PDH ") || stristr($article, "FHCHE") ) {
             $prefixe = "Point de Hongrie ";
             $object->setValue('longueur_txt','Longueur pointe à talon '.$object->getLongueur()." mm");
-            $parent->setAngle('45°');
+            $parent->setAngle('');
+            $object->setAngle('45°');
+            $object->setMotif('');
             $parent->setMotif('pth');
         }
 

@@ -1274,8 +1274,11 @@ class Website_Product extends Object_Product {
         	elseif($this->getLargeur() == 194) {
         		$addBeforeChoix .= 'DESIGNER';
         	}
-        	elseif($this->getLargeur() == 150) {
+        	elseif($this->getLargeur() == 150 && $this->getLongueur()==1940) {
         		$addBeforeChoix .= 'ELITE';
+        	}
+        	elseif($this->getLargeur() == 150 && $this->getLongueur()==1190) {
+        		$addBeforeChoix .= 'PREMIER';
         	}
         	elseif($this->getLargeur() == 92) {
         		$addBeforeChoix .= 'RISTRETTO';

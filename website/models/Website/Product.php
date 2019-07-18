@@ -1518,6 +1518,7 @@ class Website_Product extends Object_Product {
 
 	protected function cleanString($str) {
 		
+    	$str = str_replace("   ", " ", $str);
     	$str = str_replace("  ", " ", $str);
     	$str = str_replace("\n", " ", $str);
     	$str =trim($str);

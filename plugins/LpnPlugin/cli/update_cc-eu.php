@@ -325,7 +325,7 @@ foreach ($list->getObjects() as $object) {
             if(($parentParent = $parent->getParent()) instanceof Object_Product) {
                 $oldName = $parentParent->name;
                 $newName = str_replace(" ".$object->getFinitionString($raw = true),"" , $oldName);
-                $newName = str_replace(" ".$object->getTraitement_surfaceString($raw = true),"" , $newName);
+                $newName = str_ireplace(" ".$object->getTraitement_surfaceString($raw = true),"" , $newName);
 
                 //On vire les finitions sur l'object parent
                 $oldFinition = $parentParent->finition;

@@ -1256,16 +1256,8 @@ class Website_Product extends Object_Product {
 
         	//On met le type avant le choix
         	$addBeforeChoix = "";
-        	if($this->getLargeur() == 194) {
-        		$addBeforeChoix .= 'DESIGNER';
-        	}
-        	elseif($this->getLargeur() == 150) {
-        		$addBeforeChoix .= 'ELITE';
-        	}
-        	elseif($this->getLargeur() == 92) {
-        		$addBeforeChoix .= 'RISTRETTO';
-        	}
-        	elseif($this->getLongueur() == 610) {
+        	
+        	if($this->getLongueur() == 610) {
         		$addBeforeChoix .= 'BATON S';
         	}
         	elseif($this->getLongueur() == 710) {
@@ -1277,6 +1269,16 @@ class Website_Product extends Object_Product {
         	elseif($this->getLongueur() == 610) {
         		$addBeforeChoix .= 'CHEVRON L';
         	}
+        	elseif($this->getLargeur() == 194) {
+        		$addBeforeChoix .= 'DESIGNER';
+        	}
+        	elseif($this->getLargeur() == 150) {
+        		$addBeforeChoix .= 'ELITE';
+        	}
+        	elseif($this->getLargeur() == 92) {
+        		$addBeforeChoix .= 'RISTRETTO';
+        	}
+        	
 
         	$addBeforeChoix .= ' '.$this->getEpaisseur();
         	

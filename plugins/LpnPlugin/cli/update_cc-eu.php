@@ -324,15 +324,15 @@ foreach ($list->getObjects() as $object) {
 
             if(($parentParent = $parent->getParent()) instanceof Object_Product) {
                 $oldName = $parentParent->name;
-                $newName = str_replace(" ".$object->getFinitionString($raw = true),"" , $oldName);
-                $newName = str_ireplace(" ".$object->getTraitement_surfaceString($raw = true),"" , $newName);
+                $newName = str_replace($object->getFinitionString($raw = true),"" , $oldName);
+                $newName = str_ireplace($object->getTraitement_surfaceString($raw = true),"" , $newName);
 
                 //On vire les finitions sur l'object parent
                 $oldFinition = $parentParent->finition;
                 $oldTraitementSurface = $parentParent->traitement_surface;
                 
                 if($newName != $oldName || $oldFinition != ""  || $oldTraitementSurface != "") {
-                    $parentParent->setValue('name',$newName);
+                    $parentParent->setValue('name',$object->cleanString($newName));
                     $parentParent->setValue('finition','');
                     $parentParent->setValue('traitement_surface','');
                     $parentParent->save();

@@ -30,7 +30,7 @@ $list->setCondition(implode(" AND ", $conditionFilters));
 //$list->setOrderKey("o_id");
 
 $list->setOrder("DESC");
-$list->setOrderKey("o_id");
+$list->setOrderKey("code");
 
 
 $list->load();
@@ -443,7 +443,7 @@ foreach ($listObject as $object) {
         $parent->setValue('name',str_replace('Parquet chêne massif ','Parquet Versailles en chêne massif ',$parent->getParent()->getName()));
     }
     else {
-        $parent->setValue('name',null);
+        //$parent->setValue('name',null);
     }
     
     if(!$sameParentAsPrevious) 
@@ -452,7 +452,7 @@ foreach ($listObject as $object) {
     $object->setPublished(true);
     $object->save();
 
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\nEan ($idx/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
     
 
     Object_Abstract::setGetInheritedValues($inheritance); 

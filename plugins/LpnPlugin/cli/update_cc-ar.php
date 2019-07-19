@@ -29,16 +29,24 @@ $list->setUnpublished(true);
 $list->setCondition(implode(" AND ", $conditionFilters));
 
 $list->setOrder("DESC");
-$list->setOrderKey("o_id");
+$list->setOrderKey("code");
 
 
 $list->load();
 
 $objects = array();
-echo "objects in list ".count($list->getObjects())."\n";
-//Logger::debug("objects in list:" . count($list->getObjects()));
 
-foreach ($list->getObjects() as $object) {
+$previousParent = null;
+$sameParentAsPrevious = false;
+$listObject = $list->getObjects();
+$total = count($listObject);
+$idx=0;
+
+
+echo "objects in list $total \n";
+
+
+foreach ($listObject as $object) {
 
 
     //echo "update ".$object->getName()."\n";
@@ -47,6 +55,24 @@ foreach ($list->getObjects() as $object) {
 
     if(!($object instanceof Object_Product))
         continue;
+
+
+    if(isset($previousParent) && $previousParent->getId() == $parent->getId()) {
+        $sameParentAsPrevious = true;
+    }
+    else {
+         $sameParentAsPrevious = false;
+    }
+    $previousParent = $parent;
+
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->getName_scienergie();
+    $code = $article  = $object->getCode();
+    $famille = $object->getFamille();
+    $equivalence = $object->getPimonly_equivalence_auto();
+    
+
+
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
@@ -56,14 +82,6 @@ foreach ($list->getObjects() as $object) {
     $scienergie_converti = $object->name_scienergie_converti; //huilé cire
     $article = $object->code;
     $parent = $object->getParent();
-
-    //echo $scienergieCourt." ".$object->getEan()."\n";
-
-
-
-
-
-   
 
     //Usée brosssé
     /*
@@ -112,11 +130,9 @@ Usé,use
         $parent->setValue('epaisseur_txt','');
         $object->setValue('epaisseur_txt','Epaisseur +/- 21 mm');
 
-         $object->setTraitement_surface('');
-         $parent->setTraitement_surface("vieilli use brosse rives abimees");
-
-
-        $parentSuffixeEan  .= "vieilli usé brossé";
+        $object->setTraitement_surface('');
+        $parent->setTraitement_surface('use-brosse');
+        $parentSuffixeEan  .= "usé brossé";
 
 
 
@@ -130,18 +146,20 @@ Usé,use
                 $object->setTraitement_surface("");
                 $parentSuffixeEan .= " brossé intense usé déformé";
 
+
             }
             else {
-                $parent->setTraitement_surface("use-vieilli-use-deforme");
+                $object->setTraitement_surface(("vieilli-use-deforme"));
                 $object->setTraitement_surface('');
-                $parentSuffixeEan .= "vieilli usé déformé";
+                $parentSuffixeEan .= " vieilli usé déformé";
             }
-            
+            $parent->setValue('chanfreins','rives abîmées'); 
         }
         else {
              $parent->setTraitement_surface("vieilli");
              $object->setTraitement_surface('');
-             $parentSuffixeEan .= "vieilli";
+             $parentSuffixeEan .= " vieilli";
+             $parent->setValue('chanfreins','rives abîmées'); 
 
         }   
 
@@ -151,6 +169,9 @@ Usé,use
         
     }
 
+
+
+
     if(stristr($article, "G2")) {
         $parent->setValue('chanfreins','2');
     }   
@@ -158,24 +179,25 @@ Usé,use
         $parent->setValue('chanfreins','rives abîmées');
     }
 
-
-
-    if(stristr($scienergie, "HUILE AQUA")) {
-        $object->setValue('finition',"");
+    $object->setValue('finition','');
+    if(stristr($scienergie, "PRE HUILE AQUA")) {
+        $object->setValue('finition','');
+        $parent->setValue('finition',"pre-huile-aqua");
+        $parentSuffixeEan .= " pré-huilé aqua";
+    } 
+    else if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
         $parentSuffixeEan .= " huile aqua";
     }
     else if(stristr($scienergie, "PRE HUIL")) {
-        $object->setValue('finition',"");
         $parent->setValue('finition',"pre-huile");
         $parentSuffixeEan .= " pré-huilé";
     }
-    else if(stristr($scienergie, "HUILE CIRE") ||  stristr($scienergie_converti, "huilé cire")) {
-        $object->setValue('finition',"");
+    else if(stristr($scienergie, "HUILE CIRE") ) {
         $parent->setValue('finition',"huile-cire");
-        $parentSuffixeEan .= " huile cire";
-
+        $parentSuffixeEan .= " huile cire";      
     }
+
 
     $object->setValue("pimonly_name_suffixe",$suffixeEan);
     $parent->setValue("pimonly_name_suffixe",$parentSuffixeEan);
@@ -203,12 +225,12 @@ Usé,use
         
     } 
 
-    
-    $parent->save();
+    if(!$sameParentAsPrevious) 
+        $parent->save();
 
     $object->save();
 
-    echo "\nEan:".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\nEan ($idx/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 
     
 

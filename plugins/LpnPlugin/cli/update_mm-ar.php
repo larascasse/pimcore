@@ -62,23 +62,25 @@ foreach ($listObject as $object) {
     }
     $previousParent = $parent;
 
+    $scienergieCourt = $object->name_scienergie_court;
+    $scienergie = $object->getName_scienergie();
+    $code = $article  = $object->getCode();
+    $famille = $object->getFamille();
+    $equivalence = $object->getPimonly_equivalence_auto();
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
 
 
-    $scienergieCourt = $object->name_scienergie_court;
-    $scienergie = $object->cleanString($object->name_scienergie);
-    $code = $article = $object->code;
+    
     $ean  = $object->ean;
-    $article = $object->getCode();
     $parent = $object->getParent();
     $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();
     $longueur = $object->getLongueur();
     $qualite = $object->getQualite();
-    $equivalence = $object->getPimonly_equivalence();
+    
 
     $isPointDeHongrie = stripos($article, "MHCHE") === 0;
     $isbatonRompu = stripos($article, "MBCHE") === 0;

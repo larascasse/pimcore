@@ -56,7 +56,7 @@ foreach ($listObject as $object) {
     if(!($object instanceof Object_Product))
         continue;
 
-
+    $parent = $object->getParent();
     if(isset($previousParent) && $previousParent->getId() == $parent->getId()) {
         $sameParentAsPrevious = true;
     }
@@ -225,12 +225,14 @@ Usé,use
         
     } 
 
-    if(!$sameParentAsPrevious) 
+    if(!$sameParentAsPrevious) {
         $parent->save();
+         echo "\nArticle :".$parent->getCode()." - ".$parent->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$parent->getPreviewUrl();
+    }
 
     $object->save();
 
-    echo "\nEan ($idx/$total):".$object->getEan()." - ".$object->getMage_name(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
+    echo "\nEan ($idx/$total):".$object->getEan()." - ".$object->getMage_name()." - ".$object->getPimonly_equivalence_auto(). ' - https://pim.laparqueterienouvelle.fr'.$object->getPreviewUrl();
 
     
 

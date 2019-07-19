@@ -50,7 +50,7 @@ foreach ($listObject as $object) {
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT
     //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
-
+    $parent = $object->getParent();
     if(!($object instanceof Object_Product))
         continue;
 
@@ -74,7 +74,7 @@ foreach ($listObject as $object) {
 
     
     $ean  = $object->ean;
-    $parent = $object->getParent();
+    
     $famille = $object->getFamille();
     $epaisseur = $object->getEpaisseur();
     $largeur = $object->getLargeur();

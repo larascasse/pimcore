@@ -39,7 +39,12 @@ $objects = array();
  echo "objects in list ".count($list->getObjects())."\n";
 //Logger::debug("objects in list:" . count($list->getObjects()));
 
-foreach ($list->getObjects() as $object) {
+ $previousParent = null;
+
+$listObject = $list->getObjects();
+$total = count($listObject);
+$idx=0;
+foreach ($listObject as $object) {
 
 
     //echo "update ".$object->getName()."\n";
@@ -48,6 +53,15 @@ foreach ($list->getObjects() as $object) {
 
     if(!($object instanceof Object_Product))
         continue;
+
+    if(isset($previousParent) && $previousParent->getId() == $parent->getId()) {
+        $sameParentAsPrevious = true;
+    }
+    else {
+         $sameParentAsPrevious = false;
+    }
+    $previousParent = $parent;
+
     
     $inheritance = Object_Abstract::doGetInheritedValues(); 
     Object_Abstract::setGetInheritedValues(false); 
@@ -290,8 +304,8 @@ foreach ($list->getObjects() as $object) {
 
     //USEE BROSS2
     else if(stristr($article, "MMCHEUB")) {
-         $parent->setTraitement_surface(("vieilli use brosse rives abimees"));
-         $parentSuffixeEan .="vieilli usé brossé";
+         $parent->setTraitement_surface(("usé brossé rives abimees"));
+         $parentSuffixeEan .="usé brossé";
 
          $parent->setValue('fixation',['rainurelanguette-2cotes-fausses-languettes']);
          $object->setValue('chanfreins','rives abîmées'); 
@@ -425,7 +439,8 @@ foreach ($list->getObjects() as $object) {
         $parent->setValue('name',null);
     }
     
-    $parent->save();
+    if(!$sameParentAsPrevious) 
+        $parent->save();
 
     $object->setPublished(true);
     $object->save();

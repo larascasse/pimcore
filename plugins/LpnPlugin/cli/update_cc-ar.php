@@ -49,10 +49,8 @@ echo "objects in list $total \n";
 foreach ($listObject as $object) {
 
 
-    //echo "update ".$object->getName()."\n";
-    //COPIE DE SCIERGNER COURT
-    //$value  = ucfirst(strtolower($object->getValueForFieldName('name_scienergie_court')));
-
+    $idx++;
+    
     if(!($object instanceof Object_Product))
         continue;
 

@@ -45,7 +45,7 @@ $listObject = $list->getObjects();
 $total = count($listObject);
 $idx=0;
 foreach ($listObject as $object) {
-
+    $idx++;
 
     //echo "update ".$object->getName()."\n";
     //COPIE DE SCIERGNER COURT

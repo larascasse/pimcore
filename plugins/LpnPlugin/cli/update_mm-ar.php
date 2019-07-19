@@ -202,15 +202,15 @@ foreach ($listObject as $object) {
                 $object->setValue('largeur_txt','Largeurs panachées 220/260/300 mm');
                 $suffixeEan .= 'x220-300';
                 
-                $longueur_txt = 'Longueurs panachées de 1800 à 3000 mm';
+                $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
                 $suffixeEan .= 'x2000-3000';
              }
              else {
                 $object->setValue('largeur_txt','Largeurs panachées 140/180/220 mm');
                 $suffixeEan .= 'x140-220';
                 
-                $longueur_txt = 'Longueurs panachées de 2000 à 3000 mm';
-                $suffixeEan .= 'x2000-3000';
+                $longueur_txt = 'Longueurs panachées de 1800 à 2700 mm';
+                $suffixeEan .= 'x1800-2700';
              }
 
         }

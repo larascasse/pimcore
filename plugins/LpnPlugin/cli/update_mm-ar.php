@@ -387,7 +387,7 @@ foreach ($listObject as $object) {
         $parent->setValue('finition',"pre-huile");
         $parentSuffixeEan .= " pré-huilé";
     }
-    else if(stristr($scienergie, "HUILE CIRE")) {
+    else if(stristr($scienergie, "HUILE CIRE") || stristr($scienergie, "HUILE  CIRE")) {
         $parent->setValue('finition',"huile-cire");
         $parentSuffixeEan .= " huile cire";      
     }

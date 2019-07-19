@@ -68,7 +68,7 @@ foreach ($listObject as $object) {
 
 
     $scienergieCourt = $object->name_scienergie_court;
-    $scienergie = $object->name_scienergie;
+    $scienergie = $object->cleanString($object->name_scienergie);
     $code = $article = $object->code;
     $ean  = $object->ean;
     $article = $object->getCode();
@@ -387,7 +387,7 @@ foreach ($listObject as $object) {
         $parent->setValue('finition',"pre-huile");
         $parentSuffixeEan .= " pré-huilé";
     }
-    else if(stristr($scienergie, "HUILE CIRE") || stristr($scienergie, "HUILE  CIRE")) {
+    else if(stristr($scienergie, "HUILE CIRE") ) {
         $parent->setValue('finition',"huile-cire");
         $parentSuffixeEan .= " huile cire";      
     }

@@ -304,7 +304,7 @@ foreach ($listObject as $object) {
 
     //USEE BROSS2
     else if(stristr($article, "MMCHEUB")) {
-         $parent->setTraitement_surface(("usé brossé rives abimees"));
+         $parent->setTraitement_surface('use-brosse');
          $parentSuffixeEan .="usé brossé";
 
          $parent->setValue('fixation',['rainurelanguette-2cotes-fausses-languettes']);
@@ -316,7 +316,8 @@ foreach ($listObject as $object) {
         $parent->setMotif('pth');
         $parent->setAngle('45°');
         $parentSuffixeEan .=" Point de Hongrie";
-        $parent->setValue('longueur_txt','Longueur pointe à pointe : '."650"." mm");
+        $parent->setValue('');
+        $longueur_txt = 'Longueur pointe à pointe : '."650"." mm";
         $parent->setValue('fixation',['rainurelanguette']);
     }
 
@@ -379,7 +380,11 @@ foreach ($listObject as $object) {
     if(stripos($scienergie, "PP") >0) {
          $parent->setValue('finition',"brut");
     }
-    if(stristr($scienergie, "HUILE AQUA")) {
+    if(stristr($scienergie, "PRE HUILE AQUA")) {
+        $parent->setValue('finition',"pre-huile-aqua");
+        $parentSuffixeEan .= " pré-huilé aqua";
+    } 
+    else if(stristr($scienergie, "HUILE AQUA")) {
         $parent->setValue('finition',"huile-aqua");
         $parentSuffixeEan .= " huile aqua";
     }

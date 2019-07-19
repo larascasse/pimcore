@@ -1251,6 +1251,18 @@ class Website_Product extends Object_Product {
       
         	$equivalence["ZP"]["fournisseur"][2] = "Mélange Rustique/Antique";
         }
+
+
+        elseif($fournisseur == "PA") {
+      
+        	$scienergieCourt = $this->getName_scienergie_court();
+        	if (stristr($scienergieCourt, "classic")) { //QQues pint de hongrie
+        		$equivalence["PA"]["fournisseur"][0] = "Classic";
+        	}
+        }
+        
+
+
         elseif($fournisseur == "EU") {
         	
         	//On elenve les dimensions

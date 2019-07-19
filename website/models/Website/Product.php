@@ -1537,7 +1537,7 @@ class Website_Product extends Object_Product {
 
 	}
 
-	protected function cleanString($str) {
+	public function cleanString($str) {
 		
     	$str = str_replace("   ", " ", $str);
     	$str = str_replace("  ", " ", $str);

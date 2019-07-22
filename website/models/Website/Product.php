@@ -1238,6 +1238,13 @@ class Website_Product extends Object_Product {
                 'removeTraitementSurface'   =>  true,
                 'removeMotif'   =>  true,
             ],
+            "AD" => [
+                "lpn"           => [], //Ne pas changer l'ordre (vois,plus bas)
+                'fournisseur'   =>[],
+                'removeFinition'   =>  false,
+                'removeTraitementSurface'   =>  true,
+                'removeMotif'   =>  false,
+            ],
 
         );
 

@@ -219,7 +219,11 @@ foreach ($list->getObjects() as $object) {
     }
 
     //On met le vernis au dessus, car on ajoute
-    if(stristr($scienergie, "VERNIS AQUA")) {
+    if(stristr($scienergie, "VERNIS AQUA ULTRA MAT")) {
+        $parent->setValue('finition',"Verni aqua ultra mat");
+        $parentSuffixeEan .= " vernis aqua ultra mat";      
+    } //On met le vernis au dessus, car on ajoute
+    else if(stristr($scienergie, "VERNIS AQUA")) {
         $parent->setValue('finition',"Verni aqua");
         $parentSuffixeEan .= " vernis aqua";      
     }

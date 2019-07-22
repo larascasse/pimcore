@@ -1338,7 +1338,7 @@ class Website_Product extends Object_Product {
 
         
 
-        $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?$equivalence[$fournisseur]['fournisseur']:false;
+        $equivalenceByFounissseur = array_key_exists($fournisseur, $equivalence)?true:false;
 
       
         if($equivalenceByFounissseur) {
